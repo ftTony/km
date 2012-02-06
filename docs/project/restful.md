@@ -183,6 +183,7 @@ app.delete('/users',(req,res)=>{
 - [RESTful 架构详解](https://github.com/frank-lam/fullstack-tutorial/blob/master/notes/RESTful%20API.md)
 - [理解 RESTful API 设计规范](https://www.cnblogs.com/tugenhua0707/p/12153857.html)
 - [HTTP 协议理解及服务端与客户端的设计实现](https://mp.weixin.qq.com/s/69EvvR0FHR57QuhDC7bJ8w)
+- [RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
 
 ## 联系作者
 

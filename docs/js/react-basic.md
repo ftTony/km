@@ -26,6 +26,23 @@
 
 ### 四、主流消息中间件
 
+- RabbitMQ
+- RocketMQ
+- ActiveMQ
+- Kafka
+
+#### 4.1 RabbitMQ
+
+一个由 erlang 语言开发基于 AMQP 协议的开源消息队列系统。能保证消息的可靠性、稳定性、安全性。
+
+#### 4.2 RocketMQ
+
+#### 4.3 ActiveMQ
+
+Apache 出品，早起很流行主要应用中小企业，面对大量并发场景会有阻塞、消息堆积问题。
+
+#### 4.4 Kafka
+
 ### 五、安装 RabbitMQ
 
 ### 参考资料
