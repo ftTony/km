@@ -500,7 +500,37 @@ console.log(editor.getContent()) //222
 #### 10.2 代码
 
 ```
+class Context{
+    constructor(){
+        this._list = [];        // 存放 终结符表达式
+        this._sum = 0;      // 存放 非终结符表达式
+    }
 
+    get sum(){
+        return this._sum;
+    }
+
+    set sum(newValue){
+        this._sum = newValue;
+    }
+
+    add(expression){
+        this._list.push(expression)
+    }
+    get List(){
+        return [...this._list]
+    }
+}
+
+class PlusExpression{
+
+}
+
+class MinusExpression{
+
+}
+
+const context = new Context();
 ```
 
 #### 10.3 优点
