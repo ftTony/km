@@ -523,14 +523,27 @@ class Context{
 }
 
 class PlusExpression{
-
+    interpret(context){
+        if(!(context instanceof Context)){
+            throw new Error('TypeError')
+        }
+        context.sum = ++context.sum
+    }
 }
 
 class MinusExpression{
-
+    interpret(context){
+        if(!(context instanceof Context)){
+            throw new Error('TypeError')
+        }
+        context.sum = --context.sum;
+    }
 }
 
 const context = new Context();
+context.add(new PlusExpression());
+context.add(new PlusExpression());
+context.add(new MinusExpression());
 ```
 
 #### 10.3 优点
