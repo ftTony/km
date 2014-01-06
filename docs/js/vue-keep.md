@@ -297,7 +297,7 @@ componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` 
 : vnode.key
 ```
 
-即命中缓存：
+拿到`key`值后去`this.cache`对象中去寻找是否有该值，如果有则表示该组件有缓存，即命中缓存：
 
 ```
 /* 如果命中缓存，则直接从缓存中拿 vnode 的组件实例 */
@@ -309,7 +309,9 @@ if (cache[key]) {
 }
 ```
 
-没有该`key`值：
+直接从缓存中拿`vnode`的组件实例，此时重新调整该组件 key 的顺序，将其从原来的地方删掉并重新放在`this.keys`中最后一个。
+
+如果`this.cache`对象中没有该`key`值：
 
 ```
 /* 如果没有命中缓存，则将其设置进缓存 */
@@ -322,6 +324,8 @@ else {
     }
 }
 ```
+
+表明该组件还没有被缓存过，则以该组件的`key`为键，组件`vnode`为值，将其存入`this.cache`中，并且把`key`存入`this.keys`中，此时再判断`this.keys`中缓存组件的数量是否超过了设置的最大缓存数量`this.max`，如果超过了，则把第一个缓存组件删掉。
 
 ### 三、缓存策略
 
