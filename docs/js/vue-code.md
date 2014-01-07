@@ -257,7 +257,58 @@ export default class Dep {
 
 ```
 function defineReactive (obj,key,val){
+  const dep = new Dep()
 
+  const property = Object.getOwnPropertyDescriptor(obj, key)
+  if (property && property.configurable === false) {
+    return
+  }
+
+  // cater for pre-defined getter/setters
+  const getter = property && property.get
+  const setter = property && property.set
+  if ((!getter || setter) && arguments.length === 2) {
+    val = obj[key]
+  }
+
+  let childOb = !shallow && observe(val)
+  Object.defineProperty(obj, key, {
+    enumerable: true,
+    configurable: true,
+    get: function reactiveGetter () {
+      const value = getter ? getter.call(obj) : val
+      if (Dep.target) {
+        dep.depend()
+        if (childOb) {
+          childOb.dep.depend()
+          if (Array.isArray(value)) {
+            dependArray(value)
+          }
+        }
+      }
+      return value
+    },
+    set: function reactiveSetter (newVal) {
+      const value = getter ? getter.call(obj) : val
+      /* eslint-disable no-self-compare */
+      if (newVal === value || (newVal !== newVal && value !== value)) {
+        return
+      }
+      /* eslint-enable no-self-compare */
+      if (process.env.NODE_ENV !== 'production' && customSetter) {
+        customSetter()
+      }
+      // #7981: for accessor properties without setter
+      if (getter && !setter) return
+      if (setter) {
+        setter.call(obj, newVal)
+      } else {
+        val = newVal
+      }
+      childOb = !shallow && observe(newVal)
+      dep.notify()
+    }
+  })
 }
 ```
 
@@ -267,7 +318,7 @@ function defineReactive (obj,key,val){
 
 上面我们明白了什么是依赖？何时收集依赖？以及收集的依赖存放到何处？那么我们收集的依赖到底是谁？
 
-虽然我们一直在说“谁用到了这个数据谁”
+其实在`Vue`中还实现了一个叫做`Watcher`的类，而`Watcher`类的实例就是我们上面所说的那个“谁”。换句话说就是：谁用了数据，谁就是依赖，我们就为谁创建一个`Watcher`实例。在之后数据变化时，我们不直接去通知依赖更新，而通知依赖对应的`Watch`实例，由`Watcher`实例去通知真正的视图。
 
 `Watcher`类的具体实现如下：
 
@@ -308,6 +359,17 @@ export default class Watcher {
 虽然我们通过`Object.defineProperty`方法实现了对`object`数据的可观测，但是这个方法仅仅只能观测到`object`数据的取值及设置值，当我们向`object`数据里添加一对新的`key/value`或删除一对已有的`key/value`时，它是无法观测到的，导致当我们对`object`数据添加或删除时，无法通知依赖，无法驱动视力进行响应式更新。
 
 `Vue`也注意到了这一点，为了解决这一问题，`Vue`增加了两个全局 API：`Vue.set`和`Vue.delete`。
+
+**总结**
+
+我们通过`Object.defineProperty`方法实现了对`object`数据的可观测，并且封装了`Observer`类，让我们能够方便的把`object`数据中的所有属性（包括子属性）都转换成`getter/setter`的形式来侦测变化。
+
+其整个流程大致如下：
+
+1. `Data`通过`observer`转换成了`getter/setter`的形式来追踪变化。
+2. 当外界通过`Watcher`读取数据时，会触发`getter`从而将`Watcher`添加到依赖中。
+3. 当数据发生了变化时，会触发`setter`，从而向`Dep`'中的依赖（vcb 即 Watcher）发送通知。
+4. `Watcher`接收到通知后，会向外界发送能知，变化通知到外界后可能会触发视图更新，也有可能触发某个回调数等。
 
 #### 2.2 Array 的变化侦测
 
