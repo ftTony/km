@@ -417,6 +417,70 @@ methodsToPatch.forEach(function (method) {
 })
 ```
 
+**数组方法拦截器**
+
+在`Vue`中创建了一个数组方法拦截器，它拦截在数组实例与`Array.prototype`之间，在拦截器内重写了操作数组的一些方法，当数组实例使用操作数组方法时，其实使用的是拦截器中重写的方法，而不再使用`Array.prototype`上的原生方法。如下图所示：
+
+![images](vue12.png)
+
+经过整理，`Array`原型中可以改变数组自身内容的方法有 7 个，分别是：`push`、`pop`、`shift`、`unshift`、`splice`、`sort`、`reverse`。源码中的拦截器代码如下：
+
+```
+// 源码位置：/src/core/observer/array.js
+
+const arrayProto = Array.prototype
+// 创建一个对象作为拦截器
+export const arrayMethods = Object.create(arrayProto)
+
+// 改变数组自身内容的7个方法
+const methodsToPatch = [
+  'push',
+  'pop',
+  'shift',
+  'unshift',
+  'splice',
+  'sort',
+  'reverse'
+]
+
+/**
+ * Intercept mutating methods and emit events
+ */
+methodsToPatch.forEach(function (method) {
+  const original = arrayProto[method]      // 缓存原生方法
+  Object.defineProperty(arrayMethods, method, {
+    enumerable: false,
+    configurable: true,
+    writable: true,
+    value:function mutator(...args){
+      const result = original.apply(this, args)
+      return result
+    }
+  })
+})
+```
+
+**使用拦截器**
+
+```
+// 源码位置：/src/core/observer/index.js
+export class Observer {
+  constructor (value) {
+    this.value = value
+    if (Array.isArray(value)) {
+      const augment = hasProto
+        ? protoAugment
+        : copyAugment
+      augment(value, arrayMethods, arrayKeys)
+    } else {
+      this.walk(value)
+    }
+  }
+}
+// 能力检测：判断__proto__是否可用，因为有的浏览器不支持该属性
+export const hasProto = '__proto__' in {}
+```
+
 #### 2.3 变化侦测的 API 实现
 
 - `vm.$watch`
