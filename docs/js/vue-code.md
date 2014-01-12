@@ -902,6 +902,8 @@ chars (text: string, start: number, end: number) {
     }
 ```
 
+当解析到标签的文本时，触发`charts`钩子函数，在该钩子函数内部，首先会判断文本是不是一个带变量的动态文本，如“hello”。如果是动态文本，则创建动态文本类型的`AST`节点；如果不是动态文本，则创建纯静态文本类型的`AST`节点。
+
 - 当解析到注释时调用`comment`函数生成注释类型的`AST`节点；
 
 ```
@@ -940,13 +942,13 @@ comment (text: string) {
 ```
 
 export function optimize (root: ?ASTElement, options: CompilerOptions) {
-if (!root) return
-isStaticKey = genStaticKeysCached(options.staticKeys || '')
-isPlatformReservedTag = options.isReservedTag || no
-// 标记静态节点
-markStatic(root)
-// 标记静态根节点
-markStaticRoots(root, false)
+    if (!root) return
+    isStaticKey = genStaticKeysCached(options.staticKeys || '')
+    isPlatformReservedTag = options.isReservedTag || no
+    // 标记静态节点
+    markStatic(root)
+    // 标记静态根节点
+    markStaticRoots(root, false)
 }
 
 ```
@@ -1290,7 +1292,7 @@ handleError(e,vm,`${hook} hook`)
 ```
 
 export function initLifecycle (vm: Component) {
-const options = vm.\$options
+const options = vm.$options
 
 // locate first non-abstract parent
 let parent = options.parent
@@ -1307,12 +1309,12 @@ vm.$parent = parent
 vm.$children = []
   vm.$refs = {}
 
-vm.\_watcher = null
-vm.\_inactive = null
-vm.\_directInactive = false
-vm.\_isMounted = false
-vm.\_isDestroyed = false
-vm.\_isBeingDestroyed = false
+vm._watcher = null
+vm._inactive = null
+vm._directInactive = false
+vm._isMounted = false
+vm._isDestroyed = false
+vm._isBeingDestroyed = false
 }
 
 ```
@@ -1322,9 +1324,7 @@ vm.\_isBeingDestroyed = false
 在`Vue`中，当我们在父组件中使用子组件时可以给子组件上注册一些事件，这些事件包括使用`v-on`或`@`注册的自定义事件，也包括注册的浏览器原生事件，如下：
 
 ```
-
 <child @select="selectHandler" @click.native="clickHandler"></child>
-
 ```
 
 上面代码，首先要从解析事件开始说起，当遇到开始标签的时候，除了会解析开始标签，还会调用`processAttrs`方法解析标签中的属性，`processAttrs`方法位于源码的`src/compiler/parser/index.js`中，如下：
@@ -1457,8 +1457,6 @@ list[i]
 }
 }
 addAttr(el, name, JSON.stringify(value), list[i])
-// #6887 firefox doesn't update muted state if set via attribute
-// even immediately after element creation
 if (!el.component &&
 name === 'muted' &&
 platformMustUseProp(el.tag, el.attrsMap.type, name)) {
@@ -1477,13 +1475,12 @@ addProp(el, name, 'true', list[i])
 ```
 
 export function initEvents (vm: Component) {
-vm.\_events = Object.create(null)
-vm.\_hasHookEvent = false
-// init parent attached events
-const listeners = vm.\$options.\_parentListeners
-if (listeners) {
-updateComponentListeners(vm, listeners)
-}
+    vm._events = Object.create(null)
+    vm._hasHookEvent = false
+    const listeners = vm.$options._parentListeners
+    if (listeners) {
+        updateComponentListeners(vm, listeners)
+    }
 }
 
 ```
@@ -1554,19 +1551,19 @@ toggleObserving(true)
 ```
 
 export function initState (vm: Component) {
-vm.\_watchers = []
-const opts = vm.\$options
-if (opts.props) initProps(vm, opts.props)
-if (opts.methods) initMethods(vm, opts.methods)
-if (opts.data) {
-initData(vm)
-} else {
-observe(vm.\_data = {}, true /_ asRootData _/)
-}
-if (opts.computed) initComputed(vm, opts.computed)
-if (opts.watch && opts.watch !== nativeWatch) {
-initWatch(vm, opts.watch)
-}
+    vm._watchers = []
+    const opts = vm.$options
+    if (opts.props) initProps(vm, opts.props)
+    if (opts.methods) initMethods(vm, opts.methods)
+    if (opts.data) {
+        initData(vm)
+    } else {
+        observe(vm._data = {}, true)
+    }
+    if (opts.computed) initComputed(vm, opts.computed)
+    if (opts.watch && opts.watch !== nativeWatch) {
+        initWatch(vm, opts.watch)
+    }
 }
 
 ```
@@ -1576,7 +1573,6 @@ initWatch(vm, opts.watch)
 `initProps`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
-
 function initProps (vm: Component, propsOptions: Object) {
 const propsData = vm.$options.propsData || {}
   const props = vm._props = {}
@@ -1591,15 +1587,11 @@ toggleObserving(false)
 for (const key in propsOptions) {
 keys.push(key)
 const value = validateProp(key, propsOptions, propsData, vm)
-/\* istanbul ignore else \*/
 if (process.env.NODE_ENV !== 'production') {
 const hyphenatedKey = hyphenate(key)
 if (isReservedAttribute(hyphenatedKey) ||
 config.isReservedAttr(hyphenatedKey)) {
-warn(
-`"${hyphenatedKey}" is a reserved attribute and cannot be used as component prop.`,
-vm
-)
+warn(`"${hyphenatedKey}" is a reserved attribute and cannot be used as component prop.`,vm)
 }
 defineReactive(props, key, value, () => {
 if (!isRoot && !isUpdatingChildComponent) {
@@ -1615,14 +1607,11 @@ vm
 } else {
 defineReactive(props, key, value)
 }
-// static props are already proxied on the component's prototype
-// during Vue.extend(). We only need to proxy props defined at
-// instantiation here.
-if (!(key in vm)) {
-proxy(vm, `_props`, key)
+    if (!(key in vm)) {
+        proxy(vm, `_props`, key)
+    }
 }
-}
-toggleObserving(true)
+    toggleObserving(true)
 }
 
 ```
@@ -1632,11 +1621,10 @@ toggleObserving(true)
 在函数内部首先定义了 4 个变量，分别是：
 
 ```
-
 const propsData = vm.$options.propsData || {}
 const props = vm._props = {}
-const keys = vm.$options.\_propKeys = []
-const isRoot = !vm.\$parent
+const keys = vm.$options._propKeys = []
+const isRoot = !vm.$parent
 
 ```
 
@@ -1650,31 +1638,30 @@ const isRoot = !vm.\$parent
 ```
 
 function initMethods (vm: Component, methods: Object) {
-const props = vm.\$options.props
-for (const key in methods) {
-if (process.env.NODE_ENV !== 'production') {
-if (typeof methods[key] !== 'function') {
-warn(
-`Method "${key}" has type "${typeof methods[key]}" in the component definition.` +
-`Did you reference the function correctly?`,
-vm
-)
-}
-if (props && hasOwn(props, key)) {
-warn(
-`Method "${key}" has already been defined as a prop.`,
-vm
-)
-}
-if ((key in vm) && isReserved(key)) {
-warn(
-`Method "${key}" conflicts with an existing Vue instance method.` +
-`Avoid defining component methods that start with _ or $.`
-)
-}
-}
-vm[key] = typeof methods[key] !== 'function' ? noop : bind(methods[key], vm)
-}
+    const props = vm.$options.props
+    for (const key in methods) {
+        if (process.env.NODE_ENV !== 'production') {
+            if (typeof methods[key] !== 'function') {
+                warn(
+                    `Method "${key}" has type "${typeof methods[key]}" in the component definition.` +
+                    `Did you reference the function correctly?`,vm
+                )
+            }
+            if (props && hasOwn(props, key)) {
+                warn(
+                `Method "${key}" has already been defined as a prop.`,
+                vm
+                )
+            }
+            if ((key in vm) && isReserved(key)) {
+                warn(
+                `Method "${key}" conflicts with an existing Vue instance method.` +
+                `Avoid defining component methods that start with _ or $.`
+                )
+            }
+    }
+        vm[key] = typeof methods[key] !== 'function' ? noop : bind(methods[key], vm)
+    }
 }
 
 ```
@@ -1684,21 +1671,20 @@ vm[key] = typeof methods[key] !== 'function' ? noop : bind(methods[key], vm)
 ```
 
 export function initState (vm: Component) {
-vm.\_watchers = []
-const opts = vm.\$options
-if (opts.props) initProps(vm, opts.props)
-if (opts.methods) initMethods(vm, opts.methods)
-if (opts.data) {
-initData(vm)
-} else {
-observe(vm.\_data = {}, true /_ asRootData _/)
+    vm._watchers = []
+    const opts = vm.$options
+    if (opts.props) initProps(vm, opts.props)
+    if (opts.methods) initMethods(vm, opts.methods)
+    if (opts.data) {
+        initData(vm)
+    } else {
+        observe(vm._data = {}, true)
+    }
+    if (opts.computed) initComputed(vm, opts.computed)
+    if (opts.watch && opts.watch !== nativeWatch) {
+        initWatch(vm, opts.watch)
+    }
 }
-if (opts.computed) initComputed(vm, opts.computed)
-if (opts.watch && opts.watch !== nativeWatch) {
-initWatch(vm, opts.watch)
-}
-}
-
 ```
 
 初始化`initComputed`的内部原理是怎样的。`initComputed`函数的定义位于源码的`src/core/instance/state.js`中，如下：
@@ -1706,45 +1692,37 @@ initWatch(vm, opts.watch)
 ```
 
 function initComputed (vm: Component, computed: Object) {
-// \$flow-disable-line
-const watchers = vm.\_computedWatchers = Object.create(null)
-// computed properties are just getters during SSR
-const isSSR = isServerRendering()
+    const watchers = vm._computedWatchers = Object.create(null)
+    const isSSR = isServerRendering()
+    for (const key in computed) {
+        const userDef = computed[key]
+        const getter = typeof userDef === 'function' ? userDef : userDef.get
+        if (process.env.NODE_ENV !== 'production' && getter == null) {
+            warn(
+            `Getter is missing for computed property "${key}".`,
+            vm
+            )
+        }
 
-for (const key in computed) {
-const userDef = computed[key]
-const getter = typeof userDef === 'function' ? userDef : userDef.get
-if (process.env.NODE_ENV !== 'production' && getter == null) {
-warn(
-`Getter is missing for computed property "${key}".`,
-vm
-)
-}
+        if (!isSSR) {
+            watchers[key] = new Watcher(
+                vm,
+                getter || noop,
+                noop,
+                computedWatcherOptions
+            )
+        }
 
-    if (!isSSR) {
-      // create internal watcher for the computed property.
-      watchers[key] = new Watcher(
-        vm,
-        getter || noop,
-        noop,
-        computedWatcherOptions
-      )
+        if (!(key in vm)) {
+            defineComputed(vm, key, userDef)
+        } else if (process.env.NODE_ENV !== 'production') {
+            if (key in vm.$data) {
+                warn(`The computed property "${key}" is already defined in data.`, vm)
+            } else if (vm.$options.props && key in vm.$options.props) {
+                warn(`The computed property "${key}" is already defined as a prop.`, vm)
+            }
+        }
     }
-
-    // component-defined computed properties are already defined on the
-    // component prototype. We only need to define computed properties defined
-    // at instantiation here.
-    if (!(key in vm)) {
-      defineComputed(vm, key, userDef)
-    } else if (process.env.NODE_ENV !== 'production') {
-      if (key in vm.$data) {
-        warn(`The computed property "${key}" is already defined in data.`, vm)
-      } else if (vm.$options.props && key in vm.$options.props) {
-        warn(`The computed property "${key}" is already defined as a prop.`, vm)
-      }
-    }
-
-}
 }
 
 ```
@@ -1754,16 +1732,16 @@ vm
 ```
 
 function initWatch (vm: Component, watch: Object) {
-for (const key in watch) {
-const handler = watch[key]
-if (Array.isArray(handler)) {
-for (let i = 0; i < handler.length; i++) {
-createWatcher(vm, key, handler[i])
-}
-} else {
-createWatcher(vm, key, handler)
-}
-}
+    for (const key in watch) {
+        const handler = watch[key]
+        if (Array.isArray(handler)) {
+            for (let i = 0; i < handler.length; i++) {
+                createWatcher(vm, key, handler[i])
+            }
+        } else {
+            createWatcher(vm, key, handler)
+        }
+    }
 }
 
 ```
