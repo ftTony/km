@@ -936,7 +936,61 @@ comment (text: string) {
 
 **解析 HTML 注释**
 
-解析注释比较简单，我们知道`HTML`注释是以`<!--`开头，以`-->`结尾，这两者中间的内容
+解析注释比较简单，我们知道`HTML`注释是以`<!--`开头，以`-->`结尾，这两者中间的内容，那么我们只需用正则判断
+
+```
+const comment = /^<!\--/
+if(comment.test(html)){
+    // 若为注释，则继续查找是否存在'-->'
+    const commentEnd = html.indexOf('-->')
+
+    if(commentEnd >=0){
+
+    }
+}
+```
+
+在上面代码中，如果模板字符串`html`符合注释开始的正则
+
+**解析条件注释**
+
+解析条件注释也比较简单，其原理跟解析注释相同，都是先用与正则判断是否是以条件
+
+```
+// 解析是否是条件注释
+const conditionalComment = /^<!\[/
+if(conditionalComment.test(html)){
+
+}
+```
+
+**解析 DOCTYPE**
+
+解析`DOCTYPE`的原理同解析条件注释完全相同，此处不再赘述，代码如下：
+
+```
+const doctype = /^<!DOCTYPE [^>]+>/i
+// 解析是否是DOCTYPE
+const doctypeMatch  = html.match(doctype)
+if (doctypeMatch) {
+  advance(doctypeMatch[0].length)
+  continue
+}
+```
+
+**解析开始标签**
+
+```
+
+```
+
+**解析结束标签**
+
+```
+
+```
+
+**解析文本**
 
 ```
 
