@@ -746,6 +746,7 @@ export const createCompiler = createCompilerCreator(function baseCompile (
 ```
 // 代码位置：/src/complier/parser/index.js
 
+
 ```
 
 **总结**
@@ -805,34 +806,125 @@ export function parse(template,options){
 
 ```
 // 当解析到标签的开始位置时，触发start
-start(tag,attrs,unary){
+start (tag, attrs, unary, start, end) {
     let element = crateASTElement(tag,atrrs,currentParent)
 }
 
 export function crateASTElement(tag,attrs,parent){
-
+    return {
+        type: 1,
+        tag,
+        attrsList: attrs,
+        attrsMap: makeAttrsMap(attrs),
+        rawAttrsMap: {},
+        parent,
+        children: []
+    }
 }
 ```
 
-从上面代码中我们可以看到，`start`函数接收三个参数，分别是标签名`tag`、标签属性`attrs`、标签是否自闭合`unary`。当调用该钩子函数时，内部会调用`createASTElement`函数来创建元素类型的`AST`节点
+从上面代码中我们可以看到，`start`函数接收五个参数，分别是标签名`tag`、标签属性`attrs`、标签是否自闭合`unary`、开始`start`、结束`end`。当调用该钩子函数时，内部会调用`createASTElement`函数来创建元素类型的`AST`节点
 
 - 当解析到结束标签时调用`end`函数；
 - 当解析到文本调用`chars`函数生成文本类型的`AST`节点；
 
 ```
-
-
+chars (text: string, start: number, end: number) {
+      if (!currentParent) {
+        if (process.env.NODE_ENV !== 'production') {
+          if (text === template) {
+            warnOnce(
+              'Component template requires a root element, rather than just text.',
+              { start }
+            )
+          } else if ((text = text.trim())) {
+            warnOnce(
+              `text "${text}" outside root element will be ignored.`,
+              { start }
+            )
+          }
+        }
+        return
+      }
+      // IE textarea placeholder bug
+      /* istanbul ignore if */
+      if (isIE &&
+        currentParent.tag === 'textarea' &&
+        currentParent.attrsMap.placeholder === text
+      ) {
+        return
+      }
+      const children = currentParent.children
+      if (inPre || text.trim()) {
+        text = isTextTag(currentParent) ? text : decodeHTMLCached(text)
+      } else if (!children.length) {
+        // remove the whitespace-only node right after an opening tag
+        text = ''
+      } else if (whitespaceOption) {
+        if (whitespaceOption === 'condense') {
+          // in condense mode, remove the whitespace node if it contains
+          // line break, otherwise condense to a single space
+          text = lineBreakRE.test(text) ? '' : ' '
+        } else {
+          text = ' '
+        }
+      } else {
+        text = preserveWhitespace ? ' ' : ''
+      }
+      if (text) {
+        if (!inPre && whitespaceOption === 'condense') {
+          // condense consecutive whitespaces into single space
+          text = text.replace(whitespaceRE, ' ')
+        }
+        let res
+        let child: ?ASTNode
+        if (!inVPre && text !== ' ' && (res = parseText(text, delimiters))) {
+          child = {
+            type: 2,
+            expression: res.expression,
+            tokens: res.tokens,
+            text
+          }
+        } else if (text !== ' ' || !children.length || children[children.length - 1].text !== ' ') {
+          child = {
+            type: 3,
+            text
+          }
+        }
+        if (child) {
+          if (process.env.NODE_ENV !== 'production' && options.outputSourceRange) {
+            child.start = start
+            child.end = end
+          }
+          children.push(child)
+        }
+      }
+    }
 ```
 
 - 当解析到注释时调用`comment`函数生成注释类型的`AST`节点；
 
 ```
-
+// 当解析到标签的注释时，触发comment
+comment (text: string) {
+  let element = {
+    type: 3,
+    text,
+    isComment: true
+  }
+}
 ```
+
+当解析到标签的注释时，触发`comment`钩子函数，该钩子函数会创建一个注释类型的`AST`节点。
+
+一边解析不同的内容一边调用对应的钩子函数生成对应的`AST`节点，最终完成将整个模板字符串转化成`AST`，这就是`HTML`解析器所要做的工作。
 
 **如何解析不同的内容**
 
 要从模板字符串中解析出不同的内容，那
+
+- 文本，例如“难凉热血”
+- HTML 注释，例如`<!--我是注释-->`
 
 #### 4.4 文本解析器
 
