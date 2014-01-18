@@ -944,13 +944,29 @@ if(comment.test(html)){
     // 若为注释，则继续查找是否存在'-->'
     const commentEnd = html.indexOf('-->')
 
-    if(commentEnd >=0){
-
+    if(commentEnd >= 0){
+        // 若存在 '-->'，继续判断options中是否保留注释
+        if(options.shouldKeepComment){
+            // 若保留注释，则把注释截取出来给options.comment，创建溈类型的AST节点
+            options.comment(html,substring(4,commentEnd) index, index + commentEnd + 3)
+        }
+        // 若不保留注释，则将游标移动到'-->'之后，继续向后解析
+        advance(commentEnd+3)
+        continue
     }
 }
 ```
 
 在上面代码中，如果模板字符串`html`符合注释开始的正则
+
+`advance`函数是用来移动解析游标的，解析完一部分就把游标向后移动一部分，确保不会重复解析，其代码如下：
+
+```
+function advance(n){
+    index +=n       // index为解析游标
+    html = html.substring(n)
+}
+```
 
 **解析条件注释**
 
