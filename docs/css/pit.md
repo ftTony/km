@@ -645,6 +645,7 @@ document.body.addEventListener(
 - [移动端常见 bug 汇总](https://juejin.im/post/5af918636fb9a07ac5603ecb)
 - [吃透移动端 H5 与 Hybrid](https://juejin.im/post/5dfadb91e51d45584006e486)
 - [【第 1891 期】iOS 键盘难题与可见视口（VisualViewport）API](https://mp.weixin.qq.com/s/ERBxrGXYfcAHdlZTWWw0Aw)
+- [（小技巧）h5 手机键盘弹出收起的处理](https://mp.weixin.qq.com/s/ZoP6845tm6OUvcF_4lEUkQ)
 
 ## 联系作者
 
