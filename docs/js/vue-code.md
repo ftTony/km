@@ -6628,13 +6628,15 @@ const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
 - `SuperId`：父类的`cid`属性，无论是基础`Vue`类继承而来的类，都有一个`cid`属性，作为该类的唯一标识；
 - `cachedCtors`：缓存池，用于缓存创建出来的类；
 
-接着，在缓存池中先尝试获取是否之前已经创建过的该子类，如果之前创建过，
+接着，在缓存池中先尝试获取是否之前已经创建过的该子类，如果之前创建过，则直接返回之前创建的。之所以有这一步，是因为`Vue`为了性能考虑，反复调用`Vue.extend`其实应该返回同一个结果，只要返回结果是固定的，就可以将结果缓存，再次调用时，只需从缓存中取出结果即可。在 API 方法定义的最后，当创建完子类后，会使用父类的`cid`作为`key`，创建好的子类作为`value`，存入缓存池`cachedCtors`中。如下：
 
 ```
 if (cachedCtors[SuperId]) {
     return cachedCtors[SuperId]
 }
 ```
+
+接着，获取到传入的选项参数中的`name`字段，并且在开发环境下校验`name`字段是否合法，如下：
 
 ```
 const name = extendOptions.name || Super.options.name
@@ -6643,17 +6645,25 @@ if (process.env.NODE_ENV !== 'production' && name) {
 }
 ```
 
+接着，创建一个类`Sub`，这个类就是将要继承基础`Vue`类的子类，如下：
+
 ```
 const Sub = function VueComponent (options) {
     this._init(options)
 }
 ```
 
+到这里，我们已经把类创建好了，接下来的工作就是让该类去继承基础`Vue`类，让其具备一些基础 `Vue` 类的能力。
+
+首先，将父类的原型继承到子类中，并且为子类添加唯一标识 `cid`，如下：
+
 ```
 Sub.prototype = Object.create(Super.prototype)
 Sub.prototype.constructor = Sub
 Sub.cid = cid++
 ```
+
+接着，将父类的`options`与子类的`options`进行合并，将合并结果赋给子类的`options`属性，如下：
 
 ```
 Sub.options = mergeOptions(
@@ -6662,9 +6672,13 @@ Sub.options = mergeOptions(
 )
 ```
 
+接着，将父类保存到子类的`super`属性中，以确保在子类中能够拿到父类，如下：
+
 ```
 Sub['super'] = Super
 ```
+
+接着，如果选项中存在`props`属性，则初始化它，如下：
 
 ```
 if (Sub.options.props) {
@@ -6679,6 +6693,10 @@ function initProps (Comp) {
 }
 ```
 
+初始化`props`属性其实就是把参数中传入的`props`选项代理到原型的`_props`中。
+
+接着，如果选项中存在`computed`属性，则初始化它，如下：
+
 ```
 if (Sub.options.computed) {
     initComputed(Sub)
@@ -6690,6 +6708,14 @@ function initComputed (Comp) {
     defineComputed(Comp.prototype, key, computed[key])
   }
 }
+```
+
+初始化`props`属性就是遍历参数中传入的`computed`选项，将每一项都调用`defineComputed`函数定义到子类原型上。此处的`defineComputed`函数与我们之前在生命周期初始化阶段`initState`中所介绍的`defineComputed`函数是一样的。
+
+接着，将父类中的一些属性复制到子类中，如下：
+
+```
+
 ```
 
 #### 7.2 Vue.nextTick
