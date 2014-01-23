@@ -22,57 +22,35 @@
 #### 1.2 代码
 
 ```
-//篮球基类
-class BasketBall {
-    constructor() {
-        this.intro = '篮球盛行于美国'
-    }
-
-    getMember() {
-        console.log('每一个队伍需要五个球员');
-    }
-
-    getBallSize() {
-        console.log('篮球很大')
-    }
-}
-
-// 足球基类
-class FootBall {
-    constructor() {
-        this.intro = '足球在全世界范围都很流行'
-    }
-
-    getMember() {
-        console.log('每一个队伍需要11个球员');
-    }
-
-    getBallSize() {
-        console.log('足球很大')
+/* 饭店方法 */
+class Restaurant {
+    static getMenu(menu) {
+        switch (menu) {
+            case '鱼香肉丝':
+                return new YuXiangRouSi()
+            case '宫保鸡丁':
+                return new GongBaoJiDin()
+            default:
+                throw new Error('这个菜本店没有 -。-')
+        }
     }
 }
+/* 鱼香肉丝类 */
+class YuXiangRouSi {
+    constructor() { this.type = '鱼香肉丝' }
 
-let SportsFactory = function(name) {
-    switch (name) {
-        case 'NBA':
-            return new BasketBall();
-        case 'wordCup':
-            return new FootBall();
-    }
-};
+    eat() { console.log(this.type + ' 真香~') }
+}
+/* 宫保鸡丁类 */
+class GongBaoJiDin {
+    constructor() { this.type = '宫保鸡丁' }
 
-// 为直接被创建一个足球，只需要记住工厂，并且调用就可以了
-let footNall  = SportsFactory('wordCup');
-console.log(footNall);
-console.log(footNall.intro);
-footNall.getMember();
+    eat() { console.log(this.type + ' 让我想起了外婆做的菜~') }
+}
+const dish1 = Restaurant.getMenu('鱼香肉丝')
+dish1.eat()                                  // 输出: 鱼香肉丝 真香~
+const dish2 = Restaurant.getMenu('红烧排骨')  // 输出: Error 这个菜本店没有 -
 ```
-
-#### 1.3 优点
-
-#### 1.4 缺点
-
-#### 1.5 场景
 
 ### 二、工厂方法模式
 
@@ -83,46 +61,51 @@ footNall.getMember();
 #### 2.2 代码
 
 ```
-let Factory = function (type, content) {
-    if (this instanceof Factory) {
-        return new this[type](content);
-    } else {
-        return new Factory(type, content)
+/* 工厂类 */
+class Factory {
+    static getInstance(type) {
+        switch (type) {
+            case 'Product1':
+                return new Product1()
+            case 'Product2':
+                return new Product2()
+            default:
+                throw new Error('当前没有这个产品')
+        }
     }
-};
+}
+/* 产品类1 */
+class Product1 {
+    constructor() { this.type = 'Product1' }
 
-Factory.prototype = {
-    Java(content) {
-        this.content = content;
-        (function (content) {
-            console.log(content)
-        })(content);
-    },
-    Php(content) {
-        this.content = content;
-        (function (content) {
-            console.log(content)
-        })(content);
-    },
-    JavaScript(content) {
-        this.content = content;
-        (function (content) {
-            console.log(content)
-        })(content);
-    }
-};
+    operate() { console.log(this.type) }
+}
+/* 产品类2 */
+class Product2 {
+    constructor() { this.type = 'Product2' }
+
+    operate() { console.log(this.type) }
+}
+const prod1 = Factory.getInstance('Product1')
+prod1.operate()                                 // 输出: Product1
+const prod2 = Factory.getInstance('Product3')   // 输出: Error 当前没有这个产品
 ```
 
 #### 2.3 优点
 
-- 消除对象间的耦合。通过使用工厂方法而不是 new 关键字及具体类。
+- 良好的封装，代码结构清晰，访问者无需知道对象的创建流程，特别是创建比较复杂的情况下；
+- 扩展性优良，通过工厂方法隔离了用户和创建流程隔离，符合开放封闭原则；
+- 解耦了高层逻辑和底层产品类，符合最少知识原则，不需要的就不要去交流；
 
 #### 2.4 缺点
 
+- 带来了额外的系统复杂度，增加了抽象性；
+
 #### 2.3 适用场景
 
-- 动态实现：
-- 节省设置开销：
+- 对象的创建比较复杂，而访问者无需知道创建的具体流程；
+- 处理大量具有相同属性的小对象；
+- 源码 Vue-router
 
 ### 三、抽象工厂模式
 
@@ -133,51 +116,82 @@ Factory.prototype = {
 #### 3.2 代码
 
 ```
-// 抽象工厂
-let VehicleFactory = function(subType,superType){
+/* 工厂 抽象类 */
+class AbstractFactory {
+    constructor() {
+        if (new.target === AbstractFactory)
+            throw new Error('抽象类不能直接实例化!')
+    }
 
-};
+    /* 抽象方法 */
+    createProduct1() { throw new Error('抽象方法不能调用!') }
+}
+/* 具体饭店类 */
+class Factory extends AbstractFactory {
+    constructor() { super() }
 
-// 小汽车抽象类
-VehicleFactory.Car = function(){
-    this.type = 'car'
-};
-VehicleFactory.Car.prototype = {
-    getPrice(){
-        return new Error('抽象方法不能被调用')
-    },
-    getSpeed(){
-        return new Error('抽象方法不能被调用')
+    createProduct1(type) {
+        switch (type) {
+            case 'Product1':
+                return new Product1()
+            case 'Product2':
+                return new Product2()
+            default:
+                throw new Error('当前没有这个产品 -。-')
+        }
     }
 }
+/* 抽象产品类 */
+class AbstractProduct {
+    constructor() {
+        if (new.target === AbstractProduct)
+            throw new Error('抽象类不能直接实例化!')
+        this.kind = '抽象产品类1'
+    }
 
-
-/*具体实现*/
-// 宝马汽车子类
-let BMW = function(price,speed){
-    this.price = price;
-    this.speed = speed;
-};
-VehicleFactory(BMW,'Car')
-BMW.prototype.getPrice = function(){
-    return this.price
+    /* 抽象方法 */
+    operate() { throw new Error('抽象方法不能调用!') }
 }
-BMW.prototype.getSpeed = function(){
+/* 具体产品类1 */
+class Product1 extends AbstractProduct {
+    constructor() {
+        super()
+        this.type = 'Product1'
+    }
 
+    operate() { console.log(this.kind + ' - ' + this.type) }
 }
+/* 具体产品类2 */
+class Product2 extends AbstractProduct {
+    constructor() {
+        super()
+        this.type = 'Product2'
+    }
+
+    operate() { console.log(this.kind + ' - ' + this.type) }
+}
+const factory = new Factory()
+const prod1 = factory.createProduct1('Product1')
+prod1.operate()                                   // 输出: 抽象产品类1 - Product1
+const prod2 = factory.createProduct1('Product3')  // 输出: Error 当前没有这个产品 -。-
 ```
 
 #### 3.3 优点
 
-- 分离接口和实现
-- 舍不得切换产品簇变得容易
+- 抽象产品类将产品的结构抽象出来，访问者不需要知道产品的具体实现，只需要面向产品的结构编程即可，从产品的具体实现中解耦；
 
 #### 3.4 缺点
 
-- 不太容易扩展新产品
-- 容易造成雷层次复杂
+- 扩展新类簇的产品类比较困难，因为需要创建新的抽象产品类，并且还要修改工厂类，违反开闭原则；
+- 带来了系统复杂度，增加了新的类，和新的继承关系；
 
-#### 3.5 缺点
+#### 3.5 场景
+
+- 如果一组实例都有相同的结构，那么就可以使用抽象工厂模式。
+
+#### 参考资料
+
+- [抽象工厂模式](https://www.yuque.com/wubinhp/uxiv5i/wgk0bg)
 
 ### 四、建造者模式
 
@@ -188,86 +202,36 @@ BMW.prototype.getSpeed = function(){
 #### 4.2 代码
 
 ```
-// canvas绘制图形验证码
-function Gcode(el,option){
-    this.el = typeof el === 'string' ? document.querySelectory(el) : el;
-    this.option = option;
-    this.init()
-}
-Gcode.prototype = {
-    constructor:Gcode,
-    init:function(){
-        if(this.el.getContext){
-            isSupportCanvas = true;
-            var ctx = this.el.getContext('2d'),
-                // 设置画布宽高
-                cw = this.el.width = this.option.width || 200,
-                ch = this.el.height = this.option.height || 40,
-                textLen = this.option.textLen || 4,
-                lineNum = this.option.lineNum || 4;
-                var text = this.randomText(textLen);
+// 建造者，部件生产
+class ProductBuilder {
+    constructor(param) {
+        this.param = param
+    }
 
-                this.onClick(ctx,textLen,lineNum,cw,ch);
-                this.drawLine(ctx,lineNum,cw,ch);
-                this.drawText(ctx,text,ch);
-        }
-    },
-    onClick:function(ctx,textLen,lineNum,cw,ch){
-        var  _ = this;
-        this.el.addEventListener('click',function(){
-            text = _.randomText(textLen);
-            _.drawLine(ctx,lineNum,cw,ch);
-            _.drawText(ctx,text,ch);
-        },false)
-    },
-    // 画干扰线
-    drawLine: function(ctx,lineNum,maxW,maxH){
-        ctx.clearRect(0,0,maxW,maxH);
-        for(var i=0; i < lineNum;i++){
-            var dx1 = Math.random() * maxW,
-                  dy1 = Math.random() * maxH,
-                  dx2 = Math.random() * maxW,
-                  dy2 = Math.random() * maxH;
-            ctx.strokeStyle = 'rgb(' + 255 * Math.random() + ',' + 255*Math.random() + ',' + 255*Math.random() + ')';
-            ctx.beginPath();
-            ctx.moveTo(dx1,dy1);
-            ctx.lineTo(dx2,dy2);
-            ctx.stroke();
-        }
-    },
-    // 画文字
-    drawText: function(ctx,text,maxH){
-        var len = text.length;
-        for(var i=0; i < len; i++){
-            var dx = 30 * Math.random() + 30*i,
-                  dy = Math.random()*5 + maxH/2;
-            ctx.fillStyle = 'rgb('
-            ctx.font = '30px Helvetica';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(text[i],dx,dy);
-        }
-    },
-    // 生成指定个数的随机文字
-    randomText:function(len){
-        var source = []
-        var result = []
-        var sourceLen = source.length;
-        for(var i=0; i<len;i++){
-            var text = this.generateUniqueText(source,result,sourceLen);
-            result.push(text)
-        }
-        return result.join('')
-    },
-    // 生成唯一文字
-    generateUniqueText:function(source,hasList,limit){
-        var text = source[Math.floor(Math.random()*limit)];
-        if(hasList.indexof(text)>-1){
-            return this.generateUniqueText(source,hasList,limit)
-        }else{
-            return text
-        }
+    /* 生产部件，part1 */
+    buildPart1() {
+        // ... Part1 生产过程
+        this.part1 = 'part1'
+
+    }
+
+    /* 生产部件，part2 */
+    buildPart2() {
+        // ... Part2 生产过程
+        this.part2 = 'part2'
     }
 }
+/* 指挥者，负责最终产品的装配 */
+class Director {
+    constructor(param) {
+        const _product = new ProductBuilder(param)
+        _product.buildPart1()
+        _product.buildPart2()
+        return _product
+    }
+}
+// 获得产品实例
+const product = new Director('param')
 ```
 
 #### 4.3 优点
