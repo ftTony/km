@@ -66,9 +66,19 @@ p.fun()
 
 ### 三、抽象工厂模式
 
+#### 3.1 介绍
+
+#### 3.2 代码
+
 ```
 
 ```
+
+#### 3.3 优点
+
+#### 3.4 缺点
+
+#### 3.5 缺点
 
 ### 四、建造者模式
 
@@ -90,10 +100,30 @@ p.fun()
 
 #### 5.1 介绍
 
+原型模式（prototype）是 rxet 原型实例指向创建对象的种类，并且通过拷贝这些原型创建新的对象。
+
 #### 5.2 代码
 
 ```
+class Person{
+    constructor(name){
+        this.name = name
+    }
+    getName(){
+        return this.name
+    }
+}
+class Student extends Person{
+    constructor(name){
+        super(name)
+    }
+    sayHello(){
+        console.log(`Hello,My name is ${this.name}`)
+    }
+}
 
+let student = new Student('xiaoming')
+student.sayHello()
 ```
 
 ### 六、单例模式
