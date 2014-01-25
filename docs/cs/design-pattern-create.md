@@ -15,14 +15,40 @@
 
 ### 一、简单工厂模式
 
+#### 1.1 介绍
+
+#### 1.2 代码
+
 ```
-// 篮球基类
-class BasketBall{
-    constructor(){
-        this.intro = '篮球盛行于美国'
+function User(name,age,career,work){
+    this.name = name
+    this.age = age
+    this.career = career
+    this.work = work
+}
+
+function Factory(name,age,career){
+    let work
+    switch(career){
+        case 'coder':
+            work = ['写代码','写系分','修改Bug']
+            break
+        case 'product manager':
+            work = ['订会议室','写RRD','催更']
+            break
+        case 'boss':
+            work = ['喝茶','看报','见客户']
     }
+
+    return new User(name, age, career, work)
 }
 ```
+
+#### 1.3 优点
+
+#### 1.4 缺点
+
+#### 1.5 场景
 
 ### 二、工厂方法模式
 
@@ -84,6 +110,8 @@ p.fun()
 
 #### 4.1 介绍
 
+建造者模式：将一个复杂的逻辑或者功能通过有条理的分工来一步步实现
+
 #### 4.2 代码
 
 ```
@@ -92,9 +120,19 @@ p.fun()
 
 #### 4.3 优点
 
+- 分布创建一个复杂的对象或者实现一个复杂的功能
+- 解耦封装过程，无需关注具体创建的细节
+
 #### 4.4 缺点
 
+- 需要有可靠算法和逻辑的支持
+- 按需暴露一定的接口
+
 #### 4.5 场景
+
+- jquery 的 ajax 的封装
+- jquery 插件封装
+- react/vue 某一具体组件的设计
 
 #### 五、原型模式
 
