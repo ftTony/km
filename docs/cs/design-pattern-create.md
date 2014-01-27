@@ -115,6 +115,8 @@ Factory.prototype = {
 
 #### 2.3 优点
 
+- 消除对象间的耦合。通过使用工厂方法而不是 new 关键字及具体类。
+
 #### 2.4 缺点
 
 #### 2.3 适用场景
@@ -214,23 +216,56 @@ Gcode.prototype = {
         var  _ = this;
         this.el.addEventListener('click',function(){
             text = _.randomText(textLen);
+            _.drawLine(ctx,lineNum,cw,ch);
+            _.drawText(ctx,text,ch);
         },false)
     },
     // 画干扰线
     drawLine: function(ctx,lineNum,maxW,maxH){
-
+        ctx.clearRect(0,0,maxW,maxH);
+        for(var i=0; i < lineNum;i++){
+            var dx1 = Math.random() * maxW,
+                  dy1 = Math.random() * maxH,
+                  dx2 = Math.random() * maxW,
+                  dy2 = Math.random() * maxH;
+            ctx.strokeStyle = 'rgb(' + 255 * Math.random() + ',' + 255*Math.random() + ',' + 255*Math.random() + ')';
+            ctx.beginPath();
+            ctx.moveTo(dx1,dy1);
+            ctx.lineTo(dx2,dy2);
+            ctx.stroke();
+        }
     },
     // 画文字
     drawText: function(ctx,text,maxH){
-
+        var len = text.length;
+        for(var i=0; i < len; i++){
+            var dx = 30 * Math.random() + 30*i,
+                  dy = Math.random()*5 + maxH/2;
+            ctx.fillStyle = 'rgb('
+            ctx.font = '30px Helvetica';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(text[i],dx,dy);
+        }
     },
     // 生成指定个数的随机文字
     randomText:function(len){
-
+        var source = []
+        var result = []
+        var sourceLen = source.length;
+        for(var i=0; i<len;i++){
+            var text = this.generateUniqueText(source,result,sourceLen);
+            result.push(text)
+        }
+        return result.join('')
     },
     // 生成唯一文字
     generateUniqueText:function(source,hasList,limit){
-
+        var text = source[Math.floor(Math.random()*limit)];
+        if(hasList.indexof(text)>-1){
+            return this.generateUniqueText(source,hasList,limit)
+        }else{
+            return text
+        }
     }
 }
 ```
