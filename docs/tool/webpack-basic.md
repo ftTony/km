@@ -100,7 +100,7 @@ output.libraryExport: 配置要导出的模块中哪些子模块需要被导出
 
 ##### 3. module
 
-3.1 rules 
+3.1 rules
 
 rules 配置模块的读取和解析规则，通常用来配置 Loader。大致可以通过以下方式来完成
 
@@ -160,7 +160,7 @@ parser 属性可以更细粒度地配置 哪些模块语法被解析、哪些不
 parser 的使用方法如下:
 
 ```
-module: { 
+module: {
     rules : [
         {
         test: /\.js♀/，
@@ -186,6 +186,7 @@ module: {
 配置寻找模块的规则
 
 4.1. alias
+
 ```
 配置项通过别名来将原导入路径映射成一个新的导入路径
 
@@ -231,11 +232,9 @@ module.exports=[
 
 6. DevServer
 
-hot,开启模块热替换功能后，将在不刷新整个页面的情况下通过用新模块替换老模块来做到实时预览
-
-inline,依赖一个注入页面里的代理客户端，去接收来自 DevServer的 命令并负责刷新网页的工作。
-
-contentBase,配置 DevServerHTTP服务器的文件根目录
+- `hot`,开启模块热替换功能后，将在不刷新整个页面的情况下通过用新模块替换老模块来做到实时预览
+- `inline`,依赖一个注入页面里的代理客户端，去接收来自 DevServer的 命令并负责刷新网页的工作。
+- `contentBase`,配置 DevServerHTTP服务器的文件根目录
 
 ### webpack配置
 
@@ -415,7 +414,7 @@ module.exports = {
 
 - CommonsChunkPlugin 插件每次打包的时候还是会去处理一些第三方依赖库，只是它能把第三方库文件和我们的代码分开掉，生成一个独立的js文件，但它不能提高打包速度。
 - DLLPlugin 它能把第三方库代码分离开，并且每次文件更改的时候，它只会==打包该项目自身==的代码。所以打包速度会更快。
-    
+
 介绍DllPlugin插件跟DllReferencePlugin插件
 
 DllPlugin插件 : 用于打包出一个个单独的动态链接库文件 。
@@ -473,11 +472,11 @@ const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
     plugins:
     [
         // 告诉webpack使用了哪些第三方库代码
-		new DllReferencePlugin({
-			// jquery 映射到json文件上去
-			manifest: require('./dill/jquery.manifest.json')
-		})
-	]
+        new DllReferencePlugin({
+        // jquery 映射到json文件上去
+        manifest: require('./dill/jquery.manifest.json')
+        })
+    ]
 }
 ```
 
@@ -504,7 +503,6 @@ Webpack 的运行流程是一个串行的过程，从启动到结束会依次执
 流程图：
 
 ![01](https://user-images.githubusercontent.com/6395813/49738951-a31dcd00-fccb-11e8-8e30-277217990d2a.jpg)
-
 
 2.3 抽象语法树（AST）
 
@@ -555,8 +553,8 @@ module.exports = {
 ### 手写loader
 
 1. 获得loader的options，是通过`require (’ loader-utils ’);`
-1. 返回其他结果，是调用`callback`
-1. 缓存加速，调用this.cacheable(false);
+2. 返回其他结果，是调用`callback`
+3. 缓存加速，调用this.cacheable(false);
 
 具体参数可以参考《深入浅出webpack》
 
