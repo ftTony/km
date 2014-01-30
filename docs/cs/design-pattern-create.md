@@ -197,7 +197,7 @@ const prod2 = factory.createProduct1('Product3')  // 输出: Error 当前没有�
 
 #### 4.1 介绍
 
-建造者模式：将一个复杂的逻辑或者功能通过有条理的分工来一步步实现
+建造者模式又称生成器模式，将一个复杂的逻辑或者功能通过有条理的分工来一步步实现
 
 #### 4.2 代码
 
@@ -236,19 +236,19 @@ const product = new Director('param')
 
 #### 4.3 优点
 
-- 分布创建一个复杂的对象或者实现一个复杂的功能
-- 解耦封装过程，无需关注具体创建的细节
+- 使用建造者模式可以使产品的构建流程和产品的表现分离，也就是将产品的创建算法和产品组成的实现隔离，访问者不必知道产品部件实现的细节；
+- 扩展方便，如果希望征生产一个装配顺序或方式不同的新产品，那么直接新建一个指挥者即可，不用修改既有代码，符合开闭原则；
+- 更好的复用性，建造者模式将产品的创建算法和产品组成的实现分离，所以产品创建的算法可以复用，产品部件的实现也可以复用，带来很大的灵活性。
 
 #### 4.4 缺点
 
-- 需要有可靠算法和逻辑的支持
-- 按需暴露一定的接口
+- 建造者模式一般适用于产品之间组成部件类似的情况，如果产品之间差异性很大、复用性不高，那么不要使用建造者模式；
+- 实例的创建增加了许多额外的结构，无疑增加了许多复杂度，如果对象粒度不大，那么我们最好直接创建对象；
 
 #### 4.5 场景
 
-- jquery 的 ajax 的封装
-- jquery 插件封装
-- react/vue 某一具体组件的设计
+- 相同的方法，不同的执行顺序，产生不一样的产品时，可以采用建造者模式；
+- 产品的组成部件类似，通过组装不同的组件获得不同产品时，可以采用建造者模式；
 
 #### 五、原型模式
 
@@ -289,44 +289,25 @@ student.sayHello()
 #### 6.2 代码
 
 ```
-class LoginForm{
-    constructor(){
-        this.state = 'hide'
+const Singleton = (function() {
+    let _instance = null        // 存储单例
+
+    const Singleton = function() {
+        if (_instance) return _instance     // 判断是否已有单例
+        _instance = this
+        this.init()                         // 初始化操作
+        return _instance
     }
-    show(){
-        if(this.state === 'show'){
-            console.log('已经显示')
-            return
-        }
-        this.state = 'show'
-        console.log('登录框显示成功')
+
+    Singleton.prototype.init = function() {
+        this.foo = 'Singleton Pattern'
     }
-    hide(){
-        if(this.state === 'hide'){
-            console.log('已经隐藏')
-            return
-        }
-        this.state = 'hide'
-        console.log('合建框隐藏成功')
-    }
-}
-LoginForm.getInstance = (function(){
-    let instance
-    return function(){
-        if(!instance){
-            instance = new LoginForm()
-        }
-        return instance
-    }
+
+    return Singleton
 })()
-
-let obj1 = LoginForm.getInstance()
-obj1.show()
-
-let obj2 = LoginForm.getInstance()
-obj2.hide()
-
-console.log(obj1 === obj2)
+const visitor1 = new Singleton()
+const visitor2 = new Singleton()
+console.log(visitor1 === visitor2)	// true
 ```
 
 #### 6.3 优点

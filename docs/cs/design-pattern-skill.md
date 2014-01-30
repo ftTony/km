@@ -19,17 +19,49 @@
 
 #### 1.1 介绍
 
+通常情况下，通过对构造函数使用`new`会返回一个绑定到`this`上的新实例，所以我们可以在`new`出来的对象上直接用`.`访问其属性和方法。如果在普通函数中也返回当前实例，那么我们就可以使用`.`在单行代码中一次性连续调用多个方法，就好像它们被链接在一起一样，这就是链式调用。
+
 #### 1.2 代码
 
 ```
+class Reactangle{
+    constructor(){
+        this.length = null      // 长
+        this.width = null       // 宽
+        this.color = null       // 颜色
+    }
 
+    /* 设置长度 */
+    setLength(length){
+        this.length = length
+        return this
+    }
+
+    /* 设置宽度 */
+    setWidth(width){
+        this.width = width
+        return this
+    }
+
+    /* 设置颜色 */
+    setColor(color){
+        this.color = color
+        return this
+    }
+}
+
+const rect = new Rectangle()
+  .setLength('100px')
+  .setWidth('80px')
+  .setColor('blue')
+console.log(rect)
+// 输出：{length: "100px", width: "80px", color: "blue"}
 ```
 
-#### 1.3 优点
+#### 1.4 场景
 
-#### 1.4 缺点
-
-#### 1.5 场景
+- jquery 中的链式调用
+- Underscore 中的链模式
 
 ### 二、委托模式
 
