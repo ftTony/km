@@ -158,6 +158,7 @@ Main 指标就是记录渲染主线上所执行的全部**任务**，以及每�
 - [前端性能优化之利用 Chrome Dev Tools 进行页面性能分析](https://juejin.im/post/5e3ce5fb51882549575f7dea)
 - [全新 Chrome Devtool Performance 使用指南](https://zhuanlan.zhihu.com/p/29879682)
 - [Chrome 开发者工具使用指南](https://www.cnblogs.com/vvjiang/p/12370112.html)
+- [浅谈前端性能优化](https://www.cnblogs.com/AhuntSun-blog/p/12622651.html)
 
 ## 联系作者
 

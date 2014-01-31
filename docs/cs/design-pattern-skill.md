@@ -98,7 +98,11 @@ ul.onclick = function (e = window.event) {
 
 class BaseLocalStorage{
     constructor(preId,timeSign = '|-|'){
+        this.preId = preId;
+        this.timeSing = timeSign;
+        this.status = {
 
+        }
     }
 
     // 获取本地存储数据ylkd数据真实字段
@@ -140,9 +144,22 @@ let throttle = function(){
     // 第一个参数表示是否清楚计时器
     if(typeof isClear === 'boolean'){
         // 第二参数则为函数
-        fn = arguments[1]
+        fn = arguments[1];
+        fn.__trottleID && clearTimeout(fn.__trottleID);
     }else{
         // 第一个参数为函数
+        fn = isClear;
+        // 第二个参数为函数执行时候的参数
+        let param = arguments[1];
+        let p = Object.assign({
+            context: null,
+            args: [],
+            time:300
+        },param);
+        arguments.callee(true,fn);
+        fn.__trottleID = setTimeout(function(){
+            fn.apply(p.context,p.args)
+        },p.time)
     }
 }
 
