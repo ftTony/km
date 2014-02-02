@@ -403,7 +403,6 @@ Node 端的处理过程如下：
 - [一篇文章教会你 Event loop——浏览器和 Node](https://segmentfault.com/a/1190000013861128)
 - [详解 JavaScript 中的 Event Loop（事件循环）机制](https://zhuanlan.zhihu.com/p/33058983)
 - [Event Loop](https://juejin.im/book/5bdc715fe51d454e755f75ef/section/5be04a8e6fb9a04a072fd2cd)
-- [面试问到 Event Loop，这样回答最完美](https://mp.weixin.qq.com/s/8xyccve0e9uA2mnk07CAWw)
 - [「前端进阶」从多线程角度来看 Event Loop](https://mp.weixin.qq.com/s/DLunwkzknoQ0tczLHuqpHg)
 - [【THE LAST TIME】彻底吃透 JavaScript 执行机制](https://mp.weixin.qq.com/s/nQgsEQorv00fr4XqU764bA)
 - [《一文看懂浏览器事件循环》](https://mp.weixin.qq.com/s/kG4FHXlqbKFWYQCtPhLtxA)
