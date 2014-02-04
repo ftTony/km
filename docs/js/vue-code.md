@@ -1443,24 +1443,132 @@ const qnameCapture = ``;
 
 **解析结束标签**
 
-结束标签的解析要比解析开始标签容易多了，因为它不需要解析什么属性
+结束标签的解析要比解析开始标签容易多了，因为它不需要解析什么属性，只需要判断剩下的模板字符串是否符合结束标签的特征，如果是，就将结束标签名提取出来，再调用 4 个钩子函数中的`end`函数就好了。
+
+首先判断剩余的模板字符串是否符合结束标签的特征，如下：
 
 ```
 const ncname = '[a-zA-Z_][\\w\\-\\.]*'
 const qnameCapture = `((?:${ncname}\\:)?${ncname})`
-const endTag = new RegExp(`^<\\/${}>`)
+const endTag = new RegExp(`^<\\/${qnameCapture}[^>]*>`)
+const endTagMatch = html.match(endTag)
+
+'</div>'.match(endTag)  // ["</div>", "div", index: 0, input: "</div>", groups: undefined]
+'<div>'.match(endTag)  // null
 ```
 
 **解析文本**
 
-解析文本也比较容易，在解析模板字符串之前，我们先查找一下第一个`<`出现在什么位置，如果第一个`<`在第一个位置
+解析文本也比较容易，在解析模板字符串之前，我们先查找一下第一个`<`出现在什么位置，如果第一个`<`在第一个位置，那么说明模板字符串是以其它 5 种类型开始的；
 
 ```
 let textEnd = html.indexOf('<')
-
+// '<' 在第一个位置，为其余5种类型
+if (textEnd === 0) {
+    // ...
+}
+// '<' 不在第一个位置，文本开头
+if (textEnd >= 0) {
+    // 如果html字符串不是以'<'开头,说明'<'前面的都是纯文本，无需处理
+    // 那就把'<'以后的内容拿出来赋给rest
+    rest = html.slice(textEnd)
+    while (
+        !endTag.test(rest) &&
+        !startTagOpen.test(rest) &&
+        !comment.test(rest) &&
+        !conditionalComment.test(rest)
+    ) {
+        // < in plain text, be forgiving and treat it as text
+        /**
+           * 用'<'以后的内容rest去匹配endTag、startTagOpen、comment、conditionalComment
+           * 如果都匹配不上，表示'<'是属于文本本身的内容
+           */
+        // 在'<'之后查找是否还有'<'
+        next = rest.indexOf('<', 1)
+        // 如果没有了，表示'<'后面也是文本
+        if (next < 0) break
+        // 如果还有，表示'<'是文本中的一个字符
+        textEnd += next
+        // 那就把next之后的内容截出来继续下一轮循环匹配
+        rest = html.slice(textEnd)
+    }
+    // '<'是结束标签的开始 ,说明从开始到'<'都是文本，截取出来
+    text = html.substring(0, textEnd)
+    advance(textEnd)
+}
+// 整个模板字符串里没有找到`<`,说明整个模板字符串都是文本
+if (textEnd < 0) {
+    text = html
+    html = ''
+}
+// 把截取出来的text转化成textAST
+if (options.chars && text) {
+    options.chars(text)
+}
 ```
 
 #### 4.4 文本解析器
+
+文本菜板器的源码位于`src/compiler/parser/text-parsre.js`中，代码如下：
+
+```
+const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g
+const buildRegex = cached(delimiters => {
+  const open = delimiters[0].replace(regexEscapeRE, '\\$&')
+  const close = delimiters[1].replace(regexEscapeRE, '\\$&')
+  return new RegExp(open + '((?:.|\\n)+?)' + close, 'g')
+})
+export function parseText (text,delimiters) {
+  const tagRE = delimiters ? buildRegex(delimiters) : defaultTagRE
+  if (!tagRE.test(text)) {
+    return
+  }
+  const tokens = []
+  const rawTokens = []
+  /**
+   * let lastIndex = tagRE.lastIndex = 0
+   * 上面这行代码等同于下面这两行代码:
+   * tagRE.lastIndex = 0
+   * let lastIndex = tagRE.lastIndex
+   */
+  let lastIndex = tagRE.lastIndex = 0
+  let match, index, tokenValue
+  while ((match = tagRE.exec(text))) {
+    index = match.index
+    // push text token
+    if (index > lastIndex) {
+      // 先把'{{'前面的文本放入tokens中
+      rawTokens.push(tokenValue = text.slice(lastIndex, index))
+      tokens.push(JSON.stringify(tokenValue))
+    }
+    // tag token
+    // 取出'{{ }}'中间的变量exp
+    const exp = parseFilters(match[1].trim())
+    // 把变量exp改成_s(exp)形式也放入tokens中
+    tokens.push(`_s(${exp})`)
+    rawTokens.push({ '@binding': exp })
+    // 设置lastIndex 以保证下一轮循环时，只从'}}'后面再开始匹配正则
+    lastIndex = index + match[0].length
+  }
+  // 当剩下的text不再被正则匹配上时，表示所有变量已经处理完毕
+  // 此时如果lastIndex < text.length，表示在最后一个变量后面还有文本
+  // 最后将后面的文本再加入到tokens中
+  if (lastIndex < text.length) {
+    rawTokens.push(tokenValue = text.slice(lastIndex))
+    tokens.push(JSON.stringify(tokenValue))
+  }
+
+  // 最后把数组tokens中的所有元素用'+'拼接起来
+  return {
+    expression: tokens.join('+'),
+    tokens: rawTokens
+  }
+}
+```
+
+我们看到，除开我们自己加的注释，代码其实不复杂，我们逐行分析。
+
+`parseText`函数接收两个参数，一个是传入的待解析的文本内容`text`，一个包裹变量的符号`delimiters`。第一个参数好理解，那第二个参数是干什么的呢？
 
 #### 4.5 优化阶段
 
