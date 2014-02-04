@@ -2,18 +2,45 @@
 
 ## 前言
 
-本人平时学习及收集内容，欢迎参入一起讨论。
+Node 中也有宏任务和微任务，与浏览中的事件循环类似。Node 与浏览器事件循环不同，其中有多个宏任务队列，而浏览器是只一个宏任务队列。
+
+Node 的架构底层是有 libuv，它是 Node 自身的动力来源之一，通过它可以去调用一些底层操作，Node 中的 Event Loop 功能就是在 libuv 中封装实现的。
 
 ## 内容
 
 - 宏任务和微任务
 - 事件循环机制的六个阶段
-- 六个阶段
+- 阶段概述
 - 轮循顺序
 - Event Loop 过程
 - setTimeout 和 setImmediate
 
 ### 一、宏任务和微任务
+
+宏任务大概包括：
+
+- setTimeout
+- setInterval
+- setImmediate
+- script（整体代码）
+- I/O 操作等。
+
+微任务大概包括：
+
+- process.nextTick(与普通微任务有区别，在微任务队列执行之前执行)
+- new Promise().then(回调)等。
+
+### 二、事件循环机制的六个阶段
+
+![images](node11.jpg)
+
+### 三、阶段概述
+
+### 四、轮循顺序
+
+### 五、Event Loop 过程
+
+### 六、setTimeout 和 setImmediate
 
 ### 参考资料
 
