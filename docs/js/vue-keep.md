@@ -249,31 +249,78 @@ function getComponentName (opts: ?VNodeComponentOptions): ?string {
 然后用组件名称跟`include`、`exclude` 中的匹配规则去匹配：
 
 ```
-
+const { include, exclude } = this
+/* 如果name与include规则不匹配或者与exclude规则匹配则表示不缓存，直接返回vnode */
+if (
+    (include && (!name || !matches(include, name))) ||
+    // excluded
+    (exclude && name && matches(exclude, name))
+) {
+    return vnode
+}
 ```
 
 如果组件名称与`include`规则不匹配或者与`exclude`规则匹配，则表示不缓存该组件，直接返回这个组件的`vnode`，否则的话走下一步缓存：
 
 ```
+const { cache, keys } = this
+/* 获取组件的key */
+const key = vnode.key == null
+? componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` : '')
+: vnode.key
 
+/* 如果命中缓存，则直接从缓存中拿 vnode 的组件实例 */
+if (cache[key]) {
+    vnode.componentInstance = cache[key].componentInstance
+    /* 调整该组件key的顺序，将其从原来的地方删掉并重新放在最后一个 */
+    remove(keys, key)
+    keys.push(key)
+}
+/* 如果没有命中缓存，则将其设置进缓存 */
+else {
+    cache[key] = vnode
+    keys.push(key)
+    /* 如果配置了max并且缓存的长度超过了this.max，则从缓存中删除第一个 */
+    if (this.max && keys.length > parseInt(this.max)) {
+        pruneCacheEntry(cache, keys[0], keys, this._vnode)
+    }
+}
+/* 最后设置keepAlive标记位 */
+vnode.data.keepAlive = true
 ```
 
 首先获取组件的`key`值：
 
 ```
-
+const key = vnode.key == null?
+componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` : '')
+: vnode.key
 ```
 
 即命中缓存：
 
 ```
-
+/* 如果命中缓存，则直接从缓存中拿 vnode 的组件实例 */
+if (cache[key]) {
+    vnode.componentInstance = cache[key].componentInstance
+    /* 调整该组件key的顺序，将其从原来的地方删掉并重新放在最后一个 */
+    remove(keys, key)
+    keys.push(key)
+}
 ```
 
 没有该`key`值：
 
 ```
-
+/* 如果没有命中缓存，则将其设置进缓存 */
+else {
+    cache[key] = vnode
+    keys.push(key)
+    /* 如果配置了max并且缓存的长度超过了this.max，则从缓存中删除第一个 */
+    if (this.max && keys.length > parseInt(this.max)) {
+        pruneCacheEntry(cache, keys[0], keys, this._vnode)
+    }
+}
 ```
 
 ### 三、缓存策略
