@@ -199,6 +199,7 @@ var dfsVisit = function(u,color,callback){
 
 - [「中高级前端」窥探数据结构的世界- ES6 版](https://juejin.im/post/5cd1ab3df265da03587c142a)
 - [图形算法（邻接矩阵）](https://juejin.im/post/5de7c053518825125d1497e2)
+- [动画：如何用广度和深度优先搜索找到女朋友？](https://mp.weixin.qq.com/s/ln5xLC3mzFoNdu1tk9olLg)
 - 《学习 JavaScript 数据结构与算法》
 
 ## 联系作者
