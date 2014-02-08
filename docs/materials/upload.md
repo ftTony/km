@@ -8,3 +8,4 @@
 - [字节跳动面试官，我也实现了大文件上传和断点续传](https://juejin.im/post/5e367f6951882520ea398ef6)
 - [复制黏贴上传图片和跨浏览器自动化测试](https://mp.weixin.qq.com/s/DLq_GIkdnuOayThfi3jI0A)
 - [从设计到实现前端 Uploader 基础类](https://juejin.im/post/5e5badce51882549652d55c2)
+- [一文了解文件上传全过程（项目中碰到的难点）](https://mp.weixin.qq.com/s/jIk9aiHEl2Dw4DbaIdn77Q)
