@@ -159,7 +159,11 @@ this.cache = {
 }
 ```
 
+`this.keys`是一个数组，用来存储每个需要缓存的组件的`key`，即对应`this.cache`对象中的键值。
+
 #### 2.4 destroyed
+
+当`<keep-alive>`组件被销毁时，此时会调用`destroyed`钩子函数，在该钩子函数里会遍历`this.cache`对象，然后
 
 ```
 destroyed () {
@@ -171,6 +175,8 @@ destroyed () {
 
 #### 2.5 mounted
 
+在`mounted`钩子函数中观测`include`和`exclude`的变化，如下：
+
 ```
 this.$watch('include', val => {
     pruneCache(this, name => matches(val, name))
@@ -180,10 +186,76 @@ this.$watch('exclude', val => {
 })
 ```
 
+如果`include`或`exclude`发生了变化，即表示定义需要缓存的组件的规则或者不需要缓存的组件的规则发生了变化，那么就执行`pruneCache`函数，函数如下：
+
+```
+function pruneCache (keepAliveInstance, filter) {
+  const { cache, keys, _vnode } = keepAliveInstance
+  for (const key in cache) {
+    const cachedNode = cache[key]
+    if (cachedNode) {
+      const name = getComponentName(cachedNode.componentOptions)
+      if (name && !filter(name)) {
+        pruneCacheEntry(cache, key, keys, _vnode)
+      }
+    }
+  }
+}
+
+function pruneCacheEntry (cache,key,keys,current) {
+  const cached = cache[key]
+  if (cached && (!current || cached.tag !== current.tag)) {
+    cached.componentInstance.$destroy()
+  }
+  cache[key] = null
+  remove(keys, key)
+}
+```
+
 #### 2.6 render
 
 ```
+render () {
+    const slot = this.$slots.default
+    const vnode: VNode = getFirstComponentChild(slot)
+    const componentOptions: ?VNodeComponentOptions = vnode && vnode.componentOptions
+    if (componentOptions) {
+      // check pattern
+      const name: ?string = getComponentName(componentOptions)
+      const { include, exclude } = this
+      if (
+        // not included
+        (include && (!name || !matches(include, name))) ||
+        // excluded
+        (exclude && name && matches(exclude, name))
+      ) {
+        return vnode
+      }
 
+      const { cache, keys } = this
+      const key: ?string = vnode.key == null
+        // same constructor may get registered as different local components
+        // so cid alone is not enough (#3269)
+        ? componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` : '')
+        : vnode.key
+      if (cache[key]) {
+        vnode.componentInstance = cache[key].componentInstance
+        // make current key freshest
+        remove(keys, key)
+        keys.push(key)
+      } else {
+        cache[key] = vnode
+        keys.push(key)
+        // prune oldest entry
+        if (this.max && keys.length > parseInt(this.max)) {
+          pruneCacheEntry(cache, keys[0], keys, this._vnode)
+        }
+      }
+
+      vnode.data.keepAlive = true
+    }
+    return vnode || (slot && slot[0])
+  }
 ```
 
 ### 三、缓存策略
