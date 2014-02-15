@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [羚珑项目自动化测试方案实践](https://mp.weixin.qq.com/s/Ta7SFF3IPtW8itZnQypeBA)
+
 ## 联系作者
 
 <div align="center">
