@@ -284,6 +284,31 @@ var stack2 = [];
 function push(node){
     stack1.push(node);
 }
+function pop(){
+    var temp = stack1.pop();
+    while(temp){
+
+    }
+    var result = stack2.pop();
+    temp = stack2.pop();
+    while(temp){
+        stack1.push(temp);
+        temp = stack2.pop()
+    }
+    return result;
+}
+```
+
+### 输入一个链表，输出该链表中倒数第 k 个结点。
+
+```
+
+```
+
+### 输入一个链表，反转链表后，输出链表的所有元素。
+
+```
+
 ```
 
 ### 参考资料
