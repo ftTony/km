@@ -258,6 +258,34 @@ let widthTraversal2 = (node)=>{
 }
 ```
 
+### 输入一个链表，从尾到头打印链表每个节点的值。
+
+```
+function printListFromTailToHead(head){
+    if(!head){
+        return 0;
+    }else{
+        var arr = new Array();
+        var curr = head;
+        while(curr){
+            arr.push(curr.val);
+            curr = curr.next;
+        }
+        return arr.reverse();
+    }
+}
+```
+
+### 用两个栈来实现一个队列，完成队列的 Push 和 Pop 操作。队列中的元素为 int 类型。
+
+```
+var stack1 = [];
+var stack2 = [];
+function push(node){
+    stack1.push(node);
+}
+```
+
 ### 参考资料
 
 - [剑指 offer -- JavaScript 版](https://www.nowcoder.com/discuss/49349)
