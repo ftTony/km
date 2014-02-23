@@ -8,10 +8,10 @@
 
 ## 内容
 
-- 流畅动画的标准
-- 法一：借助 Chrome 开发者工具
-- 法二：借助 Frame Timing API
-- 法三：借助 requestAnimationFrame API
+- [流畅动画的标准](#一、流畅动画的标准)
+- [法一：借助 Chrome 开发者工具](#二、法一：借助-chrome-开发者工具)
+- [法二：借助 Frame Timing API](#三、法二：借助-frame-timing-api)
+- [法三：借助 requestAnimationFrame API](#四、法三：借助-requestanimationframe-api)
 
 ### 一、流畅动画的标准
 

@@ -319,6 +319,7 @@ server {
 - [Nginx 代理功能与负载均衡详解](https://www.cnblogs.com/knowledgesea/p/5199046.html)
 - [一次百万长连接压测 Nginx OOM 的问题排查分析](https://mp.weixin.qq.com/s/PzctPuzKRbRlAUBnD584Xg)
 - [从入门到精通-Nginx，图文并茂、负载均衡、动静分离、虚拟主机 附案例源码](https://www.cnblogs.com/chenyanbin/p/12521296.html)
+- [五分钟看懂 Nginx 负载均衡](https://juejin.im/post/5e806d84e51d4546b659b370)
 
 ## 联系作者
 
