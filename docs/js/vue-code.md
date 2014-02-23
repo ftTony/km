@@ -4536,19 +4536,15 @@ const isRoot = !vm.$parent
 - keys：指向`vm.$options._propKeys`的指针，缓存`props`对象中的`key`，将来更新`props`时只需遍历`vm.$options._propKeys`数组即可得到所有的`props`的`key`。
 - isRoot：当前组件是否为根组件。
 
-接着，判断当前组件是否为根组件，如果不是，那么不需要将`props`数组转换为响应式的，``用来控制是否将数据转换成响应式。如下：
-
-```
-toggleObserving(false)
-```
-
-接着，判断当前组件是否为根组件，如果不是，那么不需要将`props`数组转换为响应式的，`toggleObserving(false)`用来控制是否将数据转换成响应式，如下：
+接着，判断当前组件是否为根组件，如果不是，那么不需要将`props`数组转换为响应式的，`toggleObserving(false)`用来控制是否将数据转换成响应式。如下：
 
 ```
 if (!isRoot) {
     toggleObserving(false)
 }
 ```
+
+接着，遍历`props`选项拿到每一对键值，先将键名添加到`keys`中，然后调用`validateProp`函数校验父组件传入的`props`数据类型是否切尔西并获取到传入的值`value`，然后将键和值通过`defineReactive`函数添加到`props`中，如下：
 
 ```
 for (const key in propsOptions) {
@@ -4578,6 +4574,14 @@ for (const key in propsOptions) {
       defineReactive(props, key, value)
     }
   }
+```
+
+添加完之后再判断这个`key`在当前实例`vm`中是否存在，如果不存在，则调用`proxy`函数在`vm`上设置一个以`key`为属性的代码，当使用`vm[key]`访问数据时，其实访问的是`vm._props[key]`，如下：
+
+```
+if (!(key in vm)) {
+    proxy(vm, `_props`, key)
+}
 ```
 
 **validateProp 函数分析**
