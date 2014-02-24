@@ -47,6 +47,7 @@ var proxy = new Proxy(target,handler);
 - [ECMAScript 6 入门](http://es6.ruanyifeng.com/#docs/proxy)
 - [《ECMAScript 6 入门》 第三版](https://yjhenan.gitbooks.io/-ecmascript-6/content/docs/proxy.html)
 - [ES6 之 Proxy 的巧用](https://mp.weixin.qq.com/s/MfKjL8atgDInN3yTRDGk3Q)
+- [你不知道的 Proxy：ES6 Proxy 可以做哪些有意思的事情？](https://mp.weixin.qq.com/s/wBwOKb5lOazpCa0ufl2Mgw)
 
 ## 联系作者
 
