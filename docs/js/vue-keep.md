@@ -46,7 +46,7 @@
 #### 1.2 用法
 
 - `keep-alive` 包裹动态组件时，会缓存不活动的组件实例，而不是销毁他们。
-- 当组件在`kepp-alive`内被切换，它的`activated`和`deactivated`两个生命周期钩子函数将会被执行。
+- 当组件在`kepp-alive`内被切换，如果**再次渲染**的不会执行`created`、`mounted`等钩子函数，它的`activated`和`deactivated`两个生命周期钩子函数将会被执行。
 
 ### 二、原理
 
