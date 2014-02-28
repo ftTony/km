@@ -184,11 +184,11 @@ var TEXT = 3 // 文本内容改变
 
 定义：对两个字符串`a、b`，则他们的`Levenshtein Distance`为：
 
-[images](vue-diff-14.png)
+![images](vue-diff-14.png)
 
 示例：字符串`a`和`b`，`a="abcde"，b="cabef"`，根据上面给出的计算公式，则他们的`Levenshtein Distance`的计算过程如下：
 
-[images](vue-diff-15.png)
+![images](vue-diff-15.png)
 
 本文的`demo`使用插件`list-diff2`算法进行比较，该算法的时间复杂`O(n*m)`，虽然该算法并非最优的算法，但是用于对于`dom`元素的常规操作是足够的。
 
