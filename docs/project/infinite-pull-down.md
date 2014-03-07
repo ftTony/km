@@ -13,6 +13,8 @@
 - [「前端进阶」高性能渲染十万条数据(虚拟列表)](https://juejin.im/post/5db684ddf265da4d495c40e5)
 - [「前端进阶」高性能渲染十万条数据(时间分片)](https://juejin.im/post/5d76f469f265da039a28aff7)
 - [一个简洁、有趣的无限下拉方案](https://juejin.im/post/5de5baf2518825235b095cbe)
+- [再谈前端虚拟列表的实现](https://zhuanlan.zhihu.com/p/34585166)
+- [前端 tree 组件，10000 个树节点，从 14.65s 到 0.49s](https://zhuanlan.zhihu.com/p/55528376)
 
 ## 联系作者
 
