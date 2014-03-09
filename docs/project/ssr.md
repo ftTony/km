@@ -32,6 +32,7 @@
 - [后端渲染、客户端渲染(CSR)、同构应用(SSR)](https://github.com/amandakelake/blog/issues/60)
 - [从头开始，彻底理解服务端渲染原理(8 千字汇总长文)](https://mp.weixin.qq.com/s/uf_joal0F2csGggfqaYETg)
 - [花椒前端基于 Docker 的 SSR 持续开发集成环境实践](https://mp.weixin.qq.com/s/EowqAuFQ9-0xOQIxqMvrog)
+- [React 中同构（SSR）原理脉络梳理](https://juejin.im/post/5bc7ea48e51d450e46289eab)
 
 ## 联系作者
 
