@@ -6,11 +6,11 @@
 
 ## 内容
 
-- 什么是 PWA
-- PWA 特性
-- PWA 优、缺点
-- PWA 关键技术
-- PWA 与其它 App 的对比
+- [什么是 PWA]()
+- [PWA 特性]()
+- [PWA 优、缺点]()
+- [PWA 关键技术]()
+- [PWA 与其它 App 的对比]()
 
 ### 一、什么是 PWA
 
@@ -57,6 +57,49 @@ Web App Manifest 是一个 W3C 规范，定义了一个基于 JSON 的清单，�
 - 控制屏幕方向已获得最佳效果
 - 定义启动画面，为你的站点定义主题
 - 追踪你的应用是从主屏幕还是 URL 启动的
+
+例如：
+
+```
+{
+  "lang": "en",
+  "dir": "ltr",
+  "name": "Donate App",
+  "description": "This app helps you donate to worthy causes.",
+  "short_name": "Donate",
+  "icons": [{
+    "src": "icon/lowres.webp",
+    "sizes": "64x64",
+    "type": "image/webp"
+  },{
+    "src": "icon/lowres.png",
+    "sizes": "64x64"
+  }, {
+    "src": "icon/hd_hi",
+    "sizes": "128x128"
+  }],
+  "scope": "/racer/",
+  "start_url": "/racer/start.html",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "theme_color": "aliceblue",
+  "background_color": "red",
+  "serviceworker": {
+    "src": "sw.js",
+    "scope": "/racer/",
+    "use_cache": false
+  },
+  "screenshots": [{
+    "src": "screenshots/in-game-1x.jpg",
+    "sizes": "640x480",
+    "type": "image/jpeg"
+  },{
+    "src": "screenshots/in-game-2x.jpg",
+    "sizes": "1280x920",
+    "type": "image/jpeg"
+  }]
+}
+```
 
 #### 4.2 Service Workers
 
