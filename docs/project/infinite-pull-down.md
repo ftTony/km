@@ -6,6 +6,8 @@
 
 ## 内容
 
+对于 vue 写的相项，可以使用[vue-virtual-scroll-list](https://github.com/tangbc/vue-virtual-scroll-list)和[vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller)来优化下拉解决方案
+
 ### 参考资料
 
 - [小程序实现看一看视频滑动切换](https://www.zhihu.com/people/huang-qiong-50-1/posts)
