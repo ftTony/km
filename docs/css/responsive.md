@@ -35,7 +35,12 @@
 - **物理像素(physical pixel)**：物理像素又称为设备像素。每个像素可以根据操作系统设置自己的颜色和亮度。正是这些设备像素的微小距离欺骗了我们肉眼看到的图像效果。
 - **设备独立像素**：设备独立像素也称为密度无关像素，可以认为是计算机坐标系统中的一个点，这个点代表一个可以由程序使用的虚拟像素(比如说 CSS 像素)，然后由相关系统转换为物理像素。 - **CSS 像素**：CSS 像素是一个抽像的单位，主要使用在浏览器上，用来精确度量 Web 页面上的内容。一般情况之下，CSS 像素称为与设备无关的像素，简称 DIP。
 - **屏幕密度**：屏幕密度是指一个设备表面上存在的像素数量，它通常以每英寸有多少像素来计算(PPI)。
-- **设备像素比**：设备像素比简称为 dpr，其定义了物理像素和设备独立像素的对应关系。它的值可以按下面的公式计算得到：
+
+#### 1.3 设备独立像素
+
+**设备像素比**
+
+设备像素比简称为 dpr，其定义了物理像素和设备独立像素的对应关系。它的值可以按下面的公式计算得到：
 
 ```
 设备像素比 ＝ 物理像素 / 设备独立像素
@@ -45,13 +50,28 @@
 
 在 css 中，可以通过`-webkit-device-pixel-ratio`、`-webkit-min-device-pixel-ratio`和`-webkit-max-device-pixel-ratio`进行媒体查询，对不同 dpr 的设备，做一些样式适配。或者使用 resolution|min-resolution|max-resolution 比较新的标准方式
 
-#### 1.3 设备独立像素
-
-- **位图像素**：一个位图像素是栅格图像最小的数据单元。每一个位图像素都包含着一些自身的显示信息。
-- **视窗 viewport**：viewport 是严格等于浏览器的窗口。在桌面浏览器中，viewport 就是浏览器窗口的宽度高度。但在移动端设备上就有点复杂。移动端的 viewport 太窄，为了能更好为 CSS 布局服务，所以提供了两个 viewport:虚拟的 visualviewport 和布局的 layoutviewport。
-- **视窗缩放 viewport scale**：可以设置`meta`标签的 viewport scale 来对视窗的大小进行缩放定义
+**移动端开发**
+**web 端开发**
+**关于屏幕**
 
 #### 1.4 视口
+
+视口(`viewport`)代表当前可见的计算机图形区域。在`web`浏览器术语中，通常与浏览器窗口相同，但不包括浏览器的`UI`，菜单栏等——即指你正在浏览的文档的那一部分。
+
+一般我们所说的视口共包括三种：布局视口、视觉视口和理想视口，它们在屏幕适配中起着非常重要的作用。
+
+**布局视口**
+**视觉视口**
+**理想视口**
+**Meta viewport**
+**移动端适配**
+**缩放**
+**获取浏览器大小**
+
+参考资料
+
+- [深入浅出 Viewport 设计原理](https://www.cnblogs.com/onepixel/p/12144364.html)
+- [彻底搞懂移动 Web 开发中的 viewport 与跨屏适配](https://mp.weixin.qq.com/s/aaXgFw4isWq1RrHkv75zLA)
 
 ### 二、1px 问题
 
@@ -269,7 +289,7 @@ window.addEventListener("resize", ()=>{
 }
 ```
 
-### 五、移动端适配
+### 五、移动端适配方案
 
 #### 5.1 REM 适配
 
@@ -512,8 +532,6 @@ images.forEach((img)=>{
 - [移动端适配 - 基础知识篇](https://juejin.im/post/5e36c4fce51d450268661344)
 - [设计体系的响应式设计](https://zhuanlan.zhihu.com/p/109781992)
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
-- [彻底搞懂移动 Web 开发中的 viewport 与跨屏适配](https://mp.weixin.qq.com/s/aaXgFw4isWq1RrHkv75zLA)
-- [深入浅出 Viewport 设计原理](https://www.cnblogs.com/onepixel/p/12144364.html)
 - [前端基础知识概述 -- 移动端开发的屏幕、图像、字体与布局的兼容适配](https://mp.weixin.qq.com/s/-N6EVSye4n78h5wLTo65OQ)
 - [面试官：你了解过移动端适配吗？](https://juejin.im/post/5e6caf55e51d4526ff026a71)
 - [大厂是怎么做移动端适配的](https://mp.weixin.qq.com/s/ijLhb5WJwp9q0Ni6IhCIiQ)
