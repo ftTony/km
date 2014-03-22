@@ -1,4 +1,4 @@
-# WebRtc学习
+# WebRTC 学习
 
 ## 前言
 
@@ -8,7 +8,7 @@
 
 ### 参考资料
 
-- [如何通过WebRTC开发实时互动AI视频应用](https://mp.weixin.qq.com/s/9k0CR_niaNorgBWDPQWgmQ)
+- [如何通过 WebRTC 开发实时互动 AI 视频应用](https://mp.weixin.qq.com/s/9k0CR_niaNorgBWDPQWgmQ)
 
 ## 联系作者
 
