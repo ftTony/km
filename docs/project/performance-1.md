@@ -480,6 +480,7 @@ const ModalEchart = (props) =>(
 - [2018 前端性能优化清单](https://juejin.im/post/5a966bd16fb9a0635172a50a)
 - [【译】2018 前端性能优化清单 —— 第一部分](https://juejin.im/post/5a67e49df265da3e377c2d59)
 - [[译] 2019 前端性能优化年度总结 — 第一部分](https://juejin.im/post/5c4418006fb9a049c043545e)
+- [2020 前端性能优化清单（一）](https://mp.weixin.qq.com/s/d9J-_aF9K8QTUtemol-EfQ)
 - [前端性能优化-加载篇](https://www.cxymsg.com/guide/load.html)
 - [我们是如何将网站加载时间减少 24%的？](https://mp.weixin.qq.com/s/n1rELZ4y2htKCuAldlqS9A)
 - [网站性能优化实战——从 12.67s 到 1.06s 的故事](https://juejin.im/post/5b6fa8c86fb9a0099910ac91)

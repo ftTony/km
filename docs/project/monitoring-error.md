@@ -8,6 +8,7 @@
 
 ### 参考资料
 
+- [使用 vue+node 搭建前端异常监控系统](https://juejin.im/post/5e5e423ae51d4527041172b6)
 - [接入 sentry-让你的错误别再裸奔](https://mp.weixin.qq.com/s/JEDt9BL2eWpVTrtbfEPiAA)
 - [如何优雅处理前端异常？](https://zhuanlan.zhihu.com/p/51800345)
 - [前端代码异常监控实战](https://zhuanlan.zhihu.com/p/31979395)
