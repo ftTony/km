@@ -4643,11 +4643,30 @@ let value = propsData[key]
 - absent：当前`key`是否在`propsData`中存在，即父组件是否传入了该属性。
 - value：当前`key`在`propsData`中对应的值，即父组件对于该属性传入的真实值。
 
-接着，判断`prop`的`type`属性是否是布尔类型（）
+接着，判断`prop`的`type`属性是否是布尔类型（Boolean），`getTypeIndex`函数用于判断`prop`的`type`属性中是否存在某种类型，如果存在，则返回该类型在`type`属性中的索引（因为`type`属性可以是数组），如果不存在则返回 -1。
+
+如果是布尔类型的话，那么有两种边界情况需要单独处理：
+
+1. 如果`absent`为`true`，即父组件没有传入该`props`属性并且该属性也没有默认值的时候，将该属性值设置为`false`，如下：
 
 ```
 if (absent && !hasOwn(prop, 'default')) {
     value = false
+}
+```
+
+2. 如果父组件传入了该`prop`属性，那么需要满足以下几点：
+
+- 该属性值为空字符串串或者属性值与属性名相等；
+- `prop`和`type`属性中不存在`String`类型；
+- 如果`prop`
+
+```
+if (value === '' || value === hyphenate(key)) {
+    const stringIndex = getTypeIndex(String, prop.type)
+    if (stringIndex < 0 || booleanIndex < stringIndex) {
+        value = true
+    }
 }
 ```
 
