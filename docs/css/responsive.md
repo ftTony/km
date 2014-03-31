@@ -183,6 +183,38 @@ viewport.setAttribute('content', 'width=device-width,user-scalable=no,initial-sc
 
 ### 四、横屏适配
 
+![images](responsive06.jpg)
+
+很多视口我们要对横屏和竖屏显示不同的布局，所以我们需要检测在不同的场景下给定不同的样式
+
+#### 4.1 JavaScript 检测横屏
+
+`window.orientation`获取屏幕旋转方向
+
+```
+window.addEventListener("resize", ()=>{
+    if (window.orientation === 180 || window.orientation === 0) {
+      // 正常方向或屏幕旋转180度
+        console.log('竖屏');
+    };
+    if (window.orientation === 90 || window.orientation === -90 ){
+       // 屏幕顺时钟旋转90度或屏幕逆时针旋转90度
+        console.log('横屏');
+    }
+});
+```
+
+#### 4.2 CSS 检测横屏
+
+```
+@media screen and (orientation: portrait) {
+  /*竖屏...*/
+}
+@media screen and (orientation: landscape) {
+  /*横屏...*/
+}
+```
+
 ### 五、移动端适配
 
 #### 5.1 REM 适配
@@ -339,6 +371,8 @@ body{
 
 为了保证图片质量，我们应该尽可能让一个屏幕像素来渲染一个图片像素，所以，针对不同`DPR`的屏幕，我们需要展示不同分辨的图片。
 
+如：在`dpr=2`的屏幕上展示两倍图`(@2x)`，在`dpr=3`的屏幕上展示三倍图`(@3x)`。
+
 ![images](responsive05.png)
 
 #### 6.3 media 查询
@@ -386,7 +420,31 @@ body{
 
 #### 6.6 JavaScript 拼接图片 url
 
+使用`window.devicePixelRatio`获取设备像素比，遍历所有图片，替换图片地址：
+
+```
+const dpr = window.devicePixelRatio;
+const images =  document.querySelectorAll('img');
+images.forEach((img)=>{
+  img.src.replace(".", `@${dpr}x.`);
+})
+```
+
 #### 6.7 使用 svg
+
+`SVG`的全称是可缩放矢量图（Scalable Vector Graphics）。不同于位图的基于像素，`SVG` 则是属于对图像的形状描述，所以它本质上是文本文件，体积较小，且不管放大多少倍都不会失真。
+
+除了我们手动在代码中绘制`svg`，我们还可以像使用位图一样使用`svg`图片：
+
+```
+<img src="conardLi.svg">
+
+<img src="data:image/svg+xml;base64,[data]">
+
+.avatar {
+  background: url(conardLi.svg);
+}
+```
 
 ### 参考资料
 
