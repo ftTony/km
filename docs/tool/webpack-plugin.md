@@ -6,6 +6,42 @@
 
 ## 内容
 
+- 调用插件 apply 函数传入 compiler 对象
+- 通过 compiler 对象监听
+
+插件代码
+
+```
+//@file: plugins/myplugin.js
+class myPlugin {
+    constructor(options){
+        //用户自定义配置
+        this.options = options
+        console.log(this.options)
+    }
+    apply(compiler) {
+        console.log("This is my first plugin.")
+    }
+}
+
+module.exports = myPlugin
+```
+
+webpack 代码
+
+```
+const MyPlugin = require('./plugins/myplugin-4.js')
+
+module.exports = {
+    ......,
+    plugins: [
+        new MyPlugin("Plugin is instancing.")
+    ]
+}
+```
+
+具体参数可以参考《深入浅出 webpack》
+
 ### 参考资料
 
 - [【Webpack】513- Webpack 插件开发如此简单！](https://mp.weixin.qq.com/s/LTAlkoyS3C2yiLkFriu-Cw)

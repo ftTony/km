@@ -6,6 +6,44 @@
 
 ## 内容
 
+### loader 写法
+
+1. 获得 loader 的 options，是通过`require (’ loader-utils ’);`
+2. 返回其他结果，是调用`callback`
+3. 缓存加速，调用 this.cacheable(false);
+
+具体参数可以参考《深入浅出 webpack》
+
+#### 1.1 loader 文件
+
+```
+const loaderUtils = require('loader-utils');
+
+module.exports = function (content) {
+    // 获取用户配置的options 同步
+    const options=loaderUtils.getOptions(this);
+    console.log('***options***',options);
+    this.callback(null,'{}'+content);
+    return '{};'+content;
+}
+```
+
+#### 7.2 webpack 配置文件
+
+```
+{
+    test: /\.js$/,
+    exclude: /node_modules/,
+       use: {
+           //这里是我的自定义loader的存放路径
+           loader: path.resolve('./loaders/index.js'),
+           options: {
+              test: 1
+           }
+       }
+}
+```
+
 ### 参考资料
 
 - [编写自定义 webpack loader](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-loader.md)
