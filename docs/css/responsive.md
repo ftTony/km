@@ -158,8 +158,6 @@ iPhone 6 的 PPI 为 ![images](responsive21.svg)，那它每英寸约含有 326 
 
 `页面的缩放系数 = CSS像素 / 设备独立像素`。
 
-**关于屏幕**
-
 #### 1.4 视口
 
 视口(`viewport`)代表当前可见的计算机图形区域。在`web`浏览器术语中，通常与浏览器窗口相同，但不包括浏览器的`UI`，菜单栏等——即指你正在浏览的文档的那一部分。
@@ -551,6 +549,19 @@ module.exports = {
 #### 5.2 VW 布局
 
 `vw`是基于 Viewport 视窗的长度单位，指的就是浏览器可视化的区域，而这个可视区域是`window.innerWidth/window.innerHeight`的大小，用图简单的示意如下：
+
+![images](responsive25.jpg)
+
+在`CSS Values and Units Module Level 3`中和`Viewport`相关的单位有四个，分别为`vw`、`vh`、`vmin`和`vmax`。
+
+- `vw`：是 Viewport's width 的简写,`1vw` 等于 `window.innerWidth` 的 `1%`
+- `vh`：和 `vw` 类似，是 `Viewport's height` 的简写，`1vh` 等于 `window.innerHeihgt` 的 `1%`
+- `vmin`：`vmin` 的值是当前 `vw` 和 `vh` 中较小的值
+- `vmax`：`vmax` 的值是当前 `vw` 和 `vh` 中较大的值
+
+![images](responsive26.jpg)
+
+如果设计稿使用 `750px` 宽度，则 `100vw = 750px`，即 `1vw = 7.5px`。那么我们可以根据设计图上的 `px`值直接转换成对应的 `vw` 值。如果不想自己计算，我们可以使用 `PostCSS` 的插件 `postcss-px-to-viewport`，让我们可以直接在代码中写 `px`。
 
 ```
 {
