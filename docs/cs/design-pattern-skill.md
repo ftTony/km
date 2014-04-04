@@ -166,9 +166,12 @@ class BaseLocalStorage{
             time = +value.slice(0,index);           // 获取时间戳
             if(+new Date(time) > + new Date() || time===0){
                 // 获取数据结果
-                
+                value = value.slice(index + timeSignLen);
             }else{
                 // 获取则结果为null
+                value = null
+                status = this.status.TIMEOUT;
+                time.remove(key)
             }
         }else{
             status = this.status.FAILURE;
@@ -185,9 +188,36 @@ class BaseLocalStorage{
 
     // 删除数据
     remove(key,callback){
-
+        let status = this.status.FAILURE,
+            getKey = this.getKey(key),
+            value = null;
+        value = this.storage.getItem(getKey);
+        if(value){
+            // 删除数据
+            this.storage.removeItem(getKey);
+            status = this.status.SUCCESS;
+        }
+        callback && callback.call(this,status,status>0? null : value.slice(value.indexOf(this.timeSing)+this.timeSing.length))
     }
 }
+
+/*使用实例*/
+let LS = new BaseLocalStorage('LS__');
+LS.set('a', 'xiao ming', function () {
+    console.log(arguments)
+});
+LS.get('a', function () {
+    console.log(arguments)
+});
+LS.remove('a', function () {
+    console.log(arguments)
+});
+LS.remove('a', function () {
+    console.log(arguments)
+});
+LS.get('a', function () {
+    console.log(arguments)
+});
 ```
 
 ### 四、节流模式
@@ -237,12 +267,6 @@ $(window).on('scroll',function(){
 })
 ```
 
-#### 4.3 优点
-
-#### 4.4 缺点
-
-#### 4.5 场景
-
 ### 五、简单模板模式
 
 #### 5.1 介绍
@@ -263,6 +287,8 @@ $(window).on('scroll',function(){
 
 #### 6.1 介绍
 
+减少每次代码执行的重复性的分支判断，通过对对象重定义比原对象中的分支判断。
+
 #### 6.2 代码
 
 ```
@@ -282,6 +308,10 @@ $(window).on('scroll',function(){
 ```
 
 ### 八、等待者模式
+
+#### 8.1 介绍
+
+通过对多个异步进程的监听， 来触发未来发生的动作。
 
 ```
 
