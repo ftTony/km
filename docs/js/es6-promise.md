@@ -420,7 +420,6 @@ const preloadImage = function(path){
 #### 10.2 通过 Promise 封装 ajax 解决回调地狱问题
 
 ```
-
 function getJSON(url){
     return new Promise((resolve,reject) => {
         var XHR = new XMLHttpRequest();
@@ -444,7 +443,6 @@ function getJSON(url){
 
     return promise;
 }
-
 ```
 
 #### 10.3 Generator 函数与 Promise 的结合
@@ -452,9 +450,38 @@ function getJSON(url){
 使用`Generator`函数管理流程，遇到异步操作的时候，通常返回一个`Promise`对象。
 
 ```
-function getFoo(){
-
+function getFoo () {
+  return new Promise(function (resolve, reject){
+    resolve('foo');
+  });
 }
+
+const g = function* () {
+  try {
+    const foo = yield getFoo();
+    console.log(foo);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+function run (generator) {
+  const it = generator();
+
+  function go(result) {
+    if (result.done) return result.value;
+
+    return result.value.then(function (value) {
+      return go(it.next(value));
+    }, function (error) {
+      return go(it.throw(error));
+    });
+  }
+
+  go(it.next());
+}
+
+run(g);
 ```
 
 ### 十一、错误用法及误区
