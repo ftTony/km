@@ -618,6 +618,46 @@ body{
 
 #### 5.4 flexible 适配
 
+`flexible`方案是阿里早期开源的一个移动端适配解决方案，引用 `flexible` 后，我们在页面上统一使用 `rem` 来布局。
+
+它的核心代码非常简单：
+
+```
+// set 1rem = viewWidth / 10
+function setRemUnit () {
+    var rem = docEl.clientWidth / 10
+    docEl.style.fontSize = rem + 'px'
+}
+setRemUnit();
+```
+
+`rem` 是相对于`html`节点的`font-size`来做计算的。
+
+我们通过设置 `document.documentElement.style.fontSize` 就可以统一整个页面的布局标准。
+
+上面的代码中，将 `html` 节点的 `font-size` 设置为页面 `clientWidth`(布局视口)的 `1/10`，即 1rem 就等于页面布局视口的 `1/10`，这就意味着我们后面使用的 `rem` 都是按照页面比例来计算的。
+
+这时，我们只需要将 `UI` 出的图转换为 `rem` 即可。
+
+以 `iPhone6` 为例：布局视口为 `375px`，则 `1rem = 37.5px`，这时 `UI` 给定一个元素的宽为 `75px`（设备独立像素），我们只需要将它设置为 `75 / 37.5 = 2rem`。
+当然，每个布局都要计算非常繁琐，我们可以借助 `PostCSS` 的 `px2rem` 插件来帮助我们完成这个过程。
+
+下面的代码可以保证在页面大小变化时，布局可以自适应，当触发了 `window` 的 `resize` 和 `pageShow` 事件之后自动调整 `html` 的 `fontSize`大小。
+
+```
+  // reset rem unit on page resize
+window.addEventListener('resize', setRemUnit)window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      setRemUnit()
+    }
+})
+```
+
+#### 5.5 参考资料
+
+- [面试官：你了解过移动端适配吗？](https://juejin.im/post/5e6caf55e51d4526ff026a71)
+- [大厂是怎么做移动端适配的](https://mp.weixin.qq.com/s/ijLhb5WJwp9q0Ni6IhCIiQ)
+
 ### 六、图片模糊问题
 
 #### 6.1 产生原因
@@ -724,8 +764,6 @@ images.forEach((img)=>{
 - [设计体系的响应式设计](https://zhuanlan.zhihu.com/p/109781992)
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
 - [前端基础知识概述 -- 移动端开发的屏幕、图像、字体与布局的兼容适配](https://mp.weixin.qq.com/s/-N6EVSye4n78h5wLTo65OQ)
-- [面试官：你了解过移动端适配吗？](https://juejin.im/post/5e6caf55e51d4526ff026a71)
-- [大厂是怎么做移动端适配的](https://mp.weixin.qq.com/s/ijLhb5WJwp9q0Ni6IhCIiQ)
 - [细说移动端 经典的 REM 布局 与 新秀 VW 布局](https://www.cnblogs.com/imwtr/p/9648233.html)
 
 ## 联系作者
