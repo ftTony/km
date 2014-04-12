@@ -11,20 +11,20 @@
 
 ## 内容
 
-- [基本用法](#一基本用法)
-- [then()](#二then)
-- [catch()](#三catch)
-- [finally()](#四finally)
-- [all()](#五all)
-- [ace()](#六ace)
-- [resolve()](#七resolve)
-- [reject()](#八reject)
-- [try()](#九try)
-- [应用](#十一应用)
-- [错误用法及误区](#十一错误用法及误区)
-- [promise 你可能不知道的 6 件事](#十二promise-你可能不知道的-6-件事)
-- [手写 Promise](#十三手写-promise)
-- [Promise 几道面试题](##十四promise-几道面试题)
+- [基本用法](#一、基本用法)
+- [then()](#二、then)
+- [catch()](#三、catch)
+- [finally()](#四、finally)
+- [all()](#五、all)
+- [ace()](#六、ace)
+- [resolve()](#七、resolve)
+- [reject()](#八、reject)
+- [try()](#九、try)
+- [应用](#十、应用)
+- [错误用法及误区](#十一、错误用法及误区)
+- [promise 你可能不知道的 6 件事](#十二、promise-你可能不知道的-6-件事)
+- [手写 Promise](#十三、手写-promise)
+- [Promise 几道面试题](##十四、promise-几道面试题)
 
 ### 一、基本用法
 

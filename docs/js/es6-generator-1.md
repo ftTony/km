@@ -4,7 +4,7 @@
 
 Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为与传统函数完全不同。
 
-Generator函数有两个特征：
+Generator 函数有两个特征：
 
 - `function`关键字与函数名之间有一个星号；
 - 函数体内`yield`表达式，定义不同的内部状态；
@@ -21,26 +21,26 @@ var hw = helloWorldGenerator();
 
 ## 内容
 
-- [基本概念](#一基本概念)
-- [next 方法的参数](#二next方法的参数)
-- [for...of 循环](#三forof循环)
-- [Generator.prototype.throw()](#四generatorprototypethrow)
-- [Generator.prototype.return()](#五generatorprototypereturn)
-- [next()、throw()、return() 的共同点](#六nextthrowreturn的共同点)
-- [yield* 表达式](#七yield表达式)
-- [作为对象属性的Generator函数](#八作为对象属性的generator函数)
-- [Generator 函数的this](#九generator函数的this)
-- [含义](#十含义)
-- [应用](#十一应用)
+- [基本概念](#一、基本概念)
+- [next 方法的参数](#二、next方法的参数)
+- [for...of 循环](#三、for-of循环)
+- [Generator.prototype.throw()](#四、generator-prototype-throw)
+- [Generator.prototype.return()](#五、generator-prototype-return)
+- [next()、throw()、return() 的共同点](#六、next-、throw-、return-的共同点)
+- [yield\* 表达式](#七、yield-表达式)
+- [作为对象属性的 Generator 函数](#八、作为对象属性的generator函数)
+- [Generator 函数的 this](#九、generator函数的this)
+- [含义](#十、含义)
+- [应用](#十一、应用)
 
 ### 一、基本概念
 
-- [yield表达式](#11-yield表达式)
-- [与Iterator接口的关系](#12-与Iterator接口的关系)
+- [yield 表达式](#11-yield表达式)
+- [与 Iterator 接口的关系](#12-与Iterator接口的关系)
 
-#### 1.1 yield表达式
+#### 1.1 yield 表达式
 
-由于Generator函数返回的遍历器对象，只有调用`next`方法才会遍历下一个内部状态，所以其实提供了一种可以暂停执行的函数。`yield`表达式就是暂停标志。
+由于 Generator 函数返回的遍历器对象，只有调用`next`方法才会遍历下一个内部状态，所以其实提供了一种可以暂停执行的函数。`yield`表达式就是暂停标志。
 
 ```
 function* gen() {
@@ -52,10 +52,10 @@ function* gen() {
 
 1. 遇到`yield`表达式，就暂停执行后面的操作，并将紧跟在`yield`后面的那个表达式的值，作为返回的对象的`value`属性值。
 2. 下一次调用`next`方法时，再继续往下执行，直到遇到下一个`yield`表达式。
-3. 如果没有再遇到新的`yield`表达式，就一直运行到函数结束，直到`return`语句为止，并将`return`语句后面的表达式的值，作为返回的对象的value属性值。
+3. 如果没有再遇到新的`yield`表达式，就一直运行到函数结束，直到`return`语句为止，并将`return`语句后面的表达式的值，作为返回的对象的 value 属性值。
 4. 如果该函数没有`return`语句，则返回的对象的`value`属性值为`undefined`。
 
-#### 1.2 与Iterator接口的关系
+#### 1.2 与 Iterator 接口的关系
 
 任意一个对象的`Symbol.iterator`方法，等于该对象的遍历器生成函数，调用该函数会返回该对象的一个遍历器对象。
 
@@ -89,11 +89,11 @@ g.next(true)  // {value:0,done:false}
 
 ```
 
-注意，由于`next`方法的参数表示上一个`yield`表达式的返回值，所以在第一次使用`next`方法时，传递参数是无效的。V8引擎直接忽略第一次使用`next`方法时的参数，只有从第二次使用`next`方法开始，参数才是有效的。
+注意，由于`next`方法的参数表示上一个`yield`表达式的返回值，所以在第一次使用`next`方法时，传递参数是无效的。V8 引擎直接忽略第一次使用`next`方法时的参数，只有从第二次使用`next`方法开始，参数才是有效的。
 
 ### 三、`for...of`循环
 
-`for...of`循环可以自动遍历Generator函数运行时生成的`Iterator`对象，且此时不再需要调用`next`方法。
+`for...of`循环可以自动遍历 Generator 函数运行时生成的`Iterator`对象，且此时不再需要调用`next`方法。
 
 ```
 function * foo(){
@@ -111,12 +111,11 @@ for(let v of foo()){
 // 1 2 3 4 5
 ```
 
-除了`for...of`循环以外，扩展运算符(`...`)、解构赋值和`Array.from`方法内部调用的，都是遍历器接口。这意味着，它们都可以将Generator函数返回的Iterator对象，作为参数。
-
+除了`for...of`循环以外，扩展运算符(`...`)、解构赋值和`Array.from`方法内部调用的，都是遍历器接口。这意味着，它们都可以将 Generator 函数返回的 Iterator 对象，作为参数。
 
 ### 四、Generator.prototype.throw()
 
-Generator函数返回的遍历器对象，都有一个`throw`方法，可以在函数体外抛出错误，然后在Generator函数体内捕获。
+Generator 函数返回的遍历器对象，都有一个`throw`方法，可以在函数体外抛出错误，然后在 Generator 函数体内捕获。
 
 ```
 var g = function*(){
@@ -144,7 +143,7 @@ try{
 
 ### 五、Generator.prototype.return()
 
-`Generator`函数返回的遍历器对象，还有一个`return`方法，可以返回给定的值，并且终结遍历Generator函数。
+`Generator`函数返回的遍历器对象，还有一个`return`方法，可以返回给定的值，并且终结遍历 Generator 函数。
 
 ```
 function * gen(){
@@ -160,11 +159,11 @@ g.next('foo')  // {value:'foo',done:true}
 g.next()  // {value:undefined,done:true}
 ```
 
-以面代码中，遍历器对象`g`调用`return`方法后，返回值的`value`属性就是`return`方法的参数`foo`。并且，Generator函数的遍历就终止了，返回值的`done`属性为`true`，以后再调用`next`方法，`done`属性总是返回`true`。
+以面代码中，遍历器对象`g`调用`return`方法后，返回值的`value`属性就是`return`方法的参数`foo`。并且，Generator 函数的遍历就终止了，返回值的`done`属性为`true`，以后再调用`next`方法，`done`属性总是返回`true`。
 
 ### 六、`next()、throw()、return()`的共同点
 
-`next()`、`throw()`、`return()`这三个方法本质上是同一件事，可以放在一起理解。它们的作用都是让Generator函数恢复执行，并且使用不同的语句替换`yield`表达式。
+`next()`、`throw()`、`return()`这三个方法本质上是同一件事，可以放在一起理解。它们的作用都是让 Generator 函数恢复执行，并且使用不同的语句替换`yield`表达式。
 
 `next()`是将`yield`表达式替换成一个值。
 
@@ -201,7 +200,7 @@ gen.return(2);    // Object {value:2,done:true}
 
 ### 七、`yield*`表达式
 
-`yield*`表达式，用来在一个Generator函数里面执行另一个Generator函数。
+`yield*`表达式，用来在一个 Generator 函数里面执行另一个 Generator 函数。
 
 ```
 function * foo(){
@@ -225,9 +224,9 @@ function * bar(){
 
 ```
 
-### 八、作为对象属性的Generator函数
+### 八、作为对象属性的 Generator 函数
 
-如果一个对象的属性是Generator函数，可以简写成下面的形式。
+如果一个对象的属性是 Generator 函数，可以简写成下面的形式。
 
 ```
 let obj = {
@@ -239,7 +238,7 @@ let obj = {
 
 ### 九、`Generator`函数的`this`
 
-ES6规定这个遍历器是Generator函数的实例，也继承了Generator函数的`prototype`对象上的方法。
+ES6 规定这个遍历器是 Generator 函数的实例，也继承了 Generator 函数的`prototype`对象上的方法。
 
 如果把`Generator`当作普通的构造函数，并不会生效，因为`Generator`返回的总是遍历器对象，而不是`this`对象。
 
@@ -280,10 +279,10 @@ obj.c // 3
 
 ### 十、含义
 
-- [Generator与状态机](#101-generator与状态机)
-- [Generator与协程](#102-generator与协程)
+- [Generator 与状态机](#101-generator与状态机)
+- [Generator 与协程](#102-generator与协程)
 
-#### 10.1 Generator与状态机
+#### 10.1 Generator 与状态机
 
 Generator 是实现状态机的最佳结构。
 
@@ -298,7 +297,7 @@ var clock = function *(){
 }
 ```
 
-#### 10.2 Generator与协程
+#### 10.2 Generator 与协程
 
 协程是一种程序运行的方式，可以理解成“协作的线程”或“协作的函数”，协程既可以用单线程实现，也可以用多线程实现。前者是一种特殊的子例程，后者是一种特殊的线程。
 
@@ -318,20 +317,20 @@ var clock = function *(){
 由于 JavaScript 是单线程语言，只能保持一个调用栈。引入协程以后，每个任务可以保持自己的调用栈。这样做的最大好处，就是抛出错误的时候，可以找到原始的调用栈。不至于像异步操作的回调函数那样，一旦出错，原始的调用栈早就结束。
 Generator 函数是 ES6 对协程的实现，但属于不完全实现。Generator 函数被称为“半协程”（semi-coroutine），意思是只有 Generator 函数的调用者，才能将程序的执行权还给 Generator 函数。如果是完全执行的协程，任何函数都可以让暂停的协程继续执行。
 
-如果将 Generator 函数当作协程，完全可以将多个需要互相协作的任务写成 Generator 函数，它们之间使用yield表示式交换控制权。
+如果将 Generator 函数当作协程，完全可以将多个需要互相协作的任务写成 Generator 函数，它们之间使用 yield 表示式交换控制权。
 
 ### 十一、应用
 
-`Generator`可以暂停函数执行，返回任意表达式的值。这种特点使得Generator有多种应用场景。
+`Generator`可以暂停函数执行，返回任意表达式的值。这种特点使得 Generator 有多种应用场景。
 
 - [异步操作的同步化表达](#111-异步操作的同步化表达)
 - [控制流程管理](#112-控制流程管理)
-- [部署Iterator接口](#113-部署iterator接口)
+- [部署 Iterator 接口](#113-部署iterator接口)
 - [作为数据结构](#114-作为数据结构)
 
 #### 11.1 异步操作的同步化表达
 
-`Generator`函数的暂停执行的效果，意味着可以把异步操作的写在`yield`表达式里面，等到用`next`方法时再往后执行。这实际上等同于不需要写回调函数了，因为异步操作的后续操作可以放在`yield`表达式下面，反正要等到调用`next`方法时再执行。所以，Generator函数的一个重要实际意义就是用来处理异步操作，改写回调函数。
+`Generator`函数的暂停执行的效果，意味着可以把异步操作的写在`yield`表达式里面，等到用`next`方法时再往后执行。这实际上等同于不需要写回调函数了，因为异步操作的后续操作可以放在`yield`表达式下面，反正要等到调用`next`方法时再执行。所以，Generator 函数的一个重要实际意义就是用来处理异步操作，改写回调函数。
 
 ```
 function * main(){
@@ -378,7 +377,7 @@ function scheduler(task){
 scheduler(longRunningTask(initialValue));
 ```
 
-#### 11.3 部署Iterator接口
+#### 11.3 部署 Iterator 接口
 
 利用 Generator 函数，可以在任意对象上部署 Iterator 接口。
 
@@ -400,7 +399,7 @@ for (let [key, value] of iterEntries(myObj)) {
 
 #### 11.4 作为数据结构
 
-Generator可以看作是数据结构，更确切地说，可以看作是一个数组结构，因为 Generator 函数可以返回一系列的值，这意味着它可以对任意表达式，提供类似数组的接口。
+Generator 可以看作是数据结构，更确切地说，可以看作是一个数组结构，因为 Generator 函数可以返回一系列的值，这意味着它可以对任意表达式，提供类似数组的接口。
 
 ```
 function *doStuff() {
