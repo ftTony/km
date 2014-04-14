@@ -4316,6 +4316,20 @@ export function initState (vm: Component) {
 
 `Vue`中对数据变化的侦测是使用属性拦截的方式实现的，但是`Vue`并不是对所有数据使用属性拦截的方式侦测变化，这是因为数据越多，数据上所绑定的依赖就会多，从而造成依赖追踪的内存开销就会很大，所以从`Vue 2.0`版本起，`Vue`不再对所有数据都进行侦测，而是将侦测粒度提高到组件层面，对每个组件进行侦测，所以在每个组件上新增了`vm._watchers`属性，用来存放这个组件内用到的所有状态的依赖，当其中一个状态发生变化时，就会通知到组件，然后由组件内部使用虚拟`DOM`进行数据比对，从而降低内存开销，提高性能。
 
+```
+if (opts.props) initProps(vm, opts.props)
+if (opts.methods) initMethods(vm, opts.methods)
+if (opts.data) {
+    initData(vm)
+} else {
+    observe(vm._data = {}, true /* asRootData */)
+}
+if (opts.computed) initComputed(vm, opts.computed)
+if (opts.watch && opts.watch !== nativeWatch) {
+    initWatch(vm, opts.watch)
+}
+```
+
 先判断实例中是否有`props`选项，如果有，就调用`props`选项初始化函数`initProps`去初始`props`选项；
 
 再判断实例中是否有`methods`选项，如果有，就调用`methods`选项初始函数`initMethods`去初始化`methods`选项；
@@ -4325,6 +4339,8 @@ export function initState (vm: Component) {
 接着再判断实例中是否有`computed`选项，如果有，就调用`computed`选项初始化函数`initComputed`去初始化`computed`选项；
 
 最后判断实例中是否有`watch`选项，如果有，就调用`watch`选项初始化函数`initWatch`去初始化`watch`选项；
+
+`iniState`函数的所有逻辑，其实你会发现，在函数内部初始人这 5 个选项的时候它的顺序是有意安排的，不是毫无章法的。如果你在开发中有注意到我们在`data`中可以使用`props`，在`watch`中可以观察`data`和`props`，之所以可以这样做，就是因为在初始化的时候遵循了这种顺序，先初始化`props`，接着初始化`data`，最后初始化`watch`。
 
 **初始化 props**
 
@@ -4467,8 +4483,8 @@ props: {
 function initProps (vm: Component, propsOptions: Object) {
     const propsData = vm.$options.propsData || {}
     const props = vm._props = {}
-    const keys = vm.$options.\_propKeys = []
-    const isRoot = !vm.\$parent
+    const keys = vm.$options._propKeys = []
+    const isRoot = !vm.$parent
     // root instance props should be converted
     if (!isRoot) {
         toggleObserving(false)
@@ -4513,20 +4529,52 @@ const propsData = vm.$options.propsData || {}
 const props = vm._props = {}
 const keys = vm.$options._propKeys = []
 const isRoot = !vm.$parent
-
 ```
 
 - propsData：父组件传入的真实`props`数据。
-- props：指向`vm._props`指针，所有设置到
-- keys：指向`vm.$options._propKeys`的指针，缓存
+- props：指向`vm._props`指针，所有设置到`props`变量中的变量中的属性都会保存到`vm._props`中。
+- keys：指向`vm.$options._propKeys`的指针，缓存`props`对象中的`key`，将来更新`props`时只需遍历`vm.$options._propKeys`数组即可得到所有的`props`的`key`。
 - isRoot：当前组件是否为根组件。
+
+接着，判断当前组件是否为根组件，如果不是，那么不需要将`props`数组转换为响应式的，``用来控制是否将数据转换成响应式。如下：
+
+```
+toggleObserving(false)
+```
+
+接着，
+
+```
+
+```
+
+```
+
+```
+
+**validateProp 函数分析**
+
+```
+
+```
+
+**getPropDefaultValue 函数分析**
+
+```
+
+```
+
+**assertProp 函数分析**
+
+```
+
+```
 
 **初始化 methods**
 
 初始化`methods`相较而言就比较简单了，它的初始函数定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
-
 function initMethods (vm: Component, methods: Object) {
     const props = vm.$options.props
     for (const key in methods) {
@@ -4577,6 +4625,20 @@ export function initState (vm: Component) {
         initWatch(vm, opts.watch)
     }
 }
+```
+
+初始化`methods`无非就干了三件事：判断`method`有没有？
+
+首先，遍历`methods`选项中的每一个对象，在非生产环境下判断如果`methods`中某个方法只有`key`而没有`value`，即只有方法名没有方法体时，抛出异常：提示用户方法未定义。如下：
+
+```
+
+```
+
+接着判断如果`methods`中某个方法名
+
+```
+
 ```
 
 **初始化 computed**
