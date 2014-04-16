@@ -175,11 +175,32 @@ viewport.setAttribute('content', 'width=device-width,user-scalable=no,initial-sc
 
 ### 三、适配 iPhonX
 
+`iPhoneX`的出现将手机的首付带上了一个新的高度，它取消了物理按键，改成了底部的小黑条，但是这样的改动给开发者适配移动端双增加了难度。
+
 #### 3.1 安全区域
+
+在`iPhoneX`发布后，许多厂商相继推出了具有边缘屏幕的手机。
+
+![images](responsive12.jpg)
+
+这些手机和普通手机在外观上无外乎做了三个改动：圆角（`corners`）、刘海（`sensor housing`）和小黑条（`Home Indicator`）。为了适配这些手机，安全区域这个变诞生了：安全区域就是一个不受上面三个效果的可视窗口的范围。
+
+为了保证页面的显示效果，我们必须把页面限制在安全范围内，但是不影响整体效果。
 
 #### 3.2 viewport-fit
 
+`viewport-fit`是专门为了适配`iPhoneX`而诞生的一个属性，它用于限制网页如何在安全区域内进行展示。
+
+![images](responsive11.jpg)
+
+- `contain`：可视窗口完全包含网页内容
+- `covert`：网页内容完全覆盖可视窗口
+
+默认情况下或者设置为`auto`和`contain`效果相同。
+
 #### 3.3 env、constant
+
+![images](responsive07.jpg)
 
 ### 四、横屏适配
 
