@@ -4147,22 +4147,9 @@ const Child = {
 }
 ```
 
-```
-var Parent = {
-  provide: {
-    foo: 'bar'
-  },
-  // ...
-}
-const Child = {
-  inject: {
-    foo: {
-      from: 'bar',
-      default: () => [1, 2, 3]
-    }
-  }
-}
-```
+首先创建一个空对象`result`，用来存储`inject`选项中的数据`key`及其对应的值，作为最后的返回结果。
+
+然后获取当前`inject`选项中的所有`key`，然后遍历每一个`key`，拿到每一个`key`的`from`属性记作`provideKey`，`provideKey`就是上游父组件提供的源属性，然后开启一个`while`循环，从当前组件起，不断的向上游父组件的`_provided`属性中查找，直到查找到源属性的对应的值，将其存入`result`中，如下：
 
 ```
 for (let i = 0; i < keys.length; i++) {
@@ -4179,6 +4166,8 @@ for (let i = 0; i < keys.length; i++) {
 }
 ```
 
+如果没有找到，那么就看`inject`选项中当前的数据`key`是否设置了默认值，即是否有`default`属性，如果有的话，则拿到这个默认值，默认值可以为一个工厂函数，所以当默认值是函数的时候，就去该函数的时候，就去该函数的返回值，否则就取默认值本身。如果没有设置默认值，则抛出异常。如下：
+
 ```
 if (!source) {
   if ('default' in inject[key]) {
@@ -4191,6 +4180,10 @@ if (!source) {
   }
 }
 ```
+
+最后将`result`返回。
+
+其实在初始化阶段`_init`函数在合并属性的时候还调用了一个将`inject`选项数据规范化的函数`normalizeInject`，该函数的作用是将以下这三种写法：
 
 ```
 // 写法一
@@ -4213,6 +4206,8 @@ const Child = {
 }
 ```
 
+统统转换成以下规范化格式：
+
 ```
 const Child = {
   inject: {
@@ -4223,6 +4218,10 @@ const Child = {
   }
 }
 ```
+
+不管用户使用了何种写法，统统将其转化成一种便于集中处理的写法。
+
+该函数的定义位于源码的`src/core/util/options.js`中，如下：
 
 ```
 function normalizeInject (options: Object, vm: ?Component) {
@@ -4250,8 +4249,42 @@ function normalizeInject (options: Object, vm: ?Component) {
 }
 ```
 
+该函数的逻辑并不复杂，如果用户的`inject`选项传入的是一个字符串数组，那么就遍历该数组，把数组的每一项变成
+
+```
+inject:{
+  foo:{
+    from:'foo'
+  }
+}
+```
+
+如果给`inject`选项传入的是一个对象，那就遍历对象中的每一个`key`，给写法二形式的`key`对应的值扩展`{from:key}`，变成：
+
+```
+inject:{
+  foo:{
+    from: 'foo',
+    default: 'xxx'
+  }
+}
+```
+
+将写法三形式的`key`对应的值变成：
+
+```
+inject:{
+  foo:{
+    from: 'foo'
+  }
+}
+```
+
 **总结**
 
+首先我们先根据官方文档回顾了该选项的作用及使用方法。
+
+接着，我们分析了`initInjections`函数的内部实现原理，分析了是根据`inject`选项中的数据`key`是如何自底向上查找上游父级组件所注入的对应的值。
 
 **initState 函数分析**
 
