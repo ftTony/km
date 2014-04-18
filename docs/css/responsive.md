@@ -246,10 +246,19 @@ iPhone 6 的 PPI 为 ![images](responsive21.svg)，那它每英寸约含有 326 
 
 **获取浏览器大小**
 
+- `window.innerHeight`：获取浏览器视觉视口高度（包括垂直滚动条）。
+- `window.outHeight`：获取浏览器窗口外部的高度。表示整个浏览器窗口的高度，包括侧边栏、窗口镶边和调正窗口大小的边框。
+- `window.screenHeight`：获取获屏幕取理想视口高度，这个数值是固定的，设备的分辨率/设备像素比
+- `window.screen.availHeight`：浏览器窗口可用的高度。
+- `window.documentElement.clientHeight`：获取浏览器布局视口高度，包括内边距，但不包括垂直滚动条、边框和外边距。
+- `window.docuemntElement.offsetHeight`：包括内边距、滚动条、边框和外边距。
+- `window.docuemntElement.scrollHeight`：在不使用滚动条的情况下适合视口中的所有内容所需的最小宽度。测量方式与 `clientHeight` 相同：它包含元素的内边距，但不包括边框，外边距或垂直滚动条。
+
 参考资料
 
 - [深入浅出 Viewport 设计原理](https://www.cnblogs.com/onepixel/p/12144364.html)
 - [彻底搞懂移动 Web 开发中的 viewport 与跨屏适配](https://mp.weixin.qq.com/s/aaXgFw4isWq1RrHkv75zLA)
+- [页面元素坐标和偏移（clientX/pageX/screenX/layerX/offsetWidth/scrollWidth/clientWidth 等）相关整理](https://www.cnblogs.com/skylar/p/4121508.html)
 
 ### 二、1px 问题
 
