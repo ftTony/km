@@ -126,6 +126,8 @@ export default {
 
 #### 2.2 props
 
+在`props`选项内接收传进来的三个属性：`include`、`exclude`和`max`。如下：
+
 ```
 props: {
     include: [String, RegExp, Array],
@@ -134,12 +136,26 @@ props: {
 }
 ```
 
+`include`表示只有匹配到的组件被缓存，而`exclude`表示任何匹配到的组件都不会被缓存，`max`表示缓存组件的数量，因为我们是缓存的`vnode`对象，它也会持有 DOM，当我们缓存的组件很多的时候，会比较占用内存，所以该配置允许我们指定缓存组件的数量。
+
 #### 2.3 created
+
+在`created`钩子函数里定义并初始化了两个属性：`this.cache`和`this.keys`。
 
 ```
 created () {
     this.cache = Object.create(null)
     this.keys = []
+}
+```
+
+`this.cache`是一个对象，用来存储需要缓存的组件，它将以如下形式存储：
+
+```
+this.cache = {
+    'key1':'组件1',
+    'key2':'组件2',
+    // ...
 }
 ```
 
