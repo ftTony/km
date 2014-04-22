@@ -1,4 +1,4 @@
-# 响应式布局
+# 移动端适配
 
 ## 前言
 
@@ -13,14 +13,27 @@
 ## 内容
 
 - 基本概念
-- 自适应布局与响应式布局
-- REM 布局
+- 1px 问题
+- 适配 iPhonX
+- 横屏适配
+- 移动适配
+- 图片模糊问题
 
 ### 一、基本概念
 
+- 尺寸
+- 分辨率
+- 设备独立像素
+- 视口
+
+#### 1.1 尺寸
+
+参考[单位与值](https://km.xiaowuzi.info/css/px.html)
+
+#### 1.2 分辨率
+
 - **物理像素(physical pixel)**：物理像素又称为设备像素。每个像素可以根据操作系统设置自己的颜色和亮度。正是这些设备像素的微小距离欺骗了我们肉眼看到的图像效果。
-- **设备独立像素**：设备独立像素也称为密度无关像素，可以认为是计算机坐标系统中的一个点，这个点代表一个可以由程序使用的虚拟像素(比如说 CSS 像素)，然后由相关系统转换为物理像素。
-- **CSS 像素**：CSS 像素是一个抽像的单位，主要使用在浏览器上，用来精确度量 Web 页面上的内容。一般情况之下，CSS 像素称为与设备无关的像素，简称 DIP。
+- **设备独立像素**：设备独立像素也称为密度无关像素，可以认为是计算机坐标系统中的一个点，这个点代表一个可以由程序使用的虚拟像素(比如说 CSS 像素)，然后由相关系统转换为物理像素。 - **CSS 像素**：CSS 像素是一个抽像的单位，主要使用在浏览器上，用来精确度量 Web 页面上的内容。一般情况之下，CSS 像素称为与设备无关的像素，简称 DIP。
 - **屏幕密度**：屏幕密度是指一个设备表面上存在的像素数量，它通常以每英寸有多少像素来计算(PPI)。
 - **设备像素比**：设备像素比简称为 dpr，其定义了物理像素和设备独立像素的对应关系。它的值可以按下面的公式计算得到：
 
@@ -32,98 +45,45 @@
 
 在 css 中，可以通过`-webkit-device-pixel-ratio`、`-webkit-min-device-pixel-ratio`和`-webkit-max-device-pixel-ratio`进行媒体查询，对不同 dpr 的设备，做一些样式适配。或者使用 resolution|min-resolution|max-resolution 比较新的标准方式
 
+#### 1.3 设备独立像素
+
 - **位图像素**：一个位图像素是栅格图像最小的数据单元。每一个位图像素都包含着一些自身的显示信息。
 - **视窗 viewport**：viewport 是严格等于浏览器的窗口。在桌面浏览器中，viewport 就是浏览器窗口的宽度高度。但在移动端设备上就有点复杂。移动端的 viewport 太窄，为了能更好为 CSS 布局服务，所以提供了两个 viewport:虚拟的 visualviewport 和布局的 layoutviewport。
 - **视窗缩放 viewport scale**：可以设置`meta`标签的 viewport scale 来对视窗的大小进行缩放定义
-- **rem 单位**：就是相对于根元素`<html>`的`font-size`来做计算
-- **视窗单位**
 
-  - vw：1vw 等于视窗宽度的 1%
-  - vh：1vh 等于视窗高度的 1%
-  - vmin：选取 vw 和 vh 中最小的那个
-  - vmax：选取 vw 和 vh 中最大的那个
+#### 1.4 视口
 
-#### 什么是分辨率？
+### 二、1px 问题
 
-> 屏幕分辨率是指纵横向上的像素点数，单位是 px。
+#### 2.1 1px 产生的原因
 
-#### 常用的 midea
+#### 2.2 border-image
 
-```
-/* 横屏 */
-@media screen and (orientation:landscape){
+#### 2.3 background-image
 
-}
-/* 竖屏 */
-@media screen and (orientation:portrait){
+#### 2.4 伪类 + transform
 
-}
-/* 窗口宽度<960,设计宽度=768 */
-@media screen and (max-width:959px){
+#### 2.5 svg
 
-}
-/* 窗口宽度<768,设计宽度=640 */
-@media screen and (max-width:767px){
+#### 2.6 设置 viewport
 
-}
-/* 窗口宽度<640,设计宽度=480 */
-@media screen and (max-width:639px){
+### 三、适配 iPhonX
 
-}
-/* 窗口宽度<480,设计宽度=320 */
-@media screen and (max-width:479px){
+#### 3.1 安全区域
 
-}
-/* 设备像素比为2 */
-/* 常用于1px边框，还应规定 3dppx 的情况 */
-@media (min-resolution: 2dppx) {
+#### 3.2 viewport-fit
 
-}
-/* windows UI 贴靠 */
-@media screen and (-ms-view-state:snapped){
+#### 3.3 env、constant
 
-}
-/* 打印 */
-@media print{
+### 四、横屏适配
 
-}
-```
+### 五、移动端适配
 
-### 二、自适应布局与响应式布局
-
-### 1.1 什么是自适应布局
-
-自适应布局就是宽度自适用布局，在不同大小设备上，网页以等比例的形式绽放宽度，呈现同样的主体内容和排版布局
-
-**自适应布局演示图：**
-
-![images](responsive01.gif)
-
-随着屏幕宽度缩放，网页内容也以等比例缩放，不管屏幕宽度为多少，网页主体排版布局总是一样的
-
-**自适应布局出现的背景**
-
-在 PC 时代初期，网页设计者都会设计固定宽度的宽度，最开始的电脑显示器分辨率种类不多，因为当时电脑本来就少。后来随着显示器种类越来越多，以及笔记本、平板电脑的普及，这种固定宽度的页面出现了问题，于是出现了一种新的布局方式，宽度自适应布局。我们平时谈论的自适应布局，大多指的就是宽度自适应布局，再到后来，互联网大战从 PC 到手机，还有 HTML5 标准的发布，自适应布局也从 PC 延伸到手机，自适布局也因此了起来，成为网页设计的必要需求
-
-#### 2.2 什么是响应式布局
-
-响应式布局就是根据屏幕大小变化，页面的内容排版布局会自动调整变动，已呈现更好的用户体验
-
-**响应式布局演示图：**
-
-![images](responsive02.gif)
-
-随着屏幕宽度的缩放，页面做出相应调整，布局和展示的内容会有所变动
-
-**响应式布局出现的背景**
-
-自适应虽然成为网页设计的必要需求，但还是暴露出一个问题，如果屏幕太小，即使见面内容能够根据屏幕大小进行适配，但是在小屏幕上查看，会感觉内容过于拥挤，降低了用户体验。此时，为了解决这个总是而衍生出来的概念就是响应式布局。它可以自动识别屏幕宽度、并做出相应调整。网页的排版布局和展示的内容会有所变动。
-
-### 三、REM 布局
+#### 5.1 REM 适配
 
 `rem`适配的本质是布局等比例的缩放，通过动态设置`html`的`font-size`来改变`rem` 的大小。
 
-#### 3.1 vieport 配置
+**vieport 配置**
 
 ```
 <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;">
@@ -146,7 +106,7 @@
 - 单独设置`initial-scale`或`width`都会有兼容性问题，所以设置布局视口为理想视口的最佳方法是同时设置这个属性。
 - 即使设置了`user-scalable = no`，在`Android Chrome`浏览器中也可以强制启用手动缩放。
 
-#### 3.2 设置 rem 基准值
+**设置 rem 基准值**
 
 代码为如下
 
@@ -171,7 +131,7 @@
 - 将 html 节点的 font-size 设置为页面 clientWidth(布局视口)的 1/100，即：`1rem`=布局视口的`1/100`
 - 在 iphone6 下：`docEl.clientWidth`=设备独立像素（逻辑像素）= 布局视口宽度 = 理想窗口宽度 = 375。此时：`1rem = 375/10 +px = 37.5px`
 
-**postcss-pxtorem 将单位转化为 rem**
+使用`postcss-pxtorem`将单位转化为 rem
 
 ```
 module.exports = {
@@ -188,13 +148,90 @@ module.exports = {
 }
 ```
 
-#### 3.3 rem 布局的缺点
+- `rootValue`是转换`px`的基准值，参考设备`iPhone6`，设备宽度`375px`规则：基准值=当前设备宽度的 1/10
+- 基准值设置代码中，在`iPhone6`设备设置的`html`,`font-size`也为`37.5px`
+- 但是设计稿尺寸`750px`大小，所以量取设计稿量尺寸的时候需要除以`2`
+
+**rem 布局的缺点**
 
 在响应式布局中，必须通过 js 来动态控制根元素`font-size`的大小，也就是说 css 样式和 js 代码有一定的耦合性，且必须将改变 font-size 的代码放在`css`样式之前。
 
-### 四、REM+VW 布局
+#### 5.2 VW 布局
+
+`vw`是基于 Viewport 视窗的长度单位，指的就是浏览器可视化的区域，而这个可视区域是`window.innerWidth/window.innerHeight`的大小，用图简单的示意如下：
+
+```
+{
+    loader: 'postcss-loader',
+    options: {
+        plugins: ()=>{
+            require('autoprefixer')({
+                browsers: ['last 5 versions']
+            }),
+            require('postcss-px-to-viewport')({
+                viewportWidth: 375,     // 视口宽度（数字）
+                viewportHeight: 1334,       // 视口高度（数字）
+                unitPrecision: 3,       // 设置的保留小数位数（数字）
+                viewportUnit: 'vw',     // 设置要转换的单位（字符）
+                selectorBlackList: ['.ingore','.hairlines'],    // 不需要进行转换的类名（数组）
+                minPixelValue:1,    // 设置要替换的最小像素值（数字）
+                mediaQuery: false       // 允许在媒体查询中转换px（true/false）
+            })
+        }
+    }
+}
+```
+
+#### 5.3 REM+VW 布局
 
 - `vw`和`rem`适配的本质是等比例缩放，让页面在不同屏幕尺寸下有类似于矢量图片缩放的效果的效果，保证了页面元素之间的尺寸缩放比例和位置。
+- 给元素大小设置随着视口变化而变化的 vw 单位，这样就可以实现动态改变其大小。
+- 限制根元素字体大小的最大最小值，配合 body 加上最大宽度和最小宽度。
+
+```
+// rem 单位换算：定为 75px
+$vm_fontsize:75;        // iPhone 6尺寸的根元素大小基准值
+@function rem($px){
+    @return ($px/$vm_fontsize)*1rem;
+}
+// 根元素大小使用vm单位
+$vm_design:750;
+html{
+    font-size:($vm_fontsize/($vm_design/2))*100vw;
+    // 同时，通过Media Queries 限制根元素最大最小
+    @media screen and (max-width:320px){
+        font-size:64px;
+    }
+    @media screen and (min-width:540px){
+        font-size: 108px;
+    }
+}
+// body 也增加最大最小宽度限制，避免默认100%宽度的block元素跟随body而过大过小
+body{
+    max-width:540px;
+    min-width:320px;
+}
+```
+
+#### 5.4 flexible 适配
+
+### 六、图片模糊问题
+
+#### 6.1 产生原因
+
+#### 6.2 解决方案
+
+为了保证图片质量，我们应该尽可能让一个屏幕像素来渲染一个图片像素，所以，针对不同`DPR`的屏幕，我们需要展示不同分辨的图片。
+
+#### 6.3 media 查询
+
+#### 6.4 image-set
+
+#### 6.5 srcset
+
+#### 6.6 JavaScript 拼接图片 url
+
+#### 6.7 使用 svg
 
 ### 参考资料
 
