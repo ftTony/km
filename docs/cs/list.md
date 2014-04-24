@@ -979,6 +979,29 @@ LRUCache.prototype.put = function(key, value) {
 };
 ```
 
+#### 3.2 链表倒数第 k 个节点
+
+```
+function FindKthToTail(head, k){
+    if(!head || k<=0){
+        return null
+    }
+    var i = head,j=head
+    while(--k){
+        j = j.next;
+        if(!j){
+            return null;
+        }
+    }
+    while(j.next){
+        j= j.next;
+        i=i.next;
+    }
+    j=null;
+    return i;
+}
+```
+
 ## 参考资料
 
 - [图解：我终于让女朋友学会了翻转链表！](https://mp.weixin.qq.com/s/kpaap25Y-2EOZsJnKyXbLQ)

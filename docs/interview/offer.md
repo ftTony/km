@@ -302,6 +302,29 @@ function pop(){
 ### 输入一个链表，输出该链表中倒数第 k 个结点。
 
 ```
+function FindKthToTail(head,k){
+    if(!head || k <=0){
+        return null;
+    }
+    var i = head,j = head;
+    while(--k){
+        j = j.next;
+        if(!j){
+            return null;
+        }
+    }
+    while(j.next){
+        i = i.next;
+        j = j.next;
+    }
+    j = null;
+    return i;
+}
+```
+
+### 输入一个链表，反转链表后，输出链表的所有元素。
+
+```
 function ReverseList(pHead){
     var newHead,temp;
     if(!pHead){
@@ -318,12 +341,6 @@ function ReverseList(pHead){
     temp = null;
     return newHead;
 }
-```
-
-### 输入一个链表，反转链表后，输出链表的所有元素。
-
-```
-
 ```
 
 ### 参考资料
