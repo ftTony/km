@@ -6,11 +6,11 @@
 
 ## 内容
 
-- [http 发展史](#一、http发展史)
-- [http1.x 存在的问题](#二、http1.x存在的问题)
-- [HTTP2 新增加功能](#三、HTTP2新增加功能)
+- [http 发展史](#一、http-发展史)
+- [http1.x 存在的问题](#二、http1-x-存在的问题)
+- [HTTP2 新增加功能](#三、http2-新增加功能)
 - [总结](#四、总结)
-- [nginx 配置 HTTP2](#五、Nginx配置http2)
+- [nginx 配置 HTTP2](#五、nginx-配置-http2)
 
 ### 一、http 发展史
 

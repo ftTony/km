@@ -4643,6 +4643,8 @@ let value = propsData[key]
 - absent：当前`key`是否在`propsData`中存在，即父组件是否传入了该属性。
 - value：当前`key`在`propsData`中对应的值，即父组件对于该属性传入的真实值。
 
+接着，判断`prop`的`type`属性是否是布尔类型（）
+
 ```
 if (absent && !hasOwn(prop, 'default')) {
     value = false
