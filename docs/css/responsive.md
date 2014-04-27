@@ -59,13 +59,87 @@
 
 #### 2.2 border-image
 
+基于`media`查询判断不同的设备像素比给定不同的`border-image`：
+
+```
+.border_1px{
+    border-bottom: 1px solid #000;
+}
+@media only screen and (-webkit-min-device-pixel-ratio:2){
+    .border_1px{
+        border-bottom: none;
+        border-width: 0 0 1px 0;
+        border-image: url(../img/1pxline.png) 0 0 2 0 stretch;
+    }
+}
+```
+
 #### 2.3 background-image
+
+和`border-image`类似，准备一张符合条件的边框背影图，模拟在背影上。
+
+```
+.border_1px{
+    border-bottom: 1px solid #000;
+}
+@media only screen and (-webkit-min-device-pixel-ratio:2){
+    .border_1px{
+        background: url(../img/1pxline.png) repeat-x left bottom;
+        background-size: 100% 1px;
+    }
+}
+```
 
 #### 2.4 伪类 + transform
 
+```
+.border_1px:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #000;
+    transform-origin: 50% 0%;
+}
+@media only screen and (-webkit-min-device-pixel-ratio:2){
+    .border_1px:before{
+        transform: scaleY(0.5);
+    }
+}
+@media only screen and (-webkit-min-device-pixel-ratio:3){
+    .border_1px:before{
+        transform: scaleY(0.33);
+    }
+}
+```
+
 #### 2.5 svg
 
+```
+@svg border_1px {
+  height: 2px;
+  @rect {
+    fill: var(--color, black);
+    width: 100%;
+    height: 50%;
+    }
+  }
+.example { border: 1px solid transparent; border-image: svg(border_1px param(--color #00b1ff)) 2 2 stretch; }
+```
+
 #### 2.6 设置 viewport
+
+```
+const scale = 1 / window.devicePixelRatio;
+const viewport = document.querySelector('meta[name="viewport"]');
+if (!viewport) {
+    viewport = document.createElement('meta');
+    viewport.setAttribute('name', 'viewport');
+    window.document.head.appendChild(viewport);
+}
+viewport.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale);
+```
 
 ### 三、适配 iPhonX
 
