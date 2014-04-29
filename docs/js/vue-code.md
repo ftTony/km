@@ -4586,9 +4586,47 @@ if (!(key in vm)) {
 
 **validateProp 函数分析**
 
-```
+`validateProp`函数的定义位于源码的`src/core/util/props.js`中，如下：
 
 ```
+export function validateProp (key,propOptions,propsData,vm) {
+  const prop = propOptions[key]
+  const absent = !hasOwn(propsData, key)
+  let value = propsData[key]
+  // boolean casting
+  const booleanIndex = getTypeIndex(Boolean, prop.type)
+  if (booleanIndex > -1) {
+    if (absent && !hasOwn(prop, 'default')) {
+      value = false
+    } else if (value === '' || value === hyphenate(key)) {
+      // only cast empty string / same name to boolean if
+      // boolean has higher priority
+      const stringIndex = getTypeIndex(String, prop.type)
+      if (stringIndex < 0 || booleanIndex < stringIndex) {
+        value = true
+      }
+    }
+  }
+  // check default value
+  if (value === undefined) {
+    value = getPropDefaultValue(vm, prop, key)
+    // since the default value is a fresh copy,
+    // make sure to observe it.
+    const prevShouldObserve = shouldObserve
+    toggleObserving(true)
+    observe(value)
+    toggleObserving(prevShouldObserve)
+  }
+  if (process.env.NODE_ENV !== 'production') {
+    assertProp(prop, key, value, vm, absent)
+  }
+  return value
+}
+```
+
+该函数接收 4 个参数，分别是：
+
+- `key`:遍历`propOptions`时拿到的每个属性名。
 
 **getPropDefaultValue 函数分析**
 
