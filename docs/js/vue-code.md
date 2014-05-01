@@ -4860,7 +4860,31 @@ if (prop.required && absent) {
 }
 ```
 
-接着判断如果该项不是必填的并且该项的值
+接着判断如果该项不是必填的并且该项的值`value`不存在，那么此时是合法的，直接返回，如下：
+
+```
+if (value == null && !prop.required) {
+    return
+}
+```
+
+接下来定义了 3 个变量，分别是：
+
+```
+let type = prop.type
+let valid = !type || type === true
+const expectedTypes = []
+```
+
+- type:`prop`中的`thpe`类型;
+- valid:校验是否成功；
+- expectedTypes:保存期望类型的数组，当校验失败抛出警告时，会提示用户该属性所期望的类型是什么；
+
+通常情况下，`type`可以是一个原生构造函数，也可以是一个包含多种类型的数组，还可以不设置该属性。如果用户设置的是原生构造函数或数组，那么此时`vaild`默认为`false`（`!type`），如果用户没有设置该属性，表示不需要校验，那么此时`vaild`默认为`true`，即校验成功。
+
+另外，当`type`等于`true`时，即出现这样的写法：`props:{name:true}`，这说明`prop`一定会校验成功。所以当出现这种语法的时候，此时`type===true`，所以`vaild`默认为`true`。
+
+接下来开始校验类型，如果用户设置了`type`属性，则判断该属性是不是数组，如果不是，则统一转化为数组，方便后续处理，如下：
 
 ```
 if (type) {
@@ -4870,12 +4894,16 @@ if (type) {
 }
 ```
 
+接下来遍历`type`数组，并调用`assertType`函数校验`value`。`assertType`函数校验后会返回一个对象，如下：
+
 ```
 {
     vaild:true,       // 表示是否校验成功
     expectedType：'Boolean'   // 表示被校验的类型
 }
 ```
+
+然后将被校验的类型添加到`expectedTypes`中，并将`valid`变量设置为`assertedType.valid`，如下：
 
 ```
 for (let i = 0; i < type.length && !valid; i++) {
@@ -4896,6 +4924,8 @@ if (!valid) {
     return
 }
 ```
+
+另外，`prop`选项还支持自定义校验函数，如下：
 
 ```
 props:{
