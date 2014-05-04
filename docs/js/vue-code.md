@@ -133,7 +133,10 @@ export class Observer {
 
 
 /**
- * Define a reactive property on an Object.
+ * 使一个对象转化成可观测对象
+ * @param { Object } obj 对象
+ * @param { String } key 对象的key
+ * @param { Any } val 对象的某个key的值
  */
 export function defineReactive (
   obj: Object,
@@ -156,6 +159,7 @@ export function defineReactive (
     val = obj[key]
   }
 
+    // 递归调用，判断属性值是否是对象
   let childOb = !shallow && observe(val)
   Object.defineProperty(obj, key, {
     enumerable: true,
@@ -208,7 +212,7 @@ export function defineReactive (
 
 **把依赖收集到哪里**
 
-我们给每个数据都建一个依赖数组
+我们给每个数据都建一个依赖数组，谁依赖了这个数据我们就把谁放入这个依赖数组中。单单用一个数组来存放依赖的
 
 ```
 export default class Dep {
