@@ -1,4 +1,4 @@
-# web work 学习
+# web worker 学习
 
 ## 前言
 

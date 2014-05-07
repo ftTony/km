@@ -60,6 +60,8 @@ Web App Manifest 是一个 W3C 规范，定义了一个基于 JSON 的清单，�
 
 #### 4.2 Service Workers
 
+参考[Service Workers 学习](https://km.xiaowuzi.info/html5/service-workers.html)
+
 #### 4.3 Push Notification（推送通知）
 
 Push 和 Notification 是两个不同的功能，涉及到两个 API，但是它们之前有依赖关系。
