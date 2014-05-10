@@ -21,6 +21,8 @@
 
 **兼容性**
 
+![images](service-worker01.png)
+
 ### 二、Service Worker 的优势
 
 #### 2.1 支持离线访问

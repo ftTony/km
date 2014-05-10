@@ -35,9 +35,15 @@ Web Worker 一共包含了 3 种类型的 Worker：
 
 #### 2.1 Delicated Worker（专用 Worker）
 
+Dedicated Worker 由主线程实例化且只能与它通信。
+
 #### 2.2 Shared Worker（共享 Worker）
 
+Shared Worker 可以被同一域（浏览器中不同的 tab、iframe 或其他 Shared Worker）下的所有线程访问。
+
 #### 2.3 Service Worker（服务 Worker）
+
+Service Worker 是一个事件驱动型 Worker，它的初始化注册需要网页/站点的 origin 和路径信息。一个注册好的 Service Worker 可以控制相关网页/网站的导航、资源请求以及进行粒度化的资源缓存操作
 
 ### 三、web worker 工作原理
 
