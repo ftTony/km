@@ -5215,10 +5215,14 @@ function initComputed (vm: Component, computed: Object) {
 const watchers = vm._computedWatchers = Object.create(null)
 ```
 
+接着，遍历用户写的`computed`选项中的每一项属性，首先获取到每一项的属性值，记作`userDef`，然后判断`userDef`是不是一个函数，如果是函数，则将该函数默认为取值器`getter`，将其赋值给变量`getter`;如果不是函数，则说明是一个对象，则取对象中的`get`属性作为取值器赋给变量`getter`。如下：
+
 ```
 const userDef = computed[key]
 const getter = typeof userDef === 'function' ? userDef : userDef.get
 ```
+
+接着判断在非生产环境下如果上面两种情况取到的取值不存在，则抛出警告：提示用户计算属性必须有取值器。如下：
 
 ```
 if (process.env.NODE_ENV !== 'production' && getter == null) {
@@ -5228,6 +5232,8 @@ if (process.env.NODE_ENV !== 'production' && getter == null) {
     )
 }
 ```
+
+接着判断如果不是在服务端渲染环境下，则为`computed`选项中的每一项属性创建一个`watcher`实例，并将当前循环的属性名作为键，创建的`watcher`实例作为值，存入`watchers`对象中，如下：
 
 ```
 if (!isSSR) {
@@ -5241,6 +5247,8 @@ if (!isSSR) {
 }
 ```
 
+其中，上面代码中创建`watcher`实例时所传入的`getter`就是取到用户所写的该计算属性的取值器。而`computedWatcherOptions`参数如下：
+
 ```
 const computedWatcherOptions = { lazy: true }
 ```
@@ -5250,16 +5258,100 @@ const computedWatcherOptions = { lazy: true }
 `defineComputed`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
+const sharedPropertyDefinition = {
+  enumerable: true,
+  configurable: true,
+  get: noop,
+  set: noop
+}
 
+export function defineComputed (target,key,userDef) {
+  const shouldCache = !isServerRendering()
+  if (typeof userDef === 'function') {
+    sharedPropertyDefinition.get = shouldCache
+      ? createComputedGetter(key)
+      : userDef
+    sharedPropertyDefinition.set = noop
+  } else {
+    sharedPropertyDefinition.get = userDef.get
+      ? shouldCache && userDef.cache !== false
+        ? createComputedGetter(key)
+        : userDef.get
+      : noop
+    sharedPropertyDefinition.set = userDef.set
+      ? userDef.set
+      : noop
+  }
+  if (process.env.NODE_ENV !== 'production' &&
+      sharedPropertyDefinition.set === noop) {
+    sharedPropertyDefinition.set = function () {
+      warn(
+        `Computed property "${key}" was assigned to but it has no setter.`,
+        this
+      )
+    }
+  }
+  Object.defineProperty(target, key, sharedPropertyDefinition)
+}
+```
+
+该函数接受 3 个参数，分别是：`target`、`key`和`userDef` 。其作用是为`target`上定义一个属性`key`，并且属性`key`的`getter`和`setter`根据`userDef`的值来设置。
+
+首先定义了变量`sharedPropertyDefinition`，它是一个默认值的属性描述符，如下：
+
+```
+const sharedPropertyDefinition = {
+  enumerable: true,
+  configurable: true,
+  get: noop,
+  set: noop
+}
+```
+
+接着，在函数内部定义了变量`shouldCache`，用于标识计算属性是否应该有缓存。
+
+```
+const shouldCache = !isServerRendering()
 ```
 
 ```
-
+/*创建计算属性的getter*/
+if (typeof userDef === 'function') {
+  sharedPropertyDefinition.get = shouldCache
+    ? createComputedGetter(key)
+    : createGetterInvoker(userDef)
+  /*
+    当userDef是一个function的时候是不需要setter的，所以这边给它设置成了空函数。
+    因为计算属性默认是一个function，只设置getter。
+    当需要设置setter的时候，会将计算属性设置成一个对象。
+  */
+  sharedPropertyDefinition.set = noop
+}
 ```
 
 ```
+sharedPropertyDefinition.get = userDef.get
+  ? shouldCache && userDef.cache !== false
+    ? createComputedGetter(key)
+    : createGetterInvoker(userDef.get)
+  : noop
+/*如果有设置set方法则直接使用，否则赋值空函数*/
+sharedPropertyDefinition.set = userDef.set || noop
+```
 
 ```
+if (process.env.NODE_ENV !== 'production' &&
+    sharedPropertyDefinition.set === noop) {
+    sharedPropertyDefinition.set = function () {
+        warn(
+            `Computed property "${key}" was assigned to but it has no setter.`,
+            this
+        )
+    }
+}
+```
+
+**createComputedGetter 函数分析**
 
 ```
 
