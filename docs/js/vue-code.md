@@ -5015,12 +5015,19 @@ if (props && hasOwn(props, key)) {
 }
 ```
 
+其中，`isReserved`函数是用来判断字符串是否以`_`或`$`开头。
+
+最后，如果上述判断都没问题，那就`method`绑定到实例`vm`上，这样，我们就可以通过`this.xxx`来访问`methods`选项中的`xxx`方法了，如下：
+
+```
+vm[key] = methods[key] == null ? noop : bind(methods[key], vm)
+```
+
 **初始化 data**
 
 初始化`data`也比较简单，它的初始化函数定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
-
 export function initState (vm: Component) {
     vm._watchers = []
     const opts = vm.$options
@@ -5038,18 +5045,22 @@ export function initState (vm: Component) {
 }
 ```
 
-初始化`methods`无非就干了三件事：判断`method`有没有？
-
-首先，遍历`methods`选项中的每一个对象，在非生产环境下判断如果`methods`中某个方法只有`key`而没有`value`，即只有方法名没有方法体时，抛出异常：提示用户方法未定义。如下：
-
+```
+let data = vm.$options.data
+data = vm._data = typeof data === 'function'
+    ? getData(data, vm)
+	: data || {}
 ```
 
 ```
-
-接着判断如果`methods`中某个方法名
-
-```
-
+if (!isPlainObject(data)) {
+    data = {}
+    process.env.NODE_ENV !== 'production' && warn(
+        'data functions should return an object:\n' +
+        'https://vuejs.org/v2/guide/components.html##data-Must-Be-a-Function',
+        vm
+    )
+}
 ```
 
 **初始化 computed**
