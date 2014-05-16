@@ -5071,12 +5071,18 @@ function initData (vm) {
 }
 ```
 
+`initData`通过一系列条件判断用户传入的`data`选项是否合法，最后将`data`转换成响应式并绑定到实例`vm`上。
+
+首先获取到用户传入的`data`选项，赋给变量`data`，同时将变量`data`作为指针指向`vm._data`，然后判断`data`是不是一个函数，如果是就调用`getData`函数获取其返回值，将其保存到`vm._data`中。如果不是，就将其本身保存到`vm._data`中，如下：
+
 ```
 let data = vm.$options.data
 data = vm._data = typeof data === 'function'
     ? getData(data, vm)
 	: data || {}
 ```
+
+无论传入的`data`选项是不是一个函数，它最终的值都应该是一个对象，如果不是对象的话，就抛出警告：提示用户`data`应该是一个对象，如下：
 
 ```
 if (!isPlainObject(data)) {
@@ -5089,6 +5095,8 @@ if (!isPlainObject(data)) {
 }
 ```
 
+接下来遍历`data`对象中的每一项，在非生产环境下判断`data`对象中是否存在某一项`key`与`methods`中某个属性名重复，如果存在重复，就抛出警告：提示用户属性名重复。如下：
+
 ```
 if (process.env.NODE_ENV !== 'production') {
     if (methods && hasOwn(methods, key)) {
@@ -5099,6 +5107,8 @@ if (process.env.NODE_ENV !== 'production') {
     }
 }
 ```
+
+接下来遍历`data`对象中的每一项，在非生产环境判断`data`对象中是否存在某一项的`key`与`methods`中某个属性名重复，如果存在重复，就抛出警告：提示用户属性名重复。如下：
 
 ```
 if (props && hasOwn(props, key)) {
