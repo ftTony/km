@@ -43,7 +43,7 @@
 
 `try-catch`只能捕获到同步的运行时错误，对语法和异步错误无能为力，捕获不到。
 
-**同步运行时的错误：**
+**1. 同步运行时的错误：**
 
 ```
 try {
@@ -61,9 +61,114 @@ try {
     at <anonymous>:3:15
 ```
 
-**不能捕获到语法错误，我们修改一下代码，删掉一个单引号：**
+**2. 不能捕获到语法错误**
 
-#### 3.2 onerror
+```
+try {
+  let name = 'jartto;
+  console.log(nam);
+} catch(e) {
+
+  console.log('捕获到异常：',e);
+}
+```
+
+输出：
+
+```
+Uncaught SyntaxError: Invalid or unexpected token
+```
+
+**3. 异步错误**
+
+```
+try {
+  setTimeout(() => {
+    undefined.map(v => v);
+  }, 1000)
+} catch(e) {
+  console.log('捕获到异常：',e);
+}
+```
+
+输出
+
+```
+Uncaught TypeError: Cannot read property 'map' of undefined
+    at setTimeout (<anonymous>:3:11)
+```
+
+#### 3.2 window.onerror
+
+**1. 同步**
+
+```
+window.onerror = function(message, source, lineno, colno, error) {
+// message：错误信息（字符串）。
+// source：发生错误的脚本URL（字符串）
+// lineno：发生错误的行号（数字）
+// colno：发生错误的列号（数字）
+// error：Error对象（对象）
+console.log('捕获到异常：',{message, source, lineno, colno, error});
+}
+Jartto;
+```
+
+捕获到了异常：
+
+```
+VM243:9 Uncaught ReferenceError: Jartto is not defined
+    at <anonymous>:9:1
+```
+
+**2. 语法错误**
+
+```
+window.onerror = function(message, source, lineno, colno, error) {
+console.log('捕获到异常：',{message, source, lineno, colno, error});
+}
+let name = 'Jartto
+```
+
+输出结果：
+
+```
+Uncaught SyntaxError: Invalid or unexpected token
+```
+
+**3. 异步**
+
+```
+window.onerror = function(message, source, lineno, colno, error) {
+    console.log('捕获到异常：',{message, source, lineno, colno, error});
+}
+setTimeout(() => {
+    Jartto;
+});
+```
+
+输出结果：
+
+```
+捕获到异常： {message: "Uncaught ReferenceError: Jartto is not defined", source: "http://127.0.0.1:8001/", lineno: 36, colno: 5, error: ReferenceError: Jartto is not defined
+    at setTimeout (http://127.0.0.1:8001/:36:5)}
+```
+
+**4. 网络请求异常**
+
+```
+<script>
+window.onerror = function(message, source, lineno, colno, error) {
+    console.log('捕获到异常：',{message, source, lineno, colno, error});
+    return true;
+}
+</script>
+<img src="./jartto.png">
+```
+
+不论是静态资源异常，或者接口异常，错误都无法捕获到。
+
+**结论**
 
 `onerror`最好写在所有`JS`脚本的前面，否则有可能捕获不到错误；
 
@@ -97,7 +202,9 @@ try {
 其实上报就是要将捕获的异常信息发送到后端。最常用的方式首推动态创建标签方式。因为这种方式无需加载任何通讯库，而且页面是无需刷新的。
 
 ```
+
 new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
+
 ```
 
 #### 5.2 Ajax 上报
@@ -126,3 +233,4 @@ new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
     </p>
     <img :src="$withBase('/about/contact.png')" />
 </div>
+```
