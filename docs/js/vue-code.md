@@ -5136,10 +5136,44 @@ observe(data, true /* asRootData */)
 
 **初始化 computed**
 
+计算属性`computed`有一个很大的特点就是：计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。
+
+**用法**
+
+计算属性的用法，如下：
+
+```
+var vm = new Vue({
+  data: { a: 1 },
+  computed: {
+    // 仅读取
+    aDouble: function () {
+      return this.a * 2
+    },
+    // 读取和设置
+    aPlus: {
+      get: function () {
+        return this.a + 1
+      },
+      set: function (v) {
+        this.a = v - 1
+      }
+    }
+  }
+})
+vm.aPlus   // => 2
+vm.aPlus = 3
+vm.a       // => 2
+vm.aDouble // => 4
+```
+
+`computed`选项中的属性值可以是一个函数，那该函数默认为取值器`getter`，用于仅读取数据；还可以是一个对象，对象里面有取值器`getter`和存值器`setter`，用于读取和设置数据。
+
+**initComputed 函数分析**
+
 初始化`initComputed`的内部原理是怎样的。`initComputed`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
-
 function initComputed (vm: Component, computed: Object) {
     const watchers = vm._computedWatchers = Object.create(null)
     const isSSR = isServerRendering()
@@ -5173,6 +5207,18 @@ function initComputed (vm: Component, computed: Object) {
         }
     }
 }
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
 
 ```
 
