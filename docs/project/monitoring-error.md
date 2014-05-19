@@ -39,15 +39,46 @@
 - 监听 error 事件
 - unhandledrejection
 
-### 3.1 try-catch
+#### 3.1 try-catch
 
 `try-catch`只能捕获到同步的运行时错误，对语法和异步错误无能为力，捕获不到。
 
-### 3.2 onerror
+**同步运行时的错误：**
 
-### 3.3 监听 error 事件
+```
+try {
+  let name = 'jartto';
+  console.log(nam);
+} catch(e) {
+  console.log('捕获到异常：',e);
+}
+```
 
-### 3.4 unhandledrejection
+输出：
+
+```
+捕获到异常： ReferenceError: nam is not defined
+    at <anonymous>:3:15
+```
+
+**不能捕获到语法错误，我们修改一下代码，删掉一个单引号：**
+
+#### 3.2 onerror
+
+`onerror`最好写在所有`JS`脚本的前面，否则有可能捕获不到错误；
+
+#### 3.3 监听 error 事件
+
+#### 3.4 unhandledrejection
+
+#### 总结
+
+| 异常类型           | 同步方法 | 异步方法 | 资源加载 | Promise |
+| ------------------ | -------- | -------- | -------- | ------- |
+| try/catch          | 可以     | 不可以   | 不可以   | 不可以  |
+| onerror            | 可以     | 可以     | 不可以   | 不可以  |
+| error 事件监听     | 可以     | 可以     | 可以     | 可以    |
+| unhandledrejection | 不可以   | 不可以   | 不可以   | 可以    |
 
 ### 四、错误监控常见问题
 
@@ -58,6 +89,20 @@
 - React 异常捕获
 - iframe 异常
 - 崩溃和卡顿
+
+### 五、错误上传
+
+#### 5.1 动态创建 img 标签
+
+其实上报就是要将捕获的异常信息发送到后端。最常用的方式首推动态创建标签方式。因为这种方式无需加载任何通讯库，而且页面是无需刷新的。
+
+```
+new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
+```
+
+#### 5.2 Ajax 上报
+
+实际上我们也可以用 ajax 的方式上报错误，这和我们再业务程序中并没有什么区别。在这里就不赘述。
 
 ### 参考资料
 
