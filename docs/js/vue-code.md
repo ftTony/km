@@ -5028,20 +5028,46 @@ vm[key] = methods[key] == null ? noop : bind(methods[key], vm)
 初始化`data`也比较简单，它的初始化函数定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
-export function initState (vm: Component) {
-    vm._watchers = []
-    const opts = vm.$options
-    if (opts.props) initProps(vm, opts.props)
-    if (opts.methods) initMethods(vm, opts.methods)
-    if (opts.data) {
-        initData(vm)
-    } else {
-        observe(vm._data = {}, true)
+function initData (vm) {
+    let data = vm.$options.data
+    data = vm._data = typeof data === 'function'
+        ? getData(data, vm)
+    : data || {}
+    if (!isPlainObject(data)) {
+        data = {}
+        process.env.NODE_ENV !== 'production' && warn(
+            'data functions should return an object:\n' +
+            'https://vuejs.org/v2/guide/components.html##data-Must-Be-a-Function',
+            vm
+        )
     }
-    if (opts.computed) initComputed(vm, opts.computed)
-    if (opts.watch && opts.watch !== nativeWatch) {
-        initWatch(vm, opts.watch)
+    // proxy data on instance
+    const keys = Object.keys(data)
+    const props = vm.$options.props
+    const methods = vm.$options.methods
+    let i = keys.length
+    while (i--) {
+        const key = keys[i]
+        if (process.env.NODE_ENV !== 'production') {
+            if (methods && hasOwn(methods, key)) {
+                warn(
+                    `Method "${key}" has already been defined as a data property.`,
+                    vm
+                )
+            }
+        }
+        if (props && hasOwn(props, key)) {
+            process.env.NODE_ENV !== 'production' && warn(
+                `The data property "${key}" is already declared as a prop. ` +
+                `Use prop default value instead.`,
+                vm
+            )
+        } else if (!isReserved(key)) {
+            proxy(vm, `_data`, key)
+        }
     }
+    // observe data
+    observe(data, true /* asRootData */)
 }
 ```
 
@@ -5061,6 +5087,41 @@ if (!isPlainObject(data)) {
         vm
     )
 }
+```
+
+```
+if (process.env.NODE_ENV !== 'production') {
+    if (methods && hasOwn(methods, key)) {
+        warn(
+            `Method "${key}" has already been defined as a data property.`,
+            vm
+        )
+    }
+}
+```
+
+```
+if (props && hasOwn(props, key)) {
+    process.env.NODE_ENV !== 'production' && warn(
+        `The data property "${key}" is already declared as a prop. ` +
+        `Use prop default value instead.`,
+        vm
+    )
+}
+```
+
+如果没有重复，则调用`proxy`函数将`data`对象中`key`不以`_`或`$`开头的属性代理到实例`vm`上，这样，我们就可以通过`this.xxx`来访问`data`选项中的`xxx`数据了。如下：
+
+```
+if (!isReserved(key)) {
+    proxy(vm, `_data`, key)
+}
+```
+
+最后，调用`observe`函数将`data`中的数据转化成响应式，如下：
+
+```
+observe(data, true /* asRootData */)
 ```
 
 **初始化 computed**
