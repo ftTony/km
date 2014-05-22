@@ -5207,6 +5207,53 @@ function initComputed (vm: Component, computed: Object) {
         }
     }
 }
+```
+
+函数内部，首先定义了一个变量`watchers`并将其赋值为空对象，同时将其作为指针指向`vm._computedWatchers`，如下：
+
+```
+const watchers = vm._computedWatchers = Object.create(null)
+```
+
+```
+const userDef = computed[key]
+const getter = typeof userDef === 'function' ? userDef : userDef.get
+```
+
+```
+if (process.env.NODE_ENV !== 'production' && getter == null) {
+    warn(
+        `Getter is missing for computed property "${key}".`,
+        vm
+    )
+}
+```
+
+```
+if (!isSSR) {
+    // create internal watcher for the computed property.
+    watchers[key] = new Watcher(
+        vm,
+        getter || noop,
+        noop,
+        computedWatcherOptions
+    )
+}
+```
+
+```
+const computedWatcherOptions = { lazy: true }
+```
+
+**defineComputed 函数分析**
+
+`defineComputed`函数的定义位于源码的`src/core/instance/state.js`中，如下：
+
+```
+
+```
+
+```
 
 ```
 
