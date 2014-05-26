@@ -4913,6 +4913,10 @@ for (let i = 0; i < type.length && !valid; i++) {
 }
 ```
 
+循环中的条件语句有这样一个条件：`!vaild`，即`type`数组中还要有一个校验成功，循环立即结束，表示校验通过。
+
+接下来，如果循环完毕后`vaild`为`false`，即表示校验未通过，则招聘警告。如下：
+
 ```
 if (!valid) {
     warn(
@@ -4938,6 +4942,8 @@ props:{
     }
 }
 ```
+
+所以还需要使用用户传入的自定义校验数据。首先获取到用户传入的校验函数，调用该函数并将待校验的数据传入，如果校验失败，则抛出警告。如下：
 
 ```
 const validator = prop.validator
@@ -4982,7 +4988,31 @@ function initMethods (vm: Component, methods: Object) {
         vm[key] = typeof methods[key] !== 'function' ? noop : bind(methods[key], vm)
     }
 }
+```
 
+初始化`methods`干了三件事：判断`method`有没有？`method`的命名符不符合命名规范？如果`method`既有又符合规范那就把它挂载到`vm`实例上。
+
+首先，遍历`methods`选项中的每一个对象，在非生产环境下判断如果`methods`中某个方法只有`key`而没有`value`，即只有方法没有方法体时，抛出异常：提示用户方法未定义。如下：
+
+```
+if (methods[key] == null) {
+    warn(
+        `Method "${key}" has an undefined value in the component definition. ` +
+        `Did you reference the function correctly?`,
+        vm
+    )
+}
+```
+
+接着判断如果`methods`中某个方法名与`props`中某个属性名重复了，就抛出异常：提示用户方法名重复了。如下：
+
+```
+if (props && hasOwn(props, key)) {
+    warn(
+        `Method "${key}" has already been defined as a prop.`,
+        vm
+    )
+}
 ```
 
 **初始化 data**
