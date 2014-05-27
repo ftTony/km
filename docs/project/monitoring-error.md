@@ -172,7 +172,62 @@ window.onerror = function(message, source, lineno, colno, error) {
 
 `onerror`最好写在所有`JS`脚本的前面，否则有可能捕获不到错误；
 
+`window.onerror`函数只有在返回`true`的时候，异常才不会向上抛出，否则即使是知道异常的发生控制台还是会显示`Uncaught Error: xxxxx`
+
+```
+window.onerror = function(message, source, lineno, colno, error) {
+    console.log('捕获到异常：',{message, source, lineno, colno, error});
+    return true;
+}
+setTimeout(() => {
+    Jartto;
+});
+```
+
+`onerror`无法捕获语法错误；
+
 #### 3.3 监听 error 事件
+
+```
+<img src="./xxxxx.png">
+window.addEventListener('error', args => {
+    console.log(
+      'error event:', args
+    );
+    return true;
+  },
+  true // 利用捕获方式
+);
+```
+
+运行结果如下：
+
+```
+error event： Event:{
+    bubbles: false
+    cancelBubble: false
+    cancelable: false
+    composed: false
+    currentTarget: null
+    defaultPrevented: false
+    eventPhase: 0
+    isTrusted: true
+    path: (5) [img, body, html, document, Window]
+    returnValue: true
+    srcElement: img
+    target: img
+    timeStamp: 373.70499999815365
+    type: "error"
+    __proto__: Event
+}
+```
+
+注意：
+
+- 不同浏览器下返回的`error`对象可能不同，需要注意兼容处理。
+- 需要注意避免`addEventListener`重复监听。
+
+结论：监听`error`事件，可以捕获同步错误，异步错误，网络错误，不能处理`Promise`错误
 
 #### 3.4 unhandledrejection
 
