@@ -222,6 +222,8 @@ error event： Event:{
 }
 ```
 
+由于网络请求异常不会事件冒泡，因此必须在捕获阶段将其捕捉到才行，但是这种方式虽然可以捕捉到网络请求的异常，但是无法判断 HTTP 状态是`404`还是其他状态，所心还需要配合服务端日志才进行排查分析才可以。
+
 注意：
 
 - 不同浏览器下返回的`error`对象可能不同，需要注意兼容处理。
@@ -230,6 +232,40 @@ error event： Event:{
 结论：监听`error`事件，可以捕获同步错误，异步错误，网络错误，不能处理`Promise`错误
 
 #### 3.4 unhandledrejection
+
+在`promise`中使用`catch`可以非常方便的捕获到异步`error`，如果没有写`catch`的`Promise`中抛出的错误无法被`onerror`或`try-catch`捕获到，为了防止有漏掉的`Promise`异步，建议在全局增加一个对`unhandledrejection`的监听，用来全局监听`Uncaught Promise Error`。
+
+```
+window.addEventListener("unhandledrejection", function(e){
+  e.preventDefault()
+  console.log('捕获到异常：', e);
+  return true;
+});
+Promise.reject('promise error');
+```
+
+输出结果：
+
+```
+PromiseRejectionEvent={
+    bubbles: false
+    cancelBubble: false
+    cancelable: true
+    composed: false
+    currentTarget: Window {parent: Window, opener: null, top: Window, length: 0, frames: Window, …}
+    defaultPrevented: true
+    eventPhase: 0
+    isTrusted: true
+    path: [Window]
+    promise: Promise {<rejected>: "promise error"}
+    reason: "promise error"
+    returnValue: false
+    srcElement: Window {parent: Window, opener: null, top: Window, length: 0, frames: Window, …}
+    target: Window {parent: Window, opener: null, top: Window, length: 0, frames: Window, …}
+    timeStamp: 23.06500000122469
+    type: "unhandledrejection"
+}
+```
 
 #### 总结
 
@@ -257,9 +293,7 @@ error event： Event:{
 其实上报就是要将捕获的异常信息发送到后端。最常用的方式首推动态创建标签方式。因为这种方式无需加载任何通讯库，而且页面是无需刷新的。
 
 ```
-
 new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
-
 ```
 
 #### 5.2 Ajax 上报
