@@ -333,6 +333,70 @@ EventTarget.prototype.addEventListener = function (type, listener, options) {
 
 `sourceMap`就是一个文件，里面储存着位置信息。这个文件里保存的，是转换后代码的位置，和对应的转换前的位置。
 
+**webpack 插件实现 SourceMap 上传**
+
+在 webpack 的打包时会产生`sourcemap`文件，这个文件需要上传到异常监控服务器这个功能我们用 webpack 插件完成。
+
+创建 webpack 插件
+
+```
+const fs = require('fs')
+var http = require('http');
+
+class UploadSourceMapWebpackPlugin {
+    constructor(options){
+        this.options = options
+    }
+
+    apply(compiler){
+        // 打包结束后执行
+        compiler.hooks.done.tap('upload-sourcemap-plugin',status=>{
+            console.log('webpack runing')
+        })
+    }
+}
+
+upload(url,file){
+    return new Promise(resolve =>{
+        console.log('uploadMaps',file)
+
+        const req = http.request(`${url}?name=${path.basename(file)}`,{
+            method:'post',
+            headers:{
+                'Content-Type':'application/octet-stream',
+                'Connection':'keep-alive',
+                "Transfer-Encoding": "chunked"
+            }
+        })
+        fs.createReadStream(file).on('data',chunk=>{
+            req.write(chunk);
+        }).on('end',()=>{
+            req.end();
+            resolve()
+        })
+    })
+}
+
+module.exports = UploadSourceMapWebpackPlugin
+```
+
+加载 webpack 插件
+
+`webpack.config.js`
+
+```
+// 自动上传Map
+var UploadSourceMapWebpackPlugin = require('./')
+
+plugins:[
+    // 添加自动上传插件
+    new UploadSourceMapWebpackPlugin({
+        uploadUrl:'',
+        apiKey:''
+    })
+]
+```
+
 #### 4.3 VUE errorHandler
 
 #### 4.4 React 异常捕获
