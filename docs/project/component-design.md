@@ -8,8 +8,6 @@
 
 ### 参考资料
 
-- [前端组件设计原则](https://mp.weixin.qq.com/s/ofmfQFAVlTCvKFnZ6A-0_Q)
-- [高性能渲染大数据 Tree 组件](https://segmentfault.com/a/1190000021228976)
 - [组件设计](https://mp.weixin.qq.com/s/k_CiluFoDTx6IlR6Wq7K8g)
 - [前端组件设计原则](https://github.com/lightningminers/article/issues/36)
 - [前端通用组件设计](https://zhuanlan.zhihu.com/p/72091681)
