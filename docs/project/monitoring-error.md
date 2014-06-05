@@ -461,7 +461,33 @@ async getOriginalErrorStack(stackFrame) {
 
 #### 4.3 VUE errorHandler
 
+```
+Vue.config.errorHandler = (err, vm, info) => {
+  console.error('通过vue errorHandler捕获的错误');
+  console.error(err);
+  console.error(vm);
+  console.error(info);
+}
+```
+
 #### 4.4 React 异常捕获
+
+`React 16`提供了一个内置函数`componentDidCatch`，使用它可以非常简单的获取到`react`下的错误信息
+
+```
+componentDidCatch(error, info) {
+    console.log(error, info);
+}
+```
+
+除此之外，我们可以了解一下：`[error boundary](https://blog.csdn.net/a986597353/article/details/78469979)`，`UI`的某部分引起的`JS`错误不应该破坏整个程序，为了帮`React`的使用者解决这个问题，`React 16`介绍了一种关于错误边界的新观念。
+
+需要注意的是：error boundaries 并不会捕捉下面这些错误。
+
+- 事件处理器
+- 异步代码
+- 服务端的渲染代码
+- 在 error boundaries 区域内的错误
 
 #### 4.5 frame 异常
 
