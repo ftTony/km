@@ -351,7 +351,11 @@ class UploadSourceMapWebpackPlugin {
     apply(compiler){
         // 打包结束后执行
         compiler.hooks.done.tap('upload-sourcemap-plugin',status=>{
-            console.log('webpack runing')
+            // 读取sourcemap文件
+            const list = glob.sync(status.compilation.outputOptions.path,`./**/*.{js.map,}`)
+            for(let  filename of list){
+                await this.upload(this.options.uploadUrl,filename)
+            }
         })
     }
 }
@@ -391,10 +395,68 @@ var UploadSourceMapWebpackPlugin = require('./')
 plugins:[
     // 添加自动上传插件
     new UploadSourceMapWebpackPlugin({
-        uploadUrl:'',
-        apiKey:''
+        uploadUrl:'http://report.xiaowuzi.info/monitor/sourcemap',
+        apiKey:'nidaye'
     })
 ]
+```
+
+**反序列 Error 对象**
+
+首先创建一个新的 Error 对象将错误栈设置到 Error 中，然后利用`error-stack-parser`这个 npm 库来转化为`stackFrame`
+
+```
+const ErrorStackParser= require('error-stack-parser')
+
+parseStackTrack(stack,message){
+    const error = new Error(message)
+    error.stack = stack
+    const stackFrame = ErrorStackParser.parse(error)
+    return stackFrame
+}
+```
+
+**解析 ErrorStack**
+
+我们将错误栈中的代码位置转换为源码位置
+
+```
+const { SourceMapConsumer } = require("source-map");
+async getOriginalErrorStack(stackFrame) {
+        const origin = []
+        for (let v of stackFrame) {
+            origin.push(await this.getOriginPosition(v))
+        }
+
+        // 销毁所有consumers
+        Object.keys(this.consumers).forEach(key => {
+            console.log('key:',key)
+            this.consumers[key].destroy()
+        })
+        return origin
+    }
+
+    async getOriginPosition(stackFrame) {
+        let { columnNumber, lineNumber, fileName } = stackFrame
+        fileName = path.basename(fileName)
+        console.log('filebasename',fileName)
+        // 判断是否存在
+        let consumer = this.consumers[fileName]
+
+        if (consumer === undefined) {
+            // 读取sourcemap
+            const sourceMapPath = path.resolve(this.sourceMapDir, fileName + '.map')
+            // 判断目录是否存在
+            if(!fs.existsSync(sourceMapPath)){
+                return stackFrame
+            }
+            const content = fs.readFileSync(sourceMapPath, 'utf8')
+            consumer = await new SourceMapConsumer(content, null);
+            this.consumers[fileName] = consumer
+        }
+        const parseData = consumer.originalPositionFor({ line:lineNumber, column:columnNumber })
+        return parseData
+    }
 ```
 
 #### 4.3 VUE errorHandler
