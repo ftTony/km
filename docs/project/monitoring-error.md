@@ -8,7 +8,7 @@
 
 - 为什么要处理异常?
 - 需要处理哪些异常？
-- Try-Catch 的误区
+- 错误监控的方法
 
 ### 一、为什么要处理异常?
 
@@ -22,7 +22,42 @@
 
 ### 二、需要处理哪些异常？
 
-### 三、Try-Catch 的误区
+对于前端来说，我们可以做的异常捕获还真不少，总结一下，大概如下：
+
+- `JS`语法错误、代码异常
+- `Ajax`请求异常
+- 静态资源加载异常
+- `Promise`异常
+- `Iframe`异常
+- 跨域`Script error`
+- 崩溃和卡顿
+
+### 三、错误监控的方法
+
+- try-catch
+- onerror
+- 监听 error 事件
+- unhandledrejection
+
+### 3.1 try-catch
+
+`try-catch`只能捕获到同步的运行时错误，对语法和异步错误无能为力，捕获不到。
+
+### 3.2 onerror
+
+### 3.3 监听 error 事件
+
+### 3.4 unhandledrejection
+
+### 四、错误监控常见问题
+
+- 跨域问题
+- 代码压缩后，如何处理定位到代码问题
+- Promise Catch
+- VUE errorHandler
+- React 异常捕获
+- iframe 异常
+- 崩溃和卡顿
 
 ### 参考资料
 
