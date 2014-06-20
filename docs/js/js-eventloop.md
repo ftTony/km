@@ -6,14 +6,14 @@
 
 ## 内容
 
-- [堆，栈、队列](#一、堆栈队列)
+- [堆，栈、队列](#一、堆、栈、队列)
 - [线程与进程](#二、线程与进程)
 - [Event Loop](#三、event-loop)
 - [浏览器中的 Event Loop](#四、浏览器中的-event-loop)
 - [例子](#五、例子)
 - [NodeJS 的 Event Loop](#六、nodejs的event-loop)
 
-### 一、堆，栈、队列
+### 一、堆、栈、队列
 
 ![images](eventloop.png)
 
