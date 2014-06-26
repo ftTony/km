@@ -8,6 +8,8 @@
 
 ## 参考资料
 
+- [如何向面试官介绍你的项目](https://mp.weixin.qq.com/s/CjBVm2w0JXFAALIspGlisA)
+
 ## 联系作者
 
 <div align="center">
