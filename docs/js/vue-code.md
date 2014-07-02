@@ -4627,6 +4627,38 @@ export function validateProp (key,propOptions,propsData,vm) {
 该函数接收 4 个参数，分别是：
 
 - `key`:遍历`propOptions`时拿到的每个属性名。
+- `propOptions`：当前实例规范化后的`props`选项。
+- `propsData`：父组件传入的真实的`props`数据。
+- `vm`：当前实例
+
+在函数内部首先定义了 3 个变量，分别是：
+
+```
+const prop = propOptions[key]
+const absent = !hasOwn(propsData, key)
+let value = propsData[key]
+```
+
+- prop：当前`key`在`propOptions`中对应的值。
+- absent：当前`key`是否在`propsData`中存在，即父组件是否传入了该属性。
+- value：当前`key`在`propsData`中对应的值，即父组件对于该属性传入的真实值。
+
+```
+if (absent && !hasOwn(prop, 'default')) {
+    value = false
+}
+```
+
+如果父组件传入了该 prop 属性，那么需要满足以下几点：
+
+```
+if (value === '' || value === hyphenate(key)) {
+    const stringIndex = getTypeIndex(String, prop.type)
+    if (stringIndex < 0 || booleanIndex < stringIndex) {
+        value = true
+    }
+}
+```
 
 **getPropDefaultValue 函数分析**
 
