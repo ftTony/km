@@ -215,15 +215,8 @@ module.exports = {
                 collapsable: false,
                 children: [
                     "canvas-base",
-                    "canvas-style",
-                    "canvas-text",
-                    "canvas-transform",
-                    "canvas-pic",
                     "canvas-animation-1",
-                    "canvas-animation-2",
-                    "canvas-compositing",
-                    "canvas-rect",
-                    "canvas-image-data"
+                    "canvas-animation-2"
                 ]
             },
             {

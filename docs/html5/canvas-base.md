@@ -1,4 +1,4 @@
-# canvas
+# canvas 学习
 
 ## 前言
 
@@ -12,6 +12,8 @@
 - [canvas-应用大全](https://github.com/CodeLittlePrince/blog/issues/21)
 - [【第 513 期】Canvas 最佳实践（性能篇）](https://mp.weixin.qq.com/s/7tyqEWX0xJkDUJX_zYVLIw)
 - [高质量前端快照方案：来自页面的「自拍」](https://juejin.im/post/5df2e8ab6fb9a0163770816d)
+- [Canvas 超全教程](https://zhuanlan.zhihu.com/p/81863157)
+- [MDN 教程](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_usage)
 
 ## 联系作者
 
