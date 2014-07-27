@@ -128,7 +128,6 @@ module.exports = {
                     "node-introdect",
                     "node-eventloop",
                     "node-buffer",
-                    "node-cheerio",
                     "node-cluster",
                     "node-egg",
                     "node-events",
