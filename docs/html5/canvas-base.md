@@ -61,11 +61,60 @@
 
 ### 五、绘制文本
 
+- 字体样式
+- 对齐方式
+- 文本基线
+- 文本方向
+
+#### 5.1 字体样式
+
+#### 5.2 对齐方式
+
+#### 5.3 文本基线
+
+#### 5.4 文本方向
+
 ### 六、变形
+
+- save
+- restore
+- 移动 Translating
+- 旋转 Rotating
+- 缩放 Scaling
+- 变形 Transforms
+
+#### 6.1 save
+
+#### 6.2 restore
+
+#### 6.3 移动 Translating
+
+#### 6.4 旋转 Rotating
+
+#### 6.5 缩放 Scaling
+
+#### 6.6 变形 Transforms
 
 ### 七、合成与裁剪
 
+- globalCompositeOperation
+- clip
+
+#### 7.1 globalCompositeOperation
+
+#### 7.2 clip
+
 ### 八、像素操作
+
+- createImageData
+- getImageData
+- 例子
+
+#### 8.1 createImageData
+
+#### 8.2 getImageData
+
+#### 8.3 例子
 
 ## 参考资料
 
