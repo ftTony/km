@@ -81,6 +81,7 @@
 - [架构师之路，19 年文章精选 120 篇](https://mp.weixin.qq.com/s/syli7vs7Jw_VOTl5B2YUqg)
 - [架构师之路 18 年精选 100 篇](https://mp.weixin.qq.com/s/V1hGa6D9aGrP6PiCWEmc0w)
 - [高性能前端架构解决方案](https://mp.weixin.qq.com/s/eITZC-eEBV5c4pnSQ7Z1Fg)
+- [架构演变之路：为何要搞微服务架构？](https://www.cnblogs.com/arthinking/p/12812786.html)
 
 ## 联系作者
 
