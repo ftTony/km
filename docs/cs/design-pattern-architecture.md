@@ -15,21 +15,62 @@
 
 ### 一、同步模块模式
 
-```
+#### 1.1 介绍
 
+- **模块化：** 将复杂的系统分解成高内聚、低耦合的模块，使系统开发变得可控、可维护、可扩展，提高模块的重复使用率。
+- **同步模块模式：** 请求发出去之后，无论模块是否存在，立即执行后续的逻辑，实现模块开发中对模块的立即使用。
+
+#### 1.2 代码
+
+```
+/*
+ * 模块化开发就是讲复杂的系统分解为高内聚，低耦合的模块。
+ *
+ *
+ */
+// 模块管理对象F
+class F{
+    static define(str,fn){
+
+    }
+    static module(){
+        
+    }
+}
 ```
 
 ### 二、异步模块模式
 
-```
+#### 2.1 介绍
 
+请求发出去之后，继续执行其他业务逻辑，知道模块加载完成执行后续的逻辑，实际模块开发中模块加载完成后引用。
+
+#### 2.2 代码
+
+```
+let getUrl = function (moduleName){
+    return String(moduleName).replace(/\.js$/g,'')+'.js';
+};
+loadScript = function(src){
+
+};
+let moduleCache = {},
+    setModule = function(moduleName,params,callback){
+
+    };
+let loadModule = function(moduleName,callback){
+
+};
+F.module = function(url,modDeps,modCallBack){
+
+};
 ```
 
 ### 三、Widget 模式
 
-```
+#### 3.1 介绍
 
-```
+Widget 模式就是借用 web Widget 思想将页面分解为部件，针对部件开发，最终组合为完整的页面。
 
 ### 四、MVC 模式
 

@@ -292,16 +292,30 @@ $(window).on('scroll',function(){
 #### 6.2 代码
 
 ```
-
+// 解决函数执行时候的重复性的分支判断
+A.on3 = function (dom, type, fn) {
+    if (document.addEventListener) {
+        A.on3 = function (dom, type, fn) {
+            dom.addEventListener(type, fn, false);
+        }
+    } else if (document.attachEvent) {
+        A.on3 = function (dom, type, fn) {
+            dom.attachEvent('on' + type, fn);
+        }
+    } else {
+        A.on3 = function (dom, type, fn) {
+            dom['on' + type] = fn;
+        }
+    }
+    A.on3(dom, type, fn);
+};
 ```
 
-#### 6.3 优点
-
-#### 6.4 缺点
-
-#### 6.5 场景
-
 ### 七、参与者模式
+
+#### 7.1 介绍
+
+在特定的作用于中执行给定的函数，并将参数原封不动的传递。
 
 ```
 
