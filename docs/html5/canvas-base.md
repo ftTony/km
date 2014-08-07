@@ -75,9 +75,14 @@ if (canvas.getContext){
 
 图形的基本元素是路径。路径是通过不同颜色和宽度的线段或曲线相连形成的不同开着的点的集合。一个路径，甚至一个子路径，都是闭合的。使用路径绘制图形需要一些额外的步骤。
 
+1. 首先，你需要创建路径起始点。
+2. 然后你使用画图命令去画出路径
+3. 之后你把路径封闭。
+4. 一旦路径生成，你就能通过搭边或填充路径区域来渲染图形。
+
 用到的函数：
 
-- `beginPath()`：
+- `beginPath()`：新那一条路径，生成之后，图形绘制命令被指向到路径上生成路径。生成路径的第一步叫做`beginPath()`。本质上，路径是由很多子路径构成，这些子路径都是在一个列表中，所有的子路径（线、弧形等等）构成图形。而每次这个方法调用之后，列表清空重置，然后我们就可以重新绘制新的图形。
 - `closePath()`：闭合路径之后图形绘制命令又重新指向到上下文中。不是必需的。这个方法会通过绘制一条从当前点到开始点的直线来闭合图形。如果图形是已经闭合了的，即当前点为开始点，该函数什么也不做。
 - `stroke()`：通过线条来绘制图形轮廓。
 - `fill()`：通过填充路径的内容区域生成实心的图形。
@@ -94,7 +99,8 @@ if (canvas.getContext){
 
 绘制圆弧或者圆，我们使用`arc()`方法。当然可以使用`arcTo()`。
 
-- `arc(x,y,radius,startAngle,endAngle)`
+- `arc(x,y,radius,startAngle,endAngle)`：
+- `arcTo(x1,y1,x2,y2,radius)`：根据给定的控制点和半径画一段圆弧，再以直线连接两个控制点。
 
 ### 四、添加样式和颜色
 
@@ -107,15 +113,46 @@ if (canvas.getContext){
 
 #### 4.1 色彩
 
+- `fillStyle = color`：设置图形的填充颜色，需是符合 CSS3 颜色值标准的有效字符串：
+
+```
+  ctx.fillStyle = "orange";
+  ctx.fillStyle = "#FFA500";
+  ctx.fillStyle = "rgb(255,165,0)";
+  ctx.fillStyle = "rgba(255,165,0,1)";
+```
+
+- `strokeStyle = color`：设置图形轮廓的颜色。
+
 #### 4.2 透明度
+
+- `globalAlpha = transparencyValue`：这个属性影响到`canvas`里所有图
 
 #### 4.3 线型样式
 
+- `lineWidth = value`：设置线条宽度。
+- `lineCap = type`：设置线条末端样式。
+- `lineJoin = type`：
+- `miterLimit = value`：
+- `getLineDeash()`：
+- `setLineDash(setgments)`：设置当前虚线样式。
+- `lineDashOffset = value`：设置虚线样式的起始移量。
+
 #### 4.4 渐变
+
+- `crateLinearGradient(x1,y1,x2,y2)`：
+- `crateRadialGradient(x1,y1,r1,x2,y2,r2)`：
+- `gradient.addColorStop(position,color)`：`addColorStop` 方法 2 个参数，`position`参数必须是一个 0.0 与 1.0 之间的数值
 
 #### 4.5 图案样式
 
+- `createPattern(image,type)`：
+
 #### 4.6 阴影
+
+- `shadowOffsetX = float`和`shadowOffsetY = float`
+- `shadowBlur = float`：
+- `shadowColor = color`：
 
 ### 五、绘制文本
 
