@@ -63,13 +63,27 @@ if (canvas.getContext){
 
 #### 3.1 绘制矩形
 
+`HTML`中的元素`canvas`只支持一种原生的图形绘制
+
+- `fillRect(x,y,width,height)`：绘制一个填充的矩形
+- `strokeRect(x,ywidth,height)`：
+- `clearRect(x,ywidth,height)`：
+- `rect(x,y,width,height)`：将
+
 #### 3.2 绘制路径
+
+- `beginPath()`：
+- `closePath()`：
+- `stroke()`：
+- `fill()`：通过填充路径的内容区域生成实心的图形。
 
 #### 3.3 线
 
 `lineTo(x,y)`：绘制一条从当前位置到指定 x 以及 y 位置的直线
 
 #### 3.4 图弧
+
+绘制圆弧或者圆，我们使用`arc()`方法。当然可以使用`arcTo()`。
 
 - `arc(x,y,radius,startAngle,endAngle)`
 
