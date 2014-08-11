@@ -14,6 +14,7 @@
 - [变形](#六、变形)
 - [合成与裁剪](#七、合成与裁剪)
 - [像素操作](八、像素操作)
+- [使用图片](九、使用图片)
 
 ### 一、介绍
 
@@ -176,10 +177,10 @@ var ptrn = ctx.createPattern(img,'repeat');
 
 - `fillText(text,x,y[,maxWidth])`：在指定的(x,y)位置填充指定的文本，绘制的最大宽度是可选的。
 - `strokeText(text, x, y [, maxWidth])`：在指定的(x,y)位置绘制文本边框，绘制的最大宽度是可选的。
-- `font = value`：
-- `textAlign = value`：
-- `textBaseline = value`：
-- `direction = value`：
+- `font = value`：肖前我们用来绘制文本的样式，这个字符串使用和 CSS font 属性相同的语法，默认的字体是`10px sans-serif`。
+- `textAlign = value`：描述绘制文本时，文本的对齐方式的属性。可选的值包括：`start`, `end`, `left`, `right` or `center`. 默认值是 `start`。
+- `textBaseline = value`：基线对齐选项，可选的值包括：`top`，`hanging`，`middle`，`alphabetic`，`ideographic`，`bottom`。默认值 `alphabetic`。
+- `direction = value`：文本方向。可能的值包括：`ltr`,`rtl`, `inherit`。默认值是 `inherit`。
 
 ### 六、变形
 
@@ -222,6 +223,8 @@ var ptrn = ctx.createPattern(img,'repeat');
 #### 8.2 getImageData
 
 #### 8.3 例子
+
+### 九、使用图片
 
 ## 参考资料
 
