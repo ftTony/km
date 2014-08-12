@@ -320,6 +320,7 @@ server {
 - [一次百万长连接压测 Nginx OOM 的问题排查分析](https://mp.weixin.qq.com/s/PzctPuzKRbRlAUBnD584Xg)
 - [从入门到精通-Nginx，图文并茂、负载均衡、动静分离、虚拟主机 附案例源码](https://www.cnblogs.com/chenyanbin/p/12521296.html)
 - [五分钟看懂 Nginx 负载均衡](https://juejin.im/post/5e806d84e51d4546b659b370)
+- [nginx 入门教程](https://www.yiibai.com/nginx/beginners_guide.html)
 
 ## 联系作者
 

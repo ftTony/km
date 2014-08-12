@@ -99,7 +99,7 @@ if (canvas.getContext){
 
 绘制圆弧或者圆，我们使用`arc()`方法。当然可以使用`arcTo()`。
 
-- `arc(x,y,radius,startAngle,endAngle)`：
+- `arc(x,y,radius,startAngle,endAngle)`：画一个以（x,y）为圆心的以 radius 为半径的圆弧（圆），从 startAngle 开始到 endAngle 结束，按照 anticlockwise 给定的方向来生成
 - `arcTo(x1,y1,x2,y2,radius)`：根据给定的控制点和半径画一段圆弧，再以直线连接两个控制点。
 
 ### 四、添加样式和颜色
@@ -126,33 +126,51 @@ if (canvas.getContext){
 
 #### 4.2 透明度
 
-- `globalAlpha = transparencyValue`：这个属性影响到`canvas`里所有图
+- `globalAlpha = transparencyValue`：这个属性影响到`canvas`里所有图形的透明度，有效的值范围是 0.0（完全透明）到 1.0（完全不透明），默认是 1.0。`strokeStyle`和`fillStyle`属性接受符合 CSS3 规范的颜色值，那我们可以用下面的写法来设置具有透明度的颜色。
+
+```
+// 指定透明颜色，用于描边和填充样式
+ctx.strokeStyle = "rgba(255,0,0,0.5)";
+ctx.fillStyle = "rgba(255,0,0,0.5)";
+```
 
 #### 4.3 线型样式
 
 - `lineWidth = value`：设置线条宽度。
 - `lineCap = type`：设置线条末端样式。
-- `lineJoin = type`：
-- `miterLimit = value`：
-- `getLineDeash()`：
+- `lineJoin = type`：设定线条与线条间接合处的样式。
+- `miterLimit = value`：限制当两条线相交时交接处最大长度；所谓交接处长度（斜接长度）是指线条交接处内角顶点到外角顶点的长度。
+- `getLineDeash()`：返回一个饮食当前虚线样式，长度为非负偶数的数组。
 - `setLineDash(setgments)`：设置当前虚线样式。
 - `lineDashOffset = value`：设置虚线样式的起始移量。
 
 #### 4.4 渐变
 
-- `crateLinearGradient(x1,y1,x2,y2)`：
-- `crateRadialGradient(x1,y1,r1,x2,y2,r2)`：
-- `gradient.addColorStop(position,color)`：`addColorStop` 方法 2 个参数，`position`参数必须是一个 0.0 与 1.0 之间的数值
+- `crateLinearGradient(x1,y1,x2,y2)`：该方法接受 4 个参数，表示渐变的起点(x1,y1)与终点(x2,y2)。
+- `crateRadialGradient(x1,y1,r1,x2,y2,r2)`：该方法接受 6 个参数，前三个定义一个以(x1,y1)为原点，半径为 r1 的圆，后三个参数则定义另一个以(x2,y2)为原点，半径为 r2 的圆。
+- `gradient.addColorStop(position,color)`：`addColorStop` 方法 2 个参数，`position`参数必须是一个 0.0 与 1.0 之间的数值，表示渐变中颜色所在的相对位置。
+
+```
+var lineargradient = ctx.createLinearGradient(0,0,150,150);
+lineargradient.addColorStop(0,'white');
+lineargradient.addColorStop(1,'black');
+```
 
 #### 4.5 图案样式
 
-- `createPattern(image,type)`：
+- `createPattern(image,type)`：该方法接受两个参数。Image 可以是一个 Image 对象的引用，或者另一个`canvas`对象。Type 必须是下面的字符串值之一：repeat，repeat-x，repeat-y 和 no-repeat。
+
+```
+var img = new Image()
+img.src = 'someimage.png'
+var ptrn = ctx.createPattern(img,'repeat');
+```
 
 #### 4.6 阴影
 
 - `shadowOffsetX = float`和`shadowOffsetY = float`：shadowOffsetX 和 shadowOffsetY 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0.
-- `shadowBlur = float`：
-- `shadowColor = color`：
+- `shadowBlur = float`：用于设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 0.
+- `shadowColor = color`：是标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色。
 
 ### 五、绘制文本
 
