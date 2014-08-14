@@ -184,24 +184,38 @@ var ptrn = ctx.createPattern(img,'repeat');
 
 ### 六、变形
 
-- save
-- restore
+- 状态的的保存和恢复
 - 移动 Translating
 - 旋转 Rotating
 - 缩放 Scaling
 - 变形 Transforms
 
-#### 6.1 save
+#### 6.1 状态的的保存和恢复
 
-#### 6.2 restore
+- `save()`：保存画布的所有状态
+- `restore()`：save 和 restore 方法是用来保存和恢复 canvas 状态的，都没有参数。Canvas 的状态就是当前画面应用的所有样式和变形的一个快照。
 
-#### 6.3 移动 Translating
+#### 6.2 移动 Translating
 
-#### 6.4 旋转 Rotating
+- `translate(x, y)`: `translate` 方法接受两个参数。x 是左右偏移量，y 是上下偏移量，如右图所示。
 
-#### 6.5 缩放 Scaling
+#### 6.3 旋转 Rotating
 
-#### 6.6 变形 Transforms
+- `rotate(angle)`: 这个方法只接受一个参数：旋转的角度(angle)，它是顺时针方向的，以弧度为单位的值。
+
+#### 6.4 缩放 Scaling
+
+- `scale(x, y)`: scale 方法可以缩放画布的水平和垂直的单位。两个参数都是实数，可以为负数，x 为水平缩放因子，y 为垂直缩放因子，如果比 1 小，会比缩放图形， 如果比 1 大会放大图形。默认值为 1， 为实际大小。
+
+#### 6.5 变形 Transforms
+
+- `transform(m11, m12, m21, m22, dx, dy)`: 这个方法是将当前的变形矩阵乘上一个基于自身参数的矩阵，在这里我们用下面的矩阵：
+
+```
+m11 m21 dx
+m12 m22 dy
+0   0   1
+```
 
 ### 七、合成与裁剪
 
