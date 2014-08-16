@@ -150,24 +150,18 @@ if (canvas.getContext){
 
 #### 4.6 阴影
 
-- `shadowOffsetX = float`和`shadowOffsetY = float`
+- `shadowOffsetX = float`和`shadowOffsetY = float`：shadowOffsetX 和 shadowOffsetY 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0.
 - `shadowBlur = float`：
 - `shadowColor = color`：
 
 ### 五、绘制文本
 
-- 字体样式
-- 对齐方式
-- 文本基线
-- 文本方向
-
-#### 5.1 字体样式
-
-#### 5.2 对齐方式
-
-#### 5.3 文本基线
-
-#### 5.4 文本方向
+- `fillText(text,x,y[,maxWidth])`：在指定的(x,y)位置填充指定的文本，绘制的最大宽度是可选的。
+- `strokeText(text, x, y [, maxWidth])`：在指定的(x,y)位置绘制文本边框，绘制的最大宽度是可选的。
+- `font = value`：
+- `textAlign = value`：
+- `textBaseline = value`：
+- `direction = value`：
 
 ### 六、变形
 
