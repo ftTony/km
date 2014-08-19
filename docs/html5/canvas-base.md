@@ -272,6 +272,16 @@ var myImageData = ctx.getImageData(left, top, width, height);
 
 ### 九、使用图片
 
+- 绘制图片
+- 缩放图片
+- 切片
+
+#### 9.1 绘制图片
+
+#### 9.2 缩放图片
+
+#### 9.3 切片
+
 ## 参考资料
 
 - [Canvas 性能优化](https://juejin.im/post/5ba478136fb9a05d151ca173)
