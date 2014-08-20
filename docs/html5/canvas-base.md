@@ -272,15 +272,28 @@ var myImageData = ctx.getImageData(left, top, width, height);
 
 ### 九、使用图片
 
+引入图像到 canvas 里需要以下两步基本操作：
+
+1. 获得一个指向`HTMLImageElement`的对象或者另一个 canvas 元素的引用作为源，也可以通过提供一个 URL 的方式来使用图片
+2. 使用`drawImage()`函数将图片绘制到图片上
+
 - 绘制图片
 - 缩放图片
 - 切片
 
 #### 9.1 绘制图片
 
+- `drawImage(image, x, y)`：其中`images`是 image 或者 canvas 对象，`x`和`y`是其在目标`canvas`里的起始坐标。
+
 #### 9.2 缩放图片
 
+- `drawImage(image, x, y, width, height)`：参数`width`和`height`，这两个参数用来控制当向 canvas 画入时应该缩放的大小
+
 #### 9.3 切片
+
+- `drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)`：第一个参数是一个图像或另一个 canvas 的引用。其它 8 个参数最好是参照右边的图解，前 4 个是定义图像源的切片位置和大小，后 4 个则是定义切片的目标显示位置和大小。
+
+![images](canvas-img.jpg)
 
 ## 参考资料
 
