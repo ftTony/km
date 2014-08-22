@@ -240,13 +240,35 @@ m12 m22 dy
 
 - createImageData
 - getImageData
-- 例子
+- putImageData
+- 保存图片
 
 #### 8.1 createImageData
 
+创建一个新的具体特定尺寸的 ImageData 对象。所有像素被预设为透明黑。你也可以创建一个被`anotherImageData`对象指定的相同像素的 ImageData 对象。
+
+```
+var myImageData = ctx.createImageData(width, height);
+var myImageData = ctx.createImageData(anotherImageData)
+```
+
 #### 8.2 getImageData
 
-#### 8.3 例子
+```
+var myImageData = ctx.getImageData(left, top, width, height);
+```
+
+这个方法会返回一个 ImageData 对象，它代表了画面区域的对象数据，此画面的四个角落分别表示为(left,top), (left + width, top), (left, top + height), 以及(left + width, top + height)四个点。这些坐标点被设定为画布坐标空间元素。
+
+#### 8.3 putImageData
+
+`ctx.putImageData(myImageData, dx, dy);`： 你可以用 putImageData()方法去对场景进行像素数据的写入。dx 和 dy 参数表示你希望在场景内左上角绘制的像素数据所得到的设备坐标。
+
+#### 8.4 保存图片
+
+- `canvas.toDataURL('image/png')`： 默认设定。创建一个 PNG 图片
+- `canvas.toDataURL('image/jpeg', quality)`： 创建一个 JPG 图片。你可以有选择地提供从 0 到 1 的品质量，1 表示最好品质，0 基本不被辨析但有比较小的文件大小。当你从画布中生成了一个数据链接，例如，你可以将它用于任何`<image>`元素，或者将它放在一个有 download 属性的超链接里用于保存到本地。
+- `canvas.toBlob(callback, type, encoderOptions)`: 这个创建了一个在画布中的代表图片的 Blob 对像。
 
 ### 九、使用图片
 
