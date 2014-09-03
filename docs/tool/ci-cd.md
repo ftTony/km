@@ -6,11 +6,35 @@
 
 ## 内容
 
+- 概念
+
+### 一、概念
+
+- CI 持续集成
+- CD 持续交付
+- CD 持续部署
+
+#### 1.1 CI 持续集成
+
+开发者尽量时时刻刻合并开发分支至主干分支。避免走到发布日才开始合并，掉入集成地狱。无论何时新分支集成至项目，持续集成可以自动化测试持续难应用是否正常。
+
+#### 1.2 CD 持续交付
+
+持续将会是持续集成的扩展，可以保证稳定的发布产品新特性。这意味着基于自动化测试，你可以也可以一键自动化发布。理论上，持续将会可以决定是按天，按周，按双周发布产品。如果确实希望能够享受特拉维夫交付的好处，那么应该尽快发布到新产品中。一旦出现问题时能尽早早排除。
+
+#### 1.3 CD 持续部署
+
+持续部署是持续交付的下一步。通过这一步，每个新特性都自动的部署到产品中。但是如果出现未通过的测试用例将会终止自动部署。持续部署可以加速用户反馈新特性，避免发布日带来的压力。开发可以着力于开发系统，开发结束后几分钟就可以触达到用户。
+
+**参考资料**
+
+- [持续集成是什么？](http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html)
+- [持续集成 vs 持续交付 vs 持续部署](https://mp.weixin.qq.com/s/Y09_FYS2IWae24geE7tK-Q)
+
 ### 参考资料
 
 - [前端部署发展史](https://juejin.im/post/5dc4ae67f265da4cfa7bbb9a)
-- [持续集成是什么？](http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html)
-- [持续集成 vs 持续交付 vs 持续部署](https://mp.weixin.qq.com/s/Y09_FYS2IWae24geE7tK-Q)
+
 - [基于 GitLab CI/CD 的自动化构建、发布实践](https://mp.weixin.qq.com/s/z2f1i2FgrVGofQR6nKTd1A)
 - [基于 GitLab CI 的前端工程 CI/CD 实践](https://github.com/giscafer/front-end-manual/issues/27)
 - [GitLab CI/CD 在 Node.js 项目中的实践](https://mp.weixin.qq.com/s/AY1nJA0T7YS2YnW-GNMPFQ)
