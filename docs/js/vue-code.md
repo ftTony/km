@@ -509,6 +509,39 @@ function copyAugment (target: Object, src: Object, keys: Array<string>) {
 
 拦截器生效以后，当数组数据再发生变化时，我们就可以在拦截器中通知变化了，也就是说现在我们就可以知道数组数据何时发生变化了。
 
+**数组新增元素的侦测**
+
+对于数组中
+
+这个实现起来也很容易，我们只需要拿到新增的这个元素
+
+```
+methodsToPatch.forEach(function (method) {
+  // cache original method
+  const original = arrayProto[method]
+  def(arrayMethods, method, function mutator (...args) {
+    const result = original.apply(this, args)
+    const ob = this.__ob__
+    let inserted
+    switch (method) {
+      case 'push':
+      case 'unshift':
+        inserted = args   // 如果是push或unshift方法，那么传入参数就是新增的元素
+        break
+      case 'splice':
+        inserted = args.slice(2) // 如果是splice方法，那么传入参数列表中下标为2的就是新增的元素
+        break
+    }
+    if (inserted) ob.observeArray(inserted) // 调用observe函数将新增的元素转化成响应式
+    // notify change
+    ob.dep.notify()
+    return result
+  })
+})
+```
+
+在上面拦截器定义代码中，如果是`push`或`unshift`方法，那么传入参数就是新增的元素；如果`splice`方法，那么传入参数列表中下标为 2 的就是新增的元素，拿到新增的元素后，就可以`observe`函数将新增的元素转化成响应的了。
+
 **深度侦测**
 
 在`Vue`中，不论是`Object`型数组据还是`Array`型数据所实现的数据变化侦测都是深度侦测，所谓深度侦测就是不但要侦测数据自身的变化，还要侦测数据中所有子数据的变化。举个例子：
