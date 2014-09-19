@@ -19,6 +19,38 @@
 
 ### 二、优化打包速度
 
+#### 2.1 减少文件搜索范围
+
+#### 2.2 `resolve.module`
+
+示例代码：
+
+```
+
+```
+
+#### 2.3 `resolve.aslias`
+
+示例代码：
+
+```
+
+```
+
+#### 2.4 `happypack`并发
+
+示例代码：
+
+```
+
+```
+
+#### 2.5 `babel`使用缓存
+
+#### 2.6 使用 `DllPlugin` 和 `DllReferencePlugin`
+
+#### 2.7 使用`CommonsChunkPlugin`和`SplitChunksPlugin`
+
 - 减少文件搜索范围，比如通过另名，loader 的 test,include & exclude
 - resolve.module，配置 webpack 去哪些目录下妙手第三方模块
 - resolve.aslias 配置，通过另外来将原导入路径映射成一个新的导入路径
@@ -30,7 +62,7 @@
 - Babel 使用缓存编译，主要 loader 参数后面增加 cacheDirectory，关于[babel 编译原理](https://mp.weixin.qq.com/s/NRZQI-Md0dqNAGY96qsn-A)
 - 使用 DllPlugin 和 DllReferencePlugin，这两个跟 CommonsChunkPlugin（webpack3 中的，webpack4 中使用 SplitChunksPlugin）有一些区别，主要区别如下
   - CommonsChunkPlugin 插件每次打包的时候还是会去处理一些第三方依赖库，只是它能把第三方库文件和我们的代码分开掉，生成一个独立的 js 文件，但它不能提高打包速度。
-  - DLLPlugin 它能把第三方库代码分离开，并且每次文件更改的时候，它只会==打包该项目自身==的代码。所以打包速度会更快。
+  - DLLPlugin 它能把第三方库代码分离开，并且每次文件更改的时候，它只会打包该项目自身的代码。所以打包速度会更快。
 
 ### 参考资料
 
