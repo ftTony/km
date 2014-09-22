@@ -6,8 +6,8 @@
 
 ## 内容
 
-- 优化打包大小
-- 优化打包速度
+- [优化打包大小](l#一、优化打包大小)
+- [优化打包速度](#二、优化打包速度)
 
 ### 一、优化打包大小
 
@@ -19,9 +19,36 @@
 
 ### 二、优化打包速度
 
-#### 2.1 减少文件搜索范围
+- 优化`Loader`配置
+- 优化`resolve.module`配置
+- 优化`resolve.aslias`配置
+- 优化`resolve.mainFields`配置
+- 优化`resolve.extensions`配置
+- 优化`module.noParse`配置
+- 优化文件监听的性能
 
-#### 2.2 `resolve.module`
+#### 2.1 优化`Loader`配置
+
+由于 Loader 对文件的转换操作很耗时，所以需要让尽可能少的文件被 Loader 处理。可以通过`test/include/exclude`三个配置项来命中 loader 要应用规则的文件。
+
+示例代码：
+
+```
+module .exports = {
+    module : {
+        rules : [{
+        //如果项目源码中只有 文件，就不要写成/\jsx?$/，以提升正则表达式的性能
+        test: /\.js$/,
+        //babel -loader 支持缓存转换出的结果，通过 cacheDirectory 选项开启
+        use: ['babel-loader?cacheDirectory'] ,
+        //只对项目根目录下 src 目录中的文件采用 babel-loader
+        include: path.resolve(__dirname,'src'),
+        }],
+    }
+}
+```
+
+#### 2.2 优化`resolve.module`配置
 
 示例代码：
 
@@ -29,7 +56,7 @@
 
 ```
 
-#### 2.3 `resolve.aslias`
+#### 2.3 优化`resolve.aslias`配置
 
 示例代码：
 
@@ -37,7 +64,21 @@
 
 ```
 
-#### 2.4 `happypack`并发
+#### 2.4 优化`resolve.mainFields`配置
+
+#### 2.5 优化`resolve.extensions`配置
+
+#### 2.6 优化`module.noParse`配置
+
+#### 2.7 `happypack`并发
+
+示例代码：
+
+```
+
+```
+
+#### 2.8 优化文件监听的性能
 
 示例代码：
 
