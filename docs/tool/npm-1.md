@@ -260,6 +260,7 @@ npm publish --registry http://localhost:4873
 - [使用 verdaccio 搭建 npm 私有仓库](https://www.cnblogs.com/tugenhua0707/p/9163167.html)
 - [在 5 分钟内搭建企业内部私有 npm 仓库](https://github.com/jaywcjlove/handbook/blob/master/CentOS/%E5%9C%A85%E5%88%86%E9%92%9F%E5%86%85%E6%90%AD%E5%BB%BA%E4%BC%81%E4%B8%9A%E5%86%85%E9%83%A8%E7%A7%81%E6%9C%89npm%E4%BB%93%E5%BA%93.md)
 - [前端高级进阶：在生产环境中使你的 npm i 速度提升 50%](https://mp.weixin.qq.com/s/2_0kGRXC2xNcaTf_SC8wSQ)
+- [node_modules 困境](https://mp.weixin.qq.com/s/TU6rvx6vWQWROaxqO3qDsA)
 
 ## 联系作者
 
