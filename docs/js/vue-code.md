@@ -6833,5 +6833,3 @@ const dirsWithPostpatch = []
     </p>
     <img :src="$withBase('/about/contact.png')" />
 </div>
-```
-````
