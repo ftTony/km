@@ -392,13 +392,42 @@ function GetLeastNumber_Solution(input,k){
 
 ```
 
-### 两数之和
+13. 两数之和
+
+题目：给定一个整数数组`nums`和一个目标值`target`，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。
+
+你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
+
+示例:
 
 ```
+给定 nums = [2, 7, 11, 15], target = 9
 
+因为 nums[0] + nums[1] = 2 + 7 = 9
+所以返回 [0, 1]
 ```
 
-### 爬楼梯
+解答：
+
+```
+var twoSum = function(nums,target){
+    let map = new Map()
+    for(let i = 0; i<nums.length;i++){
+        let k = target-nums[i]
+        if(map.has(k)) {
+            return [map.get(k), i]
+        }
+        map.set(nums[i], i)
+    }
+    return []
+}
+
+let nums = [2,7,11,15],
+     target = 26;
+twoSum(nums,target)
+```
+
+14. 爬楼梯
 
 ```
 
@@ -411,6 +440,27 @@ function GetLeastNumber_Solution(input,k){
 ```
 
 ### 编辑距离
+
+```
+
+```
+
+### 数组扁平化、去重、排序
+
+```
+var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10]
+// 扁平化
+let flatArr = arr.flat(4)
+// 去重
+let disArr = Array.from(new Set(flatArr))
+// 排序
+let result = disArr.sort(function(a,b){
+    return a - b
+})
+console.log(result)
+```
+
+12. 给你两个有序整数数组`nums1`和`nums2`，请你将`nums2`合并到`nums1`中，使 `nums1` 成为一个有序数组。
 
 ```
 
