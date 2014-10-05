@@ -511,9 +511,9 @@ function copyAugment (target: Object, src: Object, keys: Array<string>) {
 
 **数组新增元素的侦测**
 
-对于数组中
+如果向数组里新增一个元素的话，我们可以也需要将新增的这个元素转化成可侦测的响应式数据。
 
-这个实现起来也很容易，我们只需要拿到新增的这个元素
+这个实现起来也很容易，我们只需要拿到新增的这个元素，然后调用`observe`函数将其转化即可。我们知道，可以向数组内新增元素的方法有 3 个，分别是：`push`、`unshift`、`splice`。我们需对这 3 中方法分别处理，拿到新增的元素，再将其转化即可。
 
 ```
 methodsToPatch.forEach(function (method) {
@@ -601,6 +601,27 @@ vm.$watch(expOrFn, callback, [options]);
 vm.$watch("a.b.c",function(newVal,oldVal){
     // 做点什么
 })
+
+// 函数
+vm.$watch(
+  function() {
+    // 表达式 `this.a + this.b` 每次得出一个不同的结果时
+    // 处理函数都会被调用。
+    // 这就像监听一个未被定义的计算属性
+    return this.a + this.b;
+  },
+  function(newVal, oldVal) {
+    // 做点什么
+  }
+);
+```
+
+`vm.$watch`返回一个取消观察函数，用来停止触发回调
+
+```
+var unwatch = vm.$watch("a", cb);
+// 之后取消观察
+unwatch();
 ```
 
 - 选项：deep
