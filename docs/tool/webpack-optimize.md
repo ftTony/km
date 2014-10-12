@@ -54,7 +54,7 @@ module .exports = {
 
 #### 2.2 优化`resolve.module`配置
 
-`resolve.modules`的默认值是`['node_modules']`
+`resolve.modules`的默认值是`['node_modules']`，含义是先去当前目录的`node_modules`目录下去找我们想找的模块，如果没找到就去上一级目录`../node_modules`中找，再没有就去`../../node_modules`中找，以此类推。这和 Node.js 的模块寻找机制很相似。当安装的第三方模块都放在项目根目录的`node_modules`目录下时，就没有必要按照默认的方式去一层层地寻找，可以指明存放第三方模块的绝对路径，以减少寻找。
 
 示例代码：
 
@@ -67,6 +67,10 @@ module.exports = {
 ```
 
 #### 2.3 优化`resolve.aslias`配置
+
+`resolve.alias`配置项通过别名来将原导入路径映射成一个新的导入路径。在项目经常会依赖一些庞大的第三方模块，以`React`库为例，发布出去的`React`库中包含两套代码
+
+- 一套是采用`CommonJS`规范的模块化代码，这些文件都放在`lib`目录下，
 
 示例代码：
 
@@ -84,9 +88,33 @@ module.exports = {
 
 #### 2.4 优化`resolve.mainFields`配置
 
+示例代码：
+
+```
+
+```
+
 #### 2.5 优化`resolve.extensions`配置
 
+示例代码：
+
+```
+
+```
+
 #### 2.6 优化`module.noParse`配置
+
+`module.noParse`配置项可以让`Webpack`忽略对部分没采用模块化的文件的递归解析处理，这样做的好处是能提高构建性能。原因是一些库如 jQuery。
+
+示例代码：
+
+```
+module.exports = {
+    module: {
+        noParse: /jquery/,
+    }
+}
+```
 
 #### 2.7 `happypack`并发
 
@@ -106,7 +134,19 @@ module.exports = {
 
 #### 2.5 `babel`使用缓存
 
+示例代码：
+
+```
+
+```
+
 #### 2.6 使用 `DllPlugin` 和 `DllReferencePlugin`
+
+示例代码：
+
+```
+
+```
 
 #### 2.7 使用`CommonsChunkPlugin`和`SplitChunksPlugin`
 
