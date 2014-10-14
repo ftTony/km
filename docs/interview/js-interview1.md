@@ -302,9 +302,15 @@ setTimeout()只是将事件插入了“任务队列”，必须等当前代码�
 
 promise 有三种状态：fulfilled,rejected,pending.
 
-Promise 的优点：
+优点：
 
--
+- 一旦状态改变，就不会再变，任何时候都可以得到这个结果
+- 可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数
+
+缺点：
+
+- 无法取消 Promise
+- 当处于 pending 状态时，无法得知目前进展到哪一个阶段
 
 ### 29.Promise 构造函数是同步还是异步执行，then 中的方法呢 ?promise 如何实现 then 处理 ?
 
