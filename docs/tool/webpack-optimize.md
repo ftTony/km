@@ -96,12 +96,6 @@ module.exports = {
 
 #### 2.5 优化`resolve.extensions`配置
 
-示例代码：
-
-```
-
-```
-
 #### 2.6 优化`module.noParse`配置
 
 `module.noParse`配置项可以让`Webpack`忽略对部分没采用模块化的文件的递归解析处理，这样做的好处是能提高构建性能。原因是一些库如 jQuery。
@@ -118,11 +112,29 @@ module.exports = {
 
 #### 2.7 `happypack`并发
 
+`WebPack`是单线程模型的，也就是说`WebPack`需要一个一个地处理任务，不能同时处理多个任务。`HappyPack`将任务分解给多个子进程去并发执行，子进程处理完后再将结果发送给主进程，从而发挥多核 CPU 电脑的威力。
+
 示例代码：
 
 ```
+const HappyPack = require('happypack')
+const os = require('os')
+const happThreadPool = HappyPack.ThreadPool({size:os.cpus().length})
 
+{
+    test:/\.js$/,
+}
+
+plugins:[
+    new HappyPack({
+        id:'happy-babel-js',
+        loaders:['babel-loader?cacheDirectory=true],
+        threadPool:happyThreadPool
+    })
+]
 ```
+
+在整个`WebPack`构建流程中，最耗时的流程可能就是`Loader`对文件的转换操作了，因为要转换的文件数据量巨大，而且这些转换操作都只能一个一个地处理`HappyPack`的核心原理就是将这部分任务分解到多个进程中去并行处理，从而减少总的构建时间。
 
 #### 2.8 优化文件监听的性能
 
@@ -142,11 +154,9 @@ module.exports = {
 
 #### 2.6 使用 `DllPlugin` 和 `DllReferencePlugin`
 
-示例代码：
+#### 2.7 使用`ParallelUglifyPlugin`
 
-```
-
-```
+`webpack`默认提供了`UglifyJS`插件来压缩 JS 代码，但是它使用的是单纯种压缩代码，也就是说多个`js`文件需要被压缩，它需要一个个文件进行压缩。所以说在正式环境打包压缩代码速度非常慢（）。
 
 #### 2.7 使用`CommonsChunkPlugin`和`SplitChunksPlugin`
 
