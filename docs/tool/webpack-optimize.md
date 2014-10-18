@@ -138,6 +138,8 @@ plugins:[
 
 #### 2.8 优化文件监听的性能
 
+在开启监听模式时，默认情况下会监听配置的`Entry`文件和所有`Entry`递归依赖的文件，在这些文件中会有很多存在于`node_modules`下，因为如今的`Web`项目会依赖大量的第三方模块，所以在大多数情况下我们都不可能去编辑`node`
+
 示例代码：
 
 ```
@@ -153,6 +155,29 @@ plugins:[
 ```
 
 #### 2.6 使用 `DllPlugin` 和 `DllReferencePlugin`
+
+`DLLPlugin`和`DLLReferencePlugin`用某种方法实现了拆分`bundles`，同时还大大提升了构建的速度。
+
+包含大量利用模块的动态链接库只需被编译一次，在之后的构建过程中被动态链接库包含的模块将不会重新编译，而是直接使用动态链接库中的代码，由动态链接库中大多数包含的是常用的第三方模块，例如 react、react-dom，所以只要不升级这些模块的版本，动态链接库就不用重新编译。
+
+代码如下：
+
+```
+module.exports = {
+    // mode: "development || "production",
+    plugins: [
+        new webpack.DllReferencePlugin({
+            context: path.join(__dirname, "..", "dll"),
+            manifest: require("../dll/dist/alpha-manifest.json") // eslint-disable-line
+        }),
+        new webpack.DllReferencePlugin({
+            scope: "beta",
+            manifest: require("../dll/dist/beta-manifest.json"), // eslint-disable-line
+            extensions: [".js", ".jsx"]
+        })
+    ]
+};
+```
 
 #### 2.7 使用`ParallelUglifyPlugin`
 
