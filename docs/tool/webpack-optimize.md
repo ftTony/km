@@ -187,15 +187,7 @@ module.export = {
 
 采用这种方法优化后， Webpack 消耗的内存和 CPU 将会大大减少。
 
-#### 2.5 `babel`使用缓存
-
-示例代码：
-
-```
-
-```
-
-#### 2.6 使用 `DllPlugin` 和 `DllReferencePlugin`
+#### 2.9 使用 `DllPlugin` 和 `DllReferencePlugin`
 
 `DLLPlugin`和`DLLReferencePlugin`用某种方法实现了拆分`bundles`，同时还大大提升了构建的速度。
 
@@ -220,24 +212,16 @@ module.exports = {
 };
 ```
 
-#### 2.7 使用`ParallelUglifyPlugin`
+与 `splitChunks`或`CommonsChunkPlugin`的区别
 
-`webpack`默认提供了`UglifyJS`插件来压缩 JS 代码，但是它使用的是单纯种压缩代码，也就是说多个`js`文件需要被压缩，它需要一个个文件进行压缩。所以说在正式环境打包压缩代码速度非常慢（）。
+- CommonsChunkPlugin 插件每次打包的时候还是会去处理一些第三方依赖库，只是它能把第三方库文件和我们的代码分开掉，生成一个独立的 js 文件，但它不能提高打包速度。
+- DLLPlugin 它能把第三方库代码分离开，并且每次文件更改的时候，它只会打包该项目自身的代码。所以打包速度会更快。
 
-#### 2.7 使用`CommonsChunkPlugin`和`SplitChunksPlugin`
+#### 2.10 使用`ParallelUglifyPlugin`
 
-- 减少文件搜索范围，比如通过另名，loader 的 test,include & exclude
-- resolve.module，配置 webpack 去哪些目录下妙手第三方模块
-- resolve.aslias 配置，通过另外来将原导入路径映射成一个新的导入路径
-- Webpack4 默认压缩并行
-- Happypack 并发调用
-  - threads:开启几个子进程去处理这一类型的文件，默认是 3 个，必须整数
-  - verbose:是否允许 happypack 输出日志，默认是 true
-  - threadpool:代表共享进程池，即多个 happypack 实例都使用同一个共享进程池中的子进程去处理任务，以防止资源占用过多
-- Babel 使用缓存编译，主要 loader 参数后面增加 cacheDirectory，关于[babel 编译原理](https://mp.weixin.qq.com/s/NRZQI-Md0dqNAGY96qsn-A)
-- 使用 DllPlugin 和 DllReferencePlugin，这两个跟 CommonsChunkPlugin（webpack3 中的，webpack4 中使用 SplitChunksPlugin）有一些区别，主要区别如下
-  - CommonsChunkPlugin 插件每次打包的时候还是会去处理一些第三方依赖库，只是它能把第三方库文件和我们的代码分开掉，生成一个独立的 js 文件，但它不能提高打包速度。
-  - DLLPlugin 它能把第三方库代码分离开，并且每次文件更改的时候，它只会打包该项目自身的代码。所以打包速度会更快。
+`webpack`默认提供了`UglifyJS`插件来压缩 JS 代码，但是它使用的是单纯种压缩代码，也就是说多个`js`文件需要被压缩，它需要一个个文件进行压缩。所以说在正式环境打包压缩代码速度非常慢（因为压缩 JS 代码需要先把代码解析成用 Object 抽象表示的 AST 语法树，再去应用各种规则分析和处理 AST，导致这个过程耗时非常大）。
+
+当 webpack 有多个 JS 文件需要输出和压缩时候，原来会使用 UglifyJS 去一个个压缩并且输出，但是 ParallelUglifyPlugin 插件则会开启多个子进程，把对多个文件压缩的工作分别给多个子进程并行处理多个子任务，效率会更加提高。
 
 ### 参考资料
 
