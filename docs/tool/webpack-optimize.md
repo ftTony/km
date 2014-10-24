@@ -70,7 +70,10 @@ module.exports = {
 
 `resolve.alias`配置项通过别名来将原导入路径映射成一个新的导入路径。在项目经常会依赖一些庞大的第三方模块，以`React`库为例，发布出去的`React`库中包含两套代码
 
-- 一套是采用`CommonJS`规范的模块化代码，这些文件都放在`lib`目录下，
+- 一套是采用`CommonJS`规范的模块化代码，这些文件都放在`lib`目录下，以`package.json`中指定的入口文件`react.js`为模块的入口
+- 一套是将`React`的所有相关代码打包好的完整代码放到一个单独的文件中， 这些代码没有采用模块化，可以直接执行。其中`dist/react.js`用于开发环境，里面包含检查和警告的代码。`dist/react.min.js` 用于线上环境，被最小化了。
+
+在默认情况下，`Webpack`会从入口文件`./node_modules/react/react.js`开始递归解析和处理依赖的几十个文件，这会是一个耗时的操作通过配置`resolve.alias`，可以让`Webpack`在处理`React`库时，直接使用单独、完整的`react.min.js`文件，从而跳过耗时的递归解析操作
 
 示例代码：
 
@@ -88,13 +91,44 @@ module.exports = {
 
 #### 2.4 优化`resolve.mainFields`配置
 
-示例代码：
+在安装的第三方模块中都会有一个`package.json`文件，用于描述这个模块的属性，其中可以存在多个字段描述入口文件，原因是某些模块可以同时用于多个环境中，针对不同的运行环境需要使用不同的代码。
+
+`resolve.mainFields`的默认值和当前的`target`配置有关系，对应的关系如下：
+
+- `target web`或者`websorker`时，值是`［'browser','module','main']`。
+- `target`为其他情况时，值是`［ 'module','main']`。
+
+以 `target` 等于 `web` 为例， `Webpack` 会先采用第三方模块中的 `browser` 字段去寻找模块的入口文件，如果不存在，就采用 `module` 字段，以此类推。
+
+为了减少搜索步骤，在明确第三方模块的入口文件描述字段时，我们可以将它设置得尽量少。由于大多数第三方模块都采用`main`字段去描述入口文件的位置，所以可以这样配置：
 
 ```
-
+module.exports = {
+    resolve: {
+    //只采用 main 字段作为入口文件的描述字段，以减少搜索步骤
+    mainFields: ['main']
+    }
+}
 ```
 
 #### 2.5 优化`resolve.extensions`配置
+
+在导入语句没带文件后缀时，Webpack 会自动带上后缀去尝试询问文件是否存在。如果这个列表越长，或者正确的后缀越往后，就会造成尝试的次数越多，所以`resolve.extensions`的配置也会影响到构建的性能在配置`resolve.extensions`时需要遵守以下几点，以做到尽可能地优化构建性能。
+
+- 后缀尝试表要尽可能小，不要将项目中不可能存在的情况写到后缀尝试列表中。
+- 频率出现最高的文件后缀要优先放在最前面，以做到尽快退出寻找过程。
+- 在源码中写入语句时，要尽可能带上后缀从而可以避免寻找过程。例如在确定的情况下将 `require ( './data '）` 写成 `require （'./data.json'）`
+
+示例配置：
+
+```
+module.exports = {
+    resolve : {
+        //尽可能减少后缀尝试的可能性
+        extensions : ['js'],
+    }
+}
+```
 
 #### 2.6 优化`module.noParse`配置
 
@@ -138,13 +172,20 @@ plugins:[
 
 #### 2.8 优化文件监听的性能
 
-在开启监听模式时，默认情况下会监听配置的`Entry`文件和所有`Entry`递归依赖的文件，在这些文件中会有很多存在于`node_modules`下，因为如今的`Web`项目会依赖大量的第三方模块，所以在大多数情况下我们都不可能去编辑`node`
+在开启监听模式时，默认情况下会监听配置的`Entry`文件和所有`Entry`递归依赖的文件，在这些文件中会有很多存在于`node_modules`下，因为如今的`Web`项目会依赖大量的第三方模块，所以在大多数情况下我们都不可能去编辑`node_modules`下的文件，而是编辑自己建立的源码文件，而一个很大的优化点就是忽略`node_modules`下的文件，不监听它们。
 
 示例代码：
 
 ```
-
+module.export = {
+    watchOptions : {
+        //不监听的 node_modules 目录下的文件
+        ignored : /node_modules/,
+    }
+}
 ```
+
+采用这种方法优化后， Webpack 消耗的内存和 CPU 将会大大减少。
 
 #### 2.5 `babel`使用缓存
 
