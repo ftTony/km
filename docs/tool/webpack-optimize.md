@@ -8,18 +8,19 @@
 
 - [优化打包大小](l#一、优化打包大小)
 - [优化打包速度](#二、优化打包速度)
+- 分析打包速度及包大小工具
 
 ### 一、优化打包大小
 
-- 开启`production`模式
 - 开启`tree shaking`模式
-- 开启`production`模式
+- 提取公共代码
+- 分割代码以按需加载
 
-- 对于 Webpack4，打包项目使用 production 模式，这样会自动开启代码压缩
-- 使用 ES6 模块来开启 tree shaking，这个技术可以移除没有使用的代码
-- 优化图片，对于小图可以使用 base64 的方式写入文件中
-- 按照路由拆分代码，实现按需加载
-- 给打包出来的文件名添加哈希，实现浏览器缓存文件(主要采用 chunkFilename)
+#### 1.1 开启`tree shaking`模式
+
+#### 1.2 提取公共代码
+
+#### 1.3 分割代码以按需加载
 
 ### 二、优化打包速度
 
@@ -29,7 +30,10 @@
 - 优化`resolve.mainFields`配置
 - 优化`resolve.extensions`配置
 - 优化`module.noParse`配置
-- 优化文件监听的性能
+- `happypack`并发
+- 使用 `DllPlugin` 和 `DllReferencePlugin`
+- 使用`ParallelUglifyPlugin`
+- 合理利用缓存
 
 #### 2.1 优化`Loader`配置
 
@@ -185,7 +189,7 @@ module.export = {
 }
 ```
 
-采用这种方法优化后， Webpack 消耗的内存和 CPU 将会大大减少。
+采用这种方法优化后， Webpack 消耗的内存和 CPU 将会大大减少。推荐使用 `thread-loader`
 
 #### 2.9 使用 `DllPlugin` 和 `DllReferencePlugin`
 
@@ -222,6 +226,10 @@ module.exports = {
 `webpack`默认提供了`UglifyJS`插件来压缩 JS 代码，但是它使用的是单纯种压缩代码，也就是说多个`js`文件需要被压缩，它需要一个个文件进行压缩。所以说在正式环境打包压缩代码速度非常慢（因为压缩 JS 代码需要先把代码解析成用 Object 抽象表示的 AST 语法树，再去应用各种规则分析和处理 AST，导致这个过程耗时非常大）。
 
 当 webpack 有多个 JS 文件需要输出和压缩时候，原来会使用 UglifyJS 去一个个压缩并且输出，但是 ParallelUglifyPlugin 插件则会开启多个子进程，把对多个文件压缩的工作分别给多个子进程并行处理多个子任务，效率会更加提高。
+
+#### 2.11 合理利用缓存
+
+使用 webpack 缓存的方法有几种，例如使用`cache-loader`、`HardSourceWebpackPlugin`或`babel-loader`和`cacheDirectory`标志。所有这些缓存
 
 ### 参考资料
 
