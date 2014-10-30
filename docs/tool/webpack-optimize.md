@@ -18,9 +18,49 @@
 
 #### 1.1 开启`tree shaking`模式
 
+```
+{
+    'presets':[
+        [
+            'env',{
+                'module':false
+            }
+        ]
+    ]
+}
+```
+
 #### 1.2 提取公共代码
 
+```
+splitChunks: {
+        chunks: "async",
+        minSize: 30000,
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: 3,
+        automaticNameDelimiter: '~',
+        name: true,
+        cacheGroups: {
+            vendors: {
+                test: /[\\/]node_modules[\\/]/,
+                priority: -10
+            },
+        default: {
+                minChunks: 2,
+                priority: -20,
+                reuseExistingChunk: true
+            }
+        }
+    }
+```
+
 #### 1.3 分割代码以按需加载
+
+Webpack 支持两种动态代码拆分技术：
+
+- 符合 `ECMAScript proposal 的 import()` 语法，推荐使用
+- 传统的 `require.ensure`
 
 ### 二、优化打包速度
 
@@ -229,7 +269,84 @@ module.exports = {
 
 #### 2.11 合理利用缓存
 
-使用 webpack 缓存的方法有几种，例如使用`cache-loader`、`HardSourceWebpackPlugin`或`babel-loader`和`cacheDirectory`标志。所有这些缓存
+使用 webpack 缓存的方法有几种，例如使用`cache-loader`、`HardSourceWebpackPlugin`或`babel-loader`和`cacheDirectory`标志。所有这些缓存方法都有启动的开销。重新运行期间在本地节省了时间很大，但是初始（冷）运行实际上会更慢。
+
+**cache-loader**
+
+使用`cache-loader`需要在一些性能开销较大的`loader`之前添加`cache-loader`，以将结果缓存到磁盘里，显著提升二次构建速度。
+
+```
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.ext$/,
+        use: ['cache-loader', ...loaders],
+        include: path.resolve('src'),
+      },
+    ],
+  },
+}
+```
+
+**HardSourceWebpackPlugin**
+
+- 第一次构建将花费正常的时间
+- 第二次构建将显着加快（大概提升 90%的构建速度）。
+
+```
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+const clientWebpackConfig = {
+  // ...
+  plugins: [
+    new HardSourceWebpackPlugin({
+      // cacheDirectory是在高速缓存写入。默认情况下，将缓存存储在node_modules下的目录中
+      // 'node_modules/.cache/hard-source/[confighash]'
+      cacheDirectory: path.join(__dirname, './lib/.cache/hard-source/[confighash]'),
+      // configHash在启动webpack实例时转换webpack配置，
+      // 并用于cacheDirectory为不同的webpack配置构建不同的缓存
+      configHash: function(webpackConfig) {
+        // node-object-hash on npm can be used to build this.
+        return require('node-object-hash')({sort: false}).hash(webpackConfig);
+      },
+      // 当加载器、插件、其他构建时脚本或其他动态依赖项发生更改时，
+      // hard-source需要替换缓存以确保输出正确。
+      // environmentHash被用来确定这一点。如果散列与先前的构建不同，则将使用新的缓存
+      environmentHash: {
+        root: process.cwd(),
+        directories: [],
+        files: ['package-lock.json', 'yarn.lock'],
+      },
+      // An object. 控制来源
+      info: {
+        // 'none' or 'test'.
+        mode: 'none',
+        // 'debug', 'log', 'info', 'warn', or 'error'.
+        level: 'debug',
+      },
+      // Clean up large, old caches automatically.
+      cachePrune: {
+        // Caches younger than `maxAge` are not considered for deletion. They must
+        // be at least this (default: 2 days) old in milliseconds.
+        maxAge: 2 * 24 * 60 * 60 * 1000,
+        // All caches together must be larger than `sizeThreshold` before any
+        // caches will be deleted. Together they must be at least this
+        // (default: 50 MB) big in bytes.
+        sizeThreshold: 50 * 1024 * 1024
+      },
+    }),
+    new HardSourceWebpackPlugin.ExcludeModulePlugin([
+      {
+        test: /.*\.DS_Store/
+      }
+    ]),
+  ]
+}
+```
+
+**cacheDirectory**
+
+主要 `loader` 参数后面增加 `cacheDirectory`
 
 ### 参考资料
 
