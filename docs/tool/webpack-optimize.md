@@ -35,6 +35,24 @@
 }
 ```
 
+第二个要求，需要使用 UglifyJsPlugin 插件。如果在`mode:"production"`模式，这个插件已经黑夜添加了，如果在其它模式下，可以手工添加它。
+
+另外要记住的是打开`optimization.usedExports`。在`mode: "production"`模式下，它也是默认打开了的。它告诉 `webpack` 每个模块明确使用 `exports`。这样之后，webpack 会在打包文件中添加诸如`/_ unused harmony export _/`这样的注释，其后`UglifyJsPlugin`插件会对这些注释作出理解。
+
+```
+module.exports = {
+    mode: 'none',
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new UglifyJsPlugin()
+        ],
+        usedExports: true,
+        sideEffects: true
+    }
+}
+```
+
 #### 1.2 提取公共代码
 
 大型网站通常由多个页面组成，每个页面都是一个独立的单页应用，但由于所有页面都采用同样的技术栈及同一套样式代码，就导致这些页面之间有很多相同的代码。可以使用 splitChunks 进行分包：
@@ -68,6 +86,14 @@ Webpack 支持两种动态代码拆分技术：
 
 - 符合 `ECMAScript proposal 的 import()` 语法，推荐使用
 - 传统的 `require.ensure`
+
+`import()` 用于动态加载模块，其引用的模块及子模块会被分割打包成一个独立的 `chunk`。Webpack 还允许以注释的方式传参，进而更好的生成 `chunk`。
+
+#### 1.4 webpack 实现 CDN 的接入
+
+- 静态资源的导入 URL 需要变成指向 DNS 服务的绝对路径的 URL，而不是相对 HTML 文件的
+- 静态资源的文件名需要带上由文件内容算出来的 Hash 值，以防止被缓存
+- 将不同类型的资源放到不同域名的 DNS 服务上，以防止资源的并行加载被阻塞
 
 ### 二、优化打包速度
 
