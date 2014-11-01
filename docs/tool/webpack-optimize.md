@@ -8,7 +8,7 @@
 
 - [优化打包大小](l#一、优化打包大小)
 - [优化打包速度](#二、优化打包速度)
-- 分析打包速度及包大小工具
+- 分析打包速度工具
 
 ### 一、优化打包大小
 
@@ -380,6 +380,11 @@ const clientWebpackConfig = {
 **cacheDirectory**
 
 主要 `loader` 参数后面增加 `cacheDirectory`
+
+### 三、分析打包速度工具
+
+- speed-measure-webpack-plugin
+- webpack-bundle-analyzer
 
 ### 参考资料
 
