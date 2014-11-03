@@ -35,38 +35,54 @@ new CommonsChunkPlugin({
 
 ### 二、自定义插件
 
-插件代码
+- webpack 插件组成
+- Webpack 插件基本架构
+- 插件触发时机
+
+#### 2.1 webpack 插件组成
+
+构成如下：
+
+- 一个具名 JavaScript 函数
+- 在它的原型上定义 apply 方法
+- 指定一个触及到 webpack 本身的事件钩子
+- 操作 Webpack 内部的实例特定数据
+- 在实现功能后调用 Webpack 提供的 callback
+
+#### 2.2 Webpack 插件基本架构
 
 ```
-//@file: plugins/myplugin.js
-class myPlugin {
-    constructor(options){
-        //用户自定义配置
-        this.options = options
-        console.log(this.options)
-    }
-    apply(compiler) {
-        console.log("This is my first plugin.")
-    }
+class HelloWorldPlugin {
+  apply(compiler) {
+    compiler.hooks.done.tap('Hello World Plugin', (
+      stats /* 在 hook 被触及时，会将 stats 作为参数传入。*/
+    ) => {
+      console.log('Hello World!');
+    });
+  }
 }
-
-module.exports = myPlugin
+module.exports = HelloWorldPlugin;
 ```
 
-webpack 代码
+使用插件
 
 ```
-const MyPlugin = require('./plugins/myplugin-4.js')
+// webpack.config.js
+var HelloWorldPlugin = require('hello-world');
 
 module.exports = {
-    ......,
-    plugins: [
-        new MyPlugin("Plugin is instancing.")
-    ]
-}
+  // ... 这里是其他配置 ...
+  plugins: [new HelloWorldPlugin({ options: true })]
+};
 ```
 
-具体参数可以参考《深入浅出 webpack》
+#### 2.3 插件触发时机
+
+插件触发时机，其实是选择插件触发的 compiler 钩子。Webpack 提供钩子有很多，这里简单介绍几个：
+
+- `entryOption`：
+
+完整具体可参考文档《[Compiler Hooks](https://webpack.js.org/api/compiler-hooks/)》
 
 ### 参考资料
 
