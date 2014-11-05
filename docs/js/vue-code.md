@@ -676,6 +676,12 @@ Vue.prototype.$watch = function (
 }
 ```
 
+在函数内部，首先判断传入的回调函数是否为一个对象，如果传入的回调函数是个对象，那就表明用户是把第二个参数回调函数`cb`和第三个参数选项`options`合起来传入的，此时调用`createWatcher`函数，该函数定义如下：
+
+```
+
+```
+
 **`vm.$set`**
 
 `vm.$set`是全局`Vue.set`的**别名**，其用法相同。
@@ -684,8 +690,49 @@ Vue.prototype.$watch = function (
 vm.$set(target, propertyName / index, value);
 ```
 
-- **参数**：
+- 参数：
+
   - `{Object | Array} target`
+
+- 返回值：设置的值
+- 用法：
+- 内部原理
+
+`set`方法的定义位于源码的`src/core/observer/index.js`中，如下：
+
+```
+export function set (target: Array<any> | Object, key: any, val: any): any {
+  if (process.env.NODE_ENV !== 'production' &&
+    (isUndef(target) || isPrimitive(target))
+  ) {
+    warn(`Cannot set reactive property on undefined, null, or primitive value: ${(target: any)}`)
+  }
+  if (Array.isArray(target) && isValidArrayIndex(key)) {
+    target.length = Math.max(target.length, key)
+    target.splice(key, 1, val)
+    return val
+  }
+  if (key in target && !(key in Object.prototype)) {
+    target[key] = val
+    return val
+  }
+  const ob = (target: any).__ob__
+  if (target._isVue || (ob && ob.vmCount)) {
+    process.env.NODE_ENV !== 'production' && warn(
+      'Avoid adding reactive properties to a Vue instance or its root $data ' +
+      'at runtime - declare it upfront in the data option.'
+    )
+    return val
+  }
+  if (!ob) {
+    target[key] = val
+    return val
+  }
+  defineReactive(ob.value, key, val)
+  ob.dep.notify()
+  return val
+}
+```
 
 **`vm.$delete`**
 
