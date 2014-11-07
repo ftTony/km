@@ -78,11 +78,19 @@ module.exports = {
 
 #### 2.3 插件触发时机
 
-插件触发时机，其实是选择插件触发的 compiler 钩子。Webpack 提供钩子有很多，这里简单介绍几个：
+插件触发时机，其实是选择插件触发的 compiler 钩子。Webpack 提供钩子有很多，这里简单介绍几个（完整具体可参考文档《[Compiler Hooks](https://webpack.js.org/api/compiler-hooks/)》）：
 
-- `entryOption`：
+- `entryOption`：在 webpack 选项中的`entry`配置项处理过之后，执行插件。
+- `afterPlugins`：设置完初始插件之后，执行插件。
+- `compilation`：编译创建之后，生成文件之前，执行插件。
+- `emit`：生成资源到`output`目录之前
+- `done`：编译完成
 
-完整具体可参考文档《[Compiler Hooks](https://webpack.js.org/api/compiler-hooks/)》
+在`compiler.hooks`下指定**事件钩子函数**，便会触发钩子时，执行回调函数。Webpack 提供三种触发钩子的方法：
+
+- `tap`：以**同步方式**触发钩子
+- `tapAsync`：以**异步方式**触发钩子
+- `tapPromise`：以**异步方式**触发钩子，返回 Promise
 
 ### 参考资料
 
