@@ -38,6 +38,8 @@ new CommonsChunkPlugin({
 - webpack 插件组成
 - Webpack 插件基本架构
 - 插件触发时机
+- 插件运行机制
+- 写一个自定义插件
 
 #### 2.1 webpack 插件组成
 
@@ -91,6 +93,57 @@ module.exports = {
 - `tap`：以**同步方式**触发钩子
 - `tapAsync`：以**异步方式**触发钩子
 - `tapPromise`：以**异步方式**触发钩子，返回 Promise
+
+#### 2.4 插件运行机制
+
+![images](webpack-plguin.jpeg)
+
+#### 2.5 写一个自定义插件
+
+```
+创建一个名称为SetScriptTimestampPlugin.js
+
+class SetScriptTimestampPlugin{
+    apply(compiler){
+        compiler.hooks.compilation.tap('SetScriptTimestampPlugin',
+        (compilation, callback) => {
+            // 插件逻辑 调用compilation提供的plugin方法
+        compilation.plugin(
+          "html-webpack-plugin-before-html-processing",
+          function(htmlPluginData, callback) {
+            // 读取并修改 script 上 src 列表
+            let jsScr = htmlPluginData.assets.js[0];
+            htmlPluginData.assets.js = [];
+            let result = `
+                <script>
+                    let scriptDOM = document.createElement("script");
+                    let jsScr = "./${jsScr}";
+                    scriptDOM.src = jsScr + "?" + new Date().getTime();
+                    document.body.appendChild(scriptDOM)
+                </script>
+            `;
+            let resultHTML = htmlPluginData.html.replace(
+              "<!--SetScriptTimestampPlugin inset script-->", result
+            );
+            // 返回修改后的结果
+            htmlPluginData.html = resultHTML;
+          }
+        );
+        })
+    }
+}
+```
+
+使用插件
+
+```
+const SetScriptTimestampPlugin = require("./SetScriptTimestampPlugin.js");
+module.exports = {
+  plugins: [
+    new SetScriptTimestampPlugin()
+  ]
+}
+```
 
 ### 参考资料
 
