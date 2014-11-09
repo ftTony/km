@@ -25,9 +25,9 @@
 2. 返回其他结果，是调用`callback`
 3. 缓存加速，调用 this.cacheable(false);
 
-具体参数可以参考《深入浅出 webpack》
+#### 实现一个 loader
 
-#### 1.1 loader 文件
+loader 逻辑代码
 
 ```
 const loaderUtils = require('loader-utils');
@@ -41,7 +41,7 @@ module.exports = function (content) {
 }
 ```
 
-#### 7.2 webpack 配置文件
+使用自定义 loader
 
 ```
 {
