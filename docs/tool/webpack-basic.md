@@ -9,7 +9,7 @@
 - [介绍、安装及常用命令](#一、介绍、安装及常用命令)
 - [webpack 基本配置说明](#二、最简单配置)
 - [webpack 配置](#三、webpack配置)
-- [总结](#总结)
+- 实际应用
 
 ### 一、介绍、安装及常用命令
 
@@ -382,9 +382,17 @@ module.exports = {
 };
 ```
 
-### 总结
+### 四、实际应用
 
-webpack 打包配置相对比较复杂，目前介绍应该可以满常规需求。
+- 编译 ES6/7
+- 编译打包 TS
+- 提取公用代码
+- 代码分割和懒加载
+- 处理 css:style-loader
+- 处理 css:style-loader
+- 配置 less/sass
+- postcss-in-webpack
+- tree-shaking
 
 ### 参考资料
 
