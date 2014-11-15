@@ -397,6 +397,54 @@ module.exports = {
 - 配置 stylelint
 - mock 使用
 
+#### 4.1 编译 ES6/7
+
+首先我们要安装`babel`编译文件`npm install -- save-dev babel-loader babel-core`同时还需要安装`npm install babel-preset-env --save-dev`这个时候，给`webpack.config.js`一个基础配置：
+
+```
+module.exports = {
+    entry: {
+        app: './app.js'
+    },
+    output: {
+        filename: "[name].[hash:8].js"
+    },
+
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: 'babel-loader',
+                exclude: '/node_modules/'
+            }
+        ]
+    }
+};
+```
+
+`babel`配置文件的写法：
+
+```
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "> 1%",
+            "last 2 versions"
+          ]
+        }
+      }
+    ]
+  ],
+  "plugins": ["transform-runtime"]
+}
+```
+
+具体配置可以查看[babel 学习](https://km.xiaowuzi.info/tool/webpack-babel.html)
+
 ### 参考资料
 
 - 《深入浅出 webpack》
