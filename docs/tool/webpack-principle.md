@@ -64,11 +64,25 @@ Webpack 的运行流程是一个串行的过程，从启动到结束会依次执
 
 Javascript 代码中的语法单元主要包括以下这么几种：
 
-- 关键字：
+- 关键字：`const`、`let`、`var`等
+- 标识符：可能是一个变量，也可能是 if、else 这些关键字，又或者是 true、false 这些常量
+- 运算符
+- 数字
+- 空格
+- 注释
+- **语法解析**：这个阶段语法解析器（Parser）会把 Tokens 转换为抽象语法树
+- **深度优先遍历语法树，修改语法树**
+- 将语法树转换回源代码
 
 #### 5.4 JavaScript Parser
 
+- JavaScript Parser，把 js 源码转化为抽象语法树的解析器。
+- 浏览器会把 js 源码通过解析器转为抽象语法树，再进一步转化为字节码或直接生成机器码。
+
 #### 5.5 项目中需要用到的工具
+
+- [astexplorer](https://astexplorer.net/)
+- [@babel/core](https://www.npmjs.com/package/@babel/core)里面内置了 babylon/parser，也可以用它来转换 AST
 
 ### 参考资料
 
