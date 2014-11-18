@@ -393,6 +393,9 @@ module.exports = {
 - 配置 less/sass
 - postcss-in-webpack
 - tree-shaking
+- 配置 eslint
+- 配置 stylelint
+- mock 使用
 
 ### 参考资料
 
