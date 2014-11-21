@@ -8,7 +8,9 @@
 
 - [webpack 事件流](#一、webpack-事件流)
 - [webpack 运行流程详解](#二、webpack-运行流程详解)
-- [抽象语法树（AST）](#三、抽象语法树（ast）)
+- Webpack 之 Tapable
+- Compiler 和 Compilation
+- [抽象语法树（AST）](#五、抽象语法树（ast）)
 
 ### 一、webpack 事件流
 
@@ -40,6 +42,18 @@ Webpack 的运行流程是一个串行的过程，从启动到结束会依次执
 - Compiler 和 Compilation 都继承自 Tapable，这样就可以订阅和发射事件。
 - Compiler：Webpack 执行构建的时候，都会先读取 Webpack 配置文件实例化一个 Compiler 对象，然后调用它的 run 方法来开启一次完整的编译，Compiler 对象代表了完整的 Webpack 环境配置。这个对象在启动 Webpack 时被一次性建立，并配置好所有可操作的设置，包括 options，loader 和 plugin。当在 Webpack 环境中应用一个插件时，插件将收到些 Compiler 对象的引用。可以使用它来访问 Webpack 的主环境。
 - Compilation：对象代表一次资源版本的构建。当运行 Webpack 开发环境中间件时，每当检测到一个文件变化，就会创建一个新的 Compilation，从而生成一组新的编译资源。一个 Compilation 对象表现了当前的模块资源、编译生成资源、变化的文件、以及被跟踪依赖的状态信息。Compilation 对象也提供了很多关键时机的回调，以供插件做自定义处理时选择使用。
+
+### 五、抽象语法树（AST）
+
+#### 5.1 AST 是什么
+
+#### 5.2 AST 用途
+
+#### 5.3 AST 执行流程
+
+#### 5.4 JavaScript Parser
+
+#### 5.5 项目中需要用到的工具
 
 ### 参考资料
 
