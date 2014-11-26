@@ -12,6 +12,14 @@
 
 #### 1.1 找到关键文件
 
+**bin/webpack.js**
+
+`node_modules\webpack\bin\webpack.js`，找到 webpack，Ctrl + 鼠标点击 ==> 就可以快速找到 webpack 的位置
+
+**lib/webpack.js**
+
+`node_modules\webpack\lib\webpack.js`，这是 webpack 的入口文件，可以从这里开始阅读源码
+
 #### 1.2 debug 代码
 
 在 vscode 中调试，设置配置文件

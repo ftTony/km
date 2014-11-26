@@ -37,6 +37,14 @@ Webpack 的运行流程是一个串行的过程，从启动到结束会依次执
 - Webpack 本质上是一种事件流的机制，它的工作流程就是将各个插件串联起来，而实现这一切的核心就是 Tapable，Webpack 中最核心的负责编译的 Compiler 和负责创建 Bundle 的 Compilation 都是 Tapable 的实例
 - Webpack 内部有各种各样的钩子，插件将自己的方法注册到对应的钩子上，这样 Webpack 编译的时候，会触发这些钩子，因此也就触发了插件的方法
 
+#### 3.1 Tabpable 分类
+
+- Tabpable 提供了很多类型的 Hook，分为同步（Sync）和异步（Async）两大类（异步中又区分异步并行和异步串行），而根据事件执行的终止条件的不同，又衍生出 `Basic/Bail/Waterfall/Loop` 类型
+
+#### 3.2 所有 Hook 的注意事项
+
+- 所有的 Hook 实例化时，都接收一个可选参数，参数是一个参数名的字符串数组
+
 ### 四、Compiler 和 Compilation
 
 - Compiler 和 Compilation 都继承自 Tapable，这样就可以订阅和发射事件。
