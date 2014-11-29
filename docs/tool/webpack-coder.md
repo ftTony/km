@@ -7,6 +7,7 @@
 ## 内容
 
 - Webpack 源码阅读技巧
+- 写一个简单的 webpack
 
 ### 一、Webpack 源码阅读技巧
 
@@ -38,6 +39,31 @@
             "args": ["--progress", "--inline", "--config", "build/webpack.demo.js"]
         }
     ]
+```
+
+### 二、写一个简单的 webpack
+
+#### 2.1 定义 Compiler 类
+
+```
+class Compiler{
+    constructor(options){
+        constructor(options){
+            // webpack配置
+            const {entry,output} = options
+            // 入口
+            this.entry = entry
+            // 出口
+            this.output = output
+            // 模块
+            this.modules = []
+        }
+        // 构建启动
+        run(){}
+        // 重写require函数，输出bundle
+        generate(){}
+    }
+}
 ```
 
 ### 参考资料
