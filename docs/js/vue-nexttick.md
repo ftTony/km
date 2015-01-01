@@ -110,6 +110,8 @@ refs.list.textContent，可以看到打印的数据还是“tony”；为什么�
 
 如上代码，在created生命周期内，我们打印 this.
 
+refs.list值为undefined，那是因为在created生命周期内页面的html没有被渲染完成，因此打印出为undefined；但是我们把它放入this.nextTick函数内即可打印出值出来，这也印证了nextTick是在下次DOM更新循环线束之后执行的延迟回调。因此只有DOM渲染完成后才会自动执行的延迟回调函数。
+
 Vue的特点之一就是能实现响应式，但数据更新时，DOM不会立即更新，而是放入一个异步队列中，因此如果在我们的业务场景中，需要在DOM更新之后执行一段代码时，这个时候我们可以使用this.$nextTick()函数来实现
 
 ### 二、Vue.nextTick 的调用方式
@@ -121,26 +123,48 @@ Vue的特点之一就是能实现响应式，但数据更新时，DOM不会立�
 
 ### 三、`vm.$nextTick` 与 `setTimeout` 的区别是什么？
 
+在区别他们两之前，我们先来看一个简单的demo如下：
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nextTick学习3</title>
+    <script type="text/javascript" src="https://cn.vuejs.org/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <template>
+          <div ref="list">{{name}}</div>
+        </template>
+      </div>
+      <script type="text/javascript">
+        new Vue({
+          el: '#app',
+          data: {
+            name: 'tony'
+          },
+          created() {
+            console.log(this.$refs.list); // 打印undefined
+            setTimeout(() => {
+              console.log(this.$refs.list); // 打印出 "<div>tony</div>"
+            }, 0);
+          }
+        })
+      </script>
+</body>
+</html>
+```
+
+如上代码，我们不使用 nextTick， 我们使用setTimeout延迟也一样可以获取页面中的HTML元素的，那么他们俩之间到底有什么区别呢？
+
 通过看vue源码我们知道，nextTick源码在`src/core/util/next-tick.js`里面。在vue中使用三种情况来延迟调用该函数，首先我们会判断我们的设备是否支持Promise对象，如果支持的话，会使用Promise.then来做延迟调用函数。如果设备不支持Promise对象，再判断是否支持MutationObserver对象，如果支持该对象，就使用MutationObserver来做延迟，最后如果上面两种都不支持的话，我们会使用`setTimeout(()=>{},0)`;setTimeout来做延迟操作。
 
 在比较 nextTick 与 setTimeout 的区别，其实我们可以比较 promise 或 MutationObserver 对象与 setTimeout 的区别的了，因为 nextTick 会先判断设备是否支持 promise 及 MutationObserver 对象的，只要我们弄懂 promise 和 setTimeout 的区别，也就是弄明白 nextTick 与 setTimeout 的区别了。
 
-我们都知道 Promise.then 和 setTimeout 都是异步的，那么在事件队列中 Promise.then 的事件应该是在 setTimeout 的后面的，那么为什么 Promise.then 比 setTimeout 函数先执行呢？
-
-#### 3.1 理解 Event Loop 的概念
-
-我们都明白，javascript 是单线程的，所有的任务都会在主线程中执行的，当主线程中的任务都执行完成之后，系统会“依次”读取任务队列里面的事件，因此对应的异步任务进入主线程，开始执行。
-
-但是异步任务队列又分为：macrotasks(宏任务)和microtasks(微任务)。他们两者分别有如下API：
-
-- **macrotasks(宏任务)：** setTimeout、setInterval、setImmediate、I/O、UI rendering等。
-- **microtasks(微任务)：** Promise、process.nextTick、MutationObserver等。
-
-如上我们的promise的then方法的函数会被
-
-```
-
-```
+比较promise与setTimeout之前，需要先了解浏览器的eventloop，请参考文章[理解 EventLoop](https://km.xiaowuzi.info/js/js-eventloop.html)
 
 **总结**：microtasks(微任务)包括Promise和MutaionObserver，因此我们可以知道在Vue中的nextTick的执行速度上是快于setTimeout的。
 
