@@ -293,14 +293,80 @@ const DFSVisit = (v, color, d, f, p, time, adjList) => {
 
 #### 5.1 Dijkstra 算法
 
-```
+`Dijkstra`算法是一种永无休止从单个源到所有其他源的最短路径的贪心算法。
 
+```
+/**
+ * 最短路径
+ */
+const INF = Number.MAX_SAFE_INTEGER
+const minDistance = (dist, visited) => {
+    let min = INF
+    let minIndex = -1
+    for (let v = 0; v < dist.length; v++) {
+        if (visited[v] === false && dist[v] <= min) {
+            min = dist[v]
+            minIndex = v
+        }
+    }
+    return minIndex
+}
+
+const dijkstra = (graph, src) => {
+    const dist = [];
+    const visited = [];
+    const {
+        length
+    } = graph
+    for (let i = 0; i < length; i++) {
+        dist[i] = INF
+        visited[i] = false
+    }
+    dist[src] = 0
+    for (let i = 0; i < length - 1; i++) {
+        const u = minDistance(dist, visited)
+        visited[u] = true
+        for (let v = 0; v < length; v++) {
+            if (!visited[v] && graph[u][v] !== 0 && dist[u] !== INF && dist[u] + graph[u][v] < dist[v]) {
+                dist[v] = dist[u] + graph[u][v]
+            }
+        }
+    }
+}
 ```
 
 #### 5.2 Floyd-Warshall 算法
 
-```
+`Floyd-Warshall`算法是一种计算图中所有最短路径的动态规划算法。
 
+```
+const floydWarshall = graph => {
+    const dist = [];
+    const {
+        length
+    } = graph
+    for (let i = 0; i < length; i++) {
+        dist[i] = []
+        for (let j = 0; j < length; j++) {
+            if (i === j) {
+                dist[i][j] = 0
+            } else if (!isFinite(graph[i][j])) {
+                dist[i][j] = Infinity
+            } else {
+                dist[i][j] = graph[i][j]
+            }
+        }
+    }
+    for (let k = 0; k < length; k++) {
+        for (let i = 0; i < length; i++) {
+            for (let j = 0; j < length; j++) {
+                if (dist[i][k] + dist[k][j] < dist[i][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j]
+                }
+            }
+        }
+    }
+}
 ```
 
 ### 六、最小生成树
@@ -309,22 +375,119 @@ const DFSVisit = (v, color, d, f, p, time, adjList) => {
 
 #### 6.1 Prim 算法
 
-Prim 算法是一种求解加权无向通图的 MST 问题的贪心算法。
+`Prim` 算法是一种求解加权无向通图的 MST 问题的贪心算法。
 
 代码如下：
 
 ```
+const INF = Number.MAX_SAFE_INTEGER
+const minKey = (graph, key, visited) => {
+    let min = INF
+    let minIndex = 0
+    for (let v = 0; v < graph.length; v++) {
+        if (visited[v] === false && key[v] < min) {
+            min = key[v]
+            minIndex = v
+        }
+    }
+    return minIndex
+}
 
+const prim = graph => {
+    const parent = []
+    const key = []
+    const visited = []
+    const {
+        length
+    } = graph
+    for (let i = 0; i < length; i++) {
+        key[i] = INF
+        visited[i] = false
+    }
+    key[0] = 0
+    parent[0] = -1
+    for (let i = 0; i < length - 1; i++) {
+        const u = minKey(graph, key, visited)
+        visited[u] = true
+        for (let v = 0; v < length; v++) {
+            if (graph[u][v] && !visited[v] && graph[u][v] < key[v]) {
+                parent[v] = u
+            }
+        }
+    }
+    return parent
+}
 ```
 
 #### 6.2 Kruskal 算法
 
-Kruskal 算法是一种求加树无向连通图的 MST 的贪心算法。
+`Kruskal` 算法是一种求加树无向连通图的 MST 的贪心算法。
 
 代码如下：
 
 ```
-
+// 最小生成树
+const INF = Number.MAX_SAFE_INTEGER;
+const find = (i, parent) => {
+    while (parent[i]) {
+        i = parent[i]
+    }
+    return i
+}
+const union = (i, j, parent) => {
+    if (i !== j) {
+        parent[j] = i
+        return true
+    }
+    return false
+}
+const initializeCost = graph => {
+    const cost = []
+    const {
+        length
+    } = graph
+    for (let i = 0; i < length; i++) {
+        cost[i] = []
+        for (let j = 0; j < length; j++) {
+            if (graph[i][j] === 0) {
+                cost[i][j] = INF
+            } else {
+                cost[i][j] = graph[i][j]
+            }
+        }
+    }
+    return cost
+}
+const kruskal = graph => {
+    const {
+        length
+    } = graph
+    const parent = []
+    let ne = 0
+    let a;
+    let b;
+    let u;
+    let v;
+    const cost = initializeColor(graph)
+    while (ne < length - 1) {
+        for (let i = 0, min = INF; i < length; i++) {
+            for (let j = 0; j < length; j++) {
+                if (cost[i][j] < min) {
+                    min = cost[i][j]
+                    a = u = i
+                    b = v = j
+                }
+            }
+        }
+        v = find(u, parent)
+        v = find(v, parent)
+        if (union(u, v, parent)) {
+            ne++
+        }
+        cost[a][b] = cost[b][a] = INF
+    }
+    return parent
+}
 ```
 
 ## 参考资料
