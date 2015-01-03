@@ -335,6 +335,44 @@ export function nextTick (cb?: Function, ctx?: Object) {
 
 如上代码，我们从上往下看，
 
+#### 5.1 promise.then 延迟调用
+
+基本代码如下：
+
+```
+if (typeof Promise !== 'undefined' && isNative(Promise)) {
+  const p = Promise.resolve()
+  timerFunc = () => {
+    p.then(flushCallbacks)
+    if (isIOS) setTimeout(noop)
+  }
+  isUsingMicroTask = true
+} 
+```
+
+上面代码的含义是：如果我们的设备（或叫浏览器）支持Promise，那么我们就使用Promise.then的方式来延迟函数的调用。Promise.then会将函数延迟到调用栈的最末端，从而会做到延迟。
+
+#### 5.2 MutationObserver 监听
+
+基本代码如下：
+
+```
+```
+
+#### 5.3 setImmediate 监听
+
+基本代码如下：
+
+```
+```
+
+#### 5.4 使用setTimeout 做降级处理
+
+基本代码如下：
+
+```
+```
+
 ### 参考资料
 
 - [Vue 系列---理解 Vue.nextTick 使用及源码分析(五)](https://www.cnblogs.com/tugenhua0707/p/11756584.html)
