@@ -63,6 +63,8 @@
 
 如上代码，页面初始化时候，页面显示的是“tony”；当页面中的所有的DOM更新完成后，我估mounted()生命周期中调用updateData()方法，然后在该方法内部修改this.name这个数据，再打印this.
 
+refs.list.textContent，可以看到打印的数据还是“tony”；为什么会是这样呢？那是因为修改name数据后，我们的DOM还没有被渲染完成，所以我们这个时候获取的值还是之前的值，但是我们放在nextTick函数里面的时候，代码会在DOM更新完成后会自动nextTick()函数，因此这个时候我们再去使用this.refs.list.textContent获取该值的时候，就可以获取到最新值了。
+
 **理解DOM更新：** 在VUE中，当我们修改了data中的某一个值后，并不会立刻去渲染html页面，而是将vue更改的数据放到watcher的一个异步队列中，只有当前任务空闲的才会执行watcher中的队列任务，因此这就会有一个延迟时间，因此我们把代码放到nextTick函数后就可以获取到html页面的最新值了。
 
 #### 1.2 在created生命周期中进行DOM操作
@@ -89,12 +91,12 @@
     new Vue({
       el: '#app',
       data: {
-        name: 'kongzhi111'
+        name: 'tony'
       },
       created() {
         console.log(this.$refs.list); // 打印undefined
         this.$nextTick(() => {
-          console.log(this.$refs.list); // 打印出 "<div>kongzhi111</div>"
+          console.log(this.$refs.list); // 打印出 "<div>tony</div>"
         });
       },
       methods: {
@@ -105,6 +107,10 @@
 </body>
 </html>
 ```
+
+如上代码，在created生命周期内，我们打印 this.
+
+Vue的特点之一就是能实现响应式，但数据更新时，DOM不会立即更新，而是放入一个异步队列中，因此如果在我们的业务场景中，需要在DOM更新之后执行一段代码时，这个时候我们可以使用this.$nextTick()函数来实现
 
 ### 二、Vue.nextTick 的调用方式
 

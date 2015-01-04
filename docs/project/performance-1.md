@@ -475,6 +475,7 @@ const ModalEchart = (props) =>(
 
 ## 参考资料
 
+- [前端阶段性总结（二）：页面渲染机制与性能优化](https://segmentfault.com/a/1190000016458627)
 - [前端性能优化之白屏时间](https://mp.weixin.qq.com/s/N_6faORvlDSxFQMh1o2naA)
 - [2018 前端性能优化清单](https://juejin.im/post/5a966bd16fb9a0635172a50a)
 - [【译】2018 前端性能优化清单 —— 第一部分](https://juejin.im/post/5a67e49df265da3e377c2d59)

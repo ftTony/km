@@ -101,6 +101,7 @@ Main 指标就是记录渲染主线上所执行的全部**任务**，以及每�
 - [加餐四｜页面性能工具：如何使用 Performance？](https://time.geekbang.org/column/article/177070)
 - [加餐五 | 性能分析工具：如何分析 Performance 中的 Main 指标？](https://time.geekbang.org/column/article/179428)
 - [前端性能优化之利用 Chrome Dev Tools 进行页面性能分析](https://juejin.im/post/5e3ce5fb51882549575f7dea)
+- [全新Chrome Devtool Performance使用指南](https://zhuanlan.zhihu.com/p/29879682)
 
 ## 联系作者
 
