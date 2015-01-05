@@ -332,6 +332,7 @@ const dijkstra = (graph, src) => {
             }
         }
     }
+    return dist
 }
 ```
 
@@ -366,8 +367,11 @@ const floydWarshall = graph => {
             }
         }
     }
+    return dist
 }
 ```
+
+参考资料：[漫画：图的 “最短路径” 问题](https://zhuanlan.zhihu.com/p/65340385)
 
 ### 六、最小生成树
 
