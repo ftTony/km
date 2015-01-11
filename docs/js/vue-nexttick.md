@@ -50,7 +50,34 @@
 
 在 Vue 中的 nextTick 的源码中，使用了 3 种情况来做延迟操作，首先会判断我们的设备是否支持 Promise 对象，如果支持 Promise 对象，就使用 Promise.then()异步函数来延迟，如果不支持，我们会继续判断我们的设备是否支持 MutationObserver，如果支持，我们就使用 MutationObserver 来监听，最后如果上面两种都不支持的话，我们会使用 setTimeout 来处理，那么我们现在要理解的是 MutationObserver 是什么？
 
+#### 4.1 MutationObserver是什么？
+
+MutationObserver中文含义可以理解为“变动观察器”。它是监听DOM变动接口，DOM发生任何变动，DOM发生任何变动，MutationObserver会得到通知。在Vue中是通过该属性来监听DOM更新完毕的。
+
+它和事件类似，但有所不同，事件是同步的，当DOM发生变动时，事件会立刻处理，但是MutationObserver则是异步的，它不会立即处理，而是等页面上所有的DOM完成后，会执行一次，如果页面上要操作100次DOM的话，如果是事件的话会监听100次DOM，但是我们的MutationObserver只会执行一次，它是等待所有DOM操作完成后，再执行。
+
+**它的特点是：**
+
+1. 等待所有脚本任务完成后，才会执行，即采用异步方式。
+2. DOM的变动记录会封装成一个数组进行处理。
+3. 还可以观测发生在DOM的所有类型变动，也可以观测某一类变动。
+
+当然 MutationObserver 也是有浏览器兼容的，我们可以使用如下代码来检测浏览器是否支持该属性，如下代码:
+
+```
+var MuationObserver = window.MutationObserver || window.WebkitMutationObserver || window.MozMutationObserver;
+
+// 监测浏览器是否支持
+var observeMutationSupport = !!MutationObserver;
+```
+
+#### 4.2 MutationObserver构造函数
+#### 4.3 MutationObserver实例的方法
+
+
 ### 五、nextTick 源码分析
+
+vue源码在 `vue/src/core/util/next-tick.js` 中。源码如下：
 
 ### 参考资料
 
