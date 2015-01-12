@@ -15,6 +15,14 @@
 
 Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
 
+### 为什么需要状态管理
+
+随着项目的规模增大，我们会发现了很多问题：
+
+1. **组件之间通信的成本增高。**
+2. **数据流变得模糊**
+3. **组件变得臃肿**
+
 ### 二、Vuex 的原理是什么
 
 ![images](vuex.png)
@@ -197,6 +205,9 @@ actions 和上面的 Muations 功能基本一样，不同点是，**actions 是�
 - [从头开始学习 Vuex](https://github.com/ljianshu/Blog/issues/36)
 - [学习 vuex 源码整体架构，打造属于自己的状态管理库](https://mp.weixin.qq.com/s/qQxUCbPBYSq9vU7dvDOCzg)
 - [一张思维导图辅助你深入了解 Vue | Vue-Router | Vuex 源码架构](https://juejin.im/post/5cd7dcff51882569562224a5)
+- [从前端状态管理，到响应式编程（上）](https://zhuanlan.zhihu.com/p/32245043)
+- [浅谈前端状态管理（上）](https://zhuanlan.zhihu.com/p/25800767)
+- [浅谈前端状态管理（下）](https://zhuanlan.zhihu.com/p/25908872)
 
 ## 联系作者
 
