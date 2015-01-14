@@ -28,6 +28,7 @@
 - [Koa 源码阅读](https://yhlben.com/blog/library-koa.html)
 - [koa 源码-核心库原理](https://xin-tan.com/passages/2019-06-21-deep-in-koa/)
 - [读 koa2 源码后的一些思考与实践](https://mp.weixin.qq.com/s/j0DjaQ2LwwV_uEzbmeoFiw)
+- [原创：带你从零看清Node源码createServer和负载均衡整个过程](https://mp.weixin.qq.com/s/EWKGPoT33qSzqBCZ0nNXJg)
 
 ## 联系作者
 

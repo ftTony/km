@@ -62,14 +62,18 @@
 
 **maxAge** | cookie失效的时间，单位秒。如果为整数，则该cookie在maxAge秒后失效。如果为负数，该cookie为临时cookie，关闭浏览器即失效，浏览吕也不会以任何形式保存该cookie。如果为0，表示删除该cookie。默认为-1。**比expires好用**。
 **expires** | 过期时间，在设置的某个时间点后该cookie就会失效。一般浏览器的cookie都是默认储存的，当关闭浏览器结束这个会话的时候，这个cookie也就会被删除
-**secure** | 该cookie是否仅被使用协议传输
-**httpOnly** | **如果给某个cookie设置了httpOnly属性，则无法通过JS脚本读取到cookie的信息，**
+**secure** | 该cookie是否仅被使用协议传输。安全协议有HTTPS，SSL等，在网络上输数据之前先将数据加密。默认为false。当secure值为true时，cookie在HTTP中是无效，在HTTPS中才有效。
+**httpOnly** | **如果给某个cookie设置了httpOnly属性，则无法通过JS脚本读取到cookie的信息，但还是能通过Application中手动修改cookie，所以只是在一定程度上可以防止XSS攻击，不是绝对的安全**
 
 ### 五、什么是Session
 
 - **session 是另一种记录服务器和客户端会话状态的机制**
 - **session 是基于 cookie 实现的，session 存储在服务器端，sessionId 会被存储到客户端的cookie 中**
+![images](token01.png)
 - **session认证流程：**
+    - 用户第一次请求服务器的时候，服务器根据用户提交的相关信息，创建对应的Session
+    - 请求返回时将此Session的唯一标识信息SessionID返回给浏览器
+    - 浏览器接收到服务器返回的SessionID信息后，会将些信息存入到Cookie中，同时Cookie记录此SessionID属于哪个域名
 
 ### 六、Cookie和Session的区别
 
