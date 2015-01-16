@@ -304,13 +304,28 @@ Promise 的优点：
 
 ### 29.Promise 构造函数是同步还是异步执行，then 中的方法呢 ?promise 如何实现 then 处理 ?
 
+Promise 的构造函数是同步执行的。then 中的方法是异步的。promise 的 then 实现，详见[Promise 对象](https://km.xiaowuzi.info/js/es6-promise.html)
+
 ### 30.Promise 和 setTimeout 的区别 ?
 
 Promise 是微任务，setTimeout 是宏任务，同一个事件循环中，promise.then 总是先于 setTimeout 执行。
 
 ### 31.如何实现 Promise.all ?
 
+要实现 Promise.all 首先我们需要知道 Promise.all 的功能：
+
+1. 如果传入的参数是一个空的可迭代对象，那么
+2. 如果传入的参数不包含任何 promise，则返回一个异步完成.promises 中所有的 promise 都
+3. 如果参数中有一个 promise 失败，那么 Promise.all 返回的 promise 对象失败
+4. 在任何情况下，Promise.all 返回的 promise 的完成状态的结果都是一个数组
+
+```
+
+```
+
 ### 32.如何实现 Promise.finally ?
+
+不管成功还是失败，都会走到finally
 
 ### 33.什么是函数柯里化？实现 sum(1)(2)(3) 返回结果是 1,2,3 之和
 
