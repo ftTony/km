@@ -6623,10 +6623,10 @@ const SuperId = Super.cid
 const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
 ```
 
-- `extendOptions`：用户传入的一个饮食组件选项的对象参数
-- `Super`：
-- `Super`：
-- `Super`：
+- `extendOptions`：用户传入的一个饮食组件选项的对象参数；
+- `Super`：指向父类，即基础`Vue`类；
+- `SuperId`：父类的`cid`属性，无论是基础`Vue`类继承而来的类，都有一个`cid`属性，作为该类的唯一标识；
+- `cachedCtors`：缓存池，用于缓存创建出来的类；
 
 接着，在缓存池中先尝试获取是否之前已经创建过的该子类，如果之前创建过，
 
@@ -6726,6 +6726,34 @@ Vue.directive( id, [definition] )
 ```
 
 - **原理分析**
+
+该 API 是用来注册或获取全局指令的，接收两个参数：指令`id`和指令的定义。这里需要注意一点的是：注册指令是将定义好的指令存放在某个位置，获取指令是根据指令`id`从存放指令的位置读取指令。
+
+该 API 的内部实现原理，其代码如下：
+
+```
+Vue.options = Object.create(null)
+Vue.options['directives'] = Object.create(null)
+
+Vue.directive= function (id,definition) {
+    if (!definition) {
+        return this.options['directives'][id]
+    } else {
+        if (type === 'directive' && typeof definition === 'function') {
+            definition = { bind: definition, update: definition }
+        }
+        this.options['directives'][id] = definition
+        return definition
+    }
+}
+```
+
+可以看到，我们在`Vue`类上创建了`options`属性，其属性值为一个空对象，并且在`options`属性中添加了`directives`属性，其值也是一个空对象，这个`directives`属性就是用来存放指令的位置。如下：
+
+```
+Vue.options = Object.create(null)
+Vue.options['directives'] = Object.create(null)
+```
 
 #### 7.6 Vue.filter
 
