@@ -6715,8 +6715,44 @@ function initComputed (Comp) {
 接着，将父类中的一些属性复制到子类中，如下：
 
 ```
+Sub.extend = Super.extend
+Sub.mixin = Super.mixin
+Sub.use = Super.use
+
+export const ASSET_TYPES = [
+  'component',
+  'directive',
+  'filter'
+]
+// create asset registers, so extended classes
+// can have their private assets too.
+ASSET_TYPES.forEach(function (type) {
+    Sub[type] = Super[type]
+})
+// enable recursive self-lookup
+if (name) {
+    Sub.options.components[name] = Sub
+}
+```
+
+接着，给子类新增三个独有的属性，如下：
 
 ```
+Sub.superOptions = Super.options
+Sub.extendOptions = extendOptions
+Sub.sealedOptions = extend({}, Sub.options)
+```
+
+最后，使用父类的`cid`作为`key`，创建好的子类`Sub`作为`value`，存入缓存池`cachedCtors`中。如下：
+
+```
+// cache constructor
+cachedCtors[SuperId] = Sub
+```
+
+最终将创建好的子类 Sub 返回。
+
+整个过程就是先创建一个类`Sub`，接着通过原型继承的方式将该类继承基础`Vue`类，然后给 `Sub` 类添加一些属性以及将父类的某些属性复制到 `Sub` 类上，最后将 `Sub` 类返回。
 
 #### 7.2 Vue.nextTick
 
