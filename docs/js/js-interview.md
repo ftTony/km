@@ -320,12 +320,31 @@ Promise 是微任务，setTimeout 是宏任务，同一个事件循环中，prom
 4. 在任何情况下，Promise.all 返回的 promise 的完成状态的结果都是一个数组
 
 ```
-
+Promise.all = function(promise){
+    return new Promise((resolve,reject)=>{
+        let index = 0;
+        let result = [];
+    })
+}
 ```
 
 ### 32.如何实现 Promise.finally ?
 
-不管成功还是失败，都会走到finally
+不管成功还是失败，都会走到 finally 中，并且 finally 之后，还可以继续 then，并且将值原封不动的传递给后面的 then.
+
+```
+Promise.prototype.finally = function (callback){
+    return this.then((value)=>{
+        reutrn Promise.resolve(callback()).then(()=>{
+            return value;
+        })
+    },(err)=>{
+        return Promise.resolve(callback()).then(()=>{
+            throw err;
+        })
+    })
+}
+```
 
 ### 33.什么是函数柯里化？实现 sum(1)(2)(3) 返回结果是 1,2,3 之和
 

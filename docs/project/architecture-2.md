@@ -13,6 +13,7 @@
 - [个人的中小型项目前端架构浅谈](https://blog.csdn.net/qq20004604/article/details/70480932)
 - [if 我是前端 Leader，谈谈前端框架体系建设](https://juejin.im/post/5decf88f51882512327a510a)
 - [QQ 音乐商业化 Web 团队前端工程化实践总结](https://cloud.tencent.com/developer/article/1500013)
+- [美团旅行前端技术体系的思考与实践](https://zhuanlan.zhihu.com/p/29373613)
 - 《大型网站技术架构-核心原理与案例分析》
 
 ## 联系作者
