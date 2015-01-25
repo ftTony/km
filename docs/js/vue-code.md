@@ -6624,6 +6624,73 @@ const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
 ```
 
 - `extendOptions`：用户传入的一个饮食组件选项的对象参数
+- `Super`：
+- `Super`：
+- `Super`：
+
+接着，在缓存池中先尝试获取是否之前已经创建过的该子类，如果之前创建过，
+
+```
+if (cachedCtors[SuperId]) {
+    return cachedCtors[SuperId]
+}
+```
+
+```
+const name = extendOptions.name || Super.options.name
+if (process.env.NODE_ENV !== 'production' && name) {
+    validateComponentName(name)
+}
+```
+
+```
+const Sub = function VueComponent (options) {
+    this._init(options)
+}
+```
+
+```
+Sub.prototype = Object.create(Super.prototype)
+Sub.prototype.constructor = Sub
+Sub.cid = cid++
+```
+
+```
+Sub.options = mergeOptions(
+    Super.options,
+    extendOptions
+)
+```
+
+```
+Sub['super'] = Super
+```
+
+```
+if (Sub.options.props) {
+    initProps(Sub)
+}
+
+function initProps (Comp) {
+  const props = Comp.options.props
+  for (const key in props) {
+    proxy(Comp.prototype, `_props`, key)
+  }
+}
+```
+
+```
+if (Sub.options.computed) {
+    initComputed(Sub)
+}
+
+function initComputed (Comp) {
+  const computed = Comp.options.computed
+  for (const key in computed) {
+    defineComputed(Comp.prototype, key, computed[key])
+  }
+}
+```
 
 #### 7.2 Vue.nextTick
 
