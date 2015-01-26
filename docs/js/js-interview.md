@@ -316,6 +316,10 @@ Promise 是微任务，setTimeout 是宏任务，同一个事件循环中，prom
 
 ### 34.说一说 JS 异步发展史
 
+异步最早的解决方案是回调函数，如果事件的回调，setInterval/setTimeout 中的回调。但是回调函数有一个很常见的问题，就是回调地狱的问题；
+
+为了解决回调地铁的问题，社区提出了 Promise
+
 ### 35.谈谈对 async/await 的理解，async/await 的实现原理是什么?
 
 async/await 就是 Generator 的语法糖，使得异步操作变得更加方便。来张图对比一下：
@@ -375,6 +379,20 @@ async function f2(){
 
 1. Promise.race 返回的仍然是一个 Promise。它的状态与第一个完成的 Promise 的状态相同。它可以是完成（resolve），也可以是失败（rejects），这个取决于第一个 Promise 是哪一种状态。
 2. 如果传入的参数是不可迭代的，那么将会抛出错误。
+3. 如果传的参数数组是空，那么返回的 promise 将永远等待。
+4. 如果迭代包含一个或多个非承诺值或已解决/拒绝的承诺，则 Promise.race 将解析为迭代中找到的第一个值。
+
+```
+Promise.race = function(promise){
+
+}
+```
+
+测试代码：
+
+```
+
+```
 
 ### 38.可遍历数据结构的有什么特点？
 

@@ -1103,6 +1103,7 @@ console.log('end')
 - [《ECMAScript 6 入门》 第三版](https://yjhenan.gitbooks.io/-ecmascript-6/content/docs/promise.html)
 - [ECMAScript 6 入门](http://es6.ruanyifeng.com/#docs/promise)
 - [JS 高级之手写一个 Promise,Generator,async 和 await【近 1W 字】](https://juejin.im/post/5df83b93f265da33f8652ccc)
+- [细说 JS 异步发展历程](https://juejin.im/post/5ce40e5ee51d4556be5b39b7)
 
 ## 联系作者
 
