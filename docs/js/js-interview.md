@@ -782,6 +782,26 @@ PS:Vue2.x 使用 Object.definedProperty 实现数据双向绑定，V3.0 则使�
 以下情况，Object.is 认为是相等
 
 - 两个值都是 undefined
+- 两个值都是 null
+- 两个值都是 true 或者都是 false
+- 两个值是由相同个数的字符按照相同的顺序组成的字符串
+- 两个值指向同个对象
+- 都是正零 +0
+- 都是负零 -0
+- 都是 NaN
+- 都是除零和 NaN 外的其它同一个数字
+
+Object.is()类似于 ===，但是有一些细微差别，如下：
+
+1. NaN 和 NaN 相等
+2. -0 和+0 不相等
+
+```
+console.log(Object.is(NaN, NaN));//true
+console.log(NaN === NaN);//false
+console.log(Object.is(-0, +0)); //false
+console.log(-0 === +0); //true
+```
 
 ### 51.什么是事件循环？Node 事件循环和 JS 事件循环的差异是什么？
 
