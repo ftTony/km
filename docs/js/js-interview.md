@@ -777,6 +777,28 @@ PS:Vue2.x 使用 Object.definedProperty 实现数据双向绑定，V3.0 则使�
 
 ```
 
+PS:Object.defineProperty 定义出来的属性，默认是不可枚举，不可理性，不可配置【无法 delete】
+
+我们可以看到 Proxy 会支持整个对象，读取对象中的属性或者是个性属性值，那么就会被劫持。但是有点需要注意，复杂数据类型，监控的是引用地址，而不值，如果引用地址没有改变，那么不会触发 set。
+
+```
+
+```
+
+最后，我们再看下对于数组的支持，Object.definedProperty 和 Proxy 的差别
+
+Object.definedProperty 可以将数组的索引作为属性进行支持，但是公示支持直接对 array[i]进行操作，不支持数组的 API，非常鸡肋。
+
+```
+
+```
+
+Proxy 可以监听到数组的变化，支持各种 API。注意数组的变化触发 get 和 set 可能不止一次，如有需要，自行根据 key 值决定是否要进行处理。
+
+```
+
+```
+
 ### 50.Object.is() 与比较操作符 ===、== 有什么区别？
 
 以下情况，Object.is 认为是相等
