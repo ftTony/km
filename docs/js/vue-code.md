@@ -6759,12 +6759,17 @@ cachedCtors[SuperId] = Sub
 **用法**
 
 ```
-
+Vue.nextTick( [callback, context] )
 ```
 
 **参数**
 
+- `{Function} [callback]`
+- `{Object} [context]`
+
 **作用**
+
+在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
 
 **原理**
 
@@ -6775,12 +6780,20 @@ cachedCtors[SuperId] = Sub
 **用法**
 
 ```
-
+Vue.set( target, propertyName/index, value )
 ```
 
 **参数**
 
+- `{Object | Array} target`
+- `{string | number} propertyName/index`
+- `{any} value`
+
+返回设置的值。
+
 **作用**
+
+向响应式对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新属性，因为 Vue 无法探测普通的新增属性
 
 **原理**
 全局 set 方法同实例 set 方法一样
@@ -6790,12 +6803,17 @@ cachedCtors[SuperId] = Sub
 **用法**
 
 ```
-
+Vue.delete( target, propertyName/index )
 ```
 
 **参数**
 
+- `{Object | Array} target`
+- `{string | number} propertyName/index`
+
 **作用**
+
+删除对象的属性。如果对象是响应式的，确保删除能触发更新视图。这个方法主要用于避开 Vue 不能检测到属性被删除的限制，但是你应该很少会使用它。
 
 **原理**
 
@@ -6814,13 +6832,7 @@ Vue.directive( id, [definition] )
   - `{string} id`
   - `{Function | Object} [definition]`
 
-- **作用：**
-
-  注册或获取全局指令。
-
-```
-
-```
+- **作用：** 注册或获取全局指令。
 
 - **原理分析**
 
