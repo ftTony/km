@@ -527,9 +527,22 @@ let obj = {
 
 在 requestAnimationFrame 之前，我们主要使用 setTimeout/setInterval 来编写 JS 动画。
 
+编写动画的关键是循环间隔的设置，一方面，循环间隔足够短，动画效果才能显得平滑流畅；另一方面，循环间隔还要足够长，才能确保浏览器有能力沉浸产生变化 。
+
+大部分的电脑显示器的刷新频率是 60HZ，也就是每秒钟重绘 60 次。大多数浏览器都会对重绘操作加以限制，不走过显示器的重绘频率，因为即使超过那个频率用户体验也不会提升。因此，最平滑动画的最佳循环间隔是 1000ms/60，约为 16.7ms。
+
+setTimeout/setInterval 有一个显著的缺陷在于时间不是精确的，setTimeout/setInterval 只能保证延时或间隔不小于设定的时间。因为它们实际上只是把任务添加到任务队列中，但是如果前面的任务还没有执行完成。它们必须要等待。
+
+requestAnmationFrame 才有的是系统时间间隔，保持最佳绘制效率，不会因为间隔时间过短，千万过度绘制，增加开销；也不会因为间隔时间太长，使用动画卡顿不流畅，让各种网页动画效果能够有一个统一的刷新机制，从而节省系统资源，提高系统性能，改善视觉效果。
+
+综上所述，requestAnmationFrame 和 setTimeout/setInterval 在编写动画时相对，优点如下：
+
+1. requestAnimationFrame 不需要设置时间，采用系统时间间隔，能达到最佳的动画效果。
+2.
+
 ### 40.JS 类型转换的规则是什么？
 
-参考资料[JS 数据类型与数据类型转换](https://km.xiaowuzi.info/js/es5-type.html)
+请戳链接：[JS 数据类型与数据类型转换](https://km.xiaowuzi.info/js/es5-type.html)
 
 ### 41.简述下对 webWorker 的理解？
 
@@ -554,15 +567,15 @@ onmessage = function(e){
 }
 ```
 
-具体参考[web work 学习](https://km.xiaowuzi.info/html5/webwork.html)
+请戳链接：[web work 学习](https://km.xiaowuzi.info/html5/webwork.html)
 
 ### 42.ES6 模块和 CommonJS 模块的差异？
 
-参考[js 模块化](https://km.xiaowuzi.info/js/js-module.html)
+请戳链接：[js 模块化](https://km.xiaowuzi.info/js/js-module.html)
 
 ### 43.浏览器事件代理机制的原理是什么？
 
-参考[js 事件](https://km.xiaowuzi.info/js/es5-event.html)
+请戳链接：[js 事件](https://km.xiaowuzi.info/js/es5-event.html)
 
 ### 44.js 如何自定义事件？
 
@@ -698,7 +711,7 @@ target.fire({type:'message',message:'Hi'});
 
 ### 45.跨域的方法有哪些？原理是什么？
 
-参考[跨域](https://km.xiaowuzi.info/project/cross-domain.html)
+请戳链接：[跨域](https://km.xiaowuzi.info/project/cross-domain.html)
 
 ### 46.js 异步加载的方式有哪些？
 
@@ -750,7 +763,7 @@ new Foo().getName();
 new new Foo().getName();
 ```
 
-参考[一道常被人轻视的前端 JS 面试题](https://www.cnblogs.com/xxcanghai/p/5189353.html)
+请戳链接：[一道常被人轻视的前端 JS 面试题](https://www.cnblogs.com/xxcanghai/p/5189353.html)
 
 最终结果如下：
 
@@ -826,6 +839,8 @@ console.log(-0 === +0); //true
 ```
 
 ### 51.什么是事件循环？Node 事件循环和 JS 事件循环的差异是什么？
+
+请戳链接：[理解 EventLoop](https://km.xiaowuzi.info/js/js-eventloop.html)
 
 ### 52.["1", "2", "3"].map(parseInt)
 
