@@ -447,14 +447,45 @@ async function f2(){
 
 ```
 Promise.race = function(promise){
+    // promise 必须是一个可遍历的数组结构，否则抛错
+    return new Promise((resolve,reject)=>{
 
+    });
 }
 ```
 
 测试代码：
 
 ```
+// 一直在等待态
+Promise.race([]).then((data)=>{
+    console.log('success',data);
+},(err)=>{
+    console.log('err',err);
+});
 
+// 抛错
+Promise.race().then((data)=>{
+    console.log('success',data);
+},(err)=>{
+    console.log('err',err);
+});
+
+Promise.race([
+    new Promise((resolve,reject)=>{
+        setTimeout(()=>{resolve(100)},1000)
+    }),
+    new Promise((resolve,reject)=>{
+        setTimeout(()=>{resolve(200)},200)
+    }),
+    new Promise((resolve,reject)=>{
+        setTimeout(()=>{reject(100)},100)
+    })
+]).then((data){
+    console.log(data);
+},(err)=>{
+    console.log(err);
+})
 ```
 
 ### 38.可遍历数据结构的有什么特点？
@@ -538,7 +569,8 @@ requestAnmationFrame 才有的是系统时间间隔，保持最佳绘制效率�
 综上所述，requestAnmationFrame 和 setTimeout/setInterval 在编写动画时相对，优点如下：
 
 1. requestAnimationFrame 不需要设置时间，采用系统时间间隔，能达到最佳的动画效果。
-2.
+2. requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，再一次重绘或回流中就完成。
+3. 当 requestAnimationFrame()运行在后台标签页或者隐藏的`<iframe>`里时，requestAnimationFrame()会被暂停调用以提升性能和电池寿命（大多数浏览器中）。
 
 ### 40.JS 类型转换的规则是什么？
 
