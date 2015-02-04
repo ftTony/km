@@ -11,7 +11,7 @@
 
 ### 一、Audits
 
-Audits 其实就是LightHouse，LightHouse是Google开源的一个自动化测试工具，它通过一系列的规则来对网页进行评估分析，最终给出一份评估报告（注意使用 Audit 功能需要翻墙）。它的面板是这样的：
+Audits 其实就是 LightHouse，LightHouse 是 Google 开源的一个自动化测试工具，它通过一系列的规则来对网页进行评估分析，最终给出一份评估报告（注意使用 Audit 功能需要翻墙）。它的面板是这样的：
 
 ![images](performance53.png)
 
@@ -19,7 +19,7 @@ Audit 的配置模块主要有两部分组成，一个是**监测类型**，另�
 
 #### 1.1 整体情况
 
-Aduits主要从五个方面来给网页打分，分别是：
+Aduits 主要从五个方面来给网页打分，分别是：
 
 - 监测并分析 Web 性能（**Performance**）；
 - 监测并分析 PWA（**Progessive Web App**）程序的性能；
@@ -27,24 +27,24 @@ Aduits主要从五个方面来给网页打分，分别是：
 - 监测并分析是否实施了无障碍功能（**Accessibility**），无障碍功能让一些身体有障碍的人可以方便地浏览你的 Web 应用。
 - 监测并分析 Web 应用是否采实施了 SEO 搜索引擎优化（**SEO**）。
 
-在选择了设备、评估方面、网络情况等选项后，点击Run Audits，我们将会得到一份报告。
+在选择了设备、评估方面、网络情况等选项后，点击 Run Audits，我们将会得到一份报告。
 
 ![images](performance54.png)
 
 上图一个总体报告，可以看出，这个页面的性能不太合格。当然一次的测试也说明不了什么问题，只能做个参考。我们看它的性能指标分别有：
 
 - First Contentful Paint：内容首次开始绘制。
-- First Meaningful Paint：可以简单理解为用户看到网页主要内容的时间，分数越低，页面显示其主要内容的速度就越快。图中例子，网页首次有效绘制时间为2.5s。
+- First Meaningful Paint：可以简单理解为用户看到网页主要内容的时间，分数越低，页面显示其主要内容的速度就越快。图中例子，网页首次有效绘制时间为 2.5s。
 - Speed Index：速度指标是一个页面加载性能指标，向你展示明显填充页面内容的速度，此指标的分数越低越好。
 - First CPU Idle：首次 CPU 空闲时间
-- Time to Interactive：可互动时间，页面中的大多数网络资源完成加载并且CPU在很长一段时间都很空闲的所需的时间。此时可以预期cpu非常空闲，可以及时的处理用户的交互操作。
+- Time to Interactive：可互动时间，页面中的大多数网络资源完成加载并且 CPU 在很长一段时间都很空闲的所需的时间。此时可以预期 cpu 非常空闲，可以及时的处理用户的交互操作。
 - Max Potential First Input Delay：最大的输入延迟时间，输入响应能力对用户如何看待你应用的性能起着关键作用。应用有 100 毫秒的时间响应用户输入。如果超过此时间，用户就会认为应用反应迟缓。
 
 这些时间，都可以点击图中红框切换展示方式，会附上对应的时间解释，然后可以点击 Learn more 来查看详细的指标介绍。在文档中，每一项指标都会明确的分为三个部分：为什么说此审查非常重要；如何通过此审查；如何实现此审查；
 
 #### 1.2 性能指标优化建议解读
 
-性能建议主要分为3类，Opportunities可优化项、手动诊断项、通过的审查项。本次的例子如下图：
+性能建议主要分为 3 类，Opportunities 可优化项、手动诊断项、通过的审查项。本次的例子如下图：
 
 ![images](performance55.png)
 
@@ -58,17 +58,17 @@ Aduits主要从五个方面来给网页打分，分别是：
 建议：
 
 1. 最小化主线程工作
-2. 减少JavaScript执行时间
-3. 避免DOM太大
+2. 减少 JavaScript 执行时间
+3. 避免 DOM 太大
 4. 通过有效的缓存策略缓存一些静态资源
 5. 避免链接关键请求
 6. 保持低请求数量和小传输大小
 
 **通过的审查项**
 
-这里列出的都是做的好的地方，本文例子共有16条。
+这里列出的都是做的好的地方，本文例子共有 16 条。
 
-#### 1.3 Accessibility辅助功能
+#### 1.3 Accessibility 辅助功能
 
 辅助功能指的是那些可能超出“普通”用户范围之外的用户体验，他们以不同于你期望的方式访问你的网页或进行交互
 
@@ -156,7 +156,8 @@ Main 指标就是记录渲染主线上所执行的全部**任务**，以及每�
 - [加餐四｜页面性能工具：如何使用 Performance？](https://time.geekbang.org/column/article/177070)
 - [加餐五 | 性能分析工具：如何分析 Performance 中的 Main 指标？](https://time.geekbang.org/column/article/179428)
 - [前端性能优化之利用 Chrome Dev Tools 进行页面性能分析](https://juejin.im/post/5e3ce5fb51882549575f7dea)
-- [全新Chrome Devtool Performance使用指南](https://zhuanlan.zhihu.com/p/29879682)
+- [全新 Chrome Devtool Performance 使用指南](https://zhuanlan.zhihu.com/p/29879682)
+- [Chrome 开发者工具使用指南](https://www.cnblogs.com/vvjiang/p/12370112.html)
 
 ## 联系作者
 

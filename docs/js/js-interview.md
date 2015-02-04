@@ -379,7 +379,9 @@ Promise.prototype.finally = function (callback){
 
 异步最早的解决方案是回调函数，如果事件的回调，setInterval/setTimeout 中的回调。但是回调函数有一个很常见的问题，就是回调地狱的问题；
 
-为了解决回调地铁的问题，社区提出了 Promise 解决方案
+为了解决回调地铁的问题，社区提出了 Promise 解决方案，ES6 将其写进了语言标准。Promise 解决了回调地狱的问题，但是 Promise 也存在一些问题，如错误不能被 try catch，而且使用 Promise 的链式调用，其实并没有从根本上解决回调地狱的问题，只是换了一种写法。
+
+ES6 中引入了 Generator 函数，Generator 是一种异步编程解决方案，Generator 函数是协程在 ES6 的实现最大特点就是可以交出函数的执行权，Generator 函数可以看出是异步任务的容器，需要暂停的地方，都用 yield 语句注明。但是 Generator 使用起来较为复杂。
 
 ### 35.谈谈对 async/await 的理解，async/await 的实现原理是什么?
 
@@ -765,7 +767,15 @@ new new Foo().getName();//3
 ### 49.实现双向绑定 Proxy 与 Object.defineProperty 相比优劣如何?
 
 1. Object.definedProperty 的作用是劫持一个对象的属性，劫持属性的 getter 和 setter 方法，在对象的属性发生变化时进行特定的操作。而 Proxy 劫持的是整个对象。
-2. Proxy 会返回一个代理对象，
+2. Proxy 会返回一个代理对象，我们只需要操作新对象即可，而`Object.definedProperty`只遍历对象属性直接修改。
+3. Object.definedProperty 不支持数组，更准确的说是不支持数组的各种 API，因为如果仅仅考虑 array[i]=value 这种情况，是可以劫持的，但是这种劫持意义不大。而 Proxy 可以把持数组的各种 API。
+4. 尽管 Object.definedPropery 有诸多缺陷，但是其兼容性好于 Proxy.
+
+PS:Vue2.x 使用 Object.definedProperty 实现数据双向绑定，V3.0 则使用了 Proxy.
+
+```
+
+```
 
 ### 50.Object.is() 与比较操作符 ===、== 有什么区别？
 
