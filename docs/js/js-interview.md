@@ -864,12 +864,20 @@ let obj = {name:'Tony',hobbits:['travel','reading'],info:{
 }}
 let p = new Proxy(obj,{
     get(target,key){
-
+        // 第三个参数是proxy，一般不使用ss
+        console.log('读取成功');
+        return Reflect.get(target,key);
     },
     set(target,key,value){
-
+        if(key === 'length') return true;      // 如果是数组长度的变化，返回
+        console.log('设置成功');
+        return Reflect.set([target,key,value]);
     }
-})
+});
+p.name = '小武子';    // 设置成功
+p.age = 30;
+p.hobbits.push('photography'); //读取成功;注意不会触发设置成功
+p.info.age = 18; //读取成功;不会触发设置成功
 ```
 
 最后，我们再看下对于数组的支持，Object.definedProperty 和 Proxy 的差别
@@ -877,22 +885,40 @@ let p = new Proxy(obj,{
 Object.definedProperty 可以将数组的索引作为属性进行支持，但是公示支持直接对 array[i]进行操作，不支持数组的 API，非常鸡肋。
 
 ```
-let array = []
-Object.define
+Object.defineProperty(arry, '0', {
+    get() {
+        console.log("读取成功");
+        return temp
+    },
+    set(value) {
+        console.log("设置成功");
+        temp = value;
+    }
+});
+
+arry[0] = 10; //触发设置成功
+arry.push(10); //不能被劫持
 ```
 
 Proxy 可以监听到数组的变化，支持各种 API。注意数组的变化触发 get 和 set 可能不止一次，如有需要，自行根据 key 值决定是否要进行处理。
 
 ```
-let hobbits = ['travel','reading'];
-let p = new Proxy(hobbits,{
-    get(target,key){
-
+let hobbits = ['travel', 'reading'];
+let p = new Proxy(hobbits, {
+    get(target, key) {
+        // if(key === 'length') return true; //如果是数组长度的变化，返回。
+        console.log('读取成功');
+        return Reflect.get(target, key);
     },
-    get(target,key,value){
-
+    set(target, key, value) {
+        // if(key === 'length') return true; //如果是数组长度的变化，返回。
+        console.log('设置成功');
+        return Reflect.set([target, key, value]);
     }
-})
+});
+p.splice(0,1) //触发get和set，可以被劫持
+p.push('photography');//触发get和set
+p.slice(1); //触发get；因为 slice 是不会修改原数组的
 ```
 
 ### 50.Object.is() 与比较操作符 ===、== 有什么区别？
