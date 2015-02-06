@@ -790,6 +790,46 @@ if(a===1 && a == 2 && a==3){
 }
 ```
 
+1. 在类型转换的时候，我们知道了对象如何转换成原始数据类型。如果部署了[Symbol.toPrimitive]，那么返回的就是 Symbol.toPrimitive 的返回值。当然，我们也可以把此函数部署在 valueOf 或者是 toString 接口上，效果相同。
+
+```
+// 利用闭包延长作用域的特性
+let a = {
+    [Symbol.toPrimitive]:(function(){
+        let i =1;
+        return function(){
+            return i++;
+        }
+    })()
+}
+```
+
+    1. 比较 a==1 时，会调用[Symbol.toPrimitive]，此时 i 是 1，相等。
+    2. 继续比较 a==2，调用[Symbol.toPrimitive]，此时 i 是 2，相等。
+    3. 继续比较 a ==3，调用[Symbol.toPrimitive]，此时 i 是 3，相等。
+
+2. 利用 Object.defineProperty 在 window/global 上定义 a 属性，获取 a 属性时，会调用 get
+
+```
+let val = 1;
+Object.defineProperty(window,'a',{
+    get:function(){
+        return val++;
+    }
+})
+```
+
+3. 利用数组的特性
+
+```
+var a = [1,2,3];
+a.join = a.shift;
+```
+
+数组的`toString`方法返回一个字符串，该字符串由数组中的每个元素的 toString()返回值经调用 join()方法连接（由逗号隔开）组成。
+
+因此，我们可以重新 join 方法。返回第一个元素，并将其删除。
+
 ### 48.下面这段代码的输出是什么？
 
 ```
