@@ -31,7 +31,8 @@ new CommonsChunkPlugin({
 - `uglifyjs-webpack-plugin`：通过`UglifyES`压缩`ES6`代码
 - `webpack-parallel-uglify-plugin`：多核压缩，提高压缩速度
 - `webpack-bundle-analyzer`：可以视化 webpack 输出文件的体积
-- `mini-css-extract-plugin`：CSS 提取到单独的文件中，支持按需加载 -`HotMouleReplacementPlugin` 启用 `module`热替换
+- `mini-css-extract-plugin`：CSS 提取到单独的文件中，支持按需加载 -`HotMouleReplacementPlugin`： 启用 `module`热替换
+- `purifycss-webpack purify-css`：移除多余的 css
 
 ### 二、自定义插件
 

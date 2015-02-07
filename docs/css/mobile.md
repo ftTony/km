@@ -380,6 +380,7 @@ document.addEventListener('visibilitychange',()=>{
 - [移动 web 最佳实践](https://juejin.im/post/5d759f706fb9a06afa32adec)
 - [移动 Web 前端知识库](https://github.com/AlloyTeam/Mars)
 - [H5 移动端知识点总结](https://www.cnblogs.com/tugenhua0707/p/5180841.html)
+- [总结移动端 H5 开发常用技巧](https://juejin.im/post/5e4a0162f265da57133b2005)
 
 ## 联系作者
 
