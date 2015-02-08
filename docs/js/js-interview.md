@@ -1014,6 +1014,9 @@ console.log(-0 === +0); //true
 - [Javascript 面试核心考点](https://mp.weixin.qq.com/s/Bk07WB9hBagL590RRjC4FA)
 - [Javascript 高频面试题解析](https://mp.weixin.qq.com/s/g5Cr0N32W_z9X3qIMLOX6Q)
 - [春招季如何横扫 Javascript 面试核心考点(基础版)？](https://juejin.im/post/5c6ad9fde51d453c356e37d1)
+- [【周刊-1】三年大厂面试官-面试题精选及答案](https://juejin.im/post/5ca9de22e51d452b5372ed90)
+- [【周刊-2】三年大厂面试官-前端面试题（偏难）](https://juejin.im/post/5cb0315f518825215e61ec14)
+- [【周刊-3】三年大厂面试官-十道前端面试题（欢迎挑战）](https://juejin.im/post/5cd82463518825692330d440)
 - [每日·壹题](https://muyiy.cn/question/program/5.html)
 
 ## 联系作者
