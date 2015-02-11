@@ -163,13 +163,24 @@ this.cache = {
 
 #### 2.4 destroyed
 
-当`<keep-alive>`组件被销毁时，此时会调用`destroyed`钩子函数，在该钩子函数里会遍历`this.cache`对象，然后
+当`<keep-alive>`组件被销毁时，此时会调用`destroyed`钩子函数，在该钩子函数里会遍历`this.cache`对象，然后将那些被缓存的并且当前没有处于被渲染状态的组件都销毁掉并将其从`this.cache`对象中剔除。如下：
 
 ```
 destroyed () {
     for (const key in this.cache) {
         pruneCacheEntry(this.cache, key, this.keys)
     }
+}
+
+// pruneCacheEntry函数
+function pruneCacheEntry (cache,key,keys,current) {
+  const cached = cache[key]
+  /* 判断当前没有处于被渲染状态的组件，将其销毁*/
+  if (cached && (!current || cached.tag !== current.tag)) {
+    cached.componentInstance.$destroy()
+  }
+  cache[key] = null
+  remove(keys, key)
 }
 ```
 
@@ -212,50 +223,57 @@ function pruneCacheEntry (cache,key,keys,current) {
 }
 ```
 
+在该函数内对`this.cache`对象进行遍历，取出每一项的`name`值，用其与新的缓存规则进行匹配，如果匹配不上，则表示在新的缓存规则下该组件已经不需要被缓存，则调用`pruneCacheEntry`函数将这个已经不需要缓存的组件实例先销毁掉，然后再将其从`this.cache`对象中剔除。
+
 #### 2.6 render
 
+在`render`函数中首先获取第一个子组件节点的`vnode`：
+
 ```
-render () {
-    const slot = this.$slots.default
-    const vnode: VNode = getFirstComponentChild(slot)
-    const componentOptions: ?VNodeComponentOptions = vnode && vnode.componentOptions
-    if (componentOptions) {
-      // check pattern
-      const name: ?string = getComponentName(componentOptions)
-      const { include, exclude } = this
-      if (
-        // not included
-        (include && (!name || !matches(include, name))) ||
-        // excluded
-        (exclude && name && matches(exclude, name))
-      ) {
-        return vnode
-      }
+const slot = this.$slots.default
+const vnode: VNode = getFirstComponentChild(slot)
+```
 
-      const { cache, keys } = this
-      const key: ?string = vnode.key == null
-        // same constructor may get registered as different local components
-        // so cid alone is not enough (#3269)
-        ? componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` : '')
-        : vnode.key
-      if (cache[key]) {
-        vnode.componentInstance = cache[key].componentInstance
-        // make current key freshest
-        remove(keys, key)
-        keys.push(key)
-      } else {
-        cache[key] = vnode
-        keys.push(key)
-        // prune oldest entry
-        if (this.max && keys.length > parseInt(this.max)) {
-          pruneCacheEntry(cache, keys[0], keys, this._vnode)
-        }
-      }
+由于我们也是在`<keep-alive>`标签内部写
 
-      vnode.data.keepAlive = true
-    }
-    return vnode || (slot && slot[0])
-  }
+```
+/* 获取该组件节点的名称 */
+const name = getComponentName(componentOptions)
+
+/* 优先获取组件的name字段，如果name不存在则获取组件的tag */
+function getComponentName (opts: ?VNodeComponentOptions): ?string {
+  return opts && (opts.Ctor.options.name || opts.tag)
+}
+```
+
+然后用组件名称跟`include`、`exclude` 中的匹配规则去匹配：
+
+```
+
+```
+
+如果组件名称与`include`规则不匹配或者与`exclude`规则匹配，则表示不缓存该组件，直接返回这个组件的`vnode`，否则的话走下一步缓存：
+
+```
+
+```
+
+首先获取组件的`key`值：
+
+```
+
+```
+
+即命中缓存：
+
+```
+
+```
+
+没有该`key`值：
+
+```
+
 ```
 
 ### 三、缓存策略
