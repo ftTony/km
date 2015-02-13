@@ -6988,13 +6988,15 @@ Vue.filter= function (id,definition) {
 }
 ```
 
-同全局指令一样，`Vue.options['components']`是用来存放全局组件的地方
+同全局指令一样，`Vue.options['components']`是用来存放全局组件的地方。还是根据是否传入了`definition`参数来决定本次操作是注册组件还是获取组件。如果没有传入`definition`参数，则表示本次操作为获取组件，那么就从存放组件的地方根据组件 `id` 来读取组件并返回；如果传入了`definition`参数，则表示本次操作为注册组件，如果是注册组件，那么在非生产环境下首先会校验组件的`name`值是否合法，如下：
 
 ```
 if (process.env.NODE_ENV !== 'production' && type === 'component') {
     validateComponentName(id)
 }
 ```
+
+接着，判断传入的`definition`参数是否是一个对象，如果是对象，则使用`Vue.extend`方法将其变为`Vue`的子类，同时如果`definition`对象中不存在`name`属性时，则使用组件 id 作为组件的`name`属性。如下：
 
 ```
 if (type === 'component' && isPlainObject(definition)) {
@@ -7005,7 +7007,7 @@ if (type === 'component' && isPlainObject(definition)) {
 
 #### 7.8 directive、filter、component 小结
 
-通过对`Vue.directive`、`Vue.filter`和`Vue.component`这三个 API 的分析，细心的你肯定会发现这三个 API 的代码实现非常的相似，是的，这是我们为了便于理解故意拆开的，其实在源码中这三个 API 的实现是写在一起的，
+通过对`Vue.directive`、`Vue.filter`和`Vue.component`这三个 API 的分析，细心的你肯定会发现这三个 API 的代码实现非常的相似，是的，这是我们为了便于理解故意拆开的，其实在源码中这三个 API 的实现是写在一起的，位于源码的`src/core/global-api/index.js`和`src/core/global-api/assets.js`中，如下：
 
 ```
 export const ASSET_TYPES = [
@@ -7058,6 +7060,8 @@ Vue.use( plugin )
 安装 Vue.js 插件。如果插件是一个对象，必须提供`install`方法。如果插件是一个函数，它会被作为 install 方法。install 方法调用时，会将`Vue`作为参数传入。
 
 - **原理分析：**
+
+该 API 内部会调用插件提供的`install`方法，同时将`Vue` 作为参数传入。另外，由于插件只会被安装一次，所以该 API 内部还应该防止 `install`方法被同一个插件多次调用。
 
 该 API 的定义位于源码的`src/core/global-api/use.js`中，代码如下：
 
@@ -7148,6 +7152,8 @@ Vue.mixin( mixin )
 
 - **原理分析**
 
+该 API 是用来向全局注册一个混入，即可以修改`Vue.options`属性，并且会影响之后的所有 Vue 实例，这个 API 虽然在日常的业务开发中几乎用不到，但是在编写 Vue 插件时用处非常大。
+
 该 API 的定义位于源码的 `src/core/global-api/mixin.js` 中，代码如下：
 
 ```
@@ -7156,6 +7162,8 @@ Vue.mixin = function (mixin: Object) {
     return this
 }
 ```
+
+该 API 就是通过修改`Vue.options`属性进而影响之后的所有 Vue 实例。所以我们只需将传入的`mixin`对象与`this.options`合并即可，然后将合并后的新对象作为`this.options`传给之后的所有 Vue 实例，从而达到改变其原有特性的效果。
 
 ### 八、过滤器篇
 
