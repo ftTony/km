@@ -1104,6 +1104,7 @@ console.log('end')
 - [ECMAScript 6 入门](http://es6.ruanyifeng.com/#docs/promise)
 - [JS 高级之手写一个 Promise,Generator,async 和 await【近 1W 字】](https://juejin.im/post/5df83b93f265da33f8652ccc)
 - [细说 JS 异步发展历程](https://juejin.im/post/5ce40e5ee51d4556be5b39b7)
+- [马蹄疾 | 详解 JavaScript 异步机制及发展历程(万字长文)](https://juejin.im/post/5cda1492e51d453a8f348c02)
 - 《你不知道的 javascript(中)》
 - 《深入浅出 Node.js》
 
