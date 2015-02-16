@@ -79,10 +79,19 @@ var observeMutationSupport = !!MutationObserver;
 var observer = new MutationObserver(callback);
 ```
 
-观察器callback回调函数会在每次DOM发生变动后调用
+观察器callback回调函数会在每次DOM发生变动后调用，它接收2个参数，第一个是变动的数组，第二个是观察器的实例。
 
 #### 4.3 MutationObserver实例的方法
 
+observe()该方法是要观察DOM节点的变动的。
+
+调用方式为：**observer.observe(dom,option);**
+
+options 类型有如下：
+
+- childList：子节点的变动。
+- attributes：属性的变动。
+- charatcterData：节点内容或节点文本的变动。
 
 ### 五、nextTick 源码分析
 
@@ -201,6 +210,8 @@ export function nextTick (cb?: Function, ctx?: Object) {
 }
 
 ```
+
+如上代码，我们从上往下看，
 
 ### 参考资料
 
