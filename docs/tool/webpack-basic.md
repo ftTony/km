@@ -17,6 +17,11 @@
 
 ### 一、介绍、安装及常用命令
 
+- 什么是webpack
+- webpack特点
+- webpack安装
+- 常用命令
+
 #### 1.1 什么是webpack
 
 自从出现模块化以后，大家可以将原本一坨代码分离到个个模块中，但是由此引发了一个问题。每个 JS 文件都需要从服务器去拿，由此会导致加载速度变慢。Webpack 最主要的目的就是为了解决这个问题，将所有小文件打包成一个或多个大文件，官网的图片很好的诠释了这个事情，除此之外，Webpack 也是一个能让你使用各种前端新技术的工具。
@@ -61,7 +66,6 @@ webpack --sort-modules-by, --sort-chunks-by, --sort-assets-by 将modules/chunks/
 webpack --display-chunks 展示编译后的分块
 webpack --display-reasons 显示更多引用模块原因
 webapck --display-error-details 显示更多报错信息
-
 ```
 
 ### 二、最简单配置
@@ -98,17 +102,13 @@ output.libraryExport: 配置要导出的模块中哪些子模块需要被导出
 
 ```
 
-##### 3. module
+- **module**
 
-3.1 rules
+`rules`配置模块的读取和解析规则，通常用来配置 Loader。大致可以通过以下方式来完成
 
-rules 配置模块的读取和解析规则，通常用来配置 Loader。大致可以通过以下方式来完成
-
-条件匹配:通过 test、 include、 exclude 三个配置项来选中 Loader 要应用 规则的文件。
-
-应用规则：对选中的文件通过 use 配置项来应用 Loader，可以只应用一个 Loader或者按照从后往前的顺序应用一组 Loader，同时可以分别向 Loader传入参数。
-
-重置顺序:一组 Loader 的执行顺序默认是从右到左执行的，通过 enforce 选项可以将其中 一个 Loader 的执行顺序放到最前或者最后 。
+- 条件匹配:通过 test、 include、 exclude 三个配置项来选中 Loader 要应用 规则的文件。
+- 应用规则：对选中的文件通过 use 配置项来应用 Loader，可以只应用一个 Loader或者按照从后往前的顺序应用一组 Loader，同时可以分别向 Loader传入参数。
+- 重置顺序:一组 Loader 的执行顺序默认是从右到左执行的，通过 enforce 选项可以将其中 一个 Loader 的执行顺序放到最前或者最后 。
 
 具体方法：
 
@@ -139,11 +139,10 @@ module:{
             use:['file-loader']
         }
     ]
-    
 }
 ```
 
-3.2 noParse
+- **noParse**
 
 配置项可以让Webpack忽略对部分没采用模块化的文件的递归解析和处理，这样做的好处能提高构建性能。
 
@@ -151,13 +150,14 @@ module:{
     //使用正则表达式
 noParse: /jquerylchartjs/
 ```
+
 注意，被忽略的文件里不应该包含 import、 require、 define 等模块化 语句，不 然会导致在构建出的代码中包含无法在浏览器环境下执行的模块化语句 。
 
-3.3. parse
+- **parse**
 
-parser 属性可以更细粒度地配置 哪些模块语法被解析、哪些不被解析。同 noParse 配置项的区别在于， parser 可以精确到 语法层 面，而 noParse 只能控制哪些文件不被解析。
+`parser`属性可以更细粒度地配置 哪些模块语法被解析、哪些不被解析。同`noParse`配置项的区别在于，`parser`可以精确到 语法层 面，而`noParse`只能控制哪些文件不被解析。
 
-parser 的使用方法如下:
+`parser`的使用方法如下:
 
 ```
 module: {
@@ -181,11 +181,11 @@ module: {
 }
 ```
 
-##### 4. resolve
+- **resolve**
 
 配置寻找模块的规则
 
-4.1. alias
+- **alias**
 
 ```
 配置项通过别名来将原导入路径映射成一个新的导入路径
@@ -197,15 +197,15 @@ resolve:{
 }
 ```
 
-4.2. mainFields
+- **mainFields**
 
 会根据 mainFields 的配 置去决定 优先采用哪份代码，
 
 ```
 mainFields : [’jsnext:main’,’browser’,’main’]
-
 ```
-4.3. extensions
+
+- **extensions**
 
 Webpack 会自动带上后缀后去尝试访问文件是否存在。 resolve.extensions 用于配置在尝试过程中用到的后缀列表
 
@@ -214,11 +214,11 @@ extensions:[’.ts’,’.j5 ’,’.json’]
 
 ```
 
-1. plugins
+- **plugins**
 
 配置扩展插件
 
-plugins配置项接收一个数组，数组里的每一项都是一个要使用 的 Plugin 的实例， Plugin 需要的参数通过构造函数传入,mini-css-extract-plugin、clean-webpack-plugin、DllReferencePlugin、html-webpack-plugin、happyPack、webpack-parallel-uglify-plugin
+plugins配置项接收一个数组，数组里的每一项都是一个要使用 的 Plugin 的实例， Plugin 需要的参数通过构造函数传入,`mini-css-extract-plugin`、`clean-webpack-plugin`、`DllReferencePlugin`、`html-webpack-plugin`、`happyPack`、`webpack-parallel-uglify-plugin`
 
 ```
 const ClearWebpackPlugin = require('clean-webpack-plugin');
@@ -230,13 +230,13 @@ module.exports=[
 ];
 ```
 
-6. DevServer
+- **DevServer**
 
-- `hot`,开启模块热替换功能后，将在不刷新整个页面的情况下通过用新模块替换老模块来做到实时预览
-- `inline`,依赖一个注入页面里的代理客户端，去接收来自 DevServer的 命令并负责刷新网页的工作。
-- `contentBase`,配置 DevServerHTTP服务器的文件根目录
+  - `hot`,开启模块热替换功能后，将在不刷新整个页面的情况下通过用新模块替换老模块来做到实时预览
+  - `inline`,依赖一个注入页面里的代理客户端，去接收来自 DevServer的 命令并负责刷新网页的工作。
+  - `contentBase`,配置 DevServerHTTP服务器的文件根目录
 
-### webpack配置
+### 三、webpack配置
 
 ```
 const path = require('path');
@@ -389,7 +389,7 @@ module.exports = {
 };
 ```
 
-### 优化
+### 四、优化
 
 优化主要是针对打包速度跟打包大小优化，主要包含以下方面
 
@@ -399,7 +399,7 @@ module.exports = {
 4. 按照路由拆分代码，实现按需加载
 5. 给打包出来的文件名添加哈希，实现浏览器缓存文件(主要采用chunkFilename)
 
-#### 打包速度
+#### 4.1 打包速度
 
 1. 减少文件搜索范围，比如通过另名，loader的test,include & exclude
 2. resolve.module，配置webpack去哪些目录下妙手第三方模块
@@ -422,7 +422,7 @@ DllReferencePlugin 插件:用于在主要的配置文件中引入 DllP!ugin 插�
 
 具体配置如下：
 
-webpack.dll.config.js配置
+`webpack.dll.config.js`配置
 
 ```
 const path = require('path');
@@ -463,7 +463,7 @@ module.exports = {
 };
 ```
 
-webpack.config.js配置
+`webpack.config.js`配置
 
 ```
 const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
@@ -480,11 +480,11 @@ const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
 }
 ```
 
-### 原理
+### 五、原理
 
-#### 1.webpack运行流程
+#### 5.1 webpack运行流程
 
-1.1 webpack事件流
+**webpack事件流**
 
 Webpack 就像一条生产线，要经过一系列处理流程后才能将源文件转换成输出结果。 这条生产线上的每个处理流程的职责都是单一的，多个流程之间有存在依赖关系，只有完成当前处理后才能交给下一个流程去处理。 插件就像是一个插入到生产线中的一个功能，在特定的时机对生产线上的资源做处理。 Webpack 通过 [Tapable](https://juejin.im/post/5abf33f16fb9a028e46ec352) 来组织这条复杂的生产线。 Webpack 在运行过程中会广播事件，插件只需要监听它所关心的事件，就能加入到这条生产线中，去改变生产线的运作。 Webpack 的事件流机制保证了插件的有序性，使得整个系统扩展性很好。
 
@@ -512,7 +512,7 @@ Webpack 的运行流程是一个串行的过程，从启动到结束会依次执
 
 解释器是将AST翻译成目标语言并运行的工具。
 
-### 手写webpack插件
+### 六、手写webpack插件
 
 - 调用插件apply函数传入compiler对象
 - 通过compiler对象监听
@@ -550,7 +550,7 @@ module.exports = {
 
 具体参数可以参考《深入浅出webpack》
 
-### 手写loader
+### 七、手写loader
 
 1. 获得loader的options，是通过`require (’ loader-utils ’);`
 2. 返回其他结果，是调用`callback`
@@ -558,7 +558,7 @@ module.exports = {
 
 具体参数可以参考《深入浅出webpack》
 
-#### loader文件
+#### 7.1 loader文件
 
 ```
 const loaderUtils = require('loader-utils');
@@ -572,7 +572,7 @@ module.exports = function (content) {
 }
 ```
 
-#### webpack配置文件
+#### 7.2 webpack配置文件
 
 ```
 {
