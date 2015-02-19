@@ -7165,6 +7165,64 @@ Vue.mixin = function (mixin: Object) {
 
 该 API 就是通过修改`Vue.options`属性进而影响之后的所有 Vue 实例。所以我们只需将传入的`mixin`对象与`this.options`合并即可，然后将合并后的新对象作为`this.options`传给之后的所有 Vue 实例，从而达到改变其原有特性的效果。
 
+#### 7.11 Vue.compile
+
+其用法如下：
+
+```
+Vue.compile( template )
+```
+
+- **参数：**
+
+  - `{string} template`
+
+- **作用：**
+
+  在`render`函数中编译模板字符串。只在独立构建时有效
+
+- **原理分析**
+
+该 API 是用来编译模板字符串的，我们在日常业务开发中几乎用不到，它内部是调用了`compileFunctions`方法，如下：
+
+```
+Vue.compile = compileToFunctions;
+```
+
+#### 7.12 Vue.observable
+
+其用法如下：
+
+```
+Vue.observable( object )
+```
+
+- **参数：**
+
+  - `{Object} object`
+
+- **用法：**
+
+  让一个对象可响应。Vue 内部会用它来处理`data`函数返回的对象。
+
+  返回的对象可以直接用于渲染函数和计算属性内，并且会在发生改变时触发相应的更新。也可以作为最小化的跨组件状态存储器，用于简单的场景：
+
+  ```
+    const state = Vue.observable({ count: 0 })
+
+    const Demo = {
+    render(h) {
+        return h('button', {
+        on: { click: () => { state.count++ }}
+        }, `count is: ${state.count}`)
+    }
+    }
+  ```
+
+- **分析原理**
+
+该 API 是用来将一个普通对象转化成响应式对象。
+
 ### 八、过滤器篇
 
 #### 8.1 resolveFilter 函数分析
