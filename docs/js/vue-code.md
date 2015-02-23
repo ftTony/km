@@ -7237,7 +7237,7 @@ export function resolveFilter (id) {
 }
 ```
 
-可以盾到，`resolveFilter`函数内部只有一行代码，就是调用`resolveAsset`函数并获取其返回值，如果返回值不存在，则返回`identity`，而`identity`是一个返回同参数一样的值，如下：
+可以看到，`resolveFilter`函数内部只有一行代码，就是调用`resolveAsset`函数并获取其返回值，如果返回值不存在，则返回`identity`，而`identity`是一个返回同参数一样的值，如下：
 
 ```
 /**
@@ -7428,6 +7428,8 @@ let lastFilterIndex = 0
 - componentUpdated：指令所在组件的 VNode**及其子 VNode**全部更新后调用。
 - unbind：只调用一次，指令与元素解绑时调用。
 
+有了每个状态的钩子函数，这样我们就可以让指令在不同状态下做不同的事件。
+
 #### 9.3 如何生效
 
 当虚拟`DOM`渲染更新的时候会触发`create`、`update`、`destory`这三个钩子函数，从而就会执行`updateDirectives`函数来处理指令的想着逻辑，执行指令函数，让指令生效。
@@ -7441,6 +7443,8 @@ function updateDirectives (oldVnode: VNodeWithData, vnode: VNodeWithData) {
   }
 }
 ```
+
+该函数的内部是判断了如果新旧`VNode`中只要有一方涉及到指令，那就调用`_update`方法去处理指令逻辑。
 
 `_update`方法定义如下：
 
@@ -7526,9 +7530,28 @@ const dirsWithPostpatch = []
 - dirsWithInsert：保存需要触发`inserted`指令钩子函数的指令列表。
 - dirsWidthPostpatch：保存需要触发`componentUpdated`指令钩子函数的指令列表。
 
-```
+另外，你可能还看到了在定义新旧指令集合的变量中调用了`normalizeDirectives`函数，其实该函数是用来模板中使用到的指令从存放指令的地方取出来，并将其格式进行统一化，其定义如下：
 
 ```
+function normalizeDirectives (dirs,vm):  {
+  const res = Object.create(null)
+  if (!dirs) {
+    return res
+  }
+  let i, dir
+  for (i = 0; i < dirs.length; i++) {
+    dir = dirs[i]
+    if (!dir.modifiers) {
+      dir.modifiers = emptyModifiers
+    }
+    res[getRawDirName(dir)] = dir
+    dir.def = resolveAsset(vm.$options, 'directives', dir.name, true)
+  }
+  return res
+}
+```
+
+`v-focus`指令为例，通过`normalizeDirectives`函数取出的指令会变成如下样子：
 
 ```
 
