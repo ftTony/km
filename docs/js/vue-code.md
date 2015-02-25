@@ -7554,8 +7554,99 @@ function normalizeDirectives (dirs,vm):  {
 `v-focus`指令为例，通过`normalizeDirectives`函数取出的指令会变成如下样子：
 
 ```
+{
+    'v-focus':{
+        name : 'focus' ,  // 指令的名称
+        value : '',       // 指令的值
+        arg:'',           // 指令的参数
+        modifiers:{},     // 指令的修饰符
+        def:{
+            inserted:fn
+        }
+    }
+}
+```
 
 ```
+let key, oldDir, dir
+for (key in newDirs) {
+    oldDir = oldDirs[key]
+    dir = newDirs[key]
+}
+```
+
+```
+// 判断当前循环到的指令名`key`在旧的指令列表`oldDirs`中是否存在，如果不存在，那么说明这是一个新的指令
+if (!oldDir) {
+    // new directive, bind
+    // 触发指令中的`bind`钩子函数
+    callHook(dir, 'bind', vnode, oldVnode)
+    // 如果定义了inserted 时的钩子函数 那么将该指令添加到dirsWithInsert中
+    if (dir.def && dir.def.inserted) {
+        dirsWithInsert.push(dir)
+    }
+}
+```
+
+```
+else {
+    // existing directive, update
+    dir.oldValue = oldDir.value
+    dir.oldArg = oldDir.arg
+    callHook(dir, 'update', vnode, oldVnode)
+    if (dir.def && dir.def.componentUpdated) {
+        dirsWithPostpatch.push(dir)
+    }
+}
+```
+
+```
+if (dirsWithInsert.length) {
+    const callInsert = () => {
+        for (let i = 0; i < dirsWithInsert.length; i++) {
+            callHook(dirsWithInsert[i], 'inserted', vnode, oldVnode)
+        }
+    }
+}
+```
+
+```
+if (dirsWithInsert.length) {
+    const callInsert = () => {
+        for (let i = 0; i < dirsWithInsert.length; i++) {
+            callHook(dirsWithInsert[i], 'inserted', vnode, oldVnode)
+        }
+    }
+    if (isCreate) {
+        mergeVNodeHook(vnode, 'insert', callInsert)
+    } else {
+        callInsert()
+    }
+}
+```
+
+```
+if (dirsWithPostpatch.length) {
+    mergeVNodeHook(vnode, 'postpatch', () => {
+        for (let i = 0; i < dirsWithPostpatch.length; i++) {
+            callHook(dirsWithPostpatch[i], 'componentUpdated', vnode, oldVnode)
+        }
+    })
+}
+```
+
+```
+if (!isCreate) {
+    for (key in oldDirs) {
+        if (!newDirs[key]) {
+            // no longer present, unbind
+            callHook(oldDirs[key], 'unbind', oldVnode, oldVnode, isDestroy)
+        }
+    }
+}
+```
+
+**总结**
 
 ### 十、总结
 
