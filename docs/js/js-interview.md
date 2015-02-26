@@ -318,7 +318,21 @@ Promise 是微任务，setTimeout 是宏任务，同一个事件循环中，prom
 
 ### 35.谈谈对 async/await 的理解，async/await 的实现原理是什么?
 
+async/await 就是 Generator 的语法糖，使得异步操作变得更加方便。来张图对比一下：
+
+async 函数就是将 Genterator 函数的星号（`*`）替换成 async，将 yield 替换成 await。
+
 ### 36.使用 async/await 需要注意什么？
+
+1. await 命令后面的 Promise 对象，运行结果可能是 rejected，此时等同于 async 函数返回的 Promise 对象被 reject，因此需要加上错误处理，可以给每个 await 后的 Promise 增加 catch 方法；也可以将 await 的代码放在`try...catch`中。
+2. 多个 await 命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。
+
+```
+
+```
+
+3. await 命令只能用在 async 函数之中，如果用在普通函数，会报错。
+4. async 函数可以保留运行堆栈。
 
 ### 37.如何实现 Promise.race？
 
@@ -329,7 +343,35 @@ Promise 是微任务，setTimeout 是宏任务，同一个事件循环中，prom
 **PS:** 遍历器根本特征就是具有 next 方法。每次调用 next 方法，都会返回一个代表当前成员的信息对象，具有 value 和 done 两个属性。
 
 ```
+// 如为对象添加Iterator接口；
+let obj = {
+    name:'Yvette',
+    age: 18,
+    job: 'engineer',
+    [Symbol.iterator](){
+        const self = this;
+        const keys = Object.keys(self);
+        let self = this;
+        const keys = Object.keys(self);
+        let index = 0;
+        return {
+            next(){
+                if(index < keys.length){
+                    return {
+                        value: self[keys[index++]],
+                        done:false
+                    }
+                }else{
+                    return { value:undefined,done:true};
+                }
+            }
+        }
+    }
+}
 
+for(let item of obj){
+    console.log(item);          // Yvette 18 engineer
+}
 ```
 
 使用 Generator 函数()简写 Symbol.iterator 方法，可以简写如下：
@@ -338,7 +380,14 @@ Promise 是微任务，setTimeout 是宏任务，同一个事件循环中，prom
 let obj = {
     name: 'Yvette',
     age: 18,
-    job: 'engineer'
+    job: 'engineer',
+    * [Symbol.iterator] () {
+        const self = this;
+        const keys = Object.keys(self);
+        for (let index=0;index<keys.length;index++){
+            yield self[keys[index]];    // yield 表达式仅能使用在Generator函数中
+        }
+    }
 }
 ```
 
