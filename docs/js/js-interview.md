@@ -379,7 +379,7 @@ Promise.prototype.finally = function (callback){
 
 异步最早的解决方案是回调函数，如果事件的回调，setInterval/setTimeout 中的回调。但是回调函数有一个很常见的问题，就是回调地狱的问题；
 
-为了解决回调地铁的问题，社区提出了 Promise
+为了解决回调地铁的问题，社区提出了 Promise 解决方案
 
 ### 35.谈谈对 async/await 的理解，async/await 的实现原理是什么?
 

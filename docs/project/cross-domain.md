@@ -666,6 +666,7 @@ socket.listen(server).on('connection', function(client) {
 - [关于 CORS 跨域问题的理解](https://www.cnblogs.com/lishanlei/p/8823823.html)
 - [【第 546 期】CORS 跨站资源共享之一](https://mp.weixin.qq.com/s/m4DkQBTw0GrHyD1xFoASPA)
 - [【第 547 期】CORS 跨站资源共享之二](https://mp.weixin.qq.com/s/rODpUh25nEhQawtLGz2DCg)
+- [不要再问我跨域的问题了](https://segmentfault.com/a/1190000015597029)
 
 ## 联系作者
 
