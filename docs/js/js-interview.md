@@ -320,7 +320,14 @@ Promise 是微任务，setTimeout 是宏任务，同一个事件循环中，prom
 
 async/await 就是 Generator 的语法糖，使得异步操作变得更加方便。来张图对比一下：
 
+![images](js-async-interview.png)
+
 async 函数就是将 Genterator 函数的星号（`*`）替换成 async，将 yield 替换成 await。
+
+> 我们说 async 是 Generator 的语法糖，那么这个糖究竟甜在哪呢？
+
+1. async 函数内置执行器，函数调用之后，会自动执行，输出最后结果。而 Generator 需要调用 next 或者配合 co 模块使用。
+2. 更好的语义，async 和 await，比如星号和 yield，语义更清楚了。async 表示函数里有异步操作，await 表示紧跟在后面的表达式需要等待结果。
 
 ### 36.使用 async/await 需要注意什么？
 
@@ -328,7 +335,31 @@ async 函数就是将 Genterator 函数的星号（`*`）替换成 async，将 y
 2. 多个 await 命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。
 
 ```
+// 下面两种写法都可以同时触发
+// 方法一
+async function f1(){
+    await Promise.all([
+        new Promise((resolve)=>{
+            setTimeout(resolve,600);
+        }),
+        new Promise((resolve)=>{
+            setTimeout(resolve,600)
+        })
+    ])
+}
 
+// 方法二
+async function f2(){
+    let fn1 = new Promise((resolve)=>{
+        setTimeout(resolve,800)
+    });
+
+    let fn2 = new Promise((resolve)=>{
+        setTimeout(resolve,800);
+    });
+    await fn1;
+    await fn2;
+}
 ```
 
 3. await 命令只能用在 async 函数之中，如果用在普通函数，会报错。
