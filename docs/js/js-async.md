@@ -19,7 +19,7 @@
 - [吞掉错误或异常](#十一、吞掉错误或异常)
 - [处理未捕获异常](#十二、es8-中改进了什么-asyncawait-异步等待)
 - [ES8 中改进了什么 ?Async/await （异步/等待）](#十三、es8-中改进了什么-asyncawait-异步等待)
-- [编写高度可维护性、非易碎异步代码的 5 个技巧]((#十四、编写高度可维护性非易碎异步代码的-5-个技巧))
+- [编写高度可维护性、非易碎异步代码的 5 个技巧](<(#十四、编写高度可维护性非易碎异步代码的-5-个技巧)>)
 
 ### 一、为什么单线程是一个限制？
 
@@ -31,7 +31,7 @@
 
 在某些情况下，这可能不是主要的问题。还有一个更大的问题是一旦你的浏览器开始处理调用堆栈中的太多任务，它可能会在很长一段时间内停止响应。这时，很多浏览器会抛出一个错误，提示是否终止页面：
 
-![](eventloop11.png)
+![images](eventloop11.png)
 
 ### 二、JavaScript 程序的构建块
 
@@ -105,7 +105,7 @@ second
 
 然后浏览器将侦听到的响应，当监听到网络请求返回内容时，浏览器通过将回调函数插入事件循环来调度要执行的回调函数。以下是示意图：
 
-![](eventloop05.jpg)
+![images](eventloop05.jpg)
 
 这些 Web api 是什么？从本质上说，它们是无法访问的线程，只能调用它们。它们是浏览器的迸发部分。如果你是一个 nodejs 开发者，这些就是 c++的 Api。
 
@@ -126,71 +126,71 @@ console.log('Bye');
 
 1. 初始化状态都为空，浏览器控制台是空的，调用堆栈也是空的
 
-![](run14.png)
+![images](run14.png)
 
 2. `console.log('Hi')`添加到调用堆栈中
 
-![](run15.png)
+![images](run15.png)
 
 3. 执行`console.log('Hi')`
 
-![](run16.png)
+![images](run16.png)
 
 4. `console.log('Hi')`从调用堆栈中移除
 
-![](run17.png)
+![images](run17.png)
 
 5. setTimeout(function cb1(){...}) 添加到调用堆栈
 
-![](run18.png)
+![images](run18.png)
 
 6. setTimeout(function cb1(){...})执行，浏览器创建一个计时器计时，这个作为 Web api 的一部分。
 
-![](run19.png)
+![images](run19.png)
 
 7. setTimeout(function cb1(){...})本身执行完成，并从调用堆栈中删除。
 
-![](run20.png)
+![images](run20.png)
 
 8. console.log('Bye')添加到调用堆栈
 
-![](run21.png)
+![images](run21.png)
 
 9. 执行 console.log('Bye')
 
-![](run22.png)
+![images](run22.png)
 
 10. console.log('Bye')从调用堆栈移除
 
-![](run23.png)
+![images](run23.png)
 
 11. 至少在 5 秒之后，计时器完成并将`cb1`回调堆到回调队列。
 
-![](run24.png)
+![images](run24.png)
 
 12. 事件循环从回调队列中获取 cb1 并将其推入调用堆栈。
 
-![](run25.png)
+![images](run25.png)
 
 13. 执行`cb1`并将`console.log('cb1')`添加到调用堆栈。
 
-![](run26.png)
+![images](run26.png)
 
 14. 执行`console.log('cb1')`
 
-![](run27.png)
+![images](run27.png)
 
 15. `console.log('cb1')`从调用堆栈中移除
 
-![](run28.png)
+![images](run28.png)
 
 16. `cb1`从调用堆栈中移除
 
-![](run29.png)
+![images](run29.png)
 
 **快速回顾**
 
-![](run30.gif)
+![images](run30.gif)
 
 值得注意的是，`ES6`指定了事件循环应该如何，这意味着在技术上它属于 JS 引擎的职责范围，不再仅仅扮演宿主环境的角色。这种变化的一个主要原因是`ES6`中引入了`Promises`，因为`ES6`需要对事件循环队列上的调度操作进行直接、细度的控制。
 
@@ -200,7 +200,6 @@ console.log('Bye');
 
 ```
 setTimeout(myCallback,1000);
-
 ```
 
 这并不意味着`myCallback`将在 1000 毫秒后就执行，而是在 1000 毫秒后，`myCallback`被添加到队列中。但是，如果队列有其他事件在前面添加回调刚必须等待前后的执行前后的执行后在执行`myCallback`。
@@ -268,7 +267,7 @@ listen('click',function(e){
 
 这种代码通常被称为“回调地狱”。但是“回调地狱”实际上与嵌套/缩进几乎没有任何关系，这是一个更深层次的问题。
 
-首先，我们等待“单击”事件，然后等待计时器触发，然后等待Ajax响应返回，此时可能会再次重复所有操作。
+首先，我们等待“单击”事件，然后等待计时器触发，然后等待 Ajax 响应返回，此时可能会再次重复所有操作。
 
 乍一看，这段代码似乎可以将其异步性自然地对应到以下顺序步骤：
 
@@ -358,13 +357,13 @@ sum(fetchX,fetchY,function(result){
 
 ```
 
-这里有一些非常重要的事情——在这个代码片段中，我们将x和y作为异步获取的值，并且执行了一个函数sum(...)(从外部)，它不关心x和y，也不关心它们是否立即可用。
+这里有一些非常重要的事情——在这个代码片段中，我们将 x 和 y 作为异步获取的值，并且执行了一个函数 sum(...)(从外部)，它不关心 x 和 y，也不关心它们是否立即可用。
 
 当然，这种基于回调的粗略方法还有很多不足之处。这只是一个我们不必判断对于异步请求的值的处理方式一个小步骤而已。
 
 ### 九、Promise Value
 
-用Promise来重写上例：
+用 Promise 来重写上例：
 
 ```
 function sum(xPromise,yPromise){
@@ -386,43 +385,43 @@ sum(fetchX(),fetchY())
 
 ```
 
-在这个代码片段中有两层Promise。
+在这个代码片段中有两层 Promise。
 
-`fetchX`和`fetchY`先直接调用，返回一个promise，传给`sum`。`sum`创建并返回一个Promise,通过调用then等待Promise，完成后，sum已经准备好了(resolve)，将会打印出来。
+`fetchX`和`fetchY`先直接调用，返回一个 promise，传给`sum`。`sum`创建并返回一个 Promise,通过调用 then 等待 Promise，完成后，sum 已经准备好了(resolve)，将会打印出来。
 
-第二层是`sum(..)`创建的Promise(通过Promise.all([...]))然后返回Promise，通过调用then(...)来等待。当`sum(...)`操作完成时，sum传入的两个Promise都执行完后，可以打印出来了。这里隐藏了在`sum(..)`中等待`x`和`y`未来值的逻辑。
+第二层是`sum(..)`创建的 Promise(通过 Promise.all([...]))然后返回 Promise，通过调用 then(...)来等待。当`sum(...)`操作完成时，sum 传入的两个 Promise 都执行完后，可以打印出来了。这里隐藏了在`sum(..)`中等待`x`和`y`未来值的逻辑。
 
-**注意：**在sum(...)内，Promise.all([...])调用创建一个promise(等待promiseX和promiseY解析)。然后链式调用.then(...)方法里再的创建了另一个Promise，然后把返回的x和y(values[0]+values[1])进行求和并返回。
+**注意：**在 sum(...)内，Promise.all([...])调用创建一个 promise(等待 promiseX 和 promiseY 解析)。然后链式调用.then(...)方法里再的创建了另一个 Promise，然后把返回的 x 和 y(values[0]+values[1])进行求和并返回。
 
-因此，我们在sum(...)末尾调用then(...)方法——实际上是返回的第二个Promise上运行，而不是由Promise.all([...])创建Promise。此外，虽然没有在第二个Promise结束时再调用then方法，其实这里也创建一个Promise。
+因此，我们在 sum(...)末尾调用 then(...)方法——实际上是返回的第二个 Promise 上运行，而不是由 Promise.all([...])创建 Promise。此外，虽然没有在第二个 Promise 结束时再调用 then 方法，其实这里也创建一个 Promise。
 
 Promise.then(...)实际上可以使用两个函数，第一个函数用于执行成功的操作，第二个函数用于处理失败的操作；
 
-如果在获取`x`或`y`时出现错误，或者在添加过程中出现某种失败，`sum(...)`返回的Promise将被拒绝，传递给then(...)的第二个回调错误处理程序将从Promise接收失败的信息。
+如果在获取`x`或`y`时出现错误，或者在添加过程中出现某种失败，`sum(...)`返回的 Promise 将被拒绝，传递给 then(...)的第二个回调错误处理程序将从 Promise 接收失败的信息。
 
-从外部看，由于Promise封装了依赖于时间的状态（等待底层值的完成或拒绝，Promise本身是与时间无关的），它可以按照可预测的方式组成，不需要开发者关心时序或底层的结果。一旦Promise决议，此刻它就成为了外部不可变的值。
+从外部看，由于 Promise 封装了依赖于时间的状态（等待底层值的完成或拒绝，Promise 本身是与时间无关的），它可以按照可预测的方式组成，不需要开发者关心时序或底层的结果。一旦 Promise 决议，此刻它就成为了外部不可变的值。
 
-**可链接调用Promise真的很有用：**
+**可链接调用 Promise 真的很有用：**
 
-创建一个延迟2000ms内完成的Promise，然后我们从第一个then(...)回调中返回，这会导致第二个then(..)等待2000ms
+创建一个延迟 2000ms 内完成的 Promise，然后我们从第一个 then(...)回调中返回，这会导致第二个 then(..)等待 2000ms
 
->注意：因为Promise一旦被解析，它在外部是不可变的，所以现在可以安全地将该值传递给任何一方，因为它不能被意外地或恶意地修改，这一点在多方遵守承诺的决议时尤其正确。一方不可能影响另一方遵守承诺决议的能力，不变性听起来像一个学术话题，但它实际上是承诺设计最基本和最重要的方面之一，不应该被随意忽略。
+> 注意：因为 Promise 一旦被解析，它在外部是不可变的，所以现在可以安全地将该值传递给任何一方，因为它不能被意外地或恶意地修改，这一点在多方遵守承诺的决议时尤其正确。一方不可能影响另一方遵守承诺决议的能力，不变性听起来像一个学术话题，但它实际上是承诺设计最基本和最重要的方面之一，不应该被随意忽略。
 
 ### 十、使用 Promise 还是不用？
 
-关于Promise的一个重要细节是要确定某个值是否是一个实际的Promise。换句话说，它是否具有像Promise一样行为？：
+关于 Promise 的一个重要细节是要确定某个值是否是一个实际的 Promise。换句话说，它是否具有像 Promise 一样行为？：
 
-我们知道Promise是由`new Promise(...)`语法构造的，你可能认为`p instanceof Promise`是一个足够可以判断的类型，嗯，不完全是。
+我们知道 Promise 是由`new Promise(...)`语法构造的，你可能认为`p instanceof Promise`是一个足够可以判断的类型，嗯，不完全是。
 
-这主要是因为可以从另一个浏览器窗口(例如iframe)接收Promise值，而该窗口或框架具有自己的Promise值，与当前窗口或框架中的Promise值不同，所以该检查将无法识别Promise实例。
+这主要是因为可以从另一个浏览器窗口(例如 iframe)接收 Promise 值，而该窗口或框架具有自己的 Promise 值，与当前窗口或框架中的 Promise 值不同，所以该检查将无法识别 Promise 实例。
 
-此外，库或框架可以选择性的封装自己的Promise，而不使用原生ES6的Promise来实现。事实上，很可能在老浏览器的库中没有Promise。
+此外，库或框架可以选择性的封装自己的 Promise，而不使用原生 ES6 的 Promise 来实现。事实上，很可能在老浏览器的库中没有 Promise。
 
 ### 十一、吞掉错误或异常
 
-如果在Promise创建中，出现了一个javascript一场错误(TypeError或者ReferenceError)，这个异常会被捕捉，并且使用这个promise被拒绝。
+如果在 Promise 创建中，出现了一个 javascript 一场错误(TypeError 或者 ReferenceError)，这个异常会被捕捉，并且使用这个 promise 被拒绝。
 
-但是，如果在调用then(...)方法中出现了JS异常错误，那么会发生什么情况呢？即使它不会丢失，你可能会发现它们的处理方式有点令人吃惊，直到你控得更深一点：
+但是，如果在调用 then(...)方法中出现了 JS 异常错误，那么会发生什么情况呢？即使它不会丢失，你可能会发现它们的处理方式有点令人吃惊，直到你控得更深一点：
 
 ```
 var p = new Promise(function(resolve,reject){
@@ -438,15 +437,15 @@ p.then(function fulfilled(message){
 
 ```
 
-看起来`foo.bar()`中的异常确实被吞噬了，不过它不是。然而还有一些更深层次的问题，我们没有注意到。p.then(...)调用本身返回另一个Promise，该Promise将被TypeError异常拒绝。
+看起来`foo.bar()`中的异常确实被吞噬了，不过它不是。然而还有一些更深层次的问题，我们没有注意到。p.then(...)调用本身返回另一个 Promise，该 Promise 将被 TypeError 异常拒绝。
 
 ### 十二、处理未捕获异常
 
 许多人会说，还有其他更好的方法。
 
-一个常见的建议是，Promise应该添加一个`done(...)`，这实际上是将Promise链标记为`done`。done(...)不会创建并返回Promise，因此传递给done(..)的回调显然不会将问题报告给不存在的链接Promise。
+一个常见的建议是，Promise 应该添加一个`done(...)`，这实际上是将 Promise 链标记为`done`。done(...)不会创建并返回 Promise，因此传递给 done(..)的回调显然不会将问题报告给不存在的链接 Promise。
 
-Promise对象的回调链，不管以then方法或catch方法结尾，要是最后一个方法招聘错误，都有可能无法捕捉到(因为Promise内部的错误不会冒泡到全局)。因此，我们可以提供一个done方法，总是处于回调链的尾端，保证抛出任何可能出现的错误。
+Promise 对象的回调链，不管以 then 方法或 catch 方法结尾，要是最后一个方法招聘错误，都有可能无法捕捉到(因为 Promise 内部的错误不会冒泡到全局)。因此，我们可以提供一个 done 方法，总是处于回调链的尾端，保证抛出任何可能出现的错误。
 
 ```
 var p = Promise.resolve(374);
@@ -460,15 +459,15 @@ p.then(function fulfilled(msg){
 
 ### 十三、ES8 中改进了什么 ?Async/await （异步/等待）
 
-JavaScript ES8引入了`async/await`，这使得使用Promise的工作更容易。这里将简要介绍async/await提供的可能性以及如何利用它们编写异步代码。
+JavaScript ES8 引入了`async/await`，这使得使用 Promise 的工作更容易。这里将简要介绍 async/await 提供的可能性以及如何利用它们编写异步代码。
 
-使用async声明异步函数。这个函数返回一个`AsyncFunction`对象。AsyncFunction对象表示该函数中包含的代码异步函数。
+使用 async 声明异步函数。这个函数返回一个`AsyncFunction`对象。AsyncFunction 对象表示该函数中包含的代码异步函数。
 
-调用使用async声明函数时，它返回一个Promise。当这个函数返回一个值时，这个值只是一个普通值而已，这个函数内部将自动创建一个承诺，并使用函数的返回的值进行解析。当这个函数招聘异常时，Promise将被抛出的值拒绝。
+调用使用 async 声明函数时，它返回一个 Promise。当这个函数返回一个值时，这个值只是一个普通值而已，这个函数内部将自动创建一个承诺，并使用函数的返回的值进行解析。当这个函数招聘异常时，Promise 将被抛出的值拒绝。
 
-使用async声明函数时可以包含一个await符号，await暂停这个函数的执行并等待传递的Promise的解析完成，然后恢复这个函数的执行并返回解析后的值。
+使用 async 声明函数时可以包含一个 await 符号，await 暂停这个函数的执行并等待传递的 Promise 的解析完成，然后恢复这个函数的执行并返回解析后的值。
 
->async/await的目的是简体使用承诺的行为
+> async/await 的目的是简体使用承诺的行为
 
 让看看下面的例子：
 
@@ -483,7 +482,7 @@ async function getNumber2(){
 }
 ```
 
-类似地，抛出异常的函数等价于返回被拒绝的Promise的函数：
+类似地，抛出异常的函数等价于返回被拒绝的 Promise 的函数：
 
 ```
 function f1(){
@@ -495,7 +494,7 @@ async function f2(){
 }
 ```
 
-`await`关键字只能在异步函数中使用，并允许同步等待Promise。如果在async函数之外使用Promise，仍然需要使用then回调：
+`await`关键字只能在异步函数中使用，并允许同步等待 Promise。如果在 async 函数之外使用 Promise，仍然需要使用 then 回调：
 
 ```
 async function loadData(){
@@ -527,11 +526,11 @@ var loadData = async function(){
 }
 ```
 
-更重要的是，在所有主流的浏览器都支持async/await:
+更重要的是，在所有主流的浏览器都支持 async/await:
 
-![](run30.png)
+![images](run30.png)
 
-最后，重要的是不盲目选择编写异步代码的“最新”方法。理解异步JavaScript的内部结构非常重要，了解为什么异步JavaScript如此关键，并深入理解所选择的方法的内部结构。与编程中的其他方法一样，每种方法都有优点和缺点。
+最后，重要的是不盲目选择编写异步代码的“最新”方法。理解异步 JavaScript 的内部结构非常重要，了解为什么异步 JavaScript 如此关键，并深入理解所选择的方法的内部结构。与编程中的其他方法一样，每种方法都有优点和缺点。
 
 ### 十四、编写高度可维护性、非易碎异步代码的 5 个技巧
 
@@ -550,7 +549,6 @@ var loadData = async function(){
 rp('https://api.example.com/endpoint1').then(function(data){
 
 });
-
 ```
 
 和：
@@ -559,7 +557,6 @@ rp('https://api.example.com/endpoint1').then(function(data){
 // `rp` is a request-promise function.
 
 var response = await rp(‘https://api.example.com/endpoint1');
-
 ```
 
 #### 14.2 错误处理
@@ -593,7 +590,6 @@ async function loadData(){
         console.log(e);
     }
 }
-
 ```
 
 #### 14.3 条件
@@ -614,7 +610,6 @@ function loadData(){
         }
     })
 }
-
 ```
 
 与
@@ -631,7 +626,6 @@ async function loadData(){
         return response;
     }
 }
-
 ```
 
 #### 14.4 堆栈帧
@@ -648,7 +642,6 @@ function loadData(){
 loadData().catch(function(e){
     console.log(err);
 });
-
 ```
 
 与：
@@ -666,7 +659,6 @@ async function loadData(){
 loadData.catch(function(e){
     cosnole.log(e);
 })
-
 ```
 
 #### 14.5 调试
@@ -676,7 +668,6 @@ loadData.catch(function(e){
 ### 参考资料
 
 - [JavaScript 是如何工作的:事件循环和异步编程的崛起+ 5 种使用 async/await 更好地编码方式！](https://github.com/qq449245884/xiaozhi/issues/4)
-
 
 ## 联系作者
 

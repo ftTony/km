@@ -4,9 +4,9 @@
 
 ES2017 标准引入了 async 函数，使得异步操作变得更加方便。
 
-它是Generator函数的语法糖。
+它是 Generator 函数的语法糖。
 
-`async`函数对Generator函数的改进，体现在以下四点。
+`async`函数对 Generator 函数的改进，体现在以下四点。
 
 - 内置执行器
 - 更好的语义
@@ -22,7 +22,7 @@ ES2017 标准引入了 async 函数，使得异步操作变得更加方便。
 
 ### 一、基本用法
 
-`async`函数返回一个Promise对象，可以使用`then`方法添加回调函数，当函数执行的时候，一旦遇到`await`就会先返回，等到异步操作完成，再接着执行函数体内后面的语句。
+`async`函数返回一个 Promise 对象，可以使用`then`方法添加回调函数，当函数执行的时候，一旦遇到`await`就会先返回，等到异步操作完成，再接着执行函数体内后面的语句。
 
 ```
 // 函数声明
@@ -52,15 +52,15 @@ const foo = async() =>{};
 
 ### 二、语法
 
-- [返回Promise对象](#21-返回promise对象)
-- [Promise对象的状态变化](#22-promise对象的状态变化)
-- [await命令](#23-await命令)
+- [返回 Promise 对象](#21-返回promise对象)
+- [Promise 对象的状态变化](#22-promise对象的状态变化)
+- [await 命令](#23-await命令)
 - [错误处理](#24-错误处理)
 - [使用注意点](#25-使用注意点)
 
-#### 2.1 返回Promise对象
+#### 2.1 返回 Promise 对象
 
-`async`函数返回一个Promise对象。
+`async`函数返回一个 Promise 对象。
 
 `async`函数内部`return`语句返回的值，会成为`then`方法回调函数的参数。
 
@@ -73,11 +73,11 @@ f().then(v => console.log(v))
 // hello world
 ```
 
-#### 2.2 Promise对象的状态变化
+#### 2.2 Promise 对象的状态变化
 
-`async`函数返回的Promise对象，必须等到内部所有`await`命令后面的Promise对象执行完，才会发生状态改变，除非遇到`return`语句或错误。也就是说，只有async函数内部的异步操作执行完，才会执行then方法指定的回调函数。
+`async`函数返回的 Promise 对象，必须等到内部所有`await`命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到`return`语句或错误。也就是说，只有 async 函数内部的异步操作执行完，才会执行 then 方法指定的回调函数。
 
-#### 2.3 await命令
+#### 2.3 await 命令
 
 `await`命令后面是一个 Promise 对象，返回该对象的结果。如果不是 Promise 对象，就直接返回对应的值。
 
@@ -122,7 +122,7 @@ async function f(){
 
 ```
 
-如果有多个await命令，可以统一放在try...catch结构中。
+如果有多个 await 命令，可以统一放在 try...catch 结构中。
 
 ```
 async function main(){
@@ -148,7 +148,7 @@ async function main(){
 
 ### 三、async 函数的实现原理
 
-async 函数的实现原理，就是将Generator函数和自动执行器，包装在一个函数里。
+async 函数的实现原理，就是将 Generator 函数和自动执行器，包装在一个函数里。
 
 ```
 async function fn(args){
@@ -198,9 +198,8 @@ function spawn(genF){
 Promise 的写法。
 
 ```
-
 function chainAnimationsPromise(elem,animations){
-    
+
     // 变量ret用来保存上一个动画的返回值
     let ret = null;
 
@@ -222,7 +221,6 @@ function chainAnimationsPromise(elem,animations){
         return ret;
     })
 }
-
 ```
 
 Generator 函数的写法。
@@ -265,6 +263,7 @@ async function chainAnimationsAsync(elem,animations){
 
 - [ECMAScript 6 入门](http://es6.ruanyifeng.com/#docs/async)
 - [《ECMAScript 6 入门》 第三版](https://yjhenan.gitbooks.io/-ecmascript-6/docs/async.html)
+- 《你不知道的 javascript(中)》
 
 ## 联系作者
 

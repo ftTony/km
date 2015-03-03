@@ -365,7 +365,16 @@ async function f2(){
 3. await 命令只能用在 async 函数之中，如果用在普通函数，会报错。
 4. async 函数可以保留运行堆栈。
 
+```
+
+```
+
 ### 37.如何实现 Promise.race？
+
+在代码实现前，我们需要先了解 Promise.race 的特点：
+
+1. Promise.race 返回的仍然是一个 Promise。它的状态与第一个完成的 Promise 的状态相同。它可以是完成（resolve），也可以是失败（rejects），这个取决于第一个 Promise 是哪一种状态。
+2. 如果传入的参数是不可迭代的，那么将会抛出错误。
 
 ### 38.可遍历数据结构的有什么特点？
 
