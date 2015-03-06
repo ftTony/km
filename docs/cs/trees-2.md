@@ -140,6 +140,44 @@ rotationRL(node){
 | LR       | 在 A 的**左子树**根节点的**右子树**上插入节点而破坏平衡 | 先左旋后右旋转 |
 | RL       | 在 A 的**右子树**根节点的**左子树**上插入节点而破坏平衡 | 先右旋后左旋转 |
 
+**插入相关代码**
+
+```
+insert(key){
+    this.root = this.insertNode(this.root,key);
+}
+insertNode(node,key){
+    // 像在BST树中一样插入节点
+    if(node == null){
+        return new Node(key);
+    }else if (this.compareFn(key,node.key)===Compare.LESS_THAN){
+        node.left = this.insertNode(node.left,key);
+    }else if(this.compareFn(key,node.key)===Compare.BIGGER_THAN){
+        node.right = this.insertNode(node.right,key);
+    }else{
+        return node;        // 重复的键
+    }
+    // 如果需要，将树进行平衡操作
+    const balanceFactor = this.getBalanceFactor(node);
+    if(balanceFactor === BalanceFactor.UNBALANCED_LEFT){
+
+    }
+}
+```
+
+**删除相关代码**
+
+```
+removeNode(node,key){
+    node = super.removeNode(node,key);
+    if(node == null){
+        return node;    // null，不需要进行平衡
+    }
+    //  检测树是否平衡
+    const balanceFactor = this.getBalanceFactor(node);
+}
+```
+
 ### 六、红黑树
 
 红黑树是一种常见的自平衡二叉查找树，常用于关联数组、字典，在各种语言的底层实现中被广泛应用，Java 的 TreeMap 和 TreeSet 就是基于红黑树实现的。
