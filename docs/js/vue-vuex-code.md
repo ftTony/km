@@ -514,7 +514,6 @@ forEachAction (fn) {
         forEachValue(this._rawModule.actions, fn)
     }
 }
-
 ```
 
 #### 2.6 ModuleCollection 类
@@ -546,7 +545,6 @@ register (path, rawModule, runtime = true) {
       })
     }
 }
-
 ```
 
 2. `unregister`：取消某个模块；
@@ -722,9 +720,10 @@ export const createNamespacedHelpers = (namespace) => ({
 })
 ```
 
-6. `normalizeNamespace`
+6. `normalizeNamespace`：主要功能返回一个新的函数，在新的函数中规范化`namespace`参数，并调用函数参数`fn`
 
 ```
+// 根据命名空间正常解析
 function normalizeNamespace (fn) {
   return (namespace, map) => {
     if (typeof namespace !== 'string') {
@@ -740,7 +739,7 @@ function normalizeNamespace (fn) {
 
 ### 三、总结
 
-vuex 代码主要使用了订阅者模式，保证了数据统一性
+Vuex 的确是一个很强大的状态管理工具 ，并且非常灵活 ，但有一个问题就是，如果严格按照单向数据流的方式进行开发 ，随着应用的复杂 度越来越高 ，开发者会写非常多的模板类代码 ，vuex 代码主要使用了订阅者模式，保证了数据统一性；
 
 ### 参考资料
 
