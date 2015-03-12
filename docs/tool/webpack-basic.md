@@ -26,7 +26,7 @@
 
 自从出现模块化以后，大家可以将原本一坨代码分离到个个模块中，但是由此引发了一个问题。每个 JS 文件都需要从服务器去拿，由此会导致加载速度变慢。Webpack 最主要的目的就是为了解决这个问题，将所有小文件打包成一个或多个大文件，官网的图片很好的诠释了这个事情，除此之外，Webpack 也是一个能让你使用各种前端新技术的工具。
 
-![image](https://user-gold-cdn.xitu.io/2017/9/15/92a95decddcecb9e25304f3b6a9dfb9c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![image](webpack01.jpg)
 
 webpack一共经历了4个版本，分别是1、2、3、4，最新版本是4，以下案例是基于4实践的
 
@@ -502,7 +502,7 @@ Webpack 的运行流程是一个串行的过程，从启动到结束会依次执
 
 流程图：
 
-![01](https://user-images.githubusercontent.com/6395813/49738951-a31dcd00-fccb-11e8-8e30-277217990d2a.jpg)
+![01](webpack02.jpg)
 
 2.3 抽象语法树（AST）
 
