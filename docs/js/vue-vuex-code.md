@@ -202,14 +202,11 @@ Store 类的成员方法有下面几个：
 
 ```
 commit (_type, _payload, _options) {
-    // check object-style commit
-    const {
-      type,
-      payload,
-      options
-    } = unifyObjectStyle(_type, _payload, _options)
+    // 检查传入的参数
+    const {type,payload,options} = unifyObjectStyle(_type, _payload, _options)
 
     const mutation = { type, payload }
+    // 找到对应的 mutation函数
     const entry = this._mutations[type]
     if (!entry) {
       if (process.env.NODE_ENV !== 'production') {
@@ -217,14 +214,18 @@ commit (_type, _payload, _options) {
       }
       return
     }
+    // _widthCommit 函数将 _commiting
+    // 设置为TRUE，保证在strict模式下
+    // 只能 commit 改变状态
     this._withCommit(() => {
       entry.forEach(function commitIterator (handler) {
         handler(payload)
       })
     })
 
+    // 执行订阅函数
     this._subscribers
-      .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+      .slice()
       .forEach(sub => sub(mutation, this.state))
 
     if (
