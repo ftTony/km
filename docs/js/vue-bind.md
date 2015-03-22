@@ -46,7 +46,7 @@
 
 属性描述符具有以下可选键值：
 
-- `configurable`当且仅当该属性的 configurable 为 true 时，该属性描述符才能被改变，同时该属性也能从对应的对象上被删除。默认为 false.
+- `configurable`当且仅当该属性的`configurable`为`true`时，该属性描述符才能被改变，同时该属性也能从对应的对象上被删除。默认为 false.
 - `enumerable` 当且仅当该属性的`enumerable`为`true`时，该属性才能够出现在对象的枚举属性中。**默认为 false**。
 
 **数据描述符同时具有以下可选键值：**
@@ -61,10 +61,10 @@
 
 **描述符可同时具有键值**
 
-| configurable | enumerable | value | writable | get | set |
-| ------------ | ---------- | ----- | -------- | --- | --- |
-| 数据描述符   | Yes        | Yes   | Yes      | Yes | No  | No |
-| 存取描述符   | Yes        | Yes   | No       | No  | Yes | Yes |
+|            | configurable | enumerable | value | writable | get | set |
+| ---------- | ------------ | ---------- | ----- | -------- | --- | --- |
+| 数据描述符 | Yes          | Yes        | Yes   | Yes      | No  | No  |
+| 存取描述符 | Yes          | Yes        | No    | No       | Yes | Yes |
 
 **如果一个描述符不具有 value，writable，get 和 set 任意一个关键字，那么它将被认为是一个数据描述符。如果一个描述符同时有(value 或 writable)和(get 或 set)关键字，将会产生一个异常。**
 

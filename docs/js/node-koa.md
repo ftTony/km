@@ -560,6 +560,7 @@ pool.getConnection(function(err, connection) {
 ### 参考资料
 
 - 《Koa 与 Node.js 开发实战》
+- [深入浅出 Koa2](https://github.com/berwin/Blog/issues/9)
 - [Koa2 进阶学习笔记](https://chenshenhai.github.io/koa2-note/)
 - [KOA2 框架原码解析和实现](https://juejin.im/post/5db7eaf7f265da4cee4d61b9)
 - [多维度分析 Express、Koa 之间的区别](https://mp.weixin.qq.com/s/fPd8FHk2Ak224bgWD5a4oQ)

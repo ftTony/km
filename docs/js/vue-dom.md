@@ -727,13 +727,18 @@ function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
         idxInOld = isDef(newStartVnode.key)
           ? oldKeyToIdx[newStartVnode.key]
           : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx)
-        if (isUndef(idxInOld)) { // New element
+        if (isUndef(idxInOld)) { // 如果在oldChildren里找不到当前循环的newChildren里的子节点
+        // 新增节点并插入到合适位置
           createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx)
         } else {
+            //  如果在oldChildren里找到了当前循环的newChildren里的子节点
           vnodeToMove = oldCh[idxInOld]
+          // 如果两个节点相同
           if (sameVnode(vnodeToMove, newStartVnode)) {
+              // 调用patchVnode更新节点
             patchVnode(vnodeToMove, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
             oldCh[idxInOld] = undefined
+            // canmove表示是否需要移动节点，如果为true表示需要移动，则移动节点，如果为false则不用移动
             canMove && nodeOps.insertBefore(parentElm, vnodeToMove.elm, oldStartVnode.elm)
           } else {
             // same key but different element. treat as new element
