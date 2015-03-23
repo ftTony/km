@@ -686,19 +686,20 @@ function patchVnode(oldVnode,vnode,insertedVnodeQueue,ownerArray,index,removeOnl
 分析一下`updateChildren`方法，它也是整个`diff`过程中最重要的环节，以下为`Vue.js`的源码过程，为了更形象理解`diff`过程，我们给出相关的示意图来讲解。
 
 ```
+// 循环更新子节点
 function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
     // 为oldCh和newCh分别建立索引，为之后遍历的依据
-    let oldStartIdx = 0
-    let newStartIdx = 0
-    let oldEndIdx = oldCh.length - 1
-    let oldStartVnode = oldCh[0]
+    let oldStartIdx = 0     // oldChildren开始索引
+    let newStartIdx = 0     // newChildren开始索引
+    let oldEndIdx = oldCh.length - 1    // oldChilren结束索引
+    let oldStartVnode = oldCh[0]    // oldChildren中所有示处理节点中的第一个
     let oldEndVnode = oldCh[oldEndIdx]
     let newEndIdx = newCh.length - 1
     let newStartVnode = newCh[0]
     let newEndVnode = newCh[newEndIdx]
     let oldKeyToIdx, idxInOld, vnodeToMove, refElm
 
-    // 直到oldCh或者newCh被遍历完后跳出循环
+    // 以"新前"、"新后"、"旧前"、"旧后"的方式开始比对节点
     while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
       if (isUndef(oldStartVnode)) {
         oldStartVnode = oldCh[++oldStartIdx] // Vnode has been moved left
