@@ -693,16 +693,16 @@ function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
     let newStartIdx = 0     // newChildren开始索引
     let oldEndIdx = oldCh.length - 1    // oldChilren结束索引
     let oldStartVnode = oldCh[0]    // oldChildren中所有示处理节点中的第一个
-    let oldEndVnode = oldCh[oldEndIdx]
-    let newEndIdx = newCh.length - 1
-    let newStartVnode = newCh[0]
-    let newEndVnode = newCh[newEndIdx]
+    let oldEndVnode = oldCh[oldEndIdx] // oldChildren中所有未处理节点中的最后一个
+    let newEndIdx = newCh.length - 1    // newChildren结束索引
+    let newStartVnode = newCh[0]    // newChildren中所有未处理节点中的第一个
+    let newEndVnode = newCh[newEndIdx]  // newChildren中所有未处理节点的最后一个
     let oldKeyToIdx, idxInOld, vnodeToMove, refElm
 
     // 以"新前"、"新后"、"旧前"、"旧后"的方式开始比对节点
     while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
       if (isUndef(oldStartVnode)) {
-        oldStartVnode = oldCh[++oldStartIdx] // Vnode has been moved left
+        oldStartVnode = oldCh[++oldStartIdx] // 如果oldStartVnode不存在，则直接路过，比对下一个
       } else if (isUndef(oldEndVnode)) {
         oldEndVnode = oldCh[--oldEndIdx]
       } else if (sameVnode(oldStartVnode, newStartVnode)) {
