@@ -10,6 +10,7 @@
 
 - [编写自定义 webpack loader](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-loader.md)
 - [【webpack 进阶系列(八)】写个 loader](https://github.com/amandakelake/blog/issues/90)
+- [简单实用的 webpack-html-include-loader（附开发详解）](https://mp.weixin.qq.com/s/KHXVIKXKdj4Wknbx-HaGxA)
 
 ## 联系作者
 

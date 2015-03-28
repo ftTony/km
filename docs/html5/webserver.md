@@ -1,4 +1,4 @@
-# web server学习
+# web server 学习
 
 ## 前言
 
@@ -7,6 +7,8 @@
 ## 内容
 
 ## 参考资料
+
+- [Service Worker 初探](https://mp.weixin.qq.com/s/cNgC0uDrILaFY5TFL_Bglw)
 
 ## 联系作者
 

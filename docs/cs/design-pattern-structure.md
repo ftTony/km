@@ -59,6 +59,7 @@
 ## 参考资料
 
 - 《JavaScript 设计模式》
+- [一文读懂 JS 装饰器，这是一个会打扮的装饰器](https://mp.weixin.qq.com/s/ns8jwFlLtSh4PNObWjSMrA)
 
 ### 联系作者
 
