@@ -268,6 +268,16 @@ export const ASSET_TYPES = [
 ]
 ```
 
+上面遍历`ASSET_TYPES`后代码相当于：
+
+```
+Vue.options.components = {}
+Vue.options.directives = {}
+Vue.options.filters = {}
+```
+
+最后通过`extend(Vue.options.components,builtInCompontents)`把一些内置组件扩展到`Vue.options.components`上，`Vue`的内置组件目前有`<keep-alive>`、`<transition>`和`<transition-group>`组件，这也就是为什么我们在其它组件中使用这些组件不需要注册的原因。
+
 `mergeOptions`这个函数，它的定义在`src/core/util/options.js`中：
 
 ```
@@ -325,6 +335,12 @@ export function mergeOptions (
 }
 ```
 
+可以看出，`mergeOptions`函数的主要功能是把`parent`和`child`这两个对象根据一些合并策略，合并成一个新对象并返回。首先递归把`extends`和`mixins`合并到`parent`上
+
+```
+
+```
+
 生命周期钩子函数的合并策略如下：
 
 ```
@@ -377,6 +393,32 @@ export function callHook(vm,hook){
 可以看到，`callHook`函数逻辑非常简单。首先从实例的`$options`中获取到需要触发的钩子名称所对应的钩子函数数组`handlers`，我们说过，每个生命周期钩子名称都对应一个钩子函数数组。然后遍历该数组，将数组中的每个钩子函数都执行一遍。
 
 **initLifecycle 函数分析**
+
+`initLifecycle`函数的定义的位于源码的`src/core/instance/lifecycle.js`中，其代码如下：
+
+```
+
+```
+
+**解析事件**
+
+```
+
+```
+
+**initInjections 函数分析**
+
+```
+
+```
+
+**initState 函数分析**
+
+首先我们先来分析`initState`函数，该函数的定义位于源码的`src/core/instance/state.js`中，如下：
+
+```
+
+```
 
 #### 5.2 模板编译阶段
 
