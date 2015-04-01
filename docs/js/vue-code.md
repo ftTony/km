@@ -243,10 +243,86 @@ vm.$options = mergeOptions(
 )
 ```
 
+它实际上就是把 `resolveConstructorOptions(vm.constructor)` 的返回值和 `options` 做合并，返回`vm.constructor.options`，相当于`Vue.options`，那么这个`Vue.options`又是什么呢，其实在`initGlobalAPI(Vue)`的时候定义了这个值，代码在`src/core/global-api/index.js`中：
+
+```
+export function initGlobalAPI (Vue: GlobalAPI) {
+  // ...
+  Vue.options = Object.create(null)
+  ASSET_TYPES.forEach(type => {
+    Vue.options[type + 's'] = Object.create(null)
+  })
+
+  extend(Vue.options.components, builtInComponents)
+  // ...
+}
+```
+
+首先通过`Vue.options = Object.create(null)`创建一个空对象，然后遍历`ASSET_TYPES`，`ASSET_TYPES`的定义在`src/shared/contstants.js`中：
+
+```
+export const ASSET_TYPES = [
+  'component',
+  'directive',
+  'filter'
+]
+```
+
 `mergeOptions`这个函数，它的定义在`src/core/util/options.js`中：
 
 ```
+/**
+ * Merge two option objects into a new one.
+ * Core utility used in both instantiation and inheritance.
+ */
+export function mergeOptions (
+  parent: Object,
+  child: Object,
+  vm?: Component
+): Object {
+  if (process.env.NODE_ENV !== 'production') {
+    checkComponents(child)
+  }
 
+  if (typeof child === 'function') {
+    child = child.options
+  }
+
+  normalizeProps(child, vm)
+  normalizeInject(child, vm)
+  normalizeDirectives(child)
+
+  // Apply extends and mixins on the child options,
+  // but only if it is a raw options object that isn't
+  // the result of another mergeOptions call.
+  // Only merged options has the _base property.
+  if (!child._base) {
+    if (child.extends) {
+      parent = mergeOptions(parent, child.extends, vm)
+    }
+    if (child.mixins) {
+      for (let i = 0, l = child.mixins.length; i < l; i++) {
+        parent = mergeOptions(parent, child.mixins[i], vm)
+      }
+    }
+  }
+
+  const options = {}
+  let key
+  for (key in parent) {
+    mergeField(key)
+  }
+  for (key in child) {
+    if (!hasOwn(parent, key)) {
+      mergeField(key)
+    }
+  }
+  function mergeField (key) {
+    const strat = strats[key] || defaultStrat
+    options[key] = strat(parent[key], child[key], vm, key)
+  }
+  return options
+}
 ```
 
 生命周期钩子函数的合并策略如下：
@@ -285,7 +361,16 @@ export const LIFECYCLE_HOOKS = [
 
 ```
 export function callHook(vm,hook){
-
+    const handlers = vm.$options[hook]
+    if(handlers){
+        for(let i = 0,j = handlers.length;i<j;i++){
+            try{
+                hanlders[i].call(vm)
+            }catch(e){
+                handleError(e,vm,`${hook} hook`)
+            }
+        }
+    }
 }
 ```
 
