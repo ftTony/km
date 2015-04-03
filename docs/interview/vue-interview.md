@@ -312,6 +312,7 @@ Sass 是基于 Ruby 的，是在服务端处理的，而 Less 是需要引入 le
 - [2020 年大厂面试指南 - Vue 篇](https://juejin.im/post/5e4d24cce51d4526f76eb2ba)
 - [「面试题」20+Vue 面试题整理 🔥(持续更新)](https://juejin.im/post/5e649e3e5188252c06113021)
 - [vue 常见面试题](https://zhuanlan.zhihu.com/p/92407628)
+- [【面试】543- 探索 Vue 和 React 中 key 的作用](https://mp.weixin.qq.com/s/iuJWl3ddUtR6oOXs-9kh0g)
 
 ## 联系作者
 
