@@ -707,8 +707,41 @@ export function initEvents (vm: Component) {
 
 **initInjections 函数分析**
 
-```
+从函数名字上来看，该函数是用来初始化实例中的`inject`选项的。说到`inject`选项，那必然离不开`provide`选项，这两个选项都是成对出现的，它们的作用是：鸡毛一个祖先组件向其所有子孙后代注入一个依赖，不论组件层次有多深，并在起上下游关系成立的时间始终生效。
 
+`provide`选项应该是一个对象或返回一个对象的函数。该对象包含可注入其子孙的属性。在该对象中你可以使用 ES 2015 Symbols 作为 key，但是只在原生支持`Symbol`和`Reflect.ownKeys`的环境下可工作。
+
+`inject`选项应该是：
+
+- 一个字符串数组或
+- 一个对象，对象的 key 是本地的绑定名，value 是：
+  - 在可用的注入
+
+`initInjections`函数的具体原理，该函数定义在位于源码的``中，如下：
+
+```
+export function initInjections (vm: Component) {
+  const result = resolveInject(vm.$options.inject, vm)
+  if (result) {
+    toggleObserving(false)
+    Object.keys(result).forEach(key => {
+      /* istanbul ignore else */
+      if (process.env.NODE_ENV !== 'production') {
+        defineReactive(vm, key, result[key], () => {
+          warn(
+            `Avoid mutating an injected value directly since the changes will be ` +
+            `overwritten whenever the provided component re-renders. ` +
+            `injection being mutated: "${key}"`,
+            vm
+          )
+        })
+      } else {
+        defineReactive(vm, key, result[key])
+      }
+    })
+    toggleObserving(true)
+  }
+}
 ```
 
 **initState 函数分析**
