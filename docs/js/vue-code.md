@@ -557,14 +557,69 @@ export function initState (vm: Component) {
 `initProps`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
-function initProps(vm,propsOptions){
-    const propsData = vm.$options.propsData || {}
-    const props = vm._props = {}
-
+function initProps (vm: Component, propsOptions: Object) {
+  const propsData = vm.$options.propsData || {}
+  const props = vm._props = {}
+  // cache prop keys so that future props updates can iterate using Array
+  // instead of dynamic object key enumeration.
+  const keys = vm.$options._propKeys = []
+  const isRoot = !vm.$parent
+  // root instance props should be converted
+  if (!isRoot) {
+    toggleObserving(false)
+  }
+  for (const key in propsOptions) {
+    keys.push(key)
+    const value = validateProp(key, propsOptions, propsData, vm)
+    /* istanbul ignore else */
+    if (process.env.NODE_ENV !== 'production') {
+      const hyphenatedKey = hyphenate(key)
+      if (isReservedAttribute(hyphenatedKey) ||
+          config.isReservedAttr(hyphenatedKey)) {
+        warn(
+          `"${hyphenatedKey}" is a reserved attribute and cannot be used as component prop.`,
+          vm
+        )
+      }
+      defineReactive(props, key, value, () => {
+        if (!isRoot && !isUpdatingChildComponent) {
+          warn(
+            `Avoid mutating a prop directly since the value will be ` +
+            `overwritten whenever the parent component re-renders. ` +
+            `Instead, use a data or computed property based on the prop's ` +
+            `value. Prop being mutated: "${key}"`,
+            vm
+          )
+        }
+      })
+    } else {
+      defineReactive(props, key, value)
+    }
+    // static props are already proxied on the component's prototype
+    // during Vue.extend(). We only need to proxy props defined at
+    // instantiation here.
+    if (!(key in vm)) {
+      proxy(vm, `_props`, key)
+    }
+  }
+  toggleObserving(true)
 }
 ```
 
 可以看到，该函数接收两个参数：当前`Vue`实例和当前实例规范化后的`props`选项。
+
+在函数内部首先定义了 4 个变量，分别是：
+
+```
+const propsData = vm.$options.propsData || {}
+const props = vm._props = {}
+const keys = vm.$options._propKeys = []
+const isRoot = !vm.$parent
+```
+
+- propsData：父组件传入的真实`props`数据。
+- props：指向`vm._props`指针
+- keys：指向
 
 #### 5.2 模板编译阶段
 
