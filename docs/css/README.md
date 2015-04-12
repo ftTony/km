@@ -24,3 +24,4 @@
 22. [给你梳理了 44 个 CSS 精选知识点](https://mp.weixin.qq.com/s/Pw3VgFpijTYRkJyYPvlJgA)
 23. [前端开发中 79 条不可忽视的知识点汇总](https://juejin.im/post/5d8989296fb9a06b1f147070)
 24. [CSS 实现一个粒子动效的按钮](https://mp.weixin.qq.com/s/gL56Cb720j7xdsgMuC1R0g)
+25. [55 个提高你 CSS 开发效率的必备片段](https://github.com/Wscats/CV/issues/29)
