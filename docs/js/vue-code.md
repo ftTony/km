@@ -552,6 +552,20 @@ export function initState (vm: Component) {
 }
 ```
 
+首先，给实例上新增了一个属性`_watchers`，用来存储当前实例中所有的`watcher`实例，无论是使用`vm.$watch`注册的`watcher`实例还是使用`watch`选项注册的`watcher`实例，都会被保存到该属性中。
+
+`initProps`函数的定义位于源码的`src/core/instance/state.js`中，如下：
+
+```
+function initProps(vm,propsOptions){
+    const propsData = vm.$options.propsData || {}
+    const props = vm._props = {}
+
+}
+```
+
+可以看到，该函数接收两个参数：当前`Vue`实例和当前实例规范化后的`props`选项。
+
 #### 5.2 模板编译阶段
 
 #### 5.3 挂载阶段
