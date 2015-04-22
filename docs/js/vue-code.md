@@ -394,13 +394,20 @@ vm.$watch("a.b.c",function(newVal,oldVal){
 为了发现对象内部值的变化，可以在选项参数中指定`deep:true`。注意监听数组的变动不需要这么做。
 
 ```
-
+vm.$watch("someObject", callback, {
+  deep: true
+});
+vm.someObject.nestedValue = 123;
+// callback is fired
 ```
 
 - 选项：immediate
 
 ```
-
+vm.$watch("a", callback, {
+  immediate: true
+});
+// 立即以 `a` 的当前值触发回调
 ```
 
 - 内部原理
@@ -447,8 +454,51 @@ vm.$set(target, propertyName / index, value);
 
 **`vm.$delete`**
 
+`vm.$delete`是全局`Vue.delete`的**别名**，其用法相同
+
+```
+vm.$delete(target, propertyName / index);
 ```
 
+- **参数**：
+
+  - `{Object | Array} target`
+  - `{string | number} propertyName/index`
+
+- **用法**：
+
+- **内部原理**：
+
+`delete`方法是用来解决`Vue`不能检测到属性被删除的限制，该方法的定义位于源码的`src/core/observer/index.js`中，如下：
+
+```
+export function del (target: Array<any> | Object, key: any) {
+  if (process.env.NODE_ENV !== 'production' &&
+    (isUndef(target) || isPrimitive(target))
+  ) {
+    warn(`Cannot delete reactive property on undefined, null, or primitive value: ${(target: any)}`)
+  }
+  if (Array.isArray(target) && isValidArrayIndex(key)) {
+    target.splice(key, 1)
+    return
+  }
+  const ob = (target: any).__ob__
+  if (target._isVue || (ob && ob.vmCount)) {
+    process.env.NODE_ENV !== 'production' && warn(
+      'Avoid deleting properties on a Vue instance or its root $data ' +
+      '- just set it to null.'
+    )
+    return
+  }
+  if (!hasOwn(target, key)) {
+    return
+  }
+  delete target[key]
+  if (!ob) {
+    return
+  }
+  ob.dep.notify()
+}
 ```
 
 ### 三、虚拟 DOM 篇
