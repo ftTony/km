@@ -198,6 +198,7 @@ DevTools 按函数显示内存分配明细。默认视图为 Heavy (Bottom Up)�
 
 - [前端面试：谈谈 JS 垃圾回收机制](https://github.com/qq449245884/xiaozhi/issues/36)
 - [Node.js 内存管理和 V8 垃圾回收机制](https://mp.weixin.qq.com/s?__biz=MzIyNDU2NTc5Mw==&mid=2247483715&idx=1&sn=00600d07ce4fd2b465d6cc7692d050f0&scene=21#wechat_redirect)
+- [如何分析 Node.js 中的内存泄漏？](https://zhuanlan.zhihu.com/p/25736931)
 - [浏览器垃圾回收机制与 Vue 项目内存泄漏场景分析](https://mp.weixin.qq.com/s/sMV4KyUb6RORJ4la7MfC4Q)
 - [V8 引擎如何进行垃圾内存的回收？](https://sanyuan0704.github.io/frontend_daily_question/week07/038.html)
 - [一文搞懂 V8 引擎的垃圾回收](https://mp.weixin.qq.com/s/1SGodqhTRM9mBy0Q9J0qow)

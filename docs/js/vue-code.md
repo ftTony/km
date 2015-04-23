@@ -1137,9 +1137,12 @@ function initWatch (vm: Component, watch: Object) {
 
 **`vm.$on`**
 
-参数：
+- **参数：**
 
-作用：
+  - `{string | Array<string>} event`(数组只在 2.2.0+中支持)
+  - `{Function} callback`
+
+- **作用：**
 
 内部原理：
 
