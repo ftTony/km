@@ -361,24 +361,51 @@ methodsToPatch.forEach(function (method) {
 - `vm.$set`
 - `vm.$delete`
 
+**`vm.$watch`**
+
+```
+vm.$watch(expOrFn, callback, [options]);
+```
+
+- 参数：
+  - `{string | Function} expOrFn`
+  - `{Function | Object} callback`
+  - `{Object} [options]`
+    - `{boolean} deep`
+    - `{boolean} immediate`
+- 返回值：`{Function} unwatch`
+- 用法：
+
+观察`Vue`实例变化的一个表达式或计算属性函数。回调函数得到的参数为新值和旧值。表达式只接受监督的键路径。对于更复杂的表达式，用一个函数取代。
+
+- 内部原理
+
+`$watch`的定义位于源码的`src/core/instance/state.js`中，如下：
+
+```
+
+```
+
+**`vm.$set`**
+
+`vm.$set`是全局`Vue.set`的**别名**，其用法相同。
+
+```
+vm.$set(target, propertyName / index, value);
+```
+
+- **参数**：
+  - `{Object | Array} target`
+
+**`vm.$delete`**
+
+```
+
+```
+
 ### 三、虚拟 DOM 篇
 
-- Vue 中的虚拟 DOM
-- Vue 中的 DOM-Diff
-- 更新子节点
-- 优化更新子节点
-
-#### 3.1 Vue 中的虚拟 DOM
-
 参考[Vue 虚拟 DOM](https://km.xiaowuzi.info/js/vue-dom.html)
-
-#### 3.2 Vue 中的 DOM-Diff
-
-参考[diff 算法](https://km.xiaowuzi.info/js/vue-diff.html)
-
-#### 3.3 更新子节点
-
-#### 3.4 优化更新子节点
 
 ### 四、模板编译篇
 
