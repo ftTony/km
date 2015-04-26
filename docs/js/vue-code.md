@@ -143,6 +143,18 @@ Vue.js 的源码都在 src 目录下，其目录结构如下。
 
 从图中我们也可以看到，模板编译过程就是把用户写的模板经过一系列处理最终生成`render`函数的过程。
 
+将一堆字符串模板解析成抽象语法树`AST`后，我们就可以对其进行各种操作处理了，处理完后用处理后的`AST`来生成`render`函数。其具体流程可大致分为三个阶段：
+
+1. 模板解析阶段：将一堆模板字符串用正则等方式解析成抽象语法树`AST`；
+2. 优化阶段：遍历`AST`，找出其中的静态节点，并打上标记；
+3. 代码生成阶段：将`AST`转换成渲染函数；
+
+这三个阶段在源码中分别对应三个模块，下面给出三个模块的源代码在源码中的路径：
+
+1. 模板解析段——解析器——源码路径：`src/compiler/parser/index.js`
+2. 优化阶段——优化器——源码路径：`src/compiler/optimizer.js`
+3. 代码生成阶段——代码生成器——源码路径：`src/compiler/codegen/index.js`
+
 #### 4.1 整体运行流程
 
 在模板解析阶段主要做的工作是把用户在`<template></template>`标签内写的模板使用正则等方式解析成抽象语法树（`AST`）。而这一阶段在源码中对应解析器（`parser`）模块。
@@ -190,6 +202,11 @@ export function parse(template,options){
     return root
 }
 ```
+
+从代码中我们可以看到，调用`parseHTML`函数时为其传入的两个参数分别是：
+
+- template 待转换的模板字符串；
+- options 转换时所需的选项；
 
 **如何解析不同的内容**
 
@@ -414,10 +431,26 @@ export function callHook(vm,hook){
 
 **initState 函数分析**
 
+这个函数是用来初始化实例状态的，主要包括`props`、`data`、`methods`、`computed`、`watch`，我们把这些选项称为实例的状态选项。也就是说，`initState`函数就是用来初始化这些状态的。
+
 首先我们先来分析`initState`函数，该函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
-
+export function initState (vm: Component) {
+  vm._watchers = []
+  const opts = vm.$options
+  if (opts.props) initProps(vm, opts.props)
+  if (opts.methods) initMethods(vm, opts.methods)
+  if (opts.data) {
+    initData(vm)
+  } else {
+    observe(vm._data = {}, true /* asRootData */)
+  }
+  if (opts.computed) initComputed(vm, opts.computed)
+  if (opts.watch && opts.watch !== nativeWatch) {
+    initWatch(vm, opts.watch)
+  }
+}
 ```
 
 #### 5.2 模板编译阶段
