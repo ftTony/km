@@ -378,12 +378,60 @@ vm.$watch(expOrFn, callback, [options]);
 
 观察`Vue`实例变化的一个表达式或计算属性函数。回调函数得到的参数为新值和旧值。表达式只接受监督的键路径。对于更复杂的表达式，用一个函数取代。
 
+注意：在变异（不是替换）对象或数组时，旧值将与新值相同，因为它们的引用指向同一个对象/数组。`Vue`不会保留变异之前值的副本。
+
+- 示例：
+
+```
+//  键路径
+vm.$watch("a.b.c",function(newVal,oldVal){
+    // 做点什么
+})
+```
+
+- 选项：deep
+
+为了发现对象内部值的变化，可以在选项参数中指定`deep:true`。注意监听数组的变动不需要这么做。
+
+```
+
+```
+
+- 选项：immediate
+
+```
+
+```
+
 - 内部原理
 
 `$watch`的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
-
+Vue.prototype.$watch = function (
+    expOrFn: string | Function,
+    cb: any,
+    options?: Object
+  ): Function {
+    const vm: Component = this
+    if (isPlainObject(cb)) {
+      return createWatcher(vm, expOrFn, cb, options)
+    }
+    options = options || {}
+    options.user = true
+    const watcher = new Watcher(vm, expOrFn, cb, options)
+    if (options.immediate) {
+      try {
+        cb.call(vm, watcher.value)
+      } catch (error) {
+        handleError(error, vm, `callback for immediate watcher "${watcher.expression}"`)
+      }
+    }
+    return function unwatchFn () {
+      watcher.teardown()
+    }
+  }
+}
 ```
 
 **`vm.$set`**
