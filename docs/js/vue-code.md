@@ -1280,6 +1280,111 @@ function initWatch (vm: Component, watch: Object) {
 
 ### 七、全局 API 篇
 
+与实例方法不同，实例方法是将方法挂载到`Vue`的原型上，而全局 API 是直接在`Vue`上挂载方法。在`Vue`中，全局 API 一共有 12 个，分别是`Vue.extend`、`Vue.nextTick`、`Vue.set`、`Vue.delete`、`Vue.directive`、`Vue.filter`、`Vue.component`、`Vue.use`、`Vue.mixin`、`Vue.observable`、`Vue.version`。这 12 个 API 中有的是我们在日常业务开发中经常会用到的，有的是对 Vue 内部或外部插件提供的，我们在日常业务开发中几乎用不到。
+
+1. Vue.extend
+2. Vue.nextTick
+3. Vue.set
+4. Vue.delete
+5. Vue.directive
+6. Vue.filter
+7. Vue.component
+8. directive、filter、component 小结
+9. Vue.use
+10. Vue.mixin
+11. Vue.compile
+12. Vue.observable
+13. Vue.version
+
+#### 7.1 Vue.extend
+
+既然是`Vue`类的子类，那么除了它本身独有的一些属性方法，还有一些是从`Vue`类中继承而来，所以创建子类的过程其实就是一边给子类上添加上独有的属性，一边将父类的公共属性到子类上。接下来，我们就来看看源码是如何实现这个过程的。
+
+该 API 的定义位于源码的`src/core/global-api/extend.js`中，如下：
+
+```
+Vue.extend = function (extendOptions: Object): Function {
+    extendOptions = extendOptions || {}
+    const Super = this
+    const SuperId = Super.cid
+    const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
+    if (cachedCtors[SuperId]) {
+        return cachedCtors[SuperId]
+    }
+
+    const name = extendOptions.name || Super.options.name
+    if (process.env.NODE_ENV !== 'production' && name) {
+        validateComponentName(name)
+    }
+
+    const Sub = function VueComponent (options) {
+        this._init(options)
+    }
+    Sub.prototype = Object.create(Super.prototype)
+    Sub.prototype.constructor = Sub
+    Sub.cid = cid++
+    Sub.options = mergeOptions(
+        Super.options,
+        extendOptions
+    )
+    Sub['super'] = Super
+
+    if (Sub.options.props) {
+        initProps(Sub)
+    }
+    if (Sub.options.computed) {
+        initComputed(Sub)
+    }
+
+    // allow further extension/mixin/plugin usage
+    Sub.extend = Super.extend
+    Sub.mixin = Super.mixin
+    Sub.use = Super.use
+
+    // create asset registers, so extended classes
+    // can have their private assets too.
+    ASSET_TYPES.forEach(function (type) {
+        Sub[type] = Super[type]
+    })
+    // enable recursive self-lookup
+    if (name) {
+        Sub.options.components[name] = Sub
+    }
+
+    Sub.superOptions = Super.options
+    Sub.extendOptions = extendOptions
+    Sub.sealedOptions = extend({}, Sub.options)
+
+    // cache constructor
+    cachedCtors[SuperId] = Sub
+    return Sub
+}
+```
+
+#### 7.9 Vue.use
+
+该 API 的定义位于源码的`src/core/global-api/use.js`中，代码如下：
+
+```
+Vue.use = function (plugin) {
+    const installedPlugins = (this._installedPlugins || (this._installedPlugins = []))
+    if (installedPlugins.indexOf(plugin) > -1) {
+        return this
+    }
+
+    // additional parameters
+    const args = toArray(arguments, 1)
+    args.unshift(this)
+    if (typeof plugin.install === 'function') {
+        plugin.install.apply(plugin, args)
+    } else if (typeof plugin === 'function') {
+        plugin.apply(null, args)
+    }
+    installedPlugins.push(plugin)
+    return this
+}
+```
+
 ### 八、过滤器篇
 
 ### 九、指令篇
