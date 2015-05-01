@@ -990,6 +990,20 @@ export function initEvents (vm: Component) {
 }
 ```
 
+这个`updateComponentListeners`函数是什么呢？该函数定义如下：
+
+```
+export function updateComponentListeners (
+  vm: Component,
+  listeners: Object,
+  oldListeners: ?Object
+) {
+  target = vm
+  updateListeners(listeners, oldListeners || {}, add, remove, createOnceHandler, vm)
+  target = undefined
+}
+```
+
 **initInjections 函数分析**
 
 从函数名字上来看，该函数是用来初始化实例中的`inject`选项的。说到`inject`选项，那必然离不开`provide`选项，这两个选项都是成对出现的，它们的作用是：鸡毛一个祖先组件向其所有子孙后代注入一个依赖，不论组件层次有多深，并在起上下游关系成立的时间始终生效。

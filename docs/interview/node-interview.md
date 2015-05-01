@@ -15,6 +15,8 @@
 - [分享 10 道 Nodejs 进程相关面试题](https://mp.weixin.qq.com/s/dKN95zcRI7qkwGYKhPXrcg)
 - [Node.js 面试题](https://github.com/jimuyouyou/node-interview-questions)
 - [面试官问:Node 与底层之间如何执行异步 I/O 调用？](https://mp.weixin.qq.com/s/kAmS_1VZHfmBH6YMWFN6BA)
+- [《吊打面试官》系列 深入 Node.js 多进程底层原理（字节跳动被问）](https://mp.weixin.qq.com/s/wBiBZcdNobDoZbk-cLLyfw)
+- [《吊打面试官》系列 Node.js 全栈秒杀系统](https://mp.weixin.qq.com/s/uWeAsJ-P253je15A49uKIQ)
 
 ## 联系作者
 
