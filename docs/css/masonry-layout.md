@@ -16,6 +16,8 @@
 
 `瀑布流`又称瀑布流式布局，是一种比较流行的页面布局方式，专业的英文名称为`Masonry Layouts`。与传统的分页显示不同，视觉表现为`参差不齐`的多栏布局。
 
+![images](column-layout-01.png)
+
 ### 二、瀑布流的实现原理
 
 ### 三、瀑布流的优缺点
@@ -56,16 +58,49 @@
 **CSS 代码**
 
 ```
+.masonry {
+    column-count: 3;
+    column-gap: 10px;
+    padding: 10px;
+}
 
+.masonry .item {
+    border: 1px solid #999;
+    margin-bottom: 10px;
+}
+
+.masonry .item img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.masonry .item .title {
+    display: block;
+    margin-left: 5px;
+}
 ```
 
 **HTML 代码**
 
 ```
-
+<div class="masonry">
+        <div class="item"><img src="https://i.pinimg.com/236x/7f/24/8c/7f248c9e18abe79de0d6c79617e03361.jpg"><span
+                class="title">Consequatur in ipsa ab sapiente enim. Accusantium aut est voluptas sequi. Quibusdam neque
+                aperiam dolor. Excepturi sunt a minus fuga autem excepturi cupiditate. Fuga aspernatur incidunt
+                aliquid.</span></div>
+        <div class="item"><img src="https://i.pinimg.com/236x/a6/cd/0a/a6cd0a15d5b2909539dd7944201127d2.jpg"><span
+                class="title">Sit qui consequuntur vel quibusdam sit ea sint. Repellendus unde ducimus sed dolor sint
+                iste. Expedita voluptas iste adipisci eos. Impedit dignissimos ratione animi dolorem est.</span></div>
+        <div class="item"><img src="https://i.pinimg.com/236x/d7/fb/60/d7fb60b2321149a83ab5dbe94744ced6.jpg"><span
+                class="title">Fugiat deserunt doloremque molestiae veritatis beatae aut. Eveniet voluptas sunt
+                accusamus. Quis quos hic itaque. Eveniet est repellendus. Odit sed sint. Repellendus est et.</span>
+        </div>
+</div>
 ```
 
 **效果**
+
+![images](column-layout-02.png)
 
 `multi-column`实现瀑布流主要依赖以下几个属性：
 
