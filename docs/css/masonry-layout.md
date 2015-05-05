@@ -137,7 +137,7 @@ break-inside:auto | avoid
 
 #### 4.2 grid 布局
 
-`Grid布局`是最强大的 CSS 布局方案。
+`Grid布局`是最强大的 CSS 布局方案。关于`Grid布局`可以详情参考[Grid 布局](https://km.xiaowuzi.info/css/grid.html)
 
 它将网页划分成一个个网格，可以做生意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。
 
@@ -240,6 +240,8 @@ break-inside:auto | avoid
 
 ![images](column-layout-05.png)
 
+我们看到高度不同的 div 块分布在每一个单元格内，但没有实现`瀑布流`的效果。
+
 为实现`瀑布流`再介绍几个属性：
 
 - `grid-row-start`：上边框所在的水平`网格线`
@@ -247,7 +249,40 @@ break-inside:auto | avoid
 - `grid-column-start`：左边框所在的垂平`网格线`
 - `grid-column-end`：右边框所在的垂平`网格线`
 
+上面 4 个属性可接收如下值：
+
+- `auto`：表示自动放置
+- `自定义名称`：可以给予网格线一个名称，并在此处引用
+- `网格线索引`：代表第几条网格线
+- `span+数字`：表示上下边框或左右跨越多少网格
+
+实际情况中，`瀑布流`更多的是为图片展示而服务的，花前月下由于图片是异步请求加载，只有在加载完成后才能获取图片的真实宽高，所以不得不使用 JS 来动态将单元格高度进行拉伸。
+
+伪代码如下：
+
+```
+//image-dom
+let img = document.getElementsByTagName('img')[0];
+//image-dom 当前宽度
+let width = img.width;
+
+let image = new Image();
+image.src = 'xxxx.img';
+image.onload = function(){
+    //图片原宽
+    let w = image.width;
+    //图片原高
+    let h = image.height;
+    //image-dom的真实高度(依据当前宽度及图片真实宽高)
+    let height = Math.round(h * width / w)
+    //设置当前跨越几个网格(每个网格10px)
+    img.style.gridRowEnd = `span ${~~(height/10)}`
+}
+```
+
 #### 4.3 Flexbox 布局
+
+`FlexBox`布局到今天已经是使用非常广泛，具体使用参考[flex 学习](https://km.xiaowuzi.info/css/flex.html)
 
 ### 参考资料
 
