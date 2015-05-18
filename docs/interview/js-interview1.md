@@ -814,7 +814,9 @@ if(a===1 && a == 2 && a==3){
 }
 ```
 
-1. 在类型转换的时候，我们知道了对象如何转换成原始数据类型。如果部署了[Symbol.toPrimitive]，那么返回的就是 Symbol.toPrimitive 的返回值。当然，我们也可以把此函数部署在 valueOf 或者是 toString 接口上，效果相同。
+参考资料[大厂面试题分享：如何让(a===1&&a===2&&a===3)的值为 true?](https://juejin.im/post/5e66dc416fb9a07cab3aaa0a)
+
+1. 在类型转换的时候，我们知道了对象如何转换成原始数据类型。如果部署了 Symbol.toPrimitive，那么返回的就是 Symbol.toPrimitive 的返回值。当然，我们也可以把此函数部署在 valueOf 或者是 toString 接口上，效果相同。
 
 ```
 // 利用闭包延长作用域的特性
@@ -828,9 +830,7 @@ let a = {
 }
 ```
 
-    1. 比较 a==1 时，会调用[Symbol.toPrimitive]，此时 i 是 1，相等。
-    2. 继续比较 a==2，调用[Symbol.toPrimitive]，此时 i 是 2，相等。
-    3. 继续比较 a ==3，调用[Symbol.toPrimitive]，此时 i 是 3，相等。
+(1) 比较 a==1 时，会调用[Symbol.toPrimitive]，此时 i 是 1，相等。(2) 继续比较 a==2，调用[Symbol.toPrimitive]，此时 i 是 2，相等。 (3)继续比较 a ==3，调用[Symbol.toPrimitive]，此时 i 是 3，相等。
 
 2. 利用 Object.defineProperty 在 window/global 上定义 a 属性，获取 a 属性时，会调用 get
 
@@ -876,6 +876,22 @@ new new Foo().getName();
 ```
 
 请戳链接：[一道常被人轻视的前端 JS 面试题](https://www.cnblogs.com/xxcanghai/p/5189353.html)
+
+1. 首先预编译阶段，变量声明与函数声明提升至其对应作用域的最顶端。
+
+因此上面的代码编译后如下（函数声明的优先级先于变量声明）：
+
+```
+
+```
+
+2. `Foo.getName()`直接调用 Foo 上 getName 方法，输出 2
+3. `getName()`输出 4，getName 被重新赋值了
+4. `Foo().getName()`执行 Foo()，window 的 getName 被重新赋值
+5. `getName()`已经抛错的自然走不动这一步了
+6. `new Foo.getName()`
+7. `new Foo().getName()`
+8. `new new Foo().getName()`new 带参数列表
 
 最终结果如下：
 
