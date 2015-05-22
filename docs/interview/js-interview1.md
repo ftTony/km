@@ -882,16 +882,23 @@ new new Foo().getName();
 因此上面的代码编译后如下（函数声明的优先级先于变量声明）：
 
 ```
-
+function Foo(){
+    getName = function(){console.log(1)}
+    return this;
+}
+function getName() {console.log(5)};    // 函数优先(函数首先被提升)
+var getName;    // 重复声明，被忽略
+Foo.getName = function(){console.log(3)};
+getName = function(){console.log(4)};
 ```
 
 2. `Foo.getName()`直接调用 Foo 上 getName 方法，输出 2
 3. `getName()`输出 4，getName 被重新赋值了
-4. `Foo().getName()`执行 Foo()，window 的 getName 被重新赋值
-5. `getName()`已经抛错的自然走不动这一步了
-6. `new Foo.getName()`
-7. `new Foo().getName()`
-8. `new new Foo().getName()`new 带参数列表
+4. `Foo().getName()`执行 Foo()，window 的 getName 被重新赋值，返回 this;浏览器环境中，非严格模式，this 指向 window，this.getName();输出为 1.如果是严格模式，this 指向 undefined，此处会抛出错误。如果是 node 环境中，this 指向 global，node 的全局变量并不挂在 global 上，因为 global.getName 对应的是 undefined，不是一个 function，会抛出错误。
+5. `getName()`已经抛错的自然走不动这一步了；继续浏览器非严格式；window.getName 被重新赋过值，此时再调用，输出的是 1
+6. `new Foo.getName()`考察[运算符优先级](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)的知识，new 无参数列表，对应的优先级 18；成员访问操作符`.`，对应的优先级是 19。因此相当于是`new (Foo.getName)()`;new 操作符会执行的构造函数中的方法，因此此处输出为 2.
+7. `new Foo().getName()`;new 带参数列表，对应的优先级是 19，和成员访问操作符`.`优先级相同。同级运算符，按照从左到右的顺序依次计算。`new Foo()`先初始化对象，实例上没有 getName 方法，因此需要原型上去找，即找到了`Foo.prototype.getName`，输出 3
+8. `new new Foo().getName()`new 带参数列表，优先级 19，因此相当于是`new(new Foo()).getName()`;先初始化 Foo 的实例化对象，然后将其原型上的 getName 函数作为构造函数再次 new，输出 3
 
 最终结果如下：
 
