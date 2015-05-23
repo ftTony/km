@@ -415,6 +415,7 @@ module.exports = {
                     "design-pattern-skill",
                     "design-pattern-architecture",
                     "design-pattern-behavior",
+                    "design-pattern-subscription",
                     "design-pattern-dependency"
                 ]
             },
