@@ -600,6 +600,100 @@ export function parse(template,options){
 
 #### 4.5 优化阶段
 
+优化阶段的源码位于`src/compiler/optimizer.js`中，如下：
+
+```
+export function optimize (root: ?ASTElement, options: CompilerOptions) {
+  if (!root) return
+  isStaticKey = genStaticKeysCached(options.staticKeys || '')
+  isPlatformReservedTag = options.isReservedTag || no
+  // 标记静态节点
+  markStatic(root)
+  // 标记静态根节点
+  markStaticRoots(root, false)
+}
+```
+
+**标记静态节点**
+
+```
+function markStatic (node: ASTNode) {
+  node.static = isStatic(node)
+  if (node.type === 1) {
+    // do not make component slot content static. this avoids
+    // 1. components not able to mutate slot nodes
+    // 2. static slot content fails for hot-reloading
+    if (
+      !isPlatformReservedTag(node.tag) &&
+      node.tag !== 'slot' &&
+      node.attrsMap['inline-template'] == null
+    ) {
+      return
+    }
+    for (let i = 0, l = node.children.length; i < l; i++) {
+      const child = node.children[i]
+      markStatic(child)
+      if (!child.static) {
+        node.static = false
+      }
+    }
+    if (node.ifConditions) {
+      for (let i = 1, l = node.ifConditions.length; i < l; i++) {
+        const block = node.ifConditions[i].block
+        markStatic(block)
+        if (!block.static) {
+          node.static = false
+        }
+      }
+    }
+  }
+}
+```
+
+如果元素节点是静态节点，那就必须满足以下几点要求：
+
+- 如果节点使用`v-pre`指令，那就断定它是静态节点；
+- 如果节点没有使用`v-pre`指令，那它要成为静态节点必须满足：
+  - 不能使用动态绑定语法，即标签上不能有`v-`、`@`、`:`开头的属性；
+  - 不能使用
+  - 不能是内置组件，即标签名不能是`slot`和`component`;
+
+**标记静态根节点**
+
+寻找表态根节点找静态节点的逻辑类似，都是从`AST`根节点递归向上遍历寻找，其代码如下：
+
+```
+function markStaticRoots (node: ASTNode, isInFor: boolean) {
+  if (node.type === 1) {
+    if (node.static || node.once) {
+      node.staticInFor = isInFor
+    }
+    // For a node to qualify as a static root, it should have children that
+    // are not just static text. Otherwise the cost of hoisting out will
+    // outweigh the benefits and it's better off to just always render it fresh.
+    if (node.static && node.children.length && !(
+      node.children.length === 1 &&
+      node.children[0].type === 3
+    )) {
+      node.staticRoot = true
+      return
+    } else {
+      node.staticRoot = false
+    }
+    if (node.children) {
+      for (let i = 0, l = node.children.length; i < l; i++) {
+        markStaticRoots(node.children[i], isInFor || !!node.for)
+      }
+    }
+    if (node.ifConditions) {
+      for (let i = 1, l = node.ifConditions.length; i < l; i++) {
+        markStaticRoots(node.ifConditions[i].block, isInFor)
+      }
+    }
+  }
+}
+```
+
 #### 4.5 代码生成阶段
 
 ### 五、生命周期篇
