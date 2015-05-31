@@ -25,9 +25,43 @@ class BasketBall{
 
 ### 二、工厂方法模式
 
-```
+#### 2.1 介绍
+
+工厂模式定义一个用于创建对象的接口，这个接口由子类决定实例化哪一个类。该模式使用一个类的实例化延迟到了子类。而子类可以重写接口方法以便创建的时候指定自己的对象类型。
+
+#### 2.2 代码
 
 ```
+class Produce{
+    constructor(name){
+        this.name = name
+    }
+    init(){
+        console.log('init')
+    }
+    fun(){
+        console.log('fun')
+    }
+}
+
+class Factory{
+    create(name){
+        return new Product(name)
+    }
+}
+
+// use
+let factory = new Factory()
+let p = factory.create('p1')
+p.init()
+p.fun()
+```
+
+#### 2.3 优点
+
+#### 2.4 缺点
+
+#### 2.3 适用场景
 
 ### 三、抽象工厂模式
 
@@ -43,25 +77,25 @@ class BasketBall{
 
 ### 五、单例模式
 
+#### 5.1 介绍
+
+一个类只有一个实例，并提供一个访问它的全局访问点。
+
+#### 5.2 代码
+
 ```
-let LazySingle = (function(){
-    let _instance = null;
-    function single(){
-        return {
-            publicMath(){},
-            publicConst:100
-        }
-    }
-    return function(){
-        if(!_instance){
-            _instance = single();
-        }
-        // 返回单例
-        return _instance;
-    }
-})();
-console.log(LazySingle().publicConst);
+
 ```
+
+#### 5.3 优点
+
+#### 5.4 缺点
+
+#### 5.5 场景例子
+
+- 定义命名空间和实现分支型方法
+- 登录框
+- vuex 和 redux 中的 store
 
 ### 参考资料
 
