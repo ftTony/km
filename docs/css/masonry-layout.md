@@ -301,7 +301,12 @@ image.onload = function(){
 
 ```
 <div class="masonry">
-
+    <div class="colmun">
+    </div>
+    <div class="colmun">
+    </div>
+    <div class="colmun">
+    </div>
 </div>
 ```
 
@@ -316,17 +321,47 @@ image.onload = function(){
 .masnory .column{
     display: flex;      // 设置为Flex容器
     flex-direction: column;     //  主轴方向设置为垂直方向
+    flex: 1;
+    padding: 0 2px;
+}
+.masnory .column .item{
+      margin-bottom: 5px;
+      width: 100%;
+}
+```
+
+**JS 代码**
+
+```
+let data1 = [], //第一列
+      data2 = [], //第二列
+      data3 = [], //第三列
+      i = 0;
+
+while (i < data.length) {
+        data1.push(data[i++]);
+    if (i < data.length) {
+        data2.push(data[i++]);
+    }
+    if (i < data.length) {
+        data3.push(data[i++]);
+    }
 }
 ```
 
 **效果**
 
-![images]()
+![images](column-layout-05.gif)
+
+### 总结
+
+做瀑布流需要考虑几方面大因素，图片质量，图片大小，加载速度，如果这些不同时满足，会大大降低用户体验。
 
 ### 参考资料
 
 - [「前端进阶」深度解析瀑布流布局](https://juejin.im/post/5ddb7a7c51882573520fb185)
 - [蘑菇街 PC 首页瀑布流实践](https://juejin.im/post/5e05acf0f265da33d158a1b1)
+- [Grid 布局 20 行代码快速生成瀑布流](https://www.cnblogs.com/ZweiZhao/p/9783930.html)
 
 ## 联系作者
 
