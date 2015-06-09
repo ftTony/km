@@ -73,7 +73,23 @@ let myEvent = {
 #### 2.2 代码
 
 ```
+class Plug{
+    getName(){
+        return 'iphone充电头'
+    }
+}
 
+class Target{
+    constructor(){
+        this.plug = new Plug();
+    }
+    getName(){
+        return this.plug.getName() + ' 适配器Type-c充电头';
+    }
+}
+
+let target = new Target();
+target.getName();       // iphone充电头 适配器转Type-c充电头
 ```
 
 #### 2.3 优点
@@ -91,7 +107,33 @@ let myEvent = {
 
 - 整合第三方 SDK
 - 封装旧接口
+
+```
+// 自己封装的ajax，使用方式如下
+ajax({
+    url: '/getData',
+    type: 'post',
+    dataType: 'json',
+    data:{
+        test:111
+    }
+}).done(function(){})
+
+// 做一层适配器
+var $ = {
+    ajax: function(options){
+        return ajax(options)
+    }
+}
+```
+
 - vue 的 computed
+
+```
+
+```
+
+原有 data 中的数据不满足当前的要求，通过计算属性的规则来适配成我们需要的格式，对原有数据并没有改变，只改变了原有数据的表现形式
 
 #### 适配器与代码模式相似
 
@@ -117,6 +159,8 @@ let myEvent = {
 ### 四、装饰者模式
 
 #### 4.1 介绍
+
+- 动态地给某个对象添加一些额外的职责，是一种实现的替代方案
 
 #### 4.2 代码
 
