@@ -261,7 +261,7 @@ break-inside:auto | avoid
 伪代码如下：
 
 ```
-//image-dom
+//  js 代码
 let img = document.getElementsByTagName('img')[0];
 //image-dom 当前宽度
 let width = img.width;
@@ -278,11 +278,50 @@ image.onload = function(){
     //设置当前跨越几个网格(每个网格10px)
     img.style.gridRowEnd = `span ${~~(height/10)}`
 }
+
+// css 代码
+.masonry{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;     //  分为3列
+    column-gap: 5px;    // 列间距5px
+    grid-auto-rows:10px;
+}
+.masonry .item{
+    grid-row-start: auto;
+}
 ```
 
 #### 4.3 Flexbox 布局
 
 `FlexBox`布局到今天已经是使用非常广泛，具体使用参考[flex 学习](https://km.xiaowuzi.info/css/flex.html)
+
+`Flexbox`怎么实现瀑布流布局。
+
+**HTML 代码结构**
+
+```
+<div class="masonry">
+
+</div>
+```
+
+**CSS 代码**
+
+```
+.masonry{
+    display:flex;       // 设置为Flex容器
+    flex-direction:row; //  主轴方向设置为水平方向
+}
+
+.masnory .column{
+    display: flex;      // 设置为Flex容器
+    flex-direction: column;     //  主轴方向设置为垂直方向
+}
+```
+
+**效果**
+
+![images]()
 
 ### 参考资料
 
