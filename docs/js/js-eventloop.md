@@ -395,6 +395,7 @@ Node 端的处理过程如下：
 
 ### 参考资料
 
+- [你不知道的 Event Loop](https://mp.weixin.qq.com/s/ETDqdo3JIcUxbeIlddSq-Q)
 - [一次弄懂 Event Loop（彻底解决此类面试问题）](https://juejin.im/post/5c3d8956e51d4511dc72c200)
 - [Event Loop](https://juejin.im/book/5bdc715fe51d454e755f75ef/section/5be04a8e6fb9a04a072fd2cd)
 - [浏览器与 Node 的事件循环(Event Loop)有何区别?](https://github.com/ljianshu/Blog/issues/54)

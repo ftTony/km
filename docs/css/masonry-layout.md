@@ -141,6 +141,40 @@ break-inside:auto | avoid
 
 它将网页划分成一个个网格，可以做生意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。
 
+![images](column-layout-04.png)
+
+上图这样的布局，就是 Grid 布局的拿手好戏，因此，我们就可以用`Grid`来实现`瀑布流`。
+
+为实现`瀑布流`先介绍以下几个属性：
+
+- `display`：设置为`grid`指明当前容器为`Grid布局`
+- `grid-template-columns`：定义每一列的列宽
+- `grid-template-rows`：定义每一行的行高
+- `column-gap`：用于设置画列间距
+
+`grid-template-columns`和`grid-template-rows`，可以使用绝对单位，也可以使用百分比。并且为了表示比例关系，`Grid`布局提供了`fr`关键字，如果设置`1fr`和`2fr`，表示后者是前者的两倍。
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+**效果**
+
+为实现`瀑布流`再介绍几个属性：
+
+- `grid-row-start`：上边框所在的水平`网格线`
+- `grid-row-end`：下边框所在的水平`网格线`
+- `grid-column-start`：左边框所在的垂平`网格线`
+- `grid-column-end`：右边框所在的垂平`网格线`
+
 #### 4.3 Flexbox 布局
 
 ### 参考资料
