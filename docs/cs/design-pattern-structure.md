@@ -322,14 +322,49 @@ class Shape{
 #### 6.2 代码
 
 ```
+class TrainOrder(){
+    create(){
+        console.log('创建火车票订单')
+    }
+}
+class HoteOrder(){
+    create(){
+        console.log('创建酒店订单')
+    }
+}
+class TotalOrder(){
+    constructor(){
+        this.orderList = []
+    }
+    addOrder(order){
+        this.orderList.push(order)
+        return this
+    }
+    create(){
+        this.orderList.forEach(item=>{
+            item.create(0)
+        })
+        return this
+    }
+}
 
+// 可以在购票网站买车同时也订房间
+let train = new TrainOrder()
+let hotel = new HotelOrder()
+let total = new TotalOrder()
+total.addOrder(train).addOrder(hotal).create()
 ```
 
 #### 6.3 优点
 
 #### 6.4 缺点
 
+- 如果通过组合模式创建了太多的对象，那么这些对象可能会让系统负担不起。
+
 #### 6.5 场景
+
+- 表示对象-整体层次结构
+- 希望用户忽略组合对象和单个对象的不同，用户将统一地使用组合结构中的所有对象（方法）
 
 ### 七、享元模式
 
