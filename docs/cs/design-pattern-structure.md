@@ -130,7 +130,25 @@ var $ = {
 - vue 的 computed
 
 ```
-
+<template>
+    <div id="example">
+    </div>
+</template>
+<script type="text/javascript">
+export default{
+    name: 'demo',
+    data(){
+        return {
+            message: 'Hello'
+        }
+    },
+    computed:{
+        reversedMessage:function(){
+            return this.message.split('').reverse().join('')
+        }
+    }
+}
+</script>
 ```
 
 原有 data 中的数据不满足当前的要求，通过计算属性的规则来适配成我们需要的格式，对原有数据并没有改变，只改变了原有数据的表现形式
@@ -216,7 +234,30 @@ xiaoming.sendFlower(B)
 #### 4.2 代码
 
 ```
+class Cellphone{
+    create(){
+        console.log('生成一个手机')
+    }
+}
+class Decorator{
+    constructor(cellphone){
+        this.cellphone = cellphone
+    }
+    create(){
+        this.cellphone.create()
+        this.createShell(cellphone)
+    }
+    createShell(){
+        console.log('生成手机壳')
+    }
+}
+// 测试代码
+let cellphone = new Cellphone()
+cellphone.create()
 
+console.log('----------')
+let dec = new Decorator(cellphone)
+dec.create()
 ```
 
 #### 4.3 优点
