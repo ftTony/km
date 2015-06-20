@@ -280,21 +280,44 @@ dec.create()
 
 #### 5.1 介绍
 
+桥接模式将抽象部分与它的实现部分分离，使它们都可以独立地变化。
+
 #### 5.2 代码
 
 ```
-
+class Color{
+    constructor(name){
+        this.name = name
+    }
+}
+class Shape{
+    constructor(name,color){
+        this.name = name
+        this.color = color
+    }
+    draw(){
+        console.log(`${this.color.name} ${this.name}`)
+    }
+}
 ```
 
 #### 5.3 优点
 
+- 有助于独立地管理各组成部分，把抽象化与实现化解耦
+- 提高可扩充性
+
 #### 5.4 缺点
+
+- 大量的类将导致开发成本增加，同时在性能方面可能也会有所减少。
 
 #### 5.5 场景
 
 ### 六、组合模式
 
 #### 6.1 介绍
+
+- 将对象组合成树形结构，以表示“整体-部分”的层次结构。
+- 通过对象的多态表现，使得用户对单个对象和组合对象的使用具有一致性。
 
 #### 6.2 代码
 
