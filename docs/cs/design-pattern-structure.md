@@ -368,9 +368,66 @@ total.addOrder(train).addOrder(hotal).create()
 
 ### 七、享元模式
 
-```
+#### 7.1 介绍
+
+运用共享技术有效地支持大量粒度对象的复用。系统只使用少量的对象，而这些对象都很相似，状态变化很小，可以实现对象的多次复用。由于享元模式要求能够共享的对象必须是细粒度对象，因此它又称轻量级模式，它是一种对象结构型模式
+
+#### 7.2 代码
 
 ```
+let examCarNum = 0
+/* 驾考车对象 */
+class ExamCar{
+    constructor(carType){
+        examCarNum++
+        this.carId = examCarNum
+        this.carType = carType ? '手动档' : '自动档'
+        this.usingState = false // 是否存在使用
+    }
+
+    /* 在本车上考试 */
+    examine(candidateId){
+        return new Promise((resolve)=>{
+            this.usingState = true
+            console.log(``)
+            setTimeout(()=>{
+                this.usingState = false
+                console.log(`%c考生- ${candidateId}`)
+                resolve()
+            },Math.random() * 2000)
+        })
+    }
+}
+
+/* 手动档汽车对象池  */
+ManualExamCarPool = {
+    _pool: [],          // 驾考车对象
+    _candidateQueue: [],    // 考生队列
+
+    /* 注册考生ID列表 */
+    registCandidates(candidateList){
+
+    },
+
+    /* 注册手动档考生 */
+    registCandidate(candidateId){
+
+    }
+}
+```
+
+#### 7.3 优点
+
+- 大大减少对象的创建，降低系统的内存，使效率提高。
+
+#### 7.4 缺点
+
+- 提高了系统的复杂度，需要分离出外部状态和内部状态，而且外部状态具有固有化的性质，不应该随着内部状态的变化而变化，否则会千万系统的混乱。
+
+#### 7.5 场景
+
+- 文件上传需要创建多个文件实例的时候
+- 如果一个应用程序使用了大量的对象，而这些大量的对象千万了很大存储开销时应该考虑使用享元模式
 
 ## 参考资料
 
