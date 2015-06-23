@@ -392,7 +392,7 @@ class ExamCar{
             console.log(``)
             setTimeout(()=>{
                 this.usingState = false
-                console.log(`%c考生- ${candidateId}`)
+                console.log(`%c考生- ${candidateId}驾考车- ${this.carId}上考试`)
                 resolve()
             },Math.random() * 2000)
         })
@@ -406,12 +406,32 @@ ManualExamCarPool = {
 
     /* 注册考生ID列表 */
     registCandidates(candidateList){
-
+        candidateList.forEach(candidateId => this.registCandidate(candidateId))
     },
 
     /* 注册手动档考生 */
     registCandidate(candidateId){
+        const examCar = this.getManualExamCar()     // 找一个未被占用手动档驾考车
+        if(examCar){
+            examCar.examine(candidateId).then(()=>{
+                const nextCandidateId = this._candidateQueue.length && this._candidateQueue.shift()
+                nextCandidateId && this.registCandidate(nextCandidateId)
+            })
+        }else{
+            this._candidateQueue.push(candidateId)
+        }
+    },
 
+    /* 注册手动档车 */
+    initManualExamCar(manualExamCarNum){
+        for(let i = 1; i<= manualExamCarNum;i++){
+            this._pool.push(new ExamCar(true))
+        }
+    },
+
+    /* 获取状态为未被占用的手动档车 */
+    getManualExamCar(){
+        return this._pool.find(car => !car.usingState)
     }
 }
 ```
