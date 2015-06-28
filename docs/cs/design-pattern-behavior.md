@@ -26,7 +26,39 @@
 #### 1.2 代码
 
 ```
-
+class Beverage{
+    constructor({brewDrink,addCondiment}){
+        this.brewDrink = brewDrink
+        this.addCondiment = addCondiment
+    }
+    /* 烧开水，共用方法 */
+    boilWater(){
+        console.log('水已经煮沸===共用')
+    }
+    /* 倒杯子里，共用方法 */
+    pourCup(){
+        console.log('倒进杯子里===共用')
+    }
+    /* 模板方法 */
+    init(){
+        this.boilWater()
+        this.brewDrink()
+        this.pourCup()
+        this.addCondiment()
+    }
+}
+/* 咖啡 */
+const coffee = new Beverage({
+    /* 冲泡咖啡，覆盖抽象方法 */
+    brewDrink:function(){
+        console.log('冲泡咖啡')
+    },
+    /* 加调味品，覆盖抽象方法 */
+    addCondiment:function(){
+        console.log('加点奶和糖')
+    }
+})
+coffee.init()
 ```
 
 #### 1.3 优点
@@ -50,6 +82,8 @@
 
 #### 3.1 介绍
 
+允许一个对象在其内部状态改变的时候改变它的行为，对象看起来似乎修改了它的类
+
 #### 3.2 代码
 
 ```
@@ -62,21 +96,53 @@
 
 #### 3.5 场景
 
+- 一个对象的行为取决于它的状态，并且它必须在运行时刻根据状态改变它的行为
+- 一个操作中含有大量的分支语句，而且这些分支语句依赖于该对象的状态
+
 ### 四、策略模式
 
 #### 4.1 介绍
 
+定义一系列的算法，把它们一个个封装起来，并且使它们可以互相替换
+
 #### 4.2 代码
 
 ```
+<html>
+<head>
+    <title>策略模式-校验表单</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+</head>
+<body>
+    <form id = "registerForm" method="post" action="http://xxxx.com/api/register">
+        用户名：<input type="text" name="userName">
+        密码：<input type="text" name="password">
+        手机号码：<input type="text" name="phoneNumber">
+        <button type="submit">提交</button>
+    </form>
+    <script type="text/javascript">
 
+    </script>
+</body>
+</html>
 ```
 
 #### 4.3 优点
 
+- 利用组合、委托、多态等技术和思想，可以有效的避免多重条件选择语句
+- 提供了对开放-封闭原则的完美支持，将算法封装在独立的 strategy 中，使得它们易于切换，理解，易于扩展
+- 利用组合和委托来让 Context 拥有执行算法的能力，这也是继承的一种更轻便的代替方案
+
 #### 4.4 缺点
 
+- 会在程序中增加许多策略类或者策略对象
+- 要使用策略模式，必须了解所有的 strategy，必须了解各个 strategy 之间的不同点，这样才选择一个合适的 strategy
+
 #### 4.5 场景
+
+- 如果在一个系统里面有许多类，它们之间的区别仅在于它们的行为，那么使用策略模式可以动态地让一个对象在许多行为中选择一种行为。
+- 一个系统需要动态地在几种算法中选择一种。
+- 表单验证
 
 ### 五、职责链模式
 
