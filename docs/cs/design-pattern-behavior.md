@@ -121,7 +121,31 @@ coffee.init()
         <button type="submit">提交</button>
     </form>
     <script type="text/javascript">
+        // 策略对象
+        const strategies = {
+            isNoEmpty: function(value,errorMsg){
 
+            },
+            isNoSpace: function(value,errorMsg){
+
+            },
+            minLength: function(value,length,errorMsg){
+
+            },
+            maxLength: function(value,length,errorMsg){
+
+            },
+            isMobile:function(value,errorMsg){
+
+            }
+        }
+
+        // 验证类
+        class Validator{
+            constructor(){
+                
+            }
+        }
     </script>
 </body>
 </html>
