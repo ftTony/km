@@ -124,26 +124,36 @@ coffee.init()
         // 策略对象
         const strategies = {
             isNoEmpty: function(value,errorMsg){
-
+                if(value === ''){
+                    return errorMsg;
+                }
             },
             isNoSpace: function(value,errorMsg){
-
+                if(value.trim() === ''){
+                    return errorMsg;
+                }
             },
             minLength: function(value,length,errorMsg){
-
+                if(value.trim().length < length){
+                    return errorMsg;
+                }
             },
             maxLength: function(value,length,errorMsg){
-
+                if(value.length>length){
+                    return errorMsg;
+                }
             },
             isMobile:function(value,errorMsg){
-
+                if (!/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|17[7]|18[0|1|2|3|5|6|7|8|9])\d{8}$/.test(value)) {
+                    return errorMsg;
+                }
             }
         }
 
         // 验证类
         class Validator{
             constructor(){
-                
+                this.cache = []
             }
         }
     </script>
