@@ -479,6 +479,28 @@ export class Observer {
 }
 // 能力检测：判断__proto__是否可用，因为有的浏览器不支持该属性
 export const hasProto = '__proto__' in {}
+
+const arrayKeys = Object.getOwnPropertyNames(arrayMethods)
+
+/**
+ * Augment an target Object or Array by intercepting
+ * the prototype chain using __proto__
+ */
+function protoAugment (target, src: Object, keys: any) {
+  target.__proto__ = src
+}
+
+/**
+ * Augment an target Object or Array by defining
+ * hidden properties.
+ */
+/* istanbul ignore next */
+function copyAugment (target: Object, src: Object, keys: Array<string>) {
+  for (let i = 0, l = keys.length; i < l; i++) {
+    const key = keys[i]
+    def(target, key, src[key])
+  }
+}
 ```
 
 #### 2.3 变化侦测的 API 实现
@@ -665,13 +687,27 @@ export function del (target: Array<any> | Object, key: any) {
 2. 优化阶段——优化器——源码路径：`src/compiler/optimizer.js`
 3. 代码生成阶段——代码生成器——源码路径：`src/compiler/codegen/index.js`
 
-#### 4.1 整体运行流程
+其对应的源码如下：
+
+```
+// 源码位置：/src/complier/index.js
+
+export const createCompiler = createCompilerCreate(function baseCompile(){
+
+})
+```
+
+可以看到`baseCompile`的代码非常的简短主要核心代码。
+
+- **const ast = parse(template.trim(),options)**：`parse`会用与此同时等方式
+
+#### 4.2 整体运行流程
 
 在模板解析阶段主要做的工作是把用户在`<template></template>`标签内写的模板使用正则等方式解析成抽象语法树（`AST`）。而这一阶段在源码中对应解析器（`parser`）模块。
 
 解析器，顾名思义，就是把用户所写的模板根据一定的解析规则解析出有效的信息，最后用这些信息形成`AST`。我们知道在`<template></template>`模板内，除了有常规的`HTML`标签外，
 
-#### 4.2 HTML 解析器
+#### 4.3 HTML 解析器
 
 **HTML 解析器内部运行流程**
 
@@ -722,7 +758,7 @@ export function parse(template,options){
 
 要从模板字符串中解析出不同的内容，那
 
-#### 4.3 文本解析器
+#### 4.4 文本解析器
 
 #### 4.5 优化阶段
 
