@@ -9,7 +9,7 @@
 - [堆，栈、队列](#一、堆栈队列)
 - [线程与进程](#二、线程与进程)
 - [Event Loop](#三、event-loop)
-- [浏览器中的 Event Loop](#四、浏览器中的event-loop)
+- [浏览器中的 Event Loop](#四、浏览器中的-event-loop)
 - [例子](#五、例子)
 - [NodeJS 的 Event Loop](#六、nodejs的event-loop)
 
@@ -340,7 +340,9 @@ process.nextTick(()=>{
 
 ```
 
-### 七、Node 与浏览器的 Event Loop 差异
+### 六、Node 与浏览器的 Event Loop 差异
+
+Node 的 EventLoop 可以看这篇文章[Node 的事件循环机制](https://km.xiaowuzi.info/js/node-eventloop.html)
 
 **浏览器环境下，microtask 的任务队列是每个 macrotask 执行完之后执行。而在 Node.js 中，microtask 会在事件循环的各个阶段之间执行，也就是一个阶段执行完毕，就会去执行 microtask 队列的任务。**
 
