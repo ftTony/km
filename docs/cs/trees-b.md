@@ -79,6 +79,8 @@ B+树是 B 树的一个升级版，相对于 B 树来说 B+树更充分的利用
 - [平衡二叉树、B 树、B+树、`B*`树 理解其中一种你就都明白了](https://zhuanlan.zhihu.com/p/27700617)
 - [心里没点 B 树。。。](https://mp.weixin.qq.com/s/5ERFlmeUGXnfQPAZBLn6RA)
 - [什么是 MySQL 索引?](https://mp.weixin.qq.com/s/yxS4tpX_6fz9LBsh0UoHpw)
+- [拜托，别再问我什么是 B+ 树了](https://mp.weixin.qq.com/s/Fu70CC8FoeVlHDfCYyZ-rg)
+- [为啥 SQL 加了索引会使数据查找更快？](https://mp.weixin.qq.com/s/xVoMmBjFVJaUSadF1nEfeg)
 
 ## 联系作者
 

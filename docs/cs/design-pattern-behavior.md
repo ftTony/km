@@ -155,6 +155,11 @@ coffee.init()
             constructor(){
                 this.cache = []
             }
+            add(dom,rules){
+                for(let i = 0,rule;rule = rules[i++];){
+
+                }
+            }
         }
     </script>
 </body>
@@ -234,17 +239,65 @@ a1.handle()
 
 #### 6.1 介绍
 
+将一个请求封装成一个对象，从而让你使用不同的请求把客户端参数化，对请求排队或者记录请求日志，可以提供命令的撤销和恢复功能。
+
 #### 6.2 代码
 
 ```
+// 接收者类
+class Receiver{
+    execute(){
+        console.log('接收者执行请求')
+    }
+}
 
+//  命令者
+class Command{
+    constructor(receiver){
+        this.receiver = receiver
+    }
+    execute(){
+        console.log('命令')
+        this.receiver.execute()
+    }
+}
+
+// 触发者
+class Invoke{
+    constructor(command){
+        this.command = command
+    }
+    invoke(){
+        console.log('开始')
+        this.command.execute()
+    }
+}
+
+// 仓库
+const warehouse = new Receiver()
+// 订单
+const order - new Command(warehouse)
+// 客户
+const client = new Invoker(order);
+client.invoke()
 ```
 
 #### 6.3 优点
 
+- 对命令进行封装，使命令易于扩展和修改
+- 命令发出者和接受解耦，使发出者不需要知道命令的具体执行过程即可执行
+
 #### 6.4 缺点
 
+- 使用命令模式可能会导致某此系统有过多的具体命令类。
+
 ### 七、访问者模式
+
+#### 7.1 介绍
+
+表示一个作用于某对象结构中各元素操作。它使你可以在不改变各元素的类的前提下定义作用
+
+#### 7.2 代码
 
 ```
 
