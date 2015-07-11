@@ -49,7 +49,27 @@ Node 的架构底层是有 libuv，它是 Node 自身的动力来源之一，通
 - 检查阶段(timers)：setImmediate()回调函数在这里执行
 - 关闭事件回调阶段(timers)：一些关闭的回调函数，如：socket.on('close',...)。
 
+日常开发中的绝大部分异步任务都是在 poll、check、timers 这 3 个阶段处理的，所以我们来重点看看。
+
+#### 3.1 timers
+
+#### 3.2 poll
+
+#### 3.3 check
+
+check 阶段。这是一个比较简单的阶段，直接执行 setImmdiate 的回调。
+
 ### 四、轮循顺序
+
+执行的轮循顺序——每个阶段都要等对应的宏任务队列执行完毕才会进入到下一个阶段的宏任务队列
+
+1. timers
+2. I/O callbacks
+3. poll
+4. setImmediate
+5. close events
+
+每两个阶段之间执行微任务队列
 
 ### 五、Event Loop 过程
 
@@ -60,6 +80,20 @@ Node 的架构底层是有 libuv，它是 Node 自身的动力来源之一，通
 5. TimersQueue—>步骤 2
 
 ### 六、setTimeout 和 setImmediate
+
+setImmediate()方法用于把一些需要长时间运行的操作放在一个回调函数里，并在浏览器完成其他操作（如事件和显示更新）后立即运行回调函数。从定义来看就是为了防止一些耗时长的操作阻塞后面的操作，这也是为什么 check 阶段运行顺序排的比较后。
+
+### 七、process.nextTick
+
+process.nextTick 是一个独立于 eventLoop 的任务队列。
+
+### 八、node 版本差异说明
+
+这里主要说明的是 node11 前后的差异，因为 node11 之后一些特性已经向浏览器看齐了，总
+
+### 九、node 和浏览器 eventLoop 的主要区别
+
+两者最主要的区别在于浏览器中的微任务是在每个相应的宏任务完成后执行的，而 node 中的微任务是在不同阶段之间执行的。
 
 ### 参考资料
 
