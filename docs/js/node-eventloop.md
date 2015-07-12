@@ -53,7 +53,22 @@ Node 的架构底层是有 libuv，它是 Node 自身的动力来源之一，通
 
 #### 3.1 timers
 
+timers 阶段会执行 setTimeout 和 setInterval 回调，并且是由 poll 阶段控制的。同样，在 Node 中定时器指定的时间也不是准确时间，只能是尽快执行。
+
 #### 3.2 poll
+
+poll 是一个至关重要的阶段，poll 阶段的执行逻辑流程图如下：
+
+![images](node12.jpg)
+
+如果当前已经存在定时器，而且有定时器到时间了，拿出来执行，eventLoop 将回到`timers`阶段。
+
+如果没有定时器，会去盾回调函数队列。
+
+- 如果 poll 队列不为空
+- 如果 poll 队列为空时，会有两件事发生
+  - 如果有 setImmediate 回调需要执行，poll 阶段会停止并且进入到 check 阶段执行回调
+  - 如果没有 setImmediate 回调需要执行，会等待回调被加入到队列中并立即执行回调，这里同样会有个超时时间设置防止一直等待下去，一段时间后自动进入 check 阶段。
 
 #### 3.3 check
 
@@ -87,9 +102,42 @@ setImmediate()方法用于把一些需要长时间运行的操作放在一个回
 
 process.nextTick 是一个独立于 eventLoop 的任务队列。
 
+在每一个 eventLoop 阶段完成后会去检查 nextTick 队列，如果里面有任务，会让这部分任务优先于微任务执行。
+
+看一个例子：
+
+```
+setImmediate(()=>{
+    console.log('timeout1')
+    Promise.resolve().then(()=>console.log('promise resolve'))
+    process.nextTick(()=>console.log('next tick1'))
+});
+setImmediate(()=>{
+    console.log('timeout2')
+    process.nextTick(()=>console.log('next tick2'))
+})
+setImmediate(()=>console.log('timeout3'))
+setImmediate(()=>console.log('timeout4'))
+```
+
+- 在 node11 之前，因为
+
 ### 八、node 版本差异说明
 
-这里主要说明的是 node11 前后的差异，因为 node11 之后一些特性已经向浏览器看齐了，总
+这里主要说明的是 node11 前后的差异，因为 node11 之后一些特性已经向浏览器看齐了，总的变化一句话来说就是，如果是 node11 版本一旦执行一个阶段里的一个宏任务(setTimeout,setInterval 和 setImmediate)就立刻执行对应的微任务队列。
+
+1. timers 阶段的执行时机变化
+2. check 阶段的执行时机变化
+
+```
+
+```
+
+3. nextTick 队列的执行时机变化
+
+```
+
+```
 
 ### 九、node 和浏览器 eventLoop 的主要区别
 
