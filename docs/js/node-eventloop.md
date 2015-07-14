@@ -120,28 +120,58 @@ setImmediate(()=>console.log('timeout3'))
 setImmediate(()=>console.log('timeout4'))
 ```
 
-- 在 node11 之前，因为
+- 在 node11 之前，因为每一个 eventLoop 阶段完成后会去检查 nextTick 队列
 
 ### 八、node 版本差异说明
 
 这里主要说明的是 node11 前后的差异，因为 node11 之后一些特性已经向浏览器看齐了，总的变化一句话来说就是，如果是 node11 版本一旦执行一个阶段里的一个宏任务(setTimeout,setInterval 和 setImmediate)就立刻执行对应的微任务队列。
 
 1. timers 阶段的执行时机变化
+
+```
+setTimeout(()=>{
+    console.log('time1')
+    Promise.resolve().then(function(){
+        console.log('promise1')
+    })
+},0)
+setTimeout(()=>{
+    console.log('time2')
+    Promise.resolve().then(function(){
+        console.log('promise2')
+    })
+},0)
+```
+
 2. check 阶段的执行时机变化
 
 ```
-
+setImmediate(()=>console.log('immediate1'));
+setImmediate(()=>{
+    console.log('immediate2')
+    Promise.resolve().then(()=>console.log('promise resolve'))
+})
+setImmediate(()=>console.log('immediate3'));
+setImmediate(()=>console.log('immedidate4'));
 ```
 
 3. nextTick 队列的执行时机变化
 
 ```
-
+setImmediate(()=>console.log('timeout1'))
+setImmediate(()=>{
+    console.log('timeout2')
+    process.nextTick(()=>console.log('next tick'))
+})
+setImmediate(()=>console.log('timeout3'))
+setImmediate(()=>console.log('timeout4'))
 ```
 
 ### 九、node 和浏览器 eventLoop 的主要区别
 
-两者最主要的区别在于浏览器中的微任务是在每个相应的宏任务完成后执行的，而 node 中的微任务是在不同阶段之间执行的。
+1. 浏览器端的 Event Loop 和 Node.js 中的 Event Loop 是不同的，实现机制也不一样
+2. Node.js 可以理解成有 4 个宏任务队列和 2 个微任务队列，但是执行宏任务时有 6 个阶段
+3. Node.js 中限制性全局 script 代码，执行完同步代码，先从微任务队列 NextTick Queue 中取出所有任务放入调用栈执行，
 
 ### 参考资料
 
