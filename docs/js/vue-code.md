@@ -600,6 +600,11 @@ export function parse(template,options){
 
 #### 4.5 优化阶段
 
+优化阶段其实干了两件事：
+
+1. 在`AST`中找出所有静态节点并打上标记；
+2. 在`AST`中找出所有表态根节点并打上标记；
+
 优化阶段的源码位于`src/compiler/optimizer.js`中，如下：
 
 ```
@@ -615,6 +620,8 @@ export function optimize (root: ?ASTElement, options: CompilerOptions) {
 ```
 
 **标记静态节点**
+
+从`AST`中找出所有静态节点并标记其实不难，我们只需从根节点开始，先标记点是否静态节点，然后看根节点如果是元素节点，那么就向下递归它的子节点，子节点如果还有子节点那就继续向下递归，直到票房完所有节点。代码如下：
 
 ```
 function markStatic (node: ASTNode) {
@@ -650,13 +657,37 @@ function markStatic (node: ASTNode) {
 }
 ```
 
+上面代码中，首先调用`isStatic`函数标记节点是否为静态节点，该函数若返回`true`表示该节点是静态节点，若返回`false`表示该节点不是静态节点，函数实现如下：
+
+```
+function isStatic (node: ASTNode): boolean {
+  if (node.type === 2) { // expression
+    return false
+  }
+  if (node.type === 3) { // text
+    return true
+  }
+  return !!(node.pre || (
+    !node.hasBindings && // no dynamic bindings
+    !node.if && !node.for && // not v-if or v-for or v-else
+    !isBuiltInTag(node.tag) && // not a built-in
+    isPlatformReservedTag(node.tag) && // not a component
+    !isDirectChildOfTemplateFor(node) &&
+    Object.keys(node).every(isStaticKey)
+  ))
+}
+```
+
 如果元素节点是静态节点，那就必须满足以下几点要求：
 
 - 如果节点使用`v-pre`指令，那就断定它是静态节点；
 - 如果节点没有使用`v-pre`指令，那它要成为静态节点必须满足：
   - 不能使用动态绑定语法，即标签上不能有`v-`、`@`、`:`开头的属性；
-  - 不能使用
+  - 不能使用`v-if`、`v-else`、`v-for` 指令；
   - 不能是内置组件，即标签名不能是`slot`和`component`;
+  - 标签名必须是平台保留标签，即不能是组件；
+  - 当前节点的父节点不能是带有`v-for`和`template`标签；
+  - 节点的所有属性的`key`都必须是静态节点才有的`key`，注：静态节点的`key`是有限的，它只能是`type`、`tag`、`attrsList`、`attrsMap`、`plain`、`parent`、`children`、`attrs`之一；
 
 **标记静态根节点**
 
