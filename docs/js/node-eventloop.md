@@ -120,7 +120,8 @@ setImmediate(()=>console.log('timeout3'))
 setImmediate(()=>console.log('timeout4'))
 ```
 
-- 在 node11 之前，因为每一个 eventLoop 阶段完成后会去检查 nextTick 队列
+- 在 node11 之前，因为每一个 eventLoop 阶段完成后会去检查 nextTick 队列，如果里面有任务，会让这部分任务优先于微任务执行，因此上述代码是先进入 check 阶段，执行所有 setImmediate，完成之后执行 nextTick 队列，最后执行微任务队列，因此输出为`timeou1=>timeout2=>timeout3=>timeout4=>next tick1=>next tick2=>promise resolve`
+- 在 node11 之后，process.nextTick 是微任务的一种，因此上述代码是先进入 check 阶段，执行一个 setImmediate 宏任务，然后执行其微任务队列，再执行下一个宏任务及其微任务，因此输出为`timeout1=>next tick1=>promise resolve=>timeout2=>next tick2=>timeout3=>timeout4`
 
 ### 八、node 版本差异说明
 
