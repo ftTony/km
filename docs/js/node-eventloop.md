@@ -144,6 +144,11 @@ setTimeout(()=>{
 },0)
 ```
 
+- 如果是 node11 版本一旦执行一个阶段里的一个宏任务(setTimeout,setInterval 和 setImmediate)就立刻执行微任务队列，这就跟浏览器端运行一致，最后的结果为`timer1=>promsie1=>timer2=>promise2`
+- 如果是 node10 及其之前版本要看第一个定时器执行完，第二个定时器是否在完成队列中
+  - 如果是第二个定时器还未在完成队列中，最后的结果为`time1=>promise1=>time2=>promise2`
+  - 如果是第二个定时器已经在完成队列中，则最后的结果为`timer1=>timer2=>promise1=>promise2`
+
 2. check 阶段的执行时机变化
 
 ```
@@ -155,6 +160,9 @@ setImmediate(()=>{
 setImmediate(()=>console.log('immediate3'));
 setImmediate(()=>console.log('immedidate4'));
 ```
+
+- 如果是 node11 后的版本，会输出`immediate1=>immediate2=>promise resolve=>immediate3=>immediate4`
+- 如果是 node11 前的版本，会输出`immediate1=>immediate2=>immediate3=>immediate4=>promise resolve`
 
 3. nextTick 队列的执行时机变化
 
@@ -168,11 +176,16 @@ setImmediate(()=>console.log('timeout3'))
 setImmediate(()=>console.log('timeout4'))
 ```
 
+- 如果是 node11 后的版本，会输出`timeout1=>timeout2=>next tick=>timeout3=>timeout4`
+- 如果是 node11 前的版本，会输出`timeout1=>timeout2=>timeout3=>timeou4=>next tick`
+
+结论：如果是 node11 版本一旦执行一个阶段里的一个宏任务(setTimeout,setInterval 和 setImmediate)就立刻执行对应的微任务队列。
+
 ### 九、node 和浏览器 eventLoop 的主要区别
 
 1. 浏览器端的 Event Loop 和 Node.js 中的 Event Loop 是不同的，实现机制也不一样
 2. Node.js 可以理解成有 4 个宏任务队列和 2 个微任务队列，但是执行宏任务时有 6 个阶段
-3. Node.js 中限制性全局 script 代码，执行完同步代码，先从微任务队列 NextTick Queue 中取出所有任务放入调用栈执行，
+3. Node.js 中限制性全局 script 代码，执行完同步代码，先从微任务队列 NextTick Queue 中取出所有任务放入调用栈执行，再从其他微任务队列中取出所有任务放入调用栈中执行，然后开始宏任务的 6 个阶段，每个阶段都将其宏任务队列中的所有任务都取出来执行(浏览器是只取第一个执行)，每个宏任务阶段执行完毕之后开始执行微任务，再开始执行下一阶段宏任务，以此构成事件循环。
 
 ### 参考资料
 
