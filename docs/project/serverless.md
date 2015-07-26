@@ -30,6 +30,7 @@
 - [Serverless + Egg.js 后台管理系统实战](https://mp.weixin.qq.com/s/5Ngu5eWWr1jU_rm9d7IE-g)
 - [【第 1890 期】看懂 Serverless SSR，这一篇就够了！](https://mp.weixin.qq.com/s/xcxoCUzzruVSm15TLLOs-Q)
 - [12 张手绘图，终于搞懂了微服务架构](https://mp.weixin.qq.com/s/akBoBjaPLtctdJrs-Hvhtg)
+- [微前端如何落地？](https://mp.weixin.qq.com/s/NdDj_JYQdfaztEGM-eFCRg)
 
 ## 联系作者
 

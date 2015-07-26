@@ -155,6 +155,7 @@ module.exports = {
                     "undescore",
                     "vue-jsx",
                     "vue-lifecycle",
+                    "vue-keep",
                     "vue-dom",
                     "vue-communication",
                     "vue-bind",
