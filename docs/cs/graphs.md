@@ -158,9 +158,15 @@ class Graph {
 
 广度优先搜索算法会从指定的第一个顶点开始遍历图，先访问其所有的邻点（相邻顶点），就像一次访问图的一层。
 
-**ES5 代码**
+代码如下：
 
 ```
+const Colors = {
+  WHITE: 0,
+  GREY: 1,
+  BLACK: 2
+};
+
 var initializeCodor = function(){
     var color = [];
     for(var i =0;i<vertices.length;i++){
@@ -169,86 +175,105 @@ var initializeCodor = function(){
     return color;
 };
 
-this.bfs = function(v,callback){
-    var bfs = function(v,callback){
-
-        var color = initializeColor(),
-            queue = new Queue();
-        queue.enqueue(v);
-
-        while(!queue.isEmpty()){
-            var u = queue.dequeue(),
-                neighbors = adjList.get(u);
-                color[u] = 'grey';
-                for(var i=0;i<neightbors.length;i++){
-                    var w = neighbors[i];
-                    if(color[w] === 'white'){
-                        color[w] = 'grey';
-                        queue.enqueue(w);
-                    }
-                }
-              color[u]='black';
-              if(callback){
-                  callback(u);
-              }
-        }
+const BFS = (graph, startVertex) => {
+  const vertices = graph.getVertices();
+  const adjList = graph.getAdjList();
+  const color = initializeColor(vertices);
+  const queue = new Queue();
+  const distances = {};
+  const predecessors = {};
+  queue.enqueue(startVertex);
+  for (let i = 0; i < vertices.length; i++) {
+    distances[vertices[i]] = 0;
+    predecessors[vertices[i]] = null;
+  }
+  while (!queue.isEmpty()) {
+    const u = queue.dequeue();
+    const neighbors = adjList.get(u);
+    color[u] = Colors.GREY;
+    for (let i = 0; i < neighbors.length; i++) {
+      const w = neighbors[i];
+      if (color[w] === Colors.WHITE) {
+        color[w] = Colors.GREY;
+        distances[w] = distances[u] + 1;
+        predecessors[w] = u;
+        queue.enqueue(w);
+      }
     }
-}
-
-```
-
-**ES6 代码实现**
-
-```
-var initializeCodor = function(){
-    var color = [];
-    for(var i =0;i<vertices.length;i++){
-        color[vertices[i]] = 'white';
-    }
-    return color;
+    color[u] = Colors.BLACK;
+  }
+  return {
+    distances,
+    predecessors
+  };
 };
 
-
-this.dfs = function(callback){
-    var color = initializeCodor();
-
-    for(var i=0;i<vertices.length;i++){
-        if(color[vertices[i]] ==='white'){
-            dfsVisit(vertices[i],color,callback);
-        }
-    }
-};
-
-var dfsVisit = function(u,color,callback){
-    color[u] = 'grey';
-    if(callback){
-        callback(u);
-    }
-    var neighbors = dfsVisit.get(u);
-    for(var i=0;i<neighhors.length;i++){
-        var w = neighbors[i];
-        if(color[w]==='white'){
-            dfsVisit(w,color,callback);
-        }
-    }
-    color[u] = 'black';
-}
 ```
 
 #### 4.2 深度遍历
 
 深度优先搜索算法将会从第一个指定的顶点开始遍历图，沿着路径走到这条路径最后一个顶点被访问了，接着原路回退并探索下一条路径。
 
-**ES5 代码实现**
+代码如下：
 
 ```
+const Colors = {
+  WHITE: 0,
+  GREY: 1,
+  BLACK: 2
+};
 
-```
+var initializeCodor = function(){
+    var color = [];
+    for(var i =0;i<vertices.length;i++){
+        color[vertices[i]] = 'white';
+    }
+    return color;
+};
 
-**ES6 代码实现**
 
-```
+const DFS = gragh => {
+    const vertices = gragh.getVertices()
+    const adjList = gragh.getAdjList()
+    const color = initializeColor(vertices)
+    const d = {}
+    const f = {}
+    const p = {}
+    const time = {
+        count: 0
+    }
+    for (let i = 0; i < vertices.length; i++) {
+        f[vertices[i]] = 0
+        d[vertices[i]] = 0
+        p[vertices[i]] = null
 
+    }
+    for (let i = 0; i < vertices.length; i++) {
+        if (color[vertices[i]] === Colors.WHITE) {
+            DFSVisit(vertices[i], color, d, f, p, time, adjList);
+        }
+    }
+    return {
+        discovery: d,
+        finished: f,
+        predecessors: p
+    }
+}
+
+const DFSVisit = (v, color, d, f, p, time, adjList) => {
+    color[u] = Colors.GREY
+    d[u] = ++time.count
+    const neighbors = adjList.get(u)
+    for (let i = 0; i < neighbors.length; i++) {
+        const w = neighbors[i]
+        if (color[w] === Colors.WHITE) {
+            p[w] = u
+            DFSVisit(w, color, d, f, p, time, adjList)
+        }
+    }
+    color[u] = Colors.BLACK
+    f[u] = ++time.count
+};
 ```
 
 #### 4.3 性能分析
@@ -263,7 +288,43 @@ var dfsVisit = function(u,color,callback){
 
 ### 五、最短路径
 
+最短路径非常著名的两个算法分别是 Dijkstra 算法和 Floyd-Warshall 算法
+
+#### 5.1 Dijkstra 算法
+
+```
+
+```
+
+#### 5.2 Floyd-Warshall 算法
+
+```
+
+```
+
 ### 六、最小生成树
+
+两种主要的求最小生成树的算法:Prim 算法和 Kruskal 算法。
+
+#### 6.1 Prim 算法
+
+Prim 算法是一种求解加权无向通图的 MST 问题的贪心算法。
+
+代码如下：
+
+```
+
+```
+
+#### 6.2 Kruskal 算法
+
+Kruskal 算法是一种求加树无向连通图的 MST 的贪心算法。
+
+代码如下：
+
+```
+
+```
 
 ## 参考资料
 
