@@ -34,7 +34,7 @@ class F{
 
     }
     static module(){
-        
+
     }
 }
 ```
@@ -80,6 +80,12 @@ MVC 模式将程序分为三个部分：模型（Model）、视图（View）、�
 2. **View 视图层：** 人机交互接口，一般为展示给用户的界面；
 3. **Controller 控制器层：** 负责连接 Model 层和 View 层，接受并处理 View 层触发的事件，并在 Model 层的数据状态变动时更新 View 层；
 
+MVC 模式的目的是**通过引入 Controller 层来将 Model 层和 View 层分离**，分层的引入是原来大锅烩方式的改进，使得系统在可维护性和可读性上有了进步。
+
+View 层通过事件通知到 Controller 层，Controller 层经过对事件的处理完成相关业务逻辑，要求 Model 层改变数据状态，Model 层再将数据更新到 View 层。示意图如下：
+
+![images](design-pattern-mvc.jpeg)
+
 ### 五、MVP 模式
 
 **MVP** 模式将程序分为三个部分：模型（Model）、视图（View）、管理层（Presenter）。
@@ -88,9 +94,17 @@ MVC 模式将程序分为三个部分：模型（Model）、视图（View）、�
 2. **View 模型层：** 人机交互接口，一般为展示给用户的界面；
 3. **Presenter 管理层：** 负责连接 Model 层和 View 层，处理 View 层的事件，负责获取数据并将获取的数据经过处理后更新 View;
 
+MVC 模式的 View 层和 Model 层存在耦合，为了解决这个问题，MVP 模式将 View 层和 Model 层解耦，之间的交互只能通过 Presenter 层，实际上，MVP 模式的目的就是**将 View 层和 Model 层完全解耦**，使得对 View 层的修改不会影响到 Model 层，而对 Model 层的数据改动也不会影响到 View 层。
+
+![images](design-pattern-mvp.jpeg)
+
 ### 六、MVVM 模式
 
-**MVVM**模式将程序分为三个部分：模型（Model）、视图（View）、视图模型（View-Model）。
+**MVVM**模式将程序分为三个部分：模型（Model）、视图（View）、视图模型（View-Model）。和 MVP 模式类似，Model 层和 View 层也被隔开离开，彻底解耦，ViewModel 层相当于 Presenter 层，负责绑定 Model 层和 View 层，相比于 MVP 增加了双向绑定机制。
+
+![images](design-pattern-mvvm.jpeg)
+
+MVVM 模式的特征是 ViewModel 层和 View 层采用双向绑定的形式（Binding），View 层的变动，将自动反映在 ViewModel 层，反之亦然。
 
 ### 参考资料
 

@@ -315,6 +315,7 @@ Sass 是基于 Ruby 的，是在服务端处理的，而 Less 是需要引入 le
 - [【面试】543- 探索 Vue 和 React 中 key 的作用](https://mp.weixin.qq.com/s/iuJWl3ddUtR6oOXs-9kh0g)
 - [为什么 Vue 中不要用 index 作为 key？（diff 算法详解）](https://juejin.im/post/5e8694b75188257372503722)
 - [高级前端开发者必会的 34 道 Vue 面试题系列（一）](https://juejin.im/post/5e7410ed51882549087dc365)
+- [【图文并茂，点赞收藏哦！】重学巩固你的 Vuejs 知识体系](https://juejin.im/post/5e6e2a5a5188254974680f6a)
 
 ## 联系作者
 
