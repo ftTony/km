@@ -1113,7 +1113,15 @@ function advance(n){
 // 解析是否是条件注释
 const conditionalComment = /^<!\[/
 if(conditionalComment.test(html)){
+    // 若为条件注释，则继续查找是否存在']>'
+    const conditionalEnd = html.indexOf(']>')
 
+    if(conditionalEnd >=0){
+        // 若存在  ']>',则从原本的html字符串中把条件注释裁掉
+        // 把剩下的内容重新赋给html，继续向后匹配
+        advance(conditionalEnd+2)
+        continue
+    }
 }
 ```
 
@@ -1133,11 +1141,16 @@ if (doctypeMatch) {
 
 **解析开始标签**
 
+相较于前三种内容的解析，解析开始标签会稍微复杂一点，但是万变不离其宗，它的原理还是想通的，都是使用正则去匹配提取。
+
+首先使用开始标签的正则去匹配模板字符串，看模板字符串是否具有开始标签的特征，如下
+
 ```
 /**
  *  匹配开始标签的正则
  */
-const ncname = '';
+const ncname = '[a-zA-Z_][\\w\\-\\.]*';
+const qnameCapture = ``;
 
 ```
 

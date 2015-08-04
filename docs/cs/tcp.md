@@ -186,8 +186,9 @@ TCP 主要通过四种算法来进行拥塞控制：慢开始、拥塞避免、�
 - [TCP/IP 详解学习笔记](https://www.cnblogs.com/zhehan54/p/6204767.html)
 - [「多图警告」重学 TCP/IP 协议](https://mp.weixin.qq.com/s/pFlJglicKZVh31EOMe83Hw)
 - [TCP 三次握手和四次挥手](https://mp.weixin.qq.com/s/rWkD5ktlJDxcNFJ-5NH1eQ)
-- [(建议收藏)TCP协议灵魂之问，巩固你的网路底层基础](https://juejin.im/post/5e527c58e51d4526c654bf41)
+- [(建议收藏)TCP 协议灵魂之问，巩固你的网路底层基础](https://juejin.im/post/5e527c58e51d4526c654bf41)
 - [动画：用动画给面试官解释 TCP 三次握手过程](https://mp.weixin.qq.com/s/HNrY1sMk14_ogqCZ8s_2sw)
+- [【TCP 协议】(2)---TCP 三次握手和四次挥手](https://www.cnblogs.com/qdhxhz/p/8470997.html)
 
 ## 联系作者
 

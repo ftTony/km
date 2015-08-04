@@ -17,6 +17,7 @@
 - [面试官问:Node 与底层之间如何执行异步 I/O 调用？](https://mp.weixin.qq.com/s/kAmS_1VZHfmBH6YMWFN6BA)
 - [《吊打面试官》系列 深入 Node.js 多进程底层原理（字节跳动被问）](https://mp.weixin.qq.com/s/wBiBZcdNobDoZbk-cLLyfw)
 - [《吊打面试官》系列 Node.js 全栈秒杀系统](https://mp.weixin.qq.com/s/uWeAsJ-P253je15A49uKIQ)
+- [RabbitMQ 和 Kafka 的比较](https://mp.weixin.qq.com/s/QilS_0wNnx-8NZfq2Iv_cA)
 
 ## 联系作者
 
