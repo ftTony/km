@@ -25,14 +25,31 @@
 ```
 /*
  * 模块化开发就是讲复杂的系统分解为高内聚，低耦合的模块。
- *
- *
+ * 每个工程师都可以去开发自己的模块实现复杂的系统可控，可维护，可扩展。模块相互之间可以调用
+ * 要点：首先要有一个模块管理器，管理模块的创建和调度
+ * 模块调动：调用分为两类，一类同步模块调用的实现，第二类是异步的实现
  */
 // 模块管理对象F
 class F{
     static define(str,fn){
+        let parts = str.split('.'),
+            old = this,
+            parent = this,
+            i = 0,
+            len = 0;
+        // 如果第一个模块是管理模块器，则移除
+        if(parts[0] === 'F'){
+            parts = parts.slice(1);
+        }
+        // 屏蔽对define与module模块
+        if(parts[0] === 'define' || parts[0] === 'module'){
+            return false
+        }
 
+        // 遍历路由模块并且定义每层模块
+        for()
     }
+    // 使用模块
     static module(){
 
     }

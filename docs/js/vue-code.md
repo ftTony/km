@@ -878,6 +878,14 @@ export function set (target: Array<any> | Object, key: any, val: any): any {
 }
 ```
 
+首先判断在非生产环境下如果传入的`target`是否为`undefined`
+
+```
+
+```
+
+接着判断如果传入的`target`是否为`undefined` 、`null`或是原始类型
+
 **`vm.$delete`**
 
 `vm.$delete`是全局`Vue.delete`的**别名**，其用法相同
@@ -892,6 +900,8 @@ vm.$delete(target, propertyName / index);
   - `{string | number} propertyName/index`
 
 - **用法**：
+
+删除对象的属性。如果对象是响应式的，确保删除能触发更新视图。这个方法主要用于避开`Vue`不检测到属性被删除的限制，但是你应该很少会使用它。
 
 - **内部原理**：
 
@@ -925,6 +935,38 @@ export function del (target: Array<any> | Object, key: any) {
   }
   ob.dep.notify()
 }
+```
+
+该方法的内部原理与`set`方法有几分相似。
+
+首先判断在非生产环境下如果传入的`target`不存在，或者`target`是原始值，则抛出警告，如下：
+
+```
+
+```
+
+接着判断如果传入的`target`是数组
+
+```
+
+```
+
+如果传入的`target`不是数组，那就当做对象来处理
+
+接下来获取到`target`的`__ob__`属性，
+
+```
+
+```
+
+最后，如果`targete`是对象，并且传入的`key`也存在于`target`中，那么就从`target`中将该属性删除，
+
+```
+delete target[key];
+if (!ob) {
+  return;
+}
+ob.dep.notify();
 ```
 
 ### 三、虚拟 DOM 篇
