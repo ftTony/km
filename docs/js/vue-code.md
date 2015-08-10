@@ -1570,6 +1570,8 @@ export function parseText (text,delimiters) {
 
 `parseText`函数接收两个参数，一个是传入的待解析的文本内容`text`，一个包裹变量的符号`delimiters`。第一个参数好理解，那第二个参数是干什么的呢？
 
+函数体内首先定义了变量`tagRE`，表示一个正则表达式。这个正则表达式是用来检查广西是否包含变量的。
+
 #### 4.5 优化阶段
 
 优化阶段其实干了两件事：
@@ -1713,7 +1715,50 @@ markStaticRoots(node.ifConditions[i].block, isInFor)
 
 ```
 
+一个节点要想成为表态根节点，它必须满足以下要求：
+
+- 节点本身必须是静态节点；
+- 必须拥有子节点`children`；
+- 子节点不能只是只有一个
+
 #### 4.5 代码生成阶段
+
+代码生成阶段的源码位于`src/compiler/codegen/index.js`中，源码虽然很长，但是逻辑不复杂，核心逻辑如下：
+
+```
+
+```
+
+**元素节点**
+
+生成元素型节点的`render`函数代码如下：
+
+```
+
+```
+
+**文本节点**
+
+文本型的`VNode`可以调用`_v(text)`函数来创建，所以生成文本
+
+```
+export function genText (text: ASTText | ASTExpression): string {
+  return `_v(${text.type === 2
+    ? text.expression // no need for () because already wrapped in _s()
+    : transformSpecialNewlines(JSON.stringify(text.text))
+  })`
+}
+```
+
+**注释节点**
+
+注释型的`VNode`可以调用`_e(text)`函数来创建，所以生成注释节点的`render`函数就是生成一个`_e(text)`函数调用的字符串。`_e()`函数接收注释内容作为参数，其生成代码如下：
+
+```
+export function genComment (comment: ASTText): string {
+  return `_e(${JSON.stringify(comment.text)})`
+}
+```
 
 ### 五、生命周期篇
 
