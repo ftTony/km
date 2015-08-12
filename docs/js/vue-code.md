@@ -2531,6 +2531,48 @@ vm.$emit('test', 'hi')
 
 `$on`和`$emit`这两个方法的内部原理是设计模式中最典型的发布订阅模式，首先定义一个事件中心，通过`$on`订阅事件，将事件存储在事件中心里面，然后通过`$emit`触发事件中心里面存储的订阅事件。
 
+该方法的定义位于源码的`src/core/instance/event.js`中，如下：
+
+```
+Vue.prototype.$on = function (event, fn) {
+    const vm: Component = this
+    if (Array.isArray(event)) {
+        for (let i = 0, l = event.length; i < l; i++) {
+            this.$on(event[i], fn)
+        }
+    } else {
+        (vm._events[event] || (vm._events[event] = [])).push(fn)
+    }
+    return vm
+}
+```
+
+`$on`方法接收两个参数，第一个参数是订阅的事件名，可以是数组，表示订阅多个事件。
+
+**`vm.$emit`**
+
+- **内部原理**
+
+```
+Vue.prototype.$emit = function (event: string): Component {
+    const vm: Component = this
+    let cbs = vm._events[event]
+    if (cbs) {
+      cbs = cbs.length > 1 ? toArray(cbs) : cbs
+      const args = toArray(arguments, 1)
+      for (let i = 0, l = cbs.length; i < l; i++) {
+        try {
+          cbs[i].apply(vm, args)
+        } catch (e) {
+          handleError(e, vm, `event handler for "${event}"`)
+        }
+      }
+    }
+    return vm
+  }
+}
+```
+
 #### 6.3 生命周期相关的方法
 
 - `vm.$mount`
