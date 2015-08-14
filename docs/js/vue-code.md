@@ -2567,7 +2567,27 @@ else {
 }
 ```
 
+当前实例的`_events`属性是干嘛的呢？
+
+生命周期初始化阶段的初始化事件 `initEvents` 函数中，在该函数中，首先在当前实例上绑定了`_events` 属性并给其赋值为空对象，如下：
+
+```
+export function initEvents (vm: Component) {
+    vm._events = Object.create(null)
+    // ...
+
+}
+```
+
+这个`_events`属性就是用来作为当前实例的事件中心，所有绑定在这个实例上的事件都会存储在事件中心`_events`属性中。
+
 **`vm.$emit`**
+
+`vm.$emit`用法
+
+```
+vm.$emit( eventName, […args] )
+```
 
 - **内部原理**
 
