@@ -1787,9 +1787,48 @@ if (process.env.NODE_ENV !== 'production' &&
 ) {
 warn('Vue is a constructor and should be called with the `new` keyword')
 }
-this.\_init(options)
+this._init(options)
 }
+```
 
+可以看到，`Vue`类的定义非常简单，其构造函数核心就一行代码：
+
+```
+this._init(options)
+```
+
+调用原型上的`_init(options)`方法并把用户所写的
+
+```
+initMixin(Vue)
+```
+
+这一行代码执行了`initMixin`函数，那`initMixin`函数又是从哪儿来的呢？该函数定义位于源码的``中，如下：
+
+```
+export function initMixin (Vue) {
+  Vue.prototype._init = function (options) {
+    const vm = this
+    vm.$options = mergeOptions(
+        resolveConstructorOptions(vm.constructor),
+        options || {},
+        vm
+    )
+    vm._self = vm
+    initLifecycle(vm)
+    initEvents(vm)
+    initRender(vm)
+    callHook(vm, 'beforeCreate')
+    initInjections(vm) // resolve injections before data/props
+    initState(vm)
+    initProvide(vm) // resolve provide after data/props
+    callHook(vm, 'created')
+
+    if (vm.$options.el) {
+      vm.$mount(vm.$options.el)
+    }
+  }
+}
 ```
 
 **合并属性**
@@ -1798,7 +1837,7 @@ this.\_init(options)
 
 ```
 
-vm.\$options = mergeOptions(
+vm.$options = mergeOptions(
 resolveConstructorOptions(vm.constructor),
 options || {},
 vm
@@ -1826,23 +1865,19 @@ extend(Vue.options.components, builtInComponents)
 首先通过`Vue.options = Object.create(null)`创建一个空对象，然后遍历`ASSET_TYPES`，`ASSET_TYPES`的定义在`src/shared/contstants.js`中：
 
 ```
-
 export const ASSET_TYPES = [
 'component',
 'directive',
 'filter'
 ]
-
 ```
 
 上面遍历`ASSET_TYPES`后代码相当于：
 
 ```
-
 Vue.options.components = {}
 Vue.options.directives = {}
 Vue.options.filters = {}
-
 ```
 
 最后通过`extend(Vue.options.components,builtInCompontents)`把一些内置组件扩展到`Vue.options.components`上，`Vue`的内置组件目前有`<keep-alive>`、`<transition>`和`<transition-group>`组件，这也就是为什么我们在其它组件中使用这些组件不需要注册的原因。
@@ -2449,12 +2484,29 @@ function initWatch (vm: Component, watch: Object) {
 
 #### 6.2 事件相关的方法
 
+与事件相关的实例方法有 4 个，分别是`vm.$on`、`vm.$emit`、`vm.$off`和`vm.$once`。它们是在`eventsMixin`函数中挂载到`Vue`原型上的，代码如下：
+
+```
+export function eventsMixin (Vue) {
+    Vue.prototype.$on = function (event, fn) {}
+    Vue.prototype.$once = function (event, fn) {}
+    Vue.prototype.$off = function (event, fn) {}
+    Vue.prototype.$emit = function (event) {}
+}
+```
+
+当执行`eventsMixin`函数后，会向`Vue`原型上挂载上述 4 个实例方法。
+
 - `vm.$on`
 - `vm.$emit`
 - `vm.$off`
 - `vm.$once`
 
 **`vm.$on`**
+
+```
+vm.$on( event, callback )
+```
 
 - **参数：**
 
@@ -2463,7 +2515,21 @@ function initWatch (vm: Component, watch: Object) {
 
 - **作用：**
 
-内部原理：
+监听当前实例上的自定义事件。事件可以由`vm.$emit`触发。回调函数会接收所有传入事件触发函数的额外参数
+
+示例：
+
+```
+vm.$on('test', function (msg) {
+  console.log(msg)
+})
+vm.$emit('test', 'hi')
+// => "hi"
+```
+
+- **内部原理：**
+
+`$on`和`$emit`这两个方法的内部原理是设计模式中最典型的发布订阅模式，首先定义一个事件中心，通过`$on`订阅事件，将事件存储在事件中心里面，然后通过`$emit`触发事件中心里面存储的订阅事件。
 
 #### 6.3 生命周期相关的方法
 
@@ -2471,6 +2537,14 @@ function initWatch (vm: Component, watch: Object) {
 - `vm.$forceUpdate`
 - `vm.$nextTick`
 - `vm.$destory`
+
+**`vm.$mount`**
+
+**`vm.$forceUpdate`**
+
+**`vm.$nextTick`**
+
+**`vm.$destory`**
 
 ### 七、全局 API 篇
 
