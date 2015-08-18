@@ -2611,6 +2611,31 @@ Vue.prototype.$emit = function (event: string): Component {
 }
 ```
 
+**`vm.$off`**
+
+- **内部原理**
+
+**`vm.$once`**
+
+- **内部原理**
+
+该方法的作用是先订阅事件，但是该事件只能触发一次，也就是说当该事件被触发后会立即移除。
+
+该方法的定义位于源码的`src/core/instance/event.js`中，如下：
+
+```
+Vue.prototype.$once = function (event, fn) {
+    const vm: Component = this
+    function on () {
+        vm.$off(event, on)
+        fn.apply(vm, arguments)
+    }
+    on.fn = fn
+    vm.$on(event, on)
+    return vm
+}
+```
+
 #### 6.3 生命周期相关的方法
 
 - `vm.$mount`
