@@ -223,6 +223,8 @@ removeNode(node,key){
 
 ### 六、红黑树
 
+#### 6.1 红黑树特点
+
 红黑树是一种常见的自平衡二叉查找树，常用于关联数组、字典，在各种语言的底层实现中被广泛应用，Java 的 TreeMap 和 TreeSet 就是基于红黑树实现的。
 
 在红黑树中，每个节点都遵循以下规则：
@@ -234,7 +236,7 @@ removeNode(node,key){
 - 不能有两个相邻的红节点，一个红节点不能有红的父节点或子节点；
 - 从给定的节点到它的后代节点的所有路径包含相同数量的黑色节点
 
-相关代码：
+#### 6.2 红黑树相关代码
 
 ```
 const Compare = {
@@ -350,6 +352,7 @@ class RedBlackTree extends BinarySearchTree {
             this.fixTreeProperties(newNode)
         }
     }
+    // 插入节点
     insertNode(node, key) {
         if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
             if (node.left == null) {
@@ -425,6 +428,12 @@ class RedBlackTree extends BinarySearchTree {
     }
 }
 ```
+
+#### 6.3 红黑树应用
+
+红黑树广泛用在 Java 的集合框架(HashMap、TreeMap、TreeSet)、Nginx 的 Timer 管理、Linux 虚拟内存管理以及 C++的 STL 等等场景
+
+在 Linux 内核中，每个用户进程都可以访问 4GB 的线性虚拟空间，虚拟空间往往需要多个虚拟内存区域描述，对这些内存区域，Linux 内核采用了链表以及红黑树形式组织。内存区域按地地址排序，链接成一个链表以及一颗红黑树，寻找空闲区域时只需要遍历这个链表，在发生缺页中断时通过红黑树快速检索特定内存区域。
 
 ### 参考资料
 

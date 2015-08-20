@@ -1226,7 +1226,9 @@ export function parse(template,options){
 - template 待转换的模板字符串；
 - options 转换时所需的选项；
 
-第一个参数是待转换的模板字符串，无需多言；重点看第二个参数，第二个参数提供了一些解析`HTML`模板时的一些参数，同时还定义了 4 个钩子函数。我仒说了模板编译阶段主线函数`parse`会将`HTML`模板字符串转化成`AST`，而`parseHTML`是用来解析模板字符串的，把模板字符串中不同的内容解释出来 之后，然后使用这个 4 个钩子函数提取出来的内容生成对应的`AST`。
+第一个参数是待转换的模板字符串，无需多言；重点看第二个参数，第二个参数提供了一些解析`HTML`模板时的一些参数，同时还定义了 4 个钩子函数。我们说了模板编译阶段主线函数`parse`会将`HTML`模板字符串转化成`AST`，而`parseHTML`是用来解析模板字符串的，把模板字符串中不同的内容解释出来之后，然后使用这个 4 个钩子函数提取出来的内容生成对应的`AST`。
+
+把这 4 个钩子函数作为参数会给解析器`parseHTML`，当解析器解析出不同的内容时调用不同的钩子函数从而生成不同的`AST`。
 
 - 当解析到开始标签时调用`start`函数生成元素类型的`AST`节点，代码如下；
 
@@ -1255,6 +1257,7 @@ export function crateASTElement(tag,attrs,parent){
 - 当解析到文本调用`chars`函数生成文本类型的`AST`节点；
 
 ```
+// 当解析到标签的文本时，触发chars
 chars (text, start, end) {
       if (!currentParent) {
         if (process.env.NODE_ENV !== 'production') {
