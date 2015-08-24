@@ -1619,7 +1619,6 @@ export function parseText (text,delimiters) {
 优化阶段的源码位于`src/compiler/optimizer.js`中，如下：
 
 ```
-
 export function optimize (root: ?ASTElement, options: CompilerOptions) {
     if (!root) return
     isStaticKey = genStaticKeysCached(options.staticKeys || '')
@@ -1629,7 +1628,6 @@ export function optimize (root: ?ASTElement, options: CompilerOptions) {
     // 标记静态根节点
     markStaticRoots(root, false)
 }
-
 ```
 
 **标记静态节点**
@@ -1695,7 +1693,7 @@ Object.keys(node).every(isStaticKey)
 
 ```
 
-该函数的实现过程其实也说明了如何判断一个节点是否为静态节点。
+该函数的实现过程其实也说明了如何判断一个节点是否为静态节点。还记得在`HTML`解析器在调用钩子函数创建`AST`节点时会根据节点类型的不同为节点加上不同的`type`属性，用`type`属性来标记`AST`节点的节点类型，其对应关系如下：
 
 | type 取值 | 对应的 AST 节点类型    |
 | --------- | ---------------------- |
@@ -1760,10 +1758,25 @@ markStaticRoots(node.ifConditions[i].block, isInFor)
 
 #### 4.5 代码生成阶段
 
+`Vue`实例在挂载的时候会调用其自身的`render`函数来生成实例上的`template`选项所对应的`VNode`，简单的来说就是`Vue`只要调用了`render`函数，就可以把模板转换成对应的虚拟`DOM`。那么`Vue`要想调用`render`函数，那必须先有这个`render`函数
+
+**如何根据 AST 生成 render 函数**
+
+代码生成阶段主要的工作就是根据已有的`AST`生成对应的`render`函数供组件挂载时调用，组件只要调用的这个`render`函数就可以得到
+
+**源码分析**
+
 代码生成阶段的源码位于`src/compiler/codegen/index.js`中，源码虽然很长，但是逻辑不复杂，核心逻辑如下：
 
 ```
-
+export function generate (ast,option) {
+  const state = new CodegenState(options)
+  const code = ast ? genElement(ast, state) : '_c("div")'
+  return {
+    render: `with(this){return ${code}}`,
+    staticRenderFns: state.staticRenderFns
+  }
+}
 ```
 
 **元素节点**
