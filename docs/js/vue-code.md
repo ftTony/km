@@ -1762,7 +1762,52 @@ markStaticRoots(node.ifConditions[i].block, isInFor)
 
 **如何根据 AST 生成 render 函数**
 
-代码生成阶段主要的工作就是根据已有的`AST`生成对应的`render`函数供组件挂载时调用，组件只要调用的这个`render`函数就可以得到
+代码生成阶段主要的工作就是根据已有的`AST`生成对应的`render`函数供组件挂载时调用，组件只要调用的这个`render`函数就可以得到`AST`对应的虚拟`DOM`的`VNode`。那么如何根据`AST`生成`render`函数呢？
+
+假设现有如下模板：
+
+```
+<div id="NLRX"><p>Hello {{name}}</p></div>
+```
+
+该模板经过解析并优化后对应的`AST`如下：
+
+```
+ast = {
+    'type':1,
+    'tag':'div',
+    'attrsList':[
+        {
+            'name':'id',
+            'value':'NLRX'
+        }
+    ],
+    'attrsMap':{
+        'id':'NLRX'
+    },
+    'static':false,
+    'parent':undefined,
+    'plain':false,
+    'children':[{
+        'type':1,
+        'tag':'p',
+        'plain':false,
+        'static':false,
+        'children':[
+            {
+                'type': 2,
+                'expression': '"Hello "+_s(name)',
+                'text': 'Hello {{name}}',
+                'static':false,
+            }
+        ]
+    }]
+}
+```
+
+根据已有的这个`AST`来生成对应的`render`函数。生成`render`函数的过程其实就是一个递归的过程，从顶向下依次递归`AST`中的每一个节点，根据不同的`AST`节点类型创建不同的`VNode`类型。接下来我们就来照已有的模板和`AST`实际演示了一下生成`render`函数的过程。
+
+1. 首先，根节点`div`
 
 **源码分析**
 
