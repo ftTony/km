@@ -2615,11 +2615,88 @@ Vue.prototype.$emit = function (event: string): Component {
 
 - **内部原理**
 
+该方法的定义位于源码的`src/core/instance/event.js`中，如下：
+
+```
+Vue.prototype.$off = function (event, fn) {
+    const vm: Component = this
+    // all
+    if (!arguments.length) {
+        vm._events = Object.create(null)
+        return vm
+    }
+    // array of events
+    if (Array.isArray(event)) {
+        for (let i = 0, l = event.length; i < l; i++) {
+            this.$off(event[i], fn)
+        }
+        return vm
+    }
+    // specific event
+    const cbs = vm._events[event]
+    if (!cbs) {
+        return vm
+    }
+    if (!fn) {
+        vm._events[event] = null
+        return vm
+    }
+    if (fn) {
+        // specific handler
+        let cb
+        let i = cbs.length
+        while (i--) {
+            cb = cbs[i]
+            if (cb === fn || cb.fn === fn) {
+                cbs.splice(i, 1)
+                break
+            }
+        }
+    }
+    return vm
+}
+```
+
+该方法内部就是通过不断判断所传参数的情况进而不同的逻辑处理。
+
+首先，判断如果没有传入任何参数，
+
+```
+if (!arguments.length) {
+    vm._events = Object.create(null)
+    return vm
+}
+```
+
+```
+if (Array.isArray(event)) {
+    for (let i = 0, l = event.length; i < l; i++) {
+        this.$off(event[i], fn)
+    }
+    return vm
+}
+```
+
 **`vm.$once`**
+
+官方文档用法：
+
+```
+vm.$once( event, callback )
+```
+
+- **参数：**
+
+  - `{string} event`
+  - `{Function} callback`
+
+- **作用：**
+
+监听一个自定义事件，但是只触发一次。一旦触发之后，监听器就会被移除。
 
 - **内部原理**
 
-该方法的作用是先订阅事件，但是该事件只能触发一次，也就是说当该事件被触发后会立即移除。
+该方法的作用是先订阅事件，但是该事件只能触发一次，也就是说当该事件被触发后会立即移除。要实现这个功能也不难，我们可以定义一个子函数，用这个子函数来替换原本订阅的事件所对应的回调，也就是当触发订阅事件时，其实执行的是这个子函数，然后再子函数内部先把订阅移除，再执行原本的回调。
 
 该方法的定义位于源码的`src/core/instance/event.js`中，如下：
 
