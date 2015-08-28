@@ -1395,9 +1395,25 @@ function advance(n){
 }
 ```
 
+为了更加直观地说明`advance`的作用，请看下图：
+
+![images](vue15.png)
+
+调用`advance`函数：
+
+```
+advance(3)
+```
+
+得到结果：
+
+![images](vue16.png)
+
+从图中可以看到，解析游标`index`最开始在模板字符串的位置 0 处，当调用了`advance(3)`之后，解析游标到了位置 3 处，每次解析完一段内容就将游标向后移动一段，接着再从解析游标往后解析，这样就保证了解析过的内容不会被重复解析。
+
 **解析条件注释**
 
-解析条件注释也比较简单，其原理跟解析注释相同，都是先用与正则判断是否是以条件注释特有的开头标识开始，
+解析条件注释也比较简单，其原理跟解析注释相同，都是先用与正则判断是否是以条件注释特有的开头标识开始，然后寻找其特有的结束标识，若找到，则说明是条件注释，将其截取出来即可，由于条件注释不存在于真正的`DOM`树中，所以不需要调用钩子函数创建`AST`节点。代码如下
 
 ```
 // 解析是否是条件注释
@@ -1440,8 +1456,24 @@ if (doctypeMatch) {
  *  匹配开始标签的正则
  */
 const ncname = '[a-zA-Z_][\\w\\-\\.]*';
-const qnameCapture = ``;
+const qnameCapture = `((?:${ncname}\\:)?${ncname})`
+const startTagOpen = new RegExp(`^<${qnameCapture}`)
 
+const start = html.match(startTagOpen)
+if(start){
+    const match = {
+    tagName: start[1],
+    attrs: [],
+    start: index
+  }
+}
+
+// 以开始标签开始的模板：
+'<div></div>'.match(startTagOpen)  => ['<div','div',index:0,input:'<div></div>']
+// 以结束标签开始的模板：
+'</div><div></div>'.match(startTagOpen) => null
+// 以文本开始的模板：
+'我是文本</p>'.match(startTagOpen) => null
 ```
 
 **解析结束标签**
