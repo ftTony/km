@@ -1879,6 +1879,57 @@ export function generate (ast,option) {
 }
 ```
 
+调用`generate`函数并传入优化后得到的`ast`，在`generate`函数内部先判断`ast`是否为空，不为空则调用`genElement(ast, state)`
+
+`genElement`函数定义如下：
+
+```
+function genElement (el, state) {
+  if (el.parent) {
+    el.pre = el.pre || el.parent.pre
+  }
+
+  if (el.staticRoot && !el.staticProcessed) {
+    return genStatic(el, state)
+  } else if (el.once && !el.onceProcessed) {
+    return genOnce(el, state)
+  } else if (el.for && !el.forProcessed) {
+    return genFor(el, state)
+  } else if (el.if && !el.ifProcessed) {
+    return genIf(el, state)
+  } else if (el.tag === 'template' && !el.slotTarget && !state.pre) {
+    return genChildren(el, state) || 'void 0'
+  } else if (el.tag === 'slot') {
+    return genSlot(el, state)
+  } else {
+    // component or element
+    let code
+    if (el.component) {
+      code = genComponent(el.component, el, state)
+    } else {
+      let data
+      if (!el.plain || (el.pre && state.maybeComponent(el))) {
+        data = genData(el, state)
+      }
+
+      const children = el.inlineTemplate ? null : genChildren(el, state, true)
+      code = `_c('${el.tag}'${
+        data ? `,${data}` : '' // data
+      }${
+        children ? `,${children}` : '' // children
+      })`
+    }
+    // module transforms
+    for (let i = 0; i < state.transforms.length; i++) {
+      code = state.transforms[i](el, code)
+    }
+    return code
+  }
+}
+```
+
+`genElement`函数逻辑很清晰，就是根据当前`AST`元素节点属性不同从而执行不同的代码生成函数。虽然元素节点属性的情况有很多种，但是最后真正创建出来的`VNode`无非就三种，分别是元素节点，文本节点，注释节点。
+
 **元素节点**
 
 生成元素型节点的`render`函数代码如下：
