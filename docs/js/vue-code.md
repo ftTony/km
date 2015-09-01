@@ -1879,7 +1879,7 @@ export function generate (ast,option) {
 }
 ```
 
-调用`generate`函数并传入优化后得到的`ast`，在`generate`函数内部先判断`ast`是否为空，不为空则调用`genElement(ast, state)`
+调用`generate`函数并传入优化后得到的`ast`，在`generate`函数内部先判断`ast`是否为空，不为空则调用`genElement(ast, state)`函数创建`VNode`，为空则创建一上空的元素型`div`的`VNode`。然后将得到的结果用`with(this){return ${code}}`包裹返回。可以看出，真正起作用的是`genElement`函数。
 
 `genElement`函数定义如下：
 
@@ -1933,6 +1933,52 @@ function genElement (el, state) {
 **元素节点**
 
 生成元素型节点的`render`函数代码如下：
+
+```
+const data = el.plain ? undefined : genData(el, state)
+
+const children = el.inlineTemplate ? null : genChildren(el, state, true)
+code = `_c('${el.tag}'${
+data ? `,${data}` : '' // data
+}${
+children ? `,${children}` : '' // children
+})`
+```
+
+生成元素节点的`render`函数就是生成一个`_c()`函数调用的字符串，上文提到了`_c()`函数接收三个参数，分别是节点的标签名`tagName`，节点属性`data`，节点的子节点列表`children`。
+
+1. 获取节点属性 data
+
+首先判断`plain`属性是否为`true`，若为`true`则表示节点没有属性，将`data`赋值为`undefined`；如果不为`true`则调用`genData`函数获取节点属性`data`数据。`genData`函数定义如下：
+
+```
+export function genData (el: ASTElement, state: CodegenState): string {
+  let data = '{'
+  const dirs = genDirectives(el, state)
+  if (dirs) data += dirs + ','
+
+    // key
+    if (el.key) {
+        data += `key:${el.key},`
+    }
+    // ref
+    if (el.ref) {
+        data += `ref:${el.ref},`
+    }
+    if (el.refInFor) {
+        data += `refInFor:true,`
+    }
+    // pre
+    if (el.pre) {
+        data += `pre:true,`
+    }
+    // 篇幅所限，省略其他情况的判断
+    data = data.replace(/,$/, '') + '}'
+    return data
+}
+```
+
+2. 获取子节点列表 children
 
 ```
 
