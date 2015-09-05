@@ -687,6 +687,48 @@ function createWatcher (vm,expOrFn,handler,options) {
 }
 ```
 
+该函数内部其实就是从用户合起来传入的对象中把回调函数`cb`和参数`options`剥离出来，然后再以常规的方式调用`$watch`方法并将剥离出来的参数传进去。
+
+接着获取到用户传入的`options`，如果用户没有传入则将其赋值为一个默认空对象，如下：
+
+```
+options = options || {};
+```
+
+`$watch`方法内部会创建一个`watcher`实例，由于该实例是用户手动调用`$watch`方法创建而来的，所以给`options`添加`user`属性并赋值为`true`，用于区分用户创建的`watcher`实例和`Vue`内部创建的`watcher`实例，如下：
+
+```
+options.user = true;
+```
+
+接着，传入参数创建一个 watcher 实例，如下：
+
+```
+const watcher = new Watcher(vm, expOrFn, cb, options);
+```
+
+接着判断如果用户在选项参数`options` 中指定的`immediate` 为`true`，则立即用被观察数据当前的值触发回调，如下：
+
+```
+if (options.immediate) {
+  cb.call(vm, watcher.value);
+}
+```
+
+最后返回一个取消观察函数`unwatchFn`，用来停止触发回调。如下：
+
+```
+return function unwatchFn() {
+  watcher.teardown();
+};
+```
+
+这个取消观察`unwatchFn`内部其实是调用了`watcher`实例的`teardown`方法，那和我们来看一下这个`teardown`方法是如何实现的。其代码如下：
+
+```
+
+```
+
 **`vm.$set`**
 
 `vm.$set`是全局`Vue.set`的**别名**，其用法相同。
