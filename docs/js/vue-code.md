@@ -1980,8 +1980,33 @@ export function genData (el: ASTElement, state: CodegenState): string {
 
 2. 获取子节点列表 children
 
+获取子节点列表`children`其实就是遍历`AST`的`children`属性中的元素，然后根据元素属性的不同生成不同的`VNode`创建函数调用字符串，如下：
+
+```
+export function genChildren (el):  {
+    if (children.length) {
+        return `[${children.map(c => genNode(c, state)).join(',')}]`
+    }
+}
+function genNode (node: ASTNode, state: CodegenState): string {
+  if (node.type === 1) {
+    return genElement(node, state)
+  } if (node.type === 3 && node.isComment) {
+    return genComment(node)
+  } else {
+    return genText(node)
+  }
+}
 ```
 
+3. 上面两步完成之后，生成`_c()`函数调用字符串，如下：
+
+```
+code = `_c('${el.tag}'${
+    data ? `,${data}` : '' // data
+}${
+    children ? `,${children}` : '' // children
+})`
 ```
 
 **文本节点**
