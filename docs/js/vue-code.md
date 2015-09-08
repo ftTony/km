@@ -2157,12 +2157,6 @@ Vue.options.filters = {}
 `mergeOptions`这个函数，它的定义在`src/core/util/options.js`中：
 
 ```
-
-/\*\*
-
-- Merge two option objects into a new one.
-- Core utility used in both instantiation and inheritance.
-  \*/
   export function mergeOptions (
   parent: Object,
   child: Object,
@@ -2599,6 +2593,16 @@ export function initState (vm: Component) {
 
 首先，给实例上新增了一个属性`_watchers`，用来存储当前实例中所有的`watcher`实例，无论是使用`vm.$watch`注册的`watcher`实例还是使用`watch`选项注册的`watcher`实例，都会被保存到该属性中。
 
+`Vue`中对数据变化的侦测是使用属性拦截的方式实现的，但是`Vue`并不是对所有数据使用属性拦截的方式侦测变化，这是因为数据越多，数据上所绑定的依赖就会多，从而造成依赖追踪的内存开销就会很大，所以从`Vue 2.0`版本起，`Vue`不再对所有数据都进行侦测，而是将侦测粒度提高到组件层面，对每个组件进行侦测，所以在每个组件上新增了`vm._watchers`属性，用来存放这个组件内用到的所有状态的依赖，当其中一个状态发生变化时，就会通知到组件，然后由组件内部使用虚拟`DOM`进行数据比对，从而降低内存开销，提高性能。
+
+先判断实例中是否有`props`选项，如果有，就调用`props`选项初始化函数`initProps`去初始`props`选项；
+
+再判断实例中是否有`methods`选项，如果有，就调用`methods`选项初始函数`initMethods`去初始化`methods`选项；
+
+接着再判断实例中是否有`data`选项，如果有，就调用`data`选项寝化函数`initData`去初始化`data`选项；如果没有，就把`data`当作空对象并将其转换成响应式；
+
+接着再判断实例中是否有`computed`
+
 `initProps`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
@@ -2778,6 +2782,10 @@ function initWatch (vm: Component, watch: Object) {
 #### 5.2 模板编译阶段
 
 #### 5.3 挂载阶段
+
+挂载阶段所做的主要工作是创建`Vue`实例并用其替换`el`选项对应的`DOM`元素，同时还要开启对模板中数据（状态）的监控，当数据（状态）发生变化时通知其依赖进行视图更新。
+
+![images](vue17.jpg)
 
 #### 5.4 销毁阶段
 
