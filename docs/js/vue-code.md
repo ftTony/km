@@ -2601,7 +2601,17 @@ export function initState (vm: Component) {
 
 接着再判断实例中是否有`data`选项，如果有，就调用`data`选项寝化函数`initData`去初始化`data`选项；如果没有，就把`data`当作空对象并将其转换成响应式；
 
-接着再判断实例中是否有`computed`
+接着再判断实例中是否有`computed`选项，如果有，就调用`computed`选项初始化函数`initComputed`去初始化`computed`选项；
+
+最后判断实例中是否有`watch`选项，如果有，就调用`watch`选项初始化函数`initWatch`去初始化`watch`选项；
+
+**初始化 props**
+
+`props`选项通常是由当前组件的父级组件传入的，当父组件在调用子组件的时候，通常会把`props`属性值作为标签属性添加在子组件的标签上，如下：
+
+```
+
+```
 
 `initProps`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
