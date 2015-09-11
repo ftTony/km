@@ -2613,6 +2613,25 @@ Vue.prototype.$emit = function (event: string): Component {
 
 **`vm.$off`**
 
+该函数的用法
+
+```
+vm.$off( [event, callback] )
+```
+
+- **参数**
+
+  - `{string | Array<string>} event`
+  - `{Function} [callback]`
+
+- **作用**
+
+  移除自定义事件监听器。
+
+  - 如果没有提供参数，则移除所有的事件监听器；
+  - 如果只提供了事件，则移除该事件所有的监听器；
+  - 如果同时提供了事件与回调，则只移除这个回调的监听器。
+
 - **内部原理**
 
 该方法的定义位于源码的`src/core/instance/event.js`中，如下：
@@ -2659,7 +2678,7 @@ Vue.prototype.$off = function (event, fn) {
 
 该方法内部就是通过不断判断所传参数的情况进而不同的逻辑处理。
 
-首先，判断如果没有传入任何参数，
+首先，判断如果没有传入任何参数，这就是第一种情况：如果没有提供参数，则移除所有的事件监听器。我们
 
 ```
 if (!arguments.length) {
@@ -2667,6 +2686,8 @@ if (!arguments.length) {
     return vm
 }
 ```
+
+接着，判断如果传入的需要移除的事件名是一个数组，就表示需要一次性移除多个事件，那么我们只需订阅多个事件一样，遍历该数组，然后将数组中的每一个事件都递归调用`$off`方法进行移除即可。
 
 ```
 if (Array.isArray(event)) {
@@ -2715,6 +2736,8 @@ Vue.prototype.$once = function (event, fn) {
 
 #### 6.3 生命周期相关的方法
 
+与生命周期想着的实例方法有 4 个，分别是`vm.$mount`、`vm.$forceUpdate`、`vm.$nextTick`和`vm.$destory`。
+
 - `vm.$mount`
 - `vm.$forceUpdate`
 - `vm.$nextTick`
@@ -2722,9 +2745,34 @@ Vue.prototype.$once = function (event, fn) {
 
 **`vm.$mount`**
 
+官方使用如下：
+
+```
+vm.$mount( [elementOrSelector] )
+```
+
+- **参数**
+  - `{Element | string} [elementOrSelector]`
+  - `{boolean} [hydrating]`
+- **返回值**：`vm`- 实例自身
+- **作用**
+  如果`Vue`实例在实例化时没有收到 el 选项，则它处于“未挂载”状态，没有关联的
+
 **`vm.$forceUpdate`**
 
+用法如下：
+
+```
+vm.$forceUpdate()
+```
+
+- **作用：** 迫使`Vue`实例重新渲染
+
+- **内部原理**
+
 **`vm.$nextTick`**
+
+参考[Vue.netTick 理解与分析](https://km.xiaowuzi.info/js/vue-nexttick.html)
 
 **`vm.$destory`**
 
