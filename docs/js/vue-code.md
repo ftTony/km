@@ -2677,6 +2677,15 @@ function normalizeProps (options: Object, vm: ?Component) {
 }
 ```
 
+首先拿到实例中的`props`选项，如果不存在，则直接返回。
+
+```
+const props = options.props
+if (!props) return
+```
+
+如果存在，则定义一个空对象`res`，用来存储最终的结果。接着判断如果`props`选项是一个数组（写法一），则遍历该数组中的每一项元素，如果该元素是字符串，那么先将该元素统一转化成驼峰式命名，然后将该元素作为`key`，将`{type:null}`作为`value`存入`res`中；
+
 `initProps`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
