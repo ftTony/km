@@ -2684,9 +2684,63 @@ const props = options.props
 if (!props) return
 ```
 
-如果存在，则定义一个空对象`res`，用来存储最终的结果。接着判断如果`props`选项是一个数组（写法一），则遍历该数组中的每一项元素，如果该元素是字符串，那么先将该元素统一转化成驼峰式命名，然后将该元素作为`key`，将`{type:null}`作为`value`存入`res`中；
+如果存在，则定义一个空对象`res`，用来存储最终的结果。接着判断如果`props`选项是一个数组（写法一），则遍历该数组中的每一项元素，如果该元素是字符串，那么先将该元素统一转化成驼峰式命名，然后将该元素作为`key`，将`{type:null}`作为`value`存入`res`中；如果不是字符串，则抛出异常，如下：
 
-`initProps`函数的定义位于源码的`src/core/instance/state.js`中，如下：
+```
+if (Array.isArray(props)) {
+    i = props.length
+    while (i--) {
+        val = props[i]
+        if (typeof val === 'string') {
+            name = camelize(val)
+            res[name] = { type: null }
+        } else if (process.env.NODE_ENV !== 'production') {
+            warn('props must be strings when using array syntax.')
+        }
+    }
+}
+```
+
+如果`props`选项不是数组那就判断是不是一个对象，如果是一个对象，那就是遍历对象中的每一对键值，拿到每一对键值后，先将键名统一转化成驼峰式命名，然后判断值是否还是一个对象，如果值是对象（写法三），那么就将该键值对存入`res`中；如果值不是对象（写法二），那么就将键名作为`key`，将`{type:null}`作为`value`存入`res`中。如下：
+
+```
+if (isPlainObject(props)) {
+    for (const key in props) {
+        val = props[key]
+        name = camelize(key)
+        res[name] = isPlainObject(val)
+            ? val
+        : { type: val }
+    }
+}
+```
+
+如果`props`选项既不是数组也不是对象，那么如果在非生产环境下就抛出异常，最后将`res`作为规范化后的结果重新赋值给实例的`props`选项。如下：
+
+```
+if (process.env.NODE_ENV !== 'production') {
+    warn(
+        `Invalid value for option "props": expected an Array or an Object, ` +
+        `but got ${toRawType(props)}.`,
+        vm
+    )
+}
+options.props = res
+```
+
+无论是三种写法的哪一种，最终都会被转化成如下写法：
+
+```
+props: {
+    name:{
+        type: xxx
+    }
+}
+```
+
+**initProps 函数分析**
+
+将`props`选项规范化完成之后，接下来我们就可以真正的初始化`props`选项了，`initProps`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
 function initProps (vm: Component, propsOptions: Object) {
