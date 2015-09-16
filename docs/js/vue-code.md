@@ -2862,6 +2862,62 @@ return cachedCtors[SuperId]
 
 ```
 
+#### 7.2 Vue.nextTick
+
+全局 nextTick 方法同实例 nextTick 方法一样
+
+#### 7.3 Vue.set
+
+全局 set 方法同实例 set 方法一样
+
+#### 7.4 Vue.delete
+
+全局 delete 方法同实例 delete 方法一样
+
+#### 7.5 Vue.directive
+
+#### 7.6 Vue.filter
+
+#### 7.7 Vue.component
+
+#### 7.8 directive、filter、component 小结
+
+通过对`Vue.directive`、`Vue.filter`和`Vue.component`这三个 API 的分析
+
+```
+export const ASSET_TYPES = [
+  'component',
+  'directive',
+  'filter'
+]
+
+Vue.options = Object.create(null)
+ASSET_TYPES.forEach(type => {
+    Vue.options[type + 's'] = Object.create(null)
+})
+
+ASSET_TYPES.forEach(type => {
+    Vue[type] = function (id,definition) {
+        if (!definition) {
+            return this.options[type + 's'][id]
+        } else {
+            if (process.env.NODE_ENV !== 'production' && type === 'component') {
+                validateComponentName(id)
+            }
+            if (type === 'component' && isPlainObject(definition)) {
+                definition.name = definition.name || id
+                definition = this.options._base.extend(definition)
+            }
+            if (type === 'directive' && typeof definition === 'function') {
+                definition = { bind: definition, update: definition }
+            }
+            this.options[type + 's'][id] = definition
+            return definition
+        }
+    }
+})
+```
+
 #### 7.9 Vue.use
 
 该 API 的定义位于源码的`src/core/global-api/use.js`中，代码如下：
@@ -2888,6 +2944,8 @@ return this
 }
 
 ```
+
+#### 7.10 Vue.mixin
 
 ### 八、过滤器篇
 
