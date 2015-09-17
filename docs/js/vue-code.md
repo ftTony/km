@@ -2876,13 +2876,94 @@ return cachedCtors[SuperId]
 
 #### 7.5 Vue.directive
 
+其用法如下：
+
+```
+Vue.directive( id, [definition] )
+```
+
+- **参数：**
+
+  - `{string} id`
+  - `{Function | Object} [definition]`
+
+- **作用：**
+
+  注册或获取全局指令。
+
+```
+
+```
+
+- **原理分析**
+
 #### 7.6 Vue.filter
+
+其用法如下：
+
+```
+Vue.filter( id, [definition] )
+```
+
+- **参数：**
+  - `{string} id`
+  - `{Function} [definition]`
+- **作用**
+
+注册或获取全局过滤器。
+
+```
+// 注册
+Vue.filter('my-filter', function (value) {
+  // 返回处理后的值
+})
+
+// getter，返回已注册的过滤器
+var myFilter = Vue.filter('my-filter')
+```
+
+- **原理分析**
+
+该 API 是用来注册或获取全局过滤器的，接收两个参数：过滤器`id`和过滤的定义。同全局指令一样，注册过滤器是将定义好的过滤器存放在某个位置，获取过滤器是根据过滤器`id`从存放过滤器的位置来读取过滤器。
+
+其代码如下：
+
+```
+Vue.options = Object.create(null)
+Vue.options['filters'] = Object.create(null)
+
+Vue.filter= function (id,definition) {
+    if (!definition) {
+        return this.options['filters'][id]
+    } else {
+        this.options['filters'][id] = definition
+        return definition
+    }
+}
+```
+
+跟全局指令一样，`Vue.options['filters']`是用来存放全局过滤器的地方。还是根据是否传入了`definition`参数来决定本次操作是注册过滤器还是获取过滤器。如果没有传入`definition`参数，则表示本次操作为获取过滤器，那么就从存放过滤器的地方根据过滤器`id`来读取过滤器并返回；如果传入了`definition`参数，则表示本次操作为注册过滤器，那就直接将其保存在`this.options['filters']`中。
 
 #### 7.7 Vue.component
 
+其用法如下：
+
+```
+Vue.component( id, [definition] )
+```
+
+- **参数：**
+
+  - `{string} id`
+  - `{Function | Object} [definition]`
+
+- **作用：**
+
+  注册或获取全局组件。
+
 #### 7.8 directive、filter、component 小结
 
-通过对`Vue.directive`、`Vue.filter`和`Vue.component`这三个 API 的分析
+通过对`Vue.directive`、`Vue.filter`和`Vue.component`这三个 API 的分析，细心的你肯定会发现这三个 API 的代码实现非常的相似，是的，这是我们为了便于理解故意拆开的，其实在源码中这三个 API 的实现是写在一起的，
 
 ```
 export const ASSET_TYPES = [
