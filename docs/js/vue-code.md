@@ -2744,39 +2744,36 @@ props: {
 
 ```
 function initProps (vm: Component, propsOptions: Object) {
-const propsData = vm.$options.propsData || {}
-  const props = vm._props = {}
-  // cache prop keys so that future props updates can iterate using Array
-  // instead of dynamic object key enumeration.
-  const keys = vm.$options.\_propKeys = []
-const isRoot = !vm.\$parent
-// root instance props should be converted
-if (!isRoot) {
-toggleObserving(false)
-}
+    const propsData = vm.$options.propsData || {}
+    const props = vm._props = {}
+    const keys = vm.$options.\_propKeys = []
+    const isRoot = !vm.\$parent
+    // root instance props should be converted
+    if (!isRoot) {
+        toggleObserving(false)
+    }
 for (const key in propsOptions) {
-keys.push(key)
-const value = validateProp(key, propsOptions, propsData, vm)
-if (process.env.NODE_ENV !== 'production') {
-const hyphenatedKey = hyphenate(key)
-if (isReservedAttribute(hyphenatedKey) ||
-config.isReservedAttr(hyphenatedKey)) {
-warn(`"${hyphenatedKey}" is a reserved attribute and cannot be used as component prop.`,vm)
-}
-defineReactive(props, key, value, () => {
-if (!isRoot && !isUpdatingChildComponent) {
-warn(
-`Avoid mutating a prop directly since the value will be` +
-`overwritten whenever the parent component re-renders.` +
-`Instead, use a data or computed property based on the prop's` +
-`value. Prop being mutated: "${key}"`,
-vm
-)
-}
-})
-} else {
-defineReactive(props, key, value)
-}
+    keys.push(key)
+    const value = validateProp(key, propsOptions, propsData, vm)
+    if (process.env.NODE_ENV !== 'production') {
+        const hyphenatedKey = hyphenate(key)
+        if (isReservedAttribute(hyphenatedKey) || config.isReservedAttr(hyphenatedKey)) {
+            warn(`"${hyphenatedKey}" is a reserved attribute and cannot be used as component prop.`,vm)
+        }
+        defineReactive(props, key, value, () => {
+            if (!isRoot && !isUpdatingChildComponent) {
+            warn(
+                `Avoid mutating a prop directly since the value will be` +
+                `overwritten whenever the parent component re-renders.` +
+                `Instead, use a data or computed property based on the prop's` +
+                `value. Prop being mutated: "${key}"`,
+                vm
+            )
+        }
+    })
+    } else {
+    defineReactive(props, key, value)
+    }
     if (!(key in vm)) {
         proxy(vm, `_props`, key)
     }
@@ -2802,6 +2799,8 @@ const isRoot = !vm.$parent
 - props：指向`vm._props`指针，所有设置到
 - keys：指向`vm.$options._propKeys`的指针，缓存
 - isRoot：当前组件是否为根组件。
+
+**初始化 methods**
 
 初始化`methods`相较而言就比较简单了，它的初始函数定义位于源码的`src/core/instance/state.js`中，如下：
 
@@ -2836,6 +2835,8 @@ function initMethods (vm: Component, methods: Object) {
 
 ```
 
+**初始化 data**
+
 初始化`data`也比较简单，它的初始化函数定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
@@ -2856,6 +2857,8 @@ export function initState (vm: Component) {
     }
 }
 ```
+
+**初始化 computed**
 
 初始化`initComputed`的内部原理是怎样的。`initComputed`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
@@ -2897,6 +2900,8 @@ function initComputed (vm: Component, computed: Object) {
 
 ```
 
+**初始化 watch**
+
 初始化`watch`选项，在日常开发中`watch`选项也经常会使用到，它可以用来侦听某个已有的数据，当该数据发生变化时执行对应的回调函数。
 
 ```
@@ -2917,6 +2922,12 @@ function initWatch (vm: Component, watch: Object) {
 ```
 
 #### 5.2 模板编译阶段
+
+`vue`基于源码构建的有两个版本，一个是`runtime only`（一个只饮食运行时的版本），另一个是`runtime+compiler`（一个同时包含编译器和运行时的完整版本）。而两个版本的区别仅在于后者包含了一个编译器。
+
+- 完整版本
+
+- 只包含运行时版本
 
 #### 5.3 挂载阶段
 
