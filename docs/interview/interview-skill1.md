@@ -9,6 +9,7 @@
 ## 参考资料
 
 - [教你如何写初/高级前端简历【赠简历导图】](https://juejin.im/post/5e91a0a4518825739837bf84)
+- [曾经老师看不起的前端开发，如今却斩获多份 offer，最终走进阿里](https://mp.weixin.qq.com/s/V1Z1snOStcxeeLqXaXRLbw)
 - 《剑指 offer》
 
 ## 联系作者
