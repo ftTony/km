@@ -2959,7 +2959,18 @@ Vue.component( id, [definition] )
 
 - **作用：**
 
-  注册或获取全局组件。
+  注册或获取全局组件。注册还会自动使用给定的`id`设置组件的名称
+
+```
+// 注册组件，传入一个扩展过的构造器
+Vue.component('my-component', Vue.extend({ /* ... */ }))
+
+// 注册组件，传入一个选项对象 (自动调用 Vue.extend)
+Vue.component('my-component', { /* ... */ })
+
+// 获取注册的组件 (始终返回构造器)
+var MyComponent = Vue.component('my-component')
+```
 
 #### 7.8 directive、filter、component 小结
 
@@ -3000,6 +3011,22 @@ ASSET_TYPES.forEach(type => {
 ```
 
 #### 7.9 Vue.use
+
+其用法如下：
+
+```
+Vue.use( plugin )
+```
+
+- **参数：**
+
+  - `{Object | Function} plugin`
+
+- **作用：**
+
+安装 Vue.js 插件。如果插件是一个对象，必须提供`install`方法。如果插件是一个函数，它会被作为 install 方法。install 方法调用时，会将`Vue`作为参数传入。
+
+- **原理分析：**
 
 该 API 的定义位于源码的`src/core/global-api/use.js`中，代码如下：
 
