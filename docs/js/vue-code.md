@@ -3117,7 +3117,58 @@ function query (el) {
 当调用了实例的`$destroy`方法之后，当前实例就进入了销毁阶段。所以分析销毁阶段就是分析`$destroy`
 
 ```
+Vue.prototype.$destroy = function () {
+    const vm: Component = this
+    if (vm._isBeingDestroyed) {
+      return
+    }
+    callHook(vm, 'beforeDestroy')
+    vm._isBeingDestroyed = true
+    // remove self from parent
+    const parent = vm.$parent
+    if (parent && !parent._isBeingDestroyed && !vm.$options.abstract) {
+      remove(parent.$children, vm)
+    }
+    // teardown watchers
+    if (vm._watcher) {
+      vm._watcher.teardown()
+    }
+    let i = vm._watchers.length
+    while (i--) {
+      vm._watchers[i].teardown()
+    }
+    // remove reference from data ob
+    // frozen object may not have observer.
+    if (vm._data.__ob__) {
+      vm._data.__ob__.vmCount--
+    }
+    // call the last hook...
+    vm._isDestroyed = true
+    // invoke destroy hooks on current rendered tree
+    vm.__patch__(vm._vnode, null)
+    // fire destroyed hook
+    callHook(vm, 'destroyed')
+    // turn off all instance listeners.
+    vm.$off()
+    // remove __vue__ reference
+    if (vm.$el) {
+      vm.$el.__vue__ = null
+    }
+    // release circular reference (#6759)
+    if (vm.$vnode) {
+      vm.$vnode.parent = null
+    }
+  }
+}
+```
 
+可以看到，在该函数中，首先会判断实例上是否存在渲染函数，如果不存在，则设置一个默认的渲染函数`createEmptyVNode`，该渲染函数会创建一个注释类型的`VNode`节点。如下：
+
+```
+vm.$el = el
+if (!vm.$options.render) {
+    vm.$options.render = createEmptyVNode
+}
 ```
 
 ### 六、实例方法
