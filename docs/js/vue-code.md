@@ -3053,6 +3053,38 @@ return this
 
 ```
 
+在该函数内部，首先定义了一个变量`installedPlugins`，该变量初始值是一个空数组，用来存储已安装过的插件。首先判断传入的插件是否存在于`installedPlugins`数组中（即已经被安装过），如果存在的话，则直接返回，防止重复安装。如下：
+
+```
+const installedPlugins = (this._installedPlugins || (this._installedPlugins = []))
+if (installedPlugins.indexOf(plugin) > -1) {
+    return this
+}
+```
+
+接下来获取到传入的其余参数，并且使用`toArray`方法将其转换成数组，同时将 `Vue` 插入到该数组的第一个位置，这是因为在后续调用 `install` 方法时，`Vue` 必须作为第一个参数传入。如下：
+
+```
+const args = toArray(arguments, 1)
+args.unshift(this)
+```
+
+首先，判断传入的插件如果是一个提供了`install`方法的对象，那么就执行该对象中提供的`install`方法并传入参数完成插件安装。如下：
+
+```
+if (typeof plugin.install === 'function') {
+    plugin.install.apply(plugin, args)
+}
+```
+
+如果传入的插件是一个函数，那么就把这个函数当作`install`方法执行，同时传入参数完成插件安装。如下：
+
+```
+else if (typeof plugin === 'function') {
+    plugin.apply(null, args)
+}
+```
+
 #### 7.10 Vue.mixin
 
 ### 八、过滤器篇
