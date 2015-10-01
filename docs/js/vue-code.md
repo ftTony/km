@@ -2963,7 +2963,7 @@ new Vue({
 
 完整版本和只包含运行时版之间的差异主要在于是否有模板编译阶段，而是否有模板编译阶段主要表现在`vm.$mount`方法的实现上。实现上`$mount`也有两个版本。
 
-**两种\$mount 方法对比**
+**两种`$mount`方法对比**
 
 只包含运行时版本的`$mount`代码如下：
 
@@ -3105,7 +3105,58 @@ function query (el) {
 `mountComponent`函数的定义位于源码的`src/core/instance/lifecycle.js`中，如下：
 
 ```
+export function mountComponent (vm,el,hydrating) {
+    vm.$el = el
+    if (!vm.$options.render) {
+        vm.$options.render = createEmptyVNode
+    }
+    callHook(vm, 'beforeMount')
 
+    let updateComponent
+
+    updateComponent = () => {
+        vm._update(vm._render(), hydrating)
+    }
+    new Watcher(vm, updateComponent, noop, {
+        before () {
+            if (vm._isMounted) {
+                callHook(vm, 'beforeUpdate')
+            }
+        }
+    }, true /* isRenderWatcher */)
+    hydrating = false
+
+    if (vm.$vnode == null) {
+        vm._isMounted = true
+        callHook(vm, 'mounted')
+    }
+    return vm
+}
+```
+
+可以看到，在该函数中，首先会判断实例上是否存在渲染函数，如果不存在，则设置一个默认的渲染函数`createEmptyVNode`，该渲染函数会创建一个注释类型的`VNode`节点。如下：
+
+```
+vm.$el = el
+if (!vm.$options.render) {
+    vm.$options.render = createEmptyVNode
+}
+```
+
+然后调用`callHook`函数来触发`beforeMount`生命同期钩子函数，如下：
+
+```
+callHook(vm, 'beforeMount')
+```
+
+该钩子函数触发后标志着正式开始执行挂载操作。
+
+接下来定义了一个`updateComponent`函数，如下：
+
+```
+updateComponent = () => {
+    vm._update(vm._render(), hydrating)
+}
 ```
 
 #### 5.4 销毁阶段
@@ -3159,15 +3210,6 @@ Vue.prototype.$destroy = function () {
       vm.$vnode.parent = null
     }
   }
-}
-```
-
-可以看到，在该函数中，首先会判断实例上是否存在渲染函数，如果不存在，则设置一个默认的渲染函数`createEmptyVNode`，该渲染函数会创建一个注释类型的`VNode`节点。如下：
-
-```
-vm.$el = el
-if (!vm.$options.render) {
-    vm.$options.render = createEmptyVNode
 }
 ```
 
