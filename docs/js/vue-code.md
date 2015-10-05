@@ -743,7 +743,50 @@ export default class Watcher {
 `traverse`函数定义如下：
 
 ```
+const seenObjects = new Set();
 
+export function traverse(val: any) {
+  _traverse(val, seenObjects);
+  seenObjects.clear();
+}
+
+function _traverse(val: any, seen: SimpleSet) {
+  let i, keys;
+  const isA = Array.isArray(val);
+  if (
+    (!isA && !isObject(val)) ||
+    Object.isFrozen(val) ||
+    val instanceof VNode
+  ) {
+    return;
+  }
+  if (val.__ob__) {
+    const depId = val.__ob__.dep.id;
+    if (seen.has(depId)) {
+      return;
+    }
+    seen.add(depId);
+  }
+  if (isA) {
+    i = val.length;
+    while (i--) _traverse(val[i], seen);
+  } else {
+    keys = Object.keys(val);
+    i = keys.length;
+    while (i--) _traverse(val[keys[i]], seen);
+  }
+}
+```
+
+该函数其实就是个递归遍历的过程，把被观察数据的内部值都递归遍历读取一遍。
+
+首先判断传入的`val`类型，如果它不是`Array`或`Object`，再或者已经被冻结，那么直接返回，退出程序。如下：
+
+```
+const isA = Array.isArray(val);
+if ((!isA && !isObject(val)) || Object.isFrozen(val) || val instanceof VNode) {
+  return;
+}
 ```
 
 **`vm.$set`**
