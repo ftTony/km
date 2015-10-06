@@ -3092,11 +3092,55 @@ function query (el) {
 
 由于`el`参数可以是元素，也可以是字符串类型的元素选择器，所以调用`query`函数来获取到`el`对应的`DOM`元素。由于`query`函数比较简单，就是根据传入的`el`参数是否为字符串从而以不同方式获取到对应的`DOM`元素。
 
-另外，这里还多了一个判断，就是判断获取到`el`对应的`DOM`
+另外，这里还多了一个判断，就是判断获取到`el`对应的`DOM`元素如果是`body`或`html`元素时，将会抛出警告。这是
+
+```
+if (el === document.body || el === document.documentElement) {
+  warn(
+    "Do not mount Vue to <html> or <body> - mount to normal elements instead."
+  );
+  return this
+}
+```
+
+接着，在用户没有手写`render`函数的情况下获取传入的模板`template`；如下：
+
+```
+if (!options.render) {
+  var template = options.template;
+  if (template) {
+    if (typeof template === 'string') {
+      if (template.charAt(0) === '#') {
+        template = idToTemplate(template);
+        /* istanbul ignore if */
+        if (!template) {
+          warn(
+            ("Template element not found or is empty: " + (options.template)),
+            this
+          );
+        }
+      }
+    } else if (template.nodeType) {
+        template = template.innerHTML;
+    } else {
+      {
+        warn('invalid template option:' + template, this);
+      }
+      return this
+    }
+  } else if (el) {
+    template = getOuterHTML(el);
+  }
+}
+```
 
 **总结**
 
-介绍了`Vue`源码构建的两种版本：完整版本和只包含运行时版本。并且我们知道了模板编译阶段只存在于完整版中，在只包含运行时版本中不存在该阶段，这是因为在只包含运行时版本中，当使用`vue-loader`或`vueify`时，`*.vue`文件内部的模板会在构建时预
+介绍了`Vue`源码构建的两种版本：完整版本和只包含运行时版本。并且我们知道了模板编译阶段只存在于完整版中，在只包含运行时版本中不存在该阶段，这是因为在只包含运行时版本中，当使用`vue-loader`或`vueify`时，`*.vue`文件内部的模板会在构建时预编译成渲染函数，所以是不需要编译的，从而不存在模板编译阶段。
+
+然后对比了两种版本`$mount`方法的区别。它们的区别在于在`$mount`方法中是否进行了模板编译。在只包含运行时版本的`$mount`方法中获取到`DOM`元素后直接进入挂载阶段，而在完整的`$mount`方法中是先将模板进行编译，然后回过头调用只包含运行时版本的`$mount`方法进入挂载阶段。
+
+最后，我们知道了分析模板编译阶段其实就是分析完整版本的`vm.$mount`方法的实现，我们将完整版本的`vm.$mount`方法源码进行了逐行分析。知道了在该阶段所做的工作就是：从用户传入的`el`选项和`template`选项中获取到用户传入的内部或外部模板，然后将获取到的模板编译成渲染函数。
 
 #### 5.3 挂载阶段
 
