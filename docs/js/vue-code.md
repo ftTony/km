@@ -3092,7 +3092,7 @@ function query (el) {
 
 由于`el`参数可以是元素，也可以是字符串类型的元素选择器，所以调用`query`函数来获取到`el`对应的`DOM`元素。由于`query`函数比较简单，就是根据传入的`el`参数是否为字符串从而以不同方式获取到对应的`DOM`元素。
 
-另外，这里还多了一个判断，就是判断获取到`el`对应的`DOM`元素如果是`body`或`html`元素时，将会抛出警告。这是
+另外，这里还多了一个判断，就是判断获取到`el`对应的`DOM`元素如果是`body`或`html`元素时，将会抛出警告。这是因为`Vue`会将模板中的内容替换`el`对应的`DOM`元素，如果是`body`或`html`元素时，替换之后将会破坏整个`DOM`文档，所以不允许`el`是`body`或`html`。如下：
 
 ```
 if (el === document.body || el === document.documentElement) {
@@ -3131,6 +3131,31 @@ if (!options.render) {
   } else if (el) {
     template = getOuterHTML(el);
   }
+}
+```
+
+首先获取用户传入的`template`选项赋给变量`template`，如果变量`template`存在，则接着判断如果`template`字符串并且以`#`开头，则认为`template`是`id`选择符，则调用`idToTemplate`函数获取到选择符对应的`DOM`元素的`innerHTML`作为模板，如下：
+
+```
+if (template) {
+  if (typeof template === 'string') {
+    if (template.charAt(0) === '#') {
+      template = idToTemplate(template);
+    }
+  }
+}
+
+var idToTemplate = cached(function (id) {
+  var el = query(id);
+  return el && el.innerHTML
+});
+```
+
+如果`template`不是字符串，那就判断它是不是一个`DOM`元素，如果是，则使用该`DOM`元素的`innerHTML`作为模板，如下：
+
+```
+if (template.nodeType) {
+  template = template.innerHTML;
 }
 ```
 
