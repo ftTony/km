@@ -3085,6 +3085,20 @@ else if (typeof plugin === 'function') {
 }
 ```
 
+如果传入的插件是一个函数，那么就把这个函数当作`install`方法执行，同时传入参数完成插件安装。如下：
+
+```
+else if (typeof plugin === 'function') {
+    plugin.apply(null, args)
+}
+```
+
+插件安装完成之后，将该插件添加进已安装插件列表中，防止重复安装。如下：
+
+```
+installedPlugins.push(plugin)
+```
+
 #### 7.10 Vue.mixin
 
 ### 八、过滤器篇
