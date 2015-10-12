@@ -235,9 +235,6 @@ Web Worker 使得网页中进行多线程编程成为可能。当主线程在处
 - [如何使页面交互更流畅](https://mp.weixin.qq.com/s/eoZyeJahkBpaYxzC2n5NLQ)
 - [CSS3 动画卡顿性能优化解决方案](https://github.com/FrankKai/FrankKai.github.io/issues/8)
 - [从 8 道面试题看浏览器渲染过程与性能优化](https://juejin.im/post/5e143104e51d45414a4715f7)
-- [页面需要渲染 10 万条数据，应该怎么实现？](https://www.cnblogs.com/ldld/p/11028179.html)
-- [「前端进阶」高性能渲染十万条数据(虚拟列表)](https://juejin.im/post/5db684ddf265da4d495c40e5)
-- [「前端进阶」高性能渲染十万条数据(时间分片)](https://juejin.im/post/5d76f469f265da039a28aff7)
 - [前端性能优化 24 条建议（2020）](https://segmentfault.com/a/1190000022205291)
 
 ## 联系作者
