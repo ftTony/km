@@ -290,7 +290,8 @@ module.exports = {
                     "performance-4",
                     "performance-5",
                     "performance-tool",
-                    "performance-pic"
+                    "performance-pic",
+                    "infinite-pull-down"
                 ]
             },
             {
