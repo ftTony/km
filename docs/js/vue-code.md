@@ -1478,6 +1478,52 @@ if(start){
 '我是文本</p>'.match(startTagOpen) => null
 ```
 
+当解析到开始标签时，会调用 4 个钩子函数中的`start`函数，而`start`函数需要传递 5 个参数，分别是标签名`tag`、标签属性`attrs`、标签是否自闭合`unary`、开始位置`start`、结束位置`end`。标签名通过与此同时的结果就可以拿到，即上面代码中的`start[1]`，而标签属性`attrs`以及标签是否自闭合`unary`需要进行一步解析。
+
+1. 解析标签属性
+
+我们知道，标签属性一般是写在开始标签的标签名之后的，如下：
+
+```
+<div class="a" id="b"></div>
+```
+
+另外，我们在上面匹配是否开始标签正则中已经可以拿到开始标签的标签名，即上面代码中的`start[0]`，那么我们可以将这一部分先从模板字符串裁掉，则剩下的部分如下：
+
+```
+ class="a" id="b"></div>
+```
+
+我们只需用剩下的这部分去匹配标签属性的正则，就可以将标签属性提取出来了，如下：
+
+```
+const attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/
+let html = 'class="a" id="b"></div>'
+let attr = html.match(attribute)
+console.log(attr)
+// ["class="a"", "class", "=", "a", undefined, undefined, index: 0, input: "class="a" id="b"></div>", groups: undefined]
+```
+
+可以看到，第一个标签属性`class="a"`已经被拿到了。另外，标签属性有可能有多个也有可能没有，如果没有的话那好办，匹配标签属性的正则就会匹配失败，标签属性就为空数组；而如果标签属性有多个的话，那就需要循环匹配了，匹配出第一个标签属性后，就把该属性裁掉，用剩下的字符串继续匹配，走到不再满足正则为止，代码如下：
+
+```
+const attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/
+const startTagClose = /^\s*(\/?)>/
+const match = {
+ tagName: start[1],
+ attrs: [],
+ start: index
+}
+ while (!(end = html.match(startTagClose)) && (attr = html.match(dynamicArgAttribute) || html.match(attribute))) {
+ advance(attr[0].length)
+ match.attrs.push(attr)
+}
+```
+
+在上面代码的`while`循环中，如果剩下的字符串不符合开始标签的结束特征
+
+2. 解析标签是否是自闭合
+
 **解析结束标签**
 
 结束标签的解析要比解析开始标签容易多了，因为它不需要解析什么属性，只需要判断剩下的模板字符串是否符合结束标签的特征，如果是，就将结束标签名提取出来，再调用 4 个钩子函数中的`end`函数就好了。

@@ -9,6 +9,7 @@
 ### 参考资料
 
 - [【前端可视化】 OpenGL / WebGL 入门和实践](https://mp.weixin.qq.com/s/jBM8aRFgPMIeH6jAAFQmxA)
+- [WebGL 工作流程解读，一个三角形的诞生](https://mp.weixin.qq.com/s/P_l86DcbJElshjYuPNwWgg)
 
 ## 联系作者
 
