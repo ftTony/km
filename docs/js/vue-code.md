@@ -3101,9 +3101,40 @@ installedPlugins.push(plugin)
 
 #### 7.10 Vue.mixin
 
+其用法如下：
+
+```
+Vue.mixin( mixin )
+```
+
+- **参数：**
+
+  - `{Object} mixin`
+
+- **作用：**
+
+全局注册一个混入，影响注册之后所有创建的每个 Vue 实例。插件作者可以使用混入，向组件注入自定义的行为。
+
+- **原理分析**
+
+该 API 的定义位于源码的 `src/core/global-api/mixin.js` 中，代码如下：
+
+```
+Vue.mixin = function (mixin: Object) {
+    this.options = mergeOptions(this.options, mixin)
+    return this
+}
+```
+
 ### 八、过滤器篇
 
 ### 九、指令篇
+
+#### 9.1 何时生效
+
+#### 9.2 指令钩子函数
+
+#### 9.3 如何生效
 
 ### 十、总结
 
