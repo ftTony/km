@@ -347,7 +347,7 @@ module.exports = {
                 'webpack-basic',
                 'webpack-babel',
                 'webpack-plugin',
-                'webpack-loador',
+                'webpack-loader',
                 'webpack-coder',
             ]
         },
