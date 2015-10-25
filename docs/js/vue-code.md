@@ -1551,6 +1551,82 @@ let end = html.match(startTagClose)
 '/>'.match(startTagClose) // ["/>", "/", index: 0, input: "/><div></div>", groups: undefined]
 ```
 
+可以看到，非自闭合标签匹配结果中的`end[1]`为`""`，而自闭合标签匹配结果中的`end[1]`为`"/"`。所以根据匹配结果的`end[1]`是否是`""`我们即可判断出当前标签是否为自闭合标签，源码如下：
+
+```
+const startTagClose = /^\s*(\/?)>/
+let end = html.match(startTagClose)
+if (end) {
+ match.unarySlash = end[1]
+ advance(end[0].length)
+ match.end = index
+ return match
+}
+```
+
+解析完毕后，就可以用解析得到的结果去调用`start`钩子函数去创建元素型的`AST`节点了。
+
+`Vue`并没有直接去调`start`钩子函数去创建`AST`节点，而是调用了`handleStartTag`函数，在该函数内部才去调用的`start`钩子函数，为什么要这样做呢？
+
+```
+function handleStartTag (match) {
+    const tagName = match.tagName
+    const unarySlash = match.unarySlash
+
+    if (expectHTML) {
+      // ...
+    }
+
+    const unary = isUnaryTag(tagName) || !!unarySlash
+
+    const l = match.attrs.length
+    const attrs = new Array(l)
+    for (let i = 0; i < l; i++) {
+      const args = match.attrs[i]
+      const value = args[3] || args[4] || args[5] || ''
+      const shouldDecodeNewlines = tagName === 'a' && args[1] === 'href'
+        ? options.shouldDecodeNewlinesForHref
+        : options.shouldDecodeNewlines
+      attrs[i] = {
+        name: args[1],
+        value: decodeAttr(value, shouldDecodeNewlines)
+      }
+    }
+
+    if (!unary) {
+      stack.push({ tag: tagName, lowerCasedTag: tagName.toLowerCase(), attrs: attrs })
+      lastTag = tagName
+    }
+
+    if (options.start) {
+      options.start(tagName, attrs, unary, match.start, match.end)
+    }
+  }
+
+```
+
+`handleStartTag`函数的开始定义几个常量：
+
+```
+
+```
+
+接下来是循环处理提取出来的标签属性数组`match.attrs`，如下：
+
+```
+for (let i = 0; i < l; i++) {
+    const args = match.attrs[i]
+    const value = args[3] || args[4] || args[5] || ''
+    const shouldDecodeNewlines = tagName === 'a' && args[1] === 'href'
+    ? options.shouldDecodeNewlinesForHref
+    : options.shouldDecodeNewlines
+    attrs[i] = {
+        name: args[1],
+        value: decodeAttr(value, shouldDecodeNewlines)
+    }
+}
+```
+
 **解析结束标签**
 
 结束标签的解析要比解析开始标签容易多了，因为它不需要解析什么属性，只需要判断剩下的模板字符串是否符合结束标签的特征，如果是，就将结束标签名提取出来，再调用 4 个钩子函数中的`end`函数就好了。
