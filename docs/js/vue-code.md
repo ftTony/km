@@ -3128,9 +3128,25 @@ Vue.mixin = function (mixin: Object) {
 
 ### 八、过滤器篇
 
+#### 8.1 resolveFilter 函数分析
+
+`resolveFilter`函数的定义位于源码的`src/core/instance/render-helper.js`中，如下：
+
 ### 九、指令篇
 
 #### 9.1 何时生效
+
+| 钩子函数名称 | 触发时机                                            | 回调参数               |
+| ------------ | --------------------------------------------------- | ---------------------- |
+| init         | 已创建 VNode，在 patch 期间发现新的虚拟节点时被触发 | VNode                  |
+| create       | 已基于 VNode 创建了 DOM 元素                        | emptyNode 和 VNode     |
+| activate     | keep-alive 组件被创建                               | emptyNode 和 innerNode |
+| insert       | VNode 对应的                                        | VNode                  |
+| prepatch     | 已创建 VNode，在 patch 期间发现新的虚拟节点时被触发 | VNode                  |
+| update       | 已创建 VNode，在 patch 期间发现新的虚拟节点时被触发 | VNode                  |
+| postpatch    | 已创建 VNode，在 patch 期间发现新的虚拟节点时被触发 | VNode                  |
+| destory      | 已创建 VNode，在 patch 期间发现新的虚拟节点时被触发 | VNode                  |
+| remove       | 已创建 VNode，在 patch 期间发现新的虚拟节点时被触发 | VNode                  |
 
 #### 9.2 指令钩子函数
 
