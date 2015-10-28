@@ -1520,9 +1520,36 @@ const match = {
 }
 ```
 
-在上面代码的`while`循环中，如果剩下的字符串不符合开始标签的结束特征
+在上面代码的`while`循环中，如果剩下的字符串不符合开始标签的结束特征（startTagClose）并且符合标签属性的特征的话，那就说明还有未提取出的标签属性，那就进入循环，继续提取，直到把所有标签属性都提取完毕。
+
+所谓不符合开始标签的结束特征是指当前剩下的字符串不是以开始标签结束符开头的，我们知道一个开始标签的结束符有可能是一个`>`（非自闭合标签），也有可能是`/>`（自闭合标签），如果剩下的字符串（如`></div>`）以开始标签的结束符开头，那么就表示标签属性已经被提取完毕了。
 
 2. 解析标签是否是自闭合
+
+在`HTML`中，有自闭合标签（如`<img src="" />`）也有非自闭合标签（如`<div></div>`），这两种类型的标签在创建`AST`节点是处理方式是有区别的，所以我们需要解析出当前标签是否自闭合标签。
+
+解析的方式很简单，我们知道，经过标签属性提取之后，那么剩下的字符串无非就两种，如下：
+
+```
+<!--非自闭合标签-->
+></div>
+```
+
+或
+
+```
+<!--自闭合标签-->
+/>
+```
+
+所以我们可以用剩下的字符串去切尔西开始标签结束符正则，如下：
+
+```
+const startTagClose = /^\s*(\/?)>/
+let end = html.match(startTagClose)
+'></div>'.match(startTagClose) // [">", "", index: 0, input: "></div>", groups: undefined]
+'/>'.match(startTagClose) // ["/>", "/", index: 0, input: "/><div></div>", groups: undefined]
+```
 
 **解析结束标签**
 
@@ -1539,6 +1566,21 @@ const endTagMatch = html.match(endTag)
 '</div>'.match(endTag)  // ["</div>", "div", index: 0, input: "</div>", groups: undefined]
 '<div>'.match(endTag)  // null
 ```
+
+如果模板字符串结束标签的特征，则会获得匹配结果数组；如果不合符，则得到 null。
+
+接着再调用`end`钩子函数，如下：
+
+```
+if (endTagMatch) {
+    const curIndex = index
+    advance(endTagMatch[0].length)
+    parseEndTag(endTagMatch[1], curIndex, index)
+    continue
+}
+```
+
+没有直接去调用 end 函数，而是调用了 parseEndTag 函数。
 
 **解析文本**
 
