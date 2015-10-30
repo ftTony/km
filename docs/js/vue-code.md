@@ -1708,6 +1708,9 @@ if (options.chars && text) {
 }
 ```
 
+**如何保证AST节点层级关系**
+
+
 #### 4.4 文本解析器
 
 文本菜板器的源码位于`src/compiler/parser/text-parsre.js`中，代码如下：

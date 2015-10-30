@@ -376,6 +376,8 @@ function createWatcher (
 - [vue 系列---理解 Vue 中的 computed,watch,methods 的区别及源码实现(六)](https://www.cnblogs.com/tugenhua0707/p/11760466.html)
 - [Vue 计算属性和侦听属性](https://github.com/ljianshu/Blog/issues/68)
 - [手把手带你实现一个最精简的响应式系统来学习 Vue 的 data、computed、watch 源码](https://juejin.im/post/5db6433b51882564912fc30f)
+- [Vue 的计算属性如何实现缓存？（原理深入揭秘）](https://mp.weixin.qq.com/s/KVepdDX9Cs3eon5jcmP__w)
+- [实现最精简的响应式系统来学习 Vue 的 data、computed、watch 源码](https://mp.weixin.qq.com/s/PNCXukFWp-DSgklRa_mARg)
 
 ## 联系作者
 
