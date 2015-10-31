@@ -1566,7 +1566,7 @@ if (end) {
 
 解析完毕后，就可以用解析得到的结果去调用`start`钩子函数去创建元素型的`AST`节点了。
 
-`Vue`并没有直接去调`start`钩子函数去创建`AST`节点，而是调用了`handleStartTag`函数，在该函数内部才去调用的`start`钩子函数，为什么要这样做呢？
+`Vue`并没有直接去调`start`钩子函数去创建`AST`节点，而是调用了`handleStartTag`函数，在该函数内部才去调用的`start`钩子函数，这是因为虽然经过`parseStartTag`函数已经把创建`AST`节点必要信息提出来了，但是提取出来的标签属性数组还是需要处理一下。`handleStartTag`函数源码如下：
 
 ```
 function handleStartTag (match) {
@@ -1605,10 +1605,16 @@ function handleStartTag (match) {
 
 ```
 
+`handleStartTag`函数用来对`parseStartTag`函数的解析结果进行进一步处理，它接收`parseStartTag`函数的返回值作为参数。
+
 `handleStartTag`函数的开始定义几个常量：
 
 ```
-
+const tagName = match.tagName       // 开始标签的标签名
+const unarySlash = match.unarySlash  // 是否为自闭合标签的标志，自闭合为"",非自闭合为"/"
+const unary = isUnaryTag(tagName) || !!unarySlash  // 布尔值，标志是否为自闭合标签
+const l = match.attrs.length    // match.attrs 数组的长度
+const attrs = new Array(l)  // 一个与match.attrs数组长度相等的数组
 ```
 
 接下来是循环处理提取出来的标签属性数组`match.attrs`，如下：
@@ -1625,6 +1631,34 @@ for (let i = 0; i < l; i++) {
         value: decodeAttr(value, shouldDecodeNewlines)
     }
 }
+```
+
+首先定义了 `args` 常量，它是解析出来的标签属性数组中的每一个属性对象，即 `match.attrs` 数组中每个元素对象。 它长这样：
+
+```
+const args = ["class="a"", "class", "=", "a", undefined, undefined, index: 0, input: "class="a" id="b"></div>", groups: undefined]
+```
+
+接下来是循环处理提取出来的标签属性数组`match.attrs`，如下：
+
+```
+for (let i = 0; i < l; i++) {
+    const args = match.attrs[i]
+    const value = args[3] || args[4] || args[5] || ''
+    const shouldDecodeNewlines = tagName === 'a' && args[1] === 'href'
+    ? options.shouldDecodeNewlinesForHref
+    : options.shouldDecodeNewlines
+    attrs[i] = {
+        name: args[1],
+        value: decodeAttr(value, shouldDecodeNewlines)
+    }
+}
+```
+
+首先定义了`args`常量，它是解析出来的标签属性数组中的每一个属性对象，即`match.attrs`数组中每个元素对象。 它长这样：
+
+```
+const args = ["class="a"", "class", "=", "a", undefined, undefined, index: 0, input: "class="a" id="b"></div>", groups: undefined]
 ```
 
 **解析结束标签**
@@ -1708,8 +1742,7 @@ if (options.chars && text) {
 }
 ```
 
-**如何保证AST节点层级关系**
-
+**如何保证 AST 节点层级关系**
 
 #### 4.4 文本解析器
 
