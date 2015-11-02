@@ -6,12 +6,12 @@
 
 ## 内容
 
-- 同步模块模式
-- 异步模块模式
-- Widget 模式
-- MVC 模式
-- MVP 模式
-- MVVM 模式
+- [同步模块模式](#一、同步模块模式)
+- [异步模块模式](#二、异步模块模式)
+- [Widget 模式](#三、widget-模式)
+- [MVC 模式](#四、mvc-模式)
+- [MVP 模式](#五、mvp-模式)
+- [MVVM 模式](#六、mvvm-模式)
 
 ### 一、同步模块模式
 
@@ -126,6 +126,7 @@ MVVM 模式的特征是 ViewModel 层和 View 层采用双向绑定的形式（B
 ### 参考资料
 
 - 《JavaScript 设计模式》
+- [MVC、MVP、MVVM](https://www.yuque.com/wubinhp/uxiv5i/bik7rk)
 
 ## 联系作者
 
