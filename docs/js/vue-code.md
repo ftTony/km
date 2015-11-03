@@ -2770,11 +2770,29 @@ vm.$forceUpdate()
 
 - **内部原理**
 
+关于该方法的内部原理在介绍**生命周期篇的模板编译阶段**中已经详细分析过，此处不再重复。
+
+**`vm.$forceUpdate`**
+
+其使用如下：
+
+```
+vm.$forceUpdate()
+```
+
+- **作用：**
+
 **`vm.$nextTick`**
 
 参考[Vue.netTick 理解与分析](https://km.xiaowuzi.info/js/vue-nexttick.html)
 
 **`vm.$destory`**
+
+其官方用法：
+
+```
+vm.$destroy()
+```
 
 ### 七、全局 API 篇
 
