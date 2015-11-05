@@ -726,6 +726,23 @@ return function unwatchFn() {
 这个取消观察`unwatchFn`内部其实是调用了`watcher`实例的`teardown`方法，那和我们来看一下这个`teardown`方法是如何实现的。其代码如下：
 
 ```
+export default class Watcher {
+  constructor(/* ... */) {
+    // ...
+    this.deps = [];
+  }
+  teardown() {
+    let i = this.deps.length;
+    while (i--) {
+      this.deps[i].removeSub(this);
+    }
+  }
+}
+```
+
+`traverse`函数定义如下：
+
+```
 
 ```
 
