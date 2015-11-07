@@ -1835,7 +1835,97 @@ while (
 解析器`parseHTML`函数，函数定义如下：
 
 ```
+function parseHTML(html, options) {
+	var stack = [];
+	var expectHTML = options.expectHTML;
+	var isUnaryTag$$1 = options.isUnaryTag || no;
+	var canBeLeftOpenTag$$1 = options.canBeLeftOpenTag || no;
+	var index = 0;
+	var last, lastTag;
 
+	// 开启一个 while 循环，循环结束的条件是 html 为空，即 html 被 parse 完毕
+	while (html) {
+		last = html;
+		// 确保即将 parse 的内容不是在纯文本标签里 (script,style,textarea)
+		if (!lastTag || !isPlainTextElement(lastTag)) {
+		   let textEnd = html.indexOf('<')
+              /**
+               * 如果html字符串是以'<'开头,则有以下几种可能
+               * 开始标签:<div>
+               * 结束标签:</div>
+               * 注释:<!-- 我是注释 -->
+               * 条件注释:<!-- [if !IE] --> <!-- [endif] -->
+               * DOCTYPE:<!DOCTYPE html>
+               * 需要一一去匹配尝试
+               */
+            if (textEnd === 0) {
+                // 解析是否是注释
+        		if (comment.test(html)) {
+
+                }
+                // 解析是否是条件注释
+                if (conditionalComment.test(html)) {
+
+                }
+                // 解析是否是DOCTYPE
+                const doctypeMatch = html.match(doctype)
+                if (doctypeMatch) {
+
+                }
+                // 解析是否是结束标签
+                const endTagMatch = html.match(endTag)
+                if (endTagMatch) {
+
+                }
+                // 匹配是否是开始标签
+                const startTagMatch = parseStartTag()
+                if (startTagMatch) {
+
+                }
+            }
+            // 如果html字符串不是以'<'开头,则解析文本类型
+            let text, rest, next
+            if (textEnd >= 0) {
+
+            }
+            // 如果在html字符串中没有找到'<'，表示这一段html字符串都是纯文本
+            if (textEnd < 0) {
+                text = html
+                html = ''
+            }
+            // 把截取出来的text转化成textAST
+            if (options.chars && text) {
+                options.chars(text)
+            }
+		} else {
+			// 父元素为script、style、textarea时，其内部的内容全部当做纯文本处理
+		}
+
+		//将整个字符串作为文本对待
+		if (html === last) {
+			options.chars && options.chars(html);
+			if (!stack.length && options.warn) {
+				options.warn(("Mal-formatted tag at end of template: \"" + html + "\""));
+			}
+			break
+		}
+	}
+
+	// Clean up any remaining tags
+	parseEndTag();
+	//parse 开始标签
+	function parseStartTag() {
+
+	}
+	//处理 parseStartTag 的结果
+	function handleStartTag(match) {
+
+	}
+	//parse 结束标签
+	function parseEndTag(tagName, start, end) {
+
+	}
+}
 ```
 
 上述代码中大致分为三部分：
@@ -1847,7 +1937,13 @@ while (
 定义了几个常量，如下：
 
 ```
-
+const stack = []       // 维护AST节点层级的栈
+const expectHTML = options.expectHTML
+const isUnaryTag = options.isUnaryTag || no
+const canBeLeftOpenTag = options.canBeLeftOpenTag || no   //用来检测一个标签是否是可以省略闭合标签的非自闭合标签
+let index = 0   //解析游标，标识当前从何处开始解析模板字符串
+let last,   // 存储剩余还未解析的模板字符串
+    lastTag  // 存储着位于 stack 栈顶的元素
 ```
 
 **parseEndTag 函数源码**
@@ -1859,6 +1955,10 @@ while (
 ```
 
 该函数接收三个参数，分别是结束标签名`tagName`、结束标签在`html`字符串中的起始和结束位置`start`和`end`。
+
+这个三参数其实都是可选的，根据选参的不同其功能也不同。
+
+- 第一种
 
 **总结**
 
