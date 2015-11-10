@@ -1946,11 +1946,85 @@ let last,   // 存储剩余还未解析的模板字符串
     lastTag  // 存储着位于 stack 栈顶的元素
 ```
 
+接着开启 while 循环，循环的终止条件是 模板字符串 html 为空，即模板字符串被全部编译完毕。在每次 while 循环中， 先把 html 的值赋给变量 last，如`last = html`
+
+```
+//将整个字符串作为文本对待
+if (html === last) {
+    options.chars && options.chars(html);
+    if (!stack.length && options.warn) {
+        options.warn(("Mal-formatted tag at end of template: \"" + html + "\""));
+    }
+    break
+}
+```
+
+```
+
+```
+
+```
 **parseEndTag 函数源码**
 
 在解析结束标签时遗留的`parseEndTag`函数，该函数定义如下：
 
 ```
+
+function parseEndTag (tagName, start, end) {
+let pos, lowerCasedTagName
+if (start == null) start = index
+if (end == null) end = index
+
+    if (tagName) {
+      lowerCasedTagName = tagName.toLowerCase()
+    }
+
+    // Find the closest opened tag of the same type
+    if (tagName) {
+      for (pos = stack.length - 1; pos >= 0; pos--) {
+        if (stack[pos].lowerCasedTag === lowerCasedTagName) {
+          break
+        }
+      }
+    } else {
+      // If no tag name is provided, clean shop
+      pos = 0
+    }
+
+    if (pos >= 0) {
+      // Close all the open elements, up the stack
+      for (let i = stack.length - 1; i >= pos; i--) {
+        if (process.env.NODE_ENV !== 'production' &&
+          (i > pos || !tagName) &&
+          options.warn
+        ) {
+          options.warn(
+            `tag <${stack[i].tag}> has no matching end tag.`
+          )
+        }
+        if (options.end) {
+          options.end(stack[i].tag, start, end)
+        }
+      }
+
+      // Remove the open elements from the stack
+      stack.length = pos
+      lastTag = pos && stack[pos - 1].tag
+    } else if (lowerCasedTagName === 'br') {
+      if (options.start) {
+        options.start(tagName, [], true, start, end)
+      }
+    } else if (lowerCasedTagName === 'p') {
+      if (options.start) {
+        options.start(tagName, [], false, start, end)
+      }
+      if (options.end) {
+        options.end(tagName, start, end)
+      }
+    }
+
+}
+}
 
 ```
 
@@ -1969,58 +2043,61 @@ let last,   // 存储剩余还未解析的模板字符串
 文本菜板器的源码位于`src/compiler/parser/text-parsre.js`中，代码如下：
 
 ```
+
 const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g
 const buildRegex = cached(delimiters => {
-  const open = delimiters[0].replace(regexEscapeRE, '\\$&')
+const open = delimiters[0].replace(regexEscapeRE, '\\$&')
   const close = delimiters[1].replace(regexEscapeRE, '\\$&')
-  return new RegExp(open + '((?:.|\\n)+?)' + close, 'g')
+return new RegExp(open + '((?:.|\\n)+?)' + close, 'g')
 })
 export function parseText (text,delimiters) {
-  const tagRE = delimiters ? buildRegex(delimiters) : defaultTagRE
-  if (!tagRE.test(text)) {
-    return
-  }
-  const tokens = []
-  const rawTokens = []
-  /**
-   * let lastIndex = tagRE.lastIndex = 0
-   * 上面这行代码等同于下面这两行代码:
-   * tagRE.lastIndex = 0
-   * let lastIndex = tagRE.lastIndex
-   */
+const tagRE = delimiters ? buildRegex(delimiters) : defaultTagRE
+if (!tagRE.test(text)) {
+return
+}
+const tokens = []
+const rawTokens = []
+/\*\*
+
+- let lastIndex = tagRE.lastIndex = 0
+- 上面这行代码等同于下面这两行代码:
+- tagRE.lastIndex = 0
+- let lastIndex = tagRE.lastIndex
+  \*/
   let lastIndex = tagRE.lastIndex = 0
   let match, index, tokenValue
   while ((match = tagRE.exec(text))) {
-    index = match.index
-    // push text token
-    if (index > lastIndex) {
-      // 先把'{{'前面的文本放入tokens中
+  index = match.index
+  // push text token
+  if (index > lastIndex) {
+  // 先把'{{'前面的文本放入tokens中
       rawTokens.push(tokenValue = text.slice(lastIndex, index))
       tokens.push(JSON.stringify(tokenValue))
     }
     // tag token
-    // 取出'{{ }}'中间的变量exp
-    const exp = parseFilters(match[1].trim())
-    // 把变量exp改成_s(exp)形式也放入tokens中
-    tokens.push(`_s(${exp})`)
-    rawTokens.push({ '@binding': exp })
-    // 设置lastIndex 以保证下一轮循环时，只从'}}'后面再开始匹配正则
-    lastIndex = index + match[0].length
+    // 取出'{{ }}'中间的变量 exp
+  const exp = parseFilters(match[1].trim())
+  // 把变量 exp 改成\_s(exp)形式也放入 tokens 中
+  tokens.push(`_s(${exp})`)
+  rawTokens.push({ '@binding': exp })
+  // 设置 lastIndex 以保证下一轮循环时，只从'}}'后面再开始匹配正则
+  lastIndex = index + match[0].length
   }
-  // 当剩下的text不再被正则匹配上时，表示所有变量已经处理完毕
-  // 此时如果lastIndex < text.length，表示在最后一个变量后面还有文本
-  // 最后将后面的文本再加入到tokens中
+  // 当剩下的 text 不再被正则匹配上时，表示所有变量已经处理完毕
+  // 此时如果 lastIndex < text.length，表示在最后一个变量后面还有文本
+  // 最后将后面的文本再加入到 tokens 中
   if (lastIndex < text.length) {
-    rawTokens.push(tokenValue = text.slice(lastIndex))
-    tokens.push(JSON.stringify(tokenValue))
+  rawTokens.push(tokenValue = text.slice(lastIndex))
+  tokens.push(JSON.stringify(tokenValue))
   }
 
-  // 最后把数组tokens中的所有元素用'+'拼接起来
-  return {
-    expression: tokens.join('+'),
-    tokens: rawTokens
-  }
+// 最后把数组 tokens 中的所有元素用'+'拼接起来
+return {
+expression: tokens.join('+'),
+tokens: rawTokens
 }
+}
+
 ```
 
 我们看到，除开我们自己加的注释，代码其实不复杂，我们逐行分析。
@@ -2039,15 +2116,17 @@ export function parseText (text,delimiters) {
 优化阶段的源码位于`src/compiler/optimizer.js`中，如下：
 
 ```
+
 export function optimize (root: ?ASTElement, options: CompilerOptions) {
-    if (!root) return
-    isStaticKey = genStaticKeysCached(options.staticKeys || '')
-    isPlatformReservedTag = options.isReservedTag || no
-    // 标记静态节点
-    markStatic(root)
-    // 标记静态根节点
-    markStaticRoots(root, false)
+if (!root) return
+isStaticKey = genStaticKeysCached(options.staticKeys || '')
+isPlatformReservedTag = options.isReservedTag || no
+// 标记静态节点
+markStatic(root)
+// 标记静态根节点
+markStaticRoots(root, false)
 }
+
 ```
 
 **标记静态节点**
@@ -2187,6 +2266,7 @@ markStaticRoots(node.ifConditions[i].block, isInFor)
 假设现有如下模板：
 
 ```
+
 <div id="NLRX"><p>Hello {{name}}</p></div>
 ```
 
