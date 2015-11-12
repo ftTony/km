@@ -2782,6 +2782,23 @@ vm.$forceUpdate()
 
 - **作用：**
 
+迫使`Vue`实例重新渲染。注意它仅仅影响实例本身和插入插槽内容的子组件，而不是所有子组件。
+
+- **内部原理**
+
+当实例依赖的数据发生变化时，变化的数据会通知其收集的依赖列表中的依赖进行更新，收集依赖就是收集`watcher`，依赖更新就是`watcher`调用`update`方法更新，所以实例依赖的数据发生变化时，就会通知实例`watcher`去执行`update`方法进行更新。
+
+代码如下：
+
+```
+Vue.prototype.$forceUpdate = function () {
+    const vm: Component = this
+    if (vm._watcher) {
+        vm._watcher.update()
+    }
+}
+```
+
 **`vm.$nextTick`**
 
 参考[Vue.netTick 理解与分析](https://km.xiaowuzi.info/js/vue-nexttick.html)
@@ -2793,6 +2810,12 @@ vm.$forceUpdate()
 ```
 vm.$destroy()
 ```
+
+- **用法：**
+
+完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器。
+
+触发 `beforeDestroy` 和 `destroyed` 的钩子。
 
 ### 七、全局 API 篇
 
