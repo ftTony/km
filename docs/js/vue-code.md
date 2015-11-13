@@ -1948,6 +1948,8 @@ let last,   // 存储剩余还未解析的模板字符串
 
 接着开启 while 循环，循环的终止条件是 模板字符串 html 为空，即模板字符串被全部编译完毕。在每次 while 循环中， 先把 html 的值赋给变量 last，如`last = html`
 
+这样做的目的是，如果经过上述所有处理逻辑处理过后，`html`字符串没有任何变化，即表示`html`字符串没有匹配上任何一条规则，那么就把`html`字符串当作纯文本对待，创建文本类型的`AST`节点并且如果抛出异常：模板字符串中标签格式有误。如下：
+
 ```
 //将整个字符串作为文本对待
 if (html === last) {
@@ -1959,17 +1961,32 @@ if (html === last) {
 }
 ```
 
-```
+接着，我们继续看`while`循环体内的代码：
 
 ```
+while (html) {
+  // 确保即将 parse 的内容不是在纯文本标签里 (script,style,textarea)
+  if (!lastTag || !isPlainTextElement(lastTag)) {
+
+  } else {
+    // parse 的内容是在纯文本标签里 (script,style,textarea)
+  }
+}
+```
+
+在循环体内，首先判断了待解析的`html`字符串是否在纯文本标签里，如`script`，`style`，`textarea`，因为在这三个标签里的内容肯定不会有`HTML`标签，所以我们可直接当作文本处理，判断条件如下：
 
 ```
+!lastTag || !isPlainTextElement(lastTag)
+```
+
+`lastTag`为栈顶元素，`!lastTag`即表示当前`html`字符串没有父节点，而`isPlainTextElement(lastTag)` 是检测 `lastTag` 是否为是那三个纯文本标签之一，是的话返回`true`，不是返回`fasle`
+
 **parseEndTag 函数源码**
 
 在解析结束标签时遗留的`parseEndTag`函数，该函数定义如下：
 
 ```
-
 function parseEndTag (tagName, start, end) {
 let pos, lowerCasedTagName
 if (start == null) start = index
@@ -2032,7 +2049,9 @@ if (end == null) end = index
 
 这个三参数其实都是可选的，根据选参的不同其功能也不同。
 
-- 第一种
+- 第一种是三个参数都传递，用于处理普通的结束标签
+- 第二种是只传递`tagName`
+- 第三种是三参数都不传递，用于处理栈中剩余未处理的标签
 
 **总结**
 
