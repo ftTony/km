@@ -2145,6 +2145,53 @@ parseEndTag()
 
 #### 4.4 文本解析器
 
+当`HTML`解析器解析到文本内容时会调用 4 个钩子函数中的`chars`函数来创建文本型的`AST`节点，并且也就说了在`chars`函数中会根据文本内容是否包含变量再细分为创建含有变量`AST`节点和不包含变量的`AST`节点，如下：
+
+```
+// 当解析到标签的文本时，触发chars
+chars(text){
+    if(res = parseText(text)){
+       let element = {
+           type: 2,
+           expression: res.expression,
+           tokens: res.tokens,
+           text
+       }
+    } else {
+       let element = {
+           type: 3,
+           text
+       }
+    }
+}
+```
+
+**结果分析**
+
+假设现有由 `HTML` 解析器解析得到的文本内容如下：
+
+```
+let text = "我叫{{name}}，我今年{{age}}岁了"
+```
+
+经过文本解析器解析后得到：
+
+```
+let res = parseText(text)
+res = {
+    expression:"我叫"+_s(name)+"，我今年"+_s(age)+"岁了",
+    tokens:[
+        "我叫",
+        {'@binding': name },
+        "，我今年"
+        {'@binding': age },
+    	"岁了"
+    ]
+}
+```
+
+**源码分析**
+
 文本菜板器的源码位于`src/compiler/parser/text-parsre.js`中，代码如下：
 
 ````
