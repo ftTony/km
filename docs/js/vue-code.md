@@ -2337,7 +2337,7 @@ tagRE.lastIndex   // 14
 
 `tagRE.lastIndex`就是第一个包裹变量最后一个`}`所在字符串中的位置。`lastIndex` 初始值为 0。
 
-存入 `tokens` 中，如下：
+当`index>lastIndex`时，表示变量前面有纯文本，那么就把这段纯文本截取出来，存入`rawTokens`中，同时再调用`JSON.stringify`给这段文本包裹上双引号，存入`tokens`中，如下：
 
 ```
 if (index > lastIndex) {
@@ -2347,7 +2347,7 @@ if (index > lastIndex) {
 }
 ```
 
-存入`rawTokens`中，如下：
+如果`index`不大于`lastIndex`，那说明`index`也为 0，即该文本一开始就是变量，例如：`hello`。那么此时变量前面没有纯文本，那就不用截取，直接取出匹配结果的第一个元素变量名，将其用`_s()`包裹存入`tokens`中，同时再把变量名构造成`{'@binding': exp}`存入 `rawTokens`中，如下：
 
 ```
 // 取出'{{ }}'中间的变量exp
@@ -2357,16 +2357,22 @@ tokens.push(`_s(${exp})`)
 rawTokens.push({ '@binding': exp })
 ```
 
-再开始匹配正则，如下：
+接着，更新 `lastIndex` 以保证下一轮循环时，只从`}}`后面再开始匹配正则，如下：
 
 ```
-
+lastIndex = index + match[0].length
 ```
 
-接着，当`while`循环完毕时，表明文本中所有变量已经被解析完毕，那就将其再存入`tokens`和`rawTokens`中，如下：
+接着，当`while`循环完毕时，表明文本中所有变量已经被解析完毕，如果此时`lastIndex < text.length`，那就说明最后一个变量的后面还有纯文本，那就将其再存入`tokens`和`rawTokens`中，如下：
 
 ```
-
+// 当剩下的text不再被正则匹配上时，表示所有变量已经处理完毕
+// 此时如果lastIndex < text.length，表示在最后一个变量后面还有文本
+// 最后将后面的文本再加入到tokens中
+if (lastIndex < text.length) {
+    rawTokens.push(tokenValue = text.slice(lastIndex))
+    tokens.push(JSON.stringify(tokenValue))
+}
 ```
 
 最后，把`tokens`数组里的元素用`+`连接，和`rawTokens`一并返回，如下：
