@@ -2417,7 +2417,7 @@ markStaticRoots(root, false)
 
 **标记静态节点**
 
-从`AST`中找出所有静态节点并标记其实不难，我们只需从根节点开始，先标记点是否静态节点，然后看根节点如果是元素节点，那么就向下递归它的子节点，子节点如果还有子节点那就继续向下递归，直到票房完所有节点。代码如下：
+从`AST`中找出所有静态节点并标记其实不难，我们只需从根节点开始，先标记点是否静态节点，然后看根节点如果是元素节点，那么就向下递归它的子节点，子节点如果还有子节点那就继续向下递归，直到标记完所有节点。代码如下：
 
 ```
 
@@ -2460,10 +2460,10 @@ node.static = false
 ```
 
 function isStatic (node: ASTNode): boolean {
-if (node.type === 2) { // expression
+if (node.type === 2) { // 包含变量的动态文本节点
 return false
 }
-if (node.type === 3) { // text
+if (node.type === 3) { // 不包含变量的纯文本节点
 return true
 }
 return !!(node.pre || (
