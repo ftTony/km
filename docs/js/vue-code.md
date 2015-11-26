@@ -2295,7 +2295,7 @@ while ((match = tagRE.exec(text))) {
 }
 ```
 
-接下来会开启一个`while`循环，循环结束
+接下来会开启一个`while`循环，循环结束条件是`tagRE.exec(text)`的结果`match`是否为`null`，`exec()`方法是在一个字符串中执行切匹配检索，如果它没有找到任何切尔西就返回`null`，但如果它找到了一个匹配就返回一个数组，例如：
 
 ```
 tagRE.exec("hello {{name}}，I am {{age}}")
@@ -2303,6 +2303,8 @@ tagRE.exec("hello {{name}}，I am {{age}}")
 tagRE.exec("hello")
 //返回：null
 ```
+
+当匹配上时，匹配结果的第一个元素是字符串中第一个完整的带有包裹的变量，第二个元素是第一个被包裹的变量名，第三个元素是第一个变量字符串中的起始位置。
 
 接着往下循环体内：
 
@@ -2325,13 +2327,15 @@ while ((match = tagRE.exec(text))) {
   }
 ```
 
-示例如下：
+首先取得字符串中第一个变量在字符串中的起始位置赋给`index`，然后比较`index`和`lastIndex`的大小，此时你可能有疑问了，这个`lastIndex`是什么呢？在上面定义变量中，定义了 `let lastIndex = tagRE.lastIndex = 0`,所以 `lastIndex` 就是 `tagRE.lastIndex`，而 `tagRE.lastIndex` 又是什么呢？当调用 `exec( )`的正则表达式对象具有修饰符 `g` 时，它将把当前正则表达式对象的 `lastIndex` 属性设置为紧挨着匹配子串的字符位置，当同一个正则表达式第二次调用 `exec( )`，它会将从 `lastIndex` 属性所指示的字符串处开始检索，如果 `exec( )`没有发现任何匹配结果，它会将 `lastIndex` 重置为 0。示例如下：
 
 ```
 const tagRE = /\{\{((?:.|\n)+?)\}\}/g
 tagRE.exec("hello {{name}}，I am {{age}}")
 tagRE.lastIndex   // 14
 ```
+
+`tagRE.lastIndex`就是第一个包裹变量最后一个`}`所在字符串中的位置。`lastIndex` 初始值为 0。
 
 存入 `tokens` 中，如下：
 
@@ -2359,16 +2363,19 @@ rawTokens.push({ '@binding': exp })
 
 ```
 
-那就将其再存入`tokens`和`rawTokens`中，如下：
+接着，当`while`循环完毕时，表明文本中所有变量已经被解析完毕，那就将其再存入`tokens`和`rawTokens`中，如下：
 
 ```
 
 ```
 
-和`rawTokens`一并返回，如下：
+最后，把`tokens`数组里的元素用`+`连接，和`rawTokens`一并返回，如下：
 
 ```
-
+return {
+    expression: tokens.join('+'),
+    tokens: rawTokens
+}
 ```
 
 **总结**
