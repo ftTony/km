@@ -2275,40 +2275,82 @@ const tagRE = delimiters ? buildRegex(delimiters) : defaultTagRE
 
 函数体内首先定义了变量`tagRE`，表示一个正则表达式。这个正则表达式是用来检查广西是否包含变量的。我们知道，通常我们在模板中写变量时是这样写的：hello。这里用`{{}}`包裹的内容就是变量。所以我们就知道，`tagRE`是用来检测文本内是否有`{{}}`。而 `tagRE` 又是可变的，它是根据是否传入了 `delimiters` 参数从而又不同的值，也就是说如果没有传入 `delimiters` 参数，则是检测文本是否包含`{{}}`，如果传入了值，就会检测文本是否包含传入的值。换句话说在开发 Vue 项目中，用户可以自定义文本内包含变量所使用的符号，例如你可以使用`%`包裹变量如：`hello %name%`。
 
-接下来用
+接下来用`tagRE`去匹配传入的文本内容，判断是否包含变量，若不包含，则直接返回，如下：
 
 ```
-
+if (!tagRE.test(text)) {
+    return
+}
 ```
 
 如果包含变量，那就继续往下看：
 
 ```
+const tokens = []
+const rawTokens = []
+let lastIndex = tagRE.lastIndex = 0
+let match, index, tokenValue
+while ((match = tagRE.exec(text))) {
 
+}
 ```
 
-循环体内：
+接下来会开启一个`while`循环，循环结束
 
 ```
+tagRE.exec("hello {{name}}，I am {{age}}")
+//返回：["{{name}}", "name", index: 6, input: "hello {{name}}，I am {{age}}", groups: undefined]
+tagRE.exec("hello")
+//返回：null
+```
 
+接着往下循环体内：
+
+```
+while ((match = tagRE.exec(text))) {
+    index = match.index
+    if (index > lastIndex) {
+      // 先把'{{'前面的文本放入tokens中
+      rawTokens.push(tokenValue = text.slice(lastIndex, index))
+      tokens.push(JSON.stringify(tokenValue))
+    }
+    // tag token
+    // 取出'{{ }}'中间的变量exp
+    const exp = match[1].trim()
+    // 把变量exp改成_s(exp)形式也放入tokens中
+    tokens.push(`_s(${exp})`)
+    rawTokens.push({ '@binding': exp })
+    // 设置lastIndex 以保证下一轮循环时，只从'}}'后面再开始匹配正则
+    lastIndex = index + match[0].length
+  }
 ```
 
 示例如下：
 
 ```
-
+const tagRE = /\{\{((?:.|\n)+?)\}\}/g
+tagRE.exec("hello {{name}}，I am {{age}}")
+tagRE.lastIndex   // 14
 ```
 
 存入 `tokens` 中，如下：
 
 ```
-
+if (index > lastIndex) {
+    // 先把'{{'前面的文本放入tokens中
+    rawTokens.push(tokenValue = text.slice(lastIndex, index))
+    tokens.push(JSON.stringify(tokenValue))
+}
 ```
 
 存入`rawTokens`中，如下：
 
 ```
-
+// 取出'{{ }}'中间的变量exp
+const exp = match[1].trim()
+// 把变量exp改成_s(exp)形式也放入tokens中
+tokens.push(`_s(${exp})`)
+rawTokens.push({ '@binding': exp })
 ```
 
 再开始匹配正则，如下：
