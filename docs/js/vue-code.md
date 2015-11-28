@@ -3187,7 +3187,16 @@ export function resolveFilter (id) {
 }
 ```
 
-`resolveFilter`函数内部只有一行代码，就是调用`resolveAsset`函数并获取其返回值，如果返回值不存在，则返回`identity`，而`identity`是一个返回同参数一样的值，`resolveAsset`函数，该函数的定义位于源码的`src/core/util/options.js`中，如下：
+可以盾到，`resolveFilter`函数内部只有一行代码，就是调用`resolveAsset`函数并获取其返回值，如果返回值不存在，则返回`identity`，而`identity`是一个返回同参数一样的值，如下：
+
+```
+/**
+ * Return same value
+ */
+export const identity = _ => _
+```
+
+`resolveAsset`函数，该函数的定义位于源码的`src/core/util/options.js`中，如下：
 
 ```
 export function resolveAsset (options,type,id,warnMissing) {
@@ -3318,7 +3327,7 @@ function wrapFilter (exp: string, filter: string): string {
 
 ### 九、指令篇
 
-在`Vue`中，除了`Vue`本身为我们提供的一些内置指令之外，
+在`Vue`中，除了`Vue`本身为我们提供的一些内置指令之外，`Vue`还支持用户自定义指令。并且用户有两种定义的方式：一种是使用全局 API——`Vue.directive`来定义全局指令，这种方式定义的指令会被存放在`Vue.options['directives']`中；另一种是在组件内的`directive`选项专为该组件使用的局部指令，这种方式定义的指令会被存放在`vm.$options['directives']`中。
 
 #### 9.1 何时生效
 
