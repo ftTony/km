@@ -2486,6 +2486,34 @@ Object.keys(node).every(isStaticKey)
 | 2         | 包含变量的动态文本节点 |
 | 3         | 不包含变量的纯文本节点 |
 
+在判断一个节点是否为静态节点时首先会根据`type`值
+
+```
+
+```
+
+如果`type`值为 2，
+
+```
+if (node.type === 3) { // 不包含变量的纯文本节点
+    return true
+}
+```
+
+如果`type`值为 1
+
+```
+node.pre ||
+(
+    !node.hasBindings && // no dynamic bindings
+    !node.if && !node.for && // not v-if or v-for or v-else
+    !isBuiltInTag(node.tag) && // not a built-in
+    isPlatformReservedTag(node.tag) && // not a component
+    !isDirectChildOfTemplateFor(node) &&
+    Object.keys(node).every(isStaticKey)
+)
+```
+
 如果元素节点是静态节点，那就必须满足以下几点要求：
 
 - 如果节点使用`v-pre`指令，那就断定它是静态节点；
