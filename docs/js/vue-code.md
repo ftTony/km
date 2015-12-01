@@ -2525,6 +2525,40 @@ node.pre ||
   - 当前节点的父节点不能是带有`v-for`和`template`标签；
   - 节点的所有属性的`key`都必须是静态节点才有的`key`，注：静态节点的`key`是有限的，它只能是`type`、`tag`、`attrsList`、`attrsMap`、`plain`、`parent`、`children`、`attrs`之一；
 
+标记完当前节点是否为静态节点之后，如果该节点是元素节点，那么还要继续去递归判断它的子节点，如下：
+
+```
+for (let i = 0, l = node.children.length; i < l; i++) {
+    const child = node.children[i]
+    markStatic(child)
+    if (!child.static) {
+    node.static = false
+    }
+}
+```
+
+新增了一个判断：
+
+```
+if (!child.static) {
+    node.static = false
+}
+```
+
+如果当前节点的子节点有一个不是静态节点，那就把当前节点也标记为非静态节点。我们在判断的时候是从上往下判断的，也就是说先判断当前节点，再判断当前节点的子节点，如果当前在一开始被标记为了静态节点，但是通过判断子节点的时候发现有一个子节点却不是静态节点，
+
+```
+if (node.ifConditions) {
+    for (let i = 1, l = node.ifConditions.length; i < l; i++) {
+        const block = node.ifConditions[i].block
+        markStatic(block)
+        if (!block.static) {
+            node.static = false
+        }
+    }
+}
+```
+
 **标记静态根节点**
 
 寻找表态根节点找静态节点的逻辑类似，都是从`AST`根节点递归向上遍历寻找，其代码如下：
