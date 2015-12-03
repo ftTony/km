@@ -2597,11 +2597,28 @@ markStaticRoots(node.ifConditions[i].block, isInFor)
 }
 }
 }
-
 ```
 
+`markStaticRoots`第二个参数是`isInFor`，对于已经是`static`的节点或者是`v-once`指令的节点，`node.staicInFor = isInFor`，如下：
+
+```
+if (node.static || node.once) {
+    node.staticInFor = isInFor
+}
 ```
 
+接着判断该节点是否为静态根节点，如下：
+
+```
+if (node.static && node.children.length && !(
+    node.children.length === 1 &&
+    node.children[0].type === 3
+)) {
+    node.staticRoot = true
+    return
+} else {
+    node.staticRoot = false
+}
 ```
 
 一个节点要想成为表态根节点，它必须满足以下要求：
@@ -2610,8 +2627,21 @@ markStaticRoots(node.ifConditions[i].block, isInFor)
 - 必须拥有子节点`children`；
 - 子节点不能只是只有一个
 
-```
+否则的话，对它的优化成本将大于优化后带来的收益。
 
+如果当前节点不是静态根节点，那就继续递归遍历它的子节点`node.children和node.ifConditions`，如下：
+
+```
+if (node.children) {
+    for (let i = 0, l = node.children.length; i < l; i++) {
+        markStaticRoots(node.children[i], isInFor || !!node.for)
+    }
+}
+if (node.ifConditions) {
+    for (let i = 1, l = node.ifConditions.length; i < l; i++) {
+        markStaticRoots(node.ifConditions[i].block, isInFor)
+    }
+}
 ```
 
 **总结**
