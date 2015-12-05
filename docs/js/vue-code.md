@@ -650,11 +650,7 @@ vm.$watch("a", callback, {
 `$watch`的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
-Vue.prototype.$watch = function (
-    expOrFn: string | Function,
-    cb: any,
-    options?: Object
-  ): Function {
+Vue.prototype.$watch = function (expOrFn,cb,options) {
     const vm: Component = this
     if (isPlainObject(cb)) {
       return createWatcher(vm, expOrFn, cb, options)
@@ -679,7 +675,16 @@ Vue.prototype.$watch = function (
 在函数内部，首先判断传入的回调函数是否为一个对象，如果传入的回调函数是个对象，那就表明用户是把第二个参数回调函数`cb`和第三个参数选项`options`合起来传入的，此时调用`createWatcher`函数，该函数定义如下：
 
 ```
-
+function createWatcher (vm,expOrFn,handler,options) {
+  if (isPlainObject(handler)) {
+    options = handler
+    handler = handler.handler
+  }
+  if (typeof handler === 'string') {
+    handler = vm[handler]
+  }
+  return vm.$watch(expOrFn, handler, options)
+}
 ```
 
 **`vm.$set`**
@@ -963,7 +968,7 @@ export function crateASTElement(tag,attrs,parent){
 - 当解析到文本调用`chars`函数生成文本类型的`AST`节点；
 
 ```
-chars (text: string, start: number, end: number) {
+chars (text, start, end) {
       if (!currentParent) {
         if (process.env.NODE_ENV !== 'production') {
           if (text === template) {
@@ -992,12 +997,9 @@ chars (text: string, start: number, end: number) {
       if (inPre || text.trim()) {
         text = isTextTag(currentParent) ? text : decodeHTMLCached(text)
       } else if (!children.length) {
-        // remove the whitespace-only node right after an opening tag
         text = ''
       } else if (whitespaceOption) {
         if (whitespaceOption === 'condense') {
-          // in condense mode, remove the whitespace node if it contains
-          // line break, otherwise condense to a single space
           text = lineBreakRE.test(text) ? '' : ' '
         } else {
           text = ' '
@@ -1007,7 +1009,6 @@ chars (text: string, start: number, end: number) {
       }
       if (text) {
         if (!inPre && whitespaceOption === 'condense') {
-          // condense consecutive whitespaces into single space
           text = text.replace(whitespaceRE, ' ')
         }
         let res
@@ -1133,18 +1134,29 @@ if (doctypeMatch) {
 **解析开始标签**
 
 ```
+/**
+ *  匹配开始标签的正则
+ */
+const ncname = '';
 
 ```
 
 **解析结束标签**
 
-```
+结束标签的解析要比解析开始标签容易多了，因为它不需要解析什么属性
 
+```
+const ncname = '[a-zA-Z_][\\w\\-\\.]*'
+const qnameCapture = `((?:${ncname}\\:)?${ncname})`
+const endTag = new RegExp(`^<\\/${}>`)
 ```
 
 **解析文本**
 
+解析文本也比较容易，在解析模板字符串之前，我们先查找一下第一个`<`出现在什么位置，如果第一个`<`在第一个位置
+
 ```
+let textEnd = html.indexOf('<')
 
 ```
 
