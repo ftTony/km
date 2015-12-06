@@ -167,7 +167,12 @@ name|opener|parent|top|content|self|frames)\W)|(localStorage|sessionStorage|Data
 
 - 数据类型：String
 - 上下文：安全 HTML 变量
-- 示例代码：`<input type="text" name="fname" value="UNTRUSTED DATA">`
+- 示例代码：
+
+```
+<input type="text" name="fname" value="UNTRUSTED DATA">
+```
+
 - 防御措施
   - HTML Attribute 编码
   - 只把不可信数据放在安全白名单内的变量上（白名单在下文列出）
@@ -177,7 +182,12 @@ name|opener|parent|top|content|self|frames)\W)|(localStorage|sessionStorage|Data
 
 - 数据类型：String
 - 上下文：GET 参数
-- 示例代码：`<a href="/site/search?value=UNTRUSTED DATA">clickme</a>`
+- 示例代码：
+
+```
+<a href="/site/search?value=UNTRUSTED DATA">clickme</a>
+```
+
 - 防御措施：URL 编码
 
 **情况四**
@@ -222,10 +232,8 @@ name|opener|parent|top|content|self|frames)\W)|(localStorage|sessionStorage|Data
 - 示例代码：
 
 ```
-
 <script>var currentValue='UNTRUSTED DATA';</script>
 <script>someFunction('UNTRUSTED DATA');</script>
-
 ```
 
 - 防御措施：
@@ -239,24 +247,34 @@ name|opener|parent|top|content|self|frames)\W)|(localStorage|sessionStorage|Data
 
 - 数据类型：HTML
 - 上下文：HTML Body
-- 示例代码：`<div>UNTRUSTED HTML</div>`
+- 示例代码：
+
+```
+<div>UNTRUSTED HTML</div>
+```
+
 - 防御措施：
   - [HTML 校验 (JSoup, AntiSamy, HTML Sanitizer)]
 
-`(https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet#RULE_.236_-_Use_an_HTML_Policy_engine_to_validate_or_clean_user-driven_HTML_in_an_outbound_way)`
+```
+(https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet#RULE_.236_-_Use_an_HTML_Policy_engine_to_validate_or_clean_user-driven_HTML_in_an_outbound_way)
+```
 
 **情况八**
 
 - 数据类型：String
 - 上下文：DOM XSS
-- 示例代码：`<script>document.write("UNTRUSTED INPUT: " + document.location.hash);<script/>`
+- 示例代码：
+
+```
+<script>document.write("UNTRUSTED INPUT: " + document.location.hash);<script/>
+```
 
 #### 4.4 DOM Based XSS 防御
 
 DOM Based XSS 是直接从“JavaScript”中输出数据到 HTML 页面里，前面提到的都是从“服务器”中输出。
 
 ```
-
 //x 是从服务器中输出的，并且做了 JavaScriptEncode 操作
 var x="\x20\x27onclick\x3dalert\x281\x29\x3b";
 //在输出后会变成<a href=" " onclick="alert(1);">test</a>还是能执行点击
@@ -301,3 +319,5 @@ document.write("<a href='"+x+">test</a>");
     </p>
     <img :src="$withBase('/about/contact.png')" />
 </div>
+```
+````

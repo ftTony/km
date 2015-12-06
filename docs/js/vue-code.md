@@ -2995,7 +2995,7 @@ const { render, staticRenderFns } = compileToFunctions(
 const { compile, compileToFunctions } = createCompiler(baseOptions);
 ```
 
-`compileToFunctions`函数是`createCompiler`函数的返回值对象中的其中一个，`createCompiler`
+`compileToFunctions`函数是`createCompiler`函数的返回值对象中的其中一个，`createCompiler`函数顾名思义他的作用就是创建一个编译器。
 
 `createCompiler`函数出处位于源码的`src/complier/index.js`文件中，如下：
 
@@ -3020,11 +3020,17 @@ export const createCompiler = createCompilerCreator(function baseCompile(
 });
 ```
 
+`createCompiler`函数是又调用`createCompilerCreator`函数返回得到的，`createCompilerCreator`函数接收一个`baseCompile`函数作为参数。这个`baseCompile`函数，这个函数就是我们据说的模板编译三大阶段的主函数。这个函数传给`createCompilerCreator`函数就可以得到`createCompiler`函数，那么我们再往前推，看一下`createCompilerCreator`函数又是怎么定义的。
+
+`createCompilerCreator`函数的定义位于源码的`src/complier/create-compiler.js`文件中，如下：
+
 ```
 export function createCompilerCreator(baseCompile) {
   return function createCompiler(baseOptions) {};
 }
 ```
+
+调用`createCompilerCreator`函数会返回`createCompiler`函数，可以看到`createCompiler`函数的定义，如下：
 
 ```
 function createCompiler(baseOptions) {
@@ -3035,6 +3041,10 @@ function createCompiler(baseOptions) {
   };
 }
 ```
+
+在`createCompiler`函数的内部定义了一个子函数`compile`，同时返回一个对象，其中这个对象的第二个属性就是我们在开头看到的`compileToFunctions`，其值对应的是`createCompileToFunctionFn(compile)`函数的返回值。
+
+`createCompileToFunctionFn(compile)`函数的出处位于源码的`src/complier/to-function.js`文件中，如下：
 
 ```
 export function createCompileToFunctionFn(compile) {
@@ -3058,6 +3068,41 @@ function createFunction(code, errors) {
     return noop;
   }
 }
+```
+
+调用`createCompileToFunctionFn`函数就可以得到
+
+`compileToFunctions`函数内部会调用传入的`compile`函数，而
+
+```
+function compile(template, options) {
+  const compiled = baseCompile(template, finalOptions);
+  compiled.errors = errors;
+  compiled.tips = tips;
+  return compiled;
+}
+```
+
+在`compile`函数内部又会调用传入的`baseCompile`函数，而这个
+
+```
+function baseCompile (
+  template: string,
+  options: CompilerOptions
+): CompiledResult {
+  // 模板解析阶段：用正则等方式解析 template 模板中的指令、class、style等数据，形成AST
+  const ast = parse(template.trim(), options)
+  if (options.optimize !== false) {
+    // 优化阶段：遍历AST，找出其中的静态节点，并打上标记；
+    optimize(ast, options)
+  }
+  // 代码生成阶段：将AST转换成渲染函数；
+  const code = generate(ast, options)
+  return {
+    ast,
+    render: code.render,
+    staticRenderFns: code.staticRenderFns
+  }
 ```
 
 ### 五、生命周期篇
