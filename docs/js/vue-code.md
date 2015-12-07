@@ -3072,7 +3072,7 @@ function createFunction(code, errors) {
 
 调用`createCompileToFunctionFn`函数就可以得到
 
-`compileToFunctions`函数内部会调用传入的`compile`函数，而
+`compileToFunctions`函数内部会调用传入的`compile`函数，而这个`compile`函数是`createCompiler`函数内部定义的子函数，如下：
 
 ```
 function compile(template, options) {
@@ -3083,7 +3083,7 @@ function compile(template, options) {
 }
 ```
 
-在`compile`函数内部又会调用传入的`baseCompile`函数，而这个
+在`compile`函数内部又会调用传入的`baseCompile`函数，而这个`baseCompile`函数就是我们所说的模板编译三大阶段的主线函数，如下：
 
 ```
 function baseCompile (
@@ -3104,6 +3104,16 @@ function baseCompile (
     staticRenderFns: code.staticRenderFns
   }
 ```
+
+最开始调用的`compileToFunctions`函数内部调用了`compile`函数，在`compile`函数内部又调用了`baseCompile`函数，而`baseCompile`函数返回的是代码生成阶段生成好的`render` 函数字符串。所以在`compileToFunctions`函数内部调用`compile`函数就可以拿到生成好的`render`函数字符串，然后在`compileToFunctions`函数内部将`render`函数字符串传给`createFunction`函数从而变成真正的`render`函数返回出去，最后将其赋值给`options.render`。画出其上述过程的流程图。如下：
+
+![images](vue18.jpg)
+
+模板编译的整体流程。
+
+**整体导图**
+
+![images](vue19.jpg)
 
 ### 五、生命周期篇
 
