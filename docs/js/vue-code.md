@@ -2987,11 +2987,17 @@ const { render, staticRenderFns } = compileToFunctions(
 );
 ```
 
-将模板`template`
+将模板`template`传给`compileToFunctions`函数就可以得到`render`函数，那这个`compileToFunctions`函数是怎么来的呢？
+
+通过代码跳转发现`compileToFunctions`函数的出处如下：
 
 ```
 const { compile, compileToFunctions } = createCompiler(baseOptions);
 ```
+
+`compileToFunctions`函数是`createCompiler`函数的返回值对象中的其中一个，`createCompiler`
+
+`createCompiler`函数出处位于源码的`src/complier/index.js`文件中，如下：
 
 ```
 export const createCompiler = createCompilerCreator(function baseCompile(
@@ -3143,6 +3149,31 @@ vm.$options = mergeOptions(
     vm
 )
 ```
+
+接着，通过调用一些初始化函数来为`Vue`实例初始化一些属性，事件，响应式数据等，如下：
+
+```
+initLifecycle(vm)       // 初始化生命周期
+initEvents(vm)        // 初始化事件
+initRender(vm)         // 初始化渲染
+callHook(vm, 'beforeCreate')  // 调用生命周期钩子函数
+initInjections(vm)   //初始化injections
+initState(vm)    // 初始化props,methods,data,computed,watch
+initProvide(vm) // 初始化 provide
+callHook(vm, 'created')  // 调用生命周期钩子函数
+```
+
+可以看到，除了调用初始化函数来进行相关数据的初始化之外，还在合适的时机调用了`callHook`函数来触发生命周期的钩子，关于`callHook`函数是如何触发生命周期的钩子会在下面介绍，我们先继续往下看：
+
+```
+if (vm.$options.el) {
+    vm.$mount(vm.$options.el)
+}
+```
+
+在所有的初始化工作都完成以后，最后，会判断用户是否传入了`el`选项，如果传入了则调用`$mount`函数进入模板编译与挂载阶段，如果没有传入 el 选项，则不进入下一个生命周期阶段，需要用户手动执行`vm.$mount`方法才进入下一个生命周期阶段。
+
+以上就是`new Vue()`所做的所有事情，可以看到，整个初始化阶段都是在`new Vue()`里完成的，关于`new Vue()`里调用的一些初始化函数具体是如何进行初始化的，我们将在接下来的几篇文章里逐一介绍。下面我们先来看看上文中遗留的属性合并及`callHook`函数是如何触发生命周期的钩子的问题。
 
 **合并属性**
 
