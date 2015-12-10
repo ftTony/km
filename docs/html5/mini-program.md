@@ -12,6 +12,7 @@
 - [【第 1883 期】Rax，完美融合编译时与运行时的双引擎小程序框架](https://mp.weixin.qq.com/s/uIYssujm8rRPUxFx0HraxQ)
 - [京喜小程序的高性能打造之路](https://juejin.im/post/5e7d4487e51d4546d83af560)
 - [京东购物小程序购物车性能优化实践](https://mp.weixin.qq.com/s/3_PwTZzt7ImmcvKTbIeTRA)
+- [说说小程序自动化](https://mp.weixin.qq.com/s/EIUEDWslSOBQBQwRLuOlKg)
 
 ## 联系作者
 
