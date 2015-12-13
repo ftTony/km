@@ -3712,7 +3712,52 @@ target = undefined
 
 - 一个字符串数组或
 - 一个对象，对象的 key 是本地的绑定名，value 是：
-  - 在可用的注入
+  - 在可用的注入内容中搜索用的 key，或
+  - 一个对象，该对象的：
+    - `from`属性是在可用的注入
+    - `default`属性是降级情况下使用的 value
+
+官方文档使用示例，如下：
+
+```
+/ 父级组件提供 'foo'
+var Parent = {
+  provide: {
+    foo: 'bar'
+  },
+  // ...
+}
+
+// 子组件注入 'foo'
+var Child = {
+  inject: ['foo'],
+  created () {
+    console.log(this.foo) // => "bar"
+  }
+  // ...
+}
+```
+
+利用 ES2015 Symbols、函数`provide`和对象`inject`：
+
+```
+const s = Symbol()
+
+const Provider = {
+  provide () {
+    return {
+      [s]: 'foo'
+    }
+  }
+}
+
+const Child = {
+  inject: { s },
+  // ...
+}
+```
+
+**initInjections 函数分析**
 
 `initInjections`函数的具体原理，该函数定义在位于源码的``中，如下：
 
