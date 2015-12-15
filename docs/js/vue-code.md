@@ -3117,10 +3117,10 @@ function baseCompile (
 
 ### 五、生命周期篇
 
-- 初始化阶段
-- 模板编译阶段
-- 挂载阶段
-- 销毁阶段
+- [初始化阶段](#_5-1-初始化阶段)
+- [模板编译阶段](#_5-2-模板编译阶段)
+- [挂载阶段](#_5-3-挂载阶段)
+- [销毁阶段](#_5-4-销毁阶段)
 
 `Vue`实例的生命周期大致可分为 4 个阶段：
 
@@ -3290,9 +3290,9 @@ Vue.options.filters = {}
   checkComponents(child)
   }
 
-if (typeof child === 'function') {
-child = child.options
-}
+    if (typeof child === 'function') {
+    child = child.options
+    }
 
 normalizeProps(child, vm)
 normalizeInject(child, vm)
@@ -3356,7 +3356,21 @@ for (key in parent) {
 }
 ```
 
-值得一提的是`mergeField`函数，它不是简单的把属性从一个对象里复制到另外一个对象里，而是根据被合并的不同的选项有着不同的合并策略。生命周期钩子函数的合并策略如下：
+接着再遍历`child`，把存在于`child`里但又不在`parent`中的属性继续调用`mergeField`函数合并到空对象`options`里。
+
+```
+for (key in child) {
+    if (!hasOwn(parent, key)) {
+        mergeField(key)
+    }
+}
+```
+
+`options`就是最终合并后得到的结果，将其返回。
+
+值得一提的是`mergeField`函数，它不是简单的把属性从一个对象里复制到另外一个对象里，而是根据被合并的不同的选项有着不同的合并策略。
+
+生命周期钩子函数的合并策略如下：
 
 ```
 function mergeHook(parentVal,childVal){
@@ -3372,7 +3386,6 @@ LIFECYCLE_HOOKS.forEach(hook => {
 这其中的`LIFECYCLE_HOOKS`的定义在`src/shared/constants.js`中：
 
 ```
-
 export const LIFECYCLE_HOOKS = [
 'beforeCreate',
 'created',
@@ -3409,6 +3422,8 @@ function mergeHook (parentVal,childVal):  {
 }
 ```
 
+它的合并策略是这样子的：如果`childVal`不存在，就返回`parentVal`；否则再判断是否存在`parentVal`，如果存在就把`childVal` 添加到 `parentVal` 后返回新数组；否则返回 `childVal` 的数组。所以回到 `mergeOptions` 函数，一旦 `parent`和 `child` 都定义了相同的钩子函数，那么它们会把 2 个钩子函数合并成一个数组。
+
 **callHook 函数如何触发钩子函数**
 
 关于`callHook`函数如何触发钩子函数的问题，我们只需看一下该函数的实现源码即可，该函数的源码位于`src/core/instance/lifecycle.js`中，如下：
@@ -3430,7 +3445,15 @@ handleError(e,vm,`${hook} hook`)
 
 ```
 
-可以看到，`callHook`函数逻辑非常简单。首先从实例的`$options`中获取到需要触发的钩子名称所对应的钩子函数数组`handlers`，我们说过，每个生命周期钩子名称都对应一个钩子函数数组。然后遍历该数组，将数组中的每个钩子函数都执行一遍。
+可以看到，`callHook`函数逻辑非常简单。首先从实例的`$options`中获取到需要触发的钩子名称所对应的钩子函数数组`handlers`，每个生命周期钩子名称都对应一个钩子函数数组。然后遍历该数组，将数组中的每个钩子函数都执行一遍。
+
+**总结**
+
+首先，分析了`new Vue()`时其内部都干了些什么。其主要逻辑就是：合并配置，调用一些初始化函数，触发生命周期钩子函数，调用`$mount`开启下一个阶段。
+
+接着，就合并属性进行了详细介绍，知道了对于不同的选项有着不同的合并策略，并挑出钩子函数的合并特事特办进行了分析。
+
+最后，分析了`callHook`函数的源码，知道了`callHook`函数如何触发钩子函数的。
 
 **initLifecycle 函数分析**
 
@@ -3464,6 +3487,8 @@ vm._isBeingDestroyed = false
 }
 
 ```
+
+**总结**
 
 **解析事件**
 
@@ -4458,9 +4483,9 @@ Vue.prototype.$destroy = function () {
 
 ### 六、实例方法
 
-- 数据相关的方法
-- 事件相关的方法
-- 生命周期相关的方法
+- [数据相关的方法](#_6-1-数据相关的方法)
+- [事件相关的方法](#_6-2-事件相关的方法)
+- [生命周期相关的方法](#_6-3-生命周期相关的方法)
 
 #### 6.1 数据相关的方法
 
