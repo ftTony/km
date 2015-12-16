@@ -3325,6 +3325,27 @@ function wrapFilter (exp: string, filter: string): string {
 }
 ```
 
+该函数的作用的是将传入的形如`'message | capitalize'`这样的过滤器字符串转化成`_f("capitalize")(message)`，接下来我们就来分析一下其内部逻辑。
+
+在该函数内部，首先定义了一些变量，如下：
+
+```
+let inSingle = false
+let inDouble = false
+let inTemplateString = false
+let inRegex = false
+let curly = 0
+let square = 0
+let paren = 0
+let lastFilterIndex = 0
+```
+
+- inSingle：标志 exp 是否在'...'中；
+- inDouble：标志 exp 是否在"..."中；
+- inTemplateString：标志 exp 是否在\`...\`中；
+- inRegex：标志 exp 是否在\\...\中；
+- curly = 0：；
+
 ### 九、指令篇
 
 在`Vue`中，除了`Vue`本身为我们提供的一些内置指令之外，`Vue`还支持用户自定义指令。并且用户有两种定义的方式：一种是使用全局 API——`Vue.directive`来定义全局指令，这种方式定义的指令会被存放在`Vue.options['directives']`中；另一种是在组件内的`directive`选项专为该组件使用的局部指令，这种方式定义的指令会被存放在`vm.$options['directives']`中。
@@ -3432,6 +3453,18 @@ function _update (oldVnode, vnode) {
     }
   }
 }
+```
+
+可以看到，该方法内首先定义了一些变量，如下：
+
+```
+const isCreate = oldVnode === emptyNode
+const isDestroy = vnode === emptyNode
+const oldDirs = normalizeDirectives(oldVnode.data.directives, oldVnode.context)
+const newDirs = normalizeDirectives(vnode.data.directives, vnode.context)
+
+const dirsWithInsert = []
+const dirsWithPostpatch = []
 ```
 
 ### 十、总结
