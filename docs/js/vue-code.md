@@ -3697,7 +3697,11 @@ export function createComponent (
 }
 ```
 
+把自定义事件`data.on`赋值给了`listeners`，把浏览器原生事件`data.nativeOn`赋值给了`data.on`，这说明所有的原生浏览器事件处理是在当前父组件环境中处理的。而对于自定义事件，会把`listeners` 作为`vnode` 的 `componentOptions` 传入，放在子组件初始化阶段中处理， 在子组件的初始化的时候， 拿到了父组件传入的`listeners`，然后在执行 `initEvents` 的过程中，会处理这个 `listeners`。
+
 父组件给子组件的注册事件中，把自定义事件传给子组件，在子组件实例化的时候进行初始化；而
+
+换句话说：实例初始化阶段调用的初始化事件函数 initEvents 实际上初始化的是父组件在模板中使用`v-on` 或`@`注册的监听子组件内触发的事件
 
 **initEvents 函数分析**
 
@@ -3729,8 +3733,13 @@ target = vm
 updateListeners(listeners, oldListeners || {}, add, remove, createOnceHandler, vm)
 target = undefined
 }
-
 ```
+
+**总结**
+
+首先从模板编译时对组件标签上的事件解析入手分析，父组件既可以给
+
+初始化事件函数`initEvents`实际上初始化的是父组件在模板中使用
 
 **initInjections 函数分析**
 
