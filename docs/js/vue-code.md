@@ -3618,7 +3618,25 @@ export function addHandler (el,name,value,modifiers) {
 }
 ```
 
-在`addHandler`函数里做了 3 件事件，首先根据`modifier`修饰符对事件名`name`做处理，接着根据`modifier.native`判断事件是一件浏览器原生事件还是自定义
+在`addHandler`函数里做了 3 件事件，首先根据`modifier`修饰符对事件名`name`做处理，接着根据`modifier.native`判断事件是一件浏览器原生事件还是自定义事件，分别对应`el.nativeEvents`和`el.events`，最后按照`name`对事件做归类，并把回调函数的字符串保留到对应的事件中。
+
+父组件的`child` 节点生成的 `el.events` 和 `el.nativeEvents` 如下：
+
+```
+el.events = {
+  select: {
+    value: 'selectHandler'
+  }
+}
+
+el.nativeEvents = {
+  click: {
+    value: 'clickHandler'
+  }
+}
+```
+
+然后在模板编译的代码生成阶段，会在`genData`函数中根据`AST`元素节点上的`events`和`naitveEvents`生成`_c(tagName,data,children)`函数中所需要的`data`数据，它的定义在 `src/compiler/codegen/index.js` 中：
 
 ```
 export function genData (el state) {
@@ -3632,20 +3650,6 @@ export function genData (el state) {
   }
   // ...
   return data
-}
-```
-
-然后在模板编译的代码生成阶段，会在`genData`函数中根据`AST`元素节点上的`events`和`naitveEvents`生成`_c(tagName,data,children)`函数中所需要的`data`数据，它的定义在 `src/compiler/codegen/index.js` 中：
-
-```
-{
-  // ...
-  on: {"select": selectHandler},
-  nativeOn: {"click": function($event) {
-      return clickHandler($event)
-    }
-  }
-  // ...
 }
 ```
 
@@ -3663,7 +3667,9 @@ export function genData (el state) {
 }
 ```
 
-源码的 `src/core/vdom/create-component.js` 中， 如下：
+最开始的模板中标签上注册的事件最终会被解析成用于创建元素型`VNode`的`_c(tagName,data,children)`函数中`data`数据中的两个对象，自定义事件对象`on`，浏览器原生事件`nativeOn`。
+
+模板编译的最终目的是创建`render`函数供挂载的时候调用生成虚拟`DOM`，那么在挂载阶段，如果被挂载的节点是一个组件节点，则通过`createComponent`函数创建一个组件`vnode`，该函数位于源码的 `src/core/vdom/create-component.js` 中， 如下：
 
 ```
 export function createComponent (
