@@ -3618,7 +3618,7 @@ export function addHandler (el,name,value,modifiers) {
 }
 ```
 
-在`addHandler`函数里做了 3 件事件，
+在`addHandler`函数里做了 3 件事件，首先根据`modifier`修饰符对事件名`name`做处理，接着根据`modifier.native`判断事件是一件浏览器原生事件还是自定义
 
 ```
 export function genData (el state) {
@@ -3635,7 +3635,7 @@ export function genData (el state) {
 }
 ```
 
-它的定义在 `src/compiler/codegen/index.js` 中：
+然后在模板编译的代码生成阶段，会在`genData`函数中根据`AST`元素节点上的`events`和`naitveEvents`生成`_c(tagName,data,children)`函数中所需要的`data`数据，它的定义在 `src/compiler/codegen/index.js` 中：
 
 ```
 {
@@ -3666,8 +3666,32 @@ export function genData (el state) {
 源码的 `src/core/vdom/create-component.js` 中， 如下：
 
 ```
+export function createComponent (
+  Ctor: Class<Component> | Function | Object | void,
+  data: ?VNodeData,
+  context: Component,
+  children: ?Array<VNode>,
+  tag?: string
+): VNode | Array<VNode> | void {
+  // ...
+  const listeners = data.on
 
+  data.on = data.nativeOn
+
+  // ...
+  const name = Ctor.options.name || tag
+  const vnode = new VNode(
+    `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`,
+    data, undefined, undefined, undefined, context,
+    { Ctor, propsData, listeners, tag, children },
+    asyncFactory
+  )
+
+  return vnode
+}
 ```
+
+父组件给子组件的注册事件中，把自定义事件传给子组件，在子组件实例化的时候进行初始化；而
 
 **initEvents 函数分析**
 
