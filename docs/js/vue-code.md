@@ -3851,6 +3851,8 @@ if (cur !== old) {
 
 最后遍历`oldOn`，获得每一个事件名，判断如果事件名在`on`中不存在，则表示该事件是需要从事件系统中卸载事件，则调用`remove`方法卸载该事件。
 
+`updateListeners`函数遗留了一个`normalizeEvent`函数是干什么用的？我们在解析事件的时候，当事件上有修饰符的时候，我们会根据不同的修饰符给事件名前面添加不同的符号以作标识，其实这个`normalizeEvent`函数就是个反向操作，根据事件名前面的不同标识反向解析出该事件所带的何种修饰符，其代码如下：
+
 ```
 const normalizeEvent = cached((name: string): {
   name: string,
@@ -3874,6 +3876,8 @@ const normalizeEvent = cached((name: string): {
   }
 })
 ```
+
+判断事件名的第一个字符是何种标识进而判断出事件带有何种修饰符，最终将真实事件名及所带的修饰符返回。
 
 **总结**
 
