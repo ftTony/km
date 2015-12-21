@@ -3788,9 +3788,11 @@ export function updateListeners (
 }
 ```
 
-该函数的作用是对比`listeners` 和 `oldListeners`的不同，并调用参数中提供的`add` 和`remove`进行相应的注册事件和卸载事件。其思想是：如果`listeners`对象中存在某个`key`（即事件名）而`oldListeners`
+该函数的作用是对比`listeners` 和 `oldListeners`的不同，并调用参数中提供的`add` 和`remove`进行相应的注册事件和卸载事件。其思想是：如果`listeners`对象中存在某个`key`（即事件名）而`oldListeners`中不存在，则说明这个事件是需要新增的；反之，如果`oldListeners`对象中存在某个`key`（即事件名）而`listeners`中不存在，则说明这个事件是需要从事件系统中卸载的；
 
-首先对`on`进行遍历，获得每一个事件名
+该函数接收 5 个参数，分别是`on`、`oldOn`、`add`、`remove`、`vm`，其中`on`对应`listeners`，`oldOn`对应`oldListeners`。
+
+首先对`on`进行遍历，获得每一个事件名，然后调用`normalizeEvent`函数处理，处理完事件名后，判断事件就把值是否存在，如果不存在则抛出警告，如下：
 
 ```
 for (name in on) {
@@ -3806,6 +3808,8 @@ for (name in on) {
 }
 ```
 
+如果存在，则继续判断该事件名在`oldOn`中是否存在，如果不存在，则调用`add`注册事件，如下：
+
 ```
 if (isUndef(old)) {
   if (isUndef(cur.fns)) {
@@ -3814,6 +3818,8 @@ if (isUndef(old)) {
   add(event.name, cur, event.once, event.capture, event.passive, event.params)
 }
 ```
+
+这里定义了`createFnInvoker`方法并返回`invoker`函数：
 
 ```
 export function createFnInvoker (fns) {
@@ -3834,12 +3840,16 @@ export function createFnInvoker (fns) {
 }
 ```
 
+由于一个事件可能会对应多个回调函数，所以这里做了数组的判断，
+
 ```
 if (cur !== old) {
   old.fns = cur
   on[name] = old
 }
 ```
+
+最后遍历`oldOn`，获得每一个事件名，判断如果事件名在`on`中不存在，则表示该事件是需要从事件系统中卸载事件，则调用`remove`方法卸载该事件。
 
 ```
 const normalizeEvent = cached((name: string): {
