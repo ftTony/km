@@ -3467,6 +3467,13 @@ const dirsWithInsert = []
 const dirsWithPostpatch = []
 ```
 
+- isCreate：判断当前节点`vnode`对应的旧节点`oldVnode`是不是一个空节点，如果是的话，表明当前节点是一个新创建的节点。
+- isDestroy：判断当前节点`vnode`是不是一个空节点，如果是的话，表明当前节点对应的旧节点将要被销毁。
+- oldDirs：旧的指令集合，即`oldVnode`中保存的指令。
+- newDirs：新的指令集合，即`vnode`中保存的指令。
+- dirsWithInsert：保存需要触发`inserted`指令钩子函数的指令列表。
+- dirsWidthPostpatch：保存需要触发`componentUpdated`指令钩子函数的指令列表。
+
 ### 十、总结
 
 ![images](vue-code.png)
