@@ -3885,6 +3885,8 @@ const normalizeEvent = cached((name: string): {
 
 初始化事件函数`initEvents`实际上初始化的是父组件在模板中使用`v-on`或`@`注册的监听子组件内触发的事件。
 
+最后分析了`initEvents`函数的具体实现过程，该函数内部首先在实例上新增了`_events`属性并将其赋值为空对象，用来存储事件。接着通过调用`updateComponentListeners`函数，将父组件向子组件注册的事件注册到子组件实例中的`_events`对象里。
+
 **initInjections 函数分析**
 
 从函数名字上来看，该函数是用来初始化实例中的`inject`选项的。说到`inject`选项，那必然离不开`provide`选项，这两个选项都是成对出现的，它们的作用是：鸡毛一个祖先组件向其所有子孙后代注入一个依赖，不论组件层次有多深，并在起上下游关系成立的时间始终生效。
@@ -3939,6 +3941,74 @@ const Child = {
   // ...
 }
 ```
+
+使用一个注入的值作为一个属性的默认值：
+
+```
+const Child = {
+  inject: ['foo'],
+  props: {
+    bar: {
+      default () {
+        return this.foo
+      }
+    }
+  }
+}
+```
+
+使用一个注入的值作为数据入口：
+
+```
+const Child = {
+  inject: ['foo'],
+  data () {
+    return {
+      bar: this.foo
+    }
+  }
+}
+```
+
+> 在 2.5.0+ 的注入可以通过设置默认值使其变成可选项：
+
+```
+const Child = {
+  inject: {
+    foo: { default: 'foo' }
+  }
+}
+```
+
+如果它需要从一个不同名字的属性注入，则使用 from 来表示其源属性：
+
+```
+const Child = {
+  inject: {
+    foo: {
+      from: 'bar',
+      default: 'foo'
+    }
+  }
+}
+```
+
+与 prop 的默认值类似，你需要对非原始值使用一个工厂方法：
+
+```
+const Child = {
+  inject: {
+    foo: {
+      from: 'bar',
+      default: () => [1, 2, 3]
+    }
+  }
+}
+```
+
+父组件可以使用`provide`选项给自己的下游子孙组件内注入一些数据，在下游子孙组件中可以使用`inject`选项来接收这些数据以便为自己所用。
+
+需要注意：`provide` 和 `inject` 选项绑定的数据不是响应式的。
 
 **initInjections 函数分析**
 
