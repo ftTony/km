@@ -4012,33 +4012,122 @@ const Child = {
 
 **initInjections 函数分析**
 
+```
+const Child = {
+  inject: ['foo'],
+  data () {
+    return {
+      bar: this.foo
+    }
+  }
+}
+```
+
 `initInjections`函数的具体原理，该函数定义在位于源码的``中，如下：
 
 ```
 
 export function initInjections (vm: Component) {
-const result = resolveInject(vm.\$options.inject, vm)
-if (result) {
-toggleObserving(false)
-Object.keys(result).forEach(key => {
-/\* istanbul ignore else \*/
-if (process.env.NODE_ENV !== 'production') {
-defineReactive(vm, key, result[key], () => {
-warn(
-`Avoid mutating an injected value directly since the changes will be` +
-`overwritten whenever the provided component re-renders.` +
-`injection being mutated: "${key}"`,
-vm
-)
-})
-} else {
-defineReactive(vm, key, result[key])
+    const result = resolveInject(vm.\$options.inject, vm)
+    if (result) {
+        toggleObserving(false)
+        Object.keys(result).forEach(key => {
+            /\* istanbul ignore else \*/
+            if (process.env.NODE_ENV !== 'production') {
+                defineReactive(vm, key, result[key], () => {
+                    warn(
+                    `Avoid mutating an injected value directly since the changes will be` +
+                    `overwritten whenever the provided component re-renders.` +
+                    `injection being mutated: "${key}"`,
+                    vm
+                    )
+                })
+            } else {
+            defineReactive(vm, key, result[key])
+            }
+        })
+        toggleObserving(true)
+    }
 }
-})
-toggleObserving(true)
-}
+```
+
+```
+// 父级组件提供 'foo'
+var Parent = {
+  provide: {
+    foo: 'bar'
+  }
 }
 
+// 子组件注入 'foo'
+var Child = {
+  inject: ['foo'],
+}
+
+// result
+result = {
+    'foo':'bar'
+}
+```
+
+```
+if (result) {
+    toggleObserving(false)
+    Object.keys(result).forEach(key => {
+        defineReactive(vm, key, result[key])
+    }
+    toggleObserving(true)
+}
+```
+
+```
+export function resolveInject (inject: any, vm: Component): ?Object {
+  if (inject) {
+    const result = Object.create(null)
+    const keys =  Object.keys(inject)
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i]
+      const provideKey = inject[key].from
+      let source = vm
+      while (source) {
+        if (source._provided && hasOwn(source._provided, provideKey)) {
+          result[key] = source._provided[provideKey]
+          break
+        }
+        source = source.$parent
+      }
+      if (!source) {
+        if ('default' in inject[key]) {
+          const provideDefault = inject[key].default
+          result[key] = typeof provideDefault === 'function'
+            ? provideDefault.call(vm)
+            : provideDefault
+        } else if (process.env.NODE_ENV !== 'production') {
+          warn(`Injection "${key}" not found`, vm)
+        }
+      }
+    }
+    return result
+  }
+}
+```
+
+```
+var Parent = {
+  provide: {
+    foo: 'bar'
+  },
+  // ...
+}
+const Child = {
+  inject: {
+    foo: {
+      from: 'bar',
+      default: () => [1, 2, 3]
+    }
+  }
+}
 ```
 
 **initState 函数分析**
