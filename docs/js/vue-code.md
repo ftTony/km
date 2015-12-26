@@ -4012,6 +4012,8 @@ const Child = {
 
 **initInjections 函数分析**
 
+`provide`选项注入的值作为数据入口，如下：
+
 ```
 const Child = {
   inject: ['foo'],
@@ -4023,10 +4025,11 @@ const Child = {
 }
 ```
 
-`initInjections`函数的具体原理，该函数定义在位于源码的``中，如下：
+数据就是我们通常所写`data`、`props`、`watch`、`computed`及`method`，所以`inject`选项接收到注入的值有可能被以上这些数据所使用到，所以在初始化完`inject`后需要先初始化这些数据，然后才能再初始化`provide`，所以在调用`initInjections`函数对`inject`初始化完之后需要先调用`initState`函数对数据进行初始化，最后再调用`initProvide`函数对`provide`进行初始化。
+
+`initInjections`函数的具体原理，该函数定义在位于源码的`src/core/instance/inject.js`中，如下：
 
 ```
-
 export function initInjections (vm: Component) {
     const result = resolveInject(vm.\$options.inject, vm)
     if (result) {
@@ -4051,6 +4054,8 @@ export function initInjections (vm: Component) {
 }
 ```
 
+`initInjections`函数首先调用`resolveInject`把`inject`选项中的数据转化成键值对的形式赋给`result`，`result`样子如下：
+
 ```
 // 父级组件提供 'foo'
 var Parent = {
@@ -4070,6 +4075,8 @@ result = {
 }
 ```
 
+然后遍历`result`中的每一对键值，调用`defineReactive`函数将其添加当前实例上，如下：
+
 ```
 if (result) {
     toggleObserving(false)
@@ -4079,6 +4086,12 @@ if (result) {
     toggleObserving(true)
 }
 ```
+
+在把`result`中的键值添加到当前实例上之前，会先调用`toggleObserving(false)`，而这个函数内部是把`shouldObserve = false`，这是为了告诉`defineReactive`函数仅仅是把键值添加
+
+**resolveInject 函数分析**
+
+`inject`选项中的每一个数据`key` 都是由其上游父级组件提供的
 
 ```
 export function resolveInject (inject: any, vm: Component): ?Object {
