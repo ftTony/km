@@ -1945,19 +1945,36 @@ return options
 可以看出，`mergeOptions`函数的主要功能是把`parent`和`child`这两个对象根据一些合并策略，合并成一个新对象并返回。首先递归把`extends`和`mixins`合并到`parent`上
 
 ```
-
+ const extendsFrom = child.extends
+  if (extendsFrom) {
+    parent = mergeOptions(parent, extendsFrom, vm)
+  }
+  if (child.mixins) {
+    for (let i = 0, l = child.mixins.length; i < l; i++) {
+      parent = mergeOptions(parent, child.mixins[i], vm)
+    }
+  }
 ```
 
-生命周期钩子函数的合并策略如下：
+然后创建一个空对象`options`，遍历`parent`，把`parent`中的每一项通过调用`mergeField`函数合并到空对象`options`里
 
 ```
+const options = {}
+let key
+for (key in parent) {
+    mergeField(key)
+}
+```
 
+值得一提的是`mergeField`函数，它不是简单的把属性从一个对象里复制到另外一个对象里，而是根据被合并的不同的选项有着不同的合并策略。生命周期钩子函数的合并策略如下：
+
+```
 function mergeHook(parentVal,childVal){
-return childVal? parentVal ? parentVal.concat(childVal) : Array.isArray(childVal) ? childVal : [childVal] : parentVal
+    return childVal? parentVal ? parentVal.concat(childVal) : Array.isArray(childVal) ? childVal : [childVal] : parentVal
 }
 
 LIFECYCLE_HOOKS.forEach(hook => {
-strats[hook] = mergeHook
+    strats[hook] = mergeHook
 })
 
 ```
@@ -1980,6 +1997,26 @@ export const LIFECYCLE_HOOKS = [
 'errorCaptured'
 ]
 
+```
+
+这里定义了所有钩子函数名称，所以对于钩子函数的合并策略都是`mergeHook`函数。`mergeHook`函数的实现了一个多层嵌套的三元运算符，如果嵌套太不好理解的话我们可以将其展开，如下：
+
+```
+function mergeHook (parentVal,childVal):  {
+ if (childVal) {
+   if (parentVal) {
+     return parentVal.concat(childVal)
+   } else {
+     if (Array.isArray(childVal)) {
+       return childVal
+     } else {
+       return [childVal]
+     }
+   }
+ } else {
+   return parentVal
+ }
+}
 ```
 
 **callHook 函数如何触发钩子函数**
