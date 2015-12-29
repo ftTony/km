@@ -50,9 +50,13 @@
 
 ### 二、原理
 
+#### 2.1 源码
+
 `<keep-alive>`组件的定义位于源码的`src/core/components/keep-alive.js`文件中，如下：
 
 ```
+const patternTypes: Array<Function> = [String, RegExp, Array]
+
 export default {
   name: 'keep-alive',
   abstract: true,
@@ -85,36 +89,27 @@ export default {
 
   render () {
     const slot = this.$slots.default
-    const vnode: VNode = getFirstComponentChild(slot)
-    const componentOptions: ?VNodeComponentOptions = vnode && vnode.componentOptions
+    const vnode = getFirstComponentChild(slot)
+    const componentOptions  = vnode && vnode.componentOptions
     if (componentOptions) {
       // check pattern
-      const name: ?string = getComponentName(componentOptions)
+      const name = getComponentName(componentOptions)
       const { include, exclude } = this
-      if (
-        // not included
-        (include && (!name || !matches(include, name))) ||
-        // excluded
-        (exclude && name && matches(exclude, name))
-      ) {
+      if ((include && (!name || !matches(include, name))) || (exclude && name && matches(exclude, name))) {
         return vnode
       }
 
       const { cache, keys } = this
-      const key: ?string = vnode.key == null
-        // same constructor may get registered as different local components
-        // so cid alone is not enough (#3269)
+      const key = vnode.key == null
         ? componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` : '')
         : vnode.key
       if (cache[key]) {
         vnode.componentInstance = cache[key].componentInstance
-        // make current key freshest
         remove(keys, key)
         keys.push(key)
       } else {
         cache[key] = vnode
         keys.push(key)
-        // prune oldest entry
         if (this.max && keys.length > parseInt(this.max)) {
           pruneCacheEntry(cache, keys[0], keys, this._vnode)
         }
@@ -125,6 +120,54 @@ export default {
     return vnode || (slot && slot[0])
   }
 }
+```
+
+组件内没有常规的`<template></template>`标签，取而代之的`render`函数，所以它不是一个常规的模板组件，而是一个函数式组件。执行`<keep-alive>`组件渲染的时候，就会执行这个`render`函数。
+
+#### 2.2 props
+
+```
+props: {
+    include: [String, RegExp, Array],
+    exclude: [String, RegExp, Array],
+    max: [String, Number]
+}
+```
+
+#### 2.3 created
+
+```
+created () {
+    this.cache = Object.create(null)
+    this.keys = []
+}
+```
+
+#### 2.4 destroyed
+
+```
+destroyed () {
+    for (const key in this.cache) {
+        pruneCacheEntry(this.cache, key, this.keys)
+    }
+}
+```
+
+#### 2.5 mounted
+
+```
+this.$watch('include', val => {
+    pruneCache(this, name => matches(val, name))
+})
+this.$watch('exclude', val => {
+    pruneCache(this, name => !matches(val, name))
+})
+```
+
+#### 2.6 render
+
+```
+
 ```
 
 ### 三、缓存策略
