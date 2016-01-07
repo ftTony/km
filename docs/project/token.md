@@ -234,6 +234,15 @@ http://www.example.com/user?token=xxx
 
 #### 13.1 使用 cookie 时需要考虑的问题
 
+- 因为存储在客户端，容易被客户端篡改，使用前需要验证合法性
+- 不要存储敏感数据，比如用户密码，账户余额
+- 使用httpOnly在一定程度上提高安全性
+- 尽量减少cookie的体积，能存储的数据量不能超过4kb
+- 设置正确的domain和path，减少数据传输
+- **cookie无法跨域**
+- 一个浏览器针对一个网站最多存20个Cookie，浏览器一般只允许存放300个Cookie
+- **移动端对cookie的支持不是很好，而session需要基于cookie实现，所以移动端常用的是token**
+
 #### 13.2 使用 session 时需要考虑的问题
 
 #### 13.3 使用 token 时需要考虑的问题
@@ -242,7 +251,16 @@ http://www.example.com/user?token=xxx
 
 #### 13.5 分布式架构下 session 共享方案
 
+**1.session复制**
+**2.粘性 session /IP 绑定策略**
+**3. session 共享（常用）**
+**4. session 持久化**
+
 #### 13.6 只要关闭浏览器 ，session 真的就消失了？
+
+不对。对session来说，除非程序通知服务器删除一个session，否则服务器会一直保留，程序一般都是在用户做log off的时候发一个指令去删除session。
+
+然而浏览器从来不会主动在关闭之前通知服务器它将要关闭
 
 ### 参考资料
 
