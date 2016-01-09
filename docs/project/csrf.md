@@ -94,6 +94,7 @@ CSRF 攻击之所能够成功，是为黑客可以完全伪造用户的请求，
 
 - [CSRF 攻击的应对之道](https://www.ibm.com/developerworks/cn/web/1102_niugang_csrf/)
 - [浅谈 CSRF 攻击方式](http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html)
+- [34 | CSRF 攻击：陌生链接不要随便点](https://time.geekbang.org/column/article/154110)
 
 ## 联系作者
 

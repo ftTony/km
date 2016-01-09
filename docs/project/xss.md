@@ -144,7 +144,7 @@ name|opener|parent|top|content|self|frames)\W)|(localStorage|sessionStorage|Data
 
 ```
 
-字符串类型的数据，需要针对<、>、/、’、”、&五个字符进行实体化转义。
+字符串类型的数据，需要针对`<`、`>`、`/`、`’`、`”`、`&`五个字符进行实体化转义。
 
 ![](/images/xss/640.webp)
 
