@@ -30,7 +30,7 @@ http://www.xss.com?x=<script>alert('xss')</script>
 
 示例图
 
-![images](/images/xss/eb141420f5d5638711537444b863eb76_r.jpg)
+![images](xss01.jpg)
 
 攻击者构造了一个包含恶意文本的 URL 发送给受害者，受害者被攻击者欺骗，通过访问这个 URL 向网站发出请求，网站给受害者的返回中包含了来自 URL 的的恶意文本，受害者的浏览器执行了来自返回中的恶意脚本，把受害者的 cookie 发送给攻击者的服务器
 
@@ -146,7 +146,7 @@ name|opener|parent|top|content|self|frames)\W)|(localStorage|sessionStorage|Data
 
 字符串类型的数据，需要针对`<`、`>`、`/`、`’`、`”`、`&`五个字符进行实体化转义。
 
-![](/images/xss/640.webp)
+![images](xss02.jpg)
 
 #### 4.3 转出检查
 
