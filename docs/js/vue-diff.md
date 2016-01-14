@@ -7,7 +7,7 @@
 ## 内容
 
 - virtual dom
-- 分析diff
+- 分析 diff
 - 算法实现
 
 ### 一、virtual dom
@@ -16,9 +16,9 @@
 
 ```
 
-### 二、分析diff
+### 二、分析 diff
 
-一篇相当经典的文章[React’s diff algorithm](https://calendar.perfplanet.com/2013/diff/)中的图，react的diff其实和vue的diff大同小异。所以这张图能很好解释过程。**比较只会在同层级进行，不会跨层级比较。**
+一篇相当经典的文章[React’s diff algorithm](https://calendar.perfplanet.com/2013/diff/)中的图，react 的 diff 其实和 vue 的 diff 大同小异。所以这张图能很好解释过程。**比较只会在同层级进行，不会跨层级比较。**
 
 ![images](vue09.png)
 
@@ -28,9 +28,9 @@
 <!-- 之前 -->
 <div>           <!-- 层级1 -->
   <p>            <!-- 层级2 -->
-    <b> aoy </b>   <!-- 层级3 -->   
+    <b> aoy </b>   <!-- 层级3 -->
     <span>diff</Span>
-  </P> 
+  </P>
 </div>
 
 <!-- 之后 -->
@@ -42,21 +42,19 @@
 </div>
 ```
 
-我们可能期望将`<span>`直接移动到`<p>`的后边，这是最优的操作。但是实际的diff操作是移除`<p>`里的`<span>`再创建一个新的`<span>`插到`<p>`的后边。因为新加的`<span>`在层级2，旧的在层级3，属于不同层级的比较。
+我们可能期望将`<span>`直接移动到`<p>`的后边，这是最优的操作。但是实际的 diff 操作是移除`<p>`里的`<span>`再创建一个新的`<span>`插到`<p>`的后边。因为新加的`<span>`在层级 2，旧的在层级 3，属于不同层级的比较。
 
 #### 源码分析
 
-
-
 ### 三、算法实现
 
-- 用JS对象模拟DOM树
-- 比较两棵虚拟DOM树的差异
-- 把差异应用到真正的DOM树上
+- 用 JS 对象模拟 DOM 树
+- 比较两棵虚拟 DOM 树的差异
+- 把差异应用到真正的 DOM 树上
 
-#### 3.1 用JS对象模拟DOM树
+#### 3.1 用 JS 对象模拟 DOM 树
 
-用JavaScript来表示一个DOM节点是很简单的事情，你只需要记录它的节点类型、属性，还有子节点：
+用 JavaScript 来表示一个 DOM 节点是很简单的事情，你只需要记录它的节点类型、属性，还有子节点：
 
 element.js
 
@@ -72,7 +70,7 @@ module.exports = function(tagName,props,children){
 }
 ```
 
-例如上面的DOM结构就可以简单的表示：
+例如上面的 DOM 结构就可以简单的表示：
 
 ```
 var el = require('./element')
@@ -84,7 +82,7 @@ var ul = el('ul',{id:'list'},[
 ])
 ```
 
-现在`ul`只是一个JavaScript对象表示的DOM结构，页面上并没有这个结构。我们可以根据这个`ul`构建真正的`<ul>`:
+现在`ul`只是一个 JavaScript 对象表示的 DOM 结构，页面上并没有这个结构。我们可以根据这个`ul`构建真正的`<ul>`:
 
 ```
 Element.prototype.render = function(){
@@ -98,14 +96,15 @@ Element.prototype.render = function(){
 }
 ```
 
-#### 3.2 比较两棵虚拟DOM树的差异
+#### 3.2 比较两棵虚拟 DOM 树的差异
 
 ```
+
 ```
 
-#### 3.3 把差异应用到真正的DOM树上
+#### 3.3 把差异应用到真正的 DOM 树上
 
-因为步骤一所构建的构建的JavaScript对象树和`render`出来真正的DOM树的信息、结构是一样的。所以我们可以对那棵DOM树也进行尝试优先的遍历，遍历的时候从步骤二生成的`patches`对象中找出当前遍历的节点差异，然后进DOM操作。
+因为步骤一所构建的构建的 JavaScript 对象树和`render`出来真正的 DOM 树的信息、结构是一样的。所以我们可以对那棵 DOM 树也进行尝试优先的遍历，遍历的时候从步骤二生成的`patches`对象中找出当前遍历的节点差异，然后进 DOM 操作。
 
 ```
 function patch(node,patches){
@@ -129,7 +128,7 @@ function dfsWalk(node,walker,patches){
 }
 ```
 
-applyPathes,根据不同类型的差异对当前节点进行DOM操作：
+applyPathes,根据不同类型的差异对当前节点进行 DOM 操作：
 
 ```
 function applyPatches (node, currentPatches) {
@@ -156,17 +155,12 @@ function applyPatches (node, currentPatches) {
 
 ### 参考资料
 
-- [如何实现一个 Virtual DOM 算法](https://github.com/livoras/blog/issues/13)
 - [Diff 算法](https://github.com/aooy/blog/issues/2)
 - [simple-virtual-dom](https://github.com/livoras/simple-virtual-dom)
-- [揭秘 Vue 中的 Virtual Dom](https://mp.weixin.qq.com/s/EeN7E8uQS4R_JJloPX8fCQ)
 - [Virtual Dom 和 Diff 算法](https://mp.weixin.qq.com/s/9nB2bfDczNFRpUTiBwup8Q)
-- [【Vue原理】Diff - 白话版](https://zhuanlan.zhihu.com/p/81752104)
-- [VirtualDOM与diff(Vue实现)](https://zhuanlan.zhihu.com/p/29450092)
-- [虚拟 DOM 到底是什么？](https://mp.weixin.qq.com/s/oAlVmZ4Hbt2VhOwFEkNEhw)
-- [现代前端科技解析 —— Virtual DOM](https://www.404forest.com/2019/03/07/modern-web-development-tech-analysis-virtual-dom/)
-- [深入剖析：Vue核心之虚拟DOM](https://juejin.im/post/5d36cc575188257aea108a74)
-- [让虚拟DOM和DOM-diff不再成为你的绊脚石](https://juejin.im/post/5c8e5e4951882545c109ae9c)
+- [【Vue 原理】Diff - 白话版](https://zhuanlan.zhihu.com/p/81752104)
+- [VirtualDOM 与 diff(Vue 实现)](https://zhuanlan.zhihu.com/p/29450092)
+- [让虚拟 DOM 和 DOM-diff 不再成为你的绊脚石](https://juejin.im/post/5c8e5e4951882545c109ae9c)
 
 ## 联系作者
 

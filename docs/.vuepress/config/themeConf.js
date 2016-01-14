@@ -151,6 +151,7 @@ module.exports = {
           'vue-nexttick',
           'vue-watch',
           'vue-code',
+          'vue-dom',
           'vue-diff',
           'vue-router-code',
           'vue-communication',
