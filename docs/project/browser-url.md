@@ -192,6 +192,7 @@ DNS 协议提供通过域名查找 IP 地址，域逆向从 IP 地址反查域�
 - [说一说从输入 URL 到页面呈现发生了什么？](https://juejin.im/post/5df5bcea6fb9a016091def69#heading-24)
 - [04 | 导航流程：从输入 URL 到页面展示，这中间发生了什么？](https://time.geekbang.org/column/article/117637)
 - 《网络是怎么连接的》
+- [面试官：浏览器输入 URL 后发生了什么？](https://mp.weixin.qq.com/s/DLq_GIkdnuOayThfi3jI0A)
 
 ## 联系作者
 

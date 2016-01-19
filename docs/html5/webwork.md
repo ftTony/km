@@ -1,4 +1,4 @@
-# web work学习
+# web work 学习
 
 ## 前言
 
@@ -6,7 +6,9 @@
 
 ## 内容
 
-## 参考资料
+### 参考资料
+
+- [Web Worker 的内部构造以及 5 种你应当使用它的场景](https://mp.weixin.qq.com/s/3MhSJoATeyHn3d96d3M3Sw)
 
 ## 联系作者
 
