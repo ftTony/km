@@ -58,6 +58,7 @@
 ### 参考资料
 
 - [理解 CSS3 中的 background－size(对响应性图片等比例缩放)](https://www.cnblogs.com/tugenhua0707/p/5260411.html)
+- [你可能不是那么了解的 CSS Background](https://juejin.im/post/5e1adb826fb9a02fc160a2c1)
 
 ## 联系作者
 

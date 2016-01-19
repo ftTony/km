@@ -28,6 +28,7 @@
 - [网易云音乐前端性能监控实践](https://mp.weixin.qq.com/s/EuFDLOCg53IxvieaQDeYug)
 - [关于前端埋点统计方案思考](https://juejin.im/post/5c178aaaf265da6147702108)
 - [前端埋点的那些事](http://www.imooc.com/article/27151)
+- [前端工程实践之数据埋点分析系统（一）](https://www.zoo.team/article/data-analysis-one)
 
 ## 联系作者
 
