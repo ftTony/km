@@ -888,11 +888,30 @@ body {
 **HTML 代码**
 
 ```
+<div id="diamond-shield"></div>
 ```
 
 **CSS 代码**
 
 ```
+#diamond-shield{
+    width: 0;
+    height: 0;
+    border:50px solid transparent;
+    border-bottom:20px solid red;
+    position: relative;
+    top: -50px;
+}
+#diamond-shield::after{
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 20px;
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-top: 70px solid red;
+}
 ```
 
 ### 29. 钻戒
@@ -900,11 +919,30 @@ body {
 **HTML 代码**
 
 ```
+<div id="diamond-narrow"></div>
 ```
 
 **CSS 代码**
 
 ```
+#diamond-narrow {
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-bottom: 70px solid red;
+    position: relative;
+    top: -50px;
+}
+#diamond-narrow:after {
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 70px;
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-top: 70px solid red;
+}
 ```
 
 ### 30. 钻石 2
