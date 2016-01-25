@@ -23,6 +23,14 @@
 
 ### 二、实现一个堆
 
+二叉树有两种表示方式。第一种是使用动态的表示方式，也就是指针。第二种是使用一个数组，通过索引值检索父节点、左侧和右侧子节点的值。
+
+堆数据结构中有三个主要操作。
+
+- insert(value)：这个方法向堆中插入一个新的值。如果插入成功，它返回 true，否则返回 false。
+- extract()：这个方法移除最小值（最小堆）或最大值（最大堆），并返回这个值。
+- findMinimum()：这个方法返回最小值（最小堆）或最大值（最大堆）且不会移除这个值。
+
 代码如下：
 
 ```
@@ -52,12 +60,15 @@ class MinHeap {
         this.compareFn = compareFn
         this.heap = []
     }
+    // 左侧子节点的位置是2*index+1
     getLeftIndex(index) {
         return (2 * index) + 1
     }
+    // 右侧子节点的位置是2*index+2
     getRightIndex(index) {
         return (2 * index) + 2
     }
+    // 父节点位置是index/2
     getParentIndex(index) {
         if (index === 0) {
             return undefined
@@ -85,6 +96,7 @@ class MinHeap {
         }
         return false
     }
+    // 下移操作
     siftDown(index) {
         let element = index
         const left = this.getLeftIndex(index)
@@ -101,6 +113,7 @@ class MinHeap {
             this.siftDown(element)
         }
     }
+    // 上移操作
     siftUp(index) {
         let parent = this.getParentIndex(index)
         while (index > 0 && this.compareFn(this.heap[parent], this.heap[index]) === Compare.BIGGER_THAN) {
@@ -156,7 +169,38 @@ class Max extends MinHeap {
 相关代码如下：
 
 ```
+function heapify(array,index,heapSize,compareFn){
+    let largest = index;
+    const left = (2*index)+1;
+    const right = (2*index)+2;
+    if(left < heapSize && compareFn(array[left],array[index]>0)){
+        largest = left;
+    }
+    if(right < heapSize && compareFn(array[right],array[largest])>0){
+        largest = right;
+    }
+    if(largest ! == index){
+        swap(array,index,largest)
+        heapify(array,largest,heapSize,compareFn)
+    }
+}
 
+function buildMaxHeap(array,compareFn){
+    for(let i = Math.floor(array.length/2);i>=0;i-=1){
+        heapify(array,i,array.length,compareFn)
+    }
+    return array
+}
+
+function heapSort(array,compareFn = defaultCompart){
+    let heapSize = array.length
+    buildMaxHeap(array,compareFn)
+    while(heapSize>1){
+        swap(array,0,--heapSize);
+        heapify(array,0,heapSize,compareFn)
+    }
+    return array
+}
 ```
 
 ### 参考资料
