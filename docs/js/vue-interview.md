@@ -31,21 +31,13 @@
 
 ### 8. 使用过 Vue SSR 吗？说说 SSR？
 
-> Vue.js 是构建客户端应用程序的框架。默认情况下，可以在浏览器中输出 Vue 组件，进行生成 DOM 和操作 DOM。然而，也可以将同一个组件渲染为服务端的 HTML 字符串，将它们直接发送到浏览器，最后将这些静态标记“激活”为客户端上完全可交互的应用程序。
->
-> 即：SSR 大致意思是 vue 在客户端将标签渲染成的整个 html 片段的工作在服务端完成，服务端形成的 html 片段直接返回给客户端这个过程就叫做服务端渲染。
+参考[Vue 服务端渲染（SSR）](https://km.xiaowuzi.info/project/ssr.html)
 
 **服务端渲染 SSR 的优缺点如下：**
 
 **1. 服务端渲染的优点：**
 
-- 更好的 SEO：
-- 更快的内容到达时间（首屏加载更快）：
-
 **2. 服务端渲染的缺点：**
-
-- 更多的开发条件限制：
-- 更多的服务器负载：
 
 ### 9. 能说下 vue-router 中常用的 hash 和 history 路由模式实现原理吗？
 
@@ -60,6 +52,8 @@ https://www.word.com#search
 hash 路由模式的实现主要是基于下面几个特性：
 
 - URL 中 hash 值只是客户端的一种状态，也就是说当向服务器端发出请求时，hash 部分不会被发送；
+- hash 值的改变，都会在浏览器的访问历史中增加一个记录。因此我们能通过浏览器的回退、前进按钮控制 hash 的切换；
+- 可以通过 a 标签，并设置 href 属性，当用户点击这个标签后，URL 的 hash 值会发生改变；或者使用 JavaScript 来对 location.hash 进
 
 #### history 模式的实现原理
 
@@ -71,6 +65,10 @@ window.history.replaceState(null,null,path);
 ```
 
 history 路由模式的实现主要基于存在下面几个特性：
+
+- `pushState`和`replaceState`两个 API 来操作实现 URL 的变化；
+- 我们可以使用 popstate 事件来监听 url 的变化，从而对页面进行跳转（渲染）；
+- `history.pushState()`或`history.replaceState()`不会触发`popstate`事件，这时我们需要手动触发页面跳转（渲染）。
 
 ### 10. Proxy 与 Object.defineProperty 优劣对比
 
@@ -93,6 +91,8 @@ history 路由模式的实现主要基于存在下面几个特性：
 **缺点：**
 
 ### 12. 虚拟 DOM 实现原理？
+
+### 13. computed 和 watch 的区别和运用的场景？
 
 ### 参考资料
 
