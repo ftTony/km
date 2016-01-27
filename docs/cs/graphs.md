@@ -6,7 +6,16 @@
 
 ## 内容
 
-### 图的实现
+- 图的概念
+- 图的表示
+- 图的遍历
+- 最短路径
+
+### 一、图的概念
+
+图是网络结构的抽象模型。图是一组由边连接的节点。
+
+### 二、图的表示
 
 **ES5 代码实现**
 
@@ -49,7 +58,9 @@ class Graph{
 }
 ```
 
-### 广度遍历
+### 三、图的遍历
+
+**广度遍历代码实现**
 
 ```
 var initializeCodor = function(){
@@ -88,7 +99,7 @@ this.bfs = function(v,callback){
 
 ```
 
-### 深度遍历
+**ES6 代码实现**
 
 ```
 var initializeCodor = function(){
@@ -125,6 +136,10 @@ var dfsVisit = function(u,color,callback){
     color[u] = 'black';
 }
 ```
+
+### 四、最短路径
+
+### 五、最小生成树
 
 ## 参考资料
 

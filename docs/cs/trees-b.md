@@ -32,7 +32,7 @@
 ### 参考资料
 
 - [B 树和 B+树的插入、删除图文详解](https://www.cnblogs.com/nullzx/p/8729425.html)
-- [平衡二叉树、B 树、B+树、B\*树 理解其中一种你就都明白了](https://zhuanlan.zhihu.com/p/27700617)
+- [平衡二叉树、B 树、B+树、`B*`树 理解其中一种你就都明白了](https://zhuanlan.zhihu.com/p/27700617)
 - [心里没点 B 树。。。](https://mp.weixin.qq.com/s/5ERFlmeUGXnfQPAZBLn6RA)
 
 ## 联系作者
