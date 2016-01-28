@@ -33,10 +33,6 @@ module.exports = {
       text: '计算机基础',
       link: '/cs/'
     },
-    // {
-    //     text: '面试',
-    //     link: '/interview-question/'
-    // },
     {
       text: '资料收集',
       link: '/materials/'
@@ -170,6 +166,8 @@ module.exports = {
         children: [
           'basic',
           'box-sizing',
+          'filter',
+          'gradients',
           'select',
           'inherit',
           'px',
