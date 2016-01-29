@@ -17,6 +17,10 @@
 
 ### 二、图的表示
 
+从数据结构的角度来说，我们有多种方式来表示图。图的正确表示法取决于待解决的问题和图的类型。
+
+图的表示主要分为：邻接矩阵、邻接表、关联矩阵
+
 **ES5 代码实现**
 
 ```
@@ -52,9 +56,48 @@ function Graph(){
 **ES6 代码实现**
 
 ```
-class Graph{
-    var vertices = [];
-    var adjList = new Dictionary();
+class Graph {
+    constructor(isDirected = false) {
+        this.isDirected = isDirected
+        this.vertices = []
+        this.adjList = new Dictionary()
+    }
+    addVertex(v) {
+        if (!this.vertices.includes(v)) {
+            this.vertices.push(v)
+            this.adjList.set(v, [])
+        }
+    }
+    addEdge(a, b) {
+        if (!this.adjList.get(a)) {
+            this.addVertex(a)
+        }
+        if (!this.adjList.get(b)) {
+            this.addVertex(b)
+        }
+        this.adjList.get(a).push(b)
+        if (this.isDirected !== true) {
+            this.adjList.get(b).push(a)
+        }
+    }
+    getVertices() {
+        return this.vertices
+    }
+    getAdjList() {
+        return this.adjList
+    }
+    toString() {
+        let s = ''
+        for (let i = 0; i < this.vertices.length; i++) {
+            s += `${this.vertices[i]}->`
+            const neighbors = this.adjList.get(this.vertices[i])
+            for (let j = 0; j < neighbors.length; j++) {
+                s += `${neighbors[j]}`
+            }
+            s += '\n';
+        }
+        return s
+    }
 }
 ```
 
