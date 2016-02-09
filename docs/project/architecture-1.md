@@ -77,6 +77,7 @@
 - [5 年时间服务器从 0 到 200，一个创业公司的架构野蛮生长史](https://zhuanlan.zhihu.com/p/33401898)
 - [从零到百亿互联网金融架构发展史](https://www.cnblogs.com/ityouknow/p/6276686.html)
 - [从零开始搭建创业公司后台技术栈](https://mp.weixin.qq.com/s/HlEDjrVKbH_KZo_SXjfzIQ)
+- [多机房多活，多机房平滑迁移架构方案全集（上+中+下）](https://mp.weixin.qq.com/s/a_LQjdis8MCBYSeuw98ExQ)
 
 ## 联系作者
 
