@@ -100,6 +100,84 @@ C@1.0.0 -> D@1.0.0
 │   │   │   └── D@2.0.0
 ```
 
+`B`、`E`模块下都包含了依赖的模块`D@2.0.0`，存在代码冗余的情况。
+
+再在项目中安装模块`F@1.0.0`（依赖于模块`D@1.0.0`）。由于`D@1.0.0`已经存在于项目根目录下的`node_modules`下，所以在安装F模块的时候，无需再在其依赖包中安装`D@1.0.0`模块，目录结构变为：
+
+```
+├── node_modules
+│   ├── A@1.0.0
+│   ├── D@1.0.0
+│   ├── B@1.0.0
+│   │   └── node_modules
+│   │   │   └── D@2.0.0
+│   └── C@1.0.0
+│   ├── E@1.0.0
+│   │   └── node_modules
+│   │   │   └── D@2.0.0
+│   └── F@1.0.0
+```
+
+从以上结构可以看出，`npm 3.x`并没有完美的解决`npm 2.x`中的问题，甚至还会退化到`npm 2.x`的行为。
+
+为了解决目录中存在很多副本的情况，（在`A`、`C`模块的依赖模块`D`升级到`2.0.0`前提下）可以通过`npm dedupe`指令把所有二级的依赖模块D@2.0.0重定向到一级目录下：
+
+```
+├── node_modules
+│   ├── A@1.0.0
+│   ├── D@2.0.0
+│   ├── B@1.0.0
+│   └── C@1.0.0
+│   ├── E@1.0.0
+│   └── F@1.0.0
+```
+
+>`node_modules`路径查找机制：模块再找对应的依赖包时，nodejs会尝试从当前模块所在目录开始，尝试在它的`node_modules`文件夹里加载相应模块，如果没有找到，那么就再向上一级目录移动，直到全局安装路径中的`node_modules`为止。
+
+#### 1.3 npm 5.x - package-lock.json
+
+从`npm 5.x`开始，安装组织`node_modules`和`npm 3.x`一样采用了扁平的方式，最大的变化是增加了[package-lock.json](https://docs.npmjs.com/files/package-lock.json)文件。
+
+`npm`为了让开发者在安全的前提下使用最新的依赖包，在`package.json`中通常做了锁定大版本的操作，这样在每次`npm install`的时候都会拉取依赖包大版本下的最新的版本。这种机制最大的一个缺点就是当有依赖包有小版本更新时，可能会出现协同开发者的依赖包不一致的问题。
+
+`package-lock.json`文件精确描述了`node_modules`目录下所有的包的树状依赖结构，每个包的版本号都是完全精确的。以`sass-loader`在`package-lock.json`中为例：
+
+```
+"dependencies": {
+  "sass-loader": {
+    "version": "7.1.0",
+    "resolved": "http://registry.npm.taobao.org/sass-loader/download/sass-loader-7.1.0.tgz",
+    "integrity": "sha1-Fv1ROMuLQkv4p1lSihly1yqtBp0=",
+    "dev": true,
+    "requires": {
+      "clone-deep": "^2.0.1",
+      "loader-utils": "^1.0.1",
+      "lodash.tail": "^4.1.1",
+      "neo-async": "^2.5.0",
+      "pify": "^3.0.0",
+      "semver": "^5.5.0"
+    },
+    "dependencies": {
+      "pify": {
+        "version": "3.0.0",
+        "resolved": "http://registry.npm.taobao.org/pify/download/pify-3.0.0.tgz",
+        "integrity": "sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY=",
+        "dev": true
+      }
+    }
+  }
+}
+```
+
+`package-lock.json`的详细描述主要由`version`、`resolved`、`integrity`、`dev`、`requires`、`dependencies`这几个字段构成：
+
+- `version`：包唯一的版本号
+- `resolved`：安装源
+- `integrity`：表明包完整性的hash值（验证包是否已失效）
+- `dev`：如果为true，则此依赖关系仅是顶级模块的开发依赖关系或者是一个的传递依赖关系
+- `requires`：依赖包所需要的所有依赖项，对应依赖包`package.json`里`dependencies`中的依赖项
+- `dependencies`：依赖包`node_modules`中依赖的包，与顶层的`dependencies`一样的结构
+
 ### 二、npm 中的依赖包
 
 #### 2.1 依赖包分类
@@ -132,12 +210,32 @@ C@1.0.0 -> D@1.0.0
 
 - **主版本号**(也叫大版本，`major version`)
 
-    大版本的发动很可能是一次颠覆性的发动，也就意味
+    大版本的发动很可能是一次颠覆性的发动，也就意味着可能存在与低版本不兼容的`API`或者用法，（比如`vue 2->3`）。
 
-- **次版本号**(也叫大版本，`minor version`)
-- **修订号**(也叫大版本，`patch version`)
+- **次版本号**(也叫小版本，`minor version`)
+
+    小版本的发动应当兼容同一个大版本内的`API`和用法，因此应该让开发者无感。所以我们通常只说大版本号，很少会精确到小版本号。
+
+    >如果大版本是0的话，表示软件处于初始阶段，一切都可能随时被改变，可能每个小版本之间也会存在不兼容性。所以在选择依赖时，尽量避开大版本号是0的包。
+
+- **修订号**(也叫补丁版本，`patch`)
+
+    一般用于修改`bug`或者很细微的变更，也需要保持向前兼容。
+
+常见的几个版本格式如下：
+
+- **“1.2.3”**
+- **“^1.2.3”**
+- **“~1.2.3”**
+- **"1.x" 、"1.X"、1.*"、"1"、"*"**
+- **"1.2.3-beta.1"**
 
 #### 2.3 依赖包版本管理
+
+`npm 2.x/3.x`已成为过去式，在`npm 5.x`以上环境下（版本最好在`5.6`以上，因为在`5.0 ~ 5.6`中间对`package-lock.json`的处理逻辑更新过几个版本，`5.6`以上才开始稳定），管理项目中的依赖包版本你应该知道（以`^`版本为例，其他类型版本参照即可）：
+
+```
+```
 
 ### 三、npm scripts 脚本
 
