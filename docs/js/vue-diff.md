@@ -38,11 +38,9 @@
 
 我们可能期望将`<span>`直接移动到`<p>`的后边，这是最优的操作。但是实际的 diff 操作是移除`<p>`里的`<span>`再创建一个新的`<span>`插到`<p>`的后边。因为新加的`<span>`在层级 2，旧的在层级 3，属于不同层级的比较。
 
-#### 源码分析
+### 二、pach 方法实现
 
-### 二、pach 方法
-
-### 三、算法实现
+### 三、diff 方法实现
 
 - 用 JS 对象模拟 DOM 树
 - 比较两棵虚拟 DOM 树的差异
@@ -110,6 +108,10 @@ function diff(oldTree,newTree){
     dfsWalk(oldTree,newTree,index,patches)
     return patches
 }
+
+function dfsWalk(){
+
+}
 ```
 
 **差异类型**
@@ -117,9 +119,9 @@ function diff(oldTree,newTree){
 `DOM` 操作导致的差异类型包括以下几种：
 
 - 节点替换：节点改变了，例如将上面的`div`换成`h1`；
-- 顺序互换：移动、删除、新增子节点
-- 属性更改：
-- 文本改变：
+- 顺序互换：移动、删除、新增子节点，例如上面`div`的子节点，把`p`和`ul`顺序互换；
+- 属性更改：修改了节点的属性，例如把上面`li`的`class`样式类删除；
+- 文本改变：改变文本节点的文本内容，例如将上面`p`节点的文本内容理性为`Real DOM`；
 
 #### 3.3 把差异应用到真正的 DOM 树上
 
@@ -171,6 +173,8 @@ function applyPatches (node, currentPatches) {
   })
 }
 ```
+
+### 源码分析
 
 ### 参考资料
 
