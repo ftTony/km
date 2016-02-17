@@ -59,6 +59,20 @@ setTimeout 和 setInterval 是由浏览器专门线程来维护它的生命周�
 
 而且这种场景很容易出现，因为使用定时器的人很容易遗忘清除
 
+代码如下：
+
+```
+var serverData = loadData();
+setInterval(function(){
+    var render = document.getElementById('render');
+    if(render){
+        render.innerHTML = JSON.stringify(serverData);
+    }
+},5000)
+```
+
+如果后续 renderer 元素被移除，整个定时器实际上没有任何作用。但如果你没有回收定时器，整个定时器依然有效, 不但定时器无法被内存回收， 定时器函数中的依赖也无法回收。在这个案例中的 serverData 也无法被回收。
+
 #### 2.3 使用不当的闭包
 
 函数本身会持有它定义时所在的记法环境的引用，但通常情况下，使用完函数后，该函数所申请的内存都会被回收了
@@ -68,6 +82,27 @@ setTimeout 和 setInterval 是由浏览器专门线程来维护它的生命周�
 所以，返回的函数，它的生命周期应尽量不宜过长，方便该装饰能够及时被回收
 
 正常来说，闭包并不是内存泄漏，因为这种持有外部函数词法环境本就闭包的特性，就是为了让这块内存不被回收，因为可能在未来还需要用到，但这无疑会造成内存的消耗，所以，不宜烂用就是了
+
+相关代码：
+
+```
+var theThing = null;
+var replaceThing = function(){
+    var originalThing = theThing;
+    var unused = function(){
+        if(originalThing){  // 对于 'originalThing'的引用
+            console.log('hi');
+        }
+    };
+    theThing = {
+        longStr: new Array(100000).join('*'),
+        someMethod:function(){
+            console.log('message');
+        }
+    }
+}
+setInterval(replaceThing,1000);
+```
 
 #### 2.4 遗漏的 DOM 元素
 
@@ -86,6 +121,8 @@ DOM 元素的生命周期正常是取决于是否挂载在 DOM 树上，当从 D
 不管哪一种，利用开发者工具抓到的内存图，应该都会看到一段时间内，内存占用不断的直线式下降，这是因为不断发生 GC，也就是垃圾回收导致的
 
 针对第一种比较严重的，会发现，内存图里即使不断发生 GC 后，所使用的内存总量仍旧在不断增长
+
+另外，内存不足会造成不断 GC，而 GC 时是会阻塞主线程的，所以会影响到页面性能，造成卡顿，所以内存泄漏是需要关注的
 
 ### 四、如何分析内存泄漏，找出有问题的代码
 
