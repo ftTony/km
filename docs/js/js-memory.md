@@ -232,21 +232,11 @@ David 大叔主要介绍了 2 个优化方案，而这也是最主要的 2 个�
 
 ### 参考资料
 
-- [垃圾回收和内存管理](https://github.com/stone0090/javascript-lessons/tree/master/2.6-GC&MemoryManagement)
-- [前端面试：谈谈 JS 垃圾回收机制](https://github.com/qq449245884/xiaozhi/issues/36)
 - [JavaScript 是如何工作的：JavaScript 的内存模型](https://github.com/qq449245884/xiaozhi/issues/21)
 - [JavaScript 如何工作:内存管理+如何处理 4 个常见的内存泄漏](https://github.com/qq449245884/xiaozhi/issues/3)
 - [「前端进阶」JS 中的内存管理](https://juejin.im/post/5d0706a6f265da1bc23f77a9)
-- [Node.js 内存管理和 V8 垃圾回收机制](https://mp.weixin.qq.com/s?__biz=MzIyNDU2NTc5Mw==&mid=2247483715&idx=1&sn=00600d07ce4fd2b465d6cc7692d050f0&scene=21#wechat_redirect)
 - [【JavaScript】【重温基础】22.内存管理](http://www.pingan8787.com/2019/02/16/140-%E3%80%90JavaScript%E3%80%91%E3%80%90%E9%87%8D%E6%B8%A9%E5%9F%BA%E7%A1%80%E3%80%9122-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/)
-- [浏览器垃圾回收机制与 Vue 项目内存泄漏场景分析](https://mp.weixin.qq.com/s/sMV4KyUb6RORJ4la7MfC4Q)
-- [V8 引擎如何进行垃圾内存的回收？](https://sanyuan0704.github.io/frontend_daily_question/week07/038.html)
-- [一文搞懂 V8 引擎的垃圾回收](https://mp.weixin.qq.com/s/1SGodqhTRM9mBy0Q9J0qow)
-- [day038:V8 引擎如何进行垃圾内存的回收？](https://mp.weixin.qq.com/s/47IoOxXYoxhh00XfTIntDQ)
 - [【第 1821 期】前端内存优化的探索与实践](https://mp.weixin.qq.com/s/iRHiu404yYXqCO_PGiJ7yA)
-- [13 | 垃圾回收：垃圾数据是如何自动回收的？](https://time.geekbang.org/column/article/131233)
-- [Chrome 浏览器垃圾回收机制与内存泄漏分析](https://mp.weixin.qq.com/s/m_cwfM0PgivmmCKaK-TviQ)
-- [讲讲 js 的内存泄漏、如何监控和分析](https://mp.weixin.qq.com/s/5qDzvMLx_DAMWOwU7dFNWA)
 - 《高程第 3 版》
 - 《深入浅出 nodejs》
 
