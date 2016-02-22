@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [图解啥是贪心算法？](https://mp.weixin.qq.com/s/YhFGBAXhv8c-Rfs6Fuciow)
+
 ## 联系作者
 
 <div align="center">

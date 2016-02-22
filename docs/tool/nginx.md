@@ -317,6 +317,7 @@ server {
 - [前端想要了解的 Nginx](https://juejin.im/post/5cae9de95188251ae2324ec3)
 - [Nginx 配置详解](https://www.cnblogs.com/knowledgesea/p/5175711.html)
 - [Nginx 代理功能与负载均衡详解](https://www.cnblogs.com/knowledgesea/p/5199046.html)
+- [一次百万长连接压测 Nginx OOM 的问题排查分析](https://mp.weixin.qq.com/s/PzctPuzKRbRlAUBnD584Xg)
 
 ## 联系作者
 
