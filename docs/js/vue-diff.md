@@ -40,6 +40,19 @@
 
 ### 二、pach 方法实现
 
+所构建的`JavaScript`对象树和`render`出来真正的`DOM`树的信息、结构是一样的。
+
+```
+function patch(node,patches){
+    var walker = {index: 0}
+    dfsWalk(node,walker,patches)
+}
+
+function dfsWalk(node,walker,patches){
+
+}
+```
+
 ### 三、diff 方法实现
 
 - 用 JS 对象模拟 DOM 树
@@ -110,7 +123,9 @@ function diff(oldTree,newTree){
 }
 
 function dfsWalk(){
+    if(typeof (oldNode) === 'string' && typeof (newNode) === 'string'){
 
+    }
 }
 ```
 
