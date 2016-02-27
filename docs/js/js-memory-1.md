@@ -118,13 +118,27 @@ DOM 元素的生命周期正常是取决于是否挂载在 DOM 树上，当从 D
 - 使用堆快照发现已经分离 DOM 树的内存泄漏
 - 按函数调查内存分配打开面板
 
+具体分析和监控可参考[讲讲 js 的内存泄漏、如何监控和分析](https://mp.weixin.qq.com/s/5qDzvMLx_DAMWOwU7dFNWA)
+
 #### 3.1 使用 Chrome 任务管理器实时监视内存使用打开 chrome 浏览器
 
 点击右上角主菜单，选择`更多工具->任务管理器`，这样就开启了任务管理器面板，然后再右键点击任务管理器的不及格标题并启用 JavaScript 使用的内存，能看到这样的面板：
 
+下面两列可以告诉您与页面的内存使用有关的不同信息：
+
+![images](performance48.png)
+
+1. `内存占用空间(Memory)`列表示原生内存。
+
 #### 3.2 利用 Chrome 时间轴记录可视化内存泄漏
 
+Performance(时间轴)面板能够直观实时显示 JS 内存使用情况、节点数量、监听器数量等。
+
+打开 Chrome 浏览器，调出调试面板(DevTools)，点击`Performance`选项(低版本是 Timeline)，勾选 Memory 复选框。一种比较好的做法是使用强制垃圾回收开始和结束记录
+
 #### 3.3 使用堆快照发现已经分离 DOM 树的内存泄漏
+
+只有页面的 DOM 树或 JavaScript 代码不再引用 DOM 节点时，DOM 节点才会被作为垃圾进行回收。如果某个节点已从 DOM 树移除，但某些 JavaScript 仍然引用它
 
 #### 3.4 按函数调查内存分配打开面板
 
@@ -138,7 +152,6 @@ DOM 元素的生命周期正常是取决于是否挂载在 DOM 树上，当从 D
 - [day038:V8 引擎如何进行垃圾内存的回收？](https://mp.weixin.qq.com/s/47IoOxXYoxhh00XfTIntDQ)
 - [13 | 垃圾回收：垃圾数据是如何自动回收的？](https://time.geekbang.org/column/article/131233)
 - [Chrome 浏览器垃圾回收机制与内存泄漏分析](https://juejin.im/post/5db2beb8e51d455b450a64b4)
-- [讲讲 js 的内存泄漏、如何监控和分析](https://mp.weixin.qq.com/s/5qDzvMLx_DAMWOwU7dFNWA)
 
 ## 联系作者
 
