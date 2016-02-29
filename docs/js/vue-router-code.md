@@ -191,8 +191,10 @@ export default class VueRouter {
     this.beforeHooks = []
     this.resolveHooks = []
     this.afterHooks = []
+    //  创建match 匹配函数
     this.matcher = createMatcher(options.routes || [], this)
 
+    // 根据 mode 实例化具体的 History
     let mode = options.mode || 'hash'
     this.fallback = mode === 'history' && !supportsPushState && options.fallback !== false
     if (this.fallback) {
@@ -203,6 +205,7 @@ export default class VueRouter {
     }
     this.mode = mode
 
+    //  判断mode模式，对不同模式做不同的处理
     switch (mode) {
       case 'history':
         this.history = new HTML5History(this, options.base)
@@ -225,21 +228,26 @@ export default class VueRouter {
 VueRouter.install = install
 VueRouter.version = '__VERSION__'
 
+// 自动使用插件
 if (inBrowser && window.Vue) {
   window.Vue.use(VueRouter)
 }
 
 ```
 
+可以看到这是一个 Vue.js 插件的经典写法，给插件对象增加`install`方法用来安装插件具体逻辑，同时在最后判断下如果是在浏览器环境且存在`window.Vue`的话就会自动使用插件。
+
 #### 3.2 install
 
 ```
-//
+// 引入router-view router-link 组件
 import View from './components/view'
 import Link from './components/link'
 
+// export 一个Vue 引用
 export let _Vue
 
+// 安装函数
 export function install (Vue) {
   if (install.installed && _Vue === Vue) return
   install.installed = true
@@ -255,12 +263,17 @@ export function install (Vue) {
     }
   }
 
+  //  beforeCreate mixin
   Vue.mixin({
     beforeCreate () {
+      // 判断是否有 router
       if (isDef(this.$options.router)) {
         this._routerRoot = this
+        // 赋值_router
         this._router = this.$options.router
+        //  初始化
         this._router.init(this)
+        //  定义响应的_route对象
         Vue.util.defineReactive(this, '_route', this._router.history.current)
       } else {
         this._routerRoot = (this.$parent && this.$parent._routerRoot) || this
