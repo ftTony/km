@@ -147,11 +147,14 @@ new Vue({
 
 #### 3.1 index 入口
 
+利用 Vue.js 提供的插件机制`.use(plugin)`来安装`VueRouter`，而这个插件机制则会调用该`plugin`对象的`install`方法（当然如果该`plugin`没有该方法的话会把`plugin`自身作为函数来调用）；下边来看下 vue-router 这个插件具体的实现部分。
+
+`VueRouter`对象是在`src/index.js`中暴露出来的，这个对象一个静态的`install`方法：
+
 ```
 
 import { install } from './install'
-import { START } from './util/route'
-import { assert } from './util/warn'
+i// ...
 import { inBrowser } from './util/dom'
 import { cleanPath } from './util/path'
 import { createMatcher } from './create-matcher'
@@ -269,6 +272,7 @@ export function install (Vue) {
     }
   })
 
+  // 注入  $router $route
   Object.defineProperty(Vue.prototype, '$router', {
     get () { return this._routerRoot._router }
   })
@@ -277,6 +281,7 @@ export function install (Vue) {
     get () { return this._routerRoot._route }
   })
 
+  //  注册组件
   Vue.component('RouterView', View)
   Vue.component('RouterLink', Link)
 
