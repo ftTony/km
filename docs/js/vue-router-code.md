@@ -306,9 +306,21 @@ export function install (Vue) {
 
 #### 3.3 match 匹配函数
 
+匹配函数是由`src/create-matcher.js`中的`createMatcher`创建的
+
 ```
 
 ```
+
+具体逻辑后续再具体分析，现在只需要理解为根据传入的`routes`配置生成对应的路由`map`，然后直接返回了`match`匹配函数。
+
+继续来看`src/create-route-map.js`中的`createRouteMap`函数：
+
+```
+
+```
+
+可以看出主要做的事情就是根据用户路由配置对象生成普通的根据`path`来对应的路由记录以及根据`name`来对应的路由记录的 map，方便后续匹配对应。
 
 #### 3.4 实例化 History
 
@@ -324,15 +336,23 @@ export function install (Vue) {
 
 #### 3.6 router-link 组件
 
+`router-view`组件比较简单，所以这里就先来分析它，他是在源码的`src/components/view.js`中定义的：
+
 ```
 
 ```
+
+从上面代码看，逻辑还是比较简单的，拿到匹配的组件进行渲染就可以了。
 
 #### 3.7 router-view 组件
 
+导航链接组件，他在源码的`src/components/link.js`中定义的：
+
 ```
 
 ```
+
+可以看出`router-link`组件就是在其点击的时候根据设置的`to`的值去调用`router`的`push`或者`replace`来更新路由的，同时呢，会检查自身是否和当前路由匹配（严格切尔西和包含匹配）来决定自身的`activeClass`是否添加。
 
 ### 参考资料
 
