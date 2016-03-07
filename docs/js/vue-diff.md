@@ -10,6 +10,86 @@
 - [pach 方法](#二、pach-方法)
 - [算法实现](#三、算法实现)
 
+### 一、虚拟 DOM 的优缺点
+
+- 优点
+- 缺点
+
+#### 优点
+
+- **保证性能下限**：框架的虚拟 DOM 需要甜酸任何上层 API 可能产生的操作，它的一些 DOM 操作的实现必须是普适的，所以它的性能并不是最优的；但是比起粗暴的 DOM 操作性能要好很多，因此框架的虚拟 DOM 至少可以保证在你不需要手动优化的情况下，依然可以提供还不错的性能，即保证性能的下限；
+- **无需手动操作 DOM**：我们不再需要手动去操作 DOM，只需要写好 View-Model 的代码逻辑，框架会根据虚拟 DOM 和数据双向绑定，帮我们以可预期的方式更新视图，极大提高我们的开发效率；
+- **跨平台**：虚拟 DOM 本质上是 JavaScript 对象，而 DOM 与平台强相关，相比之下虚拟 DOM 可以进行更方便地跨平台操作，例如服务器渲染、weex 开发等等。
+
+#### 缺点
+
+- **无法进行极致优化**：虽然虽然虚拟 DOM+合理的优化，足以应对绝大部分应用的性能需求，但在一些性能要求极高的应用中虚拟 DOM 无法进行针对性的极致优化。
+
+### 一、虚拟 DOM 的实现原理
+
+虚拟 DOM 的实现原理主要包括以下 3 部分：
+
+- 用 JavaScript 对象模拟真实 DOM 树，对真实 DOM 进行抽象；
+- diff 算法 — 比较两棵虚拟 DOM 树的差异；
+- pach 算法 — 将两个虚拟 DOM 对象的差异应用到真正的 DOM 树。
+
+#### 1.1 模拟真实 DOM
+
+用 JavaScript 来表示一个 DOM 节点是很简单的事情，你只需要记录它的节点类型、属性，还有子节点：
+
+element.js
+
+```
+function Element(tagName,props,children){
+    if(!(this instanceof Element)){
+        if(!_.isArray(children) && children !=null){
+            children = _.slice(arguments,2).filter(_.truthy)
+        }
+        return new Element(tagName,props,children)
+    }
+
+    if(_.isArray(props)){
+        children = props
+        props = {}
+    }
+
+    this.tagName = tagName
+    this.props = props || {}
+    this.chilren = children || []
+    this.key = props ? props.key: 666
+
+    var count = 0
+
+    _.each(this.children,function(child,i){
+        if(child instanceof Element){
+            count += child.count
+        }else{
+            children[i] = '' +child
+        }
+        count++
+    })
+
+    this.count = count
+}
+
+Element.prototype.render = function(){
+    var el = document.createElement(this.tagName)
+    var props = this.props
+
+    for(var propName in props){
+        var propValue = props[propName]
+        _.setAttr(el,propName,propValue)
+    }
+
+    _.each(this.children,function(child){
+        var childEl = (child instanceof Element)?child.render():document.createTextNode(child)
+        el.appendChild(childEl)
+    })
+
+    return el
+}
+```
+
 ### 一、分析 diff
 
 一篇相当经典的文章[React’s diff algorithm](https://calendar.perfplanet.com/2013/diff/)中的图，react 的 diff 其实和 vue 的 diff 大同小异。所以这张图能很好解释过程。**比较只会在同层级进行，不会跨层级比较。**
@@ -49,7 +129,46 @@ function patch(node,patches){
 }
 
 function dfsWalk(node,walker,patches){
+    // 从patches拿出当前节点的差异
+    var currentPatches = patches[walker.index]
 
+    var len = node.childNodes ? node.childNodes.length:0
+
+    // 深度遍历子节点
+    for(var i = 0; i< len;i++){
+        var child = node.childNodes[i]
+        walker.index++
+        dfsWalk(child,walker,patches)
+    }
+    // 对当前节点进行DOM操作
+    if(currentPatches){
+        applyPatches(node,currentPatches)
+    }
+}
+```
+
+applyPathes,根据不同类型的差异对当前节点进行 DOM 操作：
+
+```
+function applyPatches (node, currentPatches) {
+  currentPatches.forEach(function (currentPatch) {
+    switch (currentPatch.type) {
+      case REPLACE:
+        node.parentNode.replaceChild(currentPatch.node.render(), node)
+        break
+      case REORDER:
+        reorderChildren(node, currentPatch.moves)
+        break
+      case PROPS:
+        setProps(node, currentPatch.props)
+        break
+      case TEXT:
+        node.textContent = currentPatch.content
+        break
+      default:
+        throw new Error('Unknown patch type ' + currentPatch.type)
+    }
+  })
 }
 ```
 
@@ -123,6 +242,7 @@ function diff(oldTree,newTree){
 }
 
 function dfsWalk(){
+    var currentPatch = []
     if(typeof (oldNode) === 'string' && typeof (newNode) === 'string'){
 
     }
@@ -138,56 +258,18 @@ function dfsWalk(){
 - 属性更改：修改了节点的属性，例如把上面`li`的`class`样式类删除；
 - 文本改变：改变文本节点的文本内容，例如将上面`p`节点的文本内容理性为`Real DOM`；
 
+以上描述的几种差异类型在代码中定义如下所示：
+
+```
+var REPLACE = 0 // 替换原先的节点
+var REORDER = 1 // 重新排序
+var PROPS = 2 // 修改了节点的属性
+var TEXT = 3 // 文本内容改变
+```
+
 #### 3.3 把差异应用到真正的 DOM 树上
 
 因为步骤一所构建的构建的 JavaScript 对象树和`render`出来真正的 DOM 树的信息、结构是一样的。所以我们可以对那棵 DOM 树也进行尝试优先的遍历，遍历的时候从步骤二生成的`patches`对象中找出当前遍历的节点差异，然后进 DOM 操作。
-
-```
-function patch(node,patches){
-  var walker = {index:0}
-  dfsWalk(node,walker,patches)
-}
-
-function dfsWalk(node,walker,patches){
-  var currentPatches = patches[walker.index]  // 从patches拿出当前节点的差异
-
-  var len = node.childNodes ? node.childNodes.length:0
-  for(var i=0;i<len;i++){
-    var child = node.childNodes[i]
-    walker.index++
-    dfsWalk(child, walker, patches)
-  }
-
-  if(currentPatches){
-    applyPatches(node, currentPatches) // 对当前节点进行DOM操作
-  }
-}
-```
-
-applyPathes,根据不同类型的差异对当前节点进行 DOM 操作：
-
-```
-function applyPatches (node, currentPatches) {
-  currentPatches.forEach(function (currentPatch) {
-    switch (currentPatch.type) {
-      case REPLACE:
-        node.parentNode.replaceChild(currentPatch.node.render(), node)
-        break
-      case REORDER:
-        reorderChildren(node, currentPatch.moves)
-        break
-      case PROPS:
-        setProps(node, currentPatch.props)
-        break
-      case TEXT:
-        node.textContent = currentPatch.content
-        break
-      default:
-        throw new Error('Unknown patch type ' + currentPatch.type)
-    }
-  })
-}
-```
 
 ### 源码分析
 
