@@ -159,7 +159,7 @@ module.exports = {
                     "vue-watch",
                     "vue-router",
                     "vue-vuex",
-                    "vue-diff",
+                    "vue-dom",
                     "vue-router-code",
                     "vue-communication",
                     "vue-vuex-code",
