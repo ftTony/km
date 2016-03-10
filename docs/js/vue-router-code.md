@@ -334,21 +334,45 @@ export function install (Vue) {
 
 ```
 
-#### 3.6 router-link 组件
+#### 3.6 router-view 组件
 
 `router-view`组件比较简单，所以这里就先来分析它，他是在源码的`src/components/view.js`中定义的：
 
 ```
-
+export default {
+  name: 'router-view',
+  functional: true,   //  功能组件，纯粹渲染
+  props: {
+    name: {
+      type: String,
+      default: 'default'
+    }
+  },
+  render (_, { props, children, parent, data }) {
+  }
+}
 ```
 
 从上面代码看，逻辑还是比较简单的，拿到匹配的组件进行渲染就可以了。
 
-#### 3.7 router-view 组件
+#### 3.7 router-link 组件
 
 导航链接组件，他在源码的`src/components/link.js`中定义的：
 
 ```
+import { createRoute, isSameRoute, isIncludedRoute } from '../util/route'
+// ...
+export default {
+  name: 'router-link',
+  props: {
+
+  },
+  render (h:Function){
+    // 得到router 实例以及当前激活的route对象
+    const router = this.$router
+    const current = this.$route
+  }
+}
 
 ```
 
