@@ -331,7 +331,9 @@ export function install (Vue) {
 #### 3.5 transitionTo
 
 ```
+transitionTo(location:RawLocation,onComplete?:Function,onAbort:Function){
 
+}
 ```
 
 #### 3.6 router-view 组件
@@ -371,6 +373,7 @@ export default {
     // 得到router 实例以及当前激活的route对象
     const router = this.$router
     const current = this.$route
+
   }
 }
 
