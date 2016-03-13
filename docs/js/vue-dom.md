@@ -25,7 +25,7 @@
 
 - **无法进行极致优化**：虽然虽然虚拟 DOM+合理的优化，足以应对绝大部分应用的性能需求，但在一些性能要求极高的应用中虚拟 DOM 无法进行针对性的极致优化。
 
-### 一、虚拟 DOM 的实现原理
+### 二、虚拟 DOM 的实现原理
 
 虚拟 DOM 的实现原理主要包括以下 3 部分：
 
@@ -90,89 +90,7 @@ Element.prototype.render = function(){
 }
 ```
 
-### 一、分析 diff
-
-一篇相当经典的文章[React’s diff algorithm](https://calendar.perfplanet.com/2013/diff/)中的图，react 的 diff 其实和 vue 的 diff 大同小异。所以这张图能很好解释过程。**比较只会在同层级进行，不会跨层级比较。**
-
-![images](vue09.png)
-
-举个形象的例子。
-
-```
-<!-- 之前 -->
-<div>           <!-- 层级1 -->
-  <p>            <!-- 层级2 -->
-    <b> aoy </b>   <!-- 层级3 -->
-    <span>diff</Span>
-  </P>
-</div>
-
-<!-- 之后 -->
-<div>            <!-- 层级1 -->
-  <p>             <!-- 层级2 -->
-      <b> aoy </b>        <!-- 层级3 -->
-  </p>
-  <span>diff</Span>
-</div>
-```
-
-我们可能期望将`<span>`直接移动到`<p>`的后边，这是最优的操作。但是实际的 diff 操作是移除`<p>`里的`<span>`再创建一个新的`<span>`插到`<p>`的后边。因为新加的`<span>`在层级 2，旧的在层级 3，属于不同层级的比较。
-
-### 二、pach 方法实现
-
-所构建的`JavaScript`对象树和`render`出来真正的`DOM`树的信息、结构是一样的。
-
-```
-function patch(node,patches){
-    var walker = {index: 0}
-    dfsWalk(node,walker,patches)
-}
-
-function dfsWalk(node,walker,patches){
-    // 从patches拿出当前节点的差异
-    var currentPatches = patches[walker.index]
-
-    var len = node.childNodes ? node.childNodes.length:0
-
-    // 深度遍历子节点
-    for(var i = 0; i< len;i++){
-        var child = node.childNodes[i]
-        walker.index++
-        dfsWalk(child,walker,patches)
-    }
-    // 对当前节点进行DOM操作
-    if(currentPatches){
-        applyPatches(node,currentPatches)
-    }
-}
-```
-
-applyPathes,根据不同类型的差异对当前节点进行 DOM 操作：
-
-```
-function applyPatches (node, currentPatches) {
-  currentPatches.forEach(function (currentPatch) {
-    switch (currentPatch.type) {
-      case REPLACE:
-        node.parentNode.replaceChild(currentPatch.node.render(), node)
-        break
-      case REORDER:
-        reorderChildren(node, currentPatch.moves)
-        break
-      case PROPS:
-        setProps(node, currentPatch.props)
-        break
-      case TEXT:
-        node.textContent = currentPatch.content
-        break
-      default:
-        throw new Error('Unknown patch type ' + currentPatch.type)
-    }
-  })
-}
-```
-
-### 三、diff 方法实现
+### 三、diff 算法实现
 
 - 用 JS 对象模拟 DOM 树
 - 比较两棵虚拟 DOM 树的差异
@@ -271,10 +189,95 @@ var TEXT = 3 // 文本内容改变
 
 因为步骤一所构建的构建的 JavaScript 对象树和`render`出来真正的 DOM 树的信息、结构是一样的。所以我们可以对那棵 DOM 树也进行尝试优先的遍历，遍历的时候从步骤二生成的`patches`对象中找出当前遍历的节点差异，然后进 DOM 操作。
 
+一篇相当经典的文章[React’s diff algorithm](https://calendar.perfplanet.com/2013/diff/)中的图，react 的 diff 其实和 vue 的 diff 大同小异。所以这张图能很好解释过程。**比较只会在同层级进行，不会跨层级比较。**
+
+![images](vue09.png)
+
+举个形象的例子。
+
+```
+<!-- 之前 -->
+<div>           <!-- 层级1 -->
+  <p>            <!-- 层级2 -->
+    <b> aoy </b>   <!-- 层级3 -->
+    <span>diff</Span>
+  </P>
+</div>
+
+<!-- 之后 -->
+<div>            <!-- 层级1 -->
+  <p>             <!-- 层级2 -->
+      <b> aoy </b>        <!-- 层级3 -->
+  </p>
+  <span>diff</Span>
+</div>
+```
+
+我们可能期望将`<span>`直接移动到`<p>`的后边，这是最优的操作。但是实际的 diff 操作是移除`<p>`里的`<span>`再创建一个新的`<span>`插到`<p>`的后边。因为新加的`<span>`在层级 2，旧的在层级 3，属于不同层级的比较。
+
+### 四、pach 方法实现
+
+所构建的`JavaScript`对象树和`render`出来真正的`DOM`树的信息、结构是一样的。
+
+```
+function patch(node,patches){
+    var walker = {index: 0}
+    dfsWalk(node,walker,patches)
+}
+
+function dfsWalk(node,walker,patches){
+    // 从patches拿出当前节点的差异
+    var currentPatches = patches[walker.index]
+
+    var len = node.childNodes ? node.childNodes.length:0
+
+    // 深度遍历子节点
+    for(var i = 0; i< len;i++){
+        var child = node.childNodes[i]
+        walker.index++
+        dfsWalk(child,walker,patches)
+    }
+    // 对当前节点进行DOM操作
+    if(currentPatches){
+        applyPatches(node,currentPatches)
+    }
+}
+```
+
+applyPathes,根据不同类型的差异对当前节点进行 DOM 操作：
+
+```
+function applyPatches (node, currentPatches) {
+  currentPatches.forEach(function (currentPatch) {
+    switch (currentPatch.type) {
+      case REPLACE:
+        node.parentNode.replaceChild(currentPatch.node.render(), node)
+        break
+      case REORDER:
+        reorderChildren(node, currentPatch.moves)
+        break
+      case PROPS:
+        setProps(node, currentPatch.props)
+        break
+      case TEXT:
+        node.textContent = currentPatch.content
+        break
+      default:
+        throw new Error('Unknown patch type ' + currentPatch.type)
+    }
+  })
+}
+```
+
 ### 源码分析
 
 ### 参考资料
 
+- [如何实现一个 Virtual DOM 算法](https://github.com/livoras/blog/issues/13)
+- [揭秘 Vue 中的 Virtual Dom](https://mp.weixin.qq.com/s/EeN7E8uQS4R_JJloPX8fCQ)
+- [虚拟 DOM 到底是什么？](https://mp.weixin.qq.com/s/oAlVmZ4Hbt2VhOwFEkNEhw)
+- [深入剖析：Vue 核心之虚拟 DOM](https://juejin.im/post/5d36cc575188257aea108a74)
+- [现代前端科技解析 —— Virtual DOM #](https://www.404forest.com/2019/03/07/modern-web-development-tech-analysis-virtual-dom/)
 - [Diff 算法](https://github.com/aooy/blog/issues/2)
 - [simple-virtual-dom](https://github.com/livoras/simple-virtual-dom)
 - [Virtual Dom 和 Diff 算法](https://mp.weixin.qq.com/s/9nB2bfDczNFRpUTiBwup8Q)
