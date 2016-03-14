@@ -145,6 +145,7 @@ module.exports = {
           'mvvm',
           'jquery-code',
           'undescore',
+          'vue-jsx',
           'vue-lifecycle',
           'vue-bind',
           'vue-nexttick',
