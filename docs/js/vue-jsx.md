@@ -53,12 +53,23 @@ export default{
 
         return createElement(tag,{
             class:{
-
+                'text-input': true,
+                'is-disabled': false
+            },
+            attrs:{
+                name: this.name,
+                placeholder:this.placeholder,
+                'aria-invalid':false
             }
         })
     }
 }
 ```
+
+上面的代码做了几件事：
+
+1. `render`方法从 Vue 获取一个`createElement`助手。
+2. 我们以编程方式定义我们的标签。
 
 ### 三、JSX 是什么
 
