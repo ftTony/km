@@ -190,7 +190,17 @@ function applyPatches (node, currentPatches) {
 }
 ```
 
-### 源码分析
+### 五、源码分析
+
+#### 5.1 `VMode`模拟`DOM`树
+
+在`Vue.js`中，`Virtual DOM`是用`VNode`这个`Class`去描述，它定义在``
+
+#### 5.2 diff 过程
+
+`Vue.js`源码实例化了一个`watcher`，这个~被添加到了在模板当中所绑定变量
+
+#### 5.3 patch 过程
 
 ### 参考资料
 
@@ -200,7 +210,6 @@ function applyPatches (node, currentPatches) {
 - [深入剖析：Vue 核心之虚拟 DOM](https://juejin.im/post/5d36cc575188257aea108a74)
 - [现代前端科技解析 —— Virtual DOM #](https://www.404forest.com/2019/03/07/modern-web-development-tech-analysis-virtual-dom/)
 - [Diff 算法](https://github.com/aooy/blog/issues/2)
-- [simple-virtual-dom](https://github.com/livoras/simple-virtual-dom)
 - [Virtual Dom 和 Diff 算法](https://mp.weixin.qq.com/s/9nB2bfDczNFRpUTiBwup8Q)
 - [【Vue 原理】Diff - 白话版](https://zhuanlan.zhihu.com/p/81752104)
 - [VirtualDOM 与 diff(Vue 实现)](https://zhuanlan.zhihu.com/p/29450092)
