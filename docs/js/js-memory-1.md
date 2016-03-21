@@ -149,9 +149,50 @@ Performance(时间轴)面板能够直观实时显示 JS 内存使用情况、节
 
 #### 3.3 使用堆快照发现已经分离 DOM 树的内存泄漏
 
-只有页面的 DOM 树或 JavaScript 代码不再引用 DOM 节点时，DOM 节点才会被作为垃圾进行回收。如果某个节点已从 DOM 树移除，但某些 JavaScript 仍然引用它
+只有页面的 DOM 树或 JavaScript 代码不再引用 DOM 节点时，DOM 节点才会被作为垃圾进行回收。如果某个节点已从 DOM 树移除，但某些 JavaScript 仍然引用它，我们称此节点为“已分离”，已分离的 DOM 节点是内存泄漏的常见原因。
+
+同理，调出调试面板，点击 `Memory`，然后选择 `Heap Snapshot`，然后点击进行录制。录制完成后，选中录制结果，在 `Class filter` 文本框中键入 `Detached`，搜索已分离的 DOM 树。 以这段代码为例：
+
+```
+<html>
+<head>
+</head>
+<body>
+<button id="createBtn">增加节点</button>
+<script>
+var detachedNodes;
+
+function create() {
+  var ul = document.createElement('ul');
+  for (var i = 0; i < 10; i++) {
+    var li = document.createElement('li');
+    ul.appendChild(li);
+  }
+  detachedTree = ul;
+}
+
+document.getElementById('createBtn').addEventListener('click', create);
+</script>
+</body>
+</html>
+
+```
+
+点击几下，然后记录。可以得到以下信息：
+
+![images](performance51.png)
+
+旧版的面板，还会有颜色标注，黄色的对象实例表示它被 JS 代码引用，红色的对象实例表示被黄色节点引用的游离节点。上图是新版本的，不会有颜色标识。但是还是可以一个个来看，如上图，点开节点，可以看到下面的引用信息，上面可以看出，有个 HTMLUListElement(ul 节点)被 window.detachedNodes 引用。再结合代码，原来是没有加 var/let/const 声明，导致其成了全局变量,所以 DOM 无法释放。
 
 #### 3.4 按函数调查内存分配打开面板
+
+点击 JavaScript Profiler,如果没看到这个选项，你可以点调试面板右上角的三个点，选择 more tools，然后选择。
+
+操作步骤：点 start->在页面进行你要检测的操作->点 stop。
+
+![images](performance52.png)
+
+DevTools 按函数显示内存分配明细。默认视图为 Heavy (Bottom Up)，将分配了最多内存的函数显示在最上方，还有函数的位置，你可以看看是哪些函数占用内存较多。
 
 ### 参考资料
 
