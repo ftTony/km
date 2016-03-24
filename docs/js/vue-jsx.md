@@ -20,13 +20,45 @@
 - Vue 支持 JSX。
 - JSX 使自定义 Vue 组件更容易导入和管理
 
+举一个例子来说明为什么 JSX 是好的。
+
+我们要构建一个`<TextField/>`组件，该组件可以是普通的单行广西输入或多行输入（文本区域）。我们的模板声明可能看起来像这样。
+
+```
+ <div>
+   <textarea v-if="multiline" v-model="content" :name="name" :placeholder="placeholder" :aria-invalid="false">
+   <input v-else v-model="content" :name="name" :placeholder="placeholder" :aria-invalid="false">
+ </div>
+```
+
+从上面的代码片段中可以看到，我们很快就会遇到一些问题，比如重复代码等等。想象一下，必须支持`input`上面所列的各种属性。上面的这个小片段将会增长并成为一个难以维护的噩梦。
+
+要解决这个问题，我们需要使用 Vue 进行降级处理，因此需要使用理接近 Vue 的内部 API 来解决这个问题。
+
 ### 二、render()方法
 
 > 注意：这里并不是说没有 JSX 就没有一种简单的方法来处理上面的问题，只是说将这个逻辑移动到带有 JSX 的`render()`方法可以使用组件更直观。
 
 我们在 Vue 中创建的每个组件都有一个`render`方法。这个就是 Vue 选择渲染组件的地方。即使我们不定义这个方法，Vue 也会为我们做这件事。
 
-这意味着当我们在 Vue 中定义 HTML 模板时，Vue
+这意味着当我们在 Vue 中定义 HTML 模板时，Vue 的模板编译器将其编译为一个`createElement`函数，该函数带有几个参数并从`render`函数返回结果。
+
+为了修复上一节中的代码，我们删除了`template`属性或`template`标签，并在组件上定义了`render()`方法。如果在组件上定义了`render`方法，则 Vue 将忽略`template`定义。
+
+```
+export default{
+    name:'TextField',
+    render (createElement){
+        const tag = this.multiline ? 'textarea' : 'input'
+
+        return createElement(tag,{
+            class:{
+
+            }
+        })
+    }
+}
+```
 
 ### 三、JSX 是什么
 
@@ -97,6 +129,16 @@ render(createElement){
 render(createElement){
     return (
         <button content={this.generatedText}></button>
+    )
+}
+```
+
+将 HTML 字符串设置为元素的内容，使用`domPropsInnerHTML`而不是使用`v-html`
+
+```
+render(createElement){
+    return (
+        <button></button>
     )
 }
 ```
