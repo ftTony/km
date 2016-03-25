@@ -111,6 +111,14 @@ function dfsWalk(){
     var currentPatch = []
     if(typeof (oldNode) === 'string' && typeof (newNode) === 'string'){
 
+    }else if(newNode!==null && oldNode.tagName === newNode.tagName){
+
+    }else if(newNode!==null){
+
+    }
+
+    if(currentPatch.length){
+        patches[index] = currentPatch
     }
 }
 ```
@@ -141,7 +149,9 @@ var TEXT = 3 // 文本内容改变
 - 对原有`DOM`树进行`DOM`操作
 - DOM 结构改变
 
-所构建的`JavaScript`对象树和`render`出来真正的`DOM`树的信息、结构是一样的。
+#### 5.1 深度优先遍历 DOM 树
+
+所构建的`JavaScript`对象树和`render`出来真正的`DOM`树的信息、结构是一样的。所以我们可以对那棵`DOM`树也进行深度优先的遍历，遍历的时候从上一个步骤生成的`patches`对象中找出当前遍历的节点差异
 
 ```
 function patch(node,patches){
@@ -168,6 +178,8 @@ function dfsWalk(node,walker,patches){
 }
 ```
 
+#### 5.2 对原有 DOM 树进行 DOM 操作
+
 applyPathes,根据不同类型的差异对当前节点进行 DOM 操作：
 
 ```
@@ -193,15 +205,23 @@ function applyPatches (node, currentPatches) {
 }
 ```
 
+#### 5.3 DOM 结构改变
+
+通过将上一步骤得到的两个`DOM`对象之间的差异，应用到第一个（原先）`DOM`结构中，我们看到`DOM`结构进行了预期的变化，如下图所示：
+
 ### 六、源码分析
 
 #### 6.1 `VMode`模拟`DOM`树
 
-在`Vue.js`中，`Virtual DOM`是用`VNode`这个`Class`去描述，它定义在``
+在`Vue.js`中，`Virtual DOM`是用`VNode`这个`Class`去描述，它定义在`src/core/vdom/vnode.js`中，从以下代码块中可以看到`Vue.js`中的`Virtual DOM`的定义较为复杂一些，因为它这里包含了很多`Vue.js`的特性。实际上`Vue.js`中`Virtual DOM`是借鉴了一个开源库[snabbdom](https://github.com/snabbdom/snabbdom)的实现，然后加入了一些`Vue.js`的一些特性。
+
+```
+
+```
 
 #### 6.2 diff 过程
 
-`Vue.js`源码实例化了一个`watcher`，这个~被添加到了在模板当中所绑定变量
+`Vue.js`源码实例化了一个`watcher`，这个~被添加到了在模板当中所绑定变量的依赖当中，一旦`model`中的响应式的数据发生了变化，这些响应式的数据所的`dep`数组便会调用
 
 #### 6.3 patch 过程
 
