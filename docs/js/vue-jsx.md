@@ -70,6 +70,37 @@ export default{
 
 1. `render`方法从 Vue 获取一个`createElement`助手。
 2. 我们以编程方式定义我们的标签。
+3. 然后，我们创建标签并将其属性，类等作为对象传递。我们可以传递给`createElement`的选项很多。
+4. 我们返回新创建的元素进行渲染。
+
+我们为 Vue 组件定义的每个模板都将转换为可返回`createElement`函数的`render`方法。因为这个原因，`render`方法将优先于模板定义。
+
+```
+// HTML
+<div>
+    <p>Only you can stop forest fires</p>
+</div>
+```
+
+模板编译器将把上面的 HTML 转换成:
+
+```
+render(createElement){
+    return createElement(
+        'div',
+        {},
+        createElement(
+            'p',
+            {},
+            'Only you can stop forest fires'
+        )
+    )
+}
+```
+
+现在你可能会问这个问题：“对可读性来说这不好吗？” 答案是肯定的。 一旦定义了具有许多元素嵌套级别或具有多个同级元素的组件，我们就会遇到这个新问题。
+
+这就是 JSX 出现的原因，它可以很好的解决此类问题。
 
 ### 三、JSX 是什么
 
@@ -159,6 +190,7 @@ render(createElement){
 ### 参考资料
 
 - [如何在 Vue 中使用 JSX 以及使用它的原因](https://juejin.im/post/5e409f02e51d4526f16e3bce)
+- [Vue Render 介绍和一些基本的实例](https://juejin.im/post/5b4eb11a5188251af91a6eaf)
 
 ## 联系作者
 
