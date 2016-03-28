@@ -219,9 +219,33 @@ function applyPatches (node, currentPatches) {
 
 ```
 
+这里有几个核心的属性
+
+- `tag`属性即这个`vnode`的标签属性
+- `data`属性包含了最后渲染成真实`dom`节点后，节点上的`class`，`attribute`，`style`以及绑定的事件
+
+**源码创建 VNode 过程**
+
+```
+
+```
+
+通过查看`Vue`的`function`，我们知道`Vue`只能通过`new`关键字初始化，然后调用`this._init`方法，该方法在`src/core/instance/init.js`中定义。
+
+```
+
+```
+
 #### 6.2 diff 过程
 
-`Vue.js`源码实例化了一个`watcher`，这个~被添加到了在模板当中所绑定变量的依赖当中，一旦`model`中的响应式的数据发生了变化，这些响应式的数据所的`dep`数组便会调用
+`Vue.js`源码实例化了一个`watcher`，这个~被添加到了在模板当中所绑定变量的依赖当中，一旦`model`中的响应式的数据发生了变化，这些响应式的数据所的`dep`数组便会调用`dep.notify()`方法完成所有依赖遍历执行的工作，
+
+`diff`过程中分了好几种情况，`oldCh`为`oldVnode`的子节点，`ch`为`Vnode`的子节点：
+
+- 首先进行文本节点的判断，若
+- 在`vnode`没有文本节点的情况下，进入子节点的`diff`；
+
+**子节点`diff`流程分析**
 
 #### 6.3 patch 过程
 
