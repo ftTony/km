@@ -27,6 +27,25 @@
 
 ### 三、`vm.$nextTick` 与 `setTimeout` 的区别是什么？
 
+在比较 nextTick 与 setTimeout 的区别，其实我们可以比较 promise 或 MutationObserver 对象与 setTimeout 的区别的了，因为 nextTick 会先判断设备是否支持 promise 及 MutationObserver 对象的，只要我们弄懂 promise 和 setTimeout 的区别，也就是弄明白 nextTick 与 setTimeout 的区别了。
+
+我们都知道 Promise.then 和 setTimeout 都是异步的，那么在事件队列中 Promise.then 的事件应该是在 setTimeout 的后面的，那么为什么 Promise.then 比 setTimeout 函数先执行呢？
+
+#### 3.1 理解 Event Loop 的概念
+
+我们都明白，javascript 是单线程的，所有的任务都会在主线程中执行的，当主线程中的任务都执行完成之后，系统会“依次”读取任务队列里面的事件，因此对应的异步任务进入主线程，开始执行。
+
+但是异步任务队列又分为：macrotasks(宏任务)和microtasks(微任务)。他们两者分别有如下API：
+
+- **macrotasks(宏任务)：**
+- **microtasks(微任务)：** Promise、process.nextTick、MutationObserver等。
+
+```
+
+```
+
+**总结**：microtasks(微任务)包括Promise和MutaionObserver，因此我们可以知道在Vue中的nextTick的执行速度上是快于setTimeout的。
+
 ### 四、理解 MutationObserver
 
 在 Vue 中的 nextTick 的源码中，使用了 3 种情况来做延迟操作，首先会判断我们的设备是否支持 Promise 对象，如果支持 Promise 对象，就使用 Promise.then()异步函数来延迟，如果不支持，我们会继续判断我们的设备是否支持 MutationObserver，如果支持，我们就使用 MutationObserver 来监听，最后如果上面两种都不支持的话，我们会使用 setTimeout 来处理，那么我们现在要理解的是 MutationObserver 是什么？
