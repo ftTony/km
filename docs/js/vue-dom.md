@@ -226,14 +226,42 @@ function applyPatches (node, currentPatches) {
 
 **源码创建 VNode 过程**
 
-```
+我们在实例化一个`vue`实例，也即`new Vue()`时，实际上是执行`src/core/instance/index.js`中定义的`Function`函数。
 
+```
+function Vue(options){
+    if(process.env.NODE_ENV !=='production' && !(this instanceof Vue)){
+         warn('Vue is a constructor and should be called with the `new` keyword')
+    }
+    this._init(options)
+}
 ```
 
 通过查看`Vue`的`function`，我们知道`Vue`只能通过`new`关键字初始化，然后调用`this._init`方法，该方法在`src/core/instance/init.js`中定义。
 
 ```
 
+```
+
+**Vue 实例挂载**
+
+```
+const mount = Vue.prototype.$mount
+Vue.prototype.$mount = function(el,hydrating){
+    el = el && query(el)
+    // 省略一系列初始化以及逻辑判断代码
+    return mount.call(this, el, hydrating)
+}
+```
+
+**创建虚拟 Node**
+
+`Vue`的`_render`方法是实例的一个私有方法，它用来把实例
+
+```
+Vue.prototype._rendre = function(){
+
+}
 ```
 
 #### 6.2 diff 过程
