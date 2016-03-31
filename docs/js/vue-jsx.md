@@ -11,7 +11,6 @@
 - [JSX 是什么](#三、jsx-是什么)
 - [配置 Vue 以使用 JSX](#四、配置-vue-以使用-jsx)
 - [在 Vue 中使用 JSX 需要注意的地方](#五、在-vue-中使用-jsx-需要注意的地方)
-- [在 render 中使用 JSX](#六、在-render-中使用-jsx)
 
 ### 一、为什么要使用 JSX？
 
@@ -184,8 +183,6 @@ render(createElement){
     )
 }
 ```
-
-### 六、在 render 中使用 JSX
 
 ### 参考资料
 
