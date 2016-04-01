@@ -55,20 +55,45 @@
 
 属性 | 说明
 ---|---
-name=value | 键值对，设置 Cookie 的名称及相对应的值，都必须是字符串类型
+**name=value** | 键值对，设置 Cookie 的名称及相对应的值，都必须是字符串类型
                     - 如果值为 Unicode 字符，需要为字符编码。- 如果值为二进制数据，则需要使用 BASE64 编码。
-domain | 指定 cookie 所属域名，默认是当前域名
+**domain** | 指定 cookie 所属域名，默认是当前域名
+**path** | **指定cookie在哪个路径（路由）下生效，默认是'/'**。如果设置为`/abc`，则只有`/abc`下的路由可以访问到该cookie，如：`/abc/read`。
+**expires** | cookie失效时间，单位秒
+**secure** | cookie失效时间，单位秒
+**httpOnly** | cookie失效时间，单位秒
 
 ### 五、什么是Session
 
-- session 是另一种记录服务器和客户端会话状态的机制
-- session 是基于 cookie 实现的，session 存储在服务器端，sessionId 会被存储到客户端的cookie 中
+- **session 是另一种记录服务器和客户端会话状态的机制**
+- **session 是基于 cookie 实现的，session 存储在服务器端，sessionId 会被存储到客户端的cookie 中**
+- **session认证流程：**
 
 ### 六、Cookie和Session的区别
 
+- **安全性：**
+- **存取值的类型不同：**
+- **有效期不同：**
+- **存储大小不同：**
+
 ### 七、什么是Token（令牌）
 
+#### 7.1 Acess Token
+
+- **访问资源接口（API）蝗所需要的资源凭证**
+- **简单token的组成：** uid(用户唯一的身份标识)、time(当前时间的时间戳)、sign(签名，token的前几位以哈希算法压缩的一定长度的十六进制字符串)
+- **特点：**
+   - **服务端无状态化、可扩展性好**
+   - **支持移动端设备**
+   - 安全
+   - 支持跨程序调用
+- **token 的身份验证流程：**
+
+#### 7.2 Refresh Token
+
 ### 八、Token和Session的区别
+
+- Session是一种记录服务器和客户会话状态的机制
 
 ### 九、什么是JWT
 
