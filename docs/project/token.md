@@ -164,8 +164,32 @@ Authorization: Bearer <token>
 - 客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。
 
 **方式一**
+
+- 当用户希望访问一个受保护的路由或者资源的时候，可以把它放在cookie里面自动发送，但是这样不能跨域，所以更好的做法是放在HTTP请求头信息的Authorization字段里，使用Bearer模式添加JWT。
+
+```
+GET /calendar/v1/events
+Host: api.example.com
+Authorization: Bearer <token>
+```
+
+- 用户的状态不会存储在服务端内存中，这是一种**无状态的认证机制**
+- 服务端的保护路由将会检查请求头
+- 由于JWT是自包含的，
+- JWT的这些特性使得
+- 因为JWT并不使用Cookie
+
 **方式二**
+
+- 跨域的时候，可以把JWT放在POST请求的数据体里。
+
 **方式三**
+
+- 通过URL传输
+
+```
+http://www.example.com/user?token=xxx
+```
 
 ### 十、Token和JWT的区别
 
@@ -182,6 +206,10 @@ Authorization: Bearer <token>
 - JWT： 将 Token 和 Payload 加密后存储于客户端，服务端只需要使用密钥解密进行校验（校验也是 JWT 自己实现的）即可，不需要查询或者减少查询数据库，因为 JWT 自包含了用户信息和加密的数据。
 
 ### 十一、常见的前后端端鉴权方式
+
+- Session-Cookie
+- Token验证（包括JWT、SSO）
+- OAuth2.0（开放授权）
 
 ### 十二、常见的加密算法
 
