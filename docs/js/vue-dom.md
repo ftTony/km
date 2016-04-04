@@ -256,26 +256,52 @@ Vue.prototype.$mount = function(el,hydrating){
 
 **创建虚拟 Node**
 
-`Vue`的`_render`方法是实例的一个私有方法，它用来把实例
+`Vue`的`_render`方法是实例的一个私有方法，它用来把实例渲染成一个虚拟`Node`。它的定义在`src/core/instance/render.js`文件中：
 
 ```
-Vue.prototype._rendre = function(){
+Vue.prototype._render = function(){
 
 }
 ```
 
 #### 6.2 diff 过程
 
-`Vue.js`源码实例化了一个`watcher`，这个~被添加到了在模板当中所绑定变量的依赖当中，一旦`model`中的响应式的数据发生了变化，这些响应式的数据所的`dep`数组便会调用`dep.notify()`方法完成所有依赖遍历执行的工作，
+`Vue.js`源码实例化了一个`watcher`，这个~被添加到了在模板当中所绑定变量的依赖当中，一旦`model`中的响应式的数据发生了变化，这些响应式的数据所的`dep`数组便会调用`dep.notify()`方法完成所有依赖遍历执行的工作，这包括视图的更新，即`updateComponent`方法的调用。`watcher`和`updateComponent`方法定义在`src/core/instance/lifecycle.js`文件中。
+
+```
+
+```
+
+完成视图的更新工作事实上就是调用了`vm._update`方法，这个方法的`Vnode`，调用的`vm._update`方法定义在`src/core/instance/lifecycle.js`中。
+
+```
+
+```
+
+从以上代码得知。
 
 `diff`过程中分了好几种情况，`oldCh`为`oldVnode`的子节点，`ch`为`Vnode`的子节点：
 
-- 首先进行文本节点的判断，若
+- 首先进行文本节点的判断，若`oldVnode.text !== vnode.text`，那么就会直接进行文本节点的替换；
 - 在`vnode`没有文本节点的情况下，进入子节点的`diff`；
+- 当`oldCh`和`ch`都在存在且不相同的情况下，调用`updateChildren`对子节点进行`diff`;
+- 若`oldCh`不存在，`ch`存在，首先清空`oldVnode`的文本节点，同时调用`addVnodes`方法将`ch`添加到`elm`真实`dom`节点当中；
 
 **子节点`diff`流程分析**
 
+分析一下`updateChildren`方法，它也是整个`diff`过程中最重要的环节，
+
+```
+
+```
+
 #### 6.3 patch 过程
+
+#### 6.4 总结
+
+通过前三小节解析，我们从主线上把模板和数据如何渲染成最终的`DOM`的过程分析完毕了，我们可以通过下图更直观看到从初始化`Vue`到最终渲染的整个过程。
+
+![images](vue-diff.png)
 
 ### 参考资料
 
