@@ -110,11 +110,24 @@ function diff(oldTree,newTree){
 function dfsWalk(){
     var currentPatch = []
     if(typeof (oldNode) === 'string' && typeof (newNode) === 'string'){
+        // 文本内容改变
+        if(newNode !== oldNode){
+            currentPath.push({type:patch.TEXT,content:newNode})
+        }
+    }else if(newNode!==null && oldNode.tagName === newNode.tagName && oldNode.key === newNode.key){
+        // 节点相同，比较属性
+        var propsPatches = diffProps(oldNode,newNode)
+        if(propsPatches){
+            currentPatch.push({type:patch.PROPS,props:propsPatches})
+        }
 
-    }else if(newNode!==null && oldNode.tagName === newNode.tagName){
-
+        // 比较子节点，如果子节点有'ignore'属性，则不需要比较
+        if(!isIgnoreChild(newNode)){
+            diffChildren(oldNode.children,newNode.children,index,patches,currentPatch)
+        }
     }else if(newNode!==null){
-
+        // 新节点和旧节点不同，用replace替换
+        currentPatch.push({type:patch.REPLACE,node:newNode})
     }
 
     if(currentPatch.length){
@@ -216,7 +229,76 @@ function applyPatches (node, currentPatches) {
 在`Vue.js`中，`Virtual DOM`是用`VNode`这个`Class`去描述，它定义在`src/core/vdom/vnode.js`中，从以下代码块中可以看到`Vue.js`中的`Virtual DOM`的定义较为复杂一些，因为它这里包含了很多`Vue.js`的特性。实际上`Vue.js`中`Virtual DOM`是借鉴了一个开源库[snabbdom](https://github.com/snabbdom/snabbdom)的实现，然后加入了一些`Vue.js`的一些特性。
 
 ```
+export default class VNode {
+  tag: string | void;
+  data: VNodeData | void;
+  children: ?Array<VNode>;
+  text: string | void;
+  elm: Node | void;
+  ns: string | void;
+  context: Component | void; // rendered in this component's scope
+  key: string | number | void;
+  componentOptions: VNodeComponentOptions | void;
+  componentInstance: Component | void; // component instance
+  parent: VNode | void; // component placeholder node
 
+  // strictly internal
+  raw: boolean; // contains raw HTML? (server only)
+  isStatic: boolean; // hoisted static node
+  isRootInsert: boolean; // necessary for enter transition check
+  isComment: boolean; // empty comment placeholder?
+  isCloned: boolean; // is a cloned node?
+  isOnce: boolean; // is a v-once node?
+  asyncFactory: Function | void; // async component factory function
+  asyncMeta: Object | void;
+  isAsyncPlaceholder: boolean;
+  ssrContext: Object | void;
+  fnContext: Component | void; // real context vm for functional nodes
+  fnOptions: ?ComponentOptions; // for SSR caching
+  devtoolsMeta: ?Object; // used to store functional render context for devtools
+  fnScopeId: ?string; // functional scope id support
+
+  constructor (
+    tag?: string,
+    data?: VNodeData,
+    children?: ?Array<VNode>,
+    text?: string,
+    elm?: Node,
+    context?: Component,
+    componentOptions?: VNodeComponentOptions,
+    asyncFactory?: Function
+  ) {
+    this.tag = tag
+    this.data = data
+    this.children = children
+    this.text = text
+    this.elm = elm
+    this.ns = undefined
+    this.context = context
+    this.fnContext = undefined
+    this.fnOptions = undefined
+    this.fnScopeId = undefined
+    this.key = data && data.key
+    this.componentOptions = componentOptions
+    this.componentInstance = undefined
+    this.parent = undefined
+    this.raw = false
+    this.isStatic = false
+    this.isRootInsert = true
+    this.isComment = false
+    this.isCloned = false
+    this.isOnce = false
+    this.asyncFactory = asyncFactory
+    this.asyncMeta = undefined
+    this.isAsyncPlaceholder = false
+  }
+
+  // DEPRECATED: alias for componentInstance for backwards compat.
+  /* istanbul ignore next */
+  get child (): Component | void {
+    return this.componentInstance
+  }
+}
 ```
 
 这里有几个核心的属性
