@@ -27,6 +27,7 @@
 - [【第 1139 期】基于 Gitlab CI 搭建持续集成环境](https://mp.weixin.qq.com/s/0hss-qGPjsvYOGkprGjW9g)
 - [【第 923 期】基于 Git、Svn 的 Commit 实现可增量构建的前端持续集成解决方案](https://mp.weixin.qq.com/s/E31b-hF9yNWLOt3bNBIXCA)
 - [网易云音乐前端模块动态下发系统](https://zhuanlan.zhihu.com/p/91386560)
+- [用travis和git hook搞个一键部署](https://segmentfault.com/a/1190000005804780)
 
 ## 联系作者
 
