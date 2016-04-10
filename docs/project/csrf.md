@@ -124,6 +124,7 @@ set-cookie: 1P_JAR=2019-10-20-06; expires=Tue, 19-Nov-2019 06:36:21 GMT; path=/;
 
 ### 参考资料
 
+- [常见六大Web安全攻防解析](https://github.com/ljianshu/Blog/issues/56)
 - [CSRF 攻击的应对之道](https://www.ibm.com/developerworks/cn/web/1102_niugang_csrf/)
 - [浅谈 CSRF 攻击方式](http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html)
 - [34 | CSRF 攻击：陌生链接不要随便点](https://time.geekbang.org/column/article/154110)

@@ -51,6 +51,7 @@ Vue实例将会在实例化时调用$watch()，他会遍历watch对象的每一�
 ### 参考资料
 
 - [vue 系列---理解 Vue 中的 computed,watch,methods 的区别及源码实现(六)](https://www.cnblogs.com/tugenhua0707/p/11760466.html)
+- [Vue计算属性和侦听属性](https://github.com/ljianshu/Blog/issues/68)
 
 ## 联系作者
 
