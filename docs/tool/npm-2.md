@@ -178,6 +178,18 @@ C@1.0.0 -> D@1.0.0
 - `requires`：依赖包所需要的所有依赖项，对应依赖包`package.json`里`dependencies`中的依赖项
 - `dependencies`：依赖包`node_modules`中依赖的包，与顶层的`dependencies`一样的结构
 
+在上面的`package-lock.json`文件中可以发现，在`requires`和`dependencies`中都存在`pify`依赖项。那我们顺便去`node_modules`里面探下究竟：
+
+1. 打开根目录的`node_modules`会发现安装了`sass-loader`所需要的所有依赖包，这些依赖包中除了`pify`以外，所有依赖包的大版本号都与`sass-loader`所需要的一致。
+2. 到根目录的`node_modules`找到`pify`依赖包，发现版本为`4.0.1`。
+3. 找到`sass-loader`项目依赖包，打开其`node_modules`发现其中也存在个`pify`依赖包，但版本为`3.0.0`。这个版本的`sass-loader`真正依赖的是这个版本的`pify`。
+
+通过以上几个步骤，也验证了之前阐述过的`npm 5.x`是扁平化处理依赖的方式。
+
+在开发一个应用时，建议把`package-lock.json`文件提交到代码版本仓库，从而让你的团队成员、运维部署人员或`CI`系统可以在执行`npm install`时安装的依赖版本都是一致的。
+
+但是在开发一个库时，则不应把`package-lock.json`文件发布到仓库中。实际上，`npm`也默认不会把`package-lock.json`文件发布出去。之所以这么做，是因为库项目一般是被其他项目依赖的，在不写死的情况下，就可以复用主项目已经加载过的包，而一旦库依赖的是精确的版本号那么可能会造成包的冗余。
+
 ### 二、npm 中的依赖包
 
 #### 2.1 依赖包分类
@@ -194,7 +206,19 @@ C@1.0.0 -> D@1.0.0
 
 **dependencies**
 
+这种依赖在项目最终上线或者发布`npm`包时所需要，即其中的依赖项应该属于线上代码的一部分。比如框架`vue`，第三方的组件库`element-ui`等，这些依赖包都是必须装在这个选项里供生产环境使用。
+
+通过命令`npm install/i packageName -S/--save`把包装在此依赖项里。如果没有指定版本，直接写一个包的名字，则安装当前`npm`仓库中这个包的最新版本。如果要指定版本的，可以把版本号写在包名后面，比如`npm i vue@3.0.1 -S`。
+
+>从`npm 5.x`开始，可以不用手动添加`-S/--save`指令，直接执行`npm i packageName`把依赖包添加到`dependencies`中去。
+
 **devDependencies**
+
+这种依赖只在项目开发时所需要，即其中的依赖项不应该属于线上代码的一部分。比如构建工具webpack、gulp，预处理器babel-loader、scss-loader，测试工具e2e、chai等，这些都是辅助开发的工具包，无须在生产环境使用。
+
+通过命令npm install/i -D/--save-dev把包安装成开发依赖。如果想缩减安装包，可以使用命令npm i --production忽略开发依赖，只安装基本依赖，这通常在线上机器（或者QA环境）上使用。
+
+>千万别以为只有在dependencies中的模块才会被一起打包，而在devDependencies中的不会！模块能否被打包，取决于项目里是否被引入了该模块！在业务项目中dependencies和devDependencies没有什么本质区别，只是单纯的一个规范作用，在执行npm i时两个依赖下的模块都会被下载；而在发布npm包的时候，包中的dependencies依赖项在安装该包的时候会被一起下载，devDependencies依赖项则不会。
 
 **peerDependencies**
 
