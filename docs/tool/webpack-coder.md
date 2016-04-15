@@ -35,6 +35,7 @@
 - [急速 debug 实战三（Node - webpack 插件,babel 插件,vue 源码篇）](https://juejin.im/post/5c6b6defe51d45798b51e4b2)
 - [Webpack 运行机制](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-principle.md)
 - [窥探原理：手写一个 JavaScript 打包器](https://juejin.im/post/5e04c935e51d4557ea02c097)
+- [从 0 到 1 实现一款简易版 Webpack](https://juejin.im/post/5da56e34f265da5b932e73fa)
 
 ## 联系作者
 
