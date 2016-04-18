@@ -6,19 +6,19 @@
 
 ## 内容
 
-- 什么是认证
-- 什么是授权
-- 什么是凭证
-- 什么是Cookie
-- 什么是Session
-- Cookie和Session的区别
-- 什么是Token（令牌）
-- Token和Session的区别
-- 什么是JWT
-- Token和JWT的区别
-- 常见的前后端端鉴权方式
-- 常见的加密算法
-- 常见问题
+- [什么是认证](#一、什么是认证)
+- [什么是授权](#二、什么是授权)
+- [什么是凭证](#三、什么是凭证)
+- [什么是Cookie](#四、什么是cookie)
+- [什么是Session](#五、什么是session)
+- [Cookie和Session的区别](#六、cookie和session的区别)
+- [什么是Token（令牌）](#七、什么是token（令牌）)
+- [Token和Session的区别](#八、token和session的区别)
+- [什么是JWT](#九、什么是jwt)
+- [Token和JWT的区别](#十、token和jwt的区别)
+- [常见的前后端端鉴权方式](#十一、常见的前后端端鉴权方式)
+- [常见的加密算法](#十二、常见的加密算法)
+- [常见问题](#十三、常见问题)
 
 ### 一、什么是认证
 
@@ -55,11 +55,9 @@
 
 属性 | 说明
 ---|---
-**name=value** | 键值对，设置 Cookie 的名称及相对应的值，都必须是字符串类型
-                    - 如果值为 Unicode 字符，需要为字符编码。- 如果值为二进制数据，则需要使用 BASE64 编码。
+**name=value** | 键值对，设置 Cookie 的名称及相对应的值，都必须是字符串类型 <br/>- 如果值为 Unicode 字符，需要为字符编码。<br/>- 如果值为二进制数据，则需要使用 BASE64 编码。
 **domain** | 指定 cookie 所属域名，默认是当前域名
 **path** | **指定cookie在哪个路径（路由）下生效，默认是'/'**。如果设置为`/abc`，则只有`/abc`下的路由可以访问到该cookie，如：`/abc/read`。
-
 **maxAge** | cookie失效的时间，单位秒。如果为整数，则该cookie在maxAge秒后失效。如果为负数，该cookie为临时cookie，关闭浏览器即失效，浏览吕也不会以任何形式保存该cookie。如果为0，表示删除该cookie。默认为-1。**比expires好用**。
 **expires** | 过期时间，在设置的某个时间点后该cookie就会失效。一般浏览器的cookie都是默认储存的，当关闭浏览器结束这个会话的时候，这个cookie也就会被删除
 **secure** | 该cookie是否仅被使用协议传输。安全协议有HTTPS，SSL等，在网络上输数据之前先将数据加密。默认为false。当secure值为true时，cookie在HTTP中是无效，在HTTPS中才有效。
