@@ -362,15 +362,18 @@ Vue.prototype.$mount = function(el,hydrating){
 我们发现最终还是调用用原先原型上的`$mount`方法挂载，原先原型上的`$mount`方法在`src/platforms/web/runtime/index.js`中定义。
 
 ```
-Vue.prototype.$mount = function(){
-
+Vue.prototype.$mount = function(el,hydrating){
+    el = el && inBrowser ? query(el) : undefined
+    return mountCompon(this,el,hydrating)
 }
 ```
 
 我们发现`$mount`方法实际上会去调用`mountComponent`方法，这个方法定义在`src/core/instance/lifecycle.js`文件中
 
 ```
+export function mountComponent(vm,el,hydrating){
 
+}
 ```
 
 从上面的代码可以看到，`mountComponent`核心就是先实例化一个渲染`Watcher`，在它的回调函数中会调用`updateComponent`方法，在此方法
@@ -380,19 +383,33 @@ Vue.prototype.$mount = function(){
 `Vue`的`_render`方法是实例的一个私有方法，它用来把实例渲染成一个虚拟`Node`。它的定义在`src/core/instance/render.js`文件中：
 
 ```
-Vue.prototype.\_render = function(){
+Vue.prototype._render = function(){
      const vm = this
      const {render,_parentVnode} = vm.$options
      let vnode
      try{
-
+         // 省略一系列代码
+         currentRenderingInstance = vm
+         // 调用createElement 方法来返回vnode
+         vnode = render.call(vm._renderProxy,vm.$createElement)
      }catch(e){
-
+         handleError(e,vm,`render`){}
      }
      vnode.parent = _parentVnode
+     console.log("vnode...:",vnode)
+     return vnode
 }
+```
+
+`Vue.js`利用`_createElement`方法创建`VNode`，它定义在``中：
 
 ```
+export function _createElement(context,tag,data,children,normalization){
+
+}
+```
+
+`_createElement`方法有 5 个参数，`context`表示 VNode 的上下文环境，它是`Component`类型；
 
 #### 6.2 diff 过程
 
