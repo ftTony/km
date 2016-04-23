@@ -372,7 +372,7 @@ Vue.prototype.$mount = function(el,hydrating){
 
 ```
 export function mountComponent(vm,el,hydrating){
-
+    vm.$el = el
 }
 ```
 
@@ -433,14 +433,18 @@ export function _createElement(context,tag,data,children,normalization){
 - 在`vnode`没有文本节点的情况下，进入子节点的`diff`；
 - 当`oldCh`和`ch`都在存在且不相同的情况下，调用`updateChildren`对子节点进行`diff`;
 - 若`oldCh`不存在，`ch`存在，首先清空`oldVnode`的文本节点，同时调用`addVnodes`方法将`ch`添加到`elm`真实`dom`节点当中；
+- 若`oldCh`存在，`ch`不存在，则删除`elm`真实节点下的`oldCh`子节点；
+- 若`oldVnode`有文本节点，而`vnode`没有，那么就清空这个文本节点。
 
 **子节点`diff`流程分析**
 
-分析一下`updateChildren`方法，它也是整个`diff`过程中最重要的环节，
+分析一下`updateChildren`方法，它也是整个`diff`过程中最重要的环节，以下为`Vue.js`的源码过程，为了更形象理解`diff`过程，我们给出相关的示意图来讲解。
 
 ```
-
+function updateChildren()
 ```
+
+在开始遍历`diff`前，首先给`oldCh`
 
 #### 6.3 patch 过程
 
