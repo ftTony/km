@@ -61,8 +61,6 @@
 
 本节我们以淘宝的扫码登录为例，来实际研究分析一下淘宝的扫码登录实现逻辑。
 
-### 三、微信的扫码登录技术实现
-
 [登录界面](https://login.taobao.com/member/login.jhtml)传回来的参数为：
 
 **然后请求(GET)报文是这样的:**
@@ -93,9 +91,31 @@ https://qrlogin.taobao.com/qrcodelogin/qrcodeLoginCheck.do?lgToken=2c3b4d53ef051
 
 长时间没有扫码的话，网页端会停止轮询，二维码失效！
 
+**当手机端确认登录后，接口返回的是：**
+
+```
+{ "code": "10006", "success": true, "url": "https://login.taobao.com/member/loginByIm.do?uid=cntaobaoxxx&token=ff82fc0d1d395a33d3b38ec5a4981336&time=1530179143250&asker=qrcodelogin&ask_version=1.0.0&defaulturl=https://www.taobao.com&webpas=0b7aed2d43f01825183e4a49c6cae47d1479929926"}
+```
+
+表示登录成功，当然手机端与服务端在点击"确认登录"之间的交互可能就是这样：网页端生成的 lgToken 去请求服务端，服务端记住了这个 lgToken 并认为登录了，当网页端再次轮询请求接口时，就返回真正的登录态 Token，网页端此时就可以凭着这个 Token 来登录了。
+
+**详细的技术逻辑如下图所示：**
+
+![images](login18.png)
+
+### 三、微信的扫码登录技术实现
+
 #### 3.1 技术原理流程图
 
+![images](login19.png)
+
+微信的网页版访问地址是：[https://wx.qq.com/](https://wx.qq.com/)，有兴趣也可以自行深入研究。
+
 #### 3.2 实际的技术实现逻辑
+
+**获取唯一的 uuid, 以及包含 uid 信息的二维码：**
+
+![images](login20.png)
 
 ### 四、小结
 
