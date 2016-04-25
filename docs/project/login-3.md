@@ -117,6 +117,242 @@ https://qrlogin.taobao.com/qrcodelogin/qrcodeLoginCheck.do?lgToken=2c3b4d53ef051
 
 ![images](login20.png)
 
+```
+// 获取uuid
+
+getUUID: function() {
+
+    vare = t.defer();
+
+    returnwindow.QRLogin = {},
+
+    $.ajax({
+
+        url: i.API_jsLogin,
+
+        dataType: "script"
+
+    }).done(function() {
+
+        200 == window.QRLogin.code ? e.resolve(window.QRLogin.uuid) : e.reject(window.QRLogin.code)
+
+    }).fail(function() {
+
+        e.reject()
+
+    }),
+
+    e.promise
+
+}
+```
+
+**浏览器轮询服务器，获取扫码状态：**
+
+```
+// 查看扫码状态
+
+checkLogin: function(e, a) {
+
+    varn = t.defer()
+
+        , a = a || 0;
+
+    returnwindow.code = 0,
+
+    window.checkLoginPromise = $.ajax({
+
+        url: i.API_login + "?loginicon=true&uuid="+ e + "&tip="+ a + "&r="+ ~newDate,
+
+        dataType: "script",
+
+        timeout: 35e3
+
+    }).done(function() {
+
+        newRegExp("/"+ location.host + "/");
+
+        if(window.redirect_uri && window.redirect_uri.indexOf("/"+ location.host + "/") < 0)
+
+            returnvoid (location.href = window.redirect_uri);
+
+        vare = {
+
+            code: window.code,
+
+            redirect_uri: window.redirect_uri,
+
+            userAvatar: window.userAvatar
+
+        };
+
+        n.resolve(e)
+
+    }).fail(function() {
+
+        n.reject()
+
+    }),
+
+    n.promise
+
+}
+```
+
+**根据服务器返回的扫码状态，进行相应的操作：**
+
+**408 扫码超时：** 如果手机没有扫码或没有授权登录，服务器会阻塞约 25s，然后返回状态码 408 -> 前端继续轮询
+
+![images](login21.png)
+
+![images](login22.png)
+
+**400 二维码失效：** 大约 5 分钟的时间内不扫码，二维码失效
+
+![images](login23.png)
+
+**201 已扫码：** 如果手机已经扫码，服务器立即返回状态码和用户的基本信息`（window.code=201,window.code.userAvator="..."）`，-> 前端继续轮询
+
+![images](login24.png)
+
+**200 已授权：** 如果手机点击了确认登录，服务器返回 200 及 token -> 前端停止轮询, 获取到 token，重定向到目标页
+
+![images](login25.png)
+
+**具体的代码示例如下：**
+
+```
+// 根据服务器返回的扫码状态，进行相应的操作
+
+functiono(c) {
+
+    switch(c.code) {
+
+    case200:
+
+        t.newLoginPage(c.redirect_uri).then(function(t) {
+
+            varo = t.match(/<ret>(.*)<\/ret>/)
+
+                , r = t.match(/<script>(.*)<\/script>/)
+
+                , c = t.match(/<skey>(.*)<\/skey>/)
+
+                , s = t.match(/<wxsid>(.*)<\/wxsid>/)
+
+                , l = t.match(/<wxuin>(.*)<\/wxuin>/)
+
+                , d = t.match(/<pass_ticket>(.*)<\/pass_ticket>/)
+
+                , f = t.match(/<message>(.*)<\/message>/)
+
+                , u = t.match(/<redirecturl>(.*)<\/redirecturl>/);
+
+            returnu ? void (window.location.href = u[1]) : o && "0"!= o[1] ? (alert(f && f[1] || "登录失败"),
+
+            i.report(i.AUTH_FAIL_COUNT, 1),
+
+            void location.reload()) : (e.$emit("newLoginPage", {
+
+                Ret: o && o[1],
+
+                SKey: c && c[1],
+
+                Sid: s && s[1],
+
+                Uin: l && l[1],
+
+                Passticket: d && d[1],
+
+                Code: r
+
+            }),
+
+            void (a.getCookie("webwx_data_ticket") || n.report(n.ReportType.cookieError, {
+
+                text: "webwx_data_ticket 票据丢失",
+
+                cookie: document.cookie
+
+            })))
+
+        });
+
+        break;
+
+    case201:
+
+        e.isScan = !0,
+
+        n.report(n.ReportType.timing, {
+
+            timing: {
+
+                scan: Date.now()
+
+            }
+
+        }),
+
+        t.checkLogin(e.uuid).then(o, function(t) {
+
+            !t && window.checkLoginPromise && (e.isBrokenNetwork = !0)
+
+        });
+
+        break;
+
+    case408:
+
+        t.checkLogin(e.uuid).then(o, function(t) {
+
+            !t && window.checkLoginPromise && (e.isBrokenNetwork = !0)
+
+        });
+
+        break;
+
+    case400:
+
+    case500:
+
+    case0:
+
+        vars = a.getCookie("refreshTimes") || 0;
+
+        s < 5 ? (s++,
+
+        a.setCookie("refreshTimes", s, .5),
+
+        document.location.reload()) : e.isNeedRefresh = !0;
+
+        break;
+
+    case202:
+
+        e.isScan = !1,
+
+        e.isAssociationLogin = !1,
+
+        a.setCookie("login_frequency", 0, 2),
+
+        window.checkLoginPromise && (window.checkLoginPromise.abort(),
+
+        window.checkLoginPromise = null),
+
+        r()
+
+    }
+
+    e.code = c.code,
+
+    e.userAvatar = c.userAvatar,
+
+    a.log("get code", c.code)
+
+}
+```
+
 ### 四、小结
 
 扫码登录这个功能，现在已经不只出现有 IM 应用里，各种带有移动端的线上网站也都有了这个功能，所以本文中介绍的技术原理并不局限于只用于实现 IM 应用中的扫码登录。
