@@ -404,25 +404,75 @@ Vue.prototype._render = function(){
 `Vue.js`利用`_createElement`方法创建`VNode`，它定义在``中：
 
 ```
-export function _createElement(context,tag,data,children,normalization){
+export function _createElement (
+  context: Component,
+  tag?: string | Class<Component> | Function | Object,
+  data?: VNodeData,
+  children?: any,
+  normalizationType?: number
+): VNode | Array<VNode> {
 
+  // 省略一系列非主线代码
+
+  if (normalizationType === ALWAYS_NORMALIZE) {
+    // 场景是 render 函数不是编译生成的
+    children = normalizeChildren(children)
+  } else if (normalizationType === SIMPLE_NORMALIZE) {
+    // 场景是 render 函数是编译生成的
+    children = simpleNormalizeChildren(children)
+  }
+  let vnode, ns
+  if (typeof tag === 'string') {
+    let Ctor
+    ns = (context.$vnode && context.$vnode.ns) || config.getTagNamespace(tag)
+    if (config.isReservedTag(tag)) {
+      // 创建虚拟 vnode
+      vnode = new VNode(
+        config.parsePlatformTagName(tag), data, children,
+        undefined, undefined, context
+      )
+    } else if ((!data || !data.pre) && isDef(Ctor = resolveAsset(context.$options, 'components', tag))) {
+      // component
+      vnode = createComponent(Ctor, data, context, children, tag)
+    } else {
+      vnode = new VNode(
+        tag, data, children,
+        undefined, undefined, context
+      )
+    }
+  } else {
+    vnode = createComponent(tag, data, context, children)
+  }
+  if (Array.isArray(vnode)) {
+    return vnode
+  } else if (isDef(vnode)) {
+    if (isDef(ns)) applyNS(vnode, ns)
+    if (isDef(data)) registerDeepBindings(data)
+    return vnode
+  } else {
+    return createEmptyVNode()
+  }
 }
 ```
 
-`_createElement`方法有 5 个参数，`context`表示 VNode 的上下文环境，它是`Component`类型；
+`_createElement`方法有 5 个参数，`context`表示 VNode 的上下文环境，它是`Component`类型；`tag`表示标签，它可以是一个字符串，也可以是一个`Component`;`data`表示 VNode 的数据，它是一个`VNodeData`类型，可以在`flow/vnode.js`中找到它的定义；`children`表示当前 VNode 的子节点，它是任意类型的，需要被规范为标准的`VNode`数组；
 
 #### 6.2 diff 过程
 
 `Vue.js`源码实例化了一个`watcher`，这个~被添加到了在模板当中所绑定变量的依赖当中，一旦`model`中的响应式的数据发生了变化，这些响应式的数据所的`dep`数组便会调用`dep.notify()`方法完成所有依赖遍历执行的工作，这包括视图的更新，即`updateComponent`方法的调用。`watcher`和`updateComponent`方法定义在`src/core/instance/lifecycle.js`文件中。
 
 ```
+export function mountComponent(vm,el,hydrating){
 
+}
 ```
 
 完成视图的更新工作事实上就是调用了`vm._update`方法，这个方法的`Vnode`，调用的`vm._update`方法定义在`src/core/instance/lifecycle.js`中。
 
 ```
+Vue.prototype._update = function(vnode,hydrating){
 
+}
 ```
 
 从以上代码得知。
@@ -441,12 +491,28 @@ export function _createElement(context,tag,data,children,normalization){
 分析一下`updateChildren`方法，它也是整个`diff`过程中最重要的环节，以下为`Vue.js`的源码过程，为了更形象理解`diff`过程，我们给出相关的示意图来讲解。
 
 ```
-function updateChildren()
+function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
+    // 为oldCh和newCh分别建立索引，为之后遍历的依据
+}
 ```
 
-在开始遍历`diff`前，首先给`oldCh`
+在开始遍历`diff`前，首先给`oldCh`和`newCh`分别分配一个`startIndex`和`endIndex`来作为遍历的索引，当`oldCh`
+
+**无`key`的`diff`过程**
+
+我们通过以下示意图对以上代码过程进行讲解：
+
+**有`key`的`diff`过程**
+
+在`vnode`不带`key`的情况下，
 
 #### 6.3 patch 过程
+
+介绍`diff`过程中，我们会看到`nodeOps`相关的方法对真实`DOM`结构进行操作，`nodeOps`定义在`src/platforms/web/runtime/node-ops.js`中，其为基本`DOM`操作，这里就不在详细介绍。
+
+```
+
+```
 
 #### 6.4 总结
 
