@@ -475,6 +475,26 @@ Vue.prototype._update = function(vnode,hydrating){
 }
 ```
 
+接下来，让我们看下`vm.__patch__`的逻辑过程，`vm.__patch__`方法定义在`src/core/vdom/patch.js`中。
+
+```
+
+```
+
+在`patch`方法中，我们看到会分为两种情况，一种是当`oldVnode`不存在时，
+
+```
+function sameVnode(a,b){
+    return (a.key === b.key && a.tag === b.tag && a.isComment === b.isComment && isDef(a.data) === isDef(b.data) && sameInputType(a,b))
+}
+```
+
+`diff`过程中主要是通过调用`patchVnode`方法进行的：
+
+```
+
+```
+
 从以上代码得知。
 
 `diff`过程中分了好几种情况，`oldCh`为`oldVnode`的子节点，`ch`为`Vnode`的子节点：
