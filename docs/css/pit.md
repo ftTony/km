@@ -552,25 +552,75 @@ IOS 中 input 键盘事件 keyup、keydown 等支持不是很好，用 input 监
 
 定位找到问题是 fastclick.js 对 IOS12 的兼容性，可在 fastclick.js 源码或者 main.js 做以下修改
 
+```
+FastClick.prototype.focus = function(targetElement){
+    var length
+    if(deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !==0 && targetElement.type !=='time' && targetElement.type !=='month'){
+        length = targetElement.value.length
+        targetElement.setSelectionRange(length,length)
+        targetElement.focus()
+    }else{
+        targetElement.focus();
+    }
+}
+```
+
 **IOS 键盘收起时页面没用回落，底部会留白**
 
 通过监听键盘回落时间滚动到原来位置
 
 ```
 window.addEventListener('focusout',function(){
+    window.scrollTo(0,0);
+})
 
+// input 输入框弹起软键盘的解决方案
+var bfscrolltop = document.body.scrollTop
+$('input').focus(function(){
+    document.body.scrollTop = document.body.scrollHeight
+}).blur(function(){
+    document.body.scrollTop = bfscrolltop
 })
 ```
 
 **IOS 下 fixed 失效的原因**
 
-软键盘唤起后，页面的 fixed 元素将失效，变成了 absolute，所以当页面超过一屏且滚动时，失效的 fixed 元素就会跟随滚动了。
+软键盘唤起后，页面的 fixed 元素将失效，变成了 absolute，所以当页面超过一屏且滚动时，失效的 fixed 元素就会跟随滚动了。不仅限于 type=text 的输入框，凡是软键盘，（比如时间日期选择、select 选择等等）被唤起，都会遇到同样地问题。
+
+解决方法：不让页面滚动，而是让主体部分自己滚动，主体部分高度设为 100%，overflow:scroll
+
+```
+<body>
+    <div class="warper">
+        <div class="main"></div>
+    </div>
+    <div class="fix-bottom"></div>
+</body>
+```
+
+```
+.warper{
+    position:absolute;
+    width:100%;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    overflow-y:scroll;
+    -webkit-overflow-scrolling:touch;       /*解决ios滑动不流畅问题*/
+}
+.fix-bottom{
+    postion:fixed;
+    bottom:0;
+    width:100%;
+}
+```
 
 #### 40. IOS 上拉边界下拉出现空白
 
 手指按住屏幕下拉，屏幕顶部会多出一块白色区域。手指按住屏幕上拉，底部多出一声白色区域。
 
-在 IOS 中，手指按住
+在 IOS 中，手指按住屏幕上下拖动，会触发 touchmove 事件。这个事件触发的对象是整个 webview 容器，容器自然会被拖动，剩下的部分会成空白。
 
 **解决方案**
 
