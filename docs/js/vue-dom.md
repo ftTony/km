@@ -577,15 +577,19 @@ function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
 }
 ```
 
-在开始遍历`diff`前，首先给`oldCh`和`newCh`分别分配一个`startIndex`和`endIndex`来作为遍历的索引，当`oldCh`
+在开始遍历`diff`前，首先给`oldCh`和`newCh`分别分配一个`startIndex`和`endIndex`来作为遍历的索引，当`oldCh`或者`newCh`遍历完后（），就停止`oldCh`和`newCh`的`diff`过程。接下来通过实例来看下整个`diff`的过程。
 
 **无`key`的`diff`过程**
 
 我们通过以下示意图对以上代码过程进行讲解：
 
+首先从第一个节点开始比较，不管是`oldCh`还是`newCh`的起始或者终止节点都不存在`sameVnode`，同时节点属性中是不带`key`标记的
+
 **有`key`的`diff`过程**
 
-在`vnode`不带`key`的情况下，
+在`vnode`不带`key`的情况下，每一轮的`diff`过程当中都是`起始`和`结束`节点进行比较，直到`oldCh`或者`newCh`被遍历完。而当为`vnode`引入`key`属性后，在每一轮的`diff`过程中，当`起始`和`结束`节点都没有找到`sameVnode`时，然后再判断在`newStartVnode`的属性中是否有`key`，且是否在`oldKeyToIndex`中找到对应的节点：
+
+- 如果不存在这个`key`，那么就将这个`newStartVnode`
 
 #### 6.3 patch 过程
 
