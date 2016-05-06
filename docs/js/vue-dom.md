@@ -463,7 +463,27 @@ export function _createElement (
 
 ```
 export function mountComponent(vm,el,hydrating){
+    vm.$el = el
+    // 省略一系列其它代码
+    let updateComponent
 
+    if (process.env.NODE_ENV !== 'production' && config.performance && mark){
+
+    }else{
+
+    }
+
+    // 实例化一个渲染Watcher，在它的回调函数中会调用 updateComponent方法
+    new Watcher(vm,updateComponent,noop,{
+        before (){
+            if(vm._isMounted && !vm._isDestroyed){
+                callHook(vm,'beforeUpdate')
+            }
+        }
+    },true)
+    hydrating = false
+
+    return vm
 }
 ```
 
@@ -471,17 +491,32 @@ export function mountComponent(vm,el,hydrating){
 
 ```
 Vue.prototype._update = function(vnode,hydrating){
-
+    const vm = this
+    const prevEl = vm.$el
+    const prevVnode = vm._vnode
+    const restoreActiveInstance = setActiveInstance(vm)
+    vm._vnode = vnode
 }
 ```
+
+在这个方法当中最为关键的就是`vm.__patch__`方法，这也是整个`virtual-dom`当中最为核心的方法，主要完成了`prevVnode`和`vnode`的`diff`过程并根据需要操作的`vdom`节点打`patch`，最后生成新的真实`dom`节点并完成视图的更新工作。
 
 接下来，让我们看下`vm.__patch__`的逻辑过程，`vm.__patch__`方法定义在`src/core/vdom/patch.js`中。
 
 ```
+function patch(oldVnode,vnode,hydrating,removeOnly){
+    .....
+    if(isUndef(oldVnode)){
+        // 当oldVnode不存在时，创建新的节点
+        isInitialPatch = true
+        createElm(vnode,insertedVnodeQueue)
+    }else{
 
+    }
+}
 ```
 
-在`patch`方法中，我们看到会分为两种情况，一种是当`oldVnode`不存在时，
+在`patch`方法中，我们看到会分为两种情况，一种是当`oldVnode`不存在时，会创建新的节点；另一种则是已经存在`oldVnode`，那么会对`oldVnode`和`vnode`进行`diff`及`patch`的过程。其中`patch`过程中会调用`sameVnode`方法来对传入的 2 个`vnode`进行基本属性的比较，只有当基本属性相同的情况下才认为这 2 个`vnode`只是局部发生了更新，然后才会对这 2 个`vnode`进行`diff`，如果 2 个`vnode`的基本属性存在不一致的情况，那么就会直接跳过`diff`的过程，进而依据`vnode`新建一个真实的`dom`，同时删除老的`dom`节点。
 
 ```
 function sameVnode(a,b){
@@ -492,7 +527,9 @@ function sameVnode(a,b){
 `diff`过程中主要是通过调用`patchVnode`方法进行的：
 
 ```
+function patchVnode(oldVnode,vnode,insertedVnodeQueue,ownerArray,index,removeOnly){
 
+}
 ```
 
 从以上代码得知。
