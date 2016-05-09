@@ -620,7 +620,9 @@ function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
 
 我们通过以下示意图对以上代码过程进行讲解：
 
-首先从第一个节点开始比较，不管是`oldCh`还是`newCh`的起始或者终止节点都不存在`sameVnode`，同时节点属性中是不带`key`标记的
+首先从第一个节点开始比较，不管是`oldCh`还是`newCh`的起始或者终止节点都不存在`sameVnode`，同时节点属性中是不带`key`标记的，因此第一轮的`diff`完后，`newCh`的`startVnode`被添加到`oldStartVnode`的前面，同时`newStartIndex`前移一位；
+
+第二
 
 **有`key`的`diff`过程**
 
