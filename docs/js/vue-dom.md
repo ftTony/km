@@ -622,13 +622,27 @@ function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
 
 首先从第一个节点开始比较，不管是`oldCh`还是`newCh`的起始或者终止节点都不存在`sameVnode`，同时节点属性中是不带`key`标记的，因此第一轮的`diff`完后，`newCh`的`startVnode`被添加到`oldStartVnode`的前面，同时`newStartIndex`前移一位；
 
-第二
+![images](vue-diff-01.png)
+
+第二轮的`diff`中，满足`sameVnode(oldStartVnode,newStartVnode)`，因此对这 2 个`vnode`进行`diff`，最后将`patch`打到`oldStartVnode`上，同时`oldStartVnode`和`newStartIndex`都向前移动一位；
+
+![images](vue-diff-02.png)
+![images](vue-diff-03.png)
+![images](vue-diff-04.png)
+![images](vue-diff-05.png)
+![images](vue-diff-06.png)
 
 **有`key`的`diff`过程**
 
 在`vnode`不带`key`的情况下，每一轮的`diff`过程当中都是`起始`和`结束`节点进行比较，直到`oldCh`或者`newCh`被遍历完。而当为`vnode`引入`key`属性后，在每一轮的`diff`过程中，当`起始`和`结束`节点都没有找到`sameVnode`时，然后再判断在`newStartVnode`的属性中是否有`key`，且是否在`oldKeyToIndex`中找到对应的节点：
 
 - 如果不存在这个`key`，那么就将这个`newStartVnode`
+
+![images](vue-diff-07.png)
+![images](vue-diff-08.png)
+![images](vue-diff-09.png)
+![images](vue-diff-10.png)
+![images](vue-diff-11.png)
 
 #### 6.3 patch 过程
 
