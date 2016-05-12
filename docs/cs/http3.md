@@ -63,13 +63,25 @@ RTO：英文全称是 Retransmission TimeOut，即重传超时时间；RTO 是�
 
 2. 单调递增的 Packet Number—使用 Packet Number 代替了 TCP 的 seq。
 
+每个 Packet Number 都严格递增，也就是说就算 Packet N 丢失了，重传的 Packet N 的 Packet Number 已经不是 N，而是一个比 N 大的值。而 TCP 重传策略存在二义性，比如客户端发送了一个请求，一个 RTO 后发起重传，而实际上服务器收到了第一次请求，并且响应已经在路上了，当客户端收到响应后，得出的 RTT 将会比真实 RTT 要小。当 Packet N 唯一之后，就可以计算出正确的 RTT。
+
 3. 不允许 Reneging—一个 Packet 只要被 Ack，就认为它一定被正确接收。
 
+Reneging 的意思是，接收方有权把已经报给发送端的[SACK（Selective Acknowledgment）](https://allen-kevin.github.io/2017/03/01/TCP%E9%87%8D%E7%82%B9%E7%B3%BB%E5%88%97%E4%B9%8Bsack%E4%BB%8B%E7%BB%8D/)里的数据给丢了（如接收窗口不够而丢弃乱序的包）。
+
+QUIC 中的 ACK 包含了与 TCP 中 SACK 等价的信息，但 QUIC 不允许任何（包括被确认接受的）数据包被丢弃。这样不仅可以简化发送端与接收的实现难度，还可以减少发送端的内存压力。
+
 4. 前向纠错
+
+早期的 QUIC 版本存在一个丢包恢复机制，但后来由于增加带宽消耗和效果一般而**废弃**。FEC 中 QUIC 数据帧的数据混合原始数据和冗余数据，来确保无论到达接收端的 n 次传输内容是什么，接收端都能够恢复所有 n 个原始数据包。FEC 的实质就是异或。示意图：
+
+![images](http3-02.jpg)
 
 5. 更多的 Ack 块和增加 Ack Delay 时间
 
 6. 基于 stream 和 connection 级别的流量控制。
+
+为什么需要两类流量控制呢？主要是因为 QUIC 支持多路复用。Stream 可以认为就是一条 HTTP 请求。
 
 #### 2.2 快速握手功能
 
@@ -87,11 +99,19 @@ PSK with (EC)DHE
 
 在完全握手情况下，需要 1-RTT 建立连接。TLS1.3 恢复会话可以直接发送加密后的应用数据，不需要额外的 TLS 扬，也就是 0-RTT。
 
+TLS 1.3 0-RTT 简单原理示意（基于 DHE）：
+
+![images](http3-04.jpg)
+
 #### 2.4 多路复用，彻底解决 TCP 中队头阻塞的问题
 
 QUIC 是为多复用从头设计的，携带个别流的数据的包丢失时，通常只影响该流。QUIC 连接上的多个 stream 之间没有依赖，也不会有底层协议限制。假如 stream2 丢了一个包，也只会影响 stream2 的处理。
 
 ### 三、HTTP/3 的挑战
+
+1. 从目前的情况来看，服务器和浏览器都没有对 HTTP/3 提供比较完整的支持。Chrome 虽然在数年前就开始支持 Google 版本的 QUIC，但是这个版本的 QUIC 和官方的 QUIC 存在着非常大的差异。
+2. 部署 HTTP/3 也存在着非常大的问题。因为系统内核对 UDP 的优化远远没有达到 TCP 的优化程序，这也是阻碍 QUIC 的一个重要原因。
+3. 中间设备僵化的问题。这些设备对 UDP 的优化程度远远低于 TCP，据统计使用 QUIC 协议时，大约有 3%~7%的的丢包率。
 
 ### 参考资料
 

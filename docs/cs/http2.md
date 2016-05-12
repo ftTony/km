@@ -223,6 +223,7 @@ server {
 - [怎样把网站升级到 http/2](https://zhuanlan.zhihu.com/p/29609078)
 - [升级 Nginx 开启 HTTP/2](https://juejin.im/entry/5b5ae460e51d45195423ecca)
 - [【第 515 期】HTTPS, SPDY 和 HTTP/2 性能的简单对比](https://mp.weixin.qq.com/s/XCmUsAAY4uoXKLV7H6v0KQ)
+- [HTTP/2 服务器推送（Server Push）教程](http://www.ruanyifeng.com/blog/2018/03/http2_server_push.html)
 
 ## 联系作者
 
