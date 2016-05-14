@@ -627,9 +627,21 @@ function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
 第二轮的`diff`中，满足`sameVnode(oldStartVnode,newStartVnode)`，因此对这 2 个`vnode`进行`diff`，最后将`patch`打到`oldStartVnode`上，同时`oldStartVnode`和`newStartIndex`都向前移动一位；
 
 ![images](vue-diff-02.png)
+
+第三轮的`diff`中，满足`sameVnode(oldEndVnode,newStartVnode)`，那么首先对`oldEndVnode`和`newStartVnode`进行`diff`，并对`oldEndVnode`进行`patch`，并完成`oldEndVnode`移位的操作，最后`newStartIndex`前移一位，`oldStartVnode`后移一位；
+
 ![images](vue-diff-03.png)
+
+第四轮的`diff`中，过程同步骤 3；
+
 ![images](vue-diff-04.png)
+
+第五轮的`diff`中，同过程 1；
+
 ![images](vue-diff-05.png)
+
+遍历的过程结束后，`newStartIdx > newEndIdx`，说明此时`oldCh`存在多余的节点，那么最后就需要将这些多余的节点删除。
+
 ![images](vue-diff-06.png)
 
 **有`key`的`diff`过程**
