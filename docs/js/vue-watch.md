@@ -288,9 +288,7 @@ export function initState (vm: Component) {
 }
 ```
 
-
-
-打开源码文件`initComputed`中的文件代码，initComputed函数代码如下：
+如上代码，我们这边最主要的要看` if (opts.computed) initComputed(vm, opts.computed) `这句代码；判断`vm.$options.computed`是否有，如果有的话，就执行`initComputed(vm,opts.computed);`函数。因此我们找到initComputed函数代码如下：
 
 ```
 function initComputed (vm: Component, computed: Object) {
@@ -335,9 +333,42 @@ function initComputed (vm: Component, computed: Object) {
 }
 ```
 
+如上代码，首先使用`Object.create(null);`创建一个空对象，分别赋值给watchers;和vm._computedWatchers;接着执行代码：`const isSSR = isServerRendering();`判断是否是服务器端渲染，我们这边肯定不是服务器端渲染，因此`const isSSR = false;`,接着使用 for in 循环遍历 computed; 代码：`for (const key in computed) { const userDef = computed[key] };`，最后我们会根据computed中的key来实例化watcher，因此我们可以理解为其实computed就是watcher的实现，通过一个发布订阅模式来监听的。
+
 #### 6.2 Vue源码中的Watcher
 
 ```
+//  初始化 Watch
+function initWatch (vm: Component, watch: Object) {
+  for (const key in watch) {
+    const handler = watch[key]
+    if (Array.isArray(handler)) {
+      for (let i = 0; i < handler.length; i++) {
+        createWatcher(vm, key, handler[i])
+      }
+    } else {
+      createWatcher(vm, key, handler)
+    }
+  }
+}
+
+
+// 创建Watcher
+function createWatcher (
+  vm: Component,
+  expOrFn: string | Function,
+  handler: any,
+  options?: Object
+) {
+  if (isPlainObject(handler)) {
+    options = handler
+    handler = handler.handler
+  }
+  if (typeof handler === 'string') {
+    handler = vm[handler]
+  }
+  return vm.$watch(expOrFn, handler, options)
+}
 ```
 
 ### 参考资料
