@@ -648,10 +648,23 @@ function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
 
 在`vnode`不带`key`的情况下，每一轮的`diff`过程当中都是`起始`和`结束`节点进行比较，直到`oldCh`或者`newCh`被遍历完。而当为`vnode`引入`key`属性后，在每一轮的`diff`过程中，当`起始`和`结束`节点都没有找到`sameVnode`时，然后再判断在`newStartVnode`的属性中是否有`key`，且是否在`oldKeyToIndex`中找到对应的节点：
 
-- 如果不存在这个`key`，那么就将这个`newStartVnode`
+- 如果不存在这个`key`，那么就将这个`newStartVnode`作为新的节点创建且插入到原有的`root`的子节点中；
+- 如果存在这个`key`，那么就取出`oldCh`中的存在这个`key`的`vnode`，然后再进行`diff`的过程；
+
+通过以上分析，给`vdom`上添加`key`属性后，遍历`diff`的过程中，当**起始点，结束点**的**搜寻**及`diff`出现还是无法切尔西的情况下时，就会用`key`来作为唯一标识，来进行`diff`，这样就可以提高`diff`效率。
+
+带有`key`属性的`vnode`的`diff`过程可见下图：
+
+1. 首先从第一个节点开始比较，
 
 ![images](vue-diff-07.png)
+
+2. 第二轮的`diff`中，满足`sameVnode(oldStartVnode,newStartVnode)`，因此对这 2 个`vnode`进行`diff`，最后将
+
 ![images](vue-diff-08.png)
+
+3. 第三轮的`diff`中，满足`sameVnode(oldEndVnode,newStartVnode)`，那么首先对
+
 ![images](vue-diff-09.png)
 ![images](vue-diff-10.png)
 ![images](vue-diff-11.png)
