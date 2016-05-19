@@ -24,6 +24,7 @@
 - [前端微服务在字节跳动的打磨与应用](https://juejin.im/post/5e17f064e51d45315d648b95)
 - [ICBU 跨境供应链前端架构演进与 Serverless 实践](https://mp.weixin.qq.com/s/GFZ5MmYxmwtZmY8Q92IjBg)
 - [当 SSR 遇上 Serverless，轻松实现页面瞬开](https://mp.weixin.qq.com/s/z6IycL0yDt419K_EzufokA)
+- [【第1861期】千万级流量业务的Serverless实践，看FaaS给前端带来的变化](https://mp.weixin.qq.com/s/-oenEmJlGXNQ2XMuBp8S0g)
 
 ## 联系作者
 
