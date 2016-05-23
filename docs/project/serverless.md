@@ -27,6 +27,7 @@
 - [【第 1861 期】千万级流量业务的 Serverless 实践，看 FaaS 给前端带来的变化](https://mp.weixin.qq.com/s/-oenEmJlGXNQ2XMuBp8S0g)
 - [微前端在美团外卖的实践](https://juejin.im/post/5e57b6f0f265da57547794c9)
 - [探索 Serverless 中的前端开发模式](https://juejin.im/post/5cdc3dc2e51d453b6c1d9d3a)
+- [Serverless + Egg.js 后台管理系统实战](https://mp.weixin.qq.com/s/5Ngu5eWWr1jU_rm9d7IE-g)
 
 ## 联系作者
 
