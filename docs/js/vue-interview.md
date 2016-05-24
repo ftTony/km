@@ -282,6 +282,8 @@ beforeDestroy(){
 
 ### 简述一下Sass、Less，且说明区别？
 
+他们是动态的样式语言，是CSS预处理器
+
 ### 聊聊你对Vue.js的template编译的理解？
 
 简而言之，就是先转化成AST树，再得到的render函数返回VNode（Vue的虚拟DOM节点）
