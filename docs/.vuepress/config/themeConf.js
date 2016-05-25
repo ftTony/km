@@ -72,6 +72,7 @@ module.exports = {
                 title: 'javascript进阶',
                 collapsable: false,
                 children: [
+                    'js-clone',
                     'js-curry',
                     'js-debounce',
                     'js-precision',
