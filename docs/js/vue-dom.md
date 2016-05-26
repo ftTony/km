@@ -103,9 +103,17 @@ module.exports = Element
 - 差异类型
 - 列表对比算法
 
-`diff`算法用来比较两棵`Virtual DOM`树的差异，如果需要两棵树的完全比较，那么`diff`算法的时间复杂为`O(n^3)`。但是前端当中，你很少会跨越层级地移动`DOM`元素，所以`Virtual DOM`只会对同一个层级的元素进行对比，如下图所示，
+`diff`算法用来比较两棵`Virtual DOM`树的差异，如果需要两棵树的完全比较，那么`diff`算法的时间复杂为`O(n^3)`。但是前端当中，你很少会跨越层级地移动`DOM`元素，所以`Virtual DOM`只会对同一个层级的元素进行对比，如下图所示，`div`只会和同一层级的`div`对比，第二层级会跟第二层级对比，这样算法复杂度就可以达到`O(n)`。
+
+![images](vue-diff-12.png)
 
 #### 4.1 深度优先遍历，记录差异
+
+在实际的代码中，会对新旧两棵树进行一个深度优先的遍历，这样每个节点都会有一个唯一的标记：
+
+[images](vue-diff-13.png)
+
+在深度优先遍历的时候，每遍历到一个节点就把该节点和新的树进行对比。如果有差异的话就记录到一个对象里面。
 
 ```
 function diff(oldTree,newTree){
@@ -115,6 +123,7 @@ function diff(oldTree,newTree){
     return patches
 }
 
+// 对两棵树进行深度优先遍历
 function dfsWalk(){
     var currentPatch = []
     if(typeof (oldNode) === 'string' && typeof (newNode) === 'string'){
@@ -143,6 +152,8 @@ function dfsWalk(){
     }
 }
 ```
+
+从以上可以得出，`patchs[1]`表示`p`，`patches[3]`表示`ul`，以此类推。
 
 ### 4.2 差异类型
 
