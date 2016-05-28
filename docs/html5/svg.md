@@ -6,6 +6,10 @@
 
 ## 内容
 
+- canvas和SVG的是什么以及区别
+
+### 一、canvas和SVG的是什么以及区别
+
 ### 参考资料
 
 - [SVG 入门指南(看完,对 SVG 结构不在陌生)](https://mp.weixin.qq.com/s/_u6De6IZXFnL2yXmvJQ7Gg)

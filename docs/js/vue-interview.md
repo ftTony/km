@@ -272,11 +272,21 @@ beforeDestroy(){
 
 ### 19.图片资源懒加载
 
-对于图片过多的页面，为了加速页面加载速度，所以很多时候我们需要将页面
+对于图片过多的页面，为了加速页面加载速度，所以很多时候我们需要将页面内未出现在可视图可视区域内的图片先不做加载，等到滚动到可视区域后再去加载。这样对于页面加载性能上会有很大的提升，也提高了用户体验。我们在项目可使用`vue-lazyload`插件
 
 ### 20. 优化无限列表性能
 
 如果你的应用存在非常长或者无限滚动的列表，那么需要采用窗口化的技术来优化性能，只需要渲染少部分区域的内容，减少重新渲染组件和创建dom节点的时间。可以使用[vue-virtual-scroll-list](https://github.com/tangbc/vue-virtual-scroll-list)和[vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller)来优化这种无限列表的场景的。
+
+### 说说你对angular脏检查理解？
+
+### 简述一下Sass、Less，且说明区别？
+
+### 聊聊你对Vue.js的template编译的理解？
+
+简而言之，就是先转化成AST树，再得到的render函数返回VNode（Vue的虚拟DOM节点）
+
+详情步骤：首先通过compile编译器把template编译成AST语法树（abstract syntax tree 即源代码的抽象语法结构的树状态表现形式），compile是createCompiler的返回值，createCompiler是用以创建编译器的。另外compile还负责合并option。然后，AST会经过generate（将AST语法树转化成render function字符串的过程）得到render函数，render的返回值是VNode，VNode是Vue的虚拟DOM节点，里面有（标签名、子节点、文本等等）
 
 ### 参考资料
 
