@@ -8,6 +8,7 @@
 
 ### 参考资料
 
+- [一文道尽软件架构及前端架构演进](https://mp.weixin.qq.com/s/qOjpR1qrKgBRF90ea5mkyA)
 - [大型项目前端架构浅谈](https://juejin.im/post/5cea1f705188250640005472)
 - [个人的中小型项目前端架构浅谈](https://blog.csdn.net/qq20004604/article/details/70480932)
 - [if 我是前端 Leader，谈谈前端框架体系建设](https://juejin.im/post/5decf88f51882512327a510a)

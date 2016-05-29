@@ -154,6 +154,7 @@ function applyPatches (node, currentPatches) {
 - [【Vue 原理】Diff - 白话版](https://zhuanlan.zhihu.com/p/81752104)
 - [VirtualDOM 与 diff(Vue 实现)](https://zhuanlan.zhihu.com/p/29450092)
 - [让虚拟 DOM 和 DOM-diff 不再成为你的绊脚石](https://juejin.im/post/5c8e5e4951882545c109ae9c)
+- [虚拟Dom+Diff--Vue源码动手写系列](https://juejin.im/post/5e53c9c051882549150ea5d3)
 
 ## 联系作者
 
