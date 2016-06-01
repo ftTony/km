@@ -251,12 +251,9 @@ commit (_type, _payload, _options) {
 2. `dispatch`：
 
 ```
-dispatch (\_type, \_payload) {
-// check object-style dispatch
-const {
-type,
-payload
-} = unifyObjectStyle(\_type, \_payload)
+dispatch (_type, _payload) {
+    // check object-style dispatch
+    const {type,payload} = unifyObjectStyle(_type, _payload)
 
     const action = { type, payload }
     const entry = this._actions[type]
@@ -296,7 +293,6 @@ payload
       }
       return res
     })
-
 }
 ```
 
@@ -304,7 +300,7 @@ payload
 
 ```
 subscribe (fn) {
-return genericSubscribe(fn, this.\_subscribers)
+    return genericSubscribe(fn, this._subscribers)
 }
 
 ```
@@ -312,10 +308,9 @@ return genericSubscribe(fn, this.\_subscribers)
 4. `subscribeAction`：
 
 ```
-
 subscribeAction (fn) {
-const subs = typeof fn === 'function' ? { before: fn } : fn
-return genericSubscribe(subs, this.\_actionSubscribers)
+    const subs = typeof fn === 'function' ? { before: fn } : fn
+    return genericSubscribe(subs, this._actionSubscribers)
 }
 ```
 
@@ -334,9 +329,9 @@ Module 类的成员属性有四个，分别是：
 constructor (rawModule, runtime) {
     this.runtime = runtime
     // Store some children item
-    this.\_children = Object.create(null)
+    this._children = Object.create(null)
     // Store the origin module object which passed by programmer
-    this.\_rawModule = rawModule
+    this._rawModule = rawModule
     const rawState = rawModule.state
 
     // Store the origin module's state
@@ -349,10 +344,12 @@ Module 类的成员方法有以下几个：
 1. 作`_children`属性的 addChild、removeChild、getChild、forEachChild 四个方法。
 
 ```
+// 添加child
 addChild (key, module) {
     this._children[key] = module
 }
 
+// 移除child
 removeChild (key) {
 delete this._children[key]
 }
@@ -361,7 +358,7 @@ getChild (key) {
     return this._children[key]
 }
 
-
+// 遍历Mutation
 forEachMutation (fn) {
     if (this._rawModule.mutations) {
         forEachValue(this._rawModule.mutations, fn)
@@ -385,16 +382,19 @@ update (rawModule) {
     }
 }
 
+// 遍历child
 forEachChild (fn) {
     forEachValue(this._children, fn)
 }
 
+// 遍历getter
 forEachGetter (fn) {
     if (this._rawModule.getters) {
         forEachValue(this._rawModule.getters, fn)
     }
 }
 
+// 遍历action
 forEachAction (fn) {
     if (this._rawModule.actions) {
         forEachValue(this._rawModule.actions, fn)
@@ -606,6 +606,22 @@ export const createNamespacedHelpers = (namespace) => ({
   mapMutations: mapMutations.bind(null, namespace),
   mapActions: mapActions.bind(null, namespace)
 })
+```
+
+6. `normalizeNamespace`
+
+```
+function normalizeNamespace (fn) {
+  return (namespace, map) => {
+    if (typeof namespace !== 'string') {
+      map = namespace
+      namespace = ''
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/'
+    }
+    return fn(namespace, map)
+  }
+}
 ```
 
 ### 三、总结
