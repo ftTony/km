@@ -175,9 +175,16 @@ var TEXT = 3 // 文本内容改变
 
 #### 4.3 列表对比算法
 
-子节点的对比算法，例如`p，ul，div`的顺序换成了`div，p，ul`。这个该怎么对比？如果按照同层级进行顺序对比的话，它们都会被替换掉。如`p`和`div`的`tagName`不同，`p`会被`div`所替代。最终，三个节点都会被替换
+子节点的对比算法，例如`p，ul，div`的顺序换成了`div，p，ul`。这个该怎么对比？如果按照同层级进行顺序对比的话，它们都会被替换掉。如`p`和`div`的`tagName`不同，`p`会被`div`所替代。最终，三个节点都会被替换，这样`DOM`开销就非常大。而实际上是不需要替换节点，而只需要经过节点移动就可以达到，我们只需知道怎么进行移动。
+
+将这个总是抽象出来其实就是字符串的最小编辑距离问题（`Edition Distance`），最常见的解决方法是`Levenshtein Distance`，`Levenshtein Distance`是一个度量两个字符序列之间差异的字符串度量标准，两个单词之间的`Levenshtein Distance`是将一个单词转换为另一个单词所需的单字符编辑（插入、删除或替换）的最小数量。`Levenshtein Distance`是 1965 年由苏联数学家 Vladimir Levenshtein 发明的。`Levenshtein Distance`也被称为编辑距离，通过**动态规则**求解，时间复杂度为 `O(M*N)`。
+
+定义：对两个字符串`a、b`，则他们的`Levenshtein Distance`为：
 
 [images](vue-diff-14.png)
+
+示例：字符串`a`和`b`，`a="abcde"，b="cabef"`，根据上面给出的计算公式，则他们的`Levenshtein Distance`的计算过程如下：
+
 [images](vue-diff-15.png)
 
 ### 五、pach 方法实现
