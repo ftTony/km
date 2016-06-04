@@ -201,7 +201,7 @@ this 的绑定规则有四种：默认绑定，隐匿绑定，显式绑定，new
 5. 如果把 null 或者 undefined 作为 this 的绑定对象传入 call、apply 或者 bind, 这些值在调用时会被忽略，实际应用的是默认绑定规则。
 6. 箭头函数没有自己的 this, 它的 this 继承于上一层代码块的 this。
 
-如果 this 的知识点，您还不太懂，请戳: [this 理解](https://github.com/cs-learning-record/javascript-series/blob/master/javascript/this%E7%90%86%E8%A7%A3.md)
+如果 this 的知识点，您还不太懂，请戳: [this 理解](https://km.xiaowuzi.info/js/es5-this.html)
 
 ### 13.词法作用域和 this 的区别。
 
@@ -220,7 +220,7 @@ this 的绑定规则有四种：默认绑定，隐匿绑定，显式绑定，new
 
 作用域链：无论是 LHS 还是 RHS 查询，都会在当前的作用域开始查找，如果没有找到，就会向上级作用域继续查找目标标识符，每次上升一个作用域，一直到全局作用域为止。
 
-如果执行上下文及上下文栈不理解的话，请戳[执行上下文](https://github.com/cs-learning-record/javascript-series/blob/master/javascript/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87.md)
+如果执行上下文及上下文栈不理解的话，请戳[执行上下文](https://km.xiaowuzi.info/js/es5-execution-context.html)
 
 ### 15.什么是闭包？闭包的作用是什么？闭包有哪些使用场景？
 
@@ -232,18 +232,18 @@ this 的绑定规则有四种：默认绑定，隐匿绑定，显式绑定，new
 2. 模仿块级作用域(ES5 中没有块级作用域)
 3. 实现 JS 的模块
 
-如果闭包不理解的话，请戳[闭包](https://github.com/cs-learning-record/javascript-series/blob/master/javascript/%E9%97%AD%E5%8C%85.md)
+如果闭包不理解的话，请戳[闭包](https://km.xiaowuzi.info/js/es5-closure.html)
 
 ### 16.call、apply 有什么区别？call,aplly 和 bind 的内部是如何实现的？
 
 请戳以下两个链接：
 
-- [apply&bind&call.](https://github.com/cs-learning-record/javascript-series/blob/master/javascript/apply%26bind%26call.md)
+- [apply&bind&call.](https://km.xiaowuzi.info/js/es5-apply-call-bind.html)
 - [apply&bind&call 模拟实现](https://github.com/cs-learning-record/javascript-series/blob/master/javascript/apply%26bind%26call%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.md)
 
 ### 17.new 的原理是什么？通过 new 的方式创建对象和通过字面量创建有什么区别？
 
-请戳链接：[new 模拟实现](https://github.com/cs-learning-record/javascript-series/blob/master/javascript/new%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0.md)
+请戳链接：[new 模拟实现](https://km.xiaowuzi.info/js/es5-news.html)
 
 ### 18.谈谈你对原型的理解？
 
@@ -368,6 +368,7 @@ new new Foo().getName();
 - [【面试篇】寒冬求职季之你必须要懂的原生 JS(上)](https://juejin.im/post/5cab0c45f265da2513734390)
 - [【面试篇】寒冬求职季之你必须要懂的原生 JS(中)](https://juejin.im/post/5cbd1e33e51d45789161d053)
 - [春招季如何横扫 Javascript 面试核心考点(基础版)？](https://juejin.im/post/5c6ad9fde51d453c356e37d1)
+- [每日·壹题](https://muyiy.cn/question/program/5.html)
 
 ## 联系作者
 
