@@ -195,7 +195,13 @@ class Node{
 ```
 /*深度优先遍历三种方式*/
 let deepTraversal1=(node,nodeList=[])=>{
-
+    if(node !== null){
+        nodeList.push(node)
+        let children = node.children
+        for(let i=0;i<children.length;i++){
+            
+        }
+    }
 }
 let deepTraversal2 = (node)=>{
 
@@ -211,7 +217,14 @@ let deepTraversal3 = (node) =>{
 
 ```
 let widthTraversal2 = (node)=>{
-
+    let nodes = []
+    let stack = []
+    if(node){
+        stack.push(node)
+        while(stack.length){
+            let item = stack.shift()
+        }
+    }
 }
 ```
 

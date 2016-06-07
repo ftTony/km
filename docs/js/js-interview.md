@@ -29,7 +29,7 @@
 - new 的原理是什么？通过 new 的方式创建对象和通过字面量创建有什么区别？
 - 谈谈你对原型的理解？
 - 什么是原型链？【原型链解决的是什么问题？】
-- prototype 和 **proto** 区别是什么？
+- prototype 和 `__proto__` 区别是什么？
 - 使用 ES5 实现一个继承？
 - 什么是深拷贝？深拷贝和浅拷贝有什么区别？
 - 防抖和节流的区别是什么？防抖和节流的实现。
@@ -290,11 +290,21 @@ Math.max(...[14,3,77,30]);
 
 ### 27.为什么 0.1 + 0.2 != 0.3 ?
 
+参考[js 精度丢失问题](https://km.xiaowuzi.info/js/js-precision.html)
+
 ### 28.promise 有几种状态, Promise 有什么优缺点 ?
+
+promise有三种状态：fulfilled,rejected,pending.
+
+Promise的优点：
+
+- 
 
 ### 29.Promise 构造函数是同步还是异步执行，then 中的方法呢 ?promise 如何实现 then 处理 ?
 
 ### 30.Promise 和 setTimeout 的区别 ?
+
+Promise是微任务，setTimeout是宏任务，同一个事件循环中，promise.then总是先于setTimeout执行。
 
 ### 31.如何实现 Promise.all ?
 
@@ -318,13 +328,28 @@ Math.max(...[14,3,77,30]);
 
 ### 41.简述下对 webWorker 的理解？
 
+HTML5则提出了 Web Worker 标准，表示js允许多线程，但是子线程完全受主线程控制并且不能操作dom，只有主线程可以操作dom，所以js本质上依然是单线程语言。
+
+web worker就是在js单线程执行的基础上开启一个子线程，进行程序处理，而不影响主线程的执行，当子线程执行完之后再回到主线程上，在这个过程中不影响主线程的执行。子线程与主线程之间提供了数据交互的接口postMessage和onmessage，来进行数据发送和接收。
+
+```
+```
+
 ### 42.ES6 模块和 CommonJS 模块的差异？
+
+参考[js 模块化](https://km.xiaowuzi.info/js/js-module.html)
 
 ### 43.浏览器事件代理机制的原理是什么？
 
 ### 44.js 如何自定义事件？
 
+> 自定义DOM事件(不考虑IE9之前版本)
+
+自定义事件有三种方式，
+
 ### 45.跨域的方法有哪些？原理是什么？
+
+参考[跨域](https://km.xiaowuzi.info/project/cross-domain.html)
 
 ### 46.js 异步加载的方式有哪些？
 
@@ -353,7 +378,14 @@ new new Foo().getName();
 
 ### 49.实现双向绑定 Proxy 与 Object.defineProperty 相比优劣如何?
 
+1. Object.definedProperty的作用是劫持一个对象的属性，劫持属性的getter和setter方法，在对象的属性发生变化时进行特定的操作。而Proxy劫持的是整个对象。
+2. Proxy会返回一个代理对象，
+
 ### 50.Object.is() 与比较操作符 ===、== 有什么区别？
+
+以下情况，Object.is认为是相等
+
+- 两个值都是 undefined
 
 ### 51.什么是事件循环？Node 事件循环和 JS 事件循环的差异是什么？
 
