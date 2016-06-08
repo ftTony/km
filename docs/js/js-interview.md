@@ -345,7 +345,36 @@ web worker就是在js单线程执行的基础上开启一个子线程，进行�
 
 > 自定义DOM事件(不考虑IE9之前版本)
 
-自定义事件有三种方式，
+自定义事件有三种方式，一种是使用`new Event()`，另一种是`createEvent('CustomEvent')`，另一种是`new customEvent()`
+
+1. 使用`new Event()`
+
+获取不到`event.detail`
+
+```
+let btn = document.querySelector('#btn');
+let ev = new Event('alert',{
+    bubbles:true,           // 事件是否冒泡；默认值false
+    cancelable:true,        // 事件能否被取消；默认值false
+    composed:false
+});
+btn.addEventListener('alert',function(event){
+
+},false);
+btn.dispatchEvent(ev);
+```
+
+2. 使用`createEvent('CustomEvent')`（DOM3）
+
+```
+```
+
+3. 使用`new customEvent()`（DOM4）
+
+使用起来比`createEvent('CustomEvent')`更加方便
+
+```
+```
 
 ### 45.跨域的方法有哪些？原理是什么？
 

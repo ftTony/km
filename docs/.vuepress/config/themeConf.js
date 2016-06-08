@@ -85,7 +85,8 @@ module.exports = {
                     'js-run',
                     'js-ast',
                     'js-v8',
-                    'js-principle'
+                    'js-principle',
+                    'js-interview'
                 ]
             },
             {
