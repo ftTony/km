@@ -400,8 +400,16 @@ var btn = document.querySelector('#btn');
   * 第二个参数是一个对象
   */
 var ev = new CustomEvent('alert',{
-
+    bubbles: 'true',
+    cancelable: 'true',
+    detail: 'button'
 });
+btn.addEventListener('alert',function(event){
+    console.log(event.bubbles);     // true
+    console.log(event.cancelable);      // true
+    console.log(event.detail);      // button
+},false);
+btn.dispatchEvent(ev);
 ```
 
 > 自定义非DOM事件(观察者模式)
@@ -412,6 +420,7 @@ var ev = new CustomEvent('alert',{
 - removeHandler()用于注销某个事件类型的事件处理程序。
 
 ```
+function 
 ```
 
 ### 45.跨域的方法有哪些？原理是什么？
@@ -441,6 +450,18 @@ getName();
 new Foo.getName();
 new Foo().getName();
 new new Foo().getName();
+```
+
+最终结果如下：
+
+```
+Foo.getName(); //2
+getName();//4
+Foo().getName();//1
+getName();//1
+new Foo.getName();//2
+new Foo().getName();//3
+new new Foo().getName();//3
 ```
 
 ### 49.实现双向绑定 Proxy 与 Object.defineProperty 相比优劣如何?
