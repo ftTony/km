@@ -359,7 +359,9 @@ let ev = new Event('alert',{
     composed:false
 });
 btn.addEventListener('alert',function(event){
-
+    console.log(event.bubbles);     // true
+    console.log(event.cancelable);      // true
+    console.log(event.detail);          // undefined
 },false);
 btn.dispatchEvent(ev);
 ```
@@ -367,11 +369,29 @@ btn.dispatchEvent(ev);
 2. 使用`createEvent('CustomEvent')`（DOM3）
 
 ```
+let btn = document.querySelector('#btn');
+let ev = btn.createEvent('CustomEvent');
+ev.initCustomEvent('alert',true,true,'button');
+btn.addEventListener('alert',function(event){
+
+},false);
+btn.dispatchEvent(ev);
 ```
 
 3. 使用`new customEvent()`（DOM4）
 
 使用起来比`createEvent('CustomEvent')`更加方便
+
+```
+var btn = document.querySelector('#btn');
+```
+
+> 自定义非DOM事件(观察者模式)
+
+- EventTarget类型有一个单独的属性handlers,用于存储事件处理程序（观察者）。
+- addHandler()用于注册给定类型事件处理程序；
+- fire()用于触发一个事件；
+- removeHandler()用于注销某个事件类型的事件处理程序。
 
 ```
 ```
