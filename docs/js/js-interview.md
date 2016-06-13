@@ -255,6 +255,8 @@ this 的绑定规则有四种：默认绑定，隐匿绑定，显式绑定，new
 
 ### 22.什么是深拷贝？深拷贝和浅拷贝有什么区别？
 
+参考[JS的浅拷贝与深拷贝](https://km.xiaowuzi.info/js/js-clone.html)
+
 ### 23.防抖和节流的区别是什么？防抖和节流的实现。
 
 ### 24.取数组的最大值（ES5、ES6）
@@ -368,12 +370,21 @@ btn.dispatchEvent(ev);
 
 2. 使用`createEvent('CustomEvent')`（DOM3）
 
+要创建自定义事件，可以调用`createEvent('CustomEvent')`，返回的对象有initCustomEvent方法，接受以下四个参数：
+
+- type：字符串，表示触发的事件类型，如此处的`alert`
+- bubbles：布尔值，表示事件是否冒泡
+- cancelable：布尔值，表示事件是否可以取消
+- detail：任意值，保存在event对象的detail属性中
+
 ```
 let btn = document.querySelector('#btn');
 let ev = btn.createEvent('CustomEvent');
 ev.initCustomEvent('alert',true,true,'button');
 btn.addEventListener('alert',function(event){
-
+    console.log(event.bubbles); //true
+    console.log(event.cancelable);//true
+    console.log(event.detail); //button
 },false);
 btn.dispatchEvent(ev);
 ```
@@ -384,6 +395,13 @@ btn.dispatchEvent(ev);
 
 ```
 var btn = document.querySelector('#btn');
+/*
+  * 第一个参数是事件类型
+  * 第二个参数是一个对象
+  */
+var ev = new CustomEvent('alert',{
+
+});
 ```
 
 > 自定义非DOM事件(观察者模式)
