@@ -259,13 +259,24 @@ export default{
 
 ### 17.事件的销毁
 
-Vue组件销毁时，会自动清理它与其它实例的连接，解绑它的全部指令及事件监听器，但是仅限于组件本身的事件。如果
+Vue组件销毁时，会自动清理它与其它实例的连接，解绑它的全部指令及事件监听器，但是仅限于组件本身的事件。如果仅限于组件本身的事件。如果在js内使用addEventListene等方式是不会自动销毁的，我们需要在组件销毁时手动移除这些事件的监听，以免造成内存泄露，如：
+
+```
+created(){
+    addEventListener('click',this.click,false)
+},
+beforeDestroy(){
+    removeEventListener('click',this.click,false)
+}
+```
 
 ### 19.图片资源懒加载
 
+对于图片过多的页面，为了加速页面加载速度，所以很多时候我们需要将页面
+
 ### 20. 优化无限列表性能
 
-如果你的应用存在非常长或者无限滚动的列表，
+如果你的应用存在非常长或者无限滚动的列表，那么需要采用窗口化的技术来优化性能，只需要渲染少部分区域的内容，减少重新渲染组件和创建dom节点的时间。可以使用[vue-virtual-scroll-list](https://github.com/tangbc/vue-virtual-scroll-list)和[vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller)来优化这种无限列表的场景的。
 
 ### 参考资料
 

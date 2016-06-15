@@ -105,9 +105,14 @@ function convert(source,parentId=0){
     let trees = [];
     for(let item of source){
         if(item.parentId === parentId){
-            
+            let children = convert(source,item['id']);
+            if(children.length){
+                item.children = children
+            }
+            trees.push(item);
         }
     }
+    return trees
 }
 ```
 
@@ -115,7 +120,19 @@ function convert(source,parentId=0){
 
 ```
 function convert(source,parentId=0){
-    let trees = [];
+    const obj = {}
+    const res = []
+    list.forEach(item=>{
+        obj[item] = item
+    })
+    list.forEach(item=>{
+        if(item.parentId !==0){
+            obj[item.parentId]['children']? obj[item.parentId]['children'].push(item):obj[item.parentId]['children'] = [item]
+        }else{
+            res.push(item)
+        }
+    })
+    return res
 }
 ```
 
