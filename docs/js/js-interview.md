@@ -343,6 +343,8 @@ web worker就是在js单线程执行的基础上开启一个子线程，进行�
 
 ### 43.浏览器事件代理机制的原理是什么？
 
+参考[js事件](https://km.xiaowuzi.info/js/es5-event.html)
+
 ### 44.js 如何自定义事件？
 
 > 自定义DOM事件(不考虑IE9之前版本)
