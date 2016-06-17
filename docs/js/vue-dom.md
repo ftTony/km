@@ -197,12 +197,19 @@ var TEXT = 3 // 文本内容改变
 var ul1 = el('div',{id: 'virtual-dom'},[
     el('p',{},['Virtual DOM']),
     el('ul',{id:'list'},[
-
-    ])
+        el('li',{class:'item'},['Item 1']),
+        el('li',{class:'item'},['Item 2']),
+        el('li',{class:'item'},['Item 3'])
+    ]),
+    el('div',{},['Hello World'])
 ])
+
+
 ```
 
-我们查看输出的两个虚拟`DOM`对象之间的差异对象如下图所示，我们能通过差异对象得到，两个虚拟`DOM`对象之间进行了哪些变化，
+我们查看输出的两个虚拟`DOM`对象之间的差异对象如下图所示，我们能通过差异对象得到，两个虚拟`DOM`对象之间进行了哪些变化，从而根据这个差异对象（`patches`）更改原先的真实`DOM`结构，从而将页面的`DOM`结构进行更改。
+
+![images](vue-diff-16.png)
 
 ### 五、pach 方法实现
 
