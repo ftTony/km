@@ -422,7 +422,38 @@ btn.dispatchEvent(ev);
 - removeHandler()用于注销某个事件类型的事件处理程序。
 
 ```
-function 
+function EventTarget(){
+    this.handlers = {};
+}
+
+EventTarget.prototype = {
+    constructor:EventTarget,
+    addHandler:function(type,handler){
+        if(typeof this.handlers[type] === 'undefined'){
+            this.handlers[type] = [];
+        }
+        this.handlers[type].push(handler);
+    },
+    fire:function(event){
+        if(!event.target){
+            event.target = this;
+        }
+        if(this.handlers[event.type] instanceof Array){
+            
+        }
+    },
+    removeHandler:function(type,handler){
+
+    }
+}
+
+// 使用
+function handleMessage(event){
+    console.log(event.message);
+}
+// 创建一个新对象
+var target = new EventTarget();
+// 添加一个事件处理程序
 ```
 
 ### 45.跨域的方法有哪些？原理是什么？
