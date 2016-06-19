@@ -29,18 +29,67 @@ computed 是计算属性的；它会根据所依赖的数据动态显示新计�
 示例如下：
 
 ```
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性</title>
+    <script type="text/javascript" src="https://cn.vuejs.org/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>第一次调用computed属性：{{reversedMsg}}</div>
+        <div>第二次调用computed属性：{{reversedMsg}}</div>
+        <div>第三次调用computed属性：{{reversedMsg}}</div>
+        <!-- 下面是methods调用 -->
+        <div>第一次调用methods方法：{{reversedMsg1()}}</div>
+        <div>第二次调用methods方法：{{reversedMsg1()}}</div>
+        <div>第三次调用methods方法：{{reversedMsg1()}}</div>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello'
+            },
+            computed: {
+                reversedMsg() {
+                    console.log(1111)
+                    // this 指向 vm实例
+                    return this.msg.split('').reverse().join('');
+                }
+            },
+            methods: {
+                reversedMsg1() {
+                    console.log(2222);
+                    // this 指向vm实例
+                    return this.msg.split('').reverse().join('')
+                }
+            }
+        })
+        console.log(vm);
+    </script>
+</body>
+
+</html>
 ```
 
 执行后的结果如下所示：
 
-如上代码我们可以看到，在 computed 中有属性 reversedMsg，然后在该方法中会打印 111；信息出来，在 methods 中的方法 reversedMsg1 也会打印 2222 信息出来，
+![images](vue-watch01.png)
 
-### 二、Vue 中的 watch 的用法
+如上代码我们可以看到，在 computed 中有属性 reversedMsg，然后在该方法中会打印 111；信息出来，在 methods 中的方法 reversedMsg1 也会打印 2222 信息出来，但是在 computed 中，我们除了第一次之后，再次获取 reversedMsg 值后拿得是缓存里面的数据，因此就不会再执行该 reversedMsg 函数了。但是在 methods 中，并没有缓存，每次执行 reversedMsg1()方法后，都会打印信息。
+
+如上面代码, 我们调用了 computed 中的 reversedMsg 方法一共有三次，如果我们也有上百次调用或上千次调用的话, 如果依赖的数据没有改变, 那么每次调用都要去计算一遍, 那么肯定会造成很大的浪费。因此 computed 就是来优化这件事的。
+
+### 三、Vue 中的 watch 的用法
 
 watch 它是一个对 data 的数据监听回调，当依赖的 data 的数据变化时，会执行回调。在回调中会传入 newVal 和 oldVal 两个参数。
 
-Vue 实例将会在实例化时调用\$watch()，他会遍历 watch 对象的每一个属性。
+Vue 实例将会在实例化时调用`$watch()`，他会遍历 watch 对象的每一个属性。
 
 #### 2.1 watch 的使用场景
 
@@ -48,9 +97,11 @@ Vue 实例将会在实例化时调用\$watch()，他会遍历 watch 对象的每
 
 #### 2.2 handler 方法及 immediate 属性
 
-watch 有一个特点是：第一次寝化页面的时候，是不会去执行 age 这个属性监听的，只有当 age 值发生改变的时候才会执行监听计算。因此我们上面第一次初始化页面的时候，'basicMsg'属性默认为空字符串。那么我们现在想要第一次初始化页面的时候也希望它能够执行'age'进行监听，最后能把结果返回给
+watch 有一个特点是：第一次寝化页面的时候，是不会去执行 age 这个属性监听的，只有当 age 值发生改变的时候才会执行监听计算。因此我们上面第一次初始化页面的时候，'basicMsg'属性默认为空字符串。那么我们现在想要第一次初始化页面的时候也希望它能够执行'age'进行监听，最后能把结果返回给'basicMsg'值来。因此我们需要修改下我们的 watch 的方法，需要引入 handler 方法和 immediate 属性，代码如下所示：
 
 #### 2.3 理解 deep 属性
+
+deep 属性作用是否深度监听某个对象的值，该值默认为 false。
 
 ### 三、computed 和 watch 的区别
 
