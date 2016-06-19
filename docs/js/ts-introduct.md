@@ -290,6 +290,9 @@ interface Point {
 - [TypeScript 手册指南](https://www.tslang.cn/docs/handbook/basic-types.html)
 - [TypeScript Handbook（中文版）](https://zhongsp.gitbooks.io/typescript-handbook/content/)
 - [TypeScript 入门教程](https://ts.xcatliu.com/)
+- [滋 TS 源码（一）- 准备调试](https://mp.weixin.qq.com/s/vU4WN2wA8hzW8Y5WHulFSQ)
+- [滋 TS 源码（二）- 开始编译](https://mp.weixin.qq.com/s/GgpDGAbSbWpFD_hgfqnCZQ)
+- [滋 TS 源码（三）- 词法分析](https://mp.weixin.qq.com/s/r9waheefjYfsJ_D-r6UlUg)
 
 ## 联系作者
 

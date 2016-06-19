@@ -324,7 +324,19 @@ Promise 是微任务，setTimeout 是宏任务，同一个事件循环中，prom
 
 ### 38.可遍历数据结构的有什么特点？
 
+一个对象如果要具备可被 for...of 循环调用的 Iterator 接口，就必须在其 Symbol.iterator 的属性上部署遍历器生成方法(或者原型链上的对象具有该方法)
+
+**PS:** 遍历器根本特征就是具有 next 方法。每次调用 next 方法，都会返回一个代表当前成员的信息对象，具有 value 和 done 两个属性。
+
+```
+
+```
+
+#### 原生具备 Iterator
+
 ### 39.requestAnimationFrame 和 setTimeout/setInterval 有什么区别？使用 requestAnimationFrame 有哪些好处？
+
+在 requestAnimationFrame 之前，我们主要使用 setTimeout/setInterval 来编写 JS 动画。
 
 ### 40.JS 类型转换的规则是什么？
 
@@ -586,6 +598,9 @@ new new Foo().getName();//3
 
 - [【面试篇】寒冬求职季之你必须要懂的原生 JS(上)](https://juejin.im/post/5cab0c45f265da2513734390)
 - [【面试篇】寒冬求职季之你必须要懂的原生 JS(中)](https://juejin.im/post/5cbd1e33e51d45789161d053)
+- [中高级前端大厂面试秘籍，为你保驾护航金三银四，直通大厂(上)](https://juejin.im/post/5c64d15d6fb9a049d37f9c20)
+- [(下篇)中高级前端大厂面试秘籍，寒冬中为您保驾护航，直通大厂](https://juejin.im/post/5cc26dfef265da037b611738)
+- [(中篇)中高级前端大厂面试秘籍，寒冬中为您保驾护航，直通大厂](https://juejin.im/post/5c92f499f265da612647b754)
 - [春招季如何横扫 Javascript 面试核心考点(基础版)？](https://juejin.im/post/5c6ad9fde51d453c356e37d1)
 - [每日·壹题](https://muyiy.cn/question/program/5.html)
 
