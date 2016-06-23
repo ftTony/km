@@ -208,8 +208,6 @@ constructor (options = {}) {
 Store 类的成员方法有下面几个：
 
 1. `commit`：
-2. `dispatch`：
-3. `subscribe`：
 
 ```
 commit (_type, _payload, _options) {
@@ -248,13 +246,17 @@ commit (_type, _payload, _options) {
       )
     }
   }
+```
 
-  dispatch (_type, _payload) {
-    // check object-style dispatch
-    const {
-      type,
-      payload
-    } = unifyObjectStyle(_type, _payload)
+2. `dispatch`：
+
+```
+dispatch (\_type, \_payload) {
+// check object-style dispatch
+const {
+type,
+payload
+} = unifyObjectStyle(\_type, \_payload)
 
     const action = { type, payload }
     const entry = this._actions[type]
@@ -294,16 +296,27 @@ commit (_type, _payload, _options) {
       }
       return res
     })
-  }
 
-  subscribe (fn) {
-    return genericSubscribe(fn, this._subscribers)
-  }
+}
+```
 
-  subscribeAction (fn) {
-    const subs = typeof fn === 'function' ? { before: fn } : fn
-    return genericSubscribe(subs, this._actionSubscribers)
-  }
+3. `subscribe`：
+
+```
+subscribe (fn) {
+return genericSubscribe(fn, this.\_subscribers)
+}
+
+```
+
+4. `subscribeAction`：
+
+```
+
+subscribeAction (fn) {
+const subs = typeof fn === 'function' ? { before: fn } : fn
+return genericSubscribe(subs, this.\_actionSubscribers)
+}
 ```
 
 #### 2.5 Module 类
@@ -321,9 +334,9 @@ Module 类的成员属性有四个，分别是：
 constructor (rawModule, runtime) {
     this.runtime = runtime
     // Store some children item
-    this._children = Object.create(null)
+    this.\_children = Object.create(null)
     // Store the origin module object which passed by programmer
-    this._rawModule = rawModule
+    this.\_rawModule = rawModule
     const rawState = rawModule.state
 
     // Store the origin module's state
@@ -334,55 +347,60 @@ constructor (rawModule, runtime) {
 Module 类的成员方法有以下几个：
 
 1. 作`_children`属性的 addChild、removeChild、getChild、forEachChild 四个方法。
-2. 操作`_rawModule`属性的 update、forEachGetter、forEachAction、forEachMutation 四个方法。
 
 ```
 addChild (key, module) {
     this._children[key] = module
-  }
+}
 
-  removeChild (key) {
-    delete this._children[key]
-  }
+removeChild (key) {
+delete this._children[key]
+}
 
-  getChild (key) {
+getChild (key) {
     return this._children[key]
-  }
+}
 
-  update (rawModule) {
+
+forEachMutation (fn) {
+    if (this._rawModule.mutations) {
+        forEachValue(this._rawModule.mutations, fn)
+    }
+}
+```
+
+2. 操作`_rawModule`属性的 update、forEachGetter、forEachAction、forEachMutation 四个方法。
+
+```
+update (rawModule) {
     this._rawModule.namespaced = rawModule.namespaced
     if (rawModule.actions) {
-      this._rawModule.actions = rawModule.actions
+        this._rawModule.actions = rawModule.actions
     }
     if (rawModule.mutations) {
-      this._rawModule.mutations = rawModule.mutations
+        this._rawModule.mutations = rawModule.mutations
     }
     if (rawModule.getters) {
-      this._rawModule.getters = rawModule.getters
+        this._rawModule.getters = rawModule.getters
     }
-  }
+}
 
-  forEachChild (fn) {
+forEachChild (fn) {
     forEachValue(this._children, fn)
-  }
+}
 
-  forEachGetter (fn) {
+forEachGetter (fn) {
     if (this._rawModule.getters) {
-      forEachValue(this._rawModule.getters, fn)
+        forEachValue(this._rawModule.getters, fn)
     }
-  }
+}
 
-  forEachAction (fn) {
+forEachAction (fn) {
     if (this._rawModule.actions) {
-      forEachValue(this._rawModule.actions, fn)
+        forEachValue(this._rawModule.actions, fn)
     }
-  }
+}
 
-  forEachMutation (fn) {
-    if (this._rawModule.mutations) {
-      forEachValue(this._rawModule.mutations, fn)
-    }
-  }
 ```
 
 #### 2.6 ModuleCollection 类
@@ -396,7 +414,7 @@ ModuleCollection 类有以下几个方法成员：
 ```
 register (path, rawModule, runtime = true) {
     if (process.env.NODE_ENV !== 'production') {
-      assertRawModule(path, rawModule)
+        assertRawModule(path, rawModule)
     }
 
     const newModule = new Module(rawModule, runtime)
@@ -414,50 +432,47 @@ register (path, rawModule, runtime = true) {
       })
     }
 }
+
 ```
 
 2. `unregister`：取消某个模块；
 
 ```
- unregister (path) {
-    const parent = this.get(path.slice(0, -1))
-    const key = path[path.length - 1]
-    if (!parent.getChild(key).runtime) return
-
+unregister (path) {
+const parent = this.get(path.slice(0, -1))
+const key = path[path.length - 1]
+if (!parent.getChild(key).runtime) return
     parent.removeChild(key)
-  }
+}
+
 ```
 
 3. `update`：用于从根级别开始逐级更新模块的内容
 
 ```
 function update (path, targetModule, newModule) {
-  if (process.env.NODE_ENV !== 'production') {
-    assertRawModule(path, newModule)
-  }
+if (process.env.NODE_ENV !== 'production') {
+assertRawModule(path, newModule)
+}
 
-  // update target module
-  targetModule.update(newModule)
+// update target module
+targetModule.update(newModule)
 
-  // update nested modules
-  if (newModule.modules) {
+// update nested modules
+if (newModule.modules) {
     for (const key in newModule.modules) {
-      if (!targetModule.getChild(key)) {
-        if (process.env.NODE_ENV !== 'production') {
-          console.warn(
-            `[vuex] trying to add a new module '${key}' on hot reloading, ` +
-            'manual reload is needed'
-          )
-        }
+        if (!targetModule.getChild(key)) {
+            if (process.env.NODE_ENV !== 'production') {
+                console.warn(
+                    `[vuex] trying to add a new module '${key}' on hot reloading,` +
+                    'manual reload is needed'
+                )
+            }
         return
-      }
-      update(
-        path.concat(key),
-        targetModule.getChild(key),
-        newModule.modules[key]
-      )
     }
-  }
+    update(path.concat(key),targetModule.getChild(key),newModule.modules[key])
+    }
+    }
 }
 ```
 
@@ -468,9 +483,29 @@ function update (path, targetModule, newModule) {
 辅助函数包含以下几个方法：
 
 1. `mapState`：为了解决一个组件需要获取多个状态时候，将这些状态都声明为了计算属性会有些重复和冗余，我们可以使用`mapState`辅助函数帮助我们生成计算属性。
+
+```
+
+```
+
 2. `mapMutations`：与 mapState 可以映射模块的 state 为计算属性类似，mapMutations 也可以将模块的 mutations 映射为 matchods
+
+```
+
+```
+
 3. `mapGetters`：与 mapState 可以映射模块的 state 为计算属性类似，mapGetters 也可以将模块的 getters 映射为计算属性
+
+```
+
+```
+
 4. `mapActions`：与 mapMutations 可以映射模块的 mutation 为 methods 类似，mapActions 也可以将模块的 actions 映射为 methods
+
+```
+
+```
+
 5. `createNamespacedHelpers`：主要是根据传递的命名空间产生对应模块的局部化 mapState、mapGetters、mapMutations、mapActions 映射函数
 
 ```
@@ -496,3 +531,4 @@ vuex 代码主要使用了订阅者模式，保证了数据统一性
     </p>
     <img :src="$withBase('/about/contact.png')" />
 </div>
+```
