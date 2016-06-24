@@ -487,7 +487,29 @@ target.fire({type:'message',message:'Hi'});
 1. `<script>` 的 defer 属性，HTML4 中新增
 2. `<script>` 的 async 属性，HTML5 中新增
 
+- `<script>` 标签打开 defer 属性，脚本就会异步加载。渲染引擎遇到这一行命令，就会开始下载外部脚本，但不会等它下载和执行，而是直接执行后面的命令。
+- defer 和 async 的区别在于：defer 要等到整个页面在内存中正常渲染结束，才会执行；
+- async 一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染。defer 是“渲染完再执行”，async 是“下载完就执行”。
+- 如果有多个 defer 脚本，会按照它们在页面出现的顺序加载。
+- 多个 async 脚本是不能保证加载顺序的。
+
+3. 动态插入 script 脚本
+
+```
+function downloadJS(){
+    var element = document.createElement("script");
+    element.src ='xxx.js';
+    document.body.appendChild(element);
+}
+```
+
 ### 47.下面代码 a 在什么情况中打印出 1？
+
+```
+if(a===1 && a == 2 && a==3){
+    console.log(1);
+}
+```
 
 ### 48.下面这段代码的输出是什么？
 
@@ -509,6 +531,8 @@ new Foo.getName();
 new Foo().getName();
 new new Foo().getName();
 ```
+
+参考[一道常被人轻视的前端 JS 面试题](https://www.cnblogs.com/xxcanghai/p/5189353.html)
 
 最终结果如下：
 
