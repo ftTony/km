@@ -1,4 +1,4 @@
-# 数据类型与数据类型转换
+# JS 数据类型与数据类型转换
 
 ## 前言
 
@@ -9,7 +9,7 @@
 - [数据类型种类](#一、数据类型种类)
 - [数据类型转换](#二、数据类型转换)
 - [数据类型判断](#三、数据类型判断)
-- [实现typeAPI](#四、实现 type API)
+- [实现 typeAPI](#四、实现 type API)
 
 ## 一、数据类型种类
 
@@ -280,6 +280,8 @@ function type(obj) {
 ### 参考资料
 
 - 《JavaScript 权威第六版》
+- 《你不知道的 JavaSctipt(中)》
+- [JS 类型转换的规则是什么？](https://juejin.im/post/5cbd1e33e51d45789161d053#heading-6)
 - [JavaScript 专题之类型判断(上) ](https://github.com/mqyqingfeng/Blog/issues/28)
 
 ## 联系作者
