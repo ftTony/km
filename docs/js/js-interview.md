@@ -332,7 +332,26 @@ Promise 是微任务，setTimeout 是宏任务，同一个事件循环中，prom
 
 ```
 
-#### 原生具备 Iterator
+使用 Generator 函数()简写 Symbol.iterator 方法，可以简写如下：
+
+```
+let obj = {
+    name: 'Yvette',
+    age: 18,
+    job: 'engineer'
+}
+```
+
+#### 原生具备 Iterator 接口的数据结构如下
+
+- Array
+- Map
+- Set
+- String
+- TypedArray
+- 函数的 arguments 对象
+- NodeList 对象
+- ES6 的数组、Set、Map 都部署了以下三个方法：entries()/keys()/values()，调用后都返回遍历器对象
 
 ### 39.requestAnimationFrame 和 setTimeout/setInterval 有什么区别？使用 requestAnimationFrame 有哪些好处？
 
@@ -601,6 +620,15 @@ new new Foo().getName();//3
 - [中高级前端大厂面试秘籍，为你保驾护航金三银四，直通大厂(上)](https://juejin.im/post/5c64d15d6fb9a049d37f9c20)
 - [(下篇)中高级前端大厂面试秘籍，寒冬中为您保驾护航，直通大厂](https://juejin.im/post/5cc26dfef265da037b611738)
 - [(中篇)中高级前端大厂面试秘籍，寒冬中为您保驾护航，直通大厂](https://juejin.im/post/5c92f499f265da612647b754)
+- [44 个 Javascript 变态题解析](http://www.admin10000.com/document/9203.html)
+- [[译]送你 43 道 JavaScript 面试题](https://github.com/lydiahallie/javascript-questions/blob/master/zh-CN/README-zh_CN.md)
+- [送你 58 道 JavaScript 面试题（上）](https://mp.weixin.qq.com/s/PYD9jzcbEtooZYvuuYMf_Q)
+- [26 个精选的 JavaScript 面试问题](https://juejin.im/post/5bd95d22e51d45685f442f73)
+- [56 道高频 JavaScript 与 ES6+ 的面试题及答案](https://mp.weixin.qq.com/s/D76Bh59PkiCYPjK1mPSA4Q)
+- [50 个 JS 必须懂的面试题为你助力金九银十](https://juejin.im/post/5d6c53476fb9a06acc009e00)
+- [20 个必会的 JavaScript 面试题](https://ly2011.github.io/blog/#/interview/20%E4%B8%AA%E5%BF%85%E4%BC%9A%E7%9A%84JavaScript%E9%9D%A2%E8%AF%95%E9%A2%98)
+- [Javascript 面试核心考点](https://mp.weixin.qq.com/s/Bk07WB9hBagL590RRjC4FA)
+- [Javascript 高频面试题解析](https://mp.weixin.qq.com/s/g5Cr0N32W_z9X3qIMLOX6Q)
 - [春招季如何横扫 Javascript 面试核心考点(基础版)？](https://juejin.im/post/5c6ad9fde51d453c356e37d1)
 - [每日·壹题](https://muyiy.cn/question/program/5.html)
 
