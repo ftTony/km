@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [挑战一轮大厂后的面试总结 (含六个方向) - 浏览器 篇](https://juejin.im/post/5e5776f3f265da57127e48a9)
+
 ## 联系作者
 
 <div align="center">
