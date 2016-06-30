@@ -34,6 +34,10 @@ module.exports = {
             link: '/cs/'
         },
         {
+            text: '',
+            link: 'interview'
+        },
+        {
             text: '资料收集',
             link: '/materials/'
         },
@@ -85,8 +89,7 @@ module.exports = {
                     'js-run',
                     'js-ast',
                     'js-v8',
-                    'js-principle',
-                    'js-interview'
+                    'js-principle'
                 ]
             },
             {
@@ -159,8 +162,7 @@ module.exports = {
                     'vue-router-code',
                     'vue-communication',
                     'vue-vuex-code',
-                    'vue-code',
-                    'vue-interview'
+                    'vue-code'
                 ]
             }
         ],
@@ -319,7 +321,6 @@ module.exports = {
                     'webpack-plugin',
                     'webpack-loader',
                     'webpack-hmr',
-                    'webpack-interview',
                     'webpack-coder'
                 ]
             },
@@ -377,9 +378,7 @@ module.exports = {
                     'backtracking',
                     'dp-1',
                     'dp-2',
-                    'kmp',
-                    'offer',
-                    'leetcode'
+                    'kmp'
                 ]
             },
             {
@@ -420,6 +419,26 @@ module.exports = {
                 children: ['os', 'linux', 'linux-1', 'linux-2', 'shell']
             }
         ],
-        '/materials/': []
+        '/materials/': [],
+        'interview': [
+            'js-interview1',
+            'js-interview2',
+            'js-interview3',
+            'js-interview4',
+            'es6-interview',
+            'node-interview4',
+            'vue-interview4',
+            'css-interview1',
+            'css-interview2',
+            'css-interview3',
+            'html5-interview',
+            'browser-interview',
+            'net-interview',
+            'offer',
+            'leetcode',
+            'performance-interview',
+            'webpack-interview',
+            'project-interview',
+        ]
     }
 };
