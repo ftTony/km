@@ -34,8 +34,8 @@ module.exports = {
             link: '/cs/'
         },
         {
-            text: '',
-            link: 'interview'
+            text: '面试题',
+            link: '/interview/'
         },
         {
             text: '资料收集',
@@ -420,25 +420,66 @@ module.exports = {
             }
         ],
         '/materials/': [],
-        'interview': [
-            'js-interview1',
-            'js-interview2',
-            'js-interview3',
-            'js-interview4',
-            'es6-interview',
-            'node-interview4',
-            'vue-interview4',
-            'css-interview1',
-            'css-interview2',
-            'css-interview3',
-            'html5-interview',
-            'browser-interview',
-            'net-interview',
-            'offer',
-            'leetcode',
-            'performance-interview',
-            'webpack-interview',
-            'project-interview',
+        '/interview/': [{
+                title: 'js相关',
+                collapsable: false,
+                children: [
+                    'js-interview1',
+                    'js-interview2',
+                    'js-interview3',
+                    'js-interview4',
+                    'es6-interview',
+                ]
+            }, {
+                title: 'css相关',
+                collapsable: false,
+                children: [
+                    'css-interview1',
+                    'css-interview2',
+                    'css-interview3',
+                ]
+            },
+            {
+                title: 'HTML相关',
+                collapsable: false,
+                children: [
+                    'html5-interview'
+                ]
+            }, {
+                title: '框架相关',
+                collapsable: false,
+                children: [
+                    'vue-interview'
+                ]
+            }, {
+                title: 'node相关',
+                collapsable: false,
+                children: [
+                    'node-interview'
+                ]
+            }, {
+                title: '计算机基础',
+                collapsable: false,
+                children: [
+                    'net-interview',
+                    'offer',
+                    'leetcode',
+                ]
+            }, {
+                title: '工程化',
+                collapsable: false,
+                children: [
+                    'browser-interview',
+                    'performance-interview',
+                    'webpack-interview',
+                    'project-interview'
+                ]
+            },
+            {
+                title: '其它',
+                collapsable: false,
+                children: []
+            }
         ]
     }
 };
