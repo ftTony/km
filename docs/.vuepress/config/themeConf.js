@@ -476,6 +476,15 @@ module.exports = {
                 ]
             },
             {
+                title: '面试技巧',
+                collapsable: false,
+                children: [
+                    'interview-skill1',
+                    'interview-skill2',
+                    'interview-skill3'
+                ]
+            },
+            {
                 title: '其它',
                 collapsable: false,
                 children: []

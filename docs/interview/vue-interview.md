@@ -48,9 +48,9 @@ data:{
 }
 ```
 
-Style也可以通过对象语法和数组语法进行动态绑定：
+Style 也可以通过对象语法和数组语法进行动态绑定：
 
--  对象语法：
+- 对象语法：
 
 ```
 <div v-bind:style="{color:activeColor,fontSize:fontSize+'px'}"></div>
@@ -209,9 +209,9 @@ LRU（Least recently used）算法根据数据的历史访问记录来进行淘�
 
 keep-alive 的实现正是用到了 LRU 策略,将最近访问的组件 push 到 this.keys 最后面,this.keys[0]也就是最久没被访问的组件,当缓存实例超过 max 设置值,删除 this.keys[0]
 
-### 15. vuejs与angularjs以及react的区别？
+### 15. vuejs 与 angularjs 以及 react 的区别？
 
-#### 与Angular JS的区别
+#### 与 Angular JS 的区别
 
 **相同点：**
 
@@ -222,28 +222,28 @@ keep-alive 的实现正是用到了 LRU 策略,将最近访问的组件 push 到
 
 **不同点：**
 
-- Angular JS的学习成本高，比如拉回了Dependency Injectior特性，而Vue.js本身提供的API都比较简单、直观。
-- 在性能上，Angular JS任斯璐对数据做脏检查，所以Watcher越多越慢。
-- Vue.js使用基于依赖追踪的观察并且使用异步队列更新。所有的数据都是独立触发的。
+- Angular JS 的学习成本高，比如拉回了 Dependency Injectior 特性，而 Vue.js 本身提供的 API 都比较简单、直观。
+- 在性能上，Angular JS 任斯璐对数据做脏检查，所以 Watcher 越多越慢。
+- Vue.js 使用基于依赖追踪的观察并且使用异步队列更新。所有的数据都是独立触发的。
 
-#### 与React的区别
+#### 与 React 的区别
 
 **相同点：**
 
-- React采用特殊的JSX语法，Vue.js在组件开发中也推崇编写.vue特殊文件格式，对文件内容都有一些约定，两者都需要编译后使用。
+- React 采用特殊的 JSX 语法，Vue.js 在组件开发中也推崇编写.vue 特殊文件格式，对文件内容都有一些约定，两者都需要编译后使用。
 - 中心思想相同：一切都是组件，组件实例之间可以嵌套。
 - 都提供合理的钩子函数，可以让开发者定制化地去处理需求。
-- 都不内置列表AJAX、Route等功能到核心包，而是以插件的方式加载。
-- 在组件开发中都支持mixins的特性。
+- 都不内置列表 AJAX、Route 等功能到核心包，而是以插件的方式加载。
+- 在组件开发中都支持 mixins 的特性。
 
 **不同点：**
 
-- React依赖Virtual DOM，而Vue.js使用的是DOM模板。React采用的Virtual DOM会对渲染出来的结果做脏检查。
-- Vue.js在模板中提供了指令，过滤器等，可以非常方便，快捷地操作DOM。
+- React 依赖 Virtual DOM，而 Vue.js 使用的是 DOM 模板。React 采用的 Virtual DOM 会对渲染出来的结果做脏检查。
+- Vue.js 在模板中提供了指令，过滤器等，可以非常方便，快捷地操作 DOM。
 
 ### 16.长列表性能优化
 
-Vue会通过Object.defineProperty对数据进行劫持，来实现视图响应的变化，然而有些时候我们的组件就是纯粹的数据展示，不会有任何改变，我们就不需要Vue来支持我们的数据，在大量数据展示的情况下，这能够很明显的减少组件初始的时间，那如何禁止Vue劫持我们的数据呢？可以通过Object.freeze方法来冻结一个对象，一旦被冻结的对象就再也不能被修改了。
+Vue 会通过 Object.defineProperty 对数据进行劫持，来实现视图响应的变化，然而有些时候我们的组件就是纯粹的数据展示，不会有任何改变，我们就不需要 Vue 来支持我们的数据，在大量数据展示的情况下，这能够很明显的减少组件初始的时间，那如何禁止 Vue 劫持我们的数据呢？可以通过 Object.freeze 方法来冻结一个对象，一旦被冻结的对象就再也不能被修改了。
 
 ```
 export default{
@@ -259,7 +259,7 @@ export default{
 
 ### 17.事件的销毁
 
-Vue组件销毁时，会自动清理它与其它实例的连接，解绑它的全部指令及事件监听器，但是仅限于组件本身的事件。如果仅限于组件本身的事件。如果在js内使用addEventListene等方式是不会自动销毁的，我们需要在组件销毁时手动移除这些事件的监听，以免造成内存泄露，如：
+Vue 组件销毁时，会自动清理它与其它实例的连接，解绑它的全部指令及事件监听器，但是仅限于组件本身的事件。如果仅限于组件本身的事件。如果在 js 内使用 addEventListene 等方式是不会自动销毁的，我们需要在组件销毁时手动移除这些事件的监听，以免造成内存泄露，如：
 
 ```
 created(){
@@ -276,27 +276,27 @@ beforeDestroy(){
 
 ### 20. 优化无限列表性能
 
-如果你的应用存在非常长或者无限滚动的列表，那么需要采用窗口化的技术来优化性能，只需要渲染少部分区域的内容，减少重新渲染组件和创建dom节点的时间。可以使用[vue-virtual-scroll-list](https://github.com/tangbc/vue-virtual-scroll-list)和[vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller)来优化这种无限列表的场景的。
+如果你的应用存在非常长或者无限滚动的列表，那么需要采用窗口化的技术来优化性能，只需要渲染少部分区域的内容，减少重新渲染组件和创建 dom 节点的时间。可以使用[vue-virtual-scroll-list](https://github.com/tangbc/vue-virtual-scroll-list)和[vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller)来优化这种无限列表的场景的。
 
-### 说说你对angular脏检查理解？
+### 说说你对 angular 脏检查理解？
 
-在angular中你无法判断你的数据是否做了更改，所以它设置了一些条件，当你触发这些条件之后，它就执行一个检测来遍历所有的数据。对比你更改的地方，然后执行变化。这个检测很不科学。而且效率不高，有很多多余的地方，所以官方称为 脏检查。    
+在 angular 中你无法判断你的数据是否做了更改，所以它设置了一些条件，当你触发这些条件之后，它就执行一个检测来遍历所有的数据。对比你更改的地方，然后执行变化。这个检测很不科学。而且效率不高，有很多多余的地方，所以官方称为 脏检查。
 
-### 简述一下Sass、Less，且说明区别？
+### 简述一下 Sass、Less，且说明区别？
 
-他们是动态的样式语言，是CSS预处理器，CSS上的一种抽象层。他们是一种特殊的语法/语言而编译成CSS。
+他们是动态的样式语言，是 CSS 预处理器，CSS 上的一种抽象层。他们是一种特殊的语法/语言而编译成 CSS。
 
-变量符不一样，less是@，而Sass是$;
+变量符不一样，less 是@，而 Sass 是\$;
 
-Sass支持条件语句，可以使用if{}else{},for{}循环等等。而Less不支持；
+Sass 支持条件语句，可以使用 if{}else{},for{}循环等等。而 Less 不支持；
 
-Sass是基于Ruby的，是在服务端处理的，而Less是需要引入less.js来处理Less代码输出Css到浏览器
+Sass 是基于 Ruby 的，是在服务端处理的，而 Less 是需要引入 less.js 来处理 Less 代码输出 Css 到浏览器
 
-### 聊聊你对Vue.js的template编译的理解？
+### 聊聊你对 Vue.js 的 template 编译的理解？
 
-简而言之，就是先转化成AST树，再得到的render函数返回VNode（Vue的虚拟DOM节点）
+简而言之，就是先转化成 AST 树，再得到的 render 函数返回 VNode（Vue 的虚拟 DOM 节点）
 
-详情步骤：首先通过compile编译器把template编译成AST语法树（abstract syntax tree 即源代码的抽象语法结构的树状态表现形式），compile是createCompiler的返回值，createCompiler是用以创建编译器的。另外compile还负责合并option。然后，AST会经过generate（将AST语法树转化成render function字符串的过程）得到render函数，render的返回值是VNode，VNode是Vue的虚拟DOM节点，里面有（标签名、子节点、文本等等）
+详情步骤：首先通过 compile 编译器把 template 编译成 AST 语法树（abstract syntax tree 即源代码的抽象语法结构的树状态表现形式），compile 是 createCompiler 的返回值，createCompiler 是用以创建编译器的。另外 compile 还负责合并 option。然后，AST 会经过 generate（将 AST 语法树转化成 render function 字符串的过程）得到 render 函数，render 的返回值是 VNode，VNode 是 Vue 的虚拟 DOM 节点，里面有（标签名、子节点、文本等等）
 
 ### 参考资料
 
@@ -309,6 +309,7 @@ Sass是基于Ruby的，是在服务端处理的，而Less是需要引入less.js�
 - [12 道 vue 高频原理面试题,你能答出几道?](https://juejin.im/post/5e04411f6fb9a0166049a073)
 - [吃透 Vue 项目开发实践｜ 16 个方面深入前端工程化开发技巧《上》](https://juejin.im/post/5e0202fc6fb9a0165721e39a)
 - [vue 面试题总汇](https://juejin.im/post/59ffb4b66fb9a04512385402)
+- [2020 年大厂面试指南 - Vue 篇](https://juejin.im/post/5e4d24cce51d4526f76eb2ba)
 
 ## 联系作者
 
