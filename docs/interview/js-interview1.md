@@ -433,8 +433,36 @@ async function f2(){
 4. async 函数可以保留运行堆栈。
 
 ```
-
+/**
+*   函数a内部运行了一异步任务b()。当b()运行的时候，函数a()不会中断，而是继续执行。
+*   等到b() 运行结束，可能a()早就运行结束了，b()所在上下文环境已经消失了。
+*   如果b()或c()报错，错误堆栈将不包括a()。
+*/
+function b(){
+    return new Promise((resolve,reject)=>{
+        setTimeout(resolve,200)
+    });
+}
+function c(){
+    throw Error(10);
+}
+const a = ()=>{
+    b().then(()=>c);
+}
+a();
+/**
+* 改成async函数
+*/
+const m = async()=>{
+    await b();
+    c();
+};
+m();
 ```
+
+报错信息如下，可以看出 async 函数可以保留运行堆栈。
+
+![images](js-async02.png)
 
 ### 37.如何实现 Promise.race？
 
