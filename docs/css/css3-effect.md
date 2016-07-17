@@ -160,7 +160,36 @@
 **CSS 代码**
 
 ```
+#heart {
+    width: 100px;
+    height: 90px;
+    position: relative;
+    margin: 100px auto;
+}
 
+#heart::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 90px;
+    background: red;
+    border-radius: 50px 45px 0 0;
+    transform-origin: 0 100%;
+    transform: rotate(-45deg);
+}
+
+#heart::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 90px;
+    top: -35px;
+    left: -35px;
+    background: red;
+    border-radius: 50px 45px 0 0;
+    transform-origin: 0 100%;
+    transform:rotate(45deg);
+}
 ```
 
 ### 5.画一个八卦阵
@@ -261,11 +290,76 @@
 
 ```
 
-- 下三角
-- 左三角
-- 右三角
-- 左上角
-- 右上角
+### 12.下三角
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+### 13. 左三角
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+### 14. 右三角
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+### 15. 左上角
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+### 15. 右上角
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
 - 左下角
 - 右下角
 - 箭头
