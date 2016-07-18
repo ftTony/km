@@ -84,13 +84,20 @@
 **HTML 代码**
 
 ```
-
+<div class="parallel"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+.parallel{
+    width:200px;
+    height:100px;
+    margin-top:50px;
+    margin-left:50px;
+    background-color:lightblue;
+    transform:skew(-20deg,0);
+}
 ```
 
 ### 3.用一个 div 画五角星
@@ -98,13 +105,48 @@
 **HTML 代码**
 
 ```
-
+<div id="star"></div>
 ```
 
 **CSS 代码**
 
 ```
+#star {
+    position: relative;
+    margin: 200px auto;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+    border-width: 70px 100px;
+    transform: rotate(35deg);
+}
 
+#star::before {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    top: -128px;
+    left: -95px;
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+    border-width: 80px 30px;
+    transform: rotate(-35deg);
+}
+
+#star::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    top: -45px;
+    left: -140px;
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+    border-width: 70px 100px;
+    transform: rotate(-70deg);
+}
 ```
 
 ### 4.画一个爱心
