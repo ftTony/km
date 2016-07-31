@@ -402,13 +402,18 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="oval"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#oval {
+    width: 200px;
+    height: 100px;
+    background: red;
+    border-radius: 100px / 50px;
+}
 ```
 
 ### 10. 圆形
@@ -416,13 +421,18 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="circle"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+ #circle {
+    width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 50%;
+}
 ```
 
 ### 11. 上三角
@@ -430,13 +440,18 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="triangle-top"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#triangle-bottom{
+  width:0;
+  height:0;
+  border:50px solid;
+  border-color:  transparent transparent red transparent;
+}
 ```
 
 ### 12.下三角
@@ -444,13 +459,18 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="triangle-bottom"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#triangle-bottom{
+  width:0;
+  height:0;
+  border:50px solid;
+  border-color: red transparent transparent transparent;
+}
 ```
 
 ### 13. 左三角
@@ -458,13 +478,18 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="triangle-left"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#triangle-left{
+  width:0;
+  height:0;
+  border:50px solid;
+  border-color:transparent red transparent transparent;
+}
 ```
 
 ### 14. 右三角
@@ -472,13 +497,18 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="triangle-right"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#triangle-right{
+  width:0;
+  height:0;
+  border:50px solid;
+  border-color:transparent transparent transparent red;
+}
 ```
 
 ### 15. 左上角
@@ -486,13 +516,19 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="triangle-topleft"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+ #triangle-topleft{
+    width:0;
+    height:0;
+    border-right:50px solid;
+    border-top: 50px solid;
+    border-color: red transparent transparent;
+}
 ```
 
 ### 16. 右上角
@@ -500,13 +536,19 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="triangle-topright"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#triangle-topright{
+    width:0;
+    height:0;
+    border-left:50px solid;
+    border-top: 50px solid;
+    border-color: red transparent transparent;
+}
 ```
 
 ### 17. 左下角
