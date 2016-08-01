@@ -556,13 +556,19 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="triangle-bottomleft"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#triangle-bottomleft{
+  width:0;
+  height:0;
+  border-bottom:50px solid;
+  border-right:50px solid;
+  border-color:transparent transparent red transparent;
+}
 ```
 
 ### 18. 右下角
