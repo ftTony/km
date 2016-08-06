@@ -576,13 +576,19 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="triangle-topright"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#triangle-topright{
+    width:0;
+    height:0;
+    border-left:50px solid;
+    border-top: 50px solid;
+    border-color: red transparent transparent;
+}
 ```
 
 ### 19. 箭头
