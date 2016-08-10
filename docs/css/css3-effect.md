@@ -596,13 +596,32 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="curvedarrow"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#curvedarrow {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-top: 9px solid transparent;
+    border-right: 9px solid red;
+    transform: rotate(10deg);
+}
+#curvedarrow::after {
+    content: '';
+    position: absolute;
+    border: 0 solid transparent;
+    border-top: 3px solid red;
+    border-radius: 20px 0 0 0;
+    top: -12px;
+    left: -9px;
+    width: 12px;
+    height: 12px;
+    transform: rotate(45deg);
+}
 ```
 
 ### 20. 梯形
