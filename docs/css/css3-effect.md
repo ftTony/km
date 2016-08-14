@@ -670,16 +670,33 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="star-six"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#star-six{
+    width:0;
+    height: 0;
+    border-left:50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid red;
+    position: relative;
+}
+#star-six::after{
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid red;
+    position: absolute;
+    content: '';
+    top: 30px;
+    left: -50px;
+}
 ```
 
-- 星星 (5 角)
 - 五边形
 - 六边形
 - 八边形
@@ -707,6 +724,23 @@ body {
 - 指示器
 - 锁
 - 卡券
+
+**HTML 代码**
+
+```
+<div class="hollow-one-circle"></div>
+```
+
+**CSS 代码**
+
+```
+.hollow-one-circle {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  background:radial-gradient(circle at 0 50px,transparent 10px,#00abd5 0) top left/100px 100% no-repeat;
+}
+```
 
 ### 参考资料
 
