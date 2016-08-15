@@ -697,12 +697,101 @@ body {
 }
 ```
 
-- 五边形
-- 六边形
-- 八边形
-- 无穷大
-- 菱形
-- 钻石
+### 23. 五边形
+
+**HTML 代码**
+
+```
+<div id="pentagon"></div>
+```
+
+**CSS 代码**
+
+```
+#pentagon {
+    position: relative;
+    width: 54px;
+    box-sizing: content-box;
+    border-width: 50px 18px 0;
+    border-style: solid;
+    top: 50px;
+    border-color: red transparent;
+}
+#pentagon:before {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: -85px;
+    left: -18px;
+    border-width: 0 45px 35px;
+    border-style: solid;
+    border-color: transparent transparent red;
+}
+```
+
+### 24. 六边形
+
+**HTML 代码**
+
+```
+```
+
+**CSS 代码**
+
+```
+```
+
+### 25. 八边形
+
+**HTML 代码**
+
+```
+```
+
+**CSS 代码**
+
+```
+
+```
+
+### 26. 无穷大
+
+**HTML 代码**
+
+```
+```
+
+**CSS 代码**
+
+```
+```
+
+### 27. 菱形
+
+**HTML 代码**
+
+```
+```
+
+**CSS 代码**
+
+```
+
+```
+
+### 28. 钻石
+
+**HTML 代码**
+
+```
+```
+
+**CSS 代码**
+
+```
+```
+
 - 钻戒
 - 钻石 2
 - 蛋蛋
@@ -719,11 +808,11 @@ body {
 - 月亮
 - 旗
 - 圆锥
-- 十字架
-- 根基
-- 指示器
-- 锁
-- 卡券
+### 十字架
+### 根基
+### 指示器
+### 锁
+### 卡券
 
 **HTML 代码**
 
