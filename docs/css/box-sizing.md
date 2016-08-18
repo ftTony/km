@@ -228,6 +228,7 @@ box-sizing，顾名思义，其作用与设置 CSS box 的尺寸大小有关，�
 - [【第 1234 期】前端布局基础概述](https://mp.weixin.qq.com/s/X9i_7BX-32EZlxsYP6MxEg)
 - [谈谈一些有趣的 CSS 题目（11）-- IFC、BFC、GFC 与 FFC 知多少 ](https://github.com/chokcoco/iCSS/issues/56)
 - [尖刀出鞘的 display 常用属性及 css 盒模型深入研究](https://www.cnblogs.com/tugenhua0707/p/4161716.html)
+- [理解 boxsizing](https://www.cnblogs.com/tugenhua0707/p/7266165.html)
 
 ## 联系作者
 
