@@ -735,11 +735,40 @@ body {
 **HTML 代码**
 
 ```
+<div id="hexagon"></div>
 ```
 
 **CSS 代码**
 
 ```
+#hexagon{
+    width: 100px;
+    height: 55px;
+    background-color: red;
+    position: relative;
+}
+#hexagon::before{
+    content: '';
+    position: absolute;
+    top: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 25px solid red;
+}
+#hexagon::after{
+    content: '';
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 25px solid red;
+}
 ```
 
 ### 25. 八边形
