@@ -746,6 +746,7 @@ body {
     height: 55px;
     background-color: red;
     position: relative;
+    top:50px;
 }
 #hexagon::before{
     content: '';
@@ -776,12 +777,40 @@ body {
 **HTML 代码**
 
 ```
+<div id="octagon"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#octagon {
+    width: 100px;
+    height: 100px;
+    background: red;
+    position: relative;
+}
+#octagon:before {
+    content: "";
+    width: 42px;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 29px solid red;
+    border-left: 29px solid #eee;
+    border-right: 29px solid #eee;
+}
+#octagon:after {
+    content: "";
+    width: 42px;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 29px solid red;
+    border-left: 29px solid #eee;
+    border-right: 29px solid #eee;
+}
 ```
 
 ### 26. 无穷大
