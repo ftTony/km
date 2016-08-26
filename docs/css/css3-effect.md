@@ -818,11 +818,38 @@ body {
 **HTML 代码**
 
 ```
+<div id="infinity"></div>
 ```
 
 **CSS 代码**
 
 ```
+#infinity{
+    position: relative;
+    width: 212px;
+    height: 100px;
+    box-sizing: content-box;
+}
+
+#infinity::before,#infinity::after{
+    content: '';
+    box-sizing: content-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    border:20px solid red;
+    border-radius: 50px 50px 0 50px;
+    transform: rotate(-45deg);
+}
+
+#infinity::after{
+    left: auto;
+    right: 0;
+    border-radius: 50px 50px 50px 0;
+    transform: rotate(45deg);
+}
 ```
 
 ### 27. 菱形
@@ -830,12 +857,30 @@ body {
 **HTML 代码**
 
 ```
+<div id="diamond"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#diamond{
+    width: 0;
+    height: 0;
+    border:50px solid transparent;
+    border-bottom-color: red;
+    position: relative;
+    top: -50px;
+}
+#diamond::after{
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 50px;
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-top-color: red;
+}
 ```
 
 ### 28. 钻石
