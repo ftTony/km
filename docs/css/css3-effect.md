@@ -1004,11 +1004,24 @@ body {
 **HTML 代码**
 
 ```
+<div id="pacman"></div>
 ```
 
 **CSS 代码**
 
 ```
+#pacman{
+  width:0px;
+  height:0px;
+  border-right:60px solid transparent;
+  border-top:60px solid red;
+  border-left:60px solid red;
+  border-bottom:60px solid red;
+  border-top-left-radius:60px;
+  border-top-right-radius:60px;
+  border-bottom-left-radius:60px;
+  border-bottom-right-radius:60px;
+}
 ```
 
 ### 34. 对话泡泡
