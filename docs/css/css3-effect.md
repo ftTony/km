@@ -950,11 +950,33 @@ body {
 **HTML 代码**
 
 ```
+<div id="cut-diamond"></div>
 ```
 
 **CSS 代码**
 
 ```
+#cut-diamond{
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+    border-width: 0 25px 25px 25px;
+    height: 0;
+    width: 50px;
+    box-sizing: content-box;
+    position: relative;
+    margin: 20px 0 50px 0;
+}
+#cut-diamond:after {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: -25px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: red transparent transparent transparent;
+    border-width: 70px 50px 0 50px;
+}
 ```
 
 ### 32. 蛋蛋
@@ -962,11 +984,19 @@ body {
 **HTML 代码**
 
 ```
+<div id="egg"></div>
 ```
 
 **CSS 代码**
 
 ```
+#egg{
+    display: block;
+    width: 126px;
+    height: 180px;
+    background-color: red;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
 ```
 
 ### 33. 吃豆人
