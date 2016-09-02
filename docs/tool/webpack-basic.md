@@ -591,17 +591,13 @@ webpack 打包配置相对比较复杂，目前介绍应该可以满常规需求
 ### 参考资料
 
 - 《深入浅出 webpack》
-- [【第 1617 期】Webpack 是怎样运行的?](https://mp.weixin.qq.com/s/uc4fVViv4u86TTX2XsMgFA)
 - [由浅入深 Webpack](https://github.com/yanlele/node-index/blob/master/book/11、深入webpack工程化/01、由浅入深Webpack/README.md)
 - [搜罗一切 webpack 的好文章好工具](https://github.com/webpack-china/awesome-webpack-cn)
 - [关于 webpack4 的 14 个知识点,童叟无欺](https://juejin.im/post/5cea1e1ae51d4510664d1652)
-- [Webpack 优化——将你的构建效率提速翻倍](https://mp.weixin.qq.com/s/R9hyFWIvRlzHj9owa-aDjA)
-- [Webpack 性能优化总结大全](https://mp.weixin.qq.com/s?__biz=MzI0MzIyMDM5Ng==&mid=2649825759&idx=1&sn=726279d3dfc2ea0b6ba34788517753ad&chksm=f175eb1cc602620a66821baedcb2663e393f7ae4857e8daf6d57e4c436f9a7297a555d0e4750&scene=21#wechat_redirect)
 - [一文搞懂 Webpack 多入口配置](https://mp.weixin.qq.com/s/b45oLYScG8L40iVlg7qG7g)
 - [一步步从零开始用 webpack 搭建一个大型项目](https://juejin.im/post/5de06aa851882572d672c1ad)
 - [【Cute-Webpack】Webpack4 入门手册（共 18 章）](https://juejin.im/post/5d518b4de51d4561cc25f013)
 - [webpack 工程师的自我修养](https://github.com/luoxue-victor/webpack-box)
-- [【第 619 期】如何 10 倍提高你的 Webpack 构建效率](https://mp.weixin.qq.com/s/zy8GfmfM8tg6uiKAhItGIg)
 - [Webpack 深入浅出之公司级分享总结(内附完整 ppt)](https://juejin.im/post/5df884ad6fb9a0164e7f979d)
 - [2020 年了,再不会 webpack 敲得代码就不香了(近万字实战)](https://juejin.im/post/5de87444518825124c50cd36)
 

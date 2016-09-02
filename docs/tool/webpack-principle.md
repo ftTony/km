@@ -1,4 +1,4 @@
-# 常用 loader 及手写 loader
+# webpack 原理
 
 ## 前言
 
@@ -8,8 +8,8 @@
 
 ### 参考资料
 
-- [编写自定义 webpack loader](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-loader.md)
-- [【webpack 进阶系列(八)】写个 loader](https://github.com/amandakelake/blog/issues/90)
+- [Webpack 运行机制](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-principle.md)
+- [【第 1617 期】Webpack 是怎样运行的?](https://mp.weixin.qq.com/s/uc4fVViv4u86TTX2XsMgFA)
 
 ## 联系作者
 
