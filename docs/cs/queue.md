@@ -6,9 +6,13 @@
 
 ## 内容
 
+- 队列介绍
 - 创建队列
+- 队列实际应用
 
-### 一、创建队列
+### 一、队列介绍
+
+### 二、创建队列
 
 - `enqueue(element)`:向队列尾部添加一个新的项。
 - `dequeue()`：移除队列的第一（即排在队列最前面的）项，并返回被移除的元素。
@@ -16,7 +20,7 @@
 - `isEmpty()`：如果队列中不包含任何元素，返回true，否则返回false。
 - `size()`：返回队列包含的元素个数，与数组的length属性类似。
 
-**ES5代码实现**
+#### 2.1 ES5代码实现
 
 ```
 function Queue(){
@@ -52,7 +56,7 @@ function Queue(){
 }
 ```
 
-**ES6代码实现**
+### 2.3 ES6代码实现
 
 ```
 class Queue{
@@ -71,7 +75,7 @@ class Queue{
 }
 ```
 
-### 二、优先队列
+#### 2.3 优先队列
 
 ```
 function PriorityQueue(){
@@ -105,7 +109,7 @@ function PriorityQueue(){
 }
 ```
 
-### 循环队列
+#### 2.4 循环队列
 
 ```
 function hotPotato(nameList,num){
@@ -128,9 +132,12 @@ function hotPotato(nameList,num){
 }
 ```
 
+### 三、队列实际应用
+
 ## 参考资料
 
 - 《学习JavaScript数据结构与算法》
+- [「中高级前端」窥探数据结构的世界- ES6版](https://juejin.im/post/5cd1ab3df265da03587c142a)
 
 ## 联系作者
 
