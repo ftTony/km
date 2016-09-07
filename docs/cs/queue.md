@@ -12,11 +12,15 @@
 
 ### 一、队列介绍
 
+队列是遵循**先进先出**（FIFO，也称为先来先服务）原则的一组有序的项。队列在尾部添加新元素，并从顶部移除元素。最新添加的元素必须排在队列的末尾。
+
+在现实中，最觉的队列的例子就是排队。在电影院、自助餐厅、杂货店收银台，我们都会排队。排在第一位的人会先接受服务。
+
 ### 二、创建队列
 
 - `enqueue(element)`:向队列尾部添加一个新的项。
 - `dequeue()`：移除队列的第一（即排在队列最前面的）项，并返回被移除的元素。
-- `font()`：返回队列中第一个元素——最先被
+- `font()`：返回队列中第一个元素——最先被添加，也将是最先被移除的元素。队列不做任何变动（不移除元素，只返回元素信息——与Stack类的peek类似）。
 - `isEmpty()`：如果队列中不包含任何元素，返回true，否则返回false。
 - `size()`：返回队列包含的元素个数，与数组的length属性类似。
 
@@ -61,16 +65,53 @@ function Queue(){
 ```
 class Queue{
     constructor(...items){
-        this.reverse = false;
-        this.queue = [...items];
+        this.count = 0;
+        this.lowestCount = 0;
+        this.items = {};
     }
-
-    enqueue(...items){
-        return this.reverse?this.queue.push(...items):this.queue.unshift(...items);
+    // 向队列添加元素
+    enqueue(){
+        this.items[this.count] = element;
+        this.count++;
     }
-
+    // 从队列移除元素
     dequeue(){
-        return this.reverse ? this.queue.shift() : this.queue.pop();
+        if(this.isEmpty()){
+            return undefined;
+        }
+        const result = this.items[this.lowestCount];
+        delete this.items[this.lowestCount];
+        this.lowestCount++;
+        return result;
+    }
+    peek(){
+        if(this.isEmpty()){
+            return undefined;
+        }
+        return this.items[this.lowestCount];
+    }
+    isEmpty(){
+        return (this.count - this.lowestCount) === 0;
+    }
+    size(){
+        return this.count - this.lowestCount;
+    }
+    clear(){
+        this.items = {};
+        this.count = 0;
+        this.lowestCount = 0;
+    }
+    toString(){
+        if(this.isEmpty()){
+            if(this.isEmpty()){
+                return '';
+            }
+        }
+        let objString = ``;
+        for(let i = this.lowestCount + 1;i<this.count;i++){
+            objString = `${objString},${this.items[i]}`;
+        }
+        return objString;
     }
 }
 ```
@@ -133,6 +174,10 @@ function hotPotato(nameList,num){
 ```
 
 ### 三、队列实际应用
+
+- 击鼓传花游戏
+- 回文检查器
+- 事件循环
 
 ## 参考资料
 
