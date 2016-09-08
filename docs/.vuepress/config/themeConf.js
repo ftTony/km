@@ -338,6 +338,8 @@ module.exports = {
                     "webpack-babel",
                     "webpack-plugin",
                     "webpack-loader",
+                    "webpack-optimize",
+                    "webpack-principle",
                     "webpack-hmr",
                     "webpack-coder"
                 ]
