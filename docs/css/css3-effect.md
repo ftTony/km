@@ -1029,11 +1029,31 @@ body {
 **HTML 代码**
 
 ```
+<div id="talkbubble"></div>
 ```
 
 **CSS 代码**
 
 ```
+#talkbubble{
+    width:120px;
+    height: 80px;
+    background-color: red;
+    position: relative;
+    border-radius: 10px;
+    left: 50px;
+}
+#talkbubble::before{
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 26px;
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-right: 26px solid red;
+    border-bottom: 13px solid transparent;
+}
 ```
 
 ### 35. 12 点 爆发
@@ -1041,11 +1061,37 @@ body {
 **HTML 代码**
 
 ```
+<div id="burst-12"></div>
 ```
 
 **CSS 代码**
 
 ```
+#burst-12{
+  background:red;
+  width:80px;
+  height:80px;
+  position:relative;
+  text-align:center;
+  top:20px;
+  left:20px;
+}
+#burst-12::before,
+#burst-12::after{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  height:80px;
+  width:80px;
+  background:red;
+}
+#burst-12::before {
+  transform: rotate(30deg);
+}
+#burst-12::after {
+  transform: rotate(60deg);
+}
 ```
 
 ### 36. 8 点 爆发
