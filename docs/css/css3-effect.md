@@ -1099,11 +1099,32 @@ body {
 **HTML 代码**
 
 ```
+<div id="burst-8"></div>
 ```
 
 **CSS 代码**
 
 ```
+#burst-8{
+    background:red;
+    width: 80px;
+    height: 80px;
+    position: relative;
+    top:20px;
+    left: 20px;
+    text-align: center;
+    transform: rotate(20deg);
+}
+#burst-8::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80px;
+    width: 80px;
+    background: red;
+    transform: rotate(135deg);
+}
 ```
 
 ### 37. 徽章丝带
@@ -1111,11 +1132,34 @@ body {
 **HTML 代码**
 
 ```
+<div id="badge-ribbon"></div>
 ```
 
 **CSS 代码**
 
 ```
+#badge-ribbon{
+    position: relative;
+    background: red;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+}
+#badge-ribbon::before,#badge-ribbon::after{
+    content: '';
+    position: absolute;
+    border-bottom: 70px solid red;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    top: 70px;
+    left: -10px;
+    transform: rotate(-140deg);
+}
+#badge-ribbon::after{
+    left: auto;
+    right: -10px;
+    transform: rotate(140deg);
+}
 ```
 
 ### 38. 太空入侵者（电脑游戏名）
