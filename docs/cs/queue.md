@@ -118,6 +118,8 @@ class Queue{
 
 #### 2.3 优先队列
 
+**优先队列**是指元素的添加和移除是基于优先级的。一个现实的例子就是机场登机的顺序。头等舱和商务舱乘客的优先级要高于经济舱乘客。在有些国家，老年人和孕妇登机时也享有高于其他乘客的优先级。
+
 ```
 function PriorityQueue(){
     let items = [];
@@ -183,7 +185,11 @@ function hotPotato(nameList,num){
 
 以下几个方法：
 
-- 
+- addFront(element)：该方法在双端队列前端添加新的元素
+- addBack(element)：该方法在双端队列后端添加新的元素（实现方法和Queue类中的enqueue方法相同）
+- removeFront()：该方法会从双端队列前端移除第一个元素（实现方法和Queue类中的dequeue方法相同）
+- removeBack()：该方法会从双端队列后端移除第一个元素（实现方法和Stack类中pop方法一样）
+- peekFront()：该方法返回双端队列前端的第一个元素（实现方法和Queue类中的peek方法一样）
 
 **创建Deque**
 
@@ -195,7 +201,19 @@ class Deque{
         this.items = {};
     }
     addFont(element){
-        
+        if(this.isEmpty()){
+            this.addBack(element);
+        }else if(this.lowestCount>0){
+            this.lowestCount--;
+            this.items[this.lowestCount] = element;
+        }else{
+            for(let i = this.count;i>0;i--){
+                this.items[i] = this.items[i-1];
+            }
+            this.count++;
+            this.lowestCount = 0;
+            this.items[0] = element;
+        }
     }
 }
 ```

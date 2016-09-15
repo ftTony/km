@@ -255,6 +255,8 @@ function DoublyLinkedList(){
 #### 3.1 LRU算法
 
 ```
+https://github.com/LuckyWinty/fe-weekly-questions/issues/47
+
 作者：王天笑
 链接：https://zhuanlan.zhihu.com/p/60731274
 来源：知乎
