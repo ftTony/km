@@ -1167,11 +1167,49 @@ body {
 **HTML 代码**
 
 ```
+<div id="space-invader"></div>
 ```
 
 **CSS 代码**
 
 ```
+#space-invader{
+    box-shadow: 0 0 0 1em red,
+    0 1em 0 1em red,
+    -2.5em 1.5em 0 .5em red,
+    2.5em 1.5em 0 .5em red,
+    -3em -3em 0 0 red,
+    3em -3em 0 0 red,
+    -2em -2em 0 0 red,
+    2em -2em 0 0 red,
+    -3em -1em 0 0 red,
+    -2em -1em 0 0 red,
+    2em -1em 0 0 red,
+    3em -1em 0 0 red,
+    -4em 0 0 0 red,
+    -3em 0 0 0 red,
+    3em 0 0 0 red,
+    4em 0 0 0 red,
+    -5em 1em 0 0 red,
+    -4em 1em 0 0 red,
+    4em 1em 0 0 red,
+    5em 1em 0 0 red,
+    -5em 2em 0 0 red,
+    5em 2em 0 0 red,
+    -5em 3em 0 0 red,
+    -3em 3em 0 0 red,
+    3em 3em 0 0 red,
+    5em 3em 0 0 red,
+    -2em 4em 0 0 red,
+    -1em 4em 0 0 red,
+    1em 4em 0 0 red,
+    2em 4em 0 0 red;
+    background: red;
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    margin: 50px 0 70px 65px;
+}
 ```
 
 ### 39. 电视
@@ -1179,11 +1217,34 @@ body {
 **HTML 代码**
 
 ```
+<div id="tv"></div>
 ```
 
 **CSS 代码**
 
 ```
+#tv{
+    position: relative;
+    width: 200px;
+    height: 150px;
+    margin: 20px 0;
+    background: red;
+    border-radius: 50%/10%;
+    color: white;
+    text-align: center;
+    text-indent: .1em;
+    left: 20px;
+}
+#tv::before{
+    content:'';
+    position: absolute;
+    top:10%;
+    bottom: 10%;
+    right: -5%;
+    left: -5%;
+    background: inherit;
+    border-radius: 5% /50%;
+}
 ```
 
 ### 40. 雪佛龙
@@ -1191,11 +1252,40 @@ body {
 **HTML 代码**
 
 ```
+<div id="chevron"></div>
 ```
 
 **CSS 代码**
 
 ```
+#chevron{
+    position: relative;
+    text-align: center;
+    padding: 12px;
+    margin-bottom: 6px;
+    height: 60px;
+    width: 200px;
+}
+#chevron::before{
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 51%;
+    background:red;
+    transform: skew(0deg,6deg);
+}
+#chevron::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background: red;
+    transform: skew(0deg,-6deg);
+}
 ```
 
 ### 41. 放大镜
