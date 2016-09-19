@@ -130,7 +130,7 @@ export default {
 
 ```
 
-#### 2.12 module
+#### 2.12 module-collection
 
 ```
 
