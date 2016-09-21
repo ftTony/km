@@ -1293,11 +1293,34 @@ body {
 **HTML 代码**
 
 ```
+<div id="magnifying-glass"></div>
 ```
 
 **CSS 代码**
 
 ```
+#magnifying-glass{
+    font-size: 10em;
+    display: inline-block;
+    width: 0.4em;
+    box-sizing: content-box;
+    height: 0.4em;
+    border:0.1em solid red;
+    position: relative;
+    border-radius:0.35em;
+}
+#magnifying-glass::before{
+    content:'';
+    display: inline-block;
+    position: absolute;
+    right: -0.25em;
+    bottom: -0.1em;
+    border-width: 0;
+    background: red;
+    width: 0.35em;
+    height: 0.08em;
+    transform: rotate(45deg);
+}
 ```
 
 ### 42. Facebook 图标
@@ -1305,6 +1328,7 @@ body {
 **HTML 代码**
 
 ```
+<div id="facebook-icon"></div>
 ```
 
 **CSS 代码**
@@ -1317,11 +1341,18 @@ body {
 **HTML 代码**
 
 ```
+<div id="moon"></div>
 ```
 
 **CSS 代码**
 
 ```
+#moon{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    box-shadow: 15px 15px 0 0 red;
+}
 ```
 
 ### 44. 旗
