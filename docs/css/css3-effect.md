@@ -1334,6 +1334,42 @@ body {
 **CSS 代码**
 
 ```
+#facebook-icon{
+    background:red;
+    text-indent: -999em;
+    width: 100px;
+    height: 110px;
+    box-sizing: content-box;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+    border:15px solid red;
+    border-bottom: 0;
+}
+
+#facebook-icon::before{
+    content: "/20";
+    position: absolute;
+    background: red;
+    width: 40px;
+    height: 90px;
+    bottom:-30px;
+    right: -37px;
+    border:20px solid #eee;
+    border-radius: 25px;
+    box-sizing: content-box;
+}
+
+#facebook-icon::after{
+    content: "/20";
+    position: absolute;
+    width: 55px;
+    top: 50px;
+    height: 20px;
+    background: #eee;
+    right: 5px;
+    box-sizing: content-box;
+}
 ```
 
 ### 43. 月亮
@@ -1360,11 +1396,36 @@ body {
 **HTML 代码**
 
 ```
+<div id="flag"></div>
 ```
 
 **CSS 代码**
 
 ```
+#flag{
+    width: 110px;
+    height: 56px;
+    box-sizing: content-box;
+    padding-top: 15px;
+    position: relative;
+    background-color: red;
+    color: white;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-align: center;
+    text-transform: uppercase;
+}
+#flag::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 13px solid #fff;
+    border-left: 55px solid transparent;
+    border-right: 55px solid transparent;
+}
 ```
 
 ### 45. 圆锥
@@ -1372,11 +1433,20 @@ body {
 **HTML 代码**
 
 ```
+<div id="cone"></div>
 ```
 
 **CSS 代码**
 
 ```
+#cone{
+    width: 0;
+    height: 0;
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-top: 100px solid red;
+    border-radius: 50%;
+}
 ```
 
 ### 46. 十字架
