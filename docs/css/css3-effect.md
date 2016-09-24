@@ -1454,11 +1454,28 @@ body {
 **HTML 代码**
 
 ```
+<div id="cross"></div>
 ```
 
 **CSS 代码**
 
 ```
+#cross{
+    background-color: red;
+    height: 100px;
+    position: relative;
+    width: 20px;
+    left: 40px;
+}
+#cross::after{
+    background-color: red;
+    content: '';
+    height: 20px;
+    left: -40px;
+    position: absolute;
+    top: 40px;
+    width: 100px;
+}
 ```
 
 ### 47. 根基
