@@ -169,7 +169,6 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 #### 3.3 vertical-align
 
 - 属性值：
-
 - 线类：如`baseline(默认值)`、`top`、`middle`、`bottom`（`baseline`使元素的基线与父元素的基线对齐，`middle`使元素的中部与父元素的基线往上`x-height`的一半对齐。`top`、`bottom`使元素及其后代元素的询问与整行或整块的底部对齐。）
 - 文本类：`text-top` `text-bottom`(使元素的顶部与父元素的字体顶部对齐。)
 - 上标下标：`sub`、`super`（使元素的基线与父元素的下标基线对齐。）
@@ -178,7 +177,7 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 - `vertical-align`的作用前提
 
-**vertical-align 属性起作用的前提必须是作用在内联元素上。**即`display`计算值为`inline`、`inline-block`、`inline-table`、`table-cell`的元素。所以如果元素设置了`float:left`或者`position:absolute`，则其`vertical-align`属性不能生效，因为此时元素的`display`计算值为`block`了。
+**vertical-align 属性起作用的前提必须是作用在内联元素上。** 即`display`计算值为`inline`、`inline-block`、`inline-table`、`table-cell`的元素。所以如果元素设置了`float:left`或者`position:absolute`，则其`vertical-align`属性不能生效，因为此时元素的`display`计算值为`block`了。
 
 - 好基友`line-height`、`vertical-align`和第三者幽灵空白节点的爱恨情仇
 

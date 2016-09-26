@@ -1483,11 +1483,33 @@ body {
 **HTML 代码**
 
 ```
+<div id="base"></div>
 ```
 
 **CSS 代码**
 
 ```
+#base {
+    background-color: red;
+    display: inline-block;
+    height: 55px;
+    margin-left: 20px;
+    margin-top: 55px;
+    position: relative;
+    width: 100px;
+}
+
+#base::before {
+    border-bottom: 35px solid red;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    content: '';
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: -35px;
+    width: 0;
+}
 ```
 
 ### 48. 指示器
@@ -1495,11 +1517,41 @@ body {
 **HTML 代码**
 
 ```
+<div id="pointer"></div>
 ```
 
 **CSS 代码**
 
 ```
+#pointer {
+    width: 200px;
+    height: 40px;
+    position: relative;
+    background-color: red;
+}
+
+#pointer::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid white;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+}
+
+#pointer::before {
+    content: '';
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    width: 0;
+    border-left: 20px solid red;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+}
 ```
 
 ### 49. 锁
@@ -1507,11 +1559,52 @@ body {
 **HTML 代码**
 
 ```
+<div id="lock"></div>
 ```
 
 **CSS 代码**
 
 ```
+#lock {
+    font-size: 8px;
+    position: relative;
+    width: 18em;
+    height: 13em;
+    border-radius: 2em;
+    top: 10em;
+    box-sizing: border-box;
+    border: 3.5em solid red;
+    border-left-width: 7.5em;
+    border-right-width: 7.5em;
+    margin: 0 0 6rem 0;
+}
+
+#lock::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    border: 2.5em solid red;
+    width: 14em;
+    height: 12em;
+    left: 50%;
+    margin-left: -7em;
+    top: -12em;
+    border-top-left-radius: 7em;
+    border-top-right-radius: 7em;
+}
+
+#lock::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    border: 1em solid red;
+    width: 5em;
+    height: 8em;
+    border-radius: 2.5em;
+    left: 50%;
+    top: -1em;
+    margin-left: -2.5em;
+}
 ```
 
 ### 50. 卡券
