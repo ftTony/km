@@ -78,8 +78,60 @@ export default {
 
 #### 2.3 install
 
+`install`的相关代码在`./src/store.js`里，相关代码如下：
+
+```
+export function install (_Vue) {
+    // 判断Vue是否存在
+  if (Vue && _Vue === Vue) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.error(
+        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+      )
+    }
+    return
+  }
+  Vue = _Vue
+  applyMixin(Vue)
+}
 ```
 
+`install`调用了`applyMixin`方法，`applyMixin`方法在``
+
+```
+export default function (Vue) {
+  const version = Number(Vue.version.split('.')[0])
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit })
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    const _init = Vue.prototype._init
+    Vue.prototype._init = function (options = {}) {
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit
+      _init.call(this, options)
+    }
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    const options = this.$options
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store
+    }
+  }
+}
 ```
 
 #### 2.4 state
