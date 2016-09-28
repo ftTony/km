@@ -70,6 +70,12 @@ MVP 中的 P 代表展示器。它是一个包含视图的用户界而逻辑的�
 
 MVVM(Model View ViewModel)是一种基于 MVC 和 MVP 的架构模式，它试图将用户界面（UI）从业务逻辑和行为中更加清晰地分离出来。为了这个目的，很多例子使用声明变量绑定来把 View 层的工作从其他层分离出来。
 
+简意图：
+
+![images](mvvm01.png)
+
+复杂图：
+
 ![images](mvvm.png)
 
 #### 3.1 ViewModel
