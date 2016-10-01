@@ -96,6 +96,7 @@ performance.now() - event.timeStamp
 
 - [Web 性能领域常见的专业术语](https://mp.weixin.qq.com/s/GIpmZIY6yxGRBpkTDHuJuw)
 - [加餐三｜加载阶段性能：使用 Audits 来优化 Web 性能](https://time.geekbang.org/column/article/174254)
+- [网站性能指标这么多，你到底选对了吗？](https://mp.weixin.qq.com/s/_6iI-aKOzUOsFVXW5vqJuA)
 
 ## 联系作者
 
