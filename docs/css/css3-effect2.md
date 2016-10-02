@@ -181,13 +181,64 @@
 **HTML 代码**
 
 ```
-
+<div class="button">
+    <div class="button__content">hover me to change</div>
+</div>
 ```
 
 **CSS 代码**
 
 ```
-
+.button {
+    width: 200px;
+    height: 60px;
+    position: relative;
+    background: #fff;
+    margin: 30px auto;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-align: center;
+    line-height: 60px;
+}
+.button::before {
+    content: '';
+    width: 0;
+    height: 0;
+    background: #00adb5;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    z-index: 0;
+    transition: width 0.5s, height 0.5s;
+}
+.button::after {
+    content: '';
+    width: 0;
+    height: 0;
+    background: #00adb5;
+    position: absolute;
+    bottom: -1px;
+    left: -1px;
+    z-index: 0;
+    transition: width 0.5s, height 0.5s;
+}
+.button:hover::before {
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+}
+.button:hover::after {
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+}
+.button__content {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    background: #fff;
+}
 ```
 
 ### 图片闪光
@@ -195,13 +246,51 @@
 **HTML 代码**
 
 ```
-
+<div class="flash-container">
+    <img
+    src="https://qishaoxuan.github.io/css_tricks/assets/img/bg7.af68deb6.jpeg"
+    alt=""
+    />
+</div>
 ```
 
 **CSS 代码**
 
 ```
-
+.flash-container {
+    width: 300px;
+    height: 500px;
+    background-color: #333333;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+.flash-container::after {
+    content: '';
+    height: 150%;
+    width: 25px;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    opacity: 0.6;
+    filter: blur(6px);
+    animation: move 1s infinite ease-out;
+}
+.flash-container img {
+    max-width: 100%;
+}
+@keyframes move {
+    0% {
+        transform: translate(-200px, -200px) rotate(45deg);
+    }
+    100% {
+        transform: translate(200px, 200px) rotate(45deg);
+    }
+}
 ```
 
 ### 加载动画
