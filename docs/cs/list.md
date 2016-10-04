@@ -12,6 +12,10 @@
 
 ### 一、链表介绍
 
+链表存储有序的元素集合，但不同于数组，链表中的元素在内在中并不是连续放置的。每个元素由一个存储元素本身的节点和一个指向下一个元素的引用（也称指针或链接）组成。
+
+相对于传统的数组，链表的一个好处在于，添加或移除元素的时候不需要移动其他元素。然而，链表需要使用指针，因此实现链表时需要额外注意。在数组中，我们需要直接访问任何位置的任何元素，而要想访问链表中间的一个元素，则需要从起点开始迭代链表直到找到所需的元素。
+
 ### 二、创建链表
 
 单链表的操作核心有：
@@ -20,27 +24,26 @@
 - `remove(element)`-从列表中移除一项。
 - `indexOf(index)`-返回指定索引处的节点
 - `removeAt(position)`-从列表的特定位置移除一项。
-- `isEmpty()` -如果链表中不包含任何元素，返回true，如果链表长度大于0则返回false。
-- `size()`-返回链表包含的元素个数。与数组的length属性类似。
+- `isEmpty()` -如果链表中不包含任何元素，返回 true，如果链表长度大于 0 则返回 false。
+- `size()`-返回链表包含的元素个数。与数组的 length 属性类似。
 - `print()`- 返回链表的可见表示
 
 #### 2.1 单链表
 
-**ES5相关代码**
+**ES5 相关代码**
 
 ```
 function LinkedList(){
 
     var Node = function(element){
       this.element = element;
-      this.next = null;  
+      this.next = null;
     };
 
     var length = 0;
     var head = null;
 
     this.append = function(element){
-        
         var node = new Node(element),
             current;
 
@@ -61,7 +64,6 @@ function LinkedList(){
         length++;   // 更新列表的长度
     };
     this.insert = function(position,element){
-        
         // 检查越界值
         if(position>=0 && position<=length){
 
@@ -69,7 +71,6 @@ function LinkedList(){
                 current = head,
                 previous,
                 index =0;
-            
             if(position ===0){  // 在第一个位置添加
 
                 node.next = current;
@@ -157,19 +158,48 @@ function LinkedList(){
 }
 ```
 
-**ES6相关代码**
+**ES6 相关代码**
 
 ```
 class Node{
-    constructor(data){
-        this.data = data;
+    constructor(element)){
+        this.element = delementata;
         this.next = null;
     }
 }
 
 class LinkedList{
     constructor(){
+    }
+    push(element){
 
+    }
+    removeAt(index){
+
+    }
+    getElementAt(index){
+
+    }
+    remove(element){
+
+    }
+    insert(element,index){
+
+    }
+    indexOf(element){
+
+    }
+    size(){
+
+    }
+    isEmpty(){
+
+    }
+    getHead(){
+
+    }
+    toString(){
+        
     }
 }
 ```
@@ -236,23 +266,25 @@ function DoublyLinkedList(){
 #### 2.3 循环链表
 
 ```
+
 ```
 
 #### 2.4 反转链表
 
 ```
+
 ```
 
 ### 三、链表应用
 
-- LRU算法
+- LRU 算法
 - 删除链表中的节点
 - 从尾到头打印链表
-- 链表倒数第k个节点
+- 链表倒数第 k 个节点
 - 复杂链表的复制
 - 链表中环的入口节点
 
-#### 3.1 LRU算法
+#### 3.1 LRU 算法
 
 ```
 https://github.com/LuckyWinty/fe-weekly-questions/issues/47
@@ -328,7 +360,7 @@ LRUCache.prototype.put = function(key, value) {
 ## 参考资料
 
 - [图解：我终于让女朋友学会了翻转链表！](https://mp.weixin.qq.com/s/kpaap25Y-2EOZsJnKyXbLQ)
-- 《学习JavaScript数据结构与算法》
+- 《学习 JavaScript 数据结构与算法》
 
 ## 联系作者
 
