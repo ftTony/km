@@ -20,11 +20,11 @@
 
 - `enqueue(element)`:向队列尾部添加一个新的项。
 - `dequeue()`：移除队列的第一（即排在队列最前面的）项，并返回被移除的元素。
-- `font()`：返回队列中第一个元素——最先被添加，也将是最先被移除的元素。队列不做任何变动（不移除元素，只返回元素信息——与Stack类的peek类似）。
-- `isEmpty()`：如果队列中不包含任何元素，返回true，否则返回false。
-- `size()`：返回队列包含的元素个数，与数组的length属性类似。
+- `font()`：返回队列中第一个元素——最先被添加，也将是最先被移除的元素。队列不做任何变动（不移除元素，只返回元素信息——与 Stack 类的 peek 类似）。
+- `isEmpty()`：如果队列中不包含任何元素，返回 true，否则返回 false。
+- `size()`：返回队列包含的元素个数，与数组的 length 属性类似。
 
-#### 2.1 ES5代码实现
+#### 2.1 ES5 代码实现
 
 ```
 function Queue(){
@@ -60,11 +60,11 @@ function Queue(){
 }
 ```
 
-### 2.3 ES6代码实现
+### 2.3 ES6 代码实现
 
 ```
 class Queue{
-    constructor(...items){
+    constructor(){
         this.count = 0;
         this.lowestCount = 0;
         this.items = {};
@@ -186,12 +186,12 @@ function hotPotato(nameList,num){
 以下几个方法：
 
 - addFront(element)：该方法在双端队列前端添加新的元素
-- addBack(element)：该方法在双端队列后端添加新的元素（实现方法和Queue类中的enqueue方法相同）
-- removeFront()：该方法会从双端队列前端移除第一个元素（实现方法和Queue类中的dequeue方法相同）
-- removeBack()：该方法会从双端队列后端移除第一个元素（实现方法和Stack类中pop方法一样）
-- peekFront()：该方法返回双端队列前端的第一个元素（实现方法和Queue类中的peek方法一样）
+- addBack(element)：该方法在双端队列后端添加新的元素（实现方法和 Queue 类中的 enqueue 方法相同）
+- removeFront()：该方法会从双端队列前端移除第一个元素（实现方法和 Queue 类中的 dequeue 方法相同）
+- removeBack()：该方法会从双端队列后端移除第一个元素（实现方法和 Stack 类中 pop 方法一样）
+- peekFront()：该方法返回双端队列前端的第一个元素（实现方法和 Queue 类中的 peek 方法一样）
 
-**创建Deque**
+**创建 Deque**
 
 ```
 class Deque{
@@ -215,6 +215,70 @@ class Deque{
             this.items[0] = element;
         }
     }
+
+    addBack(element){
+        this.items[this.count] = element;
+        this.count++;
+    }
+
+    removeFront(){
+        if(this.isEmpty()){
+            return undefined;
+        }
+        const result = this.items[this.lowestCount];
+        delete this.items[this.lowestCount];
+        this.lowestCount++;
+        return result;
+    }
+
+    removeBack(){
+        if(this.isEmpty()){
+            return undefined;
+        }
+        this.count--;
+        const result = this.items[this.count];
+        delete this.items[this.count];
+        return result;
+    }
+
+    peekFront(){
+        if(this.isEmpty()){
+            return undefined;
+        }
+        return this.items[this.lowestCount];
+    }
+
+    peekBack(){
+        if(this.isEmpty()){
+            return undefined;
+        }
+        return this.items[this.count-1];
+    }
+
+    isEmpty(){
+        return this.size() === 0;
+    }
+
+    clear(){
+        this.items = {};
+        this.count = 0;
+        this.lowestCount = 0;
+    }
+
+    size(){
+        return this.count - this.lowestCount;
+    }
+
+    toString(){
+        if(this.isEmpty()){
+            return '';
+        }
+        let objString = `${this.items[this.lowestCount]}`;
+        for(let i = this.lowestCount+1;i<this.count;i++){
+            objString = `${objString},${this.items[i]}`;
+        }
+        return objString;
+    }
 }
 ```
 
@@ -226,8 +290,8 @@ class Deque{
 
 ## 参考资料
 
-- 《学习JavaScript数据结构与算法》
-- [「中高级前端」窥探数据结构的世界- ES6版](https://juejin.im/post/5cd1ab3df265da03587c142a)
+- 《学习 JavaScript 数据结构与算法》
+- [「中高级前端」窥探数据结构的世界- ES6 版](https://juejin.im/post/5cd1ab3df265da03587c142a)
 
 ## 联系作者
 

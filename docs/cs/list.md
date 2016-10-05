@@ -190,8 +190,18 @@ class LinkedList{
     }
     removeAt(index){
         if(index>=0 && index<this.count){
-
+            let current = this.head;
+            if(index === 0){
+                this.head = current.next;
+            }else{
+                const previous = this.getElementAt(index-1);
+                current = previous.next;
+                previous.next = current.next;
+            }
+            this.count--;
+            return current.element;
         }
+        return undefined;
     }
     getElementAt(index){
         if(index>0 && index<= this.count){
@@ -214,7 +224,9 @@ class LinkedList{
                 const current = this.head;
                 node.next = current;
             }else{
-
+                const previous = this.getElementAt(index-1);
+                node.next = previous.next;
+                previous.next = node;
             }
             this.count++;
             return true;
@@ -222,7 +234,14 @@ class LinkedList{
         return false;
     }
     indexOf(element){
-
+        let current = this.head;
+        for(let i=0;i<this.size() && current !=null;i++){
+            if(this.equalsFn(element,current.element)){
+                return i;
+            }
+            current = current.next;
+        }
+        return -1;
     }
     size(){
         return this.count;
@@ -231,7 +250,7 @@ class LinkedList{
         return this.size()===0;
     }
     getHead(){
-        return this.count;
+        return this.head;
     }
     toString(){
         if(this.head ==null){
@@ -240,7 +259,7 @@ class LinkedList{
         let objString = `${this.head.element}`;
         let current = this.head.next;
         for(let i=1;i<this.size() && current !=null;i++){
-            objString = ``;
+            objString = `${objString},${current.element}`;
             current = current.next;
         }
         return objString;
@@ -316,10 +335,31 @@ function DoublyLinkedList(){
 **ES6 代码实现**
 
 ```
-class DoublyNode extends Node{
-    constructor(element,next,prev){
-        super(element,next);
-        this.prev = prev;
+class DoublyLinkedList extends LinkedList{
+    constructor(equalsFn=(a,b)=>a===b){
+        super(equalsFn);
+        this.tail = unedfined
+    }
+    push(element){
+
+    }
+    insert(element,index){
+
+    }
+    removeAt(index){
+
+    }
+    indexOf(element){
+
+    }
+    getHead(){
+
+    }
+    getTail(){
+
+    }
+    clear(){
+        
     }
 }
 ```
