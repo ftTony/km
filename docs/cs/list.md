@@ -162,49 +162,99 @@ function LinkedList(){
 
 ```
 class Node{
-    constructor(element)){
+    constructor(element,next)){
         this.element = delementata;
-        this.next = null;
+        this.next = next;
     }
 }
 
 class LinkedList{
-    constructor(){
+    constructor(equalsFn = ((a,b)=>a===b)){
+        this.count = 0;
+        this.head = undefined;
+        this.equalsFn = equalsFn;
     }
     push(element){
-
+        const node = new Node(element);
+        let current;
+        if(this.head == null){
+            this.head = node;
+        }else{
+            current = this.head;
+            while(current.next !=null){
+                current = current.next;
+            }
+            current.next = node;
+        }
+        this.count++;
     }
     removeAt(index){
+        if(index>=0 && index<this.count){
 
+        }
     }
     getElementAt(index){
-
+        if(index>0 && index<= this.count){
+            let node = this.head;
+            for(let i=0;i<index && node!=null;i++){
+                node = node.next;
+            }
+            return node;
+        }
+        return undefined;
     }
     remove(element){
-
+        const index = this.indexOf(element);
+        return this.removeAt(index);
     }
     insert(element,index){
+        if(index>=0 && index<=this.count){
+            const node = new Node(element);
+            if(index === 0){
+                const current = this.head;
+                node.next = current;
+            }else{
 
+            }
+            this.count++;
+            return true;
+        }
+        return false;
     }
     indexOf(element){
 
     }
     size(){
-
+        return this.count;
     }
     isEmpty(){
-
+        return this.size()===0;
     }
     getHead(){
-
+        return this.count;
     }
     toString(){
-        
+        if(this.head ==null){
+            return '';
+        }
+        let objString = `${this.head.element}`;
+        let current = this.head.next;
+        for(let i=1;i<this.size() && current !=null;i++){
+            objString = ``;
+            current = current.next;
+        }
+        return objString;
+    }
+    clear(){
+        this.head = undefined;
+        this.count = 0;
     }
 }
 ```
 
 #### 2.2 双链表
+
+**ES5 代码实现**
 
 ```
 function DoublyLinkedList(){
@@ -263,10 +313,27 @@ function DoublyLinkedList(){
 }
 ```
 
-#### 2.3 循环链表
+**ES6 代码实现**
 
 ```
+class DoublyNode extends Node{
+    constructor(element,next,prev){
+        super(element,next);
+        this.prev = prev;
+    }
+}
+```
 
+#### 2.3 循环链表
+
+**循环链表** 可以像链表一样只有单向引用，也可以像双向链表一样有双向引用。循环链表和链表之间唯一的区别在于，最后一个元素指向下一个元素的指针不是引用 undefined，而是指向第一个元素
+
+```
+CircularLinkedList extends LinkedList{
+    constructor(equalsFn = defaultEquals){
+        super(defaultEquals)
+    }
+}
 ```
 
 #### 2.4 反转链表
