@@ -91,17 +91,19 @@ export function install (_Vue) {
     }
     return
   }
+  // Vue 变量赋值
   Vue = _Vue
   applyMixin(Vue)
 }
 ```
 
-`install`调用了`applyMixin`方法，`applyMixin`方法在``
+`install`调用了`applyMixin`方法，`applyMixin`方法在`./src/mixin.js`中，相关代码如下：
 
 ```
 export default function (Vue) {
   const version = Number(Vue.version.split('.')[0])
 
+    // 判断Vue的版本，如果Vue版本大于2，则通过 hook 的方式注入
   if (version >= 2) {
     Vue.mixin({ beforeCreate: vuexInit })
   } else {
@@ -123,11 +125,13 @@ export default function (Vue) {
   function vuexInit () {
     const options = this.$options
     // store injection
+    // store 注入
     if (options.store) {
       this.$store = typeof options.store === 'function'
         ? options.store()
         : options.store
     } else if (options.parent && options.parent.$store) {
+        // 子组件从其父组件引用 $store属性
       this.$store = options.parent.$store
     }
   }
