@@ -397,11 +397,20 @@ class DoublyLinkedList extends LinkedList{
             let current = this.head;
             if(index ===0){
                 this.head = this.head.next;
+                if(this.count === 1){
+                    this.tail = undefined;
+                }else{
+                    this.head.prev = undefined;
+                }
             }else if(index === this.count - 1 ){
-
+                current = this.tail;
+                this.tail = current.prev;
+                this.tail.next = undefined;
             }else{
                 current = this.getElementAt(index);
                 const previous = current.prev;
+                previous.next = current.next;
+                current.next.prev = preious;
             }
             this.count--;
             return current.element;
@@ -444,8 +453,15 @@ class DoublyLinkedList extends LinkedList{
     }
     inverseToString(){
         if(this.tail == null){
-
+            return '';
         }
+        let objString = `${this.tail.element}`;
+        let previous = this.tail.prev;
+        while(previous !=null){
+            objString = `${objString},${previous.element}`;
+            previous = previous.prev;
+        }
+        return objString;
     }
 }
 ```
@@ -456,8 +472,17 @@ class DoublyLinkedList extends LinkedList{
 
 ```
 CircularLinkedList extends LinkedList{
-    constructor(equalsFn = defaultEquals){
-        super(defaultEquals)
+    constructor(equalsFn = ((a,b)=>a===b)){
+        super(equalsFn);
+    }
+    push(element){
+
+    }
+    insert(element,index){
+
+    }
+    removeAt(index){
+
     }
 }
 ```
