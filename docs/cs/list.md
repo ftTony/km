@@ -489,8 +489,35 @@ CircularLinkedList extends LinkedList{
 
 #### 2.4 反转链表
 
+**借助栈**
+
+```
+var reverseList = function(head){
+    if(!head){
+        return null;
+    }
+
+    const stack = {}
+    let node = head;
+    while(node){
+
+    }
+
+    const newHead = {
+        val: stack.pop(),
+        next: null
+    };
+}
 ```
 
+**原地反转**
+
+```
+var reverseList = function(head){
+    if(!head){
+        return null;
+    }
+}
 ```
 
 ### 三、链表应用
