@@ -492,6 +492,8 @@ CircularLinkedList extends LinkedList{
 **借助栈**
 
 ```
+参考地址：https://xxoo521.com/2020-01-12-reverse-link/
+
 var reverseList = function(head){
     if(!head){
         return null;
@@ -601,6 +603,13 @@ LRUCache.prototype.put = function(key, value) {
 ```
 
 ### 七、链表相关试题
+
+- 删除链表的节点
+- 复杂链表的复制
+- 链表中倒数第 k 个节点
+- 从尾到头打印链表
+- 合并两个排序的链表
+- 链表中环的入口节点
 
 ## 参考资料
 
