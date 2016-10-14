@@ -381,13 +381,66 @@
 **HTML 代码**
 
 ```
-
+<div class="loading-bro">
+    <h1>Loading</h1>
+    <svg id="load" x="0px" y="0px" viewBox="0 0 150 150">
+    <circle id="loading-inner" cx="75" cy="75" r="60" />
+    </svg>
+</div>
 ```
 
 **CSS 代码**
 
 ```
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300);
+body {
+  background: #f1f1f1;
+  font-family: 'Roboto', sans-serif;
+}
 
+.loading-bro {
+  margin: 50px auto;
+  width: 150px;
+}
+.loading-bro > h1 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 1em;
+  font-weight: 300;
+  color: #8E8E8E;
+}
+
+#load {
+  width: 150px;
+  animation: loading 3s linear infinite;
+}
+#load #loading-inner {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 300;
+  stroke-width: 10;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  animation: loading-circle 2s linear infinite;
+  stroke: #51BBA7;
+  fill: transparent;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading-circle {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -600;
+  }
+}
 ```
 
 #### 动画三
