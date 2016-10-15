@@ -393,19 +393,59 @@ class DoublyLinkedList extends LinkedList{
         }
     }
     removeAt(index){
+        if(index>=0 && index < this.count){
+            let current = this.head;
+            if(index ===0){
+                this.head = this.head.next;
+            }else if(index === this.count - 1 ){
 
+            }else{
+                current = this.getElementAt(index);
+                const previous = current.prev;
+            }
+            this.count--;
+            return current.element;
+        }
+        return undefined
     }
     indexOf(element){
-
+        let current = this.head;
+        let index = 0;
+        while(current ! = null){
+            if(this.equalsFn(element,current.element)){
+                return index;
+            }
+            index++;
+            current = current.next;
+        }
+        return -1;
     }
     getHead(){
-
+        return this.head;
     }
     getTail(){
-
+        return this.tail;
     }
     clear(){
+        super.clear();
+        this.tail = undefined;
+    }
+    toString(){
+        if(this.head == null){
+            return '';
+        }
+        let objString = ``;
+        let current = this.head.next;
+        while(current != null){
+            objString = `${objString},${current.element}`;
+            current = current.next;
+        }
+        return objString;
+    }
+    inverseToString(){
+        if(this.tail == null){
 
+        }
     }
 }
 ```
