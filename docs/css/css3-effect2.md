@@ -448,13 +448,58 @@ body {
 **HTML 代码**
 
 ```
-
+<div class="load"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+.load {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: rgba(0, 169, 178, 0.2);
+}
+.load::before {
+    content: '';
+    width: 70px;
+    height: 70px;
+    background-color: #00adb5;
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    z-index: 1;
+    transform-origin: left bottom;
+    animation: rotate 1.5s infinite linear;
+}
+.load::after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #fff;
+    z-index: 2;
+    border-radius: 50%;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 ```
 
 #### 动画四
@@ -476,13 +521,31 @@ body {
 **HTML 代码**
 
 ```
-
+<div class="load-container"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+.load-container {
+    width: 60px;
+    height: 60px;
+    background-color: #00adb5;
+    margin: 50px auto;
+    animation: rotateplane 1.2s infinite ease-in-out;
+}
+@keyframes rotateplane {
+    0% {
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    }
+    50% {
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    }
+    100% {
+        -webkit-transform: perspective(120px) rotateX(-180deg)
+        rotateY(-179.9deg);
+    }
+}
 ```
 
 #### 动画六
