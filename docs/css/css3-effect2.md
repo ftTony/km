@@ -513,7 +513,47 @@ body {
 **CSS 代码**
 
 ```
-
+.load-container {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.load-container .container {
+    width: 50px;
+    height: 60px;
+    text-align: center;
+    font-size: 10px;
+}
+.load-container .container .boxLoading {
+    background-color: #00adb5;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+    animation: stretchdelay 1.2s infinite ease-in-out;
+}
+.load-container .container .boxLoading2 {
+    animation-delay: -1.1s;
+}
+.load-container .container .boxLoading3 {
+    animation-delay: -1s;
+}
+.load-container .container .boxLoading4 {
+    animation-delay: -0.9s;
+}
+.load-container .container .boxLoading5 {
+    animation-delay: -0.8s;
+}
+@keyframes stretchdelay {
+    0%,
+    40%,
+    100% {
+        transform: scaleY(0.4);
+    }
+    20% {
+        transform: scaleY(1);
+    }
+}
 ```
 
 #### 动画五
@@ -766,6 +806,7 @@ section
 - [趣味 CSS3 效果挑战小汇总](https://juejin.im/post/5d3810fd6fb9a07ed13716d9)
 - [请收下这 72 个炫酷的 CSS 技巧](https://juejin.im/post/5e033c946fb9a0164b4ef360)
 - [45 个值得收藏的 CSS 形状](https://juejin.im/post/5cbd1f0ae51d456e5e035f45)
+- [epicmax](https://epic-spinners.epicmax.co/#/)
 
 ## 联系作者
 
