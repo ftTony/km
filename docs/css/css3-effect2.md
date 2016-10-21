@@ -593,13 +593,47 @@ body {
 **HTML 代码**
 
 ```
-
+<div class="load-container">
+    <div class="load load1"></div>
+    <div class="load load2"></div>
+    <div class="load"></div>
+</div>
 ```
 
 **CSS 代码**
 
 ```
+.load-container {
+    margin: 50px auto;
+    width: 150px;
+    text-align: center;
+}
+.load-container .load {
+    width: 20px;
+    height: 20px;
+    background-color: #00adb5;
+    border-radius: 100%;
+    display: inline-block;
+    animation: bouncedelay 1.4s infinite ease-in-out;
+    animation-fill-mode: both;
+}
+.load-container .load1 {
+    animation-delay: -0.32s;
+}
+.load-container .load2 {
+    animation-delay: -0.16s;
+}
 
+@keyframes bouncedelay {
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
 ```
 
 #### 动画七
@@ -607,13 +641,110 @@ body {
 **HTML 代码**
 
 ```
-
+<div class="load-container">
+    <div class="container container1">
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+        <div class="circle circle3"></div>
+        <div class="circle circle4"></div>
+    </div>
+    <div class="container container2">
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+        <div class="circle circle3"></div>
+        <div class="circle circle4"></div>
+    </div>
+</div>
 ```
 
 **CSS 代码**
 
 ```
-
+.load-container {
+    margin: 50px auto;
+    width: 48px;
+    height: 48px;
+    position: relative;
+}
+.load-container .container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.load-container .container .circle {
+    width: 12px;
+    height: 12px;
+    background-color: #00adb5;
+    border-radius: 100%;
+    position: absolute;
+    animation: bouncedelay 1.2s infinite ease-in-out;
+    animation-fill-mode: both;
+}
+.load-container .container .circle1 {
+    top: 0;
+    left: 0;
+}
+.load-container .container .circle2 {
+    right: 0;
+    top: 0;
+}
+.load-container .container .circle3 {
+    right: 0;
+    bottom: 0;
+}
+.load-container .container .circle4 {
+    bottom: 0;
+    left: 0;
+}
+.load-container .container1 .circle2 {
+    animation-delay: -0.9s;
+}
+.load-container .container1 .circle3 {
+    animation-delay: -0.6s;
+}
+.load-container .container1 .circle4 {
+    animation-delay: -0.3s;
+}
+.load-container .container2 {
+    transform: rotateZ(45deg);
+}
+.load-container .container2 .circle1 {
+    animation-delay: -1.1s;
+}
+.load-container .container2 .circle2 {
+    animation-delay: -0.8s;
+}
+.load-container .container2 .circle3 {
+    animation-delay: -0.5s;
+}
+.load-container .container2 .circle4 {
+    animation-delay: -0.2s;
+}
+.load-container .container3 {
+    transform: rotateZ(90deg);
+}
+.load-container .container3 .circle1 {
+    animation-delay: -1s;
+}
+.load-container .container3 .circle2 {
+    animation-delay: -0.7s;
+}
+.load-container .container3 .circle3 {
+    animation-delay: -0.4s;
+}
+.load-container .container3 .circle4 {
+    animation-delay: -0.1s;
+}
+@keyframes bouncedelay {
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
 ```
 
 ### 弹簧动画
