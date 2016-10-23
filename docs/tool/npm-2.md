@@ -60,6 +60,14 @@ C@1.0.0 -> D@1.0.0
 
 ### 二、npm 中的依赖包
 
+在`node`中其实总共5种依赖：
+
+- **dependencies - 业务依赖**
+- **devDependencies - 开发依赖**
+- **peerDependencies - 同伴依赖**
+- **bundledDependencies / bundleDependencies - 打包依赖**
+- **optionalDependencies - 可选依赖**
+
 ### 三、npm scripts 脚本
 
 ### 四、npm 配置
