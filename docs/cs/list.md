@@ -287,6 +287,16 @@ function DoublyLinkedList(){
     var head = null;
     var tail = null;
 
+    this.append = function(element){
+        var node = new Node(element)  ,
+            current;
+        if(head === null){
+
+        }else{
+
+        }
+    };
+
     this.insert = function(position,element){
 
         // 检查越界值
@@ -328,7 +338,20 @@ function DoublyLinkedList(){
         }else{
             return false;
         }
+    };
+
+    this.removeAt = function(postion){
+
     }
+
+    this.remove = function(element){
+
+    }
+
+    this.indexOf = function(element){
+
+    };
+
 }
 ```
 
@@ -470,6 +493,14 @@ class DoublyLinkedList extends LinkedList{
 
 **循环链表** 可以像链表一样只有单向引用，也可以像双向链表一样有双向引用。循环链表和链表之间唯一的区别在于，最后一个元素指向下一个元素的指针不是引用 undefined，而是指向第一个元素
 
+**ES5 代码实现**
+
+```
+
+```
+
+**ES6 代码实现**
+
 ```
 CircularLinkedList extends LinkedList{
     constructor(equalsFn = ((a,b)=>a===b)){
@@ -533,7 +564,17 @@ CircularLinkedList extends LinkedList{
 }
 ```
 
-#### 2.4 反转链表
+#### 2.4 有序链表
+
+**有序链表** 是指保持元素有序的链表结构。除了使用排序算法之外，我们还可以将元素插入到正确的位置来保证链表的有序性。
+
+```
+class SortedLinkedList extends LinkList{
+
+}
+```
+
+#### 2.5 反转链表
 
 **借助栈**
 
