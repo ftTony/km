@@ -291,10 +291,15 @@ function DoublyLinkedList(){
         var node = new Node(element)  ,
             current;
         if(head === null){
-
+            head = node;
+            tail = node;
         }else{
-
+            tail.next = node;
+            node.prev = tail;
+            tail = node;
         }
+
+        length++;
     };
 
     this.insert = function(position,element){
@@ -342,16 +347,73 @@ function DoublyLinkedList(){
 
     this.removeAt = function(postion){
 
-    }
+    };
 
     this.remove = function(element){
 
-    }
-
-    this.indexOf = function(element){
-
+        var index = this.indexOf(element);
+        return this.removeAt(index);
     };
 
+    this.indexOf = function(element){
+        var current = head,
+            index = -1;
+
+        if(element === current.element){
+            return 0;
+        }
+        index++;
+
+        while(current.next){
+
+        }
+
+        if(element == current.element){
+            return index;
+        }
+
+        return -1;
+    };
+
+    this.isEmpty = function(){
+        return length === 0;
+    };
+
+    this.size = function(){
+        return length;
+    };
+
+    this.toString = function(){
+        var current = head,
+            s = current?current.element:'';
+        while(current && current.next){
+            current = current.next;
+            s+= ','+ current.element;
+        }
+    }
+
+    this.inversetToString = function(){
+
+        var current = tail,
+            s = current? current.element : '';
+        while(current && current.prev){
+
+        }
+        return s;
+    };
+
+    this.print = function(){
+
+    };
+    this.printInverse = function(){
+
+    };
+    this.getHead = function(){
+
+    };
+    this.getTail = function(){
+
+    };
 }
 ```
 
