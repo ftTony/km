@@ -347,6 +347,22 @@ function DoublyLinkedList(){
 
     this.removeAt = function(postion){
 
+        if(position>-1 && position < length){
+
+            var current = head,
+                previous,
+                index = 0;
+
+            if(position === 0){
+
+            }else if(position === length -1){
+
+            }else{
+
+            }
+        }else{
+            return null;
+        }
     };
 
     this.remove = function(element){
@@ -362,10 +378,17 @@ function DoublyLinkedList(){
         if(element === current.element){
             return 0;
         }
+
         index++;
 
         while(current.next){
 
+            if(element === current.element){
+                return index;
+            }
+
+            current = current.next;
+            index++;
         }
 
         if(element == current.element){
@@ -390,6 +413,8 @@ function DoublyLinkedList(){
             current = current.next;
             s+= ','+ current.element;
         }
+
+        return s;
     }
 
     this.inversetToString = function(){
@@ -397,22 +422,26 @@ function DoublyLinkedList(){
         var current = tail,
             s = current? current.element : '';
         while(current && current.prev){
-
+            current = current.prev;
+            s +=',' + current.element;
         }
         return s;
     };
 
     this.print = function(){
-
+        console.log(this.toString());
     };
+
     this.printInverse = function(){
-
+        console.log(this.inverseToString());
     };
+
     this.getHead = function(){
-
+        return head;
     };
-    this.getTail = function(){
 
+    this.getTail = function(){
+        return tail
     };
 }
 ```
