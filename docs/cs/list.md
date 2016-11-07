@@ -465,7 +465,6 @@ function DoublyLinkedList(){
 **ES6 代码实现**
 
 ```
-
 class DoublyNode extends Node{
     constructor(element,next,prev){
         super(element,next);
@@ -629,35 +628,78 @@ function CircularLinkedList(){
     };
 
     this.insert = function(position,element){
-        if(position)
+        if(position>=0 && position<= length){
+
+        }else{
+            return false;
+        }
     };
 
     this.removeAt = function(position){
+        if(postion>-1 && position<length){
 
+            var current = head,
+                previous,
+                index=0;
+
+            if(position === 0){
+                head = current.next;
+            }else{
+                while(index++< position){
+                    previous = current;
+                    current = current.next;
+                }
+
+                previous.next = current.next;
+            }
+            length--;
+            return current.element;
+        }else{
+            return null;
+        }
     };
 
     this.remove = function(element){
-
+        var index = this.indexOf(element);
+        return this.removeAt(index);
     };
 
     this.indexOf = function(element){
+        var current = head,
+            index = 0;
 
+        while(current){
+            if(element === current.element){
+                return index;
+            }
+            index++;
+            current = current.next;
+        }
+        return -1;
     };
 
     this.isEmpty = function(){
-
+        return length ===0;
     };
 
     this.size = function(){
-
+        return length;
     };
 
     this.getHead = function(){
-
+        return head;
     };
 
     this.toString = function(){
 
+        var current = head,
+            string = '';
+
+        while(current){
+            string = current.element;
+            current = current.next;
+        }
+        return string;
     };
 
     this.print = function(){
