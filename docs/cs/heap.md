@@ -6,8 +6,13 @@
 
 ## 内容
 
+- 堆是什么？
+- 实现一个堆
+- 堆的应用
+
 ### 参考资料
 
+- 《学习 JavaScript 数据结构与算法》
 - [什么是二叉堆？](https://mp.weixin.qq.com/s/En9p_zPRWpEFVZvbwdaJAA)
 - [堆](http://www.conardli.top/docs/dataStructure/%E5%A0%86/%E5%A0%86.html)
 
