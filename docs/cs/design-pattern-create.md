@@ -6,11 +6,11 @@
 
 ## 内容
 
-- 简单工厂模式
-- 工厂方法模式
-- 抽象工厂模式
-- 建造者模式
-- 单例模式
+- [简单工厂模式](#一、简单工厂模式)
+- [工厂方法模式](#二、工厂方法模式)
+- [抽象工厂模式](#三、抽象工厂模式)
+- [建造者模式](#四、建造者模式)
+- [单例模式](#五、单例模式)
 
 ### 一、简单工厂模式
 
@@ -66,7 +66,7 @@ console.log(LazySingle().publicConst);
 ### 参考资料
 
 - 《JavaScript 设计模式》
-- 《JavaScript设计模式与开发实践》
+- 《JavaScript 设计模式与开发实践》
 - [第二篇、创建型设计模式](https://github.com/yanlele/node-index/blob/master/book/04%E3%80%81js%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/02%E7%AF%87%E3%80%81%E5%88%9B%E5%BB%BA%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/README.md#class02-08)
 
 ## 联系作者
