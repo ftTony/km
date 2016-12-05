@@ -18,15 +18,10 @@ Vuex 是什么及相关使用参考[vuex 学习及原理](https://km.xiaowuzi.in
 
 - 入口文件
 - install
-- state
-- mapState
-- getter
-- mapGetters
-- mutation
-- mapMutation
-- action
-- mapActions
-- module
+- Store 类
+- Module 类
+- ModuleCollection 类
+- 辅助函数
 
 本文分析是基本 vuex 的`3.1.2`版本
 
@@ -138,55 +133,48 @@ export default function (Vue) {
 }
 ```
 
-#### 2.4 state
+#### 2.4 Store 类
+
+Store 类的成员属性主要有下面几个：
+
+1. `_commiting`：标识是否正提交，类型 Boolean；
+2. `_actions`：储存 actions，类型 Object；
+3. `_actionSubscribers`：存储 actions 的订阅者，类型 Array；
+4. `_mutations`：存储 mutations，类型 Object；
+5. `_wrappedGetters`：存储 wrapped 后的 Getters，类型 Object；
+6. `_modules`：存储模块链，是一个 ModuleCollection 实例；
+7. `_modulesNamespaceMap`：存储带全名空间的 modules，类型 Object；
+8. `_subscribers`：存储订阅者，类型 Object
+9. `_watcherVM`：存储 Vue 实例；
+10. `strict`：标识是否 strict 模式，类型 Boolean；
 
 ```
 
 ```
 
-#### 2.5 mapState
+Store 类的成员方法有下面几个：
+
+1. `commit`：
+2. `dispatch`：
+3. `subscribe`：
 
 ```
 
 ```
 
-#### 2.6 getter
+#### 2.5 Module 类
 
 ```
 
 ```
 
-#### 2.7 mapGetters
+#### 2.6 ModuleCollection 类
 
 ```
 
 ```
 
-#### 2.8 mutation
-
-```
-
-```
-
-#### 2.9 mapMutation
-
-```
-
-```
-
-#### 2.10 action
-
-```
-
-```
-
-#### 2.11 mapActions
-
-```
-
-```
-
-#### 2.12 module-collection
+#### 2.7 辅助函数
 
 ```
 
