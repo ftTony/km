@@ -8,7 +8,7 @@
 
 - 散列表介绍
 - 创建散列表
-- 散表应用
+- 散列表冲突
 
 ### 一、散列表介绍
 
@@ -147,7 +147,73 @@ class HashTable {
 }
 ```
 
-### 三、散列表应用
+### 三、散列表冲突
+
+处理散列表冲突主要有以下几种方法：链表法、线性探查、双散列法
+
+#### 3.1 链表法
+
+**链表法** 包括为散列表的每一个位置创建一个链表并将元素存储在里面。
+
+代码如下：
+
+```
+class HashTableSeparateChaining {
+  constructor(toStrFn = defaultToString) {
+    this.toStrFn = toStrFn
+    this.table = {}
+  }
+  put(key, value) {
+    if (key != null && value != null) {
+      const position = this.hashCode(key)
+      if (this.table[position] == null) {
+        this.table[position] = new linkedList()
+      }
+      this.table[position].push(new ValuePair(key, value))
+      return true
+    }
+    return false
+  }
+  get(key) {
+    const position = this.hashCode(key)
+    const linkedList = this.table[position]
+    if (linkedList != null && !linkedList.isEmpty()) {
+      let current = linkedList.getHead()
+      while (current != null) {
+        if (current.element.key === key) {
+          return current.element.value
+        }
+        current = current.next
+      }
+    }
+    return undefined
+  }
+  remove(key) {
+    const position = this.hashCode(key)
+    const linkedList = this.table[position]
+    if (linkedList != null && !linkedList.isEmpty()) {
+      let current = linkedList.getHead()
+      while (current != null) {
+        if (current.element.key === key) {
+          linkedList.remove(current.element)
+          if (linkedList.isEmpty()) {
+            delete this.table[position]
+          }
+          return true
+        }
+        current = current.next
+      }
+    }
+    return false
+  }
+}
+```
+
+#### 3.2 线性探查
+
+```
+
+```
 
 ### 参考资料
 
