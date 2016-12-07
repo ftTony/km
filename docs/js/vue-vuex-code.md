@@ -149,7 +149,60 @@ Store 类的成员属性主要有下面几个：
 10. `strict`：标识是否 strict 模式，类型 Boolean；
 
 ```
+constructor (options = {}) {
 
+    //  省略部分代码
+
+    const {
+      plugins = [],
+      strict = false
+    } = options
+
+    // store internal state
+    this._committing = false
+    this._actions = Object.create(null)
+    this._actionSubscribers = []
+    this._mutations = Object.create(null)
+    this._wrappedGetters = Object.create(null)
+    this._modules = new ModuleCollection(options)
+    this._modulesNamespaceMap = Object.create(null)
+    this._subscribers = []
+    this._watcherVM = new Vue()
+    // 本地缓存
+    this._makeLocalGettersCache = Object.create(null)
+
+    // bind commit and dispatch to self
+    const store = this
+    const { dispatch, commit } = this
+    this.dispatch = function boundDispatch (type, payload) {
+      return dispatch.call(store, type, payload)
+    }
+    this.commit = function boundCommit (type, payload, options) {
+      return commit.call(store, type, payload, options)
+    }
+
+    // strict mode
+    this.strict = strict
+
+    const state = this._modules.root.state
+
+    // init root module.
+    // this also recursively registers all sub-modules
+    // and collects all module getters inside this._wrappedGetters
+    installModule(this, state, [], this._modules.root)
+
+    // initialize the store vm, which is responsible for the reactivity
+    // (also registers _wrappedGetters as computed properties)
+    resetStoreVM(this, state)
+
+    // apply plugins
+    plugins.forEach(plugin => plugin(this))
+
+    const useDevtools = options.devtools !== undefined ? options.devtools : Vue.config.devtools
+    if (useDevtools) {
+      devtoolPlugin(this)
+    }
+  }
 ```
 
 Store 类的成员方法有下面几个：
@@ -159,7 +212,98 @@ Store 类的成员方法有下面几个：
 3. `subscribe`：
 
 ```
+commit (_type, _payload, _options) {
+    // check object-style commit
+    const {
+      type,
+      payload,
+      options
+    } = unifyObjectStyle(_type, _payload, _options)
 
+    const mutation = { type, payload }
+    const entry = this._mutations[type]
+    if (!entry) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.error(`[vuex] unknown mutation type: ${type}`)
+      }
+      return
+    }
+    this._withCommit(() => {
+      entry.forEach(function commitIterator (handler) {
+        handler(payload)
+      })
+    })
+
+    this._subscribers
+      .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+      .forEach(sub => sub(mutation, this.state))
+
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      options && options.silent
+    ) {
+      console.warn(
+        `[vuex] mutation type: ${type}. Silent option has been removed. ` +
+        'Use the filter functionality in the vue-devtools'
+      )
+    }
+  }
+
+  dispatch (_type, _payload) {
+    // check object-style dispatch
+    const {
+      type,
+      payload
+    } = unifyObjectStyle(_type, _payload)
+
+    const action = { type, payload }
+    const entry = this._actions[type]
+    if (!entry) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.error(`[vuex] unknown action type: ${type}`)
+      }
+      return
+    }
+
+    try {
+      this._actionSubscribers
+        .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+        .filter(sub => sub.before)
+        .forEach(sub => sub.before(action, this.state))
+    } catch (e) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn(`[vuex] error in before action subscribers: `)
+        console.error(e)
+      }
+    }
+
+    const result = entry.length > 1
+      ? Promise.all(entry.map(handler => handler(payload)))
+      : entry[0](payload)
+
+    return result.then(res => {
+      try {
+        this._actionSubscribers
+          .filter(sub => sub.after)
+          .forEach(sub => sub.after(action, this.state))
+      } catch (e) {
+        if (process.env.NODE_ENV !== 'production') {
+          console.warn(`[vuex] error in after action subscribers: `)
+          console.error(e)
+        }
+      }
+      return res
+    })
+  }
+
+  subscribe (fn) {
+    return genericSubscribe(fn, this._subscribers)
+  }
+
+  subscribeAction (fn) {
+    const subs = typeof fn === 'function' ? { before: fn } : fn
+    return genericSubscribe(subs, this._actionSubscribers)
+  }
 ```
 
 #### 2.5 Module 类
