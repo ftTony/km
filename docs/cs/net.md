@@ -65,6 +65,20 @@
 - DHCP 协议
 - HTTP 协议
 
+#### 6.1 路由选择协议
+
+常见的路由协议有：RIP 协议、OSPF 协议。
+
+- **RIP 协议**：底层是贝尔曼福特算法，它选择路由的度量标准（metric)是跳数，最大跳数是 15 跳，如果大于 15 跳，它就会丢弃数据包。
+
+#### 6.2 DNS 协议
+
+#### 6.3 NAT 协议
+
+#### 6.4 DHCP 协议
+
+#### 6.5 HTTP 协议
+
 ### 参考资料
 
 - [计算机网络](https://github.com/frank-lam/fullstack-tutorial/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md)
