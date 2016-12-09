@@ -308,11 +308,36 @@ commit (_type, _payload, _options) {
 
 #### 2.5 Module 类
 
+Module 类的代码位置在`./src/module/module.js`下
+
+Module 类的成员属性有四个，分别是：
+
+1. `runtime`：
+2. `_children`：
+3. `_rawModule`：
+4. `state`：
+
 ```
 
 ```
+
+Module 类的成员方法有以下几个：
+
+1. `addChild`：
+2. `removeChild`：
+3. `getChild`：
+4. `update`：
+5. `forEachChild`、`forEachGetter`、`forEachAction`、`forEachMutation`：
 
 #### 2.6 ModuleCollection 类
+
+ModuleCollection 类的相关在`./src/module/module-collection.js`文件中
+
+ModuleCollection 类有以下几个方法成员：
+
+1. `register`：
+2. `unregister`：
+3. `update`：
 
 ```
 
