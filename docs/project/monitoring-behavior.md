@@ -19,6 +19,8 @@
 - [生产环境报错如何定位源码位置](https://mp.weixin.qq.com/s/ICfqj2SgTD_QEC0KH8G9vg)
 - [前端数据之美 -- 基础篇](http://fex.baidu.com/blog/2014/05/front_end-data/)
 - [前端-埋点-理念-通识-浅谈](https://juejin.im/post/5d182a3bf265da1b667bf0be)
+- [写给大家看的数据分析思路](https://mp.weixin.qq.com/s/zurv3PejUz0DlrUgsSb84w)
+- [写给大家看的数据分析思路（二）](https://mp.weixin.qq.com/s/hXsr0I8w4ToW-a523oHv5w)
 - [前端日志监控](https://github.com/a597873885/webfunny_monitor)
 - [前端监控，性能监控平台](https://github.com/kisslove/web-monitoring)
 - [浏览器端页面性能](https://github.com/wangweianger/web-report-sdk)
