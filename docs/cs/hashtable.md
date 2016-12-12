@@ -219,7 +219,6 @@ class HashTableSeparateChaining {
 
 - 《学习 JavaScript 数据结构与算法》
 - [动画：什么是散列表？](https://mp.weixin.qq.com/s/EJt0wvsVujKy040Juq28Qw)
-- [动画：什么是散列表？](https://mp.weixin.qq.com/s/EJt0wvsVujKy040Juq28Qw)
 - [散列表 | 文本编辑器是如何检查英文单词出错的？](https://mp.weixin.qq.com/s/5ABSQrCuexhoKWHouL-YIA)
 
 ## 联系作者
