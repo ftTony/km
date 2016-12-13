@@ -345,6 +345,16 @@ ModuleCollection 类有以下几个方法成员：
 
 #### 2.7 辅助函数
 
+辅助函数源码在`./src/helpers.js`文件中
+
+辅助函数包含以下几个方法：
+
+1. `mapState`：
+2. `mapMutations`：
+3. `mapGetters`：
+4. `mapActions`：
+5. `createNamespacedHelpers`：
+
 ```
 
 ```
