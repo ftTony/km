@@ -93,6 +93,7 @@ net 模块中，对 listen() 方法进行了特殊处理。根据当前进程是
 - [通过 Node.js 的 Cluster 模块源码，深入 PM2 原理](https://mp.weixin.qq.com/s/668R5YheK0GGd8kUGtRFVA)
 - [【第 1003 期】Nodejs cluster 模块深入探究](https://mp.weixin.qq.com/s/rdbVHJs1z1SSOjmUZEXKEA)
 - [Nodejs 进阶：解答 Cluster 模块的几个疑问](https://mp.weixin.qq.com/s/uRCfvzLlkXVwQ4FTmGArrg)
+- [源码分析 Node 的 Cluster 模块](https://mp.weixin.qq.com/s/vKHG1mznQL3_iJ4XEbWaqg)
 
 ## 联系作者
 
