@@ -349,11 +349,11 @@ ModuleCollection 类有以下几个方法成员：
 
 辅助函数包含以下几个方法：
 
-1. `mapState`：
-2. `mapMutations`：
-3. `mapGetters`：
-4. `mapActions`：
-5. `createNamespacedHelpers`：
+1. `mapState`：为了解决一个组件需要获取多个状态时候，将这些状态都声明为了计算属性会有些重复和冗余，我们可以使用`mapState`辅助函数帮助我们生成计算属性。
+2. `mapMutations`：与 mapState 可以映射模块的 state 为计算属性类似，mapMutations 也可以将模块的 mutations 映射为 matchods
+3. `mapGetters`：与 mapState 可以映射模块的 state 为计算属性类似，mapGetters 也可以将模块的 getters 映射为计算属性
+4. `mapActions`：与 mapMutations 可以映射模块的 mutation 为 methods 类似，mapActions 也可以将模块的 actions 映射为 methods
+5. `createNamespacedHelpers`：主要是根据传递的命名空间产生对应模块的局部化 mapState、mapGetters、mapMutations、mapActions 映射函数
 
 ```
 
@@ -361,12 +361,13 @@ ModuleCollection 类有以下几个方法成员：
 
 ### 三、总结
 
+vuex 代码主要使用了订阅者模式，保证了数据统一性
+
 ### 参考资料
 
 - [vuex 原理及源码分析](https://github.com/dwqs/blog/issues/58)
 - [vuex-analysis](https://github.com/wabish/vuex-analysis)
 - [VUEX 源码学习笔记](https://github.com/DuLinRain/vuex-sourcecode-analysis)
-- [Vue2.x 源码解析系列一：我的源码阅读心得](https://github.com/lihongxun945/myblog/issues/22)
 - [Vuex 源码深度解析](https://juejin.im/post/5b8e3182e51d4538ae4dce87)
 
 ## 联系作者

@@ -211,7 +211,8 @@ Vue.js 的源码都在 src 目录下，其目录结构如下。
 - [逐行剖析 Vue.js 源码](https://nlrx-wjc.github.io/Learn-Vue-Source-Code/start/)
 - [渲染器](http://hcysun.me/vue-design/zh/)
 - [深入 Vue 技术栈及源码系列](https://www.cnblogs.com/tugenhua0707/category/1577630.html)
-- [Vue原理剖析](http://www.zhufengpeixun.cn/train/vue-info/source.html)
+- [Vue 原理剖析](http://www.zhufengpeixun.cn/train/vue-info/source.html)
+- [Vue2.x 源码解析系列一：我的源码阅读心得](https://github.com/lihongxun945/myblog/issues/22)
 - 《深入清出 Vue.js》
 
 ## 联系作者
