@@ -372,7 +372,6 @@ module.exports = {
                     "array",
                     "queue",
                     "stack",
-                    "heap",
                     "list",
                     "set",
                     "dictionary",
@@ -381,6 +380,7 @@ module.exports = {
                     "trees-1",
                     "trees-2",
                     "trees-b",
+                    "heap",
                     "trie",
                     "graphs"
                 ]
