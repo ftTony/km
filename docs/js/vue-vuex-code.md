@@ -312,10 +312,10 @@ Module 类的代码位置在`./src/module/module.js`下
 
 Module 类的成员属性有四个，分别是：
 
-1. `runtime`：
-2. `_children`：
-3. `_rawModule`：
-4. `state`：
+1. `runtime`：表示是否运行时，类型 Boolean；
+2. `_children`：存储该模块的直接子模块，类型 Object；
+3. `_rawModule`：存储该模块自身，类型 Object；
+4. `state`：存储该模块的 state，类型 Object；
 
 ```
 
@@ -323,11 +323,8 @@ Module 类的成员属性有四个，分别是：
 
 Module 类的成员方法有以下几个：
 
-1. `addChild`：
-2. `removeChild`：
-3. `getChild`：
-4. `update`：
-5. `forEachChild`、`forEachGetter`、`forEachAction`、`forEachMutation`：
+1. 作`_children`属性的 addChild、removeChild、getChild、forEachChild 四个方法。
+2. 操作`_rawModule`属性的 update、forEachGetter、forEachAction、forEachMutation 四个方法。
 
 #### 2.6 ModuleCollection 类
 
