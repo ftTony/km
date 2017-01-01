@@ -376,6 +376,36 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 下面是张鑫旭大佬推荐的利用 vertical-align 实现的水平垂直居中弹框，能够理解的话就说明你已经完全掌握了好基友和第三者的关系了。
 
 ```
+<div class="container">
+  <div class="dialog">自适应弹出层</div>
+</div>
+<style>
+.container{
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-color: rgba(0, 0, 0, .15);
+  text-align: center;
+  font-size: 0;
+  white-space: nowrap;
+  overflow: auto;
+}
+.container:after{
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.dialog{
+  display: inline-block;
+  width: 400px;
+  height: 400px;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 14px;
+  white-space: normal;
+  background: white;
+}
+</style>
 
 ```
 
@@ -575,6 +605,8 @@ p::first-letter{
 - `pre-wrap`：不合并空白符，允许换行符换行和文本自动换行；
 
 #### 6.5 `text-align: justify`
+
+`text-align:justify`为两端对齐。除了实现文字的两端对齐，还能用来做一些两端对齐的布局。
 
 ### 七、元素的显示与隐藏
 
