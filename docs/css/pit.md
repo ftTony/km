@@ -261,6 +261,14 @@ onpageshow 每次页面加载都会触发，无论是从缓存中加载还是正
 
 #### 24. transition 清除闪屏
 
+代码如下：
+
+```
+-webkit-transform-style:preseve-3d; //设置内嵌的元素在3D空间如何呈现：保留3D
+-webkit-backface-visibility:hidden; //设置进行转换的元素的背面在面对用户时是否可见：隐藏
+-webkit-perspective:1000;
+```
+
 #### 25. 解决 active 伪类失效
 
 #### 26. 设置 input 文本框的 placeholder 的颜色
