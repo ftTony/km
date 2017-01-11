@@ -314,6 +314,10 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 ![images](line-height04.png)
 
+内联元素的大值特性
+
+无论内联元素的`line-height` 如何设置，最终父元素的高度都是数值大的那个 `line-height` 决定的。
+
 #### 3.3 vertical-align
 
 属性值：
