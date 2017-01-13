@@ -334,6 +334,16 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 好基友`line-height`、`vertical-align`和第三者幽灵空白节点的爱恨情仇
 
+有时候会遇到下面这样的高度和设置不一致的情况：
+
+![images](vertical-align.png)
+
+`div`的实际高度比设定的行高大了，为什么呢？
+
+内联元素的默认对齐方式是`baseline`，所以此时`span`元素的基线和父元素的基线相对齐的，而此时父元素的基线在哪呢？
+
+父元素的基线其实就是行框盒子前的幽灵空白节点的基线，把幽灵空白节点具象化为字母`x`可能容易理解些：
+
 `display:inline-block`基线不同之处
 
 一个设置了`display:inline-block`的元素：
