@@ -352,7 +352,11 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 `display:inline-block`基线不同之处
 
-一个设置了`display:inline-block`的元素：
+图中`span`元素设置了`display:inline-block`和宽高，从而撑起了父元素`div`的高度，但`span`本身并无`margin`属性，那为什么底部和 div 下边缘之间会有空隙呢？
+
+![images](vertical-align02.png)
+
+这就要说到 inline-block 的不同之处了。一个设置了`display:inline-block`的元素：
 
 1. 如果元素内部没有内联元素，则该元素基线就是该元素下边缘；
 2. 如果元素设置了`overflow`为`hidden auto scroll`，则其基线就是该元素下边缘；
