@@ -320,7 +320,7 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 #### 3.3 vertical-align
 
-属性值：
+- 属性值：
 
 - 线类：如`baseline(默认值)`、`top`、`middle`、`bottom`（`baseline`使元素的基线与父元素的基线对齐，`middle`使元素的中部与父元素的基线往上`x-height`的一半对齐。` top``bottom `使元素及其后代元素的询问与整行或整块的底部对齐。）
 - 文本类：`text-top` `text-bottom`(使元素的顶部与父元素的字体顶部对齐。)
@@ -328,11 +328,11 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 - 数值：` 20px``2em `（默认值`basline`相当于数值的 0。使元素的基线对齐到父元素的基线之上的给定长度，数值正值是基线往上偏移，负值是往下偏移，借此可以实现元素垂直方向精确对齐。）
 - 百分比：`20%`（使元素的基线对齐到父元素的基线之上的给定百分比。该百分比是 line-height 属性的百分比。）
 
-`vertical-align`的作用前提
+- `vertical-align`的作用前提
 
 **vertical-align 属性起作用的前提必须是作用在内联元素上。**即`display`计算值为`inline`、`inline-block`、`inline-table`、`table-cell`的元素。所以如果元素设置了`float:left`或者`position:absolute`，则其`vertical-align`属性不能生效，因为此时元素的`display`计算值为`block`了。
 
-好基友`line-height`、`vertical-align`和第三者幽灵空白节点的爱恨情仇
+- 好基友`line-height`、`vertical-align`和第三者幽灵空白节点的爱恨情仇
 
 有时候会遇到下面这样的高度和设置不一致的情况：
 
@@ -350,7 +350,7 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 由于内联元素默认基线对齐，所以字母`x`和`span`元素发生了位移以使得基线对齐，导致`div`高度变大。而此时字母`x`的半行距比`span`元素的半行距大，大出的部分就是`div`的高度增加的部分。
 
-`display:inline-block`基线不同之处
+- `display:inline-block`基线不同之处
 
 图中`span`元素设置了`display:inline-block`和宽高，从而撑起了父元素`div`的高度，但`span`本身并无`margin`属性，那为什么底部和 div 下边缘之间会有空隙呢？
 
@@ -362,7 +362,7 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 2. 如果元素设置了`overflow`为`hidden auto scroll`，则其基线就是该元素下边缘；
 3. 如果元素内部还有一内联元素，则其基线就是内部最后一行内联元素的基线。
 
-解决问题
+- 解决问题
 
 间隙产生本质上是由基线对齐引发的错位造成的，源头上是`vertical-align`和`line-height`共同造成的，所以要想解决这个问题，只要直接或间接改造两个属性中的一个就行了：
 
@@ -370,6 +370,14 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 2. 尝试不同的`vertical-align`值如`bottom/middle/top`;
 3. 直接修改`line-height`值；
 4. 如果`line-height`为相对值如`1.4`，设置`font-size:0`间接改变`line-height`。
+
+- 弹框 dialog
+
+下面是张鑫旭大佬推荐的利用 vertical-align 实现的水平垂直居中弹框，能够理解的话就说明你已经完全掌握了好基友和第三者的关系了。
+
+```
+
+```
 
 ### 四、流的破坏
 
