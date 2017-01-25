@@ -1,10 +1,23 @@
-# 字体
+# 文本控制
 
 ## 前言
 
 本人平时学习及收集内容，欢迎参入一起讨论。
 
 ## 内容
+
+- letter-spacing
+- text-tranfrom
+- word-break 和 word-wrap
+- white-space
+
+### 一、letter-spacing
+
+### 二、text-tranfrom
+
+### 三、word-break 和 word-wrap
+
+### 四、white-space
 
 ### 参考资料
 
