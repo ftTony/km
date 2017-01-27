@@ -181,7 +181,6 @@ module.exports = {
           'scss',
           'transform',
           'fps',
-          'background-size',
           'box-sizing',
           'select'
         ]
