@@ -318,7 +318,17 @@ Module 类的成员属性有四个，分别是：
 4. `state`：存储该模块的 state，类型 Object；
 
 ```
+constructor (rawModule, runtime) {
+    this.runtime = runtime
+    // Store some children item
+    this._children = Object.create(null)
+    // Store the origin module object which passed by programmer
+    this._rawModule = rawModule
+    const rawState = rawModule.state
 
+    // Store the origin module's state
+    this.state = (typeof rawState === 'function' ? rawState() : rawState) || {}
+}
 ```
 
 Module 类的成员方法有以下几个：
@@ -326,18 +336,129 @@ Module 类的成员方法有以下几个：
 1. 作`_children`属性的 addChild、removeChild、getChild、forEachChild 四个方法。
 2. 操作`_rawModule`属性的 update、forEachGetter、forEachAction、forEachMutation 四个方法。
 
+```
+addChild (key, module) {
+    this._children[key] = module
+  }
+
+  removeChild (key) {
+    delete this._children[key]
+  }
+
+  getChild (key) {
+    return this._children[key]
+  }
+
+  update (rawModule) {
+    this._rawModule.namespaced = rawModule.namespaced
+    if (rawModule.actions) {
+      this._rawModule.actions = rawModule.actions
+    }
+    if (rawModule.mutations) {
+      this._rawModule.mutations = rawModule.mutations
+    }
+    if (rawModule.getters) {
+      this._rawModule.getters = rawModule.getters
+    }
+  }
+
+  forEachChild (fn) {
+    forEachValue(this._children, fn)
+  }
+
+  forEachGetter (fn) {
+    if (this._rawModule.getters) {
+      forEachValue(this._rawModule.getters, fn)
+    }
+  }
+
+  forEachAction (fn) {
+    if (this._rawModule.actions) {
+      forEachValue(this._rawModule.actions, fn)
+    }
+  }
+
+  forEachMutation (fn) {
+    if (this._rawModule.mutations) {
+      forEachValue(this._rawModule.mutations, fn)
+    }
+  }
+```
+
 #### 2.6 ModuleCollection 类
 
 ModuleCollection 类的相关在`./src/module/module-collection.js`文件中
 
 ModuleCollection 类有以下几个方法成员：
 
-1. `register`：
-2. `unregister`：
-3. `update`：
+1. `register`：它主要是从根级别开始，逐级注册子模块，最终的模块链条
 
 ```
+register (path, rawModule, runtime = true) {
+    if (process.env.NODE_ENV !== 'production') {
+      assertRawModule(path, rawModule)
+    }
 
+    const newModule = new Module(rawModule, runtime)
+    if (path.length === 0) {
+      this.root = newModule
+    } else {
+      const parent = this.get(path.slice(0, -1))
+      parent.addChild(path[path.length - 1], newModule)
+    }
+
+    // register nested modules
+    if (rawModule.modules) {
+      forEachValue(rawModule.modules, (rawChildModule, key) => {
+        this.register(path.concat(key), rawChildModule, runtime)
+      })
+    }
+}
+```
+
+2. `unregister`：取消某个模块；
+
+```
+ unregister (path) {
+    const parent = this.get(path.slice(0, -1))
+    const key = path[path.length - 1]
+    if (!parent.getChild(key).runtime) return
+
+    parent.removeChild(key)
+  }
+```
+
+3. `update`：用于从根级别开始逐级更新模块的内容
+
+```
+function update (path, targetModule, newModule) {
+  if (process.env.NODE_ENV !== 'production') {
+    assertRawModule(path, newModule)
+  }
+
+  // update target module
+  targetModule.update(newModule)
+
+  // update nested modules
+  if (newModule.modules) {
+    for (const key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if (process.env.NODE_ENV !== 'production') {
+          console.warn(
+            `[vuex] trying to add a new module '${key}' on hot reloading, ` +
+            'manual reload is needed'
+          )
+        }
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      )
+    }
+  }
+}
 ```
 
 #### 2.7 辅助函数
