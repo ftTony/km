@@ -497,6 +497,14 @@ p::first-letter{
 
 假设有个输入框只能输入大写字母，那么如下设置，输入小写字母出现的却是大写字母，可用于身份证输入框或验证码输入框等：
 
+取值：
+
+- `none：` 无转换
+- `capitalize：` 将每个单词的第一个字母转换成大写
+- `uppercase：` 将每个单词转换成大写
+- `lowercase：` 将每个单词转换成小写
+- `full-width：` 将所有字符转换成 fullwidth 形式。如果字符没有相应的 fullwidth 形式，将保留原样。这个值通常用于排版拉丁字符和数字等表意符号。
+
 ```
   input {
     text-transform: uppercase;
