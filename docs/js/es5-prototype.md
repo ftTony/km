@@ -20,7 +20,7 @@
 
 我们知道，在 JavaScript 中可以使用构造函数语法（通过 new 调用的函数通常被称为构造函数）来创建一个新的对象，像下面这样：
 
-``` 
+```
 
 // 构造函数，无返回值
 function Person(name) {
@@ -35,7 +35,7 @@ var person = new Person('Mike');
 
 我们创建的每个函数都有一个 prototype（原型）属性，这个属性是一个指针，指向一个对象，这个对象就是调用构造函数而创建的对象实例的原型。原型可以包含所有实例共享的属性和方法，也就是说只要是原型有的属性和方法，通过调用构造函数而生成的对象实例都会拥有这些属性和方法。看下面的代码：
 
-``` 
+```
 
 function Person(name) {
   this.name = name;
@@ -62,7 +62,7 @@ console.log(person2.age); // 20
 
 我们知道每个函数都有一个 prototype 属性，指向函数的原型，因此当我们拿到一个函数的时候，就可以确定函数的原型。反之，如果给我们一个函数的原型，我们怎么知道这个原型是属于哪个函数的呢？这就要说说原型的 constructor 属性了：
 
->在默认情况下，所有原型对象都会自动获得一个 constructor （构造函数）属性，这个属性包含一个指向 prototype 属性所在函数的指针。
+> 在默认情况下，所有原型对象都会自动获得一个 constructor （构造函数）属性，这个属性包含一个指向 prototype 属性所在函数的指针。
 
 也就是说每个原型都有都有一个 constructor 属性，指向了原型所在的函数，拿前面的例子来说 Person.prototype.constructor 指向 Person。下面是构造函数和原型的关系说明图：
 
@@ -92,7 +92,7 @@ console.log(person2.age); // 20
 
 我们可以通过 `isPrototypeOf()` 方法判断某个原型和对象实例是否存在关系，或者，我们也可以使用 ES5 新增的方法 `Object.getPrototypeOf()` 获取一个对象实例 `__proto__` 属性的值。看下面的例子：
 
-``` 
+```
     console.log(Person.prototype.isPrototypeOf(person1)); // true
     console.log(Object.getPrototypeOf(person1) == Person.prototype); // true
 
@@ -104,7 +104,7 @@ console.log(person2.age); // 20
 
 虽然可以通过对象实例访问保存在原型中的值，但却不能通过对象实例重写原型中的值。我们在实例中添加的一个属性，会屏蔽原型中的同名属性。另外，通过 `hasOwnProperty` 方法能判断对象实例中是否存在某个属性（不能判断对象原型中是否存在该属性）。来看下面的例子：
 
-``` 
+```
     JavaScript
     function Person(){ }
 
@@ -131,15 +131,15 @@ console.log(person2.age); // 20
 
 - 单独使用
 
->在单独使用时，in 操作符会在通过对象能够访问给定属性时返回 true，无论该属性存在于实例中还是原型中。
+> 在单独使用时，in 操作符会在通过对象能够访问给定属性时返回 true，无论该属性存在于实例中还是原型中。
 
 - for-in 循环中使用
 
->在使用 for-in 循环时，返回的是所有能够通过对象访问的、可枚举的（enumerated）属性，其中既包括存在于实例中的属性， 也包括存在于原型中的属性。如果需要获取所有的属性（包括不可枚举的属性），可以使用 Object.getOwnPropertyNames() 方法。
+> 在使用 for-in 循环时，返回的是所有能够通过对象访问的、可枚举的（enumerated）属性，其中既包括存在于实例中的属性， 也包括存在于原型中的属性。如果需要获取所有的属性（包括不可枚举的属性），可以使用 Object.getOwnPropertyNames() 方法。
 
 看下面的例子：
 
-``` 
+```
     JavaScript
     function Person(){
     this.name = 'Mike';
@@ -163,7 +163,7 @@ console.log(person2.age); // 20
 
 由于在对象中查找属性的过程是一次搜索，而实例与原型之间的连接只不过是一个指针，而非一个副本，因此我们对原型对象所做的任何修改都能够立即从实例上反映出来——即使是先创建了实例后修改原型也照样如此：
 
-``` 
+```
 
     JavaScript
     var person = new Person();
@@ -177,7 +177,7 @@ console.log(person2.age); // 20
 
 但是下面这种代码所得到的结果就完全不一样了：
 
-``` 
+```
     JavaScript
     function Person() {}
 
@@ -204,7 +204,7 @@ console.log(person2.age); // 20
 
 在前面的例子，我们是直接在原型上添加属性和方法，或者用一个新的对象赋值给原型，那么如果我们让原型对象等于另一个类型的实例，结果会怎样呢？
 
-``` 
+```
 JavaScript
 function Person() {
   this.age = '20';
@@ -242,7 +242,8 @@ console.log(Engineer.prototype.__proto__ == Person.prototype); // true
 ### 2.2 原型链
 
 原型链其实不难理解，上图中的红色线组成的链就可以称之为原型链，只不过这是一个不完整的原型链。我们可以这样定义原型链：
->原型对象可以包含一个指向另一个原型（原型2）的指针，相应地，另一个原型（原型2）中也可以包含着一个指向对应构造函数（原型2 的构造函数）的指针。假如另一个原型（原型2）又是另一个类型（原型3 的构造函数）的实例，那么上述关系依然成立，如此层层递进，就构成了实例与原型的链条。这就是所谓原型链的基本概念。
+
+> 原型对象可以包含一个指向另一个原型（原型 2）的指针，相应地，另一个原型（原型 2）中也可以包含着一个指向对应构造函数（原型 2 的构造函数）的指针。假如另一个原型（原型 2）又是另一个类型（原型 3 的构造函数）的实例，那么上述关系依然成立，如此层层递进，就构成了实例与原型的链条。这就是所谓原型链的基本概念。
 
 结合上面的图，这个概念不难理解。上面的图中只有两个原型，那么当有更多的原型之后，这个红色的线理论上可以无限延伸，也就构成了原型链。
 
@@ -250,14 +251,14 @@ console.log(Engineer.prototype.__proto__ == Person.prototype); // true
 
 那么原型链的末端又是什么呢？我们要知道，所有函数的 `默认原型` 都是 Object 的实例，因此默认原型都会包含一个内部指针，指向 `Object.prototype`。我们可以在上面代码的尾部加上一行代码进行验证：
 
-``` 
+```
 JavaScript
 console.log(Person.prototype.__proto__ == Object.prototype); // true
 ```
 
 那 `Object.prototype` 的原型又是什么呢，不可能没有终点啊？聪明的小伙伴可能已经猜到了，没错，就是 `null`，null 表示此处不应该有值，也就是终点了。我们可以在 Chrome 的控制台或 Node 中验证一下：
 
-``` 
+```
 JavaScript
 console.log(Object.prototype.__proto__); // null
 ```
@@ -276,21 +277,21 @@ toString() ：返回对象的字符串表示。
 
 valueOf() ：返回对象的字符串、数值或布尔值表示。通常与 toString() 方法的返回值相同。
 
-instanceof 用来判断一个构造函数的prototype属性所指向的对象是否存在另外一个要检测对象的原型链上
+instanceof 用来判断一个构造函数的 prototype 属性所指向的对象是否存在另外一个要检测对象的原型链上
 
 ## 三、完整的原型链
 
-![](proto01.png)
+![images](proto01.jpg)
 
 ## 参考资料
 
 - 《JavaScript 高级程序设计》
-- [Javascript深入之从原型到原型链](https://github.com/mqyqingfeng/Blog/issues/2)
-- [深入理解JavaScript之从原型到原型链](https://juejin.im/post/5a0a5dc4f265da430b7abffb?utm_source=gold_browser_extension)
+- [Javascript 深入之从原型到原型链](https://github.com/mqyqingfeng/Blog/issues/2)
+- [深入理解 JavaScript 之从原型到原型链](https://juejin.im/post/5a0a5dc4f265da430b7abffb?utm_source=gold_browser_extension)
 - [原型图解](https://segmentfault.com/a/1190000011880268)
 - [深入理解 JavaScript 原型](https://mp.weixin.qq.com/s/1UDILezroK5wrcK-Z5bHOg)
-- [【THE LAST TIME】一文吃透所有JS原型相关知识点](https://mp.weixin.qq.com/s/1F0cJus31Pjq0YXo-rCkwQ)
-- [重新认识构造函数、原型和原型链](https://muyiy.vip/blog/5/5.1.html)
+- [【THE LAST TIME】一文吃透所有 JS 原型相关知识点](https://mp.weixin.qq.com/s/1F0cJus31Pjq0YXo-rCkwQ)
+- [重新认识构造函数、原型和原型链](https://muyiy.cn/blog/5/5.1.html)
 
 ## 联系作者
 

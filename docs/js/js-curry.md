@@ -219,7 +219,7 @@ const currying = fn => judge = (...args) => args.length >= fn.length ? fn(...arg
 ### 参考资料
 
 - [JavaScript 专题之函数柯里化](https://github.com/mqyqingfeng/Blog/issues/42)
-- [深入高阶函数应用之柯里化](https://muyiy.vip/blog/6/6.2.html)
+- [深入高阶函数应用之柯里化](https://muyiy.cn/blog/6/6.2.html)
 - [【第 1253 期】柯里化函数应用](https://mp.weixin.qq.com/s/13cQzIsrsF61S870pnJ6bQ)
 
 ## 联系作者

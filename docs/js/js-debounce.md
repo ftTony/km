@@ -132,7 +132,7 @@ function throttle(fun,wait,options){
 
 ### 参考资料
 
-- [节流防抖](https://muyiy.vip/blog/7/7.1.html)
+- [节流防抖](https://muyiy.cn/blog/7/7.1.html)
 - [JavaScript 专题之跟着 underscore 学防抖](https://github.com/mqyqingfeng/Blog/issues/22)
 - [JavaScript 专题之跟着 underscore 学节流](https://github.com/mqyqingfeng/Blog/issues/26)
 - [函数节流和防抖](https://github.com/ljianshu/Blog/issues/43)

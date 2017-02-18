@@ -8,7 +8,7 @@
 
 - 什么是 Vue.nextTick()？
 - Vue.nextTick 的调用方式
-- `vm.$nextTick` 与 setTimeout 的区别是什么？
+- `vm.$nextTick` 与 `setTimeout` 的区别是什么？
 - 理解 MutationObserver
 - nextTick 源码分析
 

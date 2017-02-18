@@ -226,7 +226,7 @@ data[2]();	// 2
 
 - [JavaScript 深入之作用域链](https://github.com/mqyqingfeng/Blog/issues/6)
 - [JavaScript 深入之词法作用域和动态作用域](https://github.com/mqyqingfeng/Blog/issues/3)
-- [深入浅出图解作用域链和闭包](https://muyiy.vip/blog/2/2.1.html)
+- [深入浅出图解作用域链和闭包](https://muyiy.cn/blog/2/2.1.html)
 - [深入理解 JavaScript 系列（14）：作用域链(Scope Chain)](https://www.cnblogs.com/TomXu/archive/2012/01/18/2312463.html)
 - [深入理解 JavaScript, 从作用域与作用域链开始](https://juejin.im/post/5d13a5fce51d455a694f9560)
 
