@@ -11,6 +11,8 @@
 - [面试专场之「计算机网络」知识](https://mp.weixin.qq.com/s/4UCkjMpFSy_mvvHdjUVPCw)
 - [计算机网络基础知识总结](https://www.cnblogs.com/maybe2030/p/4781555.html)
 - [网络基础必知](https://www.cnblogs.com/renfanzi/p/5783937.html)
+- [常见面试题整理--计算机网络篇（每位开发者必备）](https://zhuanlan.zhihu.com/p/24001696)
+- [计算机网络太难？了解这一篇就够了](https://zhuanlan.zhihu.com/p/84316213)
 
 ## 联系作者
 
