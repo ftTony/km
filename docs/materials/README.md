@@ -10,6 +10,7 @@
 ### 资料
 
 - [前端教程&开发模块化/规范化/工程化/优化&工具/调试&值得关注的博客/Git&面试-前端资源汇总](https://github.com/xiaohuazheng/-/issues/1)
+- [个人分享--web 前端学习资源分享](https://juejin.im/post/5a0c1956f265da430a501f51)
 - [史上最全的前端资源大汇总](https://www.jianshu.com/p/6cb49271cd2a)
 - [前端回忆录](https://github.com/windiest/Front-end-tutorial)
 - [免费的计算机编程类中文书籍](https://github.com/justjavac/free-programming-books-zh_CN)
