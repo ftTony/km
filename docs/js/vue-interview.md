@@ -104,6 +104,22 @@ history 路由模式的实现主要基于存在下面几个特性：
 - 提供 include 和 exclude 属性，
 - 对应两个钩子函数`activated`和`deactivated`，当组件被激活时，触发钩子函数 activated，当组件被移除时，触发钩子 `deactivated`。
 
+**原理**
+
+1. 获取 keep-alive 包裹着的第一个子组件对象及其组件名
+2. 根据设定的`include/exclude`（如果有）进行条件匹配决定是否缓存。不匹配，直接返回组件实例
+3. 根据组件 `ID` 和 `tag` 生成缓存 `Key`，并在缓存对象中查找是否已缓存过该组件实例。如果存在，直接取出缓存值并更新该 key 在 this.keys 中的位置（**更新 key 的位置是实现 LRU 置换策略的关键**）
+4. 在 this.cache 对象中存储该组件实例并保存 key 值，之后检查缓存的实例数量是否超过 max 的设置值，超过则根据 LRU 置换策略**删除最近最久未使用的实例**（即是下标为 0 的那个 key）
+5. 最后组件实例的 keepAlive 属性设置为 true,这个在渲染和执行被包裹组件的钩子函数会用到,这里不细说
+
+**LRU 缓存淘汰算法**
+
+LRU（Least recently used）算法根据数据的历史访问记录来进行淘汰数据,其核心思想是“如果数据最近被访问过,那么将来被访问的几率也更高”。
+
+![images](lru.png)
+
+keep-alive 的实现正是用到了 LRU 策略,将最近访问的组件 push 到 this.keys 最后面,this.keys[0]也就是最久没被访问的组件,当缓存实例超过 max 设置值,删除 this.keys[0]
+
 ### 参考资料
 
 - [公司要求会使用框架 vue，面试题会被问及哪些？](https://juejin.im/post/5cf495e96fb9a07ef5622025)
