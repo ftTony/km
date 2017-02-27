@@ -105,6 +105,12 @@ Vue.js 的源码都在 src 目录下，其目录结构如下。
 
 #### 3.2 Vue 中的 DOM-Diff
 
+参考[diff 算法](https://km.xiaowuzi.info/js/vue-diff.html)
+
+#### 3.3 更新子节点
+
+#### 3.4 优化更新子节点
+
 ### 四、模板编译篇
 
 - 整体运行流程
