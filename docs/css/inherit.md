@@ -61,6 +61,7 @@ css 为控制继承提供了四个特殊的通用属性值，每个 css 属性�
 ### 参考资料
 
 - [CSS 简单的继承](https://juejin.im/post/5dcb89186fb9a04a752ba034)
+- [谈谈 CSS 关键字 initial、inherit 和 unset](https://github.com/chokcoco/iCSS/issues/13)
 
 ## 联系作者
 
