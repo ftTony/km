@@ -208,12 +208,25 @@
 
 因为 BFC 内部的元素和外部的元素绝对不会互相影响，因此，当 BFC 外部存在浮云时，它不应该影响 BFC 内容 box 的布局，BFC 会通过变窄，而不与浮动有重叠。同样的，当 BFC 内部有浮动时，为了不影响外部元素的布局，BFC 计算高度时会包括浮动高度。避免 margin 重叠也是这样的一个道理。
 
+### 五、其它格式化上下文
+
+- 行内级格式化上下文(IFC)
+- 栅格格式化上下文(GFC)
+- Flex 格式化上下文(FFC)
+
+#### 5.1 行内级格式化上下文(IFC)
+
+#### 5.2 栅格格式化上下文(GFC)
+
+#### 5.3 Flex 格式化上下文(FFC)
+
 ## 参考资料
 
 - [CSS 中重要的 BFC](https://segmentfault.com/a/1190000013023485)
 - [CSS 中的 BFC 详解](https://www.cnblogs.com/chen-cong/p/7862832.html)
 - [深入理解 BFC](https://github.com/ljianshu/Blog/issues/15)
 - [BFC 理解](https://juejin.im/post/5df1e312f265da33d039d06d#heading-4)
+- [IFC、BFC、GFC 与 FFC 知多少](https://github.com/chokcoco/iCSS/issues/56)
 
 ## 联系作者
 
