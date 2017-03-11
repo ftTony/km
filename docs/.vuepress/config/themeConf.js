@@ -130,6 +130,7 @@ module.exports = {
           'node-express',
           'node-fs',
           'node-http',
+          'node-rpc',
           'node-koa',
           'node-koa-code',
           'node-net',
