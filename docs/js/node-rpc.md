@@ -8,6 +8,7 @@
 
 ### 参考资料
 
+- [Nodejs 之 RPC 调研](https://shopee-sc.github.io/blog/2019/11/22/rpc)
 - [Nodejs 之 RPC 协议简介](https://mp.weixin.qq.com/s/AhKoUpYA4mCwhbxMRRqjBA)
 - [聊聊 Node.js RPC（一）— 协议](https://zhuanlan.zhihu.com/p/38012481)
 - [聊聊 Node.js RPC（二）— 服务发现](https://zhuanlan.zhihu.com/p/40606909)
