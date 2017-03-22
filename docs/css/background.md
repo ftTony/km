@@ -6,10 +6,10 @@
 
 ## 内容
 
-- 理解 background-size
-- 理解 background-position
-- 理解 background-origin
-- 理解 background-clip
+- [理解 background-size](#一、理解-background-size)
+- [理解 background-position](#二、理解-background-position)
+- [理解 background-origin](#三、理解-background-origin)
+- [理解 background-clip](#四、理解-background-clip)
 
 ### 一、理解 background-size
 
