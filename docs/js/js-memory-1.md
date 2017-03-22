@@ -126,11 +126,12 @@ DOM 元素的生命周期正常是取决于是否挂载在 DOM 树上，当从 D
 
 ### 四、如何分析内存泄漏，找出有问题的代码
 
+分析内存泄漏的原因，还是需要借助开发者工具的 Memory 功能，这个功能可以抓取内存快照，也可以内存快照，也可以抓取一段时间内，内存分配的情况，还可以抓取一段时间内触发内存分配的各函数情况
+
 ### 五、实例分析
 
 ### 参考资料
 
-- [垃圾回收和内存管理](https://github.com/stone0090/javascript-lessons/tree/master/2.6-GC&MemoryManagement)
 - [前端面试：谈谈 JS 垃圾回收机制](https://github.com/qq449245884/xiaozhi/issues/36)
 - [Node.js 内存管理和 V8 垃圾回收机制](https://mp.weixin.qq.com/s?__biz=MzIyNDU2NTc5Mw==&mid=2247483715&idx=1&sn=00600d07ce4fd2b465d6cc7692d050f0&scene=21#wechat_redirect)
 - [浏览器垃圾回收机制与 Vue 项目内存泄漏场景分析](https://mp.weixin.qq.com/s/sMV4KyUb6RORJ4la7MfC4Q)
