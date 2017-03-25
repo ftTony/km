@@ -6,10 +6,17 @@
 
 ## 内容
 
-- `letter-spacing` 与 `word-spacing`
-- text-tranfrom
-- `word-break` 和 `word-wrap`
-- white-space
+- [文本控制](#%e6%96%87%e6%9c%ac%e6%8e%a7%e5%88%b6)
+  - [前言](#%e5%89%8d%e8%a8%80)
+  - [内容](#%e5%86%85%e5%ae%b9)
+    - [一、letter-spacing 与 word-spacing](#%e4%b8%80letter-spacing-%e4%b8%8e-word-spacing)
+    - [二、text-tranfrom](#%e4%ba%8ctext-tranfrom)
+    - [三、word-break 和 word-wrap](#%e4%b8%89word-break-%e5%92%8c-word-wrap)
+    - [四、 white-space](#%e5%9b%9b-white-space)
+    - [五、::first-letter/::first-line伪元素](#%e4%ba%94first-letterfirst-line%e4%bc%aa%e5%85%83%e7%b4%a0)
+    - [六、text-align 与元素对齐](#%e5%85%adtext-align-%e4%b8%8e%e5%85%83%e7%b4%a0%e5%af%b9%e9%bd%90)
+    - [参考资料](#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99)
+  - [联系作者](#%e8%81%94%e7%b3%bb%e4%bd%9c%e8%80%85)
 
 ### 一、`letter-spacing` 与 `word-spacing`
 
@@ -67,7 +74,7 @@
 - `pre`：不合并空白符，并且只在有换行地方换行；
 - `pre-wrap`：不合并空白符，允许换行符换行和文本自动换行；
 
-### 五、white-space 与`::first-letter`/`::first-line`伪元素
+### 五、`::first-letter`/`::first-line`伪元素
 
 `first-letter`选中首个字符
 
