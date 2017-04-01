@@ -1,0 +1,20 @@
+# 扫码登录
+
+## 前言
+
+本人平时学习及收集内容，欢迎参入一起讨论。
+
+## 内容
+
+### 参考资料
+
+- [一文搞懂主流的扫码登录技术原理](https://my.oschina.net/u/4231722/blog/3154805)
+
+## 联系作者
+
+<div align="center">
+    <p>
+        平凡世界，贵在坚持。
+    </p>
+    <img :src="$withBase('/about/contact.png')" />
+</div>

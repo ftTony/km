@@ -278,7 +278,7 @@ module.exports = {
       {
         title: 'Web安全',
         collapsable: false,
-        children: ['login-1', 'login-2', 'osi-hijack', 'xss', 'csrf', 'sql']
+        children: ['login-1', 'login-2','login-3','token', 'osi-hijack', 'xss', 'csrf', 'sql']
       },
       {
         title: 'web监控',
