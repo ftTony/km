@@ -8,8 +8,8 @@
 
 - [什么是路由？](#一、什么是路由？)
 - [前端路由的两种实现](#二、前端路由的两种实现)
-- Vue-router 学习
-- 总结
+- [Vue-router 学习](#三、vue-router-学习)
+- [总结](#四、总结)
 
 ### 一、什么是路由？
 
@@ -50,7 +50,7 @@ https://www.word.com#search
 
 **history 原理图**
 
-![images](history).png)
+![images](history.png)
 
 ### 三、Vue-router 学习
 
