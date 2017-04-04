@@ -92,7 +92,7 @@ Docker 的主要用途，目前有三大类。
 - [如何使用 docker 部署前端应用](https://juejin.im/post/5c83cbaa6fb9a04a0f65fdaa)
 - [Docker 入门教程](https://github.com/jaywcjlove/docker-tutorial)
 - [前端领域的 Docker 与 Kubernetes](https://juejin.im/post/5dddd15b6fb9a071576dbd7a)
-- [Docker 搭建你的第一个 Node 项目到服务器](https://mp.weixin.qq.com/s/bNvcsRFi8-2N1dQv2YbpbA)
+- [Docker 搭建你的第一个 Node 项目到服务器](https://juejin.im/post/5dff84e051882512290f2fc2)
 
 ## 联系作者
 

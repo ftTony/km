@@ -38,7 +38,11 @@
 https://www.word.com#search
 ```
 
-此外，`hash`也
+此外，`hash`也存在下面几个特性：
+
+- `URL`中`hash`值只是客户端的一种状态，也就是说当向服务器端发出请求时，`hash`部分不会被发送。
+- `hash`值的改变，都会在浏览器的访问历史增加一个记录。因此我们能通过浏览器的回退、前进按钮控制`hash`的切换。
+- 我们可以使用`hashchange`事件来监听`hash`的变化。
 
 **hash 原理图**
 
@@ -46,11 +50,30 @@ https://www.word.com#search
 
 #### 2.2 History 模式
 
-前面的`hash`虽然也很不错，但使用时都需要加上#，并不是很美观。因此到了`HTML5`，又提供了``
+前面的`hash`虽然也很不错，但使用时都需要加上#，并不是很美观。因此到了`HTML5`，又提供了`History API`来实现`URL`的变化。其中做最主要的`API`有以下两个：`history.pushState()`和`history.replaceState()`。这两个`API`可以在不进行刷新的情况下，操作浏览器的历史纪录。唯一不同的是，前者是新增一个历史记录，后者是直接替换当前的历史记录，如下所示：
+
+```
+window.history.pushState(null, null, path);
+window.history.replaceState(null, null, path);
+```
+
+此外，`history`存在下面几个特性：
+
+- `pushState`和`replaceState`的标题（`title`）：一般浏览器会忽略，最好传入`null`；
+- 我们可以使用`popstate`事件来监听`url`的变化；
+- `history.pushState()`或`history.replaceState()`不会触发`popstate`事件，这时我们需要手动触发页面渲染
 
 **history 原理图**
 
 ![images](history.png)
+
+#### 2.3 两种路由模式的对比
+
+| 对比点 | Hash 模式               | History 模式                     |
+| ------ | ----------------------- | -------------------------------- |
+| 美观性 | 带着#字符，较丑         | 简洁美观                         |
+| 兼容性 | >= ie 8，其它主流浏览器 | >= ie 10，其它主流浏览器         |
+| 实用性 | 不需要对服务端做改动    | 需要服务端对路由进行相应配合设置 |
 
 ### 三、Vue-router 学习
 
