@@ -77,6 +77,80 @@ window.history.replaceState(null, null, path);
 
 ### 三、Vue-router 学习
 
+- 基本用法
+- 嵌套路由
+- 参数传递
+- 导航守卫
+- `$route` 和 `$router` 的区别
+
+#### 3.1 基本用法
+
+使用步骤如下：
+
+- 下载`npm i vur-router -S`
+- 在`main.js`中引入`import VueRouter from 'vue-router'`;
+- 安装插件`Vue.use(VueRouter)`;
+- 创建路由对象并配置路由规则`let router = new VueRouter({routes:[{path:'/home',component:Home}]})`；
+- 将其路由对象传递给 Vue 的实例，options 中加入 `router:router`
+- 在 app.vue 中留坑 `<router-view></router-view>`
+
+具体代码如下：
+
+```
+//main.js文件中引入
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+//主体
+import App from './components/app.vue';
+import Home from './components/home.vue'
+//安装插件
+Vue.use(VueRouter); //挂载属性
+//创建路由对象并配置路由规则
+let router = new VueRouter({
+    routes: [
+        //一个个对象
+        { path: '/home', component: Home }
+    ]
+});
+//new Vue 启动
+new Vue({
+    el: '#app',
+    //让vue知道我们的路由规则
+    router: router, //可以简写router
+    render: c => c(App),
+})
+```
+
+最后记得在在 app.vue 中“留坑”
+
+```
+//app.vue中
+<template>
+    <div>
+        <router-view></router-view>
+    </div>
+</template>
+<script>
+    export default {
+        data(){
+            return {}
+        }
+    }
+</script>
+```
+
+#### 3.2 嵌套路由
+
+#### 3.3 参数传递
+
+#### 3.4 导航守卫
+
+#### 3.5 `$route` 和 `$router` 的区别
+
+**`$route` 是“路由信息对象”，包括 path，params，hash，query，fullPath，matched，name 等路由信息参数。**
+
+**`$router`是“路由实例”，即使用 new VueRouter 创建的实例，包括了路由的跳转方法，钩子函数等。`$router`常见跳转方法：`$router.push`和`$router.replace`**
+
 ### 四、总结
 
 ### 参考资料
