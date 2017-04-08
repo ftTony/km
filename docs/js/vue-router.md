@@ -141,9 +141,225 @@ new Vue({
 
 #### 3.2 嵌套路由
 
+实际应用界面，通常由多层嵌套的组件组合而成。同样地，URL 中各段动态路径也按某种结构对应嵌套的各层组件，例如：
+
+```
+/user/foo/profile                     /user/foo/posts
++------------------+                  +-----------------+
+| User             |                  | User            |
+| +--------------+ |                  | +-------------+ |
+| | Profile      | |  +------------>  | | Posts       | |
+| |              | |                  | |             | |
+| +--------------+ |                  | +-------------+ |
++------------------+                  +-----------------+
+```
+
+创建 app:
+
+```
+<div id="app">
+  <router-view></router-view>
+</div>
+```
+
+`User`组件的模板添加一个`<router-view>`：
+
+```
+const User = {
+  template: `
+    <div class="user">
+      <h2>User {{ $route.params.id }}</h2>
+      <router-view></router-view>
+    </div>
+  `
+}
+```
+
+需要在 `VueRouter` 的参数中使用`children`配置：
+
+```
+const router = new VueRouter({
+  routes: [
+    { path: '/user/:id', component: User,
+      children: [
+        {
+          // 当 /user/:id/profile 匹配成功，
+          // UserProfile 会被渲染在 User 的 <router-view> 中
+          path: 'profile',
+          component: UserProfile
+        },
+        {
+          // 当 /user/:id/posts 匹配成功
+          // UserPosts 会被渲染在 User 的 <router-view> 中
+          path: 'posts',
+          component: UserPosts
+        }
+      ]
+    }
+  ]
+})
+```
+
 #### 3.3 参数传递
 
+1. 用 name 传递参数
+
+```
+routes:[
+    {
+        path:'/',
+        name:'Hello',
+        component:Hello
+    }
+]
+```
+
+模板里(src/App.vue)用`$route.name`来接收比如：`<p>{{$route.name}}</p>`
+
+2. 通过`<router-link>` 标签中的 to 传参
+
+基本语法：
+
+```
+<router-link :to="{name:xxx,params:{key:value}}">valueString</router-link>
+```
+
+接收参数：
+
+```
+{{$route.params.key}}
+```
+
+3. 利用 url 传递参数——在配置文件里以冒号的形式设置参数
+
+基本示例：
+
+```
+{
+    path:'/params/:newsId/:newsTitle',
+    component:Params
+}
+```
+
+接收参数：
+
+```
+<template>
+    <div>
+        <h2>{{ msg }}</h2>
+        <p>新闻ID：{{ $route.params.newsId}}</p>
+        <p>新闻标题：{{ $route.params.newsTitle}}</p>
+    </div>
+</template>
+<script>
+export default {
+  name: 'params',
+  data () {
+    return {
+      msg: 'params page'
+    }
+  }
+}
+</script>
+```
+
 #### 3.4 导航守卫
+
+导航守卫函数，主要是在导航中转的时候做一些操作，比如跳转页面之前，进行判断，比如跳转的时候，判断是否某个字段是否为 true，如果为 true，则跳转到 A 组件内，否则的话跳到 B 组件内。而钩子函数根据其生效范围可以分为全局钩子函数，路由独享钩子函数和组件内钩子函数。
+
+**全局钩子函数**
+
+```
+router.beforeEach((to, from, next)=>{
+  //do something
+  next();
+});
+router.afterEach((to, from, next) => {
+    console.log(to.path);
+});
+```
+
+上面的钩子方法接收三个采纳数：
+
+- `to`：即将要进入的目标路由对象。
+- `from`：当前导航正要离开的路由。
+- `next`：一定要调用该方法来 resolve 这个钩子。
+- `next()`：进行管道的下一个钩子。
+- `next(false)`：中断当前导航。
+- `next('/')`：跳转到一个不同的地址，当前的导航被中断，然后进行一个新的导航。
+
+**路由独享钩子函数**
+
+对单个的路由使用 beforeEnter 函数，我们在 router/index 的文件里面可以如下编写代码：
+
+```
+const router = new Router({
+  mode: 'history', // 访问路径不带井号
+  base: '/page/app',  // 配置单页应用的基路径
+  routes: [
+    {
+      path: '/',
+      name: 'HelloWorld',
+      component: resolve => require(['@/views/HelloWorld'], resolve)  // 使用懒加载
+    },
+    {
+      path: '/helloworld',
+      name: 'HelloWorld',
+      component: resolve => require(['@/views/HelloWorld'], resolve), // 使用懒加载
+      beforeEnter(to, from, next) {
+        console.log(111)
+        console.log(to.path); // 打印 /helloworld
+        console.log(from.path); // 打印 /
+        next(); // 跳到/helloworld 组件页面
+      }
+    },
+    {
+      path: '/demo',
+      name: 'demo',
+      component: resolve => require(['@/views/demo'], resolve) // 使用懒加载
+    }
+  ]
+});
+export default router;
+```
+
+**组件内钩子函数**
+
+更细粒度的路由拦截，只针对一个进入某一个组件的拦截。
+
+```
+export default {
+  name: 'HelloWorld2',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
+    };
+  },
+  created () {
+    this.getInfo();
+  },
+  beforeRouteEnter(to, from, next) {
+    // 在渲染该组件的对应路由被 confirm 前调用
+    // 不！能！获取组件实例 `this`
+    // 因为当钩子执行前，组件实例还没被创建
+    console.log(to.path); // 打印 /helloworld
+    console.log(from.path); // 打印 /
+    next();  // 跳转到 /helloworld 指定的页面
+  },
+  beforeRouteUpdate (to, from, next) {
+    // 在当前路由改变，但是该组件被复用时调用
+    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+    // 可以访问组件实例 `this`
+  },
+  beforeRouteLeave (to, from, next) {
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
+  }
+};
+```
+
+钩子函数使用场景:路由钩子函数在项目开发中用的并不是非常多，一般用于登录态的校验，没有登录跳转到登录页；权限的校验等等。
 
 #### 3.5 `$route` 和 `$router` 的区别
 
