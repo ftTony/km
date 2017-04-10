@@ -369,6 +369,11 @@ export default {
 
 ### 四、总结
 
+- 学习了前端路由两种实现分别为`history`和`hash`
+- `history`模式，需要跟服务端进行配合而且有浏览器兼容性问题，地址栏美观。当用户手动刷新页面时，会请求服务器；当用户点某个地址时，会使用`pushstate`或`replacestate`两个方法，但这两个方法不触发事件`popstate`，当用户点击返回或前进按钮时，会触发事件`popstate`
+- `hash`模式，主要是通过使用 `hashchange` 事件来监听 hash 的变化。当用户手动刷新页面时，不会向服务器发送请求，也不会触发`hashchange`事件；当用户点击跳转地址或浏览器前进返回按钮时，会触发`hashchange`事件。
+- `vue-router`的基本使用，路由守卫，路由嵌套、参数传递
+
 ### 参考资料
 
 - [从头开始学习 vue-router](https://github.com/ljianshu/Blog/issues/39)
