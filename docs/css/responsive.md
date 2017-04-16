@@ -12,6 +12,7 @@
 - [响应式布局](https://github.com/ljianshu/Blog/issues/38)
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
 - [使用 Flexible 实现手淘 H5 页面的终端适配](https://github.com/amfe/article/issues/17)
+- [flexible.js 布局详解](http://caibaojian.com/flexible-js.html)
 
 ## 联系作者
 
