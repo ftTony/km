@@ -38,6 +38,27 @@ vuex 主要包括以下几个模块：
 
 ### 四、如何使用 Vuex
 
+#### 4.1 创建一个`store.js`
+
+```
+import Vue from 'vue'
+import Vuex from 'vuex'
+Vue.use(Vuex)
+const store
+```
+
+### 五、使用Vuex的注意点
+
+#### 5.1 如何在Mutations里传递参数
+
+#### 5.2 如何理解getters
+
+#### 5.3 actions和mutations区别
+
+actions和上面的Muations功能基本一样，不同点是，**actions是异步的改变state状态，而Mutation是同步改变状态。**
+
+同步的意义在于这样每一个mutation执行完成后都可以对应到一个新的状态，这样devtools就可以打个snapshot存下来，然后就可以随便time-travel了。如果你开着devtool调用一个异步的action，你可以清楚地看到它所调用的mutation是何时被记录下来的，并且可以立刻查看它们对应的状态
+
 ### 参考资料
 
 - [从头开始学习 Vuex](https://github.com/ljianshu/Blog/issues/36)
