@@ -36,7 +36,20 @@
 
 #### 1.5 如何保证可靠传输
 
+- 应用数据被分割成 TCP 认为最适合发送的数据块。
+
 #### 1.6 TCP 连接状态
+
+- `CLOSED`：初始状态。
+- `LISTEN`：服务器处于监听状态。
+- `SYN_SEND`：
+- `SYN_RECV`：
+- `ESTABLISH`：
+- `FIN_WAIT_1`：
+- `CLOSE_WAIT`：
+- `FIN_WAIT_2`：
+- `LAST_ACK`：
+- `TIME_WAIT`：
 
 #### 1.7 TCP 滑动窗口
 
