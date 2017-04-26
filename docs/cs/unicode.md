@@ -8,7 +8,20 @@
 
 - Unicode 的由来
 - Unicode 和 ASCII 的区别
-- UTF-8 
+- UTF-8
+- 实际应用
+
+### 一、Unicode 的由来
+
+### 二、Unicode 和 ASCII 的区别
+
+ASCII编码和Unicode编码的区别：ASCII编码是1个字节，而Unicode编码通常是2个字节。
+
+字母A用ASCII编码是十进制的65，二进制的01000001；
+
+### 三、UTF-8
+
+### 四、实际应用
 
 ### 参考资料
 

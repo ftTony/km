@@ -404,7 +404,7 @@ module.exports = {
       {
         title: '函数式编程',
         collapsable: false,
-        children: ['base-functional']
+        children: ['base-functional','unicode']
       },
       {
         title: '网络',
