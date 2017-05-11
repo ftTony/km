@@ -8,7 +8,8 @@
 
 - [RPC 介绍](#一、-rpc-介绍)
 - [RPC 与 AJAX 及 HTTP 的区别](#二、-rpc-与-ajax-及-http-的区别)
-- RPC 基本原理
+- [RPC 基本原理](#三、rpc-基本原理)
+- [Nodejs 实现 RPC 通讯协议](#四、Nodejs-实现-RPC-通讯协议)
 
 ### 一、 RPC 介绍
 
@@ -33,6 +34,43 @@ RPC 中文名**远程过程调用**，拆开理解，**过程**也叫方法或�
 - RPC 是远程过程调用，RPC 框架的通信过程可以使用各种通信协议（如 HTTP，TCP 以及各种自定义协议）实现。良好的 rpc 调用是面向服务的封装，针对服务的可用性和效率等都做了优化。单纯使用 http 调用则缺少了这些特性。
 
 ### 三、RPC 基本原理
+
+### 四、Nodejs 实现 RPC 通讯协议
+
+Nodejs 中有个 Buffer 模块，可以提供对二进制数据的操作。所以我们可以用来进行二进制的编码和解码，结合上面的通信协议，可以写出编码和解码部分代码。
+
+#### 4.1 简单编码部分
+
+```
+// 编码
+const payload = {
+  service: 'com.test',
+  methodName: 'plus',
+  args: [ 1, 2 ],
+};
+const body = new Buffer(JSON.stringify(payload));
+
+const header = new Buffer(10);
+header[0] = 0;
+header.writeInt32BE(1000, 1);
+header[5] = 1; // codec => 1 代表是 JSON 序列化
+header.writeInt32BE(body.length, 6);
+
+const packet = Buffer.concat([ header, body ], 10 + body.length);
+```
+
+#### 4.2 简单解码部分
+
+```
+// 解码
+const type = buf[0]; // => 0 (request)
+const requestId = buf.readInt32BE(1); // => 1000
+const codec = buf[5];
+const bodyLength = buf.readInt32BE(6);
+
+const body = buf.slice(10, 10 + bodyLength);
+const payload = JSON.parse(body);
+```
 
 ### 参考资料
 
