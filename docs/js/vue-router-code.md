@@ -2,7 +2,7 @@
 
 ## 前言
 
-本人平时学习及收集内容，欢迎参入一起讨论。
+关于 vue-router 原理及使用可以参考[上一篇文章](https://km.xiaowuzi.info/js/vue-router.html)
 
 ## 内容
 

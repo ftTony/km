@@ -5,8 +5,7 @@ module.exports = {
   lastUpdated: '更新于',
   search: true,
   searchMaxSuggestions: 10,
-  nav: [
-    {
+  nav: [{
       text: '首页',
       link: '/'
     },
@@ -48,8 +47,7 @@ module.exports = {
     }
   ],
   sidebar: {
-    '/js/': [
-      {
+    '/js/': [{
         title: 'javascript基础',
         collapsable: false,
         children: [
@@ -151,20 +149,19 @@ module.exports = {
           'vue-bind',
           'vue-nexttick',
           'vue-watch',
-          'vue-code',
+          'vue-router',
+          'vue-vuex',
           'vue-dom',
           'vue-diff',
           'vue-router-code',
           'vue-communication',
-          'vue-router',
-          'vue-vuex',
           'vue-vuex-code',
+          'vue-code',
           'vue-interview'
         ]
       }
     ],
-    '/css/': [
-      {
+    '/css/': [{
         title: 'css基础',
         collapsable: false,
         children: [
@@ -201,8 +198,7 @@ module.exports = {
         children: ['module']
       }
     ],
-    '/html5/': [
-      {
+    '/html5/': [{
         title: 'canvas',
         collapsable: false,
         children: [
@@ -234,8 +230,7 @@ module.exports = {
         children: ['hybird', 'flutter', 'electron']
       }
     ],
-    '/project/': [
-      {
+    '/project/': [{
         title: '网站架构设计',
         collapsable: false,
         children: [
@@ -258,7 +253,7 @@ module.exports = {
       {
         title: '浏览器',
         collapsable: false,
-        children: ['browser-working','browser-url', 'cross-domain']
+        children: ['browser-working', 'browser-url', 'cross-domain']
       },
       {
         title: '新技术',
@@ -299,8 +294,7 @@ module.exports = {
         children: ['mobile-debug', 'seo']
       }
     ],
-    '/tool/': [
-      {
+    '/tool/': [{
         title: 'git版本工具',
         collapsable: false,
         children: ['git']
@@ -349,8 +343,7 @@ module.exports = {
         children: ['nginx']
       }
     ],
-    '/cs/': [
-      {
+    '/cs/': [{
         title: '数据结构',
         collapsable: false,
         children: [
@@ -404,7 +397,7 @@ module.exports = {
       {
         title: '函数式编程',
         collapsable: false,
-        children: ['base-functional','unicode']
+        children: ['base-functional', 'unicode']
       },
       {
         title: '网络',
