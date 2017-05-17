@@ -7,27 +7,137 @@
 ## 内容
 
 - [源码目录设计](#一、源码目录设计)
+- [入口]()
 
 ### 一、源码目录设计
 
 Vue-Router 的源码都在 src 目录下，其目录结构如下。
 
 ```
-├─dist                   # 项目构建后的文件
-├─scripts                # 与项目构建相关的脚本和配置文件
-├─build                   # 构建配置文件webpack.config.js
-├─src                    # 项目源代码
-│    ├─compontents          # 与组件相关代码
-│    │  ├─link        # <router-link>组件代码
-│    │  ├─view           # <router-view>组件相关代码
-│    ├─history            # 与服务端渲染相关的代码
-│    ├─util         # 工具相关代码
-│    ├─ create-matcher              # 创建匹配路由规则
-│    ├─ create-route-map         # 创建路由映射表
-│    ├─install.js           # vue-router安装
-│    └─index.js            # 入口文件
-└─test                   # 项目测试代码
+├── components  // 组件
+│   ├── link.js   // route-link的实现
+│   └── view.js   // route-view的实现
+├── create-matcher.js  // 创建匹配
+├── create-route-map.js  // 创建路由的映射
+├── history  // 操作浏览器记录的一系列内容
+│   ├── abstract.js  // 非浏览器的history
+│   ├── base.js    // 基本的history
+│   ├── hash.js    // hash模式的history
+│   └── html5.js   // html5模式的history
+├── index.js   // 入口文件
+├── install.js  // 插件安装的方法
+└── util   // 工具类库
+    ├── async.js    // 异步操作的工具库
+    ├── dom.js    // dom相关的函数
+    ├── location.js     // 对location的处理
+    ├── misc.js     // 一个工具方法
+    ├── params.js   // 处理参数
+    ├── path.js     // 处理路径
+    ├── push-state.js  // 处理html模式的 pushState
+    ├── query.js  //对query的处理
+    ├── resolve-components.js  //异步加载组件
+    ├── route.js  // 路由
+    ├── scroll.js  //处理滚动
+    └── warn.js  // 打印一些警告
 ```
+
+### 二、入口
+
+```
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+// 1. 使用插件.
+// 安装 <router-view> and <router-link>组件,
+// 且给当前应用下所有的组件都注入 $router and $route 对象
+Vue.use(VueRouter)
+
+// 2. 定义各个路由下使用的组件，简称路由组件
+const Home = {
+  template: '<div>home</div>'
+}
+const Foo = {
+  template: '<div>foo</div>'
+}
+const Bar = {
+  template: '<div>bar</div>'
+}
+const Unicode = {
+  template: '<div>unicode</div>'
+}
+
+// 3. 创建 VueRouter 实例router
+const router = new VueRouter({
+  mode: 'history',
+  base: __dirname,
+  routes: [{
+      path: '/',
+      component: Home
+    },
+    {
+      path: '/foo',
+      component: Foo
+    },
+    {
+      path: '/bar',
+      component: Bar
+    },
+    {
+      path: '/é',
+      component: Unicode
+    }
+  ]
+})
+
+// 4. 创建 启动应用
+// 一定要确认注入了router
+// 在<router-view>中将会渲染路由组件
+new Vue({
+  router,
+  data: () => ({
+    n: 0
+  }),
+  template: `
+    <div id="app">
+      <h1>Basic</h1>
+      <ul>
+        <li><router-link to="/">/</router-link></li>
+        <li><router-link to="/foo">/foo</router-link></li>
+        <li><router-link to="/bar">/bar</router-link></li>
+        <router-link tag="li" to="/bar" :event="['mousedown', 'touchstart']">
+          <a>/bar</a>
+        </router-link>
+        <li><router-link to="/é">/é</router-link></li>
+        <li><router-link to="/é?t=%25ñ">/é?t=%ñ</router-link></li>
+        <li><router-link to="/é#%25ñ">/é#%25ñ</router-link></li>
+        <router-link to="/foo" v-slot="props">
+          <li :class="[props.isActive && 'active', props.isExactActive && 'exact-active']">
+            <a :href="props.href" @click="props.navigate">{{ props.route.path }} (with v-slot).</a>
+          </li>
+        </router-link>
+      </ul>
+      <button id="navigate-btn" @click="navigateAndIncrement">On Success</button>
+      <pre id="counter">{{ n }}</pre>
+      <pre id="query-t">{{ $route.query.t }}</pre>
+      <pre id="hash">{{ $route.hash }}</pre>
+      <router-view class="view"></router-view>
+    </div>
+  `,
+
+  methods: {
+    navigateAndIncrement() {
+      const increment = () => this.n++
+      if (this.$route.path === '/') {
+        this.$router.push('/foo', increment)
+      } else {
+        this.$router.push('/', increment)
+      }
+    }
+  }
+}).$mount('#app')
+```
+
+### 三、vueRouter 内部方法
 
 ### 参考资料
 
