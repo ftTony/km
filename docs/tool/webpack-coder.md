@@ -33,6 +33,7 @@
 - [【webpack 进阶】使用 babel 避免 webpack 编译运行时模块依赖](https://github.com/alienzhou/blog/issues/18)
 - [webpack 原理](https://segmentfault.com/a/1190000015088834)
 - [急速 debug 实战三（Node - webpack 插件,babel 插件,vue 源码篇）](https://juejin.im/post/5c6b6defe51d45798b51e4b2)
+- [Webpack 运行机制](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-principle.md)
 - [窥探原理：手写一个 JavaScript 打包器](https://juejin.im/post/5e04c935e51d4557ea02c097)
 
 ## 联系作者

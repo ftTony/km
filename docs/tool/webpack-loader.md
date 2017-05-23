@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [编写自定义 webpack loader](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-loader.md)
+
 ## 联系作者
 
 <div align="center">
