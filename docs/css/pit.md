@@ -66,6 +66,12 @@ img{
 
 #### 7. 设置 input 里面 placeholder 字体大小
 
+代码如下：
+
+```
+-webkit-input-placeholder{font-size:10pt;}
+```
+
 #### 8. audio 元素和 video 元素在 ios 和 andriod 中无法自动播放
 
 代码如下：
@@ -78,13 +84,65 @@ audio.play()
 
 #### 9. 手机拍照和上传图片
 
-#### 10. 点击样式闪动
+#### 10. 输入框自动填充颜色
 
-#### 11. 点击样式闪动
+#### 11. 开启硬件加速
 
-#### 12. 点击样式闪动
+#### 12. 用户设置字号放大或者缩小导致页面布局错误
 
-#### 13. 点击样式闪动
+#### 13. 移动端去除 type 为 number 的箭头
+
+#### 14. 实现横屏竖屏的方案
+
+#### 15. canvas 在 retina 屏模糊
+
+#### 16. 用同等比例的图片在 PC 机上很清楚,但是手机上很模糊,原因是什么呢?
+
+#### 17. 启动或禁用自动识别页面中的电话号码;
+
+#### 18. h5 网站 input 设置为 type=number 的问题
+
+#### 19. select 下拉选择设置问题
+
+#### 20. 移动端 HTML5 audio autoplay 失效问题
+
+#### 21. CSS 动画页面闪白,动画卡顿,图片错乱的问题
+
+#### 22. html5 碰到上下拉动滚动条时卡顿/慢怎么解决
+
+#### 23. 浏览器后退不刷新
+
+#### 24. transition 清除闪屏
+
+#### 25. 解决 active 伪类失效
+
+#### 26. 设置 input 文本框的 placeholder 的颜色
+
+#### 27. 一像素边框的问题
+
+代码如下：
+
+```
+.row{
+    position:relative;
+    &:after{
+        content:'';
+        position:absolute;
+        left:0;
+        top:0;
+        width:200%;
+        border-bottom:1px solid #e6e6e6;
+    }
+}
+```
+
+#### 28. css 属性 touch-action:none;
+
+#### 29. 去除 ios 手机端 input 输入框的内阴影
+
+#### 30. 图片居中显示
+
+#### 父元素设置了 border-radius，子元素应用了 transform，并且父元素设置了 overflow:hidden，但是却失效？
 
 ### 参考资料
 
