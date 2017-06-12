@@ -84,9 +84,30 @@ audio.play()
 
 #### 9. 手机拍照和上传图片
 
+代码如下：
+
+```
+<input type="file">的accept 属性
+<!-- 选择照片 -->
+<input type=file accept="image/*">
+<!-- 选择视频 -->
+<input type=file accept="video/*">
+```
+
 #### 10. 输入框自动填充颜色
 
 #### 11. 开启硬件加速
+
+Q：优化渲染性能
+
+代码如下：
+
+```
+-webkit-transform:translate3d(0,0,0);
+-moz-transform:translate3d(0,0,0);
+-ms-transform:translate3d(0,0,0);
+transform:translate3d(0,0,0);
+```
 
 #### 12. 用户设置字号放大或者缩小导致页面布局错误
 
@@ -138,7 +159,17 @@ audio.play()
 
 #### 28. css 属性 touch-action:none;
 
+```
+该属性会导致安卓页面无法滚动，慎用!
+```
+
 #### 29. 去除 ios 手机端 input 输入框的内阴影
+
+```
+input{
+    -webkit-appearance: none;
+}
+```
 
 #### 30. 图片居中显示
 
