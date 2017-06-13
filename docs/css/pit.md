@@ -111,6 +111,16 @@ transform:translate3d(0,0,0);
 
 #### 12. 用户设置字号放大或者缩小导致页面布局错误
 
+代码如下：
+
+```
+body{
+    -webkit-text-size-adjust:100% !import;
+    text-size-adjust:100% !import;
+    -moz-text-size-adjust:100% !import;
+}
+```
+
 #### 13. 移动端去除 type 为 number 的箭头
 
 #### 14. 实现横屏竖屏的方案
