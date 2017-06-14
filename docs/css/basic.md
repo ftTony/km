@@ -673,6 +673,7 @@ div.active{
 ### 参考资料
 
 - [前端基础篇之 CSS 世界](https://juejin.im/post/5ce607a7e51d454f6f16eb3d)
+- [你需掌握的 CSS 知识都在这了（长文建议收藏，文末有福利）](https://juejin.im/post/5d8336d2f265da03df5f4a06)
 - 《CSS 世界》
 
 ## 联系作者
