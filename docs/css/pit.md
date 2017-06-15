@@ -123,6 +123,13 @@ body{
 
 #### 13. 移动端去除 type 为 number 的箭头
 
+```
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
+    -webkit-appearance:none !impotant;
+    margin:0;
+}
+```
+
 #### 14. 实现横屏竖屏的方案
 
 #### 15. canvas 在 retina 屏模糊
