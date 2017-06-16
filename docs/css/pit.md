@@ -132,6 +132,18 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
 
 #### 14. 实现横屏竖屏的方案
 
+- css 用 css3 媒体查询，缺点是宽度和高度不好控制
+
+```
+
+```
+
+- js 判断屏幕的方向或者 resize 事件
+
+```
+
+```
+
 #### 15. canvas 在 retina 屏模糊
 
 #### 16. 用同等比例的图片在 PC 机上很清楚,但是手机上很模糊,原因是什么呢?
