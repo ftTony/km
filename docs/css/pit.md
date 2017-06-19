@@ -135,7 +135,27 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
 - css 用 css3 媒体查询，缺点是宽度和高度不好控制
 
 ```
+@media screen and (orientation:portrait){
+    .main{
+        -webkit-transform:rotate(-90deg);
+        -moz-transform:rotate(-90deg);
+        -ms-transform:rotate(-90deg);
+        transform:rotate(-90deg);
+        width:100vh;
+        height:100vh;
+        /*去掉overflow微信显示正常，但是浏览器有总是，竖屏时强制横屏缩小*/
+        overflow:hidden;
+    }
+}
 
+@media screen and (orientation:landscape){
+    .main{
+        -webkit-transform:rotate(0);
+        -moz-transform:rotate(0);
+        -ms-transform:rotate(0);
+        transform:rotate(0);
+    }
+}
 ```
 
 - js 判断屏幕的方向或者 resize 事件
