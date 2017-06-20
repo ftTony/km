@@ -185,6 +185,7 @@ animation-fill-mode:none | backwards | both
 
 - [css3 中的变形（transform）、过渡(transtion)、动画(animation)](https://www.cnblogs.com/qianduanjingying/p/4937574.html)
 - [css3 动画由浅入深总结](https://www.cnblogs.com/tugenhua0707/p/5385261.html)
+- [2019 年了，你还不会 CSS 动画？](https://juejin.im/post/5cdd178ee51d456e811d279b)
 
 ## 联系作者
 

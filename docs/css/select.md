@@ -345,6 +345,7 @@ E::selection { sRules }
 - [这 30 个 CSS 选择器，你必须熟记（上）](https://mp.weixin.qq.com/s/SGoK-eRb1KwtSN9X81SXzw)
 - [这 30 个 CSS 选择器，你必须熟记（中）](https://mp.weixin.qq.com/s/-MXNffO2rRoksyRjDb8hdA)
 - [这 30 个 CSS 选择器，你必须熟记（下）](https://mp.weixin.qq.com/s/ngdGJ-qzbLDqt0Mj9rPq4w)
+- [「css 基础」你想知道的伪元素内容都在这篇文章里（长文值得收藏）](https://mp.weixin.qq.com/s/a8tGcnhYvq0zlkWuBHoQ-w)
 - [CSS 参考手册](http://css.doyoe.com/)
 
 ## 联系作者
