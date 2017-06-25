@@ -208,6 +208,14 @@ window.addEventListener(evt,function(){
 
 #### 26. 设置 input 文本框的 placeholder 的颜色
 
+代码如下：
+
+```
+input::-webkit-input-placeholer{
+    color:rgba(144,147,153,1);
+}
+```
+
 #### 27. 一像素边框的问题
 
 代码如下：
@@ -242,7 +250,18 @@ input{
 
 #### 30. 图片居中显示
 
-#### 父元素设置了 border-radius，子元素应用了 transform，并且父元素设置了 overflow:hidden，但是却失效？
+#### 31. 父元素设置了 border-radius，子元素应用了 transform，并且父元素设置了 overflow:hidden，但是却失效？
+
+代码如下：
+
+```
+// 给父元素设置
+{
+    position:relative;
+    z-index:1;
+}
+
+```
 
 ### 参考资料
 
