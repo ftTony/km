@@ -199,9 +199,31 @@ window.addEventListener(evt,function(){
 
 #### 17. 启动或禁用自动识别页面中的电话号码;
 
+```
+<meta name="format-detection" content="telephone=no">
+```
+
 #### 18. h5 网站 input 设置为 type=number 的问题
 
 #### 19. select 下拉选择设置问题
+
+问题 1：右对齐实现
+
+设置如下属性
+
+```
+select option{
+    direction: rtl;
+}
+```
+
+问题 2：禁用 select 默认箭头
+
+```
+::-ms-expand修改表单控件下拉箭头,设置隐藏并使用背景图片来修饰
+
+select::-ms-expand { display:none; }
+```
 
 #### 20. 移动端 HTML5 audio autoplay 失效问题
 
