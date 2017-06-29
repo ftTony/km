@@ -182,6 +182,7 @@ module.exports = {
           'transform',
           'font-size',
           'scss',
+          'pit',
           'fps'
         ]
       },
@@ -219,14 +220,9 @@ module.exports = {
         children: ['svg']
       },
       {
-        title: 'web work',
+        title: 'HTML5相关API',
         collapsable: false,
-        children: ['webwork', 'pit']
-      },
-      {
-        title: 'web service',
-        collapsable: false,
-        children: ['webserver', 'webrtc']
+        children: ['webwork', 'webserver', 'webrtc', 'storage', 'api']
       },
       {
         title: 'Native学习',
