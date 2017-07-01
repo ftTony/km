@@ -225,13 +225,39 @@ select option{
 select::-ms-expand { display:none; }
 ```
 
-#### 20. 移动端 HTML5 audio autoplay 失效问题
-
 #### 21. CSS 动画页面闪白,动画卡顿,图片错乱的问题
+
+> 尽可能地使用合成属性 transform 和 opacity 来设计 CSS3 动画,不使用 position 的 left 和 top 来定位
 
 #### 22. html5 碰到上下拉动滚动条时卡顿/慢怎么解决
 
+```
+.scroll-box{
+   /* 模态框之类的div不能放在这个容器中，否则关闭模态框有时候关闭不了*/
+    height:100%;
+}
+```
+
 #### 23. 浏览器后退不刷新
+
+这种情况是以前遇到的，这里也说下；主要会发生在 webview 里多一点，当点击后退时页面以缓存形式出现，而不是刷新后的，很多情况下这不是你预期的效果，解决方法是用 js：
+
+代码如下：
+
+```
+方法1：
+window.addEventListener('pageshow',()=>{
+    if(e.persisted || (window.performance && window.performance.navigation.type==2)){
+        location.reload();
+    }
+},false);
+
+window.history.replaceState(null,'',window.location.href+'?timestamp='+new Date().getTime());
+```
+
+onpageshow 每次页面加载都会触发，无论是从缓存中加载还是正常加载，这是他和 onload 的区别，persisted 判断页面是否从缓存中读出
+
+页面通过历史记录和前进后退访问时。type 值为 2
 
 #### 24. transition 清除闪屏
 
