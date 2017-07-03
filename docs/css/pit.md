@@ -271,6 +271,12 @@ onpageshow 每次页面加载都会触发，无论是从缓存中加载还是正
 
 #### 25. 解决 active 伪类失效
 
+代码如下：
+
+```
+<body ontouchstart></body>
+```
+
 #### 26. 设置 input 文本框的 placeholder 的颜色
 
 代码如下：
