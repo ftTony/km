@@ -12,6 +12,7 @@
 - [彻底搞懂移动 Web 开发中的 viewport 与跨屏适配](https://mp.weixin.qq.com/s/aaXgFw4isWq1RrHkv75zLA)
 - [浅谈移动 Web 开发（上）：深入概念](https://www.infoq.cn/article/development-of-the-mobile-web-deep-concept/)
 - [【原】移动 web 资源整理](https://www.cnblogs.com/PeunZhang/p/3407453.html)
+- [移动 web 最佳实践](https://juejin.im/post/5d759f706fb9a06afa32adec)
 
 ## 联系作者
 

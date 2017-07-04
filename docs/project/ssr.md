@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [细说后端模板渲染、客户端渲染、node 中间层、服务器端渲染（ssr）](https://github.com/senntyou/blogs/blob/master/web-extend/5.md)
+
 ## 联系作者
 
 <div align="center">
