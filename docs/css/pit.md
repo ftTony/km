@@ -195,7 +195,26 @@ window.addEventListener(evt,function(){
 
 #### 15. canvas 在 retina 屏模糊
 
+只需要将画笔根据像素比缩放即可
+
+```
+run(canvasEl){
+    const canvas = canvasEl;
+    const ctx = canvas.getContext('2d');
+    const devicePixelRatio = window.devicePixelRatio || 1;
+    const backingStorePixedRation = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixedRation || ctx.msBackingStorePixelRatio ||
+    ctx.oBackingStorePixelRatio ||
+    ctx.backingStorePixelRatio || 1;
+
+    const ratio = devicePixelRatio / backingStorePixelRatio;
+}
+```
+
 #### 16. 用同等比例的图片在 PC 机上很清楚,但是手机上很模糊,原因是什么呢?
+
+```
+
+```
 
 #### 17. 启动或禁用自动识别页面中的电话号码;
 
