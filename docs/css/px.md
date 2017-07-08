@@ -100,6 +100,10 @@ border-radius 不一样，如果设置 border-radius 为百分比，则是相对
 
 rem 是一个灵活的、可扩展的单位，由浏览器转化像素并显示。rem 单位无论嵌套层级如何，都只相对于浏览器的根元素的 font-size。
 
+```
+  1 rem = 12px
+```
+
 ### 六、vw/vh&vmin/vmax
 
 #### 6.1 什么是 vw/vh ?
