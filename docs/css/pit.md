@@ -224,6 +224,31 @@ run(canvasEl){
 
 #### 18. h5 网站 input 设置为 type=number 的问题
 
+Q1：maxlength 属性不好用
+
+```
+<input type="number" oninput="checkTextLength(this,10)">
+<script type="text/javascript">
+</script>
+```
+
+Q2：form 提交的时候默认取整
+
+```
+
+```
+
+Q3：部分安卓手机出现样式问题
+
+去除 input 默认样式的方法：
+
+```
+input,textarea{
+    border:0;
+   -webkit-appearance:none; //可同时屏蔽输入框怪异的内阴影，解决IOS下无法修改按钮样式，测试还发现，加了此属性后,iOS下默认还是有圆角的,不过可以用border-radius属性修改
+}
+```
+
 #### 19. select 下拉选择设置问题
 
 问题 1：右对齐实现
