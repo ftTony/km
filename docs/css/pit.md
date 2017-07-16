@@ -235,7 +235,7 @@ Q1：maxlength 属性不好用
 Q2：form 提交的时候默认取整
 
 ```
-
+<input type="number" step="0.01" /> // input中type=number一般会自动生成一个上下箭头，点击上箭头默认增加一个step,点击下箭头默认会减少一个step;number中默认step是1,也就是step=0.01可以允许输入2位小数,并且点击上下箭头分别增加0.01和减少0.01;step和min一起使用时数值必须在min和max之间
 ```
 
 Q3：部分安卓手机出现样式问题
