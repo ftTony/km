@@ -216,6 +216,7 @@ function getPerformanceTiming () {
 - [前端性能监控](https://juejin.im/entry/58ba9cb5128fe100643da2cc)
 - [前端数据之美 -- 基础篇](http://fex.baidu.com/blog/2014/05/front_end-data/)
 - [同程艺龙小程序性能监控系统的探索与实践](https://mp.weixin.qq.com/s/dr-wvKzab9W1h1KZscBFKw)
+- [如何进行 web 性能监控](https://mp.weixin.qq.com/s/7ycHJtq81icA-BtY0WEzXw)
 
 ## 联系作者
 
