@@ -320,6 +320,7 @@ withinErrorMargin(0.1+0.2,0.3)
 - [JavaScript 浮点数陷阱及解法](https://github.com/camsong/blog/issues/9)
 - [JS 魔法堂：彻底理解 0.1 + 0.2 === 0.30000000000000004 的背后](https://www.cnblogs.com/fsjohnhuang/p/5115672.html)
 - [JavaScript 加减危机 —— 为什么会出现这样的结果？](https://juejin.im/post/5ddc7fa66fb9a07ad665b1f0)
+- [JavaScript 浮点数之迷：0.1 + 0.2 为什么不等于 0.3？](https://mp.weixin.qq.com/s/0D6melRtJYwv_XBfq8wSvg)
 
 ## 联系作者
 

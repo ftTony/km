@@ -242,6 +242,7 @@ var foo = (function foo(x) {
 - [前端工程师为什么要学习编译原理？](https://mp.weixin.qq.com/s/Ka9-eGx4Y7MGj_wpWtjE8w)
 - [掌握了 AST，再也不怕被问 babel，vue 编译，Prettier 等原理](https://mp.weixin.qq.com/s/fH2xYo_Bad0mgvo0OdYRZQ)
 - [【第 1813 期】什么是抽象语法树](https://mp.weixin.qq.com/s/RNGEh5cf8RvxwNf5qCPSSA)
+- [手把手教你写几个实用的 AST 插件](https://mp.weixin.qq.com/s/0D6melRtJYwv_XBfq8wSvg)
 
 ## 联系作者
 
