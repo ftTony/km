@@ -183,20 +183,26 @@ E[att~="val"] { sRules }
 
 #### 4.1 选中状态选择器
 
-```
+匹配用户界面上处于选中状态的元素 E。
 
+```
+E:checked { sRules }
 ```
 
 #### 4.2 鼠标悬停状态选择器
 
-```
+设置元素在其鼠标悬停时的样式。
 
+```
+E:hover { sRules }
 ```
 
 #### 4.3 否定伪类选择器
 
-```
+匹配不含有 s 选择符的元素 E。
 
+```
+E:not(s) { sRules }
 ```
 
 #### 4.4 选择每第 n 个元素选择器
@@ -255,11 +261,20 @@ E[att~="val"] { sRules }
 
 ### 五、伪对象选择器
 
+- 伪元素选择器
 - 后置内容元素选择器
 - 前置内容元素选择器
 - 伪元素选择器
 
-#### 5.1 后置内容元素选择器(`E:after/E::after`)
+#### 5.1 伪元素选择器
+
+设置对象内的第一个字符的样式。
+
+```
+E:first-letter/E::first-letter
+```
+
+#### 5.2 后置内容元素选择器(`E:after/E::after`)
 
 设置在对象后（依据对象树的逻辑结构）发生的内容。用来和 content 属性一起使用，并且必须定义 content 属性
 
@@ -267,7 +282,7 @@ E[att~="val"] { sRules }
 E:after/E::after { sRules }
 ```
 
-#### 5.2 前置内容元素选择器(`E:before/E::before`)
+#### 5.3 前置内容元素选择器(`E:before/E::before`)
 
 设置在对象前（依据对象树的逻辑结构）发生的内容。用来和 content 属性一起使用，并且必须定义 content 属性
 
@@ -275,7 +290,7 @@ E:after/E::after { sRules }
 E:before/E::before { sRules }
 ```
 
-#### 5.3 伪元素选择器(`E::selection`)
+#### 5.4 伪元素选择器(`E::selection`)
 
 设置对象被选择时的样式。
 
