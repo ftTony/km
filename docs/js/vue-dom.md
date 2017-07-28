@@ -19,6 +19,10 @@
 
 #### 1.1 模拟真实 DOM
 
+```
+
+```
+
 #### 1.2 diff 算法
 
 参考[diff 算法](https://km.xiaowuzi.info/js/vue-diff.html)

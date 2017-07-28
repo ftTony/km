@@ -6,17 +6,10 @@
 
 ## 内容
 
-- virtual dom
 - 分析 diff
 - 算法实现
 
-### 一、virtual dom
-
-```
-
-```
-
-### 二、分析 diff
+### 一、分析 diff
 
 一篇相当经典的文章[React’s diff algorithm](https://calendar.perfplanet.com/2013/diff/)中的图，react 的 diff 其实和 vue 的 diff 大同小异。所以这张图能很好解释过程。**比较只会在同层级进行，不会跨层级比较。**
 
@@ -46,7 +39,7 @@
 
 #### 源码分析
 
-### 三、算法实现
+### 二、算法实现
 
 - 用 JS 对象模拟 DOM 树
 - 比较两棵虚拟 DOM 树的差异

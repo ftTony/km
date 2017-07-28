@@ -88,9 +88,21 @@ history 路由模式的实现主要基于存在下面几个特性：
 
 参考[Vue 虚拟 DOM](https://km.xiaowuzi.info/js/vue-dom.html)
 
+### 12. 组件中 data 为什么是一个函数？
+
+因为组件是用来复用的，且 JS 里对象是引用关系，如果组件中 data 是一个对象，那么这样作用域没有隔离，子组件中的 data 属性值会相互影响，如果组件中 data 选项是一个函数，那么每个实例可以维护一个被返回对象的独立的拷贝，组件实例之间的 data 属性值不会互相影响；而`new Vue`的实例，是不会被利用的，因此不存在引用对象的问题。
+
 ### 13. computed 和 watch 的区别和运用的场景？
 
 参考[Vue 中的 computed,watch,methods 理解与分析](https://km.xiaowuzi.info/js/vue-watch.html)
+
+### 14. 谈谈你对 keep-alive 的了解？
+
+`keep-alive`是 Vue 内置的一个组件，可以使被包含的组件保留状态，避免重新渲染，其有以下特性：
+
+- 一般结合路由和动态组件一起使用，用于缓存组件；
+- 提供 include 和 exclude 属性，
+- 对应两个钩子函数`activated`和`deactivated`，当组件被激活时，触发钩子函数 activated，当组件被移除时，触发钩子 `deactivated`。
 
 ### 参考资料
 
