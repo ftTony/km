@@ -6,6 +6,30 @@
 
 ## 内容
 
+- meta 基础知识
+- 常见问题
+
+### 一、meta 基础知识
+
+#### 1.1 H5 页面窗口自动调整到设备宽度，并禁止用户缩放页面
+
+```
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+```
+
+#### 1.2 忽略 Android 平台中对邮箱地址的识别
+
+```
+<meta name="format-detection" content="email=no"/>
+```
+
+#### viewport 模板
+
+```
+<!DOCTYPE html>
+</html>
+```
+
 ### 参考资料
 
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
