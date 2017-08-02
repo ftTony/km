@@ -23,10 +23,19 @@
 <meta name="format-detection" content="email=no"/>
 ```
 
+#### 1.3 当网站添加到主屏幕快速启动方式，可隐藏地址栏，仅针对 ios 的 safari
+
+```
+<meta name="apple-mobile-web-app-capable" content="yes" />
+```
+
 #### viewport 模板
 
 ```
 <!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta content="wdith=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 </html>
 ```
 
