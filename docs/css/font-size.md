@@ -84,6 +84,7 @@ p::first-letter{
 ### 参考资料
 
 - [撸了这么多代码，你真的了解字体吗？](https://mp.weixin.qq.com/s/NHKSKMNEIjSY5Eo27-CI0Q)
+- [彻底搞懂 word-break、word-wrap、white-space](https://mp.weixin.qq.com/s/revhs0WEGiew-OSNQVMZGw)
 - 《CSS 世界》
 
 ## 联系作者
