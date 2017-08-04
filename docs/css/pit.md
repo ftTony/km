@@ -481,6 +481,47 @@ retina:一种具备超高像素密度的液晶屏，同样大小的屏幕上显�
 - fastclick 可以解决在手机上点击事件的 300ms 延迟
 - zepto 的 touch 模块，tap 事件也是为了解决在 click 的延迟问题
 
+#### 38. 微信浏览器用户调整字体大小后页面矬了，怎么阻止用户调整
+
+原因
+
+- android 侧是复写了 layoutinflater 对 textview 做了统一处理
+- ios 侧是修改了 body.style.webkitTextSizeAjust 值
+
+解决方案：
+
+- android 使用以下代码，该接口只在微信浏览器下有效
+
+```
+(function(){
+    if (typeof(WeixinJSBridge) == "undefined") {
+        document.addEventListener("WeixinJSBridgeReady", function (e) {
+            setTimeout(function(){
+                WeixinJSBridge.invoke('setFontSizeCallback',{"fontSize":0}, function(res) {
+                    alert(JSON.stringify(res));
+                });
+            },0);
+        });
+    } else {
+        setTimeout(function(){
+            WeixinJSBridge.invoke('setFontSizeCallback',{"fontSize":0}, function(res) {
+                alert(JSON.stringify(res));
+            });
+        },0);
+    }
+})();
+```
+
+- ios 使用-webkit-text-size-adjust 禁止调整字体大小
+
+```
+body{-webkit-text-size-adjust: 100%!important;}
+```
+
+最好的解决方案：
+
+- 整个页面用 rem 或者百分比布局
+
 ### 参考资料
 
 - [移动端 H5 页面开发坑点指南](https://juejin.im/post/5dafc3df5188257a63539c64)
