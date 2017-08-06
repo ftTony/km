@@ -23,4 +23,3 @@
 21. [纯 CSS 实现简单骨骼动画](https://juejin.im/post/5deb49a251882512302daa92)
 22. [CSS 像素、物理像素、逻辑像素、设备像素比、PPI、Viewport](https://www.cnblogs.com/zaoa/p/8630393.html)
 23. [CSS 权威指南 4th 中文](http://gdut_yy.gitee.io/gitee-page/)
-24. [吃透移动端 H5 与 Hybrid](https://juejin.im/post/5dfadb91e51d45584006e486)

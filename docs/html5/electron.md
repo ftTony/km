@@ -8,6 +8,7 @@
 
 ### 参考资料
 
+- [分享这半年的 Electron 应用开发和优化经验](https://juejin.im/post/5e0010866fb9a015fd69c645)
 - [用 JS 开发跨平台桌面应用，从原理到实践](https://mp.weixin.qq.com/s/owtLBHgpzXqbJs3P1mjmLA)
 - [Electron 构建跨平台应用 Mac/Windows/Linux](https://juejin.im/post/5c46ab47e51d45522b4f55b1)
 - [[electron]终极奥义 五千字教程丢给你](https://juejin.im/post/5ba06b67f265da0ae343e89c)

@@ -26,6 +26,7 @@
 - 《学习 JavaScript 数据结构与算法》
 - [什么是平衡二叉树（AVL）](https://mp.weixin.qq.com/s/zav3hOoj6eszlOM7YfgYeA)
 - [我画了 20 张图，给女朋友讲清楚红黑树](https://mp.weixin.qq.com/s/Un1LuUo4LDQC8Sl-mfg4og)
+- [通俗易懂的红黑树图解(上)](https://juejin.im/post/5dff59cb6fb9a0163c53ce1d)
 - [动画：二叉树在实际中的应用(下）](https://mp.weixin.qq.com/s/tFJqwKa-adXW0kXGxldisg)
 - [动画 | 什么是二分搜索树（附伪代码）](https://mp.weixin.qq.com/s/0nubI8XPcUJYAaEk-Eomrg)
 
