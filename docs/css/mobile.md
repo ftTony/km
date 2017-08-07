@@ -121,6 +121,20 @@ if(width!==750){
 </script>
 ```
 
+#### 1.8 滚动条 CSS 样式
+
+```
+// 去掉webkit的滚动条—display:none;
+// 其他参数，目前在IOS上测试无效
+::-webkit-scrollbar      // 滚动条整体部分
+::-webkit-scrollbar-thumb   // 滚动条内的小方块
+::-webkit-scrollbar-track   // 滚动条轨道
+::-webkit-scrollbar-button  // 滚动条轨道两端按钮
+::-webkit-scrollbar-track-piece // 滚动条中间部分，内置轨道
+::-webkit-scrollbar-corner  // 边角，两个滚动条交汇处
+::-webkit-resizer   // 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+```
+
 ### 参考资料
 
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
