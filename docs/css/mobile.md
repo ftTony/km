@@ -133,6 +133,13 @@ if(width!==750){
 ::-webkit-scrollbar-track-piece // 滚动条中间部分，内置轨道
 ::-webkit-scrollbar-corner  // 边角，两个滚动条交汇处
 ::-webkit-resizer   // 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+
+/* ----------重写chrome滚动条--begin*/
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track-piece{background-color:#cccccc;-webkit-border-radius:6px;}
+::-webkit-scrollbar-thumb:vertical{height:5px;backgroun-color:#999999;-webkit-border-radius:6px;}
+::-webkit-scrollbar-thumb:horizontal{width:5px;background-color:#cccccc;-webkit-border-radius:6px;}
+/* ----------重写chrome滚动条--end*/
 ```
 
 ### 参考资料
