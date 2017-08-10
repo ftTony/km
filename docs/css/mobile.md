@@ -166,6 +166,75 @@ window.addEventListener('onorientationchange' in window?'orientationchange':'res
 @media all and (orientation:landscape){   }
 ```
 
+#### 1.20 获取电池状态
+
+`navigator.getBattery()`：这个 API 可以将你手机电池状态的情况暴露给需要知道的人知道。
+
+> 这个`api`返回的是一个`promise`对象，会给出一个`BatteryManager`对象，对象中包含了以下信息：
+
+| key                     | 描述                     | 备注     |
+| ----------------------- | ------------------------ | -------- |
+| charging                | 是否在充电               | 可读属性 |
+| chargingTime            | 若在充电，还需充电时间   | 可读属性 |
+| dischargingTime         | 剩余电量                 | 可读属性 |
+| level                   | 剩余电量百分数           | 可读属性 |
+| onchargingchange        | 监听充电状态改变         | 可读属性 |
+| ondischargingtimechange | 监听电池可用时间的改变   | 可读属性 |
+| onlevelchange           | 监听剩余电量百分数的改变 | 可读属性 |
+
+代码如下：
+
+```
+function getBatteryInfo(){
+
+}
+```
+
+#### 1.21 手机震动
+
+`window.navigator.vibrate(200)`：这个`API`可以让你的手机按你的想法震动。
+
+震动效果会在很多游戏使用。比如欢乐斗地主中，地主打完王炸后手机都会有震动的效果，以此来表达地主嘚瑟的心情也很是合理。
+
+代码如下：
+
+```
+function vibrateFun(){
+    let self = this;
+    if(navigator.vibrate){
+        navigator.vibrate([500,500,500,500,500,500,500,500,500]);
+    }else{
+        self.vibrateInfo = '您的设备不支持震动';
+    }
+    // 清除震动
+    navigator.vibrate(0);
+    // 持续震动
+    setInterval(function(){
+        navigator.vibrate(200);
+    },500);
+}
+```
+
+#### 1.22 联网状态
+
+`navigator.onLine`：这个`API`可以告诉让你知道你的设备的网络状态是否连接着。
+
+相关代码：
+
+```
+let onLineinfo='';
+window.addEventListener('online',onlineStatus,true)
+window.addEventListener('offline',onlineStatus,true)
+
+function onlineStatus(){
+    onLineinfo = navigator.onLine ? 'online':'offline';
+}
+```
+
+> 注意：navigator.onLine 只会在机器未连接到局域网或路由器时返回 false，其他情况下均返回 true。也就是说，机器连接上路由器后，即使这个路由器没联通网络， navigator.onLine 仍然返回 true。
+
+#### 1.23 浏览器活跃窗口监听
+
 ### 参考资料
 
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
