@@ -307,6 +307,22 @@ function fullScreenFun(){
 2. document.fullscreenEnabled：标记 fullscreen 当前是否可用
 3. document.exitFullscreen()：退出全屏
 
+#### 1.25 页面可编辑
+
+`contentEditable`：这个 API 可以使用页面所有元素成为可以编辑状态，使浏览器变成你的编辑器。
+
+相关代码：
+
+```
+<div class=haveInput contentEditable=true placeholder="请输入"></div>
+// css 样式
+.haveInput:before {
+    content: attr(placeholder);
+    display: block;
+    color: #333;
+}
+```
+
 ### 参考资料
 
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
