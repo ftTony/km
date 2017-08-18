@@ -47,6 +47,11 @@ pm2 start app.js
 我们可以在最基本的启动命令后面，添加一些参数选项，去满足我们的需求，常用的参数选项如下所示：
 
 - `--watch`：监听应用目录的变化，一旦发生变化，自动重启。
+- `-i or --instance`：启用多少个实例，可用于负载均衡，如果-i 0 或或者-i max，则根据当前机器核数确定实例数目。
+- `--ingore-watch`：排队监听的目录或文件，可以是特定的文件名，也可以是与此正则。
+- `-n or --name`：应用的名称，查看应用信息的时候可以用到。
+- `-o or --output path`：标准输出日志文件的路径。
+- `-e or --error path`：错误输出日志文件的路径
 
 ```
 pm2 start app.js --watch -i max -n first_app
@@ -63,6 +68,8 @@ pm2 restart app.js
 ```
 
 #### 2.4 停止命令
+
+停止特定的应用，可以通过 pm2 list 先获取应用的名字或者
 
 ```
 pm2 stop app_name | app_id
