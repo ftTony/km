@@ -139,6 +139,22 @@ pm2 descripe app_name | app_id
 pm2 monit
 ```
 
+动态监控界面如下所示：
+
+#### 4.4 内存超过使用上限自动重启
+
+我们可以使用 --max-memory-restart 参数来限制内存使用上限，当超过使用内存上限后自动重启：
+
+```
+pm2 start app.js --max-memory-restart 100M
+```
+
+#### 4.5 开机自启动
+
+在 linux 中，设置开机自动启动，只需要执行以下两个步骤：
+
+- 运行`pm2 startup`，即在`/etc/init.d`目录下生成`pm2-root`的启动脚本，且自动将`pm2-root`设为服务；
+
 ### 参考资料
 
 - [pm2 实践指南](https://juejin.im/post/5e1fa941e51d451c774dcc18)
@@ -151,3 +167,4 @@ pm2 monit
     </p>
     <img :src="$withBase('/about/contact.png')" />
 </div>
+```
