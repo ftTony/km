@@ -32,10 +32,17 @@
 - 获取 DOM 后分割为多个图层
 - 对每个图层的节点计算样式结果（Recalculate style--样式重计算）
 - 为每个节点生成图形和位置（Layout--回流和重布局）
+- 将每个节点绘制填充到图层位图中（Paint Setup 和 Paint--重绘）
+- 图层作为纹理上传至 GPU
+- 符合多个图层到页面上生成最终屏幕图像（Composite Layers--图层重组）
 
 **回流**
 
 有些节点，当你改变他时，会需要重新布局（这也意味着需要重新计算其他被影响的节点的位置和大小）。
+
+这种情况下，被影响的 DOM 树越大（可见节点），重绘所需要的时间就会越长，而渲染一帧动画的时间也相应变长。所以需要尽力避免这些属性
+
+一些常用的改变时会触发重布局的属性：
 
 盒子模型相关属性会触发重布局：
 
@@ -48,12 +55,36 @@
 - border
 - min-height
 
+定位属性及浮动也会触发重布局：
+
+- top
+- bottom
+- left
+- right
+- position
+- float
+- clear
+
+改变节点内部文字结构也会触发重布局：
+
+- text-align
+- overflow-y
+- font-weight
+- overflow
+- font-family
+- line-height
+- vertival-align
+- white-space
+- font-size
+
 **重绘**
 
 修改时只触发重绘的属性有：
 
 - color
 - border-style
+
+这些属性都不会修改节点的大小和位置，自然不会触发重布局，但是节点内部的渲染效果进行了改变，所以只需要重绘就可以了
 
 #### 1.2 CSS3 动画优化
 
@@ -69,6 +100,10 @@
 
 - 硬件加速的 iframe 元素（比如 iframe 嵌入的页面中有合成层）demo
 - video 元素
+- 覆盖在 video 元素上的视频控制栏
+- 3D 或者三件加速的 2D Canvas 元素
+  - demo：普通 2D Canvas 不会提升为合成层
+  - demo：3D Canvas 提升为合成层
 
 #### 1.3 Canvas 动画优化
 
