@@ -83,6 +83,18 @@
 
 - color
 - border-style
+- border-radius
+- visibility
+- text-decoration
+- background
+- background-image
+- background-position
+- background-size
+- outline-color
+- outline
+- outline-style
+- outline-width
+- box-shadow
 
 这些属性都不会修改节点的大小和位置，自然不会触发重布局，但是节点内部的渲染效果进行了改变，所以只需要重绘就可以了
 
@@ -104,12 +116,24 @@
 - 3D 或者三件加速的 2D Canvas 元素
   - demo：普通 2D Canvas 不会提升为合成层
   - demo：3D Canvas 提升为合成层
+- 硬件加速的插件，比如 flash 等等
+- 在 DPI 较高的屏幕上，fix 定位的元素会自动地被提升到合成层中。
+- 有 3D transform
+- backface-visibility 为 hidden
 
 #### 1.3 Canvas 动画优化
 
 CSS 虽然更加简单也更加保证性能的下限，但是要想实现更加复杂可控的动画，那就必须用到 Canvas+JavaScript 这个组合了
 
 ### 二、大量数据性能优化
+
+#### 2.1 虚拟列表
+
+#### 2.2 Web Worker
+
+大量数据的渲染环节我们可以采用虚拟列表或者虚拟表格的方式实现，但是大量数据的计算环节依然会产生浏览器假死或者卡顿的情况
+
+通常情况下我们 CPU 密集型的任务都是
 
 ### 参考资料
 
