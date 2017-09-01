@@ -120,6 +120,28 @@
 - 在 DPI 较高的屏幕上，fix 定位的元素会自动地被提升到合成层中。
 - 有 3D transform
 - backface-visibility 为 hidden
+- 对 opacity、transform、filter、backdropfilter 应用了 animation 或者 transition（需要是 active 的）
+- will-change 设置为 opacity、transform、top、left、bottom、right（其中 top、left 等需要设置明确的定位属性，如 relative 等）demo
+- 后代元素原因：
+  - 有合成层后代同时本身有 transform、opacity（小于 1）、mask、filter、reflection 属性 demo
+  - 有合成层后代同时本身 fixed 定位 demo
+  - 有 3D transfrom 的合成层后代同时本身有 preserves-3d 属性 demo
+  - 有 3D transfrom 的合成层后代同时本身有 perspective 属性 demo
+
+提升合成层的最好方式是使用 CSS 的 will-change 属性。从上一节合成层产生原因中，可以知道 will-change 设置为 opacity、transform、top、left、bottom、right 可以将元素提升为合成层。
+
+**那么如何避免重绘和回流？**
+
+具体而言，就是多使用 transform 或者 opacity 来实现动画效果，上述方法在合成层使用不会引起重绘和回流。
+
+**那么如何利用 GPU 加速呢？**
+
+以下几个属性会获得 GPU 加速
+
+- opacity
+- translate
+- rotate
+- scale
 
 #### 1.3 Canvas 动画优化
 
@@ -133,7 +155,7 @@ CSS 虽然更加简单也更加保证性能的下限，但是要想实现更加�
 
 大量数据的渲染环节我们可以采用虚拟列表或者虚拟表格的方式实现，但是大量数据的计算环节依然会产生浏览器假死或者卡顿的情况
 
-通常情况下我们 CPU 密集型的任务都是
+通常情况下我们 CPU 密集型的任务都是交给后端计算的，但是有些时候我们需要处理一些离线场景或者解放后端压力，这个时候此方法就不奏效了
 
 ### 参考资料
 
