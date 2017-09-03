@@ -294,6 +294,7 @@ APNG 第 1 帧为标准 PNG 图像，剩余的动画和帧速等数据放在 PNG
 ### 参考资料
 
 - [Web 性能优化：图片优化](http://www.cnblogs.com/wizcabbit/p/web-image-optimization.html)
+- [图像优化自动化实用指南](https://mp.weixin.qq.com/s/3aosOSPut-zkqJDhBfVQ1Q)
 - [每个前端工程师都应该了解的图片知识(长文建议收藏)](https://mp.weixin.qq.com/s/O1n7_t4izdmpvn2mFrB-kg)
 - [你必须知道的图片优化技巧](https://mp.weixin.qq.com/s/oJy2fncLjtlt9XmPRWnqVw)
 - [为你重新系统梳理下， Web 体验优化中和图有关的那些事（万字长文）](https://mp.weixin.qq.com/s/euvdMHkYUXHmgkV9D334NQ)
