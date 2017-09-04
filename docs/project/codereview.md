@@ -6,9 +6,9 @@
 
 ## 内容
 
-- Code Review 的好处
-- 推动 Code Review 落地执行
-- 前端如何做 Code Review
+- [Code Review 的好处](#一、code-review-的好处)
+- [推动 Code Review 落地执行](#二、推动-code-review-落地执行)
+- [前端如何做 Code Review](#三、前端如何做-code-review)
 
 ### 一、Code Review 的好处
 
