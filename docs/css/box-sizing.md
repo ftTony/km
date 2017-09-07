@@ -20,7 +20,27 @@
 
 ### 四、盒子四大家族
 
+- border
+- padding
+- content
+- margin
+
+#### 4.1 border
+
+#### 4.2 padding
+
+#### 4.3 content
+
+#### 4.4 margin
+
 ### 五、理解 box-sizing
+
+box-sizing，顾名思义，其作用与设置 CSS box 的尺寸大小有关，而 CSS box 又可细分为:
+
+- content-box(即 content area)
+- padding-box(=content area + padding area)
+- border-box(=content area + padding area + border area)
+- margin-box(=content area + padding area + border area + margin area)
 
 ### 参考资料
 
