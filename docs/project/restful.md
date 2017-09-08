@@ -46,6 +46,91 @@ REST 基本架构的四个方法：
 
 ### 四、Nodejs 实现 RESTful API
 
+- 初始化 mock 数据
+- 获取用户列表
+- 添加用户
+- 获取用户详情
+- 删除指定用户
+
+#### 4.1 初始化 mock 数据
+
+本案例使用 mock 数据来演示，如下：
+
+```
+{
+   "user1" : {
+      "name" : "leo",
+      "password" : "123456",
+      "profession" : "teacher",
+      "id": 1
+   },
+   "user2" : {
+      "name" : "pingan8787",
+      "password" : "654321",
+      "profession" : "librarian",
+      "id": 2
+   },
+   "user3" : {
+      "name" : "robin",
+      "password" : "888888",
+      "profession" : "clerk",
+      "id": 3
+   }
+}
+```
+
+#### 4.2 获取用户列表
+
+这一步我们会创建 RESTful API 中的`/users`，使用 GET 来**读取用户的信息列表：**
+
+```
+// index.js
+const expres = require('express');
+const app = express();
+const fs = require('fs');
+
+// 定义读取用户的信息列表的接口
+app.get('/users',(req,res)=>{
+    fs.readFile(__direname+'/'+'users.json','utf8',(err,data)=>{
+        console.log(data);
+        res.end(data);
+    });
+})
+
+const server = app.listen(8081,function(){
+    const {address,port} = server.address();
+    console.log(server run in: http://%s:%s',address,port);
+})
+```
+
+#### 4.3 添加用户
+
+这一步我们会创建 RESTful API 中的`/users`，使用 POST 来添加用户记录：
+
+```
+// index.js
+// 省略之前文件 只展示需要实现的接口
+
+// mock 一条要新增的数据
+
+```
+
+#### 4.4 获取用户详情
+
+这一步我们在 RESTful API 中的 URI 后面加上 /users/:id，使用 GET 来**获取指定用户详情**：
+
+```
+
+```
+
+#### 4.5 删除指定用户
+
+这一步我们会创建 RESTful API 中的 /users，使用 DELETE 来**删除指定用户**：
+
+```
+
+```
+
 ### 参考资料
 
 - [【全栈修炼】RESTful 架构及实践修炼宝典](http://www.pingan8787.com/2019/11/25/186-%E3%80%90%E5%85%A8%E6%A0%88%E4%BF%AE%E7%82%BC%E3%80%91RESTful%E6%9E%B6%E6%9E%84%E5%8F%8A%E5%AE%9E%E8%B7%B5%E4%BF%AE%E7%82%BC%E5%AE%9D%E5%85%B8/)
