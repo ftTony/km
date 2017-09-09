@@ -233,7 +233,7 @@ module.exports = {
     ],
     '/project/': [
       {
-        title: '工程测试',
+        title: '网站架构设计',
         collapsable: false,
         children: ['architecture-1', 'architecture-2', 'architecture-3']
       },
