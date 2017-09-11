@@ -105,14 +105,32 @@ const server = app.listen(8081,function(){
 
 #### 4.3 添加用户
 
-这一步我们会创建 RESTful API 中的`/users`，使用 POST 来添加用户记录：
+这一步我们会创建 RESTful API 中的`/users`，使用 POST 来**添加用户记录**：
 
 ```
 // index.js
 // 省略之前文件 只展示需要实现的接口
 
 // mock 一条要新增的数据
+const user={
+    'user4':{
+        'name':'pingan',
+        'password':'password4',
+        'profession':'teacher',
+        'id':4
+    }
+}
 
+// 定义添加用户记录的接口
+app.post('/users',(req,res)=>{
+    // 读取已存在的数据
+    fs.readFile(__dirname+'/'+'users.json','utf8',(err,data)=>{
+        data = JSON.parse(data);
+        data['user4']=user['user4'];
+        console.log(data);
+        res.end(JSON.stringify(data));
+    })
+})
 ```
 
 #### 4.4 获取用户详情
@@ -120,7 +138,19 @@ const server = app.listen(8081,function(){
 这一步我们在 RESTful API 中的 URI 后面加上 /users/:id，使用 GET 来**获取指定用户详情**：
 
 ```
+// index.js
+// 省略之前文件 只展示需要实现的接口
 
+// 定义 获取指定用户详情的接口
+app.get('/users/:id',(req,res)=>{
+    // 首先我们读取已存在的用户
+    fs.readFile(__dirname+'/'+'users.json','utf8',(err,data)=>{
+        data = JSON.parse(data);
+        const user = data['user'+req.params.id]
+        console.log(user);
+        res.end(JSON.stringify(user);)
+    })
+})
 ```
 
 #### 4.5 删除指定用户
@@ -128,8 +158,24 @@ const server = app.listen(8081,function(){
 这一步我们会创建 RESTful API 中的 /users，使用 DELETE 来**删除指定用户**：
 
 ```
+// index.js
+// 省略之前文件  只展示需要实现的接口
+
+// mock 一条要删除的用户id
+const id = 2;
+
+app.delete('/users',(req,res)=>{
+    fs.readFile(__dirname+'/'+'users.json','utf8',(err,data)=>{
+        data = JSON.parse(data);
+        delete data['user'+id];
+        console.log(data);
+        res.end(JSON.stringify(data));
+    });
+})
 
 ```
+
+相关代码在[这里]()
 
 ### 参考资料
 
