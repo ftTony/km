@@ -289,6 +289,8 @@ APNG 第 1 帧为标准 PNG 图像，剩余的动画和帧速等数据放在 PNG
 2. 在 WEB 项目中的平面图绘制，如需要绘制线，多边形，图片等。
 3. 数据可视化。
 
+> SVG 只是 Web 开发常用的一种矢量图，其实矢量图常见还有几种格式：BW 格式、AI 格式、CDR 格式、ICO 格式。
+
 ### 参考资料
 
 - [Web 性能优化：图片优化](http://www.cnblogs.com/wizcabbit/p/web-image-optimization.html)
