@@ -6,6 +6,26 @@
 
 ## 内容
 
+- Code Review 的好处
+- 推动 Code Review 落地执行
+- 前端如何做 Code Review
+
+### 一、Code Review 的好处
+
+- 互相学习，彼此成就
+- 知识共享，自动互备
+- 统一风格，提升质量
+
+#### 1.1 互相学习，彼此成就
+
+#### 1.2 知识共享，自动互备
+
+#### 1.3 统一风格，提升质量
+
+### 二、推动 Code Review 落地执行
+
+### 三、前端如何做 Code Review
+
 ### 参考资料
 
 - [如何在团队中做好 Code Review](https://www.cnblogs.com/ken-io/p/how-to-do-code-review-in-a-team.html)

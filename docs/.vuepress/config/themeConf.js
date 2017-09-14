@@ -245,7 +245,7 @@ module.exports = {
       {
         title: '规范化',
         collapsable: false,
-        children: ['standard', 'restful']
+        children: ['standard', 'restful', 'codereview']
       },
       {
         title: '浏览器',
