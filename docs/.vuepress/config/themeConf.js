@@ -394,11 +394,6 @@ module.exports = {
         children: ['base-functional']
       },
       {
-        title: '计算机组成原理',
-        collapsable: false,
-        children: ['base-computer']
-      },
-      {
         title: '网络',
         collapsable: false,
         children: [
