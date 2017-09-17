@@ -151,11 +151,15 @@ CSS 虽然更加简单也更加保证性能的下限，但是要想实现更加�
 
 #### 2.1 虚拟列表
 
+我们在实际开发过程中会碰到一种场景，前端需要渲染大量数据（几千行数万行数据不等），而且还不允许分页，这种情况下网页会出现掉帧、卡顿甚至假死的情况。
+
 #### 2.2 Web Worker
 
 大量数据的渲染环节我们可以采用虚拟列表或者虚拟表格的方式实现，但是大量数据的计算环节依然会产生浏览器假死或者卡顿的情况
 
 通常情况下我们 CPU 密集型的任务都是交给后端计算的，但是有些时候我们需要处理一些离线场景或者解放后端压力，这个时候此方法就不奏效了
+
+还有一种方法是计算切片，使用 setTimeout 拆分密集型任务，但是有一些计算无法利用此方法拆解，同时还可能产生副作用，这个方法需要视具体场景而
 
 ### 参考资料
 
@@ -163,12 +167,9 @@ CSS 虽然更加简单也更加保证性能的下限，但是要想实现更加�
 - [前端性能清单](https://github.com/JohnsenZhou/Front-End-Performance-Checklist)
 - [嗨，送你一张 Web 性能优化地图](https://mp.weixin.qq.com/s?__biz=MzUxMTcwOTM4Mg==&mid=2247483962&idx=1&sn=f9337ad983c6303811eb43d07d9f23d5&chksm=f96edb93ce195285943211e645cc683989826abdaaa8ab0b073a20761369ed04843c835c50b7#rd)
 - [2018 前端性能优化清单](https://juejin.im/post/5a966bd16fb9a0635172a50a)
-- [前端性能(一)](https://github.com/ftTony/blog/issues/28)
-- [前端性能(二)](https://github.com/ftTony/blog/issues/29)
 - [性能优化三部曲之一——构建篇](https://github.com/lcxfs1991/blog/issues/4)
 - [Web 性能](https://github.com/laoqiren/web-performance)
 - [前端性能优化之旅](https://github.com/alienzhou/fe-performance-journey)
-- [前端性能优化之白屏时间](https://mp.weixin.qq.com/s/N_6faORvlDSxFQMh1o2naA)
 - [Web 性能领域常见的专业术语](https://mp.weixin.qq.com/s/GIpmZIY6yxGRBpkTDHuJuw)
 - [如何使页面交互更流畅](https://mp.weixin.qq.com/s/eoZyeJahkBpaYxzC2n5NLQ)
 - [从 8 道面试题看浏览器渲染过程与性能优化](https://juejin.im/post/5e143104e51d45414a4715f7)

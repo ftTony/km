@@ -13,8 +13,13 @@
 
 ### 二、白屏的定义
 
+### 三、白屏加载的问题分析
+
+在现代前端应用开发中，我们往往会用 webpack 等打包器进行打包，很多情况下我们不进行优化，就会出现很多何种巨大的 chunk，有的甚至在 5M 左右，这些 chunk 是加载速度的杀手。
+
 ## 参考资料
 
+- [前端性能优化之白屏时间](https://mp.weixin.qq.com/s/N_6faORvlDSxFQMh1o2naA)
 - [2018 前端性能优化清单](https://juejin.im/post/5a966bd16fb9a0635172a50a)
 - [【译】2018 前端性能优化清单 —— 第一部分](https://juejin.im/post/5a67e49df265da3e377c2d59)
 - [[译] 2019 前端性能优化年度总结 — 第一部分](https://juejin.im/post/5c4418006fb9a049c043545e)
@@ -27,6 +32,7 @@
 - [提升 90%加载速度——vuecli 下的首屏性能优化](https://segmentfault.com/a/1190000019499007)
 - [【第 843 期】前端性能优化](https://mp.weixin.qq.com/s/Hcp60sfDOyXcP9TM0CX2Bw)
 - [25 | 页面性能：如何系统地优化页面？](https://time.geekbang.org/column/article/143889)
+- [【性能优化】DNS 预解析](https://github.com/amandakelake/blog/issues/50)
 
 ## 联系作者
 
