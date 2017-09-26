@@ -2,7 +2,9 @@
 
 ## 前言
 
-本人平时学习及收集内容，欢迎参入一起讨论。
+CSS 盒模型本质上是一个盒子，封装周围的 HTML 元素，它包括：边距 margin，边框 border，填充 padding，和实际内容 content。盒模型允许我们在其它元素和周围元素边框之间的空间放置元素。
+
+![images](box02.png)
 
 ## 内容
 
@@ -37,8 +39,8 @@
 
 box-sizing，顾名思义，其作用与设置 CSS box 的尺寸大小有关，而 CSS box 又可细分为:
 
-- content-box(即 content area)
-- padding-box(=content area + padding area)
+- `content-box`(W3C 盒模型，又名标准盒模型)：content area
+- `padding-box`(IE 盒模型，又名怪异盒模型)：content area + padding area
 - border-box(=content area + padding area + border area)
 - margin-box(=content area + padding area + border area + margin area)
 
