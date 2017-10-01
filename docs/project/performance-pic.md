@@ -104,6 +104,33 @@ IntersectionObserver 提供给我们一项能力：可以用来监听元素是�
 
 这是 Chrome51 率先提出和支持的 API，而在 2019 年的今天，各大浏览器对它的支持度已经有所改善(除了 IE，全线崩~)：
 
+废话不多说，上代码：首先假设我们有一个图片列表，它们的 src 属性我们暂不设置，而用 data-src 来替代：
+
+```
+
+```
+
+这样会导致图片无法加载，这当然不是我们的目的，我们想做的是，
+
+```
+const observer = new IntersectionObserver(function(changes){
+    changes.forEach(function(element,index){
+        // 当这个值大于0，说明满足我们的加载条件了，这个值可通过rootMargin手动设置
+    });
+});
+function initObserver(){
+    const listItems = document.querySelectorAll('.list-item-img');
+    listItems.forEach(function(item){
+        // 对每个list元素进行监听
+        observer.observe(item);
+    });
+}
+
+initObserver();
+```
+
+运行代码并观察控制台的 Network，会发现图片随着可视区域的移动而加载，我们的目的达到了。
+
 #### 3.2 还是 Chrome 的黑科技——loading 属性
 
 ### 四、响应式图片的实践
@@ -128,7 +155,7 @@ IntersectionObserver 提供给我们一项能力：可以用来监听元素是�
 }
 ```
 
-这么做有两个好处，一是保证高像素密度的设备下，图片仍能保持应有的清晰度，二是防止在低像素密度的设备下加载大尺寸图片千万浪费。
+这么做有两个好处，一是保证高像素密度的设备下，图片仍能保持应有的清晰度，二是防止在低像素密度的设备下加载大尺寸图片造成浪费。
 
 那么如何处理 img 标签呢？
 
@@ -137,6 +164,10 @@ IntersectionObserver 提供给我们一项能力：可以用来监听元素是�
 ```
 <img width="320" src="bg@2x.png" srcset="bg.png 1x;bg@2x.png 2x" />>
 ```
+
+这段代码的作用是：当设备像素密度，也就是 dpr(devicePixelRatio)为 1 时，使用 bg.png，为 2 时使用二倍图 bg@2x.png，依此类推，你可以根据需要设置多种精度下要加载的图片，如果没有命中，浏览器会选择最邻近的一个精度对应的图片进行加载。
+
+要注意：老旧的浏览器不支持 srcset 的特性，它会继续正常加载 src 属性引用的图像。
 
 ### 五、安全地使用 WebP 图片
 
