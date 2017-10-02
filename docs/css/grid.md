@@ -382,7 +382,7 @@ CSS 代码:
 
 - **justify-self**/**align-self**/**place-self**
 
-`justify-self`属性设置单元格内容的水平位置（左中右）；`align-self`属性设置单元格内容的垂直位置（上中下）；
+`justify-self`属性设置单元格内容的水平位置（左中右），跟`justify-items`属性的用法完全一致，但只作用于单个项目。；`align-self`属性设置单元格内容的垂直位置（上中下）跟 `align-items` 属性的用法完全一致，也是只作用于单个项目；
 `place-self` 是设置`align-self` 和 `justify-self` 的简写形式。
 
 值：
@@ -404,7 +404,9 @@ CSS 代码:
 示例代码：
 
 ```
-
+.item-1 {
+    justify-self: end;
+}
 ```
 
 ### 二、基本术语
