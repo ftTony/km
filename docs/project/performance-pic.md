@@ -116,6 +116,11 @@ IntersectionObserver 提供给我们一项能力：可以用来监听元素是�
 const observer = new IntersectionObserver(function(changes){
     changes.forEach(function(element,index){
         // 当这个值大于0，说明满足我们的加载条件了，这个值可通过rootMargin手动设置
+        if(element.intersectionRatio>0){
+            // 放弃监听，防止性能浪费，并加载图片
+            observer.unobserve(element.target);
+            element.target.src=element.target.dataset.src;
+        }
     });
 });
 function initObserver(){
