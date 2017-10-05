@@ -237,7 +237,7 @@ module.exports = {
       {
         title: '工程测试',
         collapsable: false,
-        children: ['test-1', 'test-2', 'test-3']
+        children: ['test-1', 'test-2', 'test-3', 'test-4']
       },
       {
         title: '规范化',
