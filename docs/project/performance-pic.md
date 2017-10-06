@@ -107,10 +107,21 @@ IntersectionObserver 提供给我们一项能力：可以用来监听元素是�
 废话不多说，上代码：首先假设我们有一个图片列表，它们的 src 属性我们暂不设置，而用 data-src 来替代：
 
 ```
-
+<li>
+  <img class="list-item-img" alt="loading" data-src='a.jpg'/>
+</li>
+<li>
+  <img class="list-item-img" alt="loading" data-src='b.jpg'/>
+</li>
+<li>
+  <img class="list-item-img" alt="loading" data-src='c.jpg'/>
+</li>
+<li>
+  <img class="list-item-img" alt="loading" data-src='d.jpg'/>
+</li>
 ```
 
-这样会导致图片无法加载，这当然不是我们的目的，我们想做的是，
+这样会导致图片无法加载，这当然不是我们的目的，我们想做的是，当 IntersectionObserver 监听到图片元素进入可视区域时，将 data-src“还给”src 属性，这样我们就可以实现图片加载了：
 
 ```
 const observer = new IntersectionObserver(function(changes){
@@ -178,15 +189,23 @@ initObserver();
 
 ### 六、对 Base64Url 的反思
 
+Base64 就是一种基于 64 个可打印字符来表示二进制数据的方法，编码过程是从二进制数据到字符串的过程，在 web 应用中我们经常用它来做啥呢——传输图片数据。HTML 中，img 的 src 和 css 样式的 background-image 都可以都可以接受 base64 字符串，
+
 #### 6.1 让 css 文件的体积失去控制
 
 #### 6.2 让浏览器的资源缓存策略功亏一篑
+
+假设你的 base64Url 会被你的应用多次利用，本来浏览器可以直接从本地缓存取出的图片，换成 base64Url，将造成应用中多个页面重复下载 1.3 倍大小的文本，假设一张图片是 100kb 大小，被你的应用使用了 10 次，那么造成的流量浪费将是(100 1.3 10) - 100 = 1200kb。
 
 #### 6.3 低版本浏览器的兼容问题
 
 这是比较次要的问题，dataurl 在低版本 IE 浏览器，比如 IE8 及以下的浏览器，会有兼容性问题
 
 #### 6.4 不利于开发者工具调试与查看
+
+无论哪张图片，看上去都是一堆没有意义的字符串，光看代码无法知道原图是哪张，不利于某些情况下的比对。
+
+说了这么多，有人可能不服气，既然这种方案缺点这么多，为啥它会从以前就被广泛使用呢？
 
 ## 参考资料
 
