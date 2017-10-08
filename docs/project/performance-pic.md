@@ -339,6 +339,7 @@ css 文件本身就是**渲染阻塞资源**，浏览器首次加载时如果没
 
 - [Web 性能优化：图片优化](http://www.cnblogs.com/wizcabbit/p/web-image-optimization.html)
 - [图像优化自动化实用指南](https://mp.weixin.qq.com/s/3aosOSPut-zkqJDhBfVQ1Q)
+- [PNG 图片压缩原理解析](https://juejin.im/post/5c8e4feb6fb9a070aa5ce200)
 - [谈谈 Web 应用中的图片优化技巧及反思](https://juejin.im/post/5d4979cc5188255b3e4126ae)
 
 ## 联系作者
