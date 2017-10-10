@@ -82,6 +82,20 @@ npm install imagemin-mozjpeg
     })();
 ```
 
+注意到我们使用 progressive:true 选项，这可以将图片转换为渐进式图片，关于渐进式图片，它允许在加载照片的时候，如果网速比较慢的话，先显示一个类似模糊有点小马赛克的质量比较差的照片，然后慢慢的变为清晰的照片：
+
+![images](performance11.gif)
+
+而相比之下，非渐进式的图片(Baseline JPEG)则会老老实实地从头到尾去加载：
+
+![images](performance12.gif)
+
+张鑫旭大神的这篇文章，可以帮你更好地了解两者的区别：[渐进式 jpeg(progressive jpeg)图片及其相关](https://www.zhangxinxu.com/wordpress/2013/01/progressive-jpeg-image-and-so-on/)
+
+简单来说，渐进式图片一开始就决定了大小，而不像 Baseline 图片一样，不断地从上往下加载，从而造成多次回流，但渐进式图片需要消耗 CPU 去多次计算渲染，这是其主要缺点。
+
+当然，交错式 png 也可以实现相应的效果，但目前 pngquant 没有实现转换功能，但是 ps 中导出 png 时是可以设置为交错式的。
+
 #### 2.3 在真实项目中如何操作？
 
 实际项目中，总不能 UI 丢一个图过来你就跑一遍压缩代码吧？幸好 imagemin 有对应的 webpack 插件，在 webpack 遍地使用的今天，我们可以轻松指压缩：
@@ -110,6 +124,8 @@ npm install imagemin-webpack-plugin
     }
 ```
 
+接着在 webpack 配置文件中，引入自己需要的插件，使用方法完全相同。
+
 ### 三、通过图片按需加载减少请求压力
 
 图片按需加载是个老生常谈的话题，传统做法自然是通过监听页面的滚动位置，符合条件了再去资源加载，我们看看如今还有什么方法可以做到按需加载。
@@ -119,6 +135,8 @@ npm install imagemin-webpack-plugin
 IntersectionObserver 提供给我们一项能力：可以用来监听元素是否进入了设备的可视区域之内，这意味着：我们等待图片元素进入可视区域后，再决定是否加载它，毕竟用户没有看到图片前，根本不关心它是否已经加载了。
 
 这是 Chrome51 率先提出和支持的 API，而在 2019 年的今天，各大浏览器对它的支持度已经有所改善(除了 IE，全线崩~)：
+
+![images](performance13.jpg)
 
 废话不多说，上代码：首先假设我们有一个图片列表，它们的 src 属性我们暂不设置，而用 data-src 来替代：
 
