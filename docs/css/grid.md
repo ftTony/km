@@ -420,15 +420,57 @@ CSS 代码:
 
 #### 2.1 网格容器
 
+应用 `display: grid` 的元素。这是所有 网格项（grid item）的直接父级元素。在这个例子中，`container` 就是**网格容器(Grid Container)**。
+
+HTML 代码：
+
+```
+<div class="container">
+  <div class="item item-1"></div>
+  <div class="item item-2"></div>
+  <div class="item item-3"></div>
+</div>
+```
+
 #### 2.2 网格项
+
+网格容器（Grid Container）的子元素（例如直接子元素）。这里`item`元素就是网格项(Grid Item)，但是`sub-item`不是。
+
+HTML 代码:
+
+```
+<div class="container">
+  <div class="item"></div>
+  <div class="item">
+    <p class="sub-item"></p>
+  </div>
+  <div class="item"></div>
+</div>
+```
 
 #### 2.3 网格线
 
+构成网格结构的分界线。它们既可以是垂直的（“列网格线(column grid lines)”），也可以是水平的（“行网格线(row grid lines)”），并位于行或列的任一侧。例如，这里的黄线就是一条列网格线。
+
+![images](items-grid-line.svg)
+
 #### 2.4 网格轨道
+
+两条相邻网格线之间的空间。你可以把它们想象成网格的列或行。下图是第二条和第三条 行网格线 之间的 网格轨道(Grid Track)。
+
+![images](terms-grid-track.svg)
 
 #### 2.5 网格单元格
 
+两个相邻的行和两个相邻的列网格线之间的空间。这是 Grid(网格) 系统的一个“单元”。下图是第 1 至第 2 条 行网格线 和第 2 至第 3 条 列网格线 交汇构成的 网格单元格(Grid Cell)。
+
+![images](terms-grid-cell.svg)
+
 #### 2.6 网格区域
+
+4 条网格线包围的总空间。一个 网格区域(Grid Area) 可以由任意数量的 网格单元格(Grid Cell) 组成。下图是 行网格线 1 和 3，以及列网格线 1 和 3 之间的网格区域。
+
+![images](terms-grid-area.svg)
 
 ### 参考资料
 
