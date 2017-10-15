@@ -1,4 +1,4 @@
-# WebAssembly学习
+# WebAssembly 学习
 
 ## 前言
 
@@ -9,7 +9,7 @@
 ### 参考资料
 
 - [什么将会替代 JavaScript 呢？](https://github.com/xitu/gold-miner/blob/master/TODO1/what-replaces-javascript.md)
-- [JavaScript是如何工作的:与 WebAssembly比较 及其使用场景](https://github.com/qq449245884/xiaozhi)
+- [JavaScript 是如何工作的:与 WebAssembly 比较 及其使用场景](https://github.com/qq449245884/xiaozhi)
 
 ## 联系作者
 
