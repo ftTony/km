@@ -12,6 +12,10 @@
 
 单元测试有 Mocha, Ava, Karma, Jest, Jasmine 等。
 
+### 二、Jest 入门
+
+### 三、Vue 中实践 Jest
+
 ### 参考资料
 
 - [万字长文总结前端测试体系建设与最佳实践](https://mp.weixin.qq.com/s/IgA29U-etBKUls7JnpE2Zw)
