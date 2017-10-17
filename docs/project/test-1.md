@@ -12,6 +12,18 @@
 
 单元测试有 Mocha, Ava, Karma, Jest, Jasmine 等。
 
+#### 1.1 框架对比
+
+| 框架  | 断言               | 仿真               | 快照               | 异步测试 | 环境     | 并发测试 | 测试覆盖率 |
+| ----- | ------------------ | ------------------ | ------------------ | -------- | -------- | -------- | ---------- |
+| Mocha | 默认不支持，可配置 | 默认不支持，可配置 | 默认不支持，可配置 | 友好     | 全局环境 | 否       | 需配置     |
+
+- Mocha 是生态最好，使用最广泛的单元测试框架，但是他需要较多的配置来实现它的高扩展性。
+- Ava 是更轻量高效简单的单元测试框架，但是自身不够稳定，并发运行文件多的时候会撑爆 CPU。
+- Jasmine 是单元测试框架的“元老”，开箱即用，但是异步测试支持较弱。
+- Jest 基于 Jasmine，做了大量修改并添加了很多特性，同样开箱即用，但异步测试支持良好。
+- Karma 能在真实的浏览器中测试，强大适配器，可配置其他单元测试框架，一般会配合 Mocha 或 Jasmine 等一起使用。
+
 ### 二、Jest 入门
 
 ### 三、Vue 中实践 Jest
@@ -22,6 +34,8 @@
 - [聊一聊前端自动化测试（下）](https://mp.weixin.qq.com/s/gQZ6SDyDLY8wu5_eedkd1g)
 - [【第 1022 期】聊一聊前端自动化测试（上）](https://mp.weixin.qq.com/s/KSszU-OcnLuxQ-Ap5KcFQg)
 - [单元测试从零开始，包含 Vue 及 React 项目中该如何单测](https://juejin.im/post/5defacfa51882512664b076f)
+- [学习测试框架 Mocha](https://www.cnblogs.com/tugenhua0707/p/8419534.html)
+- [学习 Karma+Jasmine+istanbul+webpack 自动化单元测试](https://www.cnblogs.com/tugenhua0707/p/8433847.html)
 
 ## 联系作者
 
