@@ -189,7 +189,9 @@ ps：一个 vue 的图片懒加载组件 vue-view-lazy，也是基于 Intersecti
 
 从新版本 Chrome(76)开始，已经默认支持一种新的 html 属性——loading，它包含三种取值：
 
-- auto：
+- auto：让浏览器自动决定是否进行懒加载，这其中的机制尚不明确。
+- lazy：明确地让浏览器对此图片进行懒加载，即当用户滚动到图片附近时才进行加载，但目前没有具体说明这个“附近”具体是多近。
+- eager：让浏览器立刻加载此图片。
 
 #### 3.3 还可以做到锦上添花！
 
@@ -200,6 +202,8 @@ ps：一个 vue 的图片懒加载组件 vue-view-lazy，也是基于 Intersecti
 ```
 <img src="a.jpg" style="background: red;"/>
 ```
+
+这样会先显示出红色背景，再渲染出真实的图片，重点来了，我们此时要借用工具为这张图片“配制”
 
 ```
    background: linear-gradient(
