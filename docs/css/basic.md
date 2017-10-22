@@ -558,69 +558,7 @@ div {
 
 ### 六、文本控制
 
-#### 6.1 `::first-letter`应用实例
-
-`first-letter`选中首个字符
-
-```
-<style>
-p{
-  font-weight: bold;
-  font-size: 22px;
-}
-p::first-letter{
-  font-size: 44px;
-  color: red;
-}
-</style>
-
-<p>￥ 1000</p>
-```
-
-#### 6.2 `text-transform` 应用
-
-假设有个输入框只能输入大写字母，那么如下设置，输入小写字母出现的却是大写字母，可用于身份证输入框或验证码输入框等：
-
-取值：
-
-- `none：` 无转换
-- `capitalize：` 将每个单词的第一个字母转换成大写
-- `uppercase：` 将每个单词转换成大写
-- `lowercase：` 将每个单词转换成小写
-- `full-width：` 将所有字符转换成 fullwidth 形式。如果字符没有相应的 fullwidth 形式，将保留原样。这个值通常用于排版拉丁字符和数字等表意符号。
-
-```
-  input {
-    text-transform: uppercase;
-  }
-```
-
-#### 6.3 `word-spacing` 空格间隙
-
-如果一段文字中没有空格，则该属性无效。下面代码设定空格间隙是`20px`，也就是说空格现在占据的宽度是原有的空格宽度+`20px`的宽度：
-
-```
-<p>我有空 格，我该死......</p>
-<style>
-  p {
-    word-spacing: 20px;
-  }
-</style>
-
-```
-
-#### 6.4 `white-space` 空白处理
-
-如果在 html 中输入多个空白符，默认会被当成一个空白符处理，实际上就是这个属性控制的：
-
-- `normal`：合并空白符和换行符；
-- `nowrap`：合并空白符，但不许换行；
-- `pre`：不合并空白符，并且只在有换行地方换行；
-- `pre-wrap`：不合并空白符，允许换行符换行和文本自动换行；
-
-#### 6.5 `text-align: justify`
-
-`text-align:justify`为两端对齐。除了实现文字的两端对齐，还能用来做一些两端对齐的布局。
+参考：[字体控制](https://km.xiaowuzi.info/css/font-size.html)
 
 ### 七、元素的显示与隐藏
 
