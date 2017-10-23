@@ -193,6 +193,14 @@ ps：一个 vue 的图片懒加载组件 vue-view-lazy，也是基于 Intersecti
 - lazy：明确地让浏览器对此图片进行懒加载，即当用户滚动到图片附近时才进行加载，但目前没有具体说明这个“附近”具体是多近。
 - eager：让浏览器立刻加载此图片。
 
+我们可以通过 chrome 的开发工具看看这个 demo 中的图片加载方式，我们把上一个 demo 中的 js 脚本删掉了，只用了 loading=lazy 这个属性。接着，勾选工具栏中的 Disabled Cache 后仔细观察 Network 一栏，细心的人应该会发现，一张图片被分为了两次去请求！第一次的状态码是 206，第二次状态码才是 200，如图所示：
+
+![images](performance15.jpg)
+
+这个现象跟 chrome 的 lazy-loading 功能的实现机制有关；
+
+1.
+
 #### 3.3 还可以做到锦上添花！
 
 以上介绍的两种方式，其实最终实现的效果是相似的，但这里还有个问题，当网速慢的时候，图片还没加载完之前，用户会看到一段空白时间，在这段空白时间，就算是渐进图片也无法发挥它的作用，我们需要更友好的展示方式来弥补这段空白，有一种方法简单粗暴，那就是用一张占位图来顶替，这张占位图被加载过一次后，即可从缓存中取出，无须重新加载，但这种图片会显得有些千篇一律，并不能很好地做到 preview 的效果。
@@ -214,6 +222,8 @@ ps：一个 vue 的图片懒加载组件 vue-view-lazy，也是基于 Intersecti
 ```
 
 最终效果如下所示：
+
+![images](performance17.gif)
 
 ### 四、响应式图片的实践
 
@@ -277,7 +287,7 @@ Base64 就是一种基于 64 个可打印字符来表示二进制数据的方法
 
 - [Web 性能优化：图片优化](http://www.cnblogs.com/wizcabbit/p/web-image-optimization.html)
 - [图像优化自动化实用指南](https://mp.weixin.qq.com/s/3aosOSPut-zkqJDhBfVQ1Q)
-- [你必须知道的图片优化技巧](https://mp.weixin.qq.com/s/oJy2fncLjtlt9XmPRWnqVw)
+- [谈谈 Web 应用中的图片优化技巧及反思](https://juejin.im/post/5d4979cc5188255b3e4126ae)
 
 ## 联系作者
 
