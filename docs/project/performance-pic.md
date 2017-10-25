@@ -199,7 +199,9 @@ ps：一个 vue 的图片懒加载组件 vue-view-lazy，也是基于 Intersecti
 
 这个现象跟 chrome 的 lazy-loading 功能的实现机制有关；
 
-1.
+- 首先，浏览器会发送一个预请求，请求地址就是这张图片的 url，但是这个请求只摘取这张图片的头部数据，大约 2kb，具体做法是在请求头中设置 range:butes=0-2047，
+
+![images](performance16.jpg)
 
 #### 3.3 还可以做到锦上添花！
 
