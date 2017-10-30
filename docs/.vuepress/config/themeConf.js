@@ -227,7 +227,7 @@ module.exports = {
       {
         title: 'Native学习',
         collapsable: false,
-        children: ['hybird', 'flutter', 'electron']
+        children: ['hybird', 'flutter', 'electron', 'mini-program']
       }
     ],
     '/project/': [{
