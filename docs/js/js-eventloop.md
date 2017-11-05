@@ -408,7 +408,6 @@ Node 端的处理过程如下：
 - [「前端进阶」从多线程角度来看 Event Loop](https://mp.weixin.qq.com/s/DLunwkzknoQ0tczLHuqpHg)
 - [【THE LAST TIME】彻底吃透 JavaScript 执行机制](https://mp.weixin.qq.com/s/nQgsEQorv00fr4XqU764bA)
 - [《一文看懂浏览器事件循环》](https://mp.weixin.qq.com/s/kG4FHXlqbKFWYQCtPhLtxA)
-- [day040: 如何理解 EventLoop——宏任务和微任务篇](https://mp.weixin.qq.com/s/-E5cgSscTvOnC5mNEMev1A)
 
 ## 联系作者
 
