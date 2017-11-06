@@ -270,7 +270,7 @@ module.exports = {
       {
         title: '性能',
         collapsable: false,
-        children: ['performance-1', 'performance-2', 'performance-3']
+        children: ['performance-1', 'performance-2', 'performance-3', 'performance-pic']
       },
       {
         title: 'Web安全',
