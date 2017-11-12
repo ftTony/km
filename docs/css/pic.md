@@ -250,6 +250,10 @@ WebP 是谷歌开发的一种新图片格式，WebP 是同时支持有损和无�
 
 #### 4.5 APNG
 
+APNG（Animated Portable Network Graphics）顾名思义是基于 PNG 格式扩展的一种动画格式，增加了对动画图像的支持，同时加入了 24 位图像和 8 位 Alpha 透明度的支持，这意味着动画将拥有更好的质量，其诞生的目的是为了替代老旧的 GIF 格式，但它目前并没有获得 PNG 组织官方的认可。
+
+APNG 第 1 帧为标准 PNG 图像，剩余的动画和帧速等数据放在 PNG 扩展数据块，因此只支持原版 PNG 的软件会正确显示第 1 帧。
+
 #### 4.6 SVG
 
 **关键词**：无损、矢量图、体积小、不失真、兼容性好
@@ -270,7 +274,6 @@ WebP 是谷歌开发的一种新图片格式，WebP 是同时支持有损和无�
 - [每个前端工程师都应该了解的图片知识(长文建议收藏)](https://mp.weixin.qq.com/s/O1n7_t4izdmpvn2mFrB-kg)
 - [你必须知道的图片优化技巧](https://mp.weixin.qq.com/s/oJy2fncLjtlt9XmPRWnqVw)
 - [为你重新系统梳理下， Web 体验优化中和图有关的那些事（万字长文）](https://mp.weixin.qq.com/s/euvdMHkYUXHmgkV9D334NQ)
-- [Web 性能优化：图片优化](https://www.cnblogs.com/wizcabbit/p/web-image-optimization.html)
 - [webp 图片实践之路](https://www.cnblogs.com/season-huang/p/5804884.html)
 
 ## 联系作者
