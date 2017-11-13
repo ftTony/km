@@ -171,11 +171,36 @@ Skeleton 是一个好方法，Skeleton 现在已经很开始被广泛应用了�
 在不同框架上都有相应的 Skeleton 实现
 
 - React: antd 内置的骨架图 [Skeleton](https://ant.design/components/skeleton-cn/) 方案
-- Vue:
+- Vue：[vue-skeleton-webpack-plugin](https://github.com/lavas-project/vue-skeleton-webpack-plugin)
+
+以 vue-cli 3 为例,我们可以直接在 vue.config.js 中配置
+
+```
+// 引入插件
+const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
+
+
+```
+
+然后就是基本的 vue 文件编写了
 
 ### 六、TTI(可交互时间)
 
-当有意义的内容渲染出来之后，用户会尝试与页面交互
+当有意义的内容渲染出来之后，用户会尝试与页面交互，这个时候页面并不是加载完毕了，而是看起来页面加载完毕了，事实上这个时候 JavaScript 脚本依然在密集得执行。
+
+#### 6.1 Tree Shaking
+
+Tree Shaking 虽然出现很早了，比如 js 基础库的事实标准打包工具 rollup 就是 Tree Shaking 的祖师爷，react 用 rollup 打包之后体积减少了 30%，这就是 Tree Shaking 的厉害之处。
+
+#### 6.2 polyfill 动态加载
+
+#### 6.3 动态加载 ES6 代码
+
+既然 polyfill 能动态加载，那么 es5 和 es6+的代码能不能动态加载呢？是的，但是这样有什么意义呢？es6 会更快吗？
+
+#### 6.4 路由级别拆解代码
+
+我们在上文中已经通过 SplitChunksPlugin 将第三方库进行了抽离，但是在首屏加载过程中依然有很多冗余代码，比如我们的首页是个登录界面，那么其实用到的代码很简单
 
 ### 七、组件加载
 
