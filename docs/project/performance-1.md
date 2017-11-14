@@ -192,7 +192,21 @@ const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
 
 Tree Shaking 虽然出现很早了，比如 js 基础库的事实标准打包工具 rollup 就是 Tree Shaking 的祖师爷，react 用 rollup 打包之后体积减少了 30%，这就是 Tree Shaking 的厉害之处。
 
+Tree Shaking 的作用就是，通过程序流分析找出你代码中无用的代码并剔除，如果不用 Tree Shaking 那么很多代码虽然定义了但是永远都不会用到，也会进入用户的客户端执行，这无疑是性能的多杀手，Tree Shaking 依赖 es6 的 module 模块的静态特性，通过分析剔除无用代码
+
+目前在 webpack4.x 版本之后在生产环境下已经默认支持 Tree Shaking 了，所以 Tree Shaking 可以称得上开箱即用的技术了，但是并不代表 Tree Shaking 真的会起作用，因为这里面还是有很多坑
+
+坑 1：
+
+坑 2：
+
 #### 6.2 polyfill 动态加载
+
+polyfill 是为了浏览器兼容性而生，是否需要 polyfill 应该有客户端的浏览器自己决定，而不是开发者决定，但是我们在很长一段时间里都是开发者将各种 ployfill 打包，其实很多情况下导致用户加载了根本没有必要的代码。
+
+解决这个问题的方法很简单，直接引入`<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>`即可，而对于 Vue 开发者就更友好了，vue-cli 现在生成的模板就自带这个引用。
+
+这个原理就是服务商通过识别不同浏览器的 User Agent，使得服务器能够识别客户使用的操作系统及版本、CPU 类型、浏览器及版本、浏览器渲染引擎、浏览器语言、浏览器插件等，然后根据这个信息判断是否需要加载 polyfill，开发者在流星器的 network 就可以查看 User Agent。
 
 #### 6.3 动态加载 ES6 代码
 
@@ -201,6 +215,11 @@ Tree Shaking 虽然出现很早了，比如 js 基础库的事实标准打包工
 #### 6.4 路由级别拆解代码
 
 我们在上文中已经通过 SplitChunksPlugin 将第三方库进行了抽离，但是在首屏加载过程中依然有很多冗余代码，比如我们的首页是个登录界面，那么其实用到的代码很简单
+
+1. 框架的基础库例如 vue redux 等等
+2. ui 框架的部分 form 组件和按钮组件等等
+3. 一个简单的布局组件
+4. 其它少量逻辑和样式
 
 ### 七、组件加载
 
