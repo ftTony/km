@@ -294,6 +294,13 @@ CSS 代码：
 
 `grid-column-start`属性：左边框所在的垂直网格线；`grid-coloumn-end`属性：右边框所在的垂直网格线；`grid-row-start`属性：上边框所在的水平网格线；`grid-row-end`属性：下边框所在的水平网格线；
 
+值：
+
+- `<line>`：可以是一个数字引用一个编号的网格线，或者一个名字来引用一个命名的网格线
+- `span <number>` ：该网格项将跨越所提供的网格轨道数量
+- `span <name>`：该网格项将跨越到它与提供的名称位置
+- `auto`：表示自动放置，自动跨度，默认会扩展一个网格轨道的宽度或者高度
+
 CSS 代码:
 
 ```
@@ -320,6 +327,10 @@ CSS 代码:
 
 `grid-column` 属性是 `grid-column-start` 和 `grid-column-end` 的合并简写形式，`grid-row` 属性是 `grid-row-start` 属性和 `grid-row-end` 的合并简写形式。
 
+值：
+
+- `<start-line> / <end-line>`：每个网格项都接受所有相同的值，作为普通书写的版本，包括跨度
+
 CSS 代码:
 
 ```
@@ -339,6 +350,36 @@ CSS 代码:
 ```
 
 - **grid-area**
+
+`grid-area`属性指定项目放在哪一个区域。
+
+值：
+
+- `<name>`：你所选的名称
+- `<row-start> / <column-start> / <row-end> / <column-end>`：数字或分隔线名称
+
+CSS 代码:
+
+```
+.item {
+  grid-area: <name> | <row-start> / <column-start> / <row-end> / <column-end>;
+}
+```
+
+示例代码：
+
+```
+#container {
+  grid-template-areas:
+    'a b c'
+    'd e f'
+    'g h i';
+}
+.item-1 {
+      grid-area: e;
+}
+```
+
 - **justify-self**/**align-self**/**place-self**
 
 ### 二、基本术语
