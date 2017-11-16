@@ -102,8 +102,17 @@ optimization:{
         maxAsyncRequests: 1,    // 最大异步请求数，默认1
         maxInitialRequests: 1,  // 最大初始化请求数，默认1
         name: ()=>{},   // 名称，此选项可以接收function
-        cacheGroups:{       // 缓存组会继承splitChuncks的配置，但是test、priorty和
-
+        cacheGroups:{       // 缓存组会继承splitChuncks的配置，但是test、priorty和reuseExistingChunk只能用于配置缓存组。
+            priority: "0",      // 缓存组优先级，即权重 false | object
+            vendor: {   // key 为entry中定义的入口名称
+                chunks: "initial",          // 必须三选一： "initial"(初始化s) | "all" | "async"(默认就是异步)
+                test: /react|lodash/,   // 正则规则验证，如果符合就提取chunk
+                name: 'vendor',     // 要缓存的，分隔出来chunk名称
+                minSize: 0,
+                minChunks: 1,
+                enforce: true,
+                reuseExistingChunk: true // 可设置是否征用已用chunk 不再创建新的chunk
+            }
         }
     }
 }
@@ -121,7 +130,20 @@ splitChunks:{
     maxInitialRequests: 3,      // 最大初始化请求数
     automaticNameDelimiter: '~',    // 打包分割符
     name: true,
-
+    cacheGroups: {
+        vendor: {
+            name: "vendor",
+            test: /[\\/]node_modules[\\/]/,   // 打包第三方库
+            chunks: "all",
+            priority: 10    // 优先级
+        },
+        common: {   // 打包其余的公共代码
+            minChunks: 2,       // 引入两次及以上被打包
+            name: 'common',     // 分离包的名字
+            chunks: 'all',
+            priority: 5
+        }
+    }
 }
 ```
 
@@ -135,7 +157,12 @@ splitChunks:{
 ```
 cacheGroups: {
     reactBase:{
-
+        name: 'reactBase',
+        test: (module) => {
+            return /react|redux/.test(module.context);
+        },
+        chunks: 'initial',
+        priority:10,
     }
 }
 ```
@@ -196,9 +223,9 @@ Tree Shaking 的作用就是，通过程序流分析找出你代码中无用的�
 
 目前在 webpack4.x 版本之后在生产环境下已经默认支持 Tree Shaking 了，所以 Tree Shaking 可以称得上开箱即用的技术了，但是并不代表 Tree Shaking 真的会起作用，因为这里面还是有很多坑
 
-坑 1：
-
-坑 2：
+坑 1：Babel 转译，我们已经提到了 Tree Shaking 的时候必须用 es6 的 module，如果用 common.js 那种 f
+动态 module，Tree Shaking 就失效了，但是 Babel 默认状态下是启用 common.js 的，所以需要我们手动关闭。
+坑 2：第三方库不可控，我们已经知道 Tree Shaking 的程序分析依赖 ESM，但是市面上很多库为了兼容性依然只暴露了 ES5 版本的代码，这导致 Tree Shaking 对很多第三方库是无效的，所以我们要尽量依赖有 ESM 的库，比如之前有一个 ESM 版的 lodash(lodash-es)，我们就可以这样引用了`import { dobounce} from 'lodash-es'`
 
 #### 6.2 polyfill 动态加载
 
@@ -211,6 +238,8 @@ polyfill 是为了浏览器兼容性而生，是否需要 polyfill 应该有客�
 #### 6.3 动态加载 ES6 代码
 
 既然 polyfill 能动态加载，那么 es5 和 es6+的代码能不能动态加载呢？是的，但是这样有什么意义呢？es6 会更快吗？
+
+我们得首先明确一点，一般情况下在新标准发布后，浏览器厂商会
 
 #### 6.4 路由级别拆解代码
 
