@@ -133,13 +133,21 @@ splitChunks:{
 下面示意了如何将第三方库进行拆包，基础型的 react 等库与工具性的 lodash 和特定库 Echarts 进行拆分
 
 ```
+cacheGroups: {
+    reactBase:{
 
+    }
+}
 ```
 
 我们对 chunk 进行 hash 化，正如下图所示，我们变动 chunk2 相关的代码后，其它 chunk 都没有变化，只有 chunk2 的 hash 改变了
 
 ```
-
+output:{
+    filename: mode === 'production' ? '[name].[chunkhash:8]':'[name].js',
+    chunkFilename: mode === 'production' ? '[id].[chunkhash:8].chunk.js':'[id].js',
+    path: getPath(config.outputPath)
+}
 ```
 
 ### 五、FMP(首次有意义绘制)
@@ -157,6 +165,13 @@ splitChunks:{
 Skeleton 是一个好方法，Skeleton 现在已经很开始被广泛应用了，它的意义在于事先撑开即将渲染的元素，避免闪屏，同时提示用户这要渲染东西了，较少用户焦虑。
 
 比如微博的 Skeleton 就做的很不错
+
+![images](performance23.png)
+
+在不同框架上都有相应的 Skeleton 实现
+
+- React: antd 内置的骨架图 [Skeleton](https://ant.design/components/skeleton-cn/) 方案
+- Vue:
 
 ### 六、TTI(可交互时间)
 
