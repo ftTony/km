@@ -472,6 +472,12 @@ HTML 代码:
 
 ![images](terms-grid-area.svg)
 
+### 三、浏览器支持
+
+浏览器支持如下（数据来源[Caniuse](https://caniuse.com/#search=grid)）：
+
+![images](grid.png)
+
 ### 参考资料
 
 - [grid 学习](https://www.zcfy.cc/article/learn-css-grid-a-guide-to-learning-css-grid-jonathan-suh)
