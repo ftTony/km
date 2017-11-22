@@ -149,8 +149,8 @@ splitChunks:{
 
 这样似乎大功告成了？并没有，我们的配置有很大的问题：
 
-1. 我们粗暴得将第三方库一起打包可以吗？
-2. 当 chunk 在强缓存期，但服务器代码已经变动了，我们怎么通知客户端？上面我们的示意图已经看到
+1. 我们粗暴得将第三方库一起打包可以吗？当然是有问题的，因为将第三方库一块打包，只要有一个库我们升级或者引入一个新库，这个 chunk 就会变动，那么这个 chunk 的变动性会很高，并不适合长期缓存，还有一点，我们要提高首页加载速度，第一要务是减少首页加载依赖的代码量，请问像 react vue reudx 这种整个应用的基础库我们是首页必须要依赖的之外，像 d3.js、three.js 这种特定页面才会出现的特殊库是没必要在首屏加载的，所以我们需要将应用基础库和特定的库进行分离。
+2. 当 chunk 在强缓存期，但服务器代码已经变动了，我们怎么通知客户端？上面我们的示意图已经看到了，
 
 下面示意了如何将第三方库进行拆包，基础型的 react 等库与工具性的 lodash 和特定库 Echarts 进行拆分
 
@@ -163,6 +163,28 @@ cacheGroups: {
         },
         chunks: 'initial',
         priority:10,
+    },
+    utilBase:{
+        name: 'utilBase',
+        test: (module) =>{
+            return /rxjs| lodash/.test(module.context);
+        },
+        chunks: 'initial',
+        priority: 9,
+    },
+    uiBase:{
+        name: 'chartBase',
+        test: (module)=>{
+            return /echarts/.test(module.context);
+        },
+        chunks: 'initial',
+        priority: 8,
+    },
+    commons:{
+        name: 'common',
+        chunks: 'initial',
+        priority: 2,
+        minChunks:2
     }
 }
 ```
