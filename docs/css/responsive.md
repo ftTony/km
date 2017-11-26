@@ -14,7 +14,6 @@
 - [使用 Flexible 实现手淘 H5 页面的终端适配](https://github.com/amfe/article/issues/17)
 - [flexible.js 布局详解](http://caibaojian.com/flexible-js.html)
 - [彻底搞懂移动 Web 开发中的 viewport 与跨屏适配](https://mp.weixin.qq.com/s/aaXgFw4isWq1RrHkv75zLA)
-- [彻底搞懂移动 Web 开发中的 viewport 与跨屏适配](https://mp.weixin.qq.com/s/Qur8JLPdqxm7xIIOjuXmSQ)
 - [用 vw、vh ＋媒体查询打造最完美的移动端适配方案](https://juejin.im/post/5cf0d8fb6fb9a07ee9585681)
 - [前端响应式布局原理与方案（详细版）](https://juejin.im/post/5caaa230e51d452b672f9703)
 - [浅谈移动 Web 开发（上）：深入概念](https://www.infoq.cn/article/development-of-the-mobile-web-deep-concept/)

@@ -10,7 +10,7 @@
 - [图的类型分类](#二、图的类型分类)
 - [图的压缩分类](#三、图的压缩分类)
 - [常见的图片格式解析](#四、常见的图片格式解析)
-- [图片优化]()
+- [图片优化](#五、图片优化)
 
 ### 一、图片格式选择
 
@@ -299,7 +299,6 @@ APNG 第 1 帧为标准 PNG 图像，剩余的动画和帧速等数据放在 PNG
 ### 参考资料
 
 - [每个前端工程师都应该了解的图片知识(长文建议收藏)](https://mp.weixin.qq.com/s/O1n7_t4izdmpvn2mFrB-kg)
-- [你必须知道的图片优化技巧](https://mp.weixin.qq.com/s/oJy2fncLjtlt9XmPRWnqVw)
 - [为你重新系统梳理下， Web 体验优化中和图有关的那些事（万字长文）](https://mp.weixin.qq.com/s/euvdMHkYUXHmgkV9D334NQ)
 - [webp 图片实践之路](https://www.cnblogs.com/season-huang/p/5804884.html)
 
