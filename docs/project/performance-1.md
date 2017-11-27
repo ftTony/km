@@ -205,10 +205,16 @@ output:{
 
 我们通过 http 缓存+webpack hash 缓存策略使得前端项目充分利用了缓存的优势，但是 webpack 之所以需要传说中的**webpack 配置工程师**是有原因的，因为 webpack 本身是玄学，还是以上图为例，如果你 chunk2 的相关代码去除了一个依赖或者引入了新的但是已经存在工程中依赖，会怎么样呢？
 
-我们正常的的期望是，只有 chunk2 发生变化了，但是事实上是大量不相干的 chunk 的 hash 发生了变动，这就导致我们缓存策略失败了，下图是变更后的 hash，我们用红圈圈起来的都是hash变动的，而事实上我们只变动了chunk2相关的代码，为什么会这样呢？
+我们正常的的期望是，只有 chunk2 发生变化了，但是事实上是大量不相干的 chunk 的 hash 发生了变动，这就导致我们缓存策略失败了，下图是变更后的 hash，我们用红圈圈起来的都是 hash 变动的，而事实上我们只变动了 chunk2 相关的代码，为什么会这样呢？
 
 ![images](performance26.png)
+
+原因是 webpack 会给每个 chunk 搭上 id，这个 id 是自增的，比如 chunk 0 中的 id 为 0，一旦我们引入新的依赖，chunk 的自增被打乱，这个时候又因为 hashchunk 根据内容生成 hash，这就导致了 id 的变动致使 hashchunk 发生巨变，虽然代码内容根本没有变化。
+
 ![images](performance27.png)
+
+这个问题我们需要额外引入一个插件 HashedModuleIdsPlugin,他用非自增的方式进行 chunk id 的命名,可以解决这个问题,虽然 webpack 号称 0 配置了,但是这个常用功能没有内置,要等到下个版本了。
+
 ![images](performance28.png)
 
 > webpack hash 缓存相关内容建议阅读此[文章](https://github.com/pigcan/blog/issues/9) 作为拓展
@@ -270,6 +276,12 @@ module.exports = {
 
 当有意义的内容渲染出来之后，用户会尝试与页面交互，这个时候页面并不是加载完毕了，而是看起来页面加载完毕了，事实上这个时候 JavaScript 脚本依然在密集得执行。
 
+> 我们看到在页面已经基本呈现的情况下，依然有大量的脚本在执行
+
+![images](performance29.png)
+
+这个时候页面并不是可交互的，
+
 #### 6.1 Tree Shaking
 
 Tree Shaking 虽然出现很早了，比如 js 基础库的事实标准打包工具 rollup 就是 Tree Shaking 的祖师爷，react 用 rollup 打包之后体积减少了 30%，这就是 Tree Shaking 的厉害之处。
@@ -306,6 +318,8 @@ polyfill 是为了浏览器兼容性而生，是否需要 polyfill 应该有客�
 4. 其它少量逻辑和样式
 
 ### 七、组件加载
+
+路由其实是一个大组件，很多时候人们忽略了路由跳转之间的加载优化，更多的时候我们的精力都留在首屏
 
 ### 八、组件懒加载
 
