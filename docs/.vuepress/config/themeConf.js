@@ -156,7 +156,8 @@ module.exports = {
           'vue-communication',
           'vue-router',
           'vue-vuex',
-          'vue-vuex-code'
+          'vue-vuex-code',
+          'vue-interview'
         ]
       }
     ],
@@ -235,7 +236,12 @@ module.exports = {
       {
         title: '网站架构设计',
         collapsable: false,
-        children: ['architecture-1', 'architecture-2', 'architecture-3']
+        children: [
+          'component-design',
+          'architecture-1',
+          'architecture-2',
+          'architecture-3'
+        ]
       },
       {
         title: '工程测试',
