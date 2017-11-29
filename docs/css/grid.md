@@ -382,6 +382,31 @@ CSS 代码:
 
 - **justify-self**/**align-self**/**place-self**
 
+`justify-self`属性设置单元格内容的水平位置（左中右）；`align-self`属性设置单元格内容的垂直位置（上中下）；
+`place-self` 是设置`align-self` 和 `justify-self` 的简写形式。
+
+值：
+
+- `start`：对齐单元格的起始边缘；
+- `end`：对齐单元格的结束边缘；
+- `center`：单元格内部居中。
+- `stretch`：拉伸，占满单元格的整个宽度（默认值）。
+
+CSS 代码:
+
+```
+.item {
+  justify-self: start | end | center | stretch;
+  align-self: start | end | center | stretch;
+}
+```
+
+示例代码：
+
+```
+
+```
+
 ### 二、基本术语
 
 - 网格容器
@@ -419,3 +444,4 @@ CSS 代码:
     </p>
     <img :src="$withBase('/about/contact.png')" />
 </div>
+```
