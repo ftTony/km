@@ -183,6 +183,7 @@ module.exports = {
           'font-size',
           'scss',
           'pit',
+          'mobile',
           'fps'
         ]
       },
