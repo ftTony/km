@@ -8,6 +8,12 @@
 
 ### 参考资料
 
+- [大型项目前端架构浅谈](https://juejin.im/post/5cea1f705188250640005472)
+- [个人的中小型项目前端架构浅谈](https://blog.csdn.net/qq20004604/article/details/70480932)
+- [if 我是前端 Leader，谈谈前端框架体系建设](https://juejin.im/post/5decf88f51882512327a510a)
+- [QQ 音乐商业化 Web 团队前端工程化实践总结](https://cloud.tencent.com/developer/article/1500013)
+- 《大型网站技术架构-核心原理与案例分析》
+
 ## 联系作者
 
 <div align="center">
