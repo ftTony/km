@@ -425,7 +425,20 @@ Code Spliting 不仅可以进行路由分割，甚至可以进行组件级别的
 其实组件分割的方法跟路由分割差不多，也是通过 lazy+Suspense 的方法进行组件懒加载
 
 ```
+// 动态加载图表组件
+const Chart = lazy(()=>import('./charts'))
 
+// 包含着图表的 model 组件
+const ModalEchart = (props) =>(
+    <Modal
+    title = "Basic Modal"
+    visible = {props.visible}
+    onOk = {props.handleOk}
+    onCancel = {props.handleCancel}
+    >
+        <Chart />
+   </Modal>
+)
 ```
 
 ### 九、组件预加载
@@ -436,9 +449,15 @@ Code Spliting 不仅可以进行路由分割，甚至可以进行组件级别的
 
 ![images](performance38.png)
 
+我们能不能提前把图表加载进来，避免图表渲染中加载时间过长的问题？这种提前加载的方法就是组件的预加载
+
+原理也很简单，就是在用户的鼠标还处于 hover 状态的时候就开始触发图表资源的加载，通常情况下当用户点击结束之后，加载也基本完成，这个时候图表会很顺利地渲染出来，不会出现延迟
+
 #### keep-alive
 
-对于使用 vue 的开发者 keep-alive 这个 API 应该是最熟悉不过了，keep-alive 的作用是在页面已经跳转后依然不
+对于使用 vue 的开发者 keep-alive 这个 API 应该是最熟悉不过了，keep-alive 的作用是在页面已经跳转后依然不销毁组件，保存组件对应的实例在内存中，当此页面再次需要渲染的时候就可以利用已经缓存的组件实例了。
+
+如果大量实例不销毁保存在内存中,那么这个 API 存在内存泄漏的风险,所以要注意调用 deactivated 销毁。
 
 ## 参考资料
 
