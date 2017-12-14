@@ -264,12 +264,7 @@ module.exports = {
       {
         title: '性能',
         collapsable: false,
-        children: [
-          'performance-1',
-          'performance-2',
-          'performance-3',
-          'performance-4'
-        ]
+        children: ['performance-1', 'performance-2', 'performance-3']
       },
       {
         title: 'Web安全',
