@@ -29,6 +29,7 @@
 - [解密 HTTP/2 与 HTTP/3 的新特性](https://mp.weixin.qq.com/s/5jR7MrWQ9v3w_E8BhNWrpA)
 - [HTTP/3 要点](https://mp.weixin.qq.com/s/qBD90RdofvYDNX2sSJWgNA)
 - [31 ｜ HTTP/3：甩掉 TCP、TLS 的包袱，构建高效网络](https://time.geekbang.org/column/article/150159)
+- [一文读懂 HTTP/1HTTP/2HTTP/3](https://zhuanlan.zhihu.com/p/102561034)
 
 ## 联系作者
 
