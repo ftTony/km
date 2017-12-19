@@ -234,10 +234,11 @@ var foo = (function foo(x) {
 ## 参考资料
 
 - [JavaScript 是如何工作的：解析、抽象语法树（AST）+ 提升编译速度 5 个技巧](https://github.com/qq449245884/xiaozhi/issues/14)
-- [Javascript抽象语法树上篇(基础篇)](https://mp.weixin.qq.com/s/Ri7DJVJa2ELFfxIRifs3tQ)
-- [Javascript抽象语法树下篇(实践篇)](https://mp.weixin.qq.com/s/Fz9H5dscj5Oy__daecAYvg)
-- [手写一个四则运算表达式转换成AST的方法（上）](https://mp.weixin.qq.com/s/HMggcevKJ9afZFqHgm0e5A)
-- [手写一个四则运算表达式转换成AST的方法（下）](https://mp.weixin.qq.com/s/lHYZja_EFRl4s5UQH-kL3w)
+- [Javascript 抽象语法树上篇(基础篇)](https://mp.weixin.qq.com/s/Ri7DJVJa2ELFfxIRifs3tQ)
+- [Javascript 抽象语法树下篇(实践篇)](https://mp.weixin.qq.com/s/Fz9H5dscj5Oy__daecAYvg)
+- [手写一个四则运算表达式转换成 AST 的方法（上）](https://mp.weixin.qq.com/s/HMggcevKJ9afZFqHgm0e5A)
+- [手写一个四则运算表达式转换成 AST 的方法（下）](https://mp.weixin.qq.com/s/lHYZja_EFRl4s5UQH-kL3w)
+- [【第 1471 期】AST 抽象语法树——最基础的 javascript 重点知识](https://mp.weixin.qq.com/s/EnS22WGKiXnTCdFnqrVahA)
 
 ## 联系作者
 

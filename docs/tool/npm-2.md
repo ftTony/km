@@ -1153,6 +1153,7 @@ npm config set save-exact true
 - [package.json 知多少？](https://mp.weixin.qq.com/s/jMWoXzrw6WDi5VG9Y8Mn0Q)
 - [你不知道的 package.json](https://mp.weixin.qq.com/s/KqnbA8lB6CdGpNRW1-Lz7w)
 - [NPM 命令实用使用技巧总结](https://mp.weixin.qq.com/s/fwskK5DLa6Kbbj555GaDUQ)
+- [【第 1283 期】从 0 开始发布一个无依赖、高质量的 npm](https://mp.weixin.qq.com/s/aKwEF0ES1ldH5e0jgvh6qA)
 
 ## 联系作者
 

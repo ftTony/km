@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [前端自适应布局你需要知道的所有事](https://mp.weixin.qq.com/s/Z4sxXGxMqdqtPTcNyvRRLA)
+
 ## 联系作者
 
 <div align="center">

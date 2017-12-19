@@ -44,7 +44,7 @@
 特别说明两点：
 
 1. **如果是协议和端口造成的跨域问题“前台”是无能为力的。**
-2. **在跨域问题上，仅仅是通过“URL的首部”来识别而不会根据域名对应的IP地址是否相同来判断。“URL的首部”可以理解为“协议，域名和商品必须匹配”**
+2. **在跨域问题上，仅仅是通过“URL 的首部”来识别而不会根据域名对应的 IP 地址是否相同来判断。“URL 的首部”可以理解为“协议，域名和商品必须匹配”**
 
 ### 三、跨域解决方案
 
@@ -54,20 +54,20 @@
 - window.name + iframe 跨域
 - postMessage 跨域
 - 跨域资源共享（CORS）
-- nginx反向代理
+- nginx 反向代理
 - nodejs 中间件代理跨域
 - WebSocket 协议跨域
 
 #### 3.1 通过 jsonp 跨域
 
-- **JSONP原理：** 利用`<script>`标签没有跨域限制的漏洞，网页可以可以得到从其他来源动态产生的JSON数据。JSONP请求一定需要对方的服务器做支持才可以。
-- **JSONP和AJAX对比：** JSONP和AJAX相同，都是客户端向服务器端发送请求，从服务器获取数据的方式。但AJAX属于同源策略，JSONP属于非同源策略(跨域请求)
-- **JSONP优缺点：** JSONP优点是简单兼容性好，可用于解决主流浏览器的跨域数据访问的问题。缺点就是仅支持get方法具有局限性，不安全可能会遭受XSS攻击。
-- **JSONP的实现流程**
-  - 声明一个回调函数，其函数名(如show)当做参数值，要传递给跨域请求数据的服务器，函数形参为要获取目标数据(服务器返回的data)。
-  - 创建一个`<script>`标签，把那个跨域API数据接口地址，同仁给`script`的`src`还要在这个地址中向服务器传递该函数名(可以通过问题传参:`?callback=show`)。
+- **JSONP 原理：** 利用`<script>`标签没有跨域限制的漏洞，网页可以可以得到从其他来源动态产生的 JSON 数据。JSONP 请求一定需要对方的服务器做支持才可以。
+- **JSONP 和 AJAX 对比：** JSONP 和 AJAX 相同，都是客户端向服务器端发送请求，从服务器获取数据的方式。但 AJAX 属于同源策略，JSONP 属于非同源策略(跨域请求)
+- **JSONP 优缺点：** JSONP 优点是简单兼容性好，可用于解决主流浏览器的跨域数据访问的问题。缺点就是仅支持 get 方法具有局限性，不安全可能会遭受 XSS 攻击。
+- **JSONP 的实现流程**
+  - 声明一个回调函数，其函数名(如 show)当做参数值，要传递给跨域请求数据的服务器，函数形参为要获取目标数据(服务器返回的 data)。
+  - 创建一个`<script>`标签，把那个跨域 API 数据接口地址，同仁给`script`的`src`还要在这个地址中向服务器传递该函数名(可以通过问题传参:`?callback=show`)。
   - 服务器接收到请求后，需要进行特殊的处理：把传递进来的函数名和它需要给你的数据拼接成一个字符串,例如：传递进去的函数名是`show`，它准备好的数据是`show('我不爱好')`。
-  - 最后服务器把准备的数据通过HTTP协议返回给客户端，客户端再调用执行之前声明的回调函数(show)，对返回的数据进行操作。
+  - 最后服务器把准备的数据通过 HTTP 协议返回给客户端，客户端再调用执行之前声明的回调函数(show)，对返回的数据进行操作。
 
 在开发中可能会遇到多个`JSONP`请求的回调函数名是相同的，这时候就需要自己封装一个`JSONP`函数。
 
@@ -103,8 +103,7 @@ function show(res) {
 }
 ```
 
-上面这段代码相当于向`http://localhost:3000/say?wd=Iloveyou&callback=show`这个地址请求数据，然后后台返回`show('我不爱你')`，最后会运行show()这个函数，打印出'我不爱你'
-
+上面这段代码相当于向`http://localhost:3000/say?wd=Iloveyou&callback=show`这个地址请求数据，然后后台返回`show('我不爱你')`，最后会运行 show()这个函数，打印出'我不爱你'
 
 ```
 // server.js
@@ -120,9 +119,9 @@ app.listen(3000)
 
 ```
 
-- jQuery的jsonp形式
+- jQuery 的 jsonp 形式
 
-**JSONP都是GET和异步请求的，不存在其他的请求方式和同步请求，且jQuery默认就会给JSONP的请求清除缓存。**
+**JSONP 都是 GET 和异步请求的，不存在其他的请求方式和同步请求，且 jQuery 默认就会给 JSONP 的请求清除缓存。**
 
 ```
 $.ajax({
@@ -166,7 +165,7 @@ $.ajax({
 #### 3.3 location.hash+iframe 跨域
 
 - **实现原理：** `a.html`欲与`b.html` 跨域相互通信，通过中间页`c`来实现。 三个页面，不同域之间利用`iframe`的`location.hash`传值，相同域之间直接 js 访问来通信。
-- **具体实现：** A域：`a.html` -> B域：`b.html` -> A域：`c.html`，`a`与`b`不同域只能通过 `hash`值单向通信，`b`与`c`也不同域也只能单向通信，但`c`与`a`同域，所以`c`可通过`parent.parent`访问`a`页面所有对象。
+- **具体实现：** A 域：`a.html` -> B 域：`b.html` -> A 域：`c.html`，`a`与`b`不同域只能通过 `hash`值单向通信，`b`与`c`也不同域也只能单向通信，但`c`与`a`同域，所以`c`可通过`parent.parent`访问`a`页面所有对象。
 
 ```
 // a.html
@@ -214,7 +213,7 @@ $.ajax({
 
 `window.name`属性的独特之处：`name`值在不同的页面（甚至不同域名）加载后依旧存在，并且可以支持非常长的`name`值（2MB）。
 
-其中`a.html`和`b.html`是同域的，都是`http://localhost:3000`;而c.html是`http://localhost:4000`
+其中`a.html`和`b.html`是同域的，都是`http://localhost:3000`;而 c.html 是`http://localhost:4000`
 
 ```
 // a.html
@@ -279,7 +278,7 @@ postMessage 是 HTML5 XMLHttpRequest Level 2 中的 API，且是为数不多可�
 
 **postMessage()方法允许来自不同源的脚本采用异步方式进行有限的通信，可以实现跨文本档、多窗口、跨域消息传递。**
 
->用法：postMessage(data,origin)方法接受两个参数
+> 用法：postMessage(data,origin)方法接受两个参数
 
 - data：html5 规范支持任意基本类型或可复制的对象，但部分浏览器只支持字符串，所以传参时最好用 JSON.stringify()序列化。
 - origin：协议+主机+端口号，也可以设置为"\*"，表示可以传递给任意窗口，如果要指定和当前窗口同源的话设置为"/"。
@@ -324,7 +323,7 @@ postMessage 是 HTML5 XMLHttpRequest Level 2 中的 API，且是为数不多可�
 
 #### 3.6 跨域资源共享（CORS）
 
-**CORS需要浏览器和后端同时支持。IE8和9需要通过XDomainRequest来实现。**
+**CORS 需要浏览器和后端同时支持。IE8 和 9 需要通过 XDomainRequest 来实现。**
 
 浏览器会自动进行`CORS`通信，实现`CORS`通信的关键是后端。只要后端实现了`CORS`，就实现了跨域。
 
@@ -336,14 +335,14 @@ postMessage 是 HTML5 XMLHttpRequest Level 2 中的 API，且是为数不多可�
 
 只要同时满足以下两大条件，就属于简单请求
 
-- **条件1：** 请求方法使用下列方法之一分别为`GET`、`HEAD`、`POST`
-- **条件2：** HTTP的头信息不超出以下几个种字段`Accept`、`Accept-Language`、`Content-Language`、`Last-Event-ID`、`Content-Type`只限于三个值`application/x-www-form-urlencoded`、`multipart/form-data`、`text/plain`
+- **条件 1：** 请求方法使用下列方法之一分别为`GET`、`HEAD`、`POST`
+- **条件 2：** HTTP 的头信息不超出以下几个种字段`Accept`、`Accept-Language`、`Content-Language`、`Last-Event-ID`、`Content-Type`只限于三个值`application/x-www-form-urlencoded`、`multipart/form-data`、`text/plain`
 
 **非简单请求**
 
 不同时满足上面两个条件，就是非简单请求了。
 
-复杂请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求,该请求是 option 方法的，通过该请求来知道服务端是否允许跨域请求。
+复杂请求的 CORS 请求，会在正式通信之前，增加一次 HTTP 查询请求，称为"预检"请求,该请求是 option 方法的，通过该请求来知道服务端是否允许跨域请求。
 
 我们用`PUT`向后台请求时，属于复杂请求，后台需做如下配置：
 
@@ -363,7 +362,7 @@ app.put('/getData', function(req, res) {
 })
 ```
 
-接下来我们看下一个完整复杂请求的例子，并且介绍下CORS请求相关的字段
+接下来我们看下一个完整复杂请求的例子，并且介绍下 CORS 请求相关的字段
 
 ```
 // index.html
@@ -433,7 +432,7 @@ app.listen(4000)
 
 上述代码由`http://localhost:3000/index.html`向`http://localhost:4000/`跨域请求，正如我们上面所说的，后端是实现`CORS`通信的关键。
 
-#### 3.7 nginx反向代理
+#### 3.7 nginx 反向代理
 
 **nginx 配置解决 iconfont 跨域**
 
@@ -447,7 +446,7 @@ location / {
 
 **nginx 反向代理接口跨域**
 
-使用nginx反向代理实现跨域，是最简单的跨域方式。只需要修改nginx的配置即可解决跨域问题，支持所有浏览器，支持session，不需要修改任何代码，并且不会影响服务器性能。
+使用 nginx 反向代理实现跨域，是最简单的跨域方式。只需要修改 nginx 的配置即可解决跨域问题，支持所有浏览器，支持 session，不需要修改任何代码，并且不会影响服务器性能。
 
 **跨域原理：** 同源策略是浏览器的安全策略，不是 HTTP 协议的一部分。服务器端调用 HTTP 接口只是使用 HTTP 协议，不会执行 JS 脚本，不需要同源策略，也就不存在跨越问题。
 
@@ -520,7 +519,7 @@ console.log('Server is running at port 8080...');
 
 ![images](cross01.png)
 
-我们先来看个例子：本地文件index.html文件，通过代理服务器`http://localhost:3000`向目标服务器`http://localhost:4000`请求数据。
+我们先来看个例子：本地文件 index.html 文件，通过代理服务器`http://localhost:3000`向目标服务器`http://localhost:4000`请求数据。
 
 ```
 // index.html(http://127.0.0.1:5500)
@@ -604,7 +603,6 @@ server.listen(4000, () => {
 
 原生 `WebSocket API` 使用起来不太方便，我们使用`Socket.io`，它很好地封装了`webSocket`接口，提供了更简单、灵活的接口，也对不支持 `webSocket` 的浏览器提供了向下兼容。
 
-
 ```
 <div>user input：<input type="text"></div>
 <script src="./socket.io.js"></script>
@@ -665,7 +663,9 @@ socket.listen(server).on('connection', function(client) {
 - [前端常见跨域解决方案（全）](https://segmentfault.com/a/1190000011145364)
 - [九种跨域方式实现原理（完整版)](https://github.com/ljianshu/Blog/issues/55)
 - [深度解析 CORS 跨域原理及 @koa/cors 源码](https://mp.weixin.qq.com/s/S9NYjMAXq31zbieYBRG-rg)
-- [关于CORS跨域问题的理解](https://www.cnblogs.com/lishanlei/p/8823823.html)
+- [关于 CORS 跨域问题的理解](https://www.cnblogs.com/lishanlei/p/8823823.html)
+- [【第 546 期】CORS 跨站资源共享之一](https://mp.weixin.qq.com/s/m4DkQBTw0GrHyD1xFoASPA)
+- [【第 547 期】CORS 跨站资源共享之二](https://mp.weixin.qq.com/s/rODpUh25nEhQawtLGz2DCg)
 
 ## 联系作者
 

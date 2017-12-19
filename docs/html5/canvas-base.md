@@ -9,6 +9,7 @@
 ## 参考资料
 
 - [canvas-应用大全](https://github.com/CodeLittlePrince/blog/issues/21)
+- [【第 513 期】Canvas 最佳实践（性能篇）](https://mp.weixin.qq.com/s/7tyqEWX0xJkDUJX_zYVLIw)
 
 ## 联系作者
 
