@@ -52,6 +52,22 @@ box-sizing，顾名思义，其作用与设置 CSS box 的尺寸大小有关，�
 - border-box(=content area + padding area + border area)
 - margin-box(=content area + padding area + border area + margin area)
 
+#### 5.1 box-sizing 应用场景
+
+- border-box 属性在 form 上的使用
+
+当我们在要做一个登陆页面的时候，这时候就需要表单和按钮这些元素
+首先我们在 div 中设置两个表单，一个用来输入用户名，一个用来输入密码，同时还有一个登录按钮，
+当我们想让这两个表单和一个登录按钮的长度相同时，我们试着把她们三个的 width 的值设置为 100%
+但她们的长度并不一致，表单和按钮的 padding，border 值不统一，这时我们给表单的属性中添加一个 box-sizing：border-box，此时表单和按钮的长度保持一致
+当不给表单添加 box-sizing：border-box 时，而是添加一个 padding 值会发现表单的长度都有所增加
+当给按钮添加 padding 时，她的长度并不会改变，由此可以看出表单默认为 content-box，按钮 submit 默认为 border-box，button 的默认值也为 border-box
+
+- border-box 属性在盒子中的使用
+
+当我们设置一个宽度为 500px 的盒子，在里面放入四个盒子，分别为上(width:100%)，中左(width:60%)，中右(width:40%)，下(width: 100%)，此时在大盒子里面四个盒子排列的很整齐
+这是我们给上盒子设置一个 padding 或者 border 为 5px，这时上盒子的长度就会超出大盒子的宽度，此时我们给上盒子添加 box-sizing：border-box，就可以使他的宽度不超出
+
 ### 参考资料
 
 - 《CSS 世界》
