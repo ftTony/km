@@ -7,11 +7,11 @@
 ## 内容
 
 - [流接口简介](#一、流接口简介)
-- [Stream分类](#二、stream分类)
+- [Stream 分类](#二、stream分类)
 
 ### 一、流接口简介
 
-流（stream）是Node.js中处理流式数据的抽象接口。`Node.js`中很多对象都实现了流，流是`EventEmitter`对象的一个实例。
+流（stream）是 Node.js 中处理流式数据的抽象接口。`Node.js`中很多对象都实现了流，流是`EventEmitter`对象的一个实例。
 
 ![image](stream.png)
 
@@ -21,9 +21,9 @@
 const stream = require('stream');
 ```
 
-### 二、Stream分类
+### 二、Stream 分类
 
-在nodejs中，有四种stream类型：
+在 nodejs 中，有四种 stream 类型：
 
 - **Readable：** 用来读取数据，比如`fs.createReadStrem()`。
 - **Writable：** 用来写数据，比如`fs.createWriteStream()`。
@@ -36,9 +36,9 @@ const stream = require('stream');
 
 `Readable`的例子包括：
 
-- 客户端的HTTP响应
-- 服务端的HTTP请求
-- fs的读取流
+- 客户端的 HTTP 响应
+- 服务端的 HTTP 请求
+- fs 的读取流
 
 例一
 
@@ -65,9 +65,9 @@ fs.createReadStream('./sample.txt').pipe(process.stdout);
 
 `Writable`的例子包括：
 
-- 客户端的HTTP响应
-- 服务端的HTTP请求
-- fs的写入流
+- 客户端的 HTTP 响应
+- 服务端的 HTTP 请求
+- fs 的写入流
 
 ```
 var fs = require('fs');
@@ -81,7 +81,7 @@ fs.writeFile(filepath, content);
 
 双工流（Duplex）是同时实现了`Readable`和`Writable`接口的流。
 
-最常见的Duplex stream应该就是`net.Socket`实例了
+最常见的 Duplex stream 应该就是`net.Socket`实例了
 
 `Duplex`流的例子包括：
 
@@ -130,13 +130,12 @@ client.on('data', function(data){
 
 #### 2.4 Transform
 
-Transform 是Duplex的特殊，也就是说，Transform也同时可读可写。
+Transform 是 Duplex 的特殊，也就是说，Transform 也同时可读可写。
 
 `Transform` 流的例子包括：
 
-- zlib流
-- crypto流
-
+- zlib 流
+- crypto 流
 
 ```
 var fs = require('fs');
@@ -152,10 +151,11 @@ inFile.pipe(gzip).pipe(out);
 
 ### 参考资料
 
-- 《node.js高级编程》
+- 《node.js 高级编程》
 - [Stream 模块](https://github.com/wscats/node-tutorial/tree/master/tutorial/stream)
-- [理解Stream模块](https://github.com/chyingp/nodejs-learning-guide/blob/master/%E6%A8%A1%E5%9D%97/stream.md)
-- [想学Node.js，stream先有必要搞清楚](https://juejin.im/post/5d25ce36f265da1ba84ab97a)
+- [理解 Stream 模块](https://github.com/chyingp/nodejs-learning-guide/blob/master/%E6%A8%A1%E5%9D%97/stream.md)
+- [想学 Node.js，stream 先有必要搞清楚](https://juejin.im/post/5d25ce36f265da1ba84ab97a)
+- [[译] 你所需要知道的关于 Node.js Streams 的一切](https://mp.weixin.qq.com/s/huPERCsDnDpk6jRnbD6n-Q)
 
 ## 联系作者
 
