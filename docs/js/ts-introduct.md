@@ -25,9 +25,59 @@
 
 ### 二、配置 TypeScript
 
+#### 2.1 安装 TypeScript
 
+```
+npm install -g typescript
+```
+
+#### 2.1 构建你的第一个 TypeScript 文件
+
+在编辑器，将下面的代码输入到`greeter.ts`文件里：
+
+```
+function greeter(person) {
+    return "Hello, " + person;
+}
+
+let user = "Jane User";
+
+document.body.innerHTML = greeter(user);
+```
+
+#### 2.2 编译代码
+
+在命令行上，运行 TypeScript 编译器：
+
+```
+tsc greeter.ts
+```
 
 ### 三、基础类型
+
+#### 2.1 布尔值
+
+#### 2.2 数字
+
+#### 2.3 字符串
+
+#### 2.4 数组
+
+#### 2.5 元组
+
+#### 2.6 枚举
+
+#### 2.7 Any
+
+#### 2.8 Void
+
+#### 2.9 Null 和 Undefined
+
+#### 2.10 Never
+
+#### 2.11 Object
+
+#### 2.12 类型断言
 
 ### 四、接口
 
