@@ -57,6 +57,12 @@ tsc greeter.ts
 
 #### 2.1 布尔值
 
+最基本的数据类型就是简单的 true/false 值，在 JavaScript 和 TypeScript 里叫做 `boolean`。
+
+```
+let isDone: boolean = false;
+```
+
 #### 2.2 数字
 
 #### 2.3 字符串
