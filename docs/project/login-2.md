@@ -6,6 +6,20 @@
 
 ## 内容
 
+- 单系统登录机制
+- 多系统的复杂性
+- 单点登录
+
+### 一、单系统登录机制
+
+- http 无状态协议
+- 会话机制
+- 登录状态
+
+### 二、多系统的复杂性
+
+### 三、单点登录
+
 ### 参考资料
 
 - [Web 登录鉴权](https://lmjben.github.io/blog/osi-web-login.html#session-cookie)
