@@ -8,7 +8,7 @@
 
 ### 图的实现
 
-**ES5代码实现**
+**ES5 代码实现**
 
 ```
 function Graph(){
@@ -40,7 +40,7 @@ function Graph(){
 }
 ```
 
-**ES6代码实现**
+**ES6 代码实现**
 
 ```
 class Graph{
@@ -128,8 +128,9 @@ var dfsVisit = function(u,color,callback){
 
 ## 参考资料
 
-- [「中高级前端」窥探数据结构的世界- ES6版](https://juejin.im/post/5cd1ab3df265da03587c142a)
-- 《学习JavaScript数据结构与算法》
+- [「中高级前端」窥探数据结构的世界- ES6 版](https://juejin.im/post/5cd1ab3df265da03587c142a)
+- [图形算法（邻接矩阵）](https://juejin.im/post/5de7c053518825125d1497e2)
+- 《学习 JavaScript 数据结构与算法》
 
 ## 联系作者
 
