@@ -65,7 +65,23 @@ let isDone: boolean = false;
 
 #### 2.2 数字
 
+和 JavaScript 一样，TypeScript 里的所有数字都是浮点数。 这些浮点数的类型是 `number`。
+
+```
+let decLiteral: number = 0 ;
+let hexLiteral: number = 0xf00d;
+let binaryLiteral: number = 0b1010;
+let octalLiteral: number = 0o744;
+```
+
 #### 2.3 字符串
+
+JavaScript 程序的另一项基本操作是处理网页或服务器端的文本数据。
+
+```
+let name: string = "bob";
+name = "smith";
+```
 
 #### 2.4 数组
 
