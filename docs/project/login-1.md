@@ -51,7 +51,8 @@ OAuth 认证的整个运行流程：
 
 1. 攻击者李四登录 Tonr 网站，并且选择绑定自己的 Sparkir 账号
 2. Tonr 网站将李四重定向到 fSparkir，由于他之前已经登录过 Sparkir，所以 Sparkir 直接向他显示“是否授权 Tonr 访问”的页面。
-3. 李四在点击“同意授权”之后，
+3. 李四在点击“同意授权”之后，截获 Sparkir 服务器返回的含有 Authorization Code 参数的 HTTP 响应。
+4. 李四精心构造一个 Web 页面，它会触发 Tonr 网站
 
 #### 3.2 受害者张三(Resource Owner)视角
 
