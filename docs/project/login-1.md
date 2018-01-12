@@ -54,6 +54,7 @@ OAuth 认证的整个运行流程：
 3. 李四在点击“同意授权”之后，截获 Sparkir 服务器返回的含有 Authorization Code 参数的 HTTP 响应。
 4. 李四精心构造一个 Web 页面，它会触发 Tonr 网站向 Sparkir 发起令牌申请的请求，而这个请求中的 Authorization Code 参数正是上一步获到的 code。
 5. 李四将这个 Web 页面放到互联网上，等待或者诱骗受害者张三来访问。
+6. 张三之前登录了 Tonr 网站，只是没有把自己账号和其他社交账号绑定起来。在张三访问了李四准备的这处 Web 页面后，令牌申请流程在张三的浏览器里被顺利触发，Tonr 网站从 Sparkir 那里获取到 access_token，但是这个 token 以及通过它进一步获取到的用户信息却都是攻击者李四的。
 
 #### 3.2 受害者张三(Resource Owner)视角
 
