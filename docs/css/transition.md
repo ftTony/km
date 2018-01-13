@@ -6,11 +6,11 @@
 
 ## 内容
 
-- transition 介绍
-- property
-- duration
-- timing-function
-- delay
+- [transition 介绍](#一、-transition-介绍)
+- [property](#二、property)
+- [duration](#三、duration)
+- [timing-function](#四、timing-function)
+- [delay](#五、delay)
 
 ### 一、 transition 介绍
 
