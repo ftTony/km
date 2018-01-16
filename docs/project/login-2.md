@@ -50,6 +50,19 @@ HttpSession session = request.getSession();
 session.setAttribute("isLogin", true);
 ```
 
+用户再次访问时，tomcat 在会话对象中查看登录状态
+
+```
+HttpSession session = request.getSession();
+session.getAttribute("isLogin");
+```
+
+实现了登录状态的浏览器请求服务器模型如下图描述
+
+![images](login05.png)
+
+每次请求受保护资源时都会检查会话对象中的登录状态，只有 isLogin=true 的会话才能访问，登录机制因此而实现。
+
 ### 二、多系统的复杂性
 
 web 系统早已从久远的单系统发展成为如今由多系统组成的应用群，面对如此众多的系统，用户难道要一个一个登录、然后一个一个注销吗？就像下面描述的这样
