@@ -475,61 +475,6 @@ module.exports = {
             ]
         }
         ],
-        // '/interview-question/': [{
-        //     title: 'js',
-        //     collapsable: false,
-        //     children: [
-        //         'js-eventloop'
-        //     ]
-        // },
-        // {
-        //     title: 'css',
-        //     collapsable: false,
-        //     children: [
-        //         'css-center'
-        //     ]
-        // },
-        // {
-        //     title: '框架',
-        //     collapsable: false,
-        //     children: []
-        // }
-        // ],
-        '/materials/': [
-            //     {
-            //     title: 'js基础',
-            //     collapsable: false,
-            //     children: [
-            //         ''
-            //     ]
-            // },
-            // {
-            //     title: 'es6',
-            //     collapsable: false,
-            //     children: [
-            //         ''
-            //     ]
-            // },
-            // {
-            //     title: 'nodejs',
-            //     collapsable: false,
-            //     children: []
-            // },
-            // {
-            //     title: 'vue框架',
-            //     collapsable: false,
-            //     children: []
-            // },
-            // {
-            //     title: '工具',
-            //     collapsable: false,
-            //     children: []
-            // },
-            // {
-            //     title: '面试题',
-            //     collapsable: false,
-            //     children: []
-            // }
-        ]
+        '/materials/': []
     }
 };
