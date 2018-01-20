@@ -118,7 +118,7 @@ log('webpack');
 
 #### 2.1 filename
 
-`filename`是一个很常见的配置，就是对应于`entry`里面的输入文件，经过webpack打包后输出文件的文件名。比如说经过下面的配置，生成出来的文件名为`index.min.js`。
+`filename`是一个很常见的配置，就是对应于`entry`里面的输入文件，经过 webpack 打包后输出文件的文件名。比如说经过下面的配置，生成出来的文件名为`index.min.js`。
 
 ```
 {
@@ -184,7 +184,7 @@ btn.addEventListener('click', () => {
 
 这个`1.min.js`就是异步加载的`chunk`文件。[文档](https://webpack.docschina.org/configuration/output/#output-chunkfilename)里这么解释：
 
->`output.chunkFilename` 默认使用`[id].js`或从`output.filename`中推断出的值（`[name]`会被预先替换为 `[id]` 或 `[id]`.）
+> `output.chunkFilename` 默认使用`[id].js`或从`output.filename`中推断出的值（`[name]`会被预先替换为 `[id]` 或 `[id]`.）
 
 文档写的太抽象，我们不如结合上面的例子来看：
 
@@ -239,7 +239,7 @@ btn.addEventListener('click', () => {
 ```
 async function getAsyncComponent() {
     var element = document.createElement('div');
-  
+
     // 在 import 的括号里 加注释 /* webpackChunkName: "lodash" */ ，为引入的文件取别名
     const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
 
@@ -291,7 +291,7 @@ const { default: _ } = await import(/* webpackChunkName: "lodash" */ /* webpackP
 
 - `webpackChunkName`是为预加载的文件取别名
 - `webpackPrefetch`会在浏览器闲置下载文件
-- `webpackPreload`会在父chunk加载时并行下载文件
+- `webpackPreload`会在父 chunk 加载时并行下载文件
 
 ### 四、`hash`、`chunkhash`、`contenthash`有什么不同？
 
@@ -303,7 +303,7 @@ const { default: _ } = await import(/* webpackChunkName: "lodash" */ /* webpackP
 
 #### 4.1 hash
 
-hash 计算是跟整个项目的构建相关，我们做一个简单的demo。
+hash 计算是跟整个项目的构建相关，我们做一个简单的 demo。
 
 沿用案例 1 的 demo 代码，文件目录如下：
 
@@ -326,9 +326,9 @@ src/
     output: {
         filename: "[name].[hash].js",  // 改为 hash
     },
-    
+
     ......
-    
+
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'index.[hash].css' // 改为 hash
@@ -373,9 +373,9 @@ export function cube(x) {
     output: {
         filename: "[name].[chunkhash].js", // 改为 chunkhash
     },
-          
+
     ......
-    
+
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'index.[chunkhash].css' // // 改为 chunkhash
@@ -412,9 +412,9 @@ export function cube(x) {
     output: {
         filename: "[name].[chunkhash].js",
     },
-      
+
     ......
-    
+
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'index.[contenthash].css' // 这里改为 contenthash
@@ -445,14 +445,29 @@ export function cube(x) {
 
 ![images](webpack03.png)
 
-如果再仔细看一下，就发现这 13 种大部分都是`eval`、`cheap`、`inline` 和 `module`这4个词排列组合的，我做了个简单的表格，比官网上直白多了：
+如果再仔细看一下，就发现这 13 种大部分都是`eval`、`cheap`、`inline` 和 `module`这 4 个词排列组合的，我做了个简单的表格，比官网上直白多了：
 
-| 参数   | 参数解释                                                            |
-| ------ | ------------------------------------------------------------------- |
-| eval   | 打包后的模块都使用`eval()`执行，行映射可能不准；不产生独立的map文件 |
-| cheap  | map映射只显示行不显示列，忽略源自loader的source map                 |
-| inline | 映射文件以base64格式编码，加在bundle文件最后，不产生独立的map文件   |
-| module | 增加对 loader source map 和第三方模块的映射                         |
+| 参数   | 参数解释                                                                |
+| ------ | ----------------------------------------------------------------------- |
+| eval   | 打包后的模块都使用`eval()`执行，行映射可能不准；不产生独立的 map 文件   |
+| cheap  | map 映射只显示行不显示列，忽略源自 loader 的 source map                 |
+| inline | 映射文件以 base64 格式编码，加在 bundle 文件最后，不产生独立的 map 文件 |
+| module | 增加对 loader source map 和第三方模块的映射                             |
+
+### 六、loader 和 plugin 的区别
+
+- 主要区别
+- 常用的 plugin
+- 常用的 loader
+
+### 6.1 主要区别
+
+- `loader`用于加载某些资源文件。因为 webpack 本身
+- `plugin`用于扩展 webpack 的功能。
+
+### 6.2 常用的 plugin
+
+### 6.3 常用的 loader
 
 ### 参考资料
 
