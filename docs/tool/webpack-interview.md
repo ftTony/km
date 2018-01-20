@@ -462,8 +462,8 @@ export function cube(x) {
 
 ### 6.1 主要区别
 
-- `loader`用于加载某些资源文件。因为 webpack 本身
-- `plugin`用于扩展 webpack 的功能。
+- `loader`用于加载某些资源文件。因为 webpack 本身只能打包`commonjs`规范的 js 文件，对于其他资源例如 css，图片，或者其他的语法集，比如 jsx，coffee，是没有办法加载的。这就是需要对应的 loader 将资源转化，加载进来。从字面意思也能看出，loader 是用于加载的，它作用于一个个文件上。
+- `plugin`用于扩展 webpack 的功能。它直接作用 webpack，扩展了它的功能。当然 loader 也时变相的扩展了 webpack，但是它只专注于文件（transform）这一个领域。而 plugin 的功能更加的丰富，而不仅局限于资源的加载。
 
 ### 6.2 常用的 plugin
 
