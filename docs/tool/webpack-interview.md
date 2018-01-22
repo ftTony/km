@@ -470,6 +470,16 @@ export function cube(x) {
 - CommonsChunkPlugin 创建一个公用的 chunk，常用于将第三方 lib 抽取成公用 js，例如
 
 ```
+entry:{
+    vendor:['jquery','other-lib'],
+    app:'./entry'
+}
+
+new CommonsChunkPlugin({
+    name:'vendor',
+    filename:'vendor.js',
+    minChunks:infinity
+})
 
 ```
 
