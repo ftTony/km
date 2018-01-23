@@ -483,7 +483,11 @@ new CommonsChunkPlugin({
 
 ```
 
+- HotMouleReplacementPlugin 启用 module 热替换
+
 ### 6.3 常用的 loader
+
+loader 的功能就是加载资源到 webpack
 
 ### 参考资料
 
