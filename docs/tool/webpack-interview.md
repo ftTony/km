@@ -467,7 +467,7 @@ export function cube(x) {
 
 ### 6.2 常用的 plugin
 
-- CommonsChunkPlugin 创建一个公用的 chunk，常用于将第三方 lib 抽取成公用 js，例如
+- `CommonsChunkPlugin` 创建一个公用的 chunk，常用于将第三方 lib 抽取成公用 js，例如
 
 ```
 entry:{
@@ -483,11 +483,15 @@ new CommonsChunkPlugin({
 
 ```
 
-- HotMouleReplacementPlugin 启用 module 热替换
+-`HotMouleReplacementPlugin` 启用 `module`热替换
 
 ### 6.3 常用的 loader
 
 loader 的功能就是加载资源到 webpack
+
+- `css` 和 `style` cssloader 和 styleloader 做两件事件
+  - `css-loader`遍历所有 require 的 css 文件，输出文件内容
+  - `style-loader`将 css 内容输出到页面的`style`标签中
 
 ### 参考资料
 
