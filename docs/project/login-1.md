@@ -65,6 +65,10 @@ OAuth 认证的整个运行流程：
 
 #### 3.3 Tonr 网站(Client)视角
 
+从 Tonr 网站来看，它收到的所有请求看上去都是正常的。首先它收到了一个 HTTP 请求，其代表着当前用户张三在 SparkIr 网站上已经做了“同意授权”操作。其内容如下：
+
+`GET /bindingCallback?code=AUTHORIZATION_CODE`
+
 #### 3.4 Sparklr 网站(OAuth2 服务提供者)视角
 
 #### 3.5 攻击者李四视角
