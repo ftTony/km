@@ -88,7 +88,8 @@ OAuth 认证的整个运行流程：
 尽管这个攻击既巧妙又隐藏，但是要成功进行这样的 CSRF 攻击也是需要满足一定前提条件的。
 
 - 首先，在攻击过程中，受害者张三在 Tonr 网站上的用户会话必须是有效的，也就是说，张三在受到攻击前已经登录了 Tonr 网站。
-- 其次，整个攻击必须在短时间内完成，因为 OAuth2 提供者颁发的 Authorization Code 有效期很短， OAuth2 官方推荐的时间是不大于 10 分钟，而
+- 其次，整个攻击必须在短时间内完成，因为 OAuth2 提供者颁发的 Authorization Code 有效期很短， OAuth2 官方推荐的时间是不大于 10 分钟，而一旦 Authorization Code 过期那么后续的攻击也就不能进行下去了。
+- 最后，一个 Authorization Code 只能被使用一次，如果 OAuth2 提供者收到重复的 Authorization Code，它会拒绝当前的令牌申请请求。不止如此，根据 OAuth2 官方推荐，它还可以把和这个已经使用过的 Authorization Code 想着联的 access_token 全部撤销掉，进一步降低安全风险。
 
 #### 3.9 防御办法
 
