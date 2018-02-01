@@ -69,6 +69,12 @@ OAuth 认证的整个运行流程：
 
 `GET /bindingCallback?code=AUTHORIZATION_CODE`
 
+不过需要注意的是，URL 里的 code 不是当前受害者张三的 Authorization Code，而是攻击者李四的。
+
+当 Tonr 收到这样的请求时，它以为张三已经同意授权（但实际上这个请求是李四伪造的），于是就发起后续的令牌申请请求，用收到的 Authorization Code 向 Sparklr 换取 access_token，只不过最后拿到的是攻击者李四的 access_token。
+
+最后，Tonr 网站把攻击者李四的 access_token 和当前受害者张三在 Tonr 网站上的账号进行关联绑定。
+
 #### 3.4 Sparklr 网站(OAuth2 服务提供者)视角
 
 Sparklr 网站也是一脸茫然的样子，因为在它看来，自己收到的授权请求，以及后续的令牌申请请求都是正常的，或者说它无法得知接收到的这些请求之间的关联关系，而且也无法区别出这些请求到底是来自张三本人，还是由李四伪造出来的。因此只要自己收到的参数是正确有效的，那就提供正常的认证服务，仅此而已。
