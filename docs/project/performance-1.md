@@ -17,6 +17,7 @@
 - [前端性能优化-加载篇](https://www.cxymsg.com/guide/load.html)
 - [网站性能优化实战——从12.67s到1.06s的故事](https://juejin.im/post/5b6fa8c86fb9a0099910ac91)
 - [你必须懂的前端性能优化](https://mp.weixin.qq.com/s/DdbaiuZd4RbqUod0jhn_vg)
+- [我是如何让公司后台管理系统焕然一新的(上) -性能优化](https://juejin.im/post/5c76843af265da2ddd4a6dd0)
 
 ## 联系作者
 
