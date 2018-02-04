@@ -6,7 +6,37 @@
 
 ## 内容
 
-## 参考资料
+
+### 栈的相关方法
+
+### 创建栈
+
+![images](stack.png)
+
+**ES5代码**
+
+```
+function Stack(){
+
+}
+```
+
+**ES6代码**
+
+```
+class Stack{
+    constructor(...items){
+
+    }
+}
+```
+
+### 栈的实际应用
+
+
+### 参考资料
+
+- 《学习JavaScript数据结构与算法》
 
 ## 联系作者
 
