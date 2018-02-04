@@ -109,31 +109,32 @@ module.exports = {
                 'es6-symbol'
             ]
         },
-        // {
-        //     title: 'TypeScript',
-        //     collapsable: false,
-        //     children: [
-        //         'ts-types',
-        //         'ts-deciarations',
-        //         'ts-interfaces',
-        //         'ts-classes',
-        //         'ts-functions',
-        //         'ts-generics',
-        //         'ts-enums',
-        //         'ts-type-inference',
-        //         'ts-type-compatibility',
-        //         'ts-advanced-types',
-        //         'ts-symbols',
-        //         'ts-iterators-and-generators',
-        //         'ts-modules',
-        //         'ts-namespaces',
-        //         'ts-namespaces-and-modules',
-        //         'ts-module-resolution',
-        //         'ts-declaration-merging',
-        //         'ts-decorators',
-        //         'ts-mixins',
-        //     ]
-        // },
+        {
+            title: 'TypeScript',
+            collapsable: false,
+            children: [
+                'ts-introduct'
+                // 'ts-types',
+                // 'ts-deciarations',
+                // 'ts-interfaces',
+                // 'ts-classes',
+                // 'ts-functions',
+                // 'ts-generics',
+                // 'ts-enums',
+                // 'ts-type-inference',
+                // 'ts-type-compatibility',
+                // 'ts-advanced-types',
+                // 'ts-symbols',
+                // 'ts-iterators-and-generators',
+                // 'ts-modules',
+                // 'ts-namespaces',
+                // 'ts-namespaces-and-modules',
+                // 'ts-module-resolution',
+                // 'ts-declaration-merging',
+                // 'ts-decorators',
+                // 'ts-mixins',
+            ]
+        },
         {
             title: 'nodejs',
             collapsable: false,
