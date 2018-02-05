@@ -31,6 +31,26 @@ OAuth 认证的整个运行流程：
 
 ![images](login01.jpg)
 
+### 三、针对 OAuth2 的 CSRF 攻击
+
+#### 3.1 攻击流程
+
+#### 3.2 受害者张三(Resource Owner)视角
+
+#### 3.3 Tonr 网站(Client)视角
+
+#### 3.4 Sparklr 网站(OAuth2 服务提供者)视角
+
+#### 3.5 攻击者李四视角
+
+#### 3.6 上帝视角
+
+#### 3.7 漏洞的本质
+
+#### 3.8 前提条件
+
+#### 3.9 防御办法
+
 ### 参考资料
 
 - [简述 OAuth 2.0 的运作流程](https://www.barretlee.com/blog/2016/01/10/oauth2-introduce/)
