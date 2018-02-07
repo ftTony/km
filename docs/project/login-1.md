@@ -51,6 +51,10 @@ OAuth 认证的整个运行流程：
 
 #### 3.9 防御办法
 
+要防止这样的攻击其实很容易，作为第三方应用的开发者，只需在 OAuth 认证过程中加入 state 参数，并验证它的参数值即可。具体细节如下：
+
+- 在将用户重定向到 OAuth2 的 Authorization Endpoint 去的时候，
+
 ### 参考资料
 
 - [简述 OAuth 2.0 的运作流程](https://www.barretlee.com/blog/2016/01/10/oauth2-introduce/)
