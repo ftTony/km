@@ -53,7 +53,7 @@ OAuth 认证的整个运行流程：
 
 要防止这样的攻击其实很容易，作为第三方应用的开发者，只需在 OAuth 认证过程中加入 state 参数，并验证它的参数值即可。具体细节如下：
 
-- 在将用户重定向到 OAuth2 的 Authorization Endpoint 去的时候，
+- 在将用户重定向到 OAuth2 的 Authorization Endpoint 去的时候，为用户生成一个随机的字符串，并作为 state 参数加入到 URL 中。
 
 ### 参考资料
 
