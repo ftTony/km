@@ -73,6 +73,46 @@ class Queue{
 
 ### 二、优先队列
 
+```
+function PriorityQueue(){
+    let items = [];
+    function QueueElement(element,priority){
+        this.element = element;
+        this.priority = priority;
+    }
+
+    this.enqueue = function(element,priority){
+        let queueElement = new QueueElement(element,priority);
+
+        let added = false;
+        for(let i=0;i<items.length;i++){
+            if(queueElement.priority<items[i].priority){
+                
+            }
+        }
+    };
+
+    this.print = function(){
+        for(let i=0; i<items.length;i++){
+            console.log(`${items[i].element}-${items[i].priority}`);
+        }
+    }
+}
+```
+
+### 循环队列
+
+```
+function hotPotato(nameList,num){
+
+    let queue = new Queue();
+
+    for(let i=0; i<nameList.length;i++){
+
+    }
+}
+```
+
 ## 参考资料
 
 - 《学习JavaScript数据结构与算法》
