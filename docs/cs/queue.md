@@ -118,8 +118,13 @@ function hotPotato(nameList,num){
 
     let eliminated = '';
     while(queue.size()>1){
-
+        for(let i=0;i<num;i++){
+            queue.enqueue(queue.dequeue());
+        }
+        eliminated = queue.dequeue();
+        console.log(eliminated+'在击鼓伟花游戏中被淘汰。')
     }
+    return queue.dequeue();
 }
 ```
 
