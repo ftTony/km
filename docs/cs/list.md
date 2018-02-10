@@ -12,11 +12,12 @@
 
 单链表的操作核心有：
 
-- `push(value)`-在链表的末尾/头部添加一个节点
-- `pop()`-从链表的末尾/头部删除一个节点
-- `get(index)`-返回指定索引处的节点
-- `delete(index)`- 删除指定索引处的节点
-- `isEmpty()` - 根据列表长度返回true或false
+- `append(element)`-向列表尾部添加一个新的项。
+- `remove(element)`-从列表中移除一项。
+- `indexOf(index)`-返回指定索引处的节点
+- `removeAt(position)`-从列表的特定位置移除一项。
+- `isEmpty()` -如果链表中不包含任何元素，返回true，如果链表长度大于0则返回false。
+- `size()`-返回链表包含的元素个数。与数组的length属性类似。
 - `print()`- 返回链表的可见表示
 
 **ES5相关代码**
@@ -32,7 +33,10 @@ function LinkedList(){
     var length = 0;
     var head = null;
 
-    this.append = function(element){};
+    this.append = function(element){
+        
+
+    };
     this.insert = function(position,element){};
     this.removeAt = function(position){};
     this.remove = function(element){};
