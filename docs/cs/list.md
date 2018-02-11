@@ -35,7 +35,14 @@ function LinkedList(){
 
     this.append = function(element){
         
+        var node = new Node(element),
+            current;
 
+        if(head === null){  // 列表中第一个节点
+            head = node;
+        }else{
+            current = head;
+        }
     };
     this.insert = function(position,element){};
     this.removeAt = function(position){};
