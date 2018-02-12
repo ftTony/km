@@ -54,8 +54,25 @@ function LinkedList(){
 
         length++;   // 更新列表的长度
     };
-    this.insert = function(position,element){};
-    this.removeAt = function(position){};
+    this.insert = function(position,element){
+        
+    };
+    this.removeAt = function(position){
+
+        // 检查越界值
+        if(position>-1 && position<length){
+            var current = head,
+                previous,
+                index =0;
+
+            // 移除第一项
+            if(position === 0){
+
+            }else{
+                
+            }
+        }
+    };
     this.remove = function(element){};
     this.indexOf = function(element){};
     this.isEmpty = function(){};
