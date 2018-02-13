@@ -67,9 +67,11 @@ function LinkedList(){
 
             // 移除第一项
             if(position === 0){
-
+                head = current.next;
             }else{
-                
+                while(index++ < position){
+                    previous = current;
+                }
             }
         }
     };
