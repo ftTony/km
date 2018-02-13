@@ -404,6 +404,7 @@ module.exports = {
                 'array',
                 'list',
                 'stack',
+                'dictionary',
                 'hash',
                 'trees',
                 'trie',
