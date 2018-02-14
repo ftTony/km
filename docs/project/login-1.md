@@ -45,6 +45,10 @@ OAuth 认证的整个运行流程：
 
 #### 3.1 攻击流程
 
+让我们来看一个针对 OAuth2 的 CSRF 攻击的例子。假设有用户张三，和攻击者李四，还有一个第三方 Web 应用 Tonr，它集成了第三方社交账号登录，并且允许用户将社交账号和 Tonr 中的账号进行绑定。此外还有一个 OAuth2 服务提供者 Sparkir。
+
+![images](login12.png)
+
 #### 3.2 受害者张三(Resource Owner)视角
 
 #### 3.3 Tonr 网站(Client)视角
