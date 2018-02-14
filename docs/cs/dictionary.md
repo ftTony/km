@@ -8,9 +8,17 @@
 
 ### 创建字典类
 
+```
+function Dictionary(){
+    var items = {};
+}
+```
+
 ### 字典类相关方法
 
 - `set(key,value)`：向字典中添加新元素
+- `remove(key)`：通过使用键值来从字典中移除键值对应的数据值。
+- `has(key)`：如果某个键值存在于这个字典中，则返回true，反之则返回false。
 
 ### 参考资料
 
