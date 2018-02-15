@@ -71,8 +71,17 @@ function LinkedList(){
             }else{
                 while(index++ < position){
                     previous = current;
+                    current = current.next;
                 }
+
+                // 将previous与current的下一项链接起来：路过current，从而移除它
+                previous.next = current.next;
             }
+            length--;
+
+            return current.element;
+        }else{
+            return null;
         }
     };
     this.remove = function(element){};
