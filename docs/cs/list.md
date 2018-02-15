@@ -56,6 +56,10 @@ function LinkedList(){
     };
     this.insert = function(position,element){
         
+        // 检查越界值
+        if(position>=0 && position<=length){
+
+        }
     };
     this.removeAt = function(position){
 
