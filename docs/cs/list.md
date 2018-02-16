@@ -59,6 +59,14 @@ function LinkedList(){
         // 检查越界值
         if(position>=0 && position<=length){
 
+            var node = new Node(element),
+                current = head,
+                previous,
+                index =0;
+            
+            if(position ===0){  // 在第一个位置添加
+
+            }
         }
     };
     this.removeAt = function(position){
