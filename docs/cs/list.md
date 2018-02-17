@@ -70,9 +70,17 @@ function LinkedList(){
                 head = node;
             }else{
                 while(index++<position){
-
+                    previous = current;
+                    current = current.next;
                 }
+                node.next = current;
+                previous.next = node;
             }
+
+            length++;
+            return true;
+        }else{
+            return false;
         }
     };
     this.removeAt = function(position){
