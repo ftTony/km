@@ -66,6 +66,12 @@ function LinkedList(){
             
             if(position ===0){  // 在第一个位置添加
 
+                node.next = current;
+                head = node;
+            }else{
+                while(index++<position){
+
+                }
             }
         }
     };
