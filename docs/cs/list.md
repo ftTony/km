@@ -140,6 +140,16 @@ class LinkedList{
 
 ### 三、双链表
 
+```
+function DoublyLinkedList(){
+    var Node = function(element){
+        this.element = element;
+        this.next = null;
+        this.prev = null;   //新增
+    }
+}
+```
+
 ### 四、循环链表
 
 ### 五、反转链表
