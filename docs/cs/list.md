@@ -110,7 +110,17 @@ function LinkedList(){
             return null;
         }
     };
-    this.remove = function(element){};
+    this.remove = function(element){
+
+        var current = head,
+            string = '';
+
+        while(current){
+            string = current.element;
+            current = current.next;
+        }
+        return string;
+    };
     this.indexOf = function(element){
 
         var current = head,
