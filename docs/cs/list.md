@@ -111,7 +111,20 @@ function LinkedList(){
         }
     };
     this.remove = function(element){};
-    this.indexOf = function(element){};
+    this.indexOf = function(element){
+
+        var current = head,
+            index = -1;
+
+        while(current){
+            if(element === current.element){
+                return index;
+            }
+            index++;
+            current = current.next;
+        }
+        return -1;
+    };
     this.isEmpty = function(){};
     this.size = function(){};
     this.toString = function(){};
