@@ -49,6 +49,9 @@ OAuth 认证的整个运行流程：
 
 ![images](login12.png)
 
+1. 攻击者李四登录 Tonr 网站，并且选择绑定自己的 Sparkir 账号
+2. Tonr 网站将李四重定向到 fSparkir，由于他之前已经登录过 Sparkir，所以 Sparkir 直接向他显示“是否授权 Tonr 访问”的页面。
+
 #### 3.2 受害者张三(Resource Owner)视角
 
 #### 3.3 Tonr 网站(Client)视角
