@@ -111,15 +111,8 @@ function LinkedList(){
         }
     };
     this.remove = function(element){
-
-        var current = head,
-            string = '';
-
-        while(current){
-            string = current.element;
-            current = current.next;
-        }
-        return string;
+        var index = this.indexOf(element);
+        return this.removeAt(index);
     };
     this.indexOf = function(element){
 
@@ -135,10 +128,26 @@ function LinkedList(){
         }
         return -1;
     };
-    this.isEmpty = function(){};
-    this.size = function(){};
-    this.toString = function(){};
-    this.print = function(){};
+    this.isEmpty = function(){
+        return length ===0;
+    };
+    this.size = function(){
+        return length;
+    };
+    this.getHead = function(){
+        return head;
+    };
+    this.toString = function(){
+
+        var current = head,
+            string = '';
+
+        while(current){
+            string = current.element;
+            current = current.next;
+        }
+        return string;
+    };
 }
 ```
 
