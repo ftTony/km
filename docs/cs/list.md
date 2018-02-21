@@ -178,6 +178,33 @@ function DoublyLinkedList(){
         this.element = element;
         this.next = null;
         this.prev = null;   //新增
+    };
+
+    var length = 0;
+    var head = null;
+    var tail = null;
+
+    this.insert = function(position,element){
+
+        // 检查越界值
+        if(position>=0 && position<=length){
+            var node = new Node(element),
+                current = head,
+                previous,
+                index = 0;
+
+            if(position ===0){  //在第一个位置添加
+
+            }else if(position === length){  // 最后一项
+
+            }else{
+
+            }
+            length++;       // 更新列表的长度
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 ```
