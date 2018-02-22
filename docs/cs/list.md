@@ -196,9 +196,12 @@ function DoublyLinkedList(){
             if(position ===0){  //在第一个位置添加
 
                 if(!head){
-
+                    head = node;
+                    tail = node;
                 }else{
-
+                    node.next = current;
+                    current.prev= node;
+                    head = node;
                 }
             }else if(position === length){  // 最后一项
 
@@ -208,9 +211,14 @@ function DoublyLinkedList(){
                 tail = node;
             }else{
                 while(index++<position){
-
+                    previous = current;
+                    current = current.next;
                 }
                 node.next = current;
+                previous.next = node;
+
+                current.prev= node;     //新增的
+                node.prev= previous;                
             }
             length++;       // 更新列表的长度
             return true;
