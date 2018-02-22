@@ -195,10 +195,22 @@ function DoublyLinkedList(){
 
             if(position ===0){  //在第一个位置添加
 
+                if(!head){
+
+                }else{
+
+                }
             }else if(position === length){  // 最后一项
 
+                current = tail;
+                current.next = node;
+                node.prev = current;
+                tail = node;
             }else{
+                while(index++<position){
 
+                }
+                node.next = current;
             }
             length++;       // 更新列表的长度
             return true;
