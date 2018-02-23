@@ -218,7 +218,7 @@ function DoublyLinkedList(){
                 previous.next = node;
 
                 current.prev= node;     //新增的
-                node.prev= previous;                
+                node.prev= previous;
             }
             length++;       // 更新列表的长度
             return true;
