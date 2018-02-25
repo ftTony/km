@@ -30,7 +30,13 @@ function BinarySearchTree(){
     var root = null;
 
     this.insert = function(key){
+        var newNode = new Node(key);
 
+        if(root === null){
+            root = newNode;
+        }else{
+            insertNode(root.newNode);
+        }
     };
 
     this.min = function(){
@@ -39,6 +45,12 @@ function BinarySearchTree(){
 
     this.max = function(){
         return maxNode(root);
+    }
+}
+
+var insertNode = function(node,newNode){
+    if(newNode.key < node.key){
+
     }
 }
 
