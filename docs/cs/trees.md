@@ -50,6 +50,12 @@ function BinarySearchTree(){
 
 var insertNode = function(node,newNode){
     if(newNode.key < node.key){
+        if(node.left === null){
+            node.left = newNode;
+        }else{
+            insertNode(node.left,newNode);
+        }
+    }else{
 
     }
 }
