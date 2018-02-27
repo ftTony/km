@@ -46,7 +46,15 @@ function BinarySearchTree(){
     this.max = function(){
         return maxNode(root);
     }
+
+    this.inOrderTraverse = function(callback){
+        inOrderTraverse(root,callback);
+    }
 }
+
+var inOrderTraverse = function(node,callback){
+
+};
 
 var insertNode = function(node,newNode){
     if(newNode.key < node.key){
@@ -56,7 +64,11 @@ var insertNode = function(node,newNode){
             insertNode(node.left,newNode);
         }
     }else{
-
+        if(node.right === null){
+            node.right = newNode;
+        }else{
+            insertNode(node.right,newNode);
+        }
     }
 }
 
