@@ -48,13 +48,21 @@ function BinarySearchTree(){
     }
 
     this.inOrderTraverse = function(callback){
-        inOrderTraverse(root,callback);
+        inOrderTraverseNode(root,callback);
     }
 }
 
-var inOrderTraverse = function(node,callback){
-
+var inOrderTraverseNode = function(node,callback){
+    if(node !== null){
+        inOrderTraverseNode(node.left,callback);
+        callback(node.key);
+        inOrderTraverseNode(node.right,callback);
+    }
 };
+
+function printNode(value){
+    console.log(value);
+}
 
 var insertNode = function(node,newNode){
     if(newNode.key < node.key){
