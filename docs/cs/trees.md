@@ -50,6 +50,10 @@ function BinarySearchTree(){
     this.inOrderTraverse = function(callback){
         inOrderTraverseNode(root,callback);
     }
+
+    this.preOrderTraverse = function(callback){
+        preOrderTraverseNode(root,callback);
+    }
 }
 
 var inOrderTraverseNode = function(node,callback){
@@ -58,6 +62,10 @@ var inOrderTraverseNode = function(node,callback){
         callback(node.key);
         inOrderTraverseNode(node.right,callback);
     }
+};
+
+var preOrderTraverseNode = function(node,callback){
+
 };
 
 function printNode(value){
