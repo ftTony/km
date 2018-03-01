@@ -65,7 +65,10 @@ var inOrderTraverseNode = function(node,callback){
 };
 
 var preOrderTraverseNode = function(node,callback){
-
+    if(node!==null){
+        callback(node.key);
+        preOrderTraverseNode(node.left,callback);
+    }
 };
 
 function printNode(value){
