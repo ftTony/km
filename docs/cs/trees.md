@@ -81,7 +81,9 @@ var preOrderTraverseNode = function(node,callback){
 
 var postOrderTraverseNode = function(node,callback){
     if(node!==null){
-
+        postOrderTraverseNode(node.left,callback);
+        postOrderTraverseNode(node.right,callback);
+        callback(node.key);
     }
 }
 
