@@ -108,7 +108,13 @@ var insertNode = function(node,newNode){
 }
 
 var minNode = function(node){
-
+    if(node){
+        while(node && node.left !== null){
+            node = node.left;
+        }
+        return node.key;
+    }
+    return null;
 };
 
 var maxNode = function(node){
