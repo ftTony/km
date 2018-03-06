@@ -107,6 +107,7 @@ var insertNode = function(node,newNode){
     }
 }
 
+// 最小值
 var minNode = function(node){
     if(node){
         while(node && node.left !== null){
@@ -117,8 +118,16 @@ var minNode = function(node){
     return null;
 };
 
-var maxNode = function(node){
 
+// 最大值
+var maxNode = function(node){
+    if(node){
+        while(node && node.right !==null){
+            node = node.right;
+        }
+        return node.key;
+    }
+    return null;
 };
 
 ```
