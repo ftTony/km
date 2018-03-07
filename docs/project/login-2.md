@@ -87,6 +87,8 @@ web 系统由单系统发展成多系统组成的应用群，复杂性应该由�
 
 ### 三、单点登录
 
+什么是单点登录？单点登录全称 Single Sign On（以下简称 SSO），是指在多系统应用群中登录一个系统，便可在其他中得到授权而无需再次登录，包括单点登录与单点注销两部分。
+
 ### 参考资料
 
 - [Web 登录鉴权](https://lmjben.github.io/blog/osi-web-login.html#session-cookie)
