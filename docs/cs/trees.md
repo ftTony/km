@@ -61,6 +61,15 @@ function BinarySearchTree(){
     this.postOrderTraverse = function(callback){
         postOrderTraverseNode(root,callback);
     }
+
+    // 搜索一个特定的值
+    this.search = function(key){
+        return searchNode(root,key);
+    }
+}
+
+var searchNode = function(node,key){
+
 }
 
 var inOrderTraverseNode = function(node,callback){
