@@ -20,7 +20,24 @@ class Graph{
 
 ```
 var initializeCodor = function(){
-    
+    var color = [];
+    for(var i =0;i<vertices.length;i++){
+        color[vertices[i]] = 'white';
+    }
+    return color;
+};
+
+this.bfs = function(v,callback){
+    var bfs = function(v,callback){
+
+        var color = initializeColor(),
+            queue = new Queue();
+        queue.enqueue(v);
+
+        while(!queue.isEmpty()){
+
+        }
+    }
 }
 
 ```
