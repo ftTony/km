@@ -22,6 +22,7 @@
 ### 参考资料
 
 - [彻底搞懂 CSS 层叠上下文、层叠等级、层叠顺序、z-index](https://juejin.im/post/5b876f86518825431079ddd6)
+- [CSS 中重要的层叠概念](https://juejin.im/post/5ba4efe36fb9a05cf52ac192)
 - 《CSS 世界》
 
 ## 联系作者
