@@ -766,9 +766,68 @@ console.log( reg.test("abcdEF234") ); // true 三者都有
 
 #### 3.1 分组和分支结构
 
+这二者是括号最直觉的作用，也是最原始的功能。
+
+**分组**
+
+我们知道`/a+/`匹配连续出现的"a"，而要匹配连续出现的"ab"时，需要使用`/(ab)+/`。
+
+其中括号是提供分组功能，使量词`+`作用于"ab"这个整体，测试如下：
+
+```
+var regex = /(ab)+/g;
+var string = "ababa abbb ababab";
+console.log( string.match(regex) ); 
+// => ["abab", "ab", "ababab"]
+```
+
+**分支结构**
+
+而在多选分支结构`(p1|p2)`中，此处括号的作用也是不言而喻的，提供了子表达式的所有可能。
+
+比如，要匹配如下的字符串：
+
+>I love JavaScript
+>I love Regular Expression
+
+可以使用正则：
+
+```
+var regex = /^I love (JavaScript|Regular Expression)$/;
+console.log( regex.test("I love JavaScript") );
+console.log( regex.test("I love Regular Expression") );
+// => true
+// => true
+```
+
+如果去掉正则中的括号，即`/^I love JavaScript|Regular Expression$/`，匹配字符串是"I love JavaScript"和"Regular Expression"，当然这不是我们想要的。
+
+**引用分组**
+
+这是括号一个重要的作用，有了它，我们就可以进行数据提取，以及更强大的替换操作。
+
+而要使用它带来的好处，必须配合使用实现环境的API。
+
+以日期为例。假设格式是yyyy-mm-dd的，我们可以先写一个简单的正则：
+
+```
+var regex = /\d{4}-\d{2}-\d{2}/;
+```
+
+```
+var regex = /(\d{4})-(\d{2})-(\d{2})/;
+```
+
+
 #### 3.2 捕获分组
 
+```
+```
+
 #### 3.3 反向引用
+
+```
+```
 
 #### 3.4 非捕获分组
 
