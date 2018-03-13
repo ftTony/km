@@ -95,6 +95,8 @@ web 系统由单系统发展成多系统组成的应用群，复杂性应该由�
 
 ![images](login09.png)
 
+下面对上图简要描述
+
 ### 参考资料
 
 - [Web 登录鉴权](https://lmjben.github.io/blog/osi-web-login.html#session-cookie)
