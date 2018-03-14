@@ -66,10 +66,28 @@ function BinarySearchTree(){
     this.search = function(key){
         return searchNode(root,key);
     }
+
+    // 删除一个节点
+    this.remove = function(key){
+        root = removeNode(root,key);
+    }
+}
+
+var removeNode = function(node,key){
+    
 }
 
 var searchNode = function(node,key){
-
+    if(node === null){
+        return false;
+    }
+    if(key<node.key){
+        return searchNode(node.left,key);
+    }else if(key>node.key){
+        return searchNode(node.right,key);
+    }else{
+        return true;
+    }
 }
 
 var inOrderTraverseNode = function(node,callback){
