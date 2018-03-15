@@ -11,6 +11,10 @@
 **ES5代码实现**
 
 ```
+function Graph(){
+    var vertices = [];
+    var adjList = new Dictionary();
+}
 ```
 
 **ES6代码实现**
