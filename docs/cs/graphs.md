@@ -89,6 +89,17 @@ this.dfs = function(callback){
 
 var dfsVisit = function(u,color,callback){
     color[u] = 'grey';
+    if(callback){
+        callback(u);
+    }
+    var neighbors = dfsVisit.get(u);
+    for(var i=0;i<neighhors.length;i++){
+        var w = neighbors[i];
+        if(color[w]==='white'){
+            dfsVisit(w,color,callback);
+        }
+    }
+    color[u] = 'black';
 }
 ```
 
