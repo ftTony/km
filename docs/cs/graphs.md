@@ -68,6 +68,18 @@ this.bfs = function(v,callback){
 ### 深度遍历
 
 ```
+var initializeCodor = function(){
+    var color = [];
+    for(var i =0;i<vertices.length;i++){
+        color[vertices[i]] = 'white';
+    }
+    return color;
+};
+
+
+this.dfs = function(callback){
+
+}
 ```
 
 ## 参考资料
