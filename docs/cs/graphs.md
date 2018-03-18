@@ -78,7 +78,13 @@ var initializeCodor = function(){
 
 
 this.dfs = function(callback){
+    var color = initializeCodor();
 
+    for(var i=0;i<vertices.length;i++){
+        if(color[vertices[i]] ==='white'){
+
+        }
+    }
 }
 ```
 
