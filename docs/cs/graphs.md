@@ -24,6 +24,19 @@ function Graph(){
         adjList.get(v).push(w);
         adjList.get(w).push(v);
     }
+
+    this.toString = function(){
+        var s = '';
+        for(var i=0; i<vertices.length;i++){
+            s +=vertices[i]+' -> ';
+            var neighbors = adjList.get(vertices[i]);
+            for(var j=0;j<neighbors.length;j++){
+                s+=neighbors[j]+ ' ';
+            }
+            s+='\n';
+        }
+        return s;
+    };
 }
 ```
 
