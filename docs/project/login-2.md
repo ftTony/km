@@ -141,6 +141,8 @@ sso 认证中心一直监听全局会话的状态，一旦全局会话销毁，�
 
 单点登录涉及 sso 认证中心与众子系统，子系统与 sso 认证中心需要通信以交换令牌、校验令牌及发起注销请求，因而子系统必须集成 sso 的客户端，sso 认证中心则是 sso 服务端，整个单点登录过程实质是 sso 客户端与服务端通信的过程，用下图描述
 
+![images](login11.png)
+
 ### 参考资料
 
 - [Web 登录鉴权](https://lmjben.github.io/blog/osi-web-login.html#session-cookie)
