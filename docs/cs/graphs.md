@@ -82,9 +82,13 @@ this.dfs = function(callback){
 
     for(var i=0;i<vertices.length;i++){
         if(color[vertices[i]] ==='white'){
-
+            dfsVisit(vertices[i],color,callback);
         }
     }
+};
+
+var dfsVisit = function(u,color,callback){
+    color[u] = 'grey';
 }
 ```
 
