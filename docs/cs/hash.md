@@ -13,6 +13,18 @@
 ```
 function HashTable(){
     var table = [];
+
+    this.put = function(key,value){
+
+    }
+
+    this.get = function(key){
+
+    }
+
+    this.remove = function(key){
+
+    }
 }
 
 var loseloseHashCode = function(key){
