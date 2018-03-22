@@ -802,7 +802,7 @@ console.log( regex.test("I love Regular Expression") );
 
 如果去掉正则中的括号，即`/^I love JavaScript|Regular Expression$/`，匹配字符串是"I love JavaScript"和"Regular Expression"，当然这不是我们想要的。
 
-**引用分组**
+#### 3.2 引用分组
 
 这是括号一个重要的作用，有了它，我们就可以进行数据提取，以及更强大的替换操作。
 
@@ -814,17 +814,93 @@ console.log( regex.test("I love Regular Expression") );
 var regex = /\d{4}-\d{2}-\d{2}/;
 ```
 
+然后再修改成括号版的：
+
 ```
 var regex = /(\d{4})-(\d{2})-(\d{2})/;
 ```
+为什么要使用这个正则呢？
 
+**提取数据**
 
-#### 3.2 捕获分组
+比如提取出年、月、日，可以这么做：
 
 ```
+var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = "2017-06-12";
+console.log( string.match(regex) );
+// => ["2017-06-12", "2017", "06", "12", index: 0, input: "2017-06-12"]
+```
+
+`match`返回的一个数组，第一个元素是整体匹配结果，然后是各个分组（括号里）匹配的内容，然后是匹配下标，最后是输入的文本。（注意：如果正则是否有修饰符`g`，`match`返回的数组格式是不一样的）。
+
+另外也可以使用正则对象的`exec`方法：
+
+```
+var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = "2017-06-12";
+console.log( regex.exec(string) );
+// => ["2017-06-12", "2017", "06", "12", index: 0, input: "2017-06-12"]
+```
+
+同时，也可以使用构造函数的全局属性`$1`至`$9`来获取：
+
+```
+var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = "2017-06-12";
+
+regex.test(string); // 正则操作即可，例如
+//regex.exec(string);
+//string.match(regex);
+
+console.log(RegExp.$1); // "2017"
+console.log(RegExp.$2); // "06"
+console.log(RegExp.$3); // "12"
+```
+
+**替换**
+
+比如，想把yyyy-mm-dd格式，替换成mm/dd/yyyy怎么做？
+
+```
+var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = "2017-06-12";
+var result = string.replace(regex, "$2/$3/$1");
+console.log(result);
+// => "06/12/2017"
+```
+
+其中`replace`中的，第二个参数里用`$1`、`$2`、`$3`指代相应的分组。等价于如下的形式：
+
+```
+var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = "2017-06-12";
+var result = string.replace(regex, function() {
+	return RegExp.$2 + "/" + RegExp.$3 + "/" + RegExp.$1;
+});
+console.log(result);
+// => "06/12/2017"
+```
+
+也等价于：
+
+```
+var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = "2017-06-12";
+var result = string.replace(regex, function(match, year, month, day) {
+	return month + "/" + day + "/" + year;
+});
+console.log(result);
+// => "06/12/2017"
 ```
 
 #### 3.3 反向引用
+
+除了使用相应API来引用分组，也可以在正则本身里引用分组。但只能引用之前出现的分组，即反向引用。
+
+还是以日期为例。
+
+比如要写一个正则支持匹配如下三种格式：
 
 ```
 ```
