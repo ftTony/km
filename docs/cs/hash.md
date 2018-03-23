@@ -15,11 +15,13 @@ function HashTable(){
     var table = [];
 
     this.put = function(key,value){
-
+        var position = loseloseHashCode(key);
+        console.log(position + ' - ' + key);
+        table[position] = value;
     }
 
     this.get = function(key){
-
+        return table[loseloseHashCode(key)];
     }
 
     this.remove = function(key){
