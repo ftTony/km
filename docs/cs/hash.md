@@ -23,7 +23,7 @@ function HashTable(){
     }
 
     this.remove = function(key){
-
+        table[loseloseHashCode(key)] = undefined;
     }
 }
 
