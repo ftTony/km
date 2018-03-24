@@ -74,7 +74,32 @@ function BinarySearchTree(){
 }
 
 var removeNode = function(node,key){
-    
+
+    if(node === null){
+        return null;
+    }
+    if(key<node.key){
+        node.left = removeNode(node.left,key);
+        return node;
+    }else if(key>node.key){
+        node.right = removeNode(node.right,key);
+        return node;
+    }else{ // 健等于node.key
+        // 第一种情况——一种叶节点
+        if(node.left === null && node.right === null){
+
+        }
+
+        // 第二种情况——一个只有一个子节点的节点
+        if(node.left === null){
+
+        }else if(node.right===null){
+
+        }
+
+        // 第三种情况——一个有两个节点的节点
+        
+    }
 }
 
 var searchNode = function(node,key){
