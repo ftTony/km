@@ -87,18 +87,24 @@ var removeNode = function(node,key){
     }else{ // 健等于node.key
         // 第一种情况——一种叶节点
         if(node.left === null && node.right === null){
-
+            node = null;
+            return node;
         }
 
         // 第二种情况——一个只有一个子节点的节点
         if(node.left === null){
-
+            node= node.right;
+            return node;
         }else if(node.right===null){
-
+            node= node.left;
+            return node;
         }
 
         // 第三种情况——一个有两个节点的节点
-        
+        var aux = findMinxNode(node.right);
+        node.key = aux.key8;
+        node.right = removeNode(node.right,aux.key);
+        return node;
     }
 }
 
