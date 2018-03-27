@@ -902,7 +902,89 @@ console.log(result);
 
 比如要写一个正则支持匹配如下三种格式：
 
+>2016-06-12
+>
+>2016/06/12
+>
+>2016.06.12
+
+最先可能想到的正则是:
+
 ```
+var regex = /\d{4}(-|\/|\.)\d{2}(-|\/|\.)\d{2}/;
+var string1 = "2017-06-12";
+var string2 = "2017/06/12";
+var string3 = "2017.06.12";
+var string4 = "2016-06/12";
+console.log( regex.test(string1) ); // true
+console.log( regex.test(string2) ); // true
+console.log( regex.test(string3) ); // true
+console.log( regex.test(string4) ); // true
+```
+
+其中`/`和`.`需要转义。虽然匹配了要求的情况，但也匹配"2016-06/12"这样的数据。
+
+假设我们想要求分割符前后一致怎么办？此时需要使用反向引用：
+
+```
+var regex = /\d{4}(-|\/|\.)\d{2}\1\d{2}/;
+var string1 = "2017-06-12";
+var string2 = "2017/06/12";
+var string3 = "2017.06.12";
+var string4 = "2016-06/12";
+console.log( regex.test(string1) ); // true
+console.log( regex.test(string2) ); // true
+console.log( regex.test(string3) ); // true
+console.log( regex.test(string4) ); // false
+```
+
+注意里面的`\1`，表示的引用之前的那个分组`(-|\/|\.)`。不管它匹配到什么（比如-），`\1`都匹配那个同样的具体某个字符。
+
+我们知道了`\1`的含义后，那么`\2`和`\3`的概念也就理解了，即分别指代第二个和第三个分组。
+
+看到这里，此时，恐怕你会有三个问题。
+
+**括号嵌套怎么办？**
+
+以左括号（开括号）为准。比如：
+
+```
+var regex = /^((\d)(\d(\d)))\1\2\3\4$/;
+var string = "1231231233";
+console.log( regex.test(string) ); // true
+console.log( RegExp.$1 ); // 123
+console.log( RegExp.$2 ); // 1
+console.log( RegExp.$3 ); // 23
+console.log( RegExp.$4 ); // 3
+```
+
+我们可以看看这个正则匹配模式：
+
+- 第一个字符是数字，比如说1，
+- 第二个字符是数字，比如说2，
+- 第三个字符是数字，比如说3，
+- 接下来的是`\1`，是第一个分组内容，那么看第一个开括号对应的分组是什么，是123，
+- 接下来的是`\2`，找到第2个开括号，对应的分组，匹配的内容是1，
+- 接下来的是`\3`，找到第3个开括号，对应的分组，匹配的内容是23，
+- 最后的是`\4`，找到第3个开括号，对应的分组，匹配的内容是3。
+
+这个问题，估计仔细看一下，就该明白了。
+
+**\10表示什么呢？**
+
+```
+var regex = /(1)(2)(3)(4)(5)(6)(7)(8)(9)(#) \10+/;
+var string = "123456789# ######"
+console.log( regex.test(string) );
+// => true
+```
+
+**引用不存在的分组会怎样？**
+
+```
+var regex = /\1\2\3\4\5\6\7\8\9/;
+console.log( regex.test("\1\2\3\4\5\6\7\8\9") ); 
+console.log( "\1\2\3\4\5\6\7\8\9".split("") );
 ```
 
 #### 3.4 非捕获分组
