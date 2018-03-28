@@ -358,7 +358,7 @@ find 函数实现的功能是在一个数组中找到值等于 x 的项，并返
 
 要查找的变量 x 在数组中的位置，有 n+1 种情况：在数组的 0～n-1 位置中和不在数组中。我们把每种情况下，查找需要遍历的元素个数累加起来，然后再除以 n+1，就可以得到需要遍历的元素个数的平均值，即：
 
-![](algorithm-timing04.png)
+![images](algorithm-timing04.png)
 
 省略掉系数、低阶、常量，所以，这个公式简化之后，得到的平均时间复杂度就是 O(n)。
 
@@ -366,7 +366,7 @@ find 函数实现的功能是在一个数组中找到值等于 x 的项，并返
 
 因此，前面的推导过程中存在的最大问题就是，没有将各种情况发生的概率考虑进去。如果我们把每种情况发生的概率也考虑进去，那平均时间复杂度的计算过程就变成了这样：
 
-![](algorithm-timing05.png)
+![images](algorithm-timing05.png)
 
 这个值就是概率论中的**加权平均值**，也叫**期望值**，所以平均时间复杂度的全称应该叫**加权平均时间复杂度**或者**期望时间复杂度**。
 
@@ -384,9 +384,9 @@ O(1) < O(logn) < (n) < O(nlogn) < O(n2) < O(n3) < O(2n) < O(n!) < O(nn)
 
 常见的时间复杂度：
 
-![](algorithm-timing.png)
-![](algorithm-timing02.png)
-![](algorithm-timing03.png)
+![images](algorithm-timing.png)
+![images](algorithm-timing02.png)
+![images](algorithm-timing03.png)
 
 #### 3.7 空间复杂度分析
 
