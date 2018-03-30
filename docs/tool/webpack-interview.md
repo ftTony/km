@@ -11,6 +11,7 @@
 - `webpackPrefetch`、`webpackPreload` 和 `webpackChunkName` 到底是干什么的？
 - `hash`、`chunkhash`、`contenthash`有什么不同？
 - `sourse-map` 中 `eval`、`cheap`、`inline` 和 `module` 各是什么意思？
+- `loader` 和 `plugin` 的区别
 
 ### 一、`module`，`chunk`和`bundle`的区别是什么？
 
@@ -454,7 +455,7 @@ export function cube(x) {
 | inline | 映射文件以 base64 格式编码，加在 bundle 文件最后，不产生独立的 map 文件 |
 | module | 增加对 loader source map 和第三方模块的映射                             |
 
-### 六、loader 和 plugin 的区别
+### 六、`loader` 和 `plugin` 的区别
 
 - 主要区别
 - 常用的 plugin
@@ -462,12 +463,12 @@ export function cube(x) {
 
 ### 6.1 主要区别
 
-- `loader`用于加载某些资源文件。因为 webpack 本身只能打包`commonjs`规范的 js 文件，对于其他资源例如 css，图片，或者其他的语法集，比如 jsx，coffee，是没有办法加载的。这就是需要对应的 loader 将资源转化，加载进来。从字面意思也能看出，loader 是用于加载的，它作用于一个个文件上。
-- `plugin`用于扩展 webpack 的功能。它直接作用 webpack，扩展了它的功能。当然 loader 也时变相的扩展了 webpack，但是它只专注于文件（transform）这一个领域。而 plugin 的功能更加的丰富，而不仅局限于资源的加载。
+- `loader`用于加载某些资源文件。因为 `webpack` 本身只能打包`commonjs`规范的 `js` 文件，对于其他资源例如 `css`，图片，或者其他的语法集，比如 `jsx`，`coffee`，是没有办法加载的。这就是需要对应的 `loader` 将资源转化，加载进来。从字面意思也能看出，`loader` 是用于加载的，它作用于一个个文件上。
+- `plugin`用于扩展 `webpack` 的功能。它直接作用 `webpack`，扩展了它的功能。当然 `loader` 也时变相的扩展了 `webpack`，但是它只专注于文件（transform）这一个领域。而 `plugin` 的功能更加的丰富，而不仅局限于资源的加载。
 
 ### 6.2 常用的 plugin
 
-- `CommonsChunkPlugin` 创建一个公用的 chunk，常用于将第三方 lib 抽取成公用 js，例如
+- `CommonsChunkPlugin` 创建一个公用的 `chunk`，常用于将第三方 `lib` 抽取成公用 js，例如
 
 ```
 entry:{
@@ -487,7 +488,7 @@ new CommonsChunkPlugin({
 
 ### 6.3 常用的 loader
 
-loader 的功能就是加载资源到 webpack
+`loader` 的功能就是加载资源到 `webpack`
 
 - `css` 和 `style` cssloader 和 styleloader 做两件事件
   - `css-loader`遍历所有 require 的 css 文件，输出文件内容
