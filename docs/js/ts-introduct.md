@@ -131,9 +131,27 @@ x = [10, 'hello']; // Error
 
 `enum`类型是对 JavaScript 标准数据类型的一个补充。
 
+```
+enum Color {Red,Green,Blue}
+let c:Color = Color:Green;
+```
+
 #### 2.7 Any
 
+```
+let notSure:any = 4;
+notSure
+```
+
 #### 2.8 Void
+
+`void`类型像是与`any`类型相反，它表示没有任何类型。
+
+```
+function warnUser():void{
+    console.log('This is my warning message');
+}
+```
 
 #### 2.9 Null 和 Undefined
 
