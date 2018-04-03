@@ -138,6 +138,8 @@ let c:Color = Color:Green;
 
 #### 2.7 Any
 
+有时候，我们会想要为那些在编程阶段还不清楚类型的变量指定一个类型。 这种情况下，我们不希望类型检查器对这些值进行检查而是直接让它们通过编译阶段的检查。 那么我们可以使用 any 类型来标记这些变量：
+
 ```
 let notSure:any = 4;
 notSure
@@ -155,9 +157,51 @@ function warnUser():void{
 
 #### 2.9 Null 和 Undefined
 
+`undefined` 和 `null` 两者各自有自己的类型分别叫做 `undefined` 和 `null`。
+
+```
+// Not much else we can assign to these variables!
+let u: undefined = undefined;
+let n: null = null;
+```
+
 #### 2.10 Never
 
+`never`类型表示的是那些永不存在的值的类型。
+
+```
+// 返回never的函数必须存在无法达到的终点
+function error(message: string): never {
+    throw new Error(message);
+}
+
+// 推断的返回值类型为never
+function fail() {
+    return error("Something failed");
+}
+
+// 返回never的函数必须存在无法达到的终点
+function infiniteLoop(): never {
+    while (true) {
+    }
+}
+```
+
 #### 2.11 Object
+
+`object`表示非原始类型，也就是除`number`，`string`，`boolean`，`symbol`，`null` 或 `undefined` 之外的类型。
+
+```
+declare function create(o: object | null): void;
+
+create({ prop: 0 }); // OK
+create(null); // OK
+
+create(42); // Error
+create("string"); // Error
+create(false); // Error
+create(undefined); // Error
+```
 
 #### 2.12 类型断言
 
