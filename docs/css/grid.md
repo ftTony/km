@@ -46,11 +46,11 @@ CSS 代码:
 - `<percentage>`：非负值且相对于网格容器的`<百分比>`。
 - `<flex>`：非负值，用单位`fr`来定义网格轨道大小的弹性系数。 每个定义了`<flex>`的网格轨道会按比例分配剩余的可用空间。当外层用一个`minmax()`表示时，它将是一个自动最小值
 - `max-content`：是一个用来表示以网格项的最大的内容来占据网格轨道的关键字。
-- `min-content`
-- `minmax`
-- `auto`
-- `fit-content`
-- `repeat`:表示网格重复
+- `min-content`：是一个用来表示以网格项的最小内容来占据网格轨道的关键字。
+- `minmax`：是一个来定义大小范围的属性，大于等于 min 值，并且小于等于 max 值。
+- `auto`：如果该网格轨道为最大时，该属性等同于`<max-content>` ，为最小时，则等同于`<min-content>` 。
+- `fit-content`：相当于公式`min(max-content, max(auto, argument))`，类似于 `auto` 的计算(即 minmax(auto, max-content))，除了网格轨道大小值是确定下来的，否则该值都大于 `auto` 的最小值。
+- `repeat`：表示网格重复部分，以一种更简洁的方式去表示大量而且重复列的表达式。可值有`positive-integer`、`auto-fill`、`auto-fit`
 
 - grid-template-areas
 - grid-template
