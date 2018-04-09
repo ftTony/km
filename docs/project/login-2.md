@@ -126,6 +126,12 @@ web 系统由单系统发展成多系统组成的应用群，复杂性应该由�
 
 ![images](login10.png)
 
+sso 认证中心一直监听全局会话的状态，一旦全局会话销毁，监听器将通知所有注册系统执行注销操作
+
+下面对上图简要说明
+
+1. 用户向系统 1 发起注销请求
+
 ### 参考资料
 
 - [Web 登录鉴权](https://lmjben.github.io/blog/osi-web-login.html#session-cookie)
