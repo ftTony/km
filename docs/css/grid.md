@@ -53,9 +53,17 @@ CSS 代码:
 - `repeat`：表示网格重复部分，以一种更简洁的方式去表示大量而且重复列的表达式。可值有`positive-integer`、`auto-fill`、`auto-fit`
 
 - grid-template-areas
+
+通过引用`grid-area`属性指定的风格区域名称来定义网格模板。重复网格区域的名称导致内容跨越这些单元格。
+
+值：
+
+- `<grid-area-name>`：由网格项的`grid-area`指定的网格区域名称
+- `.`(点号)：代表一个空的风格单元
+- `none`：不定义网格区域
+
 - grid-template
-- grid-column-gap
-- grid-row-gap
+- grid-column-gap/grid-row-gap
 - grid-gap
 - justify-items
 - align-items
