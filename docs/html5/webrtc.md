@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [如何通过WebRTC开发实时互动AI视频应用](https://mp.weixin.qq.com/s/9k0CR_niaNorgBWDPQWgmQ)
+
 ## 联系作者
 
 <div align="center">
