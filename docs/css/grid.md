@@ -14,9 +14,35 @@ CSS Grid(网格)布局，是一个二维的基于风格的布局系统，它的�
 
 #### 1.1 网格容器(Grid Container) 属性
 
-- display
-- grid-template-columns
-- grid-template-rows
+- **display**
+
+将元素定义为网格容器，并为其内容建立新的，网格格式上下文。
+
+值：
+
+- `grid`：生成一个块级网格
+- `inline-grid`：生成一个内联网格
+
+- **grid-template-columns/grid-template-rows**
+
+使用空格分隔的值列表，用来定义网格的列和行。这些值表示网格轨道大小，它们之间的空格表示网格线。
+
+值：
+
+- `<track-size>`：可以是长度值，百分比，或者等份网格容器中可用空间（使用`fr`单位）
+- `<line-name>`：你可以选择的任意名称
+
+CSS 代码:
+
+```
+.container {
+  grid-template-columns: <track-size> ... | <line-name> <track-size> ...;
+  grid-template-rows: <track-size> ... | <line-name> <track-size> ...;
+}
+```
+
+**repeat()**
+
 - grid-template-areas
 - grid-template
 - grid-column-gap
@@ -71,6 +97,7 @@ CSS Grid(网格)布局，是一个二维的基于风格的布局系统，它的�
 - [CSS Grid 网格布局教程](https://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)
 - [Grid 布局](https://juejin.im/entry/5894135c8fd9c5a19507f6a1)
 - [CSS Grid 布局完全指南(图解 Grid 详细教程)](https://www.html.cn/archives/8510)
+- [MDN Grid](https://developer.mozilla.org/zh-CN/docs/Web/CSS/grid)
 
 ## 联系作者
 
