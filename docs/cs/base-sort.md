@@ -57,6 +57,9 @@
 #### 2.2 代码实现
 
 ```
+function bubbleSort(arr){
+    var len = arr.length;
+}
 ```
 
 ### 三、选择排序
