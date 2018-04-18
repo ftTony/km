@@ -162,7 +162,23 @@ n个记录的直接选择排序可以经过n-1趟直接选择排序得到有序�
 #### 3.3 代码实现
 
 ```
-
+function selectionSort(arr){
+    var len = arr.length;
+    var minIndex,temp;
+    console.log('选择排序耗时');
+    for(var i=0;i<len-i;i++){
+        minIndex = i;
+        for(var j = i + 1; j<len;j++){
+            if(arr[j]<arr[minIndex]){   // 寻找最小的数
+                minIndex = j;
+            }
+        }
+        temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+    console.timeEnd('选择排序耗时');
+}
 ```
 
 #### 3.4 算法分析
