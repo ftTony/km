@@ -413,6 +413,31 @@ babel 默认只转换 js 语法，而不转换新的 API，比如 Iterator、Gen
 
 #### 4.6 babel-loader
 
+```
+module: {
+  rules: [
+    {
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      loader: 'babel-loader'
+    }
+  ]
+}
+
+```
+
+如果想在这里传入 babel 的配置项，也可以把改成：
+
+```
+// loader: 'babel-loader' 改成如下：
+use: {
+  loader: 'babel-loader',
+  options: {
+    // 配置项在这里
+  }
+}
+```
+
 #### 小结
 
 | 名称                                           | 作用                                                        | 备注                                                                 |
