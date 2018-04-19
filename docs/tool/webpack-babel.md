@@ -405,13 +405,24 @@ babel 默认只转换 js 语法，而不转换新的 API，比如 Iterator、Gen
 
 `babel-polyfill`主要有两个缺点：
 
-- 使用`babel-polyfill`会导致打出来的包非常大，因为`babel-polyfill`是一个整体，把所有方法都加到原型链上。比如我们只使用了`Array.from`，但它把`Object.defineProperty`也给加上了，这就是一种浪费了
+- 使用`babel-polyfill`会导致打出来的包非常大，因为`babel-polyfill`是一个整体，把所有方法都加到原型链上。比如我们只使用了`Array.from`，但它把`Object.defineProperty`也给加上了，这就是一种浪费了。这个问题可以通过单独`core-js`的某个类库来解决，`core-js`都是分开的。
+- ``
+
+因此在实际使用中，如果我们无法忍受这两个缺点(尤其是第二个)，通常我们会倾向于使用`babel-plugin-transform-runtime`。
+
+但如果代码中包含高版本 js 中类型的实例方法 (例如`[1,2,3].includes(1)`)，这还是要使用 polyfill。
 
 #### 4.5 babel-runtime 和 babel-plugin-transform-runtime
 
-我们时常在项目中看到.babelrc中使用`babel-plugin-transform-runtime`，而`package.json`中的`dependencies`(注意不是`devDependencies`)又包含了`babel-runtime`，那这两个是不是成套使用的呢？
+我们时常在项目中看到.babelrc中使用`babel-plugin-transform-runtime`，而`package.json`中的`dependencies`(注意不是`devDependencies`)又包含了`babel-runtime`，那这两个是不是成套使用的呢？他们又起什么作用呢？
 
 #### 4.6 babel-loader
+
+前面提过 babel 的三种使用方法，并且已经介绍过了 babel-cli。但一些大型的项目都会有构建工具 (如 webpack 或 rollup) 来进行代码构建和压缩 (uglify)。理论上来说，我们也可以对压缩后的代码进行 babel 处理，但那会非常慢。因此如果在 uglify 之前就加入 babel 处理，岂不完美？
+
+所以就有了 babel 插入到构建工具内部这样的需求。以(我还算熟悉的) webpack 为例，webpack 有 loader 的概念，因此就出现了 babel-loader。
+
+和`babel-cli`一样，`babel-loader`也会读取 .babelrc 或者 package.json 中的`babel`段作为自己的配置，之后的内核处理也是相同。唯一比`babel-cli`复杂的是，它需要和 webpack 交互，因此需要在 webpack 这边进行配置。比较常见的如下：
 
 ```
 module: {
