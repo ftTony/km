@@ -416,6 +416,21 @@ babel 默认只转换 js 语法，而不转换新的 API，比如 Iterator、Gen
 
 我们时常在项目中看到.babelrc中使用`babel-plugin-transform-runtime`，而`package.json`中的`dependencies`(注意不是`devDependencies`)又包含了`babel-runtime`，那这两个是不是成套使用的呢？他们又起什么作用呢？
 
+先说`babel-plugin-transform-runtime`。
+
+babel会转换js语法，之前已经提过了。以`async/await`举例，如果不使用这个plugin(即默认情况)，转换后的代码大概是：
+
+```
+// babel 添加一个方法，把 async 转化为 generator
+function _asyncToGenerator(fn) { return function () {....}} // 很长很长一段
+
+// 具体使用处
+var _ref = _asyncToGenerator(function* (arg1, arg2) {
+  yield (0, something)(arg1, arg2);
+});
+
+```
+
 #### 4.6 babel-loader
 
 前面提过 babel 的三种使用方法，并且已经介绍过了 babel-cli。但一些大型的项目都会有构建工具 (如 webpack 或 rollup) 来进行代码构建和压缩 (uglify)。理论上来说，我们也可以对压缩后的代码进行 babel 处理，但那会非常慢。因此如果在 uglify 之前就加入 babel 处理，岂不完美？
@@ -448,6 +463,8 @@ use: {
   }
 }
 ```
+
+这里的配置项优先级是最高的。但我认为放到单独的配置文件中更加清晰合理，可读性强一些。
 
 #### 小结
 
