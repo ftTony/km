@@ -243,7 +243,31 @@ visitor: {
 	}
 ```
 
+当把这个插件用于遍历中时，每当处理到一个import语句，即ImportDeclaration节点时，都会自动调用ImportDeclaration()方法，这个方法中定义了处理import语句具体操作。
+
 #### 2.5 Path
+
+从上面的visitor对象中，可以看到每次访问节点方法时，都会传入一个path参数，这个path参数中包含了节点的信息以及节点和所在的位置，以供对特定节点进行操作。具体来说Path 是表示两个节点之间连接的对象。这个对象不仅包含了当前节点的信息，也有当前节点的父节点的信息，同时也包含了添加、更新、移动和删除节点有关的其他很多方法。具体地，Path对象包含的属性和方法主要如下：
+
+```
+── 属性      
+  - node   当前节点
+  - parent  父节点
+  - parentPath 父path
+  - scope   作用域
+  - context  上下文
+  - ...
+── 方法
+  - get   当前节点
+  - findParent  向父节点搜寻节点
+  - getSibling 获取兄弟节点
+  - replaceWith  用AST节点替换该节点
+  - replaceWithMultiple 用多个AST节点替换该节点
+  - insertBefore  在节点前插入节点
+  - insertAfter 在节点后插入节点
+  - remove   删除节点
+  - ...
+```
 
 #### 2.6 State
 
