@@ -6,15 +6,15 @@
 
 ## 内容
 
-- Animations 功能介绍
-- name
-- duration
-- timeing-function
-- delay
-- iterations-count
-- direction
-- play-state
-- fill-mode
+- [Animations 功能介绍](#一、animations-功能介绍)
+- [name](#二、name)
+- [duration](#三、duration)
+- [timeing-function](#四、timeing-function)
+- [delay](#五、delay)
+- [iterations-count](#六、iterations-count)
+- [direction](#七、direction)
+- [play-state](#八、play-state)
+- [fill-mode](#九、fill-mode)
 
 ### 一、Animations 功能介绍
 
