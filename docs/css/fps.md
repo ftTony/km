@@ -78,9 +78,56 @@ Chrome 提供给开发者的功能十分强大，在开发者工具中，我们�
 
 Frame Timing API 是 Web Performance Timing API 标准中的其中一位成员。
 
+[Web Performance Timing API](http://siusin.github.io/perf-timing-primer/)是 W3C 推出的一套性能 API 标准，用于帮助开发者对网站各方面的性能进行精确的分析与控制，提升 Web 网站性能。
+
+它包含许多子类 API，完成不同的功能，大致如下
+
+![images](fps02.png)
+
 #### 3.4 Frame Timing API 示意
 
 ### 四、法三：借助 requestAnimationFrame API
+
+#### 4.1 使用 requestAnimationFrame 计算 FPS 原理
+
+```
+var rAF = function () {
+    return (
+        window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+        }
+    );
+}();
+
+var frame = 0;
+var allFrameCount = 0;
+var lastTime = Date.now();
+var lastFameTime = Date.now();
+
+var loop = function () {
+    var now = Date.now();
+    var fs = (now - lastFameTime);
+    var fps = Math.round(1000 / fs);
+
+    lastFameTime = now;
+    // 不置 0，在动画的开头及结尾记录此值的差值算出 FPS
+    allFrameCount++;
+    frame++;
+
+    if (now > 1000 + lastTime) {
+        var fps = Math.round((frame * 1000) / (now - lastTime));
+        console.log(`${new Date()} 1S内 FPS：`, fps);
+        frame = 0;
+        lastTime = now;
+    };
+
+    rAF(loop);
+}
+
+loop();
+```
 
 ### 参考资料
 
