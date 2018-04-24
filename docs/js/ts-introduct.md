@@ -83,7 +83,36 @@ let name: string = "bob";
 name = "smith";
 ```
 
+使用模版字符串，它可以定义多行文本和内嵌表达式。
+
+```
+let name: string = `Gene`;
+let age: number = 37;
+let sentence: string = `Hello, my name is ${ name }.
+
+I'll be ${ age + 1 } years old next month.`;
+```
+
+定义 sentence 的方式效果相同：
+
+```
+let sentence: string = "Hello, my name is " + name + ".\n\n" +
+    "I'll be " + (age + 1) + " years old next month.";
+```
+
 #### 2.4 数组
+
+TypeScript 像 JavaScript 一样可以操作数组元素。 有两种方式可以定义数组。 第一种，可以在元素类型后面接上 `[]`，表示由此类型元素组成的一个数组：
+
+```
+let list: number[] = [1, 2, 3];
+```
+
+第二种方式是使用数组泛型，`Array<元素类型>`：
+
+```
+let list: Array<number> = [1, 2, 3];
+```
 
 #### 2.5 元组
 
