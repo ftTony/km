@@ -116,7 +116,20 @@ let list: Array<number> = [1, 2, 3];
 
 #### 2.5 元组
 
+元组类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同。
+
+```
+// Declare a tuple type
+let x: [string, number];
+// Initialize it
+x = ['hello', 10]; // OK
+// Initialize it incorrectly
+x = [10, 'hello']; // Error
+```
+
 #### 2.6 枚举
+
+`enum`类型是对 JavaScript 标准数据类型的一个补充。
 
 #### 2.7 Any
 
