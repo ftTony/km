@@ -205,6 +205,24 @@ create(undefined); // Error
 
 #### 2.12 类型断言
 
+类型断言好比其它语言里的类型转换，但是不进行特殊的数据检查和解构。 它没有运行时的影响，只是在编译阶段起作用。
+
+类型断言有两种形式。 其一是“尖括号”语法：
+
+```
+let someValue: any = "this is a string";
+
+let strLength: number = (<string>someValue).length;
+```
+
+另一个为`as`语法：
+
+```
+let someValue: any = "this is a string";
+
+let strLength: number = (someValue as string).length;
+```
+
 ### 四、接口
 
 ### 五、类
