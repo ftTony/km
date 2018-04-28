@@ -225,6 +225,29 @@ let strLength: number = (someValue as string).length;
 
 ### 四、接口
 
+接口有助于在整个应用程序中形成模式，这样任何开发人员在编写代码时都可以选择这种模型并遵循它。
+
+#### 4.1 例子
+
+```
+interface LabelledValue{
+    label:string;
+}
+
+function printLabel(labelledObj:LabelledValue){
+    console.log(labelledObj.label);
+}
+
+let myObj = {size:10,label:'Size 10 Object'};
+printLabel(myObj);
+```
+
+#### 4.2 可选属性
+
+```
+
+```
+
 ### 五、类
 
 ### 六、函数
