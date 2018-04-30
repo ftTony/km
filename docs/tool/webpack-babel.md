@@ -216,7 +216,32 @@ n * n;
 
 #### 2.4 Visitor
 
+当Babel处理一个节点时，是以访问者的形式获取节点信息，并进行相关操作，这种方式是通过一个visitor对象来完成的，在visitor对象中定义了对于各种节点的访问函数，这样就可以针对不同的节点做出不同的处理。我们编写的Babel插件其实也是通过定义一个实例化visitor对象处理一系列的AST节点来完成我们圣代的修改操作。举个例子：
 
+我们想要处理代码中用来加载模块的import命令语句
+
+```
+import { Ajax } from '../lib/utils';
+```
+
+那么我们的Babel插件就需要定义这样的一个visitor对象：
+
+```
+visitor: {
+            Program: {
+                enter(path, state) {
+                    console.log('start processing this module...');
+                },
+                exit(path, state) {
+                    console.log('end processing this module!');
+                }
+            },
+    	    ImportDeclaration (path, state) {
+            	console.log('processing ImportDeclaration...');
+            	// do something
+            }
+	}
+```
 
 #### 2.5 Path
 
