@@ -522,10 +522,26 @@ ES6 中，还支持 positive lookbehind 和 negative lookbehind。
 "hello" == "" + "h" + "" + "e" + "" + "l" + "" + "l" + "o" + "";
 ```
 
-也等于
+也等价于
 
 ```
 "hello" == "" + "" + "hello"
+```
+
+因此，把`/^hello$/`写成`/^^hello$$$/`，是没有任何问题的：
+
+```
+var result = /^^hello$$$/.test("hello");
+console.log(result);
+// => true
+```
+
+甚至可以写成更复杂的:
+
+```
+var result = /(?=he)^^he(?=\w)llo$\b\b$/.test("hello");
+console.log(result);
+// => true
 ```
 
 ### 三、正则表达式括号的作用
