@@ -267,6 +267,9 @@ preset 分为以下几种：
 2. stage-x，这里面包含的都是当年最新规范的草案，每年更新。
    - Stage 0 - 稻草人：只是一个想法，经过TC39成员提出即可。
    - Stage 1 - 提案：初步尝试。
+   - Stage 2 - 初稿：完成初步规范。
+   - Stage 3 - 候选：完成规范和浏览器初步实现。
+   - Stage 4 - 完成：将被添加到下一年度发布。
 
 #### 3.5 执行顺序
 
@@ -290,6 +293,12 @@ preset 分为以下几种：
 - babel-loader
 
 #### 4.1 babel-cli
+
+顾名思义，cli就是命令行工具。安装了`babel-cli`就能够在命令行中使用`babel`命令来编译文件。
+
+在开发npm package时经常会使用如下模式：
+
+- 把`babel-cli`安装为`devDependencies`
 
 #### 4.2 babel-node
 
