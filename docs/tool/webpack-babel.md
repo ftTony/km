@@ -2,19 +2,22 @@
 
 ## 前言
 
-本人平时学习及收集内容，欢迎参入一起讨论。
+Babel是JavaScript编译器，更确切地说是源码到源码的编译器，通常也叫做“转换编译器”。意思是说你为Babel提供一些JavaScript代码，Babel更改这些代码，然后返回给你新生成的代码。
 
 ## 内容
 
-- babel 到底做了什么？怎么做的？
+- 抽象语法树
+- Babel 的处理步骤
 - 其他配套工具
 - Babel 7.x
 
-### 一、babel 到底做了什么？怎么做的？
+### 一、抽象语法树
 
-### 二、其他配套工具
+### 二、Babel 的处理步骤
 
-### 三、Babel 7.x
+### 三、其他配套工具
+
+### 四、Babel 7.x
 
 ## 参考资料
 
@@ -24,6 +27,7 @@
 - [前端工程师需要了解的 Babel 知识](https://mp.weixin.qq.com/s/HdIvS75nJ0JFStoNPIl7Iw)
 - [深入浅出 Babel 上篇：架构和原理 + 实战](https://juejin.im/post/5d94bfbf5188256db95589be)
 - [深入浅出 Babel 下篇：既生 Plugin 何生 Macros](https://juejin.im/post/5da12397e51d4578364f6ffa)
+- [Babel 插件手册](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md)
 
 ## 联系作者
 
