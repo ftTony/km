@@ -283,6 +283,14 @@ preset 分为以下几种：
 
 #### 3.7 env (重点)
 
+因为env最为常用也最重要，所以我们必须重点关注。
+
+env的核心目的是通过配置得知
+
+
+```
+```
+
 ### 四、其他配套工具
 
 - babel-cli
@@ -309,6 +317,18 @@ preset 分为以下几种：
 #### 4.5 babel-runtime 和 babel-plugin-transform-runtime
 
 #### 4.6 babel-loader
+
+#### 小结
+
+
+| 名称                                           | 作用                            | 备注 |
+| ---------------------------------------------- | ------------------------------- | ---- |
+| babel-cli                                      | 允许命令行使用babel命令转译文件 |
+| babel-node                                     | 允许命令行使用babel命令转译文件 |
+| babel-register                                 | 允许命令行使用babel命令转译文件 |
+| babel-polyfill                                 | 允许命令行使用babel命令转译文件 |
+| babel-plugin-transform-runtime & babel-runtime | 允许命令行使用babel命令转译文件 |
+| babel-loader                                   | 允许命令行使用babel命令转译文件 |
 
 ### 五、Babel 7.x
 
