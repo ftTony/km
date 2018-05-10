@@ -270,6 +270,14 @@ preset 分为以下几种：
    - Stage 2 - 初稿：完成初步规范。
    - Stage 3 - 候选：完成规范和浏览器初步实现。
    - Stage 4 - 完成：将被添加到下一年度发布。
+例如`syntax-dynamic-import`就是stage-2的内容，`transform-object-rest-spread`就是stage-3的内容。
+
+此外，低一级的stage会包含所有高级stage的内容，例如 stage-1 会包含 stage-2, stage-3 的所有内容。
+
+stage-4 在下一年更新会直接放到 env 中，所以没有单独的 stage-4 可供使用。
+
+3. es201x,latest
+
 
 #### 3.5 执行顺序
 
