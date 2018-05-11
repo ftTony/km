@@ -278,6 +278,9 @@ stage-4 在下一年更新会直接放到 env 中，所以没有单独的 stage-
 
 3. es201x,latest
 
+这些是已经纳入到标准规范的语法。例如 es2015 包含 `arrow-functions`，es2017 包含 `syntax-trailing-function-commas`。但因为 env 的出现，使得 es2016 和 es2017 都已经废弃。所以我们经常可以看到 es2015 被单独列出来，但极少看到其他两个。
+
+latest 是 env 的雏形，它是一个每年更新的 preset，目的是包含所有 es201x。但也是因为更加灵活的 env 的出现，已经废弃。
 
 #### 3.5 执行顺序
 
