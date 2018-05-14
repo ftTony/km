@@ -399,7 +399,9 @@ babel-register模块必写`require`命令，为它加上一个钩子。此后，
 
 babel 默认只转换 js 语法，而不转换新的 API，比如 Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise 等全局对象，以及一些定义在全局对象上的方法(比如`Object.assign`)都不会转码。
 
-举例来说，es2015在Array对象上新增了
+举例来说，es2015在Array对象上新增了`Array.from`方法。babel就不会转码这个方法。如果想让这个方法运行，必须使用`babel-polyfill`。(内部集成了`core-js`和`regenerator`)
+
+使用时，在所有代码运行之前增加`require('babel-polyfill')`。或者更常规的操作是在`webpack.config.js`中将`babel-polyfill`作为第一个entry。因此必须把`babel-polyfill`作为`dependencies`而不是`devDependencies`
 
 #### 4.5 babel-runtime 和 babel-plugin-transform-runtime
 
