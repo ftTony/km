@@ -209,6 +209,43 @@ function reloadApp() {
 
 这一步是整个模块热更新（HMR）的关键步骤，而且模块热更新都是发生在HMR runtime 中的 hotApply 方法中，这儿我不打算把 hotApply 方法整个源码贴出来了，因为这个方法包含 300 多行代码，我将只摘取关键代码片段。
 
+```
+// webpack/lib/HotModuleReplacement.runtime
+function hotApply() {
+    // ...
+    var idx;
+    var queue = outdatedModules.slice();
+    while(queue.length > 0) {
+        moduleId = queue.pop();
+        module = installedModules[moduleId];
+        // ...
+        // remove module from cache
+        delete installedModules[moduleId];
+        // when disposing there is no need to call dispose handler
+        delete outdatedDependencies[moduleId];
+        // remove "parents" references from all children
+        for(j = 0; j < module.children.length; j++) {
+            var child = installedModules[module.children[j]];
+            if(!child) continue;
+            idx = child.parents.indexOf(moduleId);
+            if(idx >= 0) {
+                child.parents.splice(idx, 1);
+            }
+        }
+    }
+    // ...
+    // insert new code
+    for(moduleId in appliedUpdate) {
+        if(Object.prototype.hasOwnProperty.call(appliedUpdate, moduleId)) {
+            modules[moduleId] = appliedUpdate[moduleId];
+        }
+    }
+    // ...
+}
+```
+
+从上面hotApply方法可以看出，模块热替换主要分三个阶段，第一个阶段是找出outdatedModules和outdateDependencies，这儿我没有贴这部分代码，有兴趣可以自己阅读源码。第二个阶段从缓存中删除过期的模块和依赖，如下：
+
 **第六步：业务代码需要做些什么？**
 
 当用新的模块代码替换老的模块后，但是我们的业务代码并不能知道代码已经发生变化，也就是说，当hello.js文件修改后，我们需要在index.js文件中调用HMR的accept方法，添加模块更新后的处理函数，及时将hello方法的返回值插入到页面中。代码如下：
