@@ -203,9 +203,11 @@ function reloadApp() {
 
 如上两图所示，值得注意的是，两次请求的都是使用上一次的hash值拼接的请求文件名，hotDownloadManifest方法返回的是最新的hash值，hotDownloadUpdateChunk方法返回的就是最新hash值对对应的代码块。然后将新的代码块返回给HMR runtime，进行模块热更新。
 
-还记得**HMR的工作原理图解**中的问题3吗？为什么更新模块的代码不直接在第三步通过websocket发送到浏览器端，而是通过jsonp来获取呢？我的理解是功能块的解耦，各个模块各司其职，dev-server/client只负责消息的传递而不负责新模块的获取
+还记得**HMR的工作原理图解**中的问题3吗？为什么更新模块的代码不直接在第三步通过websocket发送到浏览器端，而是通过jsonp来获取呢？我的理解是功能块的解耦，各个模块各司其职，dev-server/client只负责消息的传递而不负责新模块的获取，而这些工作应该有HMR runtime来完成，HMR runtime才应该是获取新代码的地方。再就是因为不使用webpack-dev-server 的前提，使用webpack-hot-middleware 和 webpack 配合也可以完成模块热更新流程，在使用webpack-hot-middleware中有件有意思的事，它没有使用websocket，而是使用的EventSource。综上所述，HMR 的工作流中，不应该把新模块代码放在 websocket 消息中。
 
 **第五步：HotModuleReplacement.runtime 对模块进行热更新**
+
+这一步是整个模块热更新（HMR）的关键步骤，而且模块热更新都是发生在HMR runtime 中的 hotApply 方法中，这儿我不打算把 hotApply 方法整个源码贴出来了，因为这个方法包含 300 多行代码，我将只摘取关键代码片段。
 
 **第六步：业务代码需要做些什么？**
 
