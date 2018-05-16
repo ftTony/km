@@ -246,6 +246,29 @@ function hotApply() {
 
 从上面hotApply方法可以看出，模块热替换主要分三个阶段，第一个阶段是找出outdatedModules和outdateDependencies，这儿我没有贴这部分代码，有兴趣可以自己阅读源码。第二个阶段从缓存中删除过期的模块和依赖，如下：
 
+>delete installedModules[moduleId];
+>delete outdatedDependencies[moduleId];
+
+第三个阶段是将新的模块添加到modules中，当下次调用__webpack_require__(webpack 重写的 require 方法)方法的时候，就是获取到了新的模块代码了。
+
+模块热更新的错误处理，如果在热更新过程出现错误，热更新将回退到刷新浏览器，这部分代码在dev-server代码中，简要代码如下：
+
+```
+module.hot.check(true).then(function(updatedModules) {
+    if(!updatedModules) {
+        return window.location.reload();
+    }
+    // ...
+}).catch(function(err) {
+    var status = module.hot.status();
+    if(["abort", "fail"].indexOf(status) >= 0) {
+        window.location.reload();
+    }
+});
+```
+
+dev-server 先验证是否有更新，没有代码更新的话，重载浏览器。如果在 hotApply 的过程中出现 abort 或者 fail 错误，也进行重载浏览器。
+
 **第六步：业务代码需要做些什么？**
 
 当用新的模块代码替换老的模块后，但是我们的业务代码并不能知道代码已经发生变化，也就是说，当hello.js文件修改后，我们需要在index.js文件中调用HMR的accept方法，添加模块更新后的处理函数，及时将hello方法的返回值插入到页面中。代码如下：

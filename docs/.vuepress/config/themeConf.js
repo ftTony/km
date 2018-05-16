@@ -335,8 +335,8 @@ module.exports = {
             collapsable: false,
             children: [
                 'ci-cd',
-                'npm-1',
                 'npm-2',
+                'npm-1',
                 'webhook',
             ]
         },
