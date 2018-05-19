@@ -338,6 +338,24 @@ env的核心目的是通过配置得知目标环境的特点，然后只做必�
 }
 ```
 
+如上配置将考虑所有浏览器的最新2个版本(safari大于等于7.0的版本)的特性，将必要的代码进行转换。而这些版本已有的功能就不进行转化了。这里的语法可以参考[browserslist](https://github.com/browserslist/browserslist)
+
+```
+{
+  "presets": [
+    ["env", {
+      "targets": {
+        "node": "6.10"
+      }
+    }]
+  ]
+}
+```
+
+如上配置将目标设置为nodejs，并且支持6.10及鸡皮疙瘩版本。也可以使用`node: 'current'`来支持最新稳定版本。例如箭头函数在nodejs6及以上将不被转化，但如果nodejs 0.12就会被转化了。
+
+另外一个有用的配置项是`modules`。它的取值可以是`amd`, `umd`, `systemjs`, `commonjs` 和 `false`。这可以让 babel 以特定的模块化格式来输出代码。如果选择`false` 就不进行模块化处理。
+
 ### 四、其他配套工具
 
 - babel-cli
