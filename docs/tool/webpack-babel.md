@@ -31,6 +31,38 @@ Babel的三个主要处理步骤分别是：**解析(parse)**，**转换(transfo
 n * n;
 ```
 
+```
+[
+  { type: { ... }, value: "n", start: 0, end: 1, loc: { ... } },
+  { type: { ... }, value: "*", start: 2, end: 3, loc: { ... } },
+  { type: { ... }, value: "n", start: 4, end: 5, loc: { ... } },
+  ...
+]
+```
+
+每一个`type`有一组属性来描述该令牌：
+
+```
+{
+  type: {
+    label: 'name',
+    keyword: undefined,
+    beforeExpr: false,
+    startsExpr: true,
+    rightAssociative: false,
+    isLoop: false,
+    isAssign: false,
+    prefix: false,
+    postfix: false,
+    binop: null,
+    updateContext: null
+  },
+  ...
+}
+```
+
+和AST节点一样它们也有`start`、`end`、`loc`属性。
+
 #### 2.2 转换
 
 #### 2.3 生成
