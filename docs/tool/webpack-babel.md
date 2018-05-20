@@ -320,10 +320,22 @@ preset的逆向顺序主要是为了保证向后兼容，因为大多数用户�
 
 因为env最为常用也最重要，所以我们必须重点关注。
 
-env的核心目的是通过配置得知
+env的核心目的是通过配置得知目标环境的特点，然后只做必要的转换。例如目标浏览器支持es2015，那么es2015这个preset其实是不需要的，于是代码就可以小一点(一般转化后的代码总是更长)，构建时间也可以缩短一些。
 
+如果不写任何任何配置项，env等价于latest，也等价于 es2015 + es2016 + es2017 三个相加(不包含 stage-x 中的插件)。env 包含的插件列表维护在[这里](https://github.com/babel/babel-preset-env/blob/master/data/plugin-features.js)
+
+下面列出几种比较常用的配置方法：
 
 ```
+{
+    "presets":[
+        {
+            "env":{
+                "targets":["last 2 versions", "safari >= 7"]
+            }
+        }
+    ]
+}
 ```
 
 ### 四、其他配套工具
