@@ -393,6 +393,8 @@ babel-register模块必写`require`命令，为它加上一个钩子。此后，
 
 #### 4.4 babel-polyfill
 
+babel 默认只转换 js 语法，而不转换新的 API，比如 Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise 等全局对象，以及一些定义在全局对象上的方法(比如`Object.assign`)都不会转码。
+
 #### 4.5 babel-runtime 和 babel-plugin-transform-runtime
 
 #### 4.6 babel-loader
