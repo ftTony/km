@@ -391,9 +391,15 @@ babel-register模块必写`require`命令，为它加上一个钩子。此后，
 
 使用时，必须首先加载`require('babel-register')`。
 
+需要注意的是，babel-register只会对`require`命令加载的文件转码，而**不会对当前文件转码**。
+
+另外，由于它是实时转码，所以**只适合在开发环境使用**。
+
 #### 4.4 babel-polyfill
 
 babel 默认只转换 js 语法，而不转换新的 API，比如 Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise 等全局对象，以及一些定义在全局对象上的方法(比如`Object.assign`)都不会转码。
+
+举例来说，es2015在Array对象上新增了
 
 #### 4.5 babel-runtime 和 babel-plugin-transform-runtime
 
