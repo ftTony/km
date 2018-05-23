@@ -50,6 +50,44 @@ function square(n) {
                   - name: n
 ```
 
+或是如下所示的 JavaScript Object（对象）：
+
+```
+{
+  type: "FunctionDeclaration",
+  id: {
+    type: "Identifier",
+    name: "square"
+  },
+  params: [{
+    type: "Identifier",
+    name: "n"
+  }],
+  body: {
+    type: "BlockStatement",
+    body: [{
+      type: "ReturnStatement",
+      argument: {
+        type: "BinaryExpression",
+        operator: "*",
+        left: {
+          type: "Identifier",
+          name: "n"
+        },
+        right: {
+          type: "Identifier",
+          name: "n"
+        }
+      }
+    }]
+  }
+}
+```
+
+你会留意到 AST 的每一层都拥有相同的结构：
+
+
+
 ### 二、Babel 的处理步骤
 
 Babel的三个主要处理步骤分别是：**解析(parse)**，**转换(transform)**，**生成(generate)**。
