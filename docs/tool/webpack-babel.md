@@ -13,6 +13,43 @@ Babel是JavaScript编译器，更确切地说是源码到源码的编译器，�
 
 ### 一、抽象语法树
 
+这个处理过程中的每一步都涉及到创建或是操作抽象语法树，亦称 AST。
+
+>Babel 使用一个基于 ESTree 并修改过的 AST，它的内核说明文档可以在[这里](https://github.com/babel/babel/blob/master/doc/ast/spec.md)找到。
+
+```
+function square(n) {
+  return n * n;
+}
+```
+
+>[AST Explorer](http://astexplorer.net/)可以让你对 AST 节点有一个更好的感性认识。 [这里](http://astexplorer.net/#/Z1exs6BWMq)是上述代码的一个示例链接。
+
+这个程序可以被表示成如下的一棵树：
+
+```
+- FunctionDeclaration:
+  - id:
+    - Identifier:
+      - name: square
+  - params [1]
+    - Identifier
+      - name: n
+  - body:
+    - BlockStatement
+      - body [1]
+        - ReturnStatement
+          - argument
+            - BinaryExpression
+              - operator: *
+              - left
+                - Identifier
+                  - name: n
+              - right
+                - Identifier
+                  - name: n
+```
+
 ### 二、Babel 的处理步骤
 
 Babel的三个主要处理步骤分别是：**解析(parse)**，**转换(transform)**，**生成(generate)**。
