@@ -405,9 +405,11 @@ babel 默认只转换 js 语法，而不转换新的 API，比如 Iterator、Gen
 
 `babel-polyfill`主要有两个缺点：
 
-- 使用`babel-polyfill`会导致打出来的包非常大，因为`babel-polyfill`是一个整体，把所有方法都加到原型链上。比如我们只使用
+- 使用`babel-polyfill`会导致打出来的包非常大，因为`babel-polyfill`是一个整体，把所有方法都加到原型链上。比如我们只使用了`Array.from`，但它把`Object.defineProperty`也给加上了，这就是一种浪费了
 
 #### 4.5 babel-runtime 和 babel-plugin-transform-runtime
+
+我们时常在项目中看到.babelrc中使用`babel-plugin-transform-runtime`，而`package.json`中的`dependencies`(注意不是`devDependencies`)又包含了`babel-runtime`，那这两个是不是成套使用的呢？
 
 #### 4.6 babel-loader
 
