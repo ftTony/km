@@ -403,6 +403,10 @@ babel 默认只转换 js 语法，而不转换新的 API，比如 Iterator、Gen
 
 使用时，在所有代码运行之前增加`require('babel-polyfill')`。或者更常规的操作是在`webpack.config.js`中将`babel-polyfill`作为第一个entry。因此必须把`babel-polyfill`作为`dependencies`而不是`devDependencies`
 
+`babel-polyfill`主要有两个缺点：
+
+- 使用`babel-polyfill`会导致打出来的包非常大，因为`babel-polyfill`是一个整体，把所有方法都加到原型链上。比如我们只使用
+
 #### 4.5 babel-runtime 和 babel-plugin-transform-runtime
 
 #### 4.6 babel-loader
