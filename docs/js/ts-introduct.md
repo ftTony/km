@@ -245,7 +245,35 @@ printLabel(myObj);
 #### 4.2 可选属性
 
 ```
+interface SquareConfig{
+    color?: string;
+    width?: number;
+}
 
+function createSquare(config:SquareConfig):{color:string,area:number}{
+  let newSquare = {color: "white", area: 100};
+  if (config.clor) {
+    // Error: Property 'clor' does not exist on type 'SquareConfig'
+    newSquare.color = config.clor;
+  }
+  if (config.width) {
+    newSquare.area = config.width * config.width;
+  }
+  return newSquare;
+}
+
+let mySquare = createSquare({color: "black"});
+```
+
+#### 4.3 只读属性
+
+一些对象属性只能在对象刚刚创建的时候修改其值。 你可以在属性名前用`readonly`来指定只读属性:
+
+```
+interface Point {
+    readonly x: number;
+    readonly y: number;
+}
 ```
 
 ### 五、类
