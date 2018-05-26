@@ -512,7 +512,51 @@ use: {
 
 #### 4.7 Babylon
 
+""可以说Babylon定义了把代码解析成AST的一套规范。
+
+```
+import * as babylon from "babylon";
+const code = `function square(n) {
+  return n * n;
+}`;
+
+babylon.parse(code);
+// Node {
+//   type: "File",
+//   start: 0,
+//   end: 38,
+//   loc: SourceLocation {...},
+//   program: Node {...},
+//   comments: [],
+//   tokens: [...]
+// }
+
+```
+
 #### 4.8 babel-traverse
+
+```
+import * as babylon from "babylon";
+import traverse from "babel-traverse";
+
+const code = `function square(n) {
+  return n * n;
+}`;
+
+const ast = babylon.parse(code);
+
+traverse(ast, {
+  enter(path) {
+    if (
+      path.node.type === "Identifier" &&
+      path.node.name === "n"
+    ) {
+      path.node.name = "x";
+    }
+  }
+});
+
+```
 
 #### 4.9 babel-types
 
