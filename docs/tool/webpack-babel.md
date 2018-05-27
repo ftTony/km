@@ -86,7 +86,32 @@ function square(n) {
 
 你会留意到 AST 的每一层都拥有相同的结构：
 
+```
+{
+  type: "FunctionDeclaration",
+  id: {...},
+  params: [...],
+  body: {...}
+}
+```
 
+```
+{
+  type: "Identifier",
+  name: ...
+}
+```
+
+```
+{
+  type: "BinaryExpression",
+  operator: ...,
+  left: {...},
+  right: {...}
+}
+```
+
+>注意：出于简化的目的移除了某些属性
 
 ### 二、Babel 的处理步骤
 
