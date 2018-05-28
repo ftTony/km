@@ -113,6 +113,16 @@ function square(n) {
 
 >注意：出于简化的目的移除了某些属性
 
+这样的每一层结构也被叫做**节点（Node）**。一个AST可以由单一的节点或是成百上千个节点构成。它们组合在一些可以描述用于静态分析的程序语法。
+
+每一个节点都有如下所示的接口（Interface）：
+
+```
+interface Node {
+  type: string;
+}
+```
+
 ### 二、Babel 的处理步骤
 
 Babel的三个主要处理步骤分别是：**解析(parse)**，**转换(transform)**，**生成(generate)**。
