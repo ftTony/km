@@ -123,6 +123,31 @@ interface Node {
 }
 ```
 
+字符串形式的`type`字段表示节点的类型（如：`"FunctionDeclaration"`，`"Identifier"`，`"BinaryExpression"`）。每一种类型的节点定义了一些附加属性用来进一步描述该节点类型。
+
+Babel还为每个节点额外生成了一些属性，用于描述该节点在原始代码中的位置。
+
+```
+{
+  type: ...,
+  start: 0,
+  end: 38,
+  loc: {
+    start: {
+      line: 1,
+      column: 0
+    },
+    end: {
+      line: 3,
+      column: 1
+    }
+  },
+  ...
+}
+```
+
+每一个节点都会有`start`，`end`，`loc`这几个属性。
+
 ### 二、Babel 的处理步骤
 
 Babel的三个主要处理步骤分别是：**解析(parse)**，**转换(transform)**，**生成(generate)**。
