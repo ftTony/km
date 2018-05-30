@@ -8,7 +8,8 @@
 
 ### 参考资料
 
-- [从头开始学习Vuex](https://github.com/ljianshu/Blog/issues/36)
+- [从头开始学习 Vuex](https://github.com/ljianshu/Blog/issues/36)
+- [学习 vuex 源码整体架构，打造属于自己的状态管理库](https://mp.weixin.qq.com/s/qQxUCbPBYSq9vU7dvDOCzg)
 
 ## 联系作者
 

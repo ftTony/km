@@ -133,6 +133,7 @@ foo();
 - [这一次，彻底弄懂 JavaScript 执行机制](https://juejin.im/post/59e85eebf265da430d571f89)
 - [[译] JavaScript 运行原理](https://juejin.im/post/5da17d7cf265da5b7b3ee8f5)
 - [理解 Javascript 执行过程](https://www.cnblogs.com/tugenhua0707/p/11980566.html)
+- [彻底吃透 JavaScript 的执行机制](https://mp.weixin.qq.com/s/cOMlH-z5noHrg6Upg6zyNw)
 
 ## 联系作者
 
