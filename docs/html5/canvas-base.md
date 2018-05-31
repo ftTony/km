@@ -8,6 +8,8 @@
 
 ## 参考资料
 
+- [canvas-应用大全](https://github.com/CodeLittlePrince/blog/issues/21)
+
 ## 联系作者
 
 <div align="center">

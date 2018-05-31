@@ -44,13 +44,13 @@ CSS 代码:
 - `none`：这个关键字表示不明确的网格。所有的列和其大小都将由`grid-auto-columns`属性隐式的指定。
 - `<length>`：非负值的长度大小。
 - `<percentage>`：非负值且相对于网格容器的`<百分比>`。
-- `<flex>`：非负值，用单位`fr`来定义网格轨道大小的弹性系数。
-- `max-content`
+- `<flex>`：非负值，用单位`fr`来定义网格轨道大小的弹性系数。 每个定义了`<flex>`的网格轨道会按比例分配剩余的可用空间。当外层用一个`minmax()`表示时，它将是一个自动最小值
+- `max-content`：是一个用来表示以网格项的最大的内容来占据网格轨道的关键字。
 - `min-content`
-- `minmax(min, max)`
+- `minmax`
 - `auto`
-- `fit-content( [ <length> | <percentage> ] )`
-- `repeat()`
+- `fit-content`
+- `repeat`:表示网格重复
 
 - grid-template-areas
 - grid-template
