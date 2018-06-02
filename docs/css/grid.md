@@ -41,7 +41,16 @@ CSS 代码:
 }
 ```
 
-**repeat()**
+- `none`：这个关键字表示不明确的网格。所有的列和其大小都将由`grid-auto-columns`属性隐式的指定。
+- `<length>`：非负值的长度大小。
+- `<percentage>`：非负值且相对于网格容器的`<百分比>`。
+- `<flex>`：非负值，用单位`fr`来定义网格轨道大小的弹性系数。
+- `max-content`
+- `min-content`
+- `minmax(min, max)`
+- `auto`
+- `fit-content( [ <length> | <percentage> ] )`
+- `repeat()`
 
 - grid-template-areas
 - grid-template
