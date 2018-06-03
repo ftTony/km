@@ -139,7 +139,17 @@ observer.observe({entryTypes: ['frame']});
 
 ### 四、法三：借助 requestAnimationFrame API
 
-费了这么多笔墨描述 Frame Timing API 但最后因为兼容性问题完全没办法使用。
+费了这么多笔墨描述 Frame Timing API 但最后因为兼容性问题完全没办法使用。不过不代表这么长篇幅的描述没有用，从上面的介绍，我们得知，如果我们可以得到每一帧中的固定一个时间点，那么两者相减，也能够近似得到一帧所消耗的时间。
+
+那么，我们再另辟蹊径。这次，我们借助兼容性不错的 requestAnimationFrame API。
+
+```
+window.requestAnimationFrame(callback);
+```
+
+`requestAnimationFrame`大家应该都不陌生，方法告诉浏览器您希望执行动画并请求浏览器调用指定的函数在下一次之前更新动画。
+
+当你准备好更新屏幕画面时你就应用此方法。这会要求你的动画函数在浏览器下次重绘前执行。回调的次数常是每秒 60 次，大多数浏览器通常匹配 W3C 所建议的刷新率。
 
 #### 4.1 使用 requestAnimationFrame 计算 FPS 原理
 
