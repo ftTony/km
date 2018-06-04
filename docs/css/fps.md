@@ -153,6 +153,10 @@ window.requestAnimationFrame(callback);
 
 #### 4.1 使用 requestAnimationFrame 计算 FPS 原理
 
+原理是，正常而言 requestAnimationFrame 这个方法在一秒内会执行 60 次，也就是不掉帧的情况下。假设动画在时间 A 开始执行，在时间 B 结束，耗时 x ms。而中间 requestAnimationFrame 一共执行了 n 次，则此段动画的帧率大致为：n/(B-A)。
+
+核心代码如下，能近似计算每秒页面帧率，以及我们额外记录一个 allFrameCount，用于记录 rAF 的执行次数，用于计算每次动画的帧率：
+
 ```
 var rAF = function () {
     return (
@@ -191,6 +195,22 @@ var loop = function () {
 
 loop();
 ```
+
+OK，寻找一个有动画不断运行的页面进行测试，可以看到代码运行如下：
+
+![images](fps06.png)
+
+这里，我使用了我之前制作的一个页面进行了测试，使用 Chrome 同时调出页面的 FPS meter，对比两边的实时 FPS 值，基本吻合。
+
+测试页面，Solar System。你可以将上面的代码贴到这个页面的 console 中，测试一下数据：
+
+![images](fps07.gif)
+
+对比右上角的 Frame Rate，帧率基本一致。在大部分情况下，这种方法可以很好的得出 Web 动画的帧率。
+
+如果我们需要统计某个特定动画过程的帧率，只需要在动画开始和结尾两处分别记录 allFrameCount 这个数值大小，再除以中间消耗的时间，也可以得出特定动画过程的 FPS 值。
+
+值得注意的是，这个方法计算的结果和真实的帧率肯定是存在误差的，因为它是将每两次主线程执行 javascript 的时间间隔当成一帧，而非上面说的主线程加合成线程所消耗的时间为一帧。但是对于现阶段而言，算是一种可取的方法。
 
 ### 参考资料
 
