@@ -29,6 +29,12 @@
 
 #### 1.2 块级元素和内联元素
 
+块级元素是指单独撑满一行的元素，如 `div、ul、li、table、p、h1` 等元素。这些元素的 `display` 值默认是 `block、table、list-item` 等。
+
+内联元素又叫行内元素，指只占据它对应标签的边框所包含的空间的元素，这些元素如果父元素宽度足够则并排在一行显示的，如 `span、a、em、i、img、td` 等。这些元素的 `display` 值默认是 `inline、inline-block、inline-table、table-cell` 等。
+
+实际开发中，我们经常把 `display` 计算值为 `inline inline-block inline-table table-cell` 的元素叫做内联元素，而把 `display` 计算值为 `block` 的元素叫做块级元素。
+
 #### 1.3 `width: auto` 和 `height: auto`
 
 #### 1.4 外在盒子和内在盒子
