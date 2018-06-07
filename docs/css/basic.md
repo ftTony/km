@@ -58,6 +58,27 @@
 | 0,1,0,0 |                                                                                  |
 | 0,1,0,0 |                                                                                  |
 
+#### 1.6 BFC
+
+BFC（Block Formatting Context）格式化上下文，是 Web 页面中盒模型布局的 CSS 渲染模式，指一个独立的渲染区域或者说是一个隔离的独立容器。
+
+**BFC 应用**
+
+- 防止 margin 重叠
+- 清除内部浮动
+- 自适应两（多）栏布局
+- 防止字体环绕
+
+**触发 BFC 条件**
+
+- 根元素
+- float 的值不为 none
+- overflow 的值不为 visible
+- display 的值为 inline-block、table-cell、table-caption
+- position 的值为 absolute、fixed
+
+**BFC 的特性**
+
 ### 二、盒模型四大金刚
 
 ### 三、好基友`line-height`和`vertical-align`
