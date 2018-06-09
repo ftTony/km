@@ -98,6 +98,29 @@ Frame Timing API 是 Web Performance Timing API 标准中的其中一位成员�
 
 #### 3.4 Frame Timing API 示意
 
+借助 Web Performance Timing API 中的 Frame Timing API，可以轻松的拿到每一帧中，主线程以及合成线程的时间。或者更加容易，直接拿到每一帧的耗时。
+
+获取 Render 主线程和合成线程的记录，每条记录包含的信息基本如下，代码示意：
+
+```
+var rendererEvents = window.performance.getEntriesByType("renderer");
+var compositeThreadEvents = window.performance.getEntriesByType("composite");
+```
+
+或者是：
+
+```
+var observer = new PerformanceObserver(function(list) {
+    var perfEntries = list.getEntries();
+    for (var i = 0; i < perfEntries.length; i++) {
+        console.log("frame: ", perfEntries[i]);
+    }
+});
+
+// subscribe to Frame Timing
+observer.observe({entryTypes: ['frame']});
+```
+
 ### 四、法三：借助 requestAnimationFrame API
 
 #### 4.1 使用 requestAnimationFrame 计算 FPS 原理
