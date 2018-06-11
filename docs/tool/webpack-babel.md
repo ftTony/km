@@ -215,8 +215,28 @@ n * n;
 ### 三、Babel使用方法
 
 - 使用方法
+- 插件
+- 配置文件
+- preset
+- 执行顺序
+- 插件和 preset 的配置项
+- env (重点)
 
-### 三、其他配套工具
+#### 3.1 使用方法
+
+#### 3.2 插件
+
+#### 3.3 配置文件
+
+#### 3.4 preset
+
+#### 3.5 执行顺序
+
+#### 3.6 插件和 preset 的配置项
+
+#### 3.7 env (重点)
+
+### 四、其他配套工具
 
 - babel-cli
 - babel-node
@@ -225,7 +245,7 @@ n * n;
 - babel-runtime 和 babel-plugin-transform-runtime
 - babel-loader
 
-### 四、Babel 7.x
+### 五、Babel 7.x
 
 ## 参考资料
 
