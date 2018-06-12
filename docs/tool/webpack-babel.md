@@ -245,6 +245,18 @@ n * n;
 - babel-runtime 和 babel-plugin-transform-runtime
 - babel-loader
 
+#### 4.1 babel-cli
+
+#### 4.2 babel-node
+
+#### 4.3 babel-register
+
+#### 4.4 babel-polyfill
+
+#### 4.5 babel-runtime 和 babel-plugin-transform-runtime
+
+#### 4.6 babel-loader
+
 ### 五、Babel 7.x
 
 ## 参考资料
