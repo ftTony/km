@@ -61,7 +61,36 @@
 
 ### 二、盒模型四大金刚
 
+- content
+- padding
+- margin
+- border
+
+#### 2.1 content
+
+对于非替换元素如`div`，其`content`就是 div 内部的元素。而对于替换元素，其`content`就是可替换部分的内容。
+
+CSS 中的`content`属性主要用于伪元素`:before/:after`中，除了做字体库或少写个 div，对于一般开发来说并无卵用。
+
+#### 2.2 padding
+
+`padding`是四大金刚中最稳定的了，少见有什么异常。尽管如此还是有些需要注意的地方：
+
+#### 2.3 margin
+
+#### 2.4 border
+
 ### 三、好基友`line-height`和`vertical-align`
+
+- 字母 x 的角色
+- line-height
+- vertical-align
+
+#### 3.1 字母 x 的角色
+
+#### 3.2 line-height
+
+#### 3.3 vertical-align
 
 ### 四、流的破坏
 
