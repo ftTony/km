@@ -243,7 +243,7 @@ module.exports = {
       {
         title: '规范化',
         collapsable: false,
-        children: ['standard']
+        children: ['standard', 'restful']
       },
       {
         title: '浏览器',
