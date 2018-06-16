@@ -84,6 +84,18 @@ Frame Timing API 是 Web Performance Timing API 标准中的其中一位成员�
 
 ![images](fps02.png)
 
+怎么使用呢？以`Navigation Timing`, `Performance Timeline`, `Resource Timing`为例子，对于兼容它的浏览器，它以只读属性的形式对外暴露挂载在 `window.performance`上。
+
+在调试台 console 中打印`window.performance` ，查看其中的 timing 属性：
+
+![images](fps03.png)
+
+它表示我们页面整个加载过程中每一个重要的时间点，可以详细看看这张图：
+
+![images](fps04.png)
+
+通过这张图以及上面的`window.performance.timing`，我们就可以轻松的统计出页面每个重要节点的耗时，这就是 Web Performance Timing API 的强大之处，感兴趣的可以详细去研究研究，使用在页面统计上。
+
 #### 3.4 Frame Timing API 示意
 
 ### 四、法三：借助 requestAnimationFrame API
