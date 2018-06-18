@@ -586,7 +586,7 @@ babylon.parse(code);
 
 #### 4.8 babel-traverse
 
-babel-traverse 用于维护操作 AST 的状态，定义了更新、添加和移除节点的操作方法。之前也说到，path 参数里面的属性和方法都是
+babel-traverse 用于维护操作 AST 的状态，定义了更新、添加和移除节点的操作方法。之前也说到，path 参数里面的属性和方法都是在 babel-traverse 里面定义的。这里还是引用一个例子，将 babel-traverse 和 Babylon 一起使用来遍历和更新节点：
 
 ```
 import * as babylon from "babylon";
@@ -612,6 +612,16 @@ traverse(ast, {
 ```
 
 #### 4.9 babel-types
+
+babel-types 是一个强大的用于处理 AST 节点的工具库，“它包含了构造、验证以及变换 AST 节点的方法。该工具库包含考虑周到的工具方法，对编写处理 AST 逻辑非常有用”
+
+这里我们还是用 import 命令来演示一个例子，比如我们要判断 import 导入是什么类型的导入，这里先写出三种形式的导入：
+
+```
+import { Ajax } from '../lib/utils';
+import utils from '../lib/utils';
+import * as utils from '../lib/utils';
+```
 
 #### 小结
 
