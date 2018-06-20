@@ -243,7 +243,31 @@ visitor: {
 	}
 ```
 
-当把这个插件用于遍历中时，每当处理到一个 import 语句，即 ImportDeclaration 节点时，都会自动调用 ImportDeclaration()方法，这个方法中定义了处理 import 语句具体操作。
+当把这个插件用于遍历中时，每当处理到一个 import 语句，即 ImportDeclaration 节点时，都会自动调用 ImportDeclaration()方法，这个方法中定义了处理 import 语句具体操作。ImportDeclaration()都是在进入 ImportDeclaration 节点时调用的，我们也可以让插件在退出节点时调用方法进行处理。
+
+```
+visitor: {
+            ImportDeclaration: {
+                enter(path, state) {
+                    console.log('start processing ImportDeclaration...');
+                    // do something
+                },
+                exit(path, state) {
+                    console.log('end processing ImportDeclaration!');
+                    // do something
+                }
+            },
+	}
+```
+
+当进入 ImportDeclaration 节点时调用 enter()方法，退出 ImportDeclaration 节点时调用 exit()方法。上面的 Program 节点（Program 节点可以通俗地解释为一个模块节点）也是一样的道理。值得注意的是，AST 的遍历采用深度优先遍历，所以上述 import 代码块的 AST 遍历的过程如下：
+
+```
+─ Program.enter()
+  ─ ImportDeclaration.enter()
+  ─ ImportDeclaration.exit()
+─ Program.exit()
+```
 
 #### 2.5 Path
 
@@ -275,7 +299,31 @@ visitor: {
 
 #### 2.7 Scopes(作用域)
 
-在 JavaScript 中，每当你创建了一个引用，不管是通过变量（variable）、函数（function）、类型（class）、参数（params）、模块导入（import）还是标签（label）等，它都属于当前作用域。
+这里的作用域其实跟 js 说的作用域是一个道理，也就是说 babel 在处理 AST 时也需要考虑作用域的问题，比如函数内外的同名变量需要区分开来，这里直接拿 Babel 手册里的一个例子解释一下。考虑下列代码：
+
+```
+function square(n) {
+  return n * n;
+}
+```
+
+我们来写一个把 n 重命名为 x 的 visitor。
+
+```
+visitor: {
+	    FunctionDeclaration(path) {
+                const param = path.node.params[0];
+                paramName = param.name;
+                param.name = "x";
+             },
+
+            Identifier(path) {
+                if (path.node.name === paramName) {
+                  path.node.name = "x";
+                }
+             }
+	}
+```
 
 ### 三、Babel 使用方法
 
@@ -621,6 +669,25 @@ babel-types 是一个强大的用于处理 AST 节点的工具库，“它包含
 import { Ajax } from '../lib/utils';
 import utils from '../lib/utils';
 import * as utils from '../lib/utils';
+```
+
+在 AST 中用于表示上面导入的三个变量的节点是不同的，分别叫做 ImportSpecifier、ImportDefaultSpecifier 和 ImportNamespaceSpecifier。如果我们只对导入指定变量的 import 命令语句做处理，那么我们的 babel 插件就可以这样写：
+
+```
+function plugin () {
+	return ({ types }) => ({
+	    visitor: {
+	        ImportDeclaration (path, state) {
+        	    const specifiers = path.node.specifiers;
+        	    specifiers.forEach((specifier) => {
+	                if (!types.isImportDefaultSpecifier(specifier) && !types.isImportNamespaceSpecifier(specifier)) {
+            	        // do something
+            	    }
+    	        })
+            }
+        }
+    })
+}
 ```
 
 #### 小结
