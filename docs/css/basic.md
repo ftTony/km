@@ -112,7 +112,15 @@ W3C 标准模型：`box-sizing:content-box`此模式下，元素的宽度计算�
 
 #### 1.8 替换元素
 
-替换元素是指内容可以替换的元素，实际上就是`content box`可以被替换的元素。如存在`src=""`属性的`<img><audio>`
+替换元素是指内容可以替换的元素，实际上就是`content box`可以被替换的元素。如存在`src=""`属性的`<img><audio><iframe>`元素和可以输入文本的`<input><select><textarea>`元素等。
+
+所有替换元素都是内联元素，默认`display`属性是`inline`或`inline-block`(除了`input[type="hidden"]`默认`display:none;`)。
+
+替换元素有自己默认的样式、尺寸（根据浏览器不同而不同），而且其`vertical-align`属性默认是`bottom`（非替换元素默认值是`baseline`）。
+
+#### 1.9 css 的继承机制
+
+参见
 
 ### 二、盒模型四大金刚
 
