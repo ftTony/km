@@ -141,13 +141,25 @@ CSS 中的`content`属性主要用于伪元素`:before/:after`中，除了做字
 
 #### 2.3 margin
 
-1. 作为外边距，`margin`属性并不会参与盒子宽度的计算，
+1. 作为外边距，`margin`属性并不会参与盒子宽度的计算，但通过设置`margin`为负值，却能改变元素水平方向的尺寸：
+
+```
+
+```
 
 #### 2.4 border
 
 `border`主要作用是做边框。`border-style`属性的值有`none/solid/dashed/dotted/double`等，效果如下：
 
 ![images](border01.png)
+
+`border-width`属性的默认值是`3px`，值得注意的是，`border-color`默认是跟随字体的颜色，相当于默认设置了`border-color: currentColor`一样。
+
+`border`另一广受欢迎的功能就是图形构建，特别是做应用广泛的三角形，其原理可看下图
+
+```
+
+```
 
 ### 三、好基友`line-height`和`vertical-align`
 
@@ -157,7 +169,7 @@ CSS 中的`content`属性主要用于伪元素`:before/:after`中，除了做字
 
 #### 3.1 字母 x 的角色
 
-在内联元素的垂直方向对齐中，基线是最为重要的概念。
+在内联元素的垂直方向对齐中，基线是最为重要的概念。`line-height`
 
 #### 3.2 line-height
 
