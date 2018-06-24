@@ -139,6 +139,8 @@ CSS 中的`content`属性主要用于伪元素`:before/:after`中，除了做字
 
 `padding`是四大金刚中最稳定的了，少见有什么异常。尽管如此还是有些需要注意的地方：
 
+1. 大部分情况下我们会将元素重置为`box-sizing:border-box`，宽高的计算是包含了`padding`的，给人一种`padding`也是`content box`一部分的感觉
+
 #### 2.3 margin
 
 1. 作为外边距，`margin`属性并不会参与盒子宽度的计算，但通过设置`margin`为负值，却能改变元素水平方向的尺寸：
@@ -158,8 +160,41 @@ CSS 中的`content`属性主要用于伪元素`:before/:after`中，除了做字
 `border`另一广受欢迎的功能就是图形构建，特别是做应用广泛的三角形，其原理可看下图
 
 ```
-
+div{
+    float:left;
+    margin:20px;
+}
+div:nth-child(1){
+    width:20px;
+    height:20px;
+    border:20px solid;
+    border-color:blue red orange green;
+}
+div:nth-child(2){
+  width: 20px;
+  height: 20px;
+  border: 20px solid;
+  border-color: blue transparent transparent transparent;
+}
+div:nth-child(3){
+  border: 20px solid;
+  border-color: blue transparent transparent transparent;
+}
+div:nth-child(4){
+  border-style: solid;
+  border-width: 40px 20px;
+  border-color: blue transparent transparent transparent;
+}
+div:nth-child(5){
+  border-style: solid;
+  border-width: 40px 20px;
+  border-color: blue red transparent transparent;
+}
 ```
+
+![images](border02.png)
+
+其实就是将其他三个边框的颜色设置透明，并把宽高设为 0。是通过调整边框宽度和颜色调整三角形的形状，把最后一个图的红色改为蓝色，则是一个直角三解开了。
 
 ### 三、好基友`line-height`和`vertical-align`
 
