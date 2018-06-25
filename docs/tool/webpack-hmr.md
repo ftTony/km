@@ -187,6 +187,8 @@ function reloadApp() {
 }
 ```
 
+如上面代码所示，首先将hash值暂存到currentHash变量，当接收到ok消息后，对App进行reload。如果配置了模块热更新，就调用webpack/hot/emitter将最新hash值发送给webpack，然后将控制权交给webpack客户端代码。如果没有配置模块热更新，就直接调用location.reload方法刷新页面。
+
 **第四步：webpack接收到最新hash值验证并请求模块代码**
 
 **第五步：HotModuleReplacement.runtime 对模块进行热更新**
