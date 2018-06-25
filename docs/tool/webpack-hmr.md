@@ -191,6 +191,9 @@ function reloadApp() {
 
 **第四步：webpack接收到最新hash值验证并请求模块代码**
 
+在这一步，其实是webpack中三个模块(三个文件，后面英文名对应文件路径)之间配合的结果，首先是webpack/hot/dev-server监听第三步webpack-dev-server/client发送的`webpackHotUpdate`消息，调用webpack/lib/HotModuleReplacement.runtime（简称 HMR runtime）中的 check 方法，检测
+
+
 **第五步：HotModuleReplacement.runtime 对模块进行热更新**
 
 **第六步：业务代码需要做些什么？**
