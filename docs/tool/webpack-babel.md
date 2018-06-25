@@ -212,7 +212,18 @@ n * n;
 
 代码生成其实很简单：深度优先遍历整个 AST，然后构建可以表示转换后代码的字符串。
 
+### 三、Babel使用方法
+
+- 使用方法
+
 ### 三、其他配套工具
+
+- babel-cli
+- babel-node
+- babel-register
+- babel-polyfill
+- babel-runtime 和 babel-plugin-transform-runtime
+- babel-loader
 
 ### 四、Babel 7.x
 
