@@ -139,7 +139,21 @@ CSS 中的`content`属性主要用于伪元素`:before/:after`中，除了做字
 
 `padding`是四大金刚中最稳定的了，少见有什么异常。尽管如此还是有些需要注意的地方：
 
-1. 大部分情况下我们会将元素重置为`box-sizing:border-box`，宽高的计算是包含了`padding`的，给人一种`padding`也是`content box`一部分的感觉
+1. 大部分情况下我们会将元素重置为`box-sizing:border-box`，宽高的计算是包含了`padding`的，给人一种`padding`也是`content box`一部分的感觉，好像`line-height`属性也作用于`padding`上。但实际上，元素真正的内容的宽高只是`content box`的宽高，而`line-height`属性是不作用于`padding`的。
+
+![images](padding.png)
+
+2. `padding`不可为负值，但是可以为百分比值。为百分比时水平和垂直方向的`padding`都是相对于父级元素宽度计算的。将一个`div`设为`padding:100%`就能得到一个正方形，`padding:10% 50%`可以得到一个宽高比 5:1 的矩形。
+
+```
+body {
+  width: 400px;
+}
+.box {
+  padding: 10% 50%;
+}
+
+```
 
 #### 2.3 margin
 
