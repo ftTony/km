@@ -155,12 +155,47 @@ body {
 
 ```
 
+![images](padding01.png)
+
+3. `padding`配合`background-clip`属性，可以制作一些特殊形状：
+
+```
+/*三道杠*/
+.icon1 {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 12px;
+  height: 10px;
+  padding: 2px 0;
+  border-top: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  background: currentColor; /*注意如果此处背景颜色属性用缩写的话，需要放到其他背景属性的前面，否则会覆盖前面的属性值（此处为background-clip）为默认值*/
+  background-clip: content-box;
+}
+/*双层圆点*/
+.icon2 {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  padding: 2px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  background-color: currentColor;
+  background-clip: content-box;
+}
+```
+
 #### 2.3 margin
 
 1. 作为外边距，`margin`属性并不会参与盒子宽度的计算，但通过设置`margin`为负值，却能改变元素水平方向的尺寸：
 
 ```
-
+<div>asdf</div>
+<style>
+  div {
+    margin: 0 -100px;
+  }
+</style>
 ```
 
 #### 2.4 border
