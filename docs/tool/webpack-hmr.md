@@ -197,6 +197,12 @@ function reloadApp() {
 
 图三：hotDownloadManifest方法获取更新文件列表
 
+![images](webpack22.jpg)
+
+图四：hotDownloadUpdateChunk获取到更新的新模块代码
+
+如上两图所示，值得注意的是，两次请求的都是使用上一次的hash值拼接的请求文件名，hotDownloadManifest方法返回的是最新的hash值，hotDownloadUpdateChunk方法返回的就是最新hash值对对应的代码块。然后将新的代码块返回给HMR runtime，进行模块热更新。
+
 **第五步：HotModuleReplacement.runtime 对模块进行热更新**
 
 **第六步：业务代码需要做些什么？**
