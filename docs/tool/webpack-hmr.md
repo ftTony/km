@@ -203,6 +203,8 @@ function reloadApp() {
 
 如上两图所示，值得注意的是，两次请求的都是使用上一次的hash值拼接的请求文件名，hotDownloadManifest方法返回的是最新的hash值，hotDownloadUpdateChunk方法返回的就是最新hash值对对应的代码块。然后将新的代码块返回给HMR runtime，进行模块热更新。
 
+还记得**HMR的工作原理图解**中的问题3吗？为什么更新模块的代码不直接在第三步通过websocket发送到浏览器端，而是通过jsonp来获取呢？我的理解是功能块的解耦，各个模块各司其职，dev-server/client只负责消息的传递而不负责新模块的获取
+
 **第五步：HotModuleReplacement.runtime 对模块进行热更新**
 
 **第六步：业务代码需要做些什么？**
