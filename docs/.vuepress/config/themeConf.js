@@ -186,6 +186,7 @@ module.exports = {
                 'flex',
                 'grid',
                 'bfc',
+                'scss',
                 'select'
             ]
         },
