@@ -6,6 +6,19 @@
 
 ## 内容
 
+- 流畅动画的标准
+- 法一：借助 Chrome 开发者工具
+- 法二：借助 Frame Timing API
+- 法三：借助 requestAnimationFrame API
+
+### 一、流畅动画的标准
+
+### 二、法一：借助 Chrome 开发者工具
+
+### 三、法二：借助 Frame Timing API
+
+### 四、法三：借助 requestAnimationFrame API
+
 ### 参考资料
 
 - [Web 动画帧率（FPS）计算](https://www.cnblogs.com/coco1s/p/8029582.html)
