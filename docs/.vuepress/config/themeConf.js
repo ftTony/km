@@ -166,6 +166,7 @@ module.exports = {
         collapsable: false,
         children: [
           'basic',
+          'inherit',
           'center',
           'background',
           'stack',

@@ -67,6 +67,18 @@ css 的属性非常有意思，正常流下，如果块级元素的`width`是个
 
 在 css 中，`!important` 的权重相当的高。如果出现了`!important`，则不管权重如何都取有`!important` 的属性值。但是宽高有例外情况，由于宽高会被 `max-width/min-width` 覆盖，所以`!important` 会失效。
 
+#### 1.6 盒模型（盒尺寸）
+
+元素的内在盒子是由`margin box`、`border box`、`padding box`、`content box`组成的，这四个盒子由外到内构成了盒模型。
+
+IE 模型：
+
+W3C 标准模型：
+
+#### 1.7 内联盒模型
+
+#### 1.8 替换元素
+
 ### 二、盒模型四大金刚
 
 - content
