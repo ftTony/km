@@ -28,6 +28,10 @@
 
 ![images](module01.jpg)
 
+**PostCSS**
+
+`PostCSS`一开始是从`AutoPrefixer`项目中抽象出来的框架，它本身并不对 CSS 做具体的业务操作，只是将 CSS 解析成抽象语法树(AST)
+
 ### 二、BEM
 
 BEM 其实是一种命名的规范。或者说是一种 class 书写方式的方法论。BEM 的意思就是块(block)、元素(element)、修饰符(modifier)，是由 Yandex 团队提出的一种前端命名方法论。在具体 CSS 类选择器上的表现就像下面这样
