@@ -22,6 +22,11 @@
 后处理器是对原生 CSS 进行处理并最终生成 CSS 的处理器，广义上还是个预处理器，与上面不同的是，它处理的对象是标准 CSS，比较典型的后处理工具有：
 
 - clean-css——压缩 css
+- `AutoPrefixer`--自动添加 CSS3 属性各浏览器的前缀
+- Rework--取代 stylus 的插件化框架
+- `PostCSS`
+
+![images](module01.jpg)
 
 ### 二、BEM
 
