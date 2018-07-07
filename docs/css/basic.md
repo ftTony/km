@@ -206,7 +206,16 @@ body {
 
 2. 块级元素的垂直方向会发生`margin`合并，存在以下三种场景：
 
-- 相邻兄弟元素
+- 相邻兄弟元素之间`margin`合并；
+- 父元素`margin-top`和子元素`margin-top`，父元素`margin-bottom`和子元素`margin-bottom`;
+- 空块元素自身的`margin-top`和`margin-bottom`合并
+
+要阻止`margin`合并，可以使用以下方法
+
+- 把元素放到`bfc`中；
+- 设置`border`或`padding`阻隔`margin`;
+- 用内联元素阻隔；
+- 给父元素设定高度
 
 #### 2.4 border
 
