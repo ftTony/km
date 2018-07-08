@@ -217,6 +217,25 @@ body {
 - 用内联元素阻隔；
 - 给父元素设定高度
 
+3. `margin`的百分比值跟`padding`一样，
+
+```
+<div class="box">
+  <div></div>
+</div>
+<style>
+  .box{
+    overflow: hidden;
+    background-color: lightblue;
+  }
+  .box > div{
+    margin: 50%;
+  }
+</style>
+```
+
+4. `margin: auto`能在块级元素设定宽高之后自动填充剩余宽高。
+
 #### 2.4 border
 
 `border`主要作用是做边框。`border-style`属性的值有`none/solid/dashed/dotted/double`等，效果如下：
