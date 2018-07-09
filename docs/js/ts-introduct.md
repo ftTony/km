@@ -6,6 +6,14 @@
 
 ## 内容
 
+- 什么是 TypeScript
+- 配置 TypeScript
+- 基础类型
+- 接口
+- 类
+- 函数
+- 继承
+
 ### 参考资料
 
 - [【TS 演化史 -- 破晓】一步一个脚印入门 TS](https://mp.weixin.qq.com/s/fvRvtcdrigcQzjUKwyzvHw)
