@@ -30,7 +30,18 @@
 
 **PostCSS**
 
-`PostCSS`一开始是从`AutoPrefixer`项目中抽象出来的框架，它本身并不对 CSS 做具体的业务操作，只是将 CSS 解析成抽象语法树(AST)
+`PostCSS`一开始是从`AutoPrefixer`项目中抽象出来的框架，它本身并不对 CSS 做具体的业务操作，只是将 CSS 解析成抽象语法树(AST)，样式的操作由之后运行的插件系统完成。
+
+![images](module02.jpg)
+
+更多时候我们讨论的 PostCSS，并不只是其解析的 CSS 的核心工具，更包括它创建的插件系统，而今 PostCSS 最为吸引开发者的正是其扩展性较强的插件系统和丰富的插件支持。
+
+常用的插件
+
+- autoprefixer -- 自动补全 CSS 属性兼容性前缀
+- postcss-cssnext -- 使用最新的 CSS 语法
+- postcss-modules -- 组件内自动关联样式至选择器
+- stylelint -- CSS 语法检查器
 
 ### 二、BEM
 
