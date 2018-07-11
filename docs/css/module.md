@@ -54,7 +54,11 @@ BEM 其实是一种命名的规范。或者说是一种 class 书写方式的方
 .block__element--modifier {}
 ```
 
+其中，block 表示的是独立的分块或组件；element 表示每个 block 中更细粒度的元素；modifier 则通常会用来表示该 block 或者 element 不同的类型和状态。
+
 ### 三、OOCSS
+
+OOCSS(Object-Oriented CSS)即面向对象 CSS，主要有两个核心原则
 
 ### 四、CSS modlue
 
