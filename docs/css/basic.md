@@ -319,7 +319,7 @@ div:nth-child(5){
 
 ### 五、层叠规则
 
-层叠规则是指当网页中的元素发生层叠时侯的遵循的规则。
+参考：[结构与层叠](https://km.xiaowuzi.info/css/stack.html)
 
 ### 六、文本控制
 
@@ -329,7 +329,11 @@ div:nth-child(5){
 
 弹性布局是指 display: flex 或 display: inline-flex 的布局。注意，设为弹性布局以后，子元素的 float、clear、vertical-align 属性都会失效。
 
+参考：[flex 学习](https://km.xiaowuzi.info/css/flex.html)
+
 ### 九、网格布局
+
+参考：[grid 布局](https://km.xiaowuzi.info/css/grid.html)
 
 ### 参考资料
 
