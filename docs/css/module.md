@@ -60,6 +60,36 @@ BEM 其实是一种命名的规范。或者说是一种 class 书写方式的方
 
 OOCSS(Object-Oriented CSS)即面向对象 CSS，主要有两个核心原则
 
+- 分享结构和皮肤
+  皮肤即一些重复的初学特征，如边框、背景、颜色、分离是为了更多的利用；结构是指元素大小特征，如高度、宽度、边距等等。
+
+```
+.button {
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, .5) 2px 2px 5px;
+}
+.widget {
+  overflow: auto;
+  box-shadow: rgba(0, 0, 0, .5) 2px 2px 5px;
+}
+```
+
+根据此原则，我们需要对公用的皮肤进行提取并分离，如下
+
+```
+.button {
+  padding: 10px;
+}
+.widget {
+  overflow: auto;
+}
+.skin {
+  box-shadow: rgba(0, 0, 0, .5) 2px 2px 5px;
+}
+```
+
+- 分离容器和内容
+
 ### 四、CSS modlue
 
 ### 五、CSS IN JS
