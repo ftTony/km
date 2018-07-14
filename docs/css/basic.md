@@ -303,7 +303,7 @@ div:nth-child(5){
 
 属性值：
 
-- 线类：
+- 线类：如`baseline(默认值)`、`top`、`middle`、`bottom`（`baseline`使元素的基线与父元素的基线对齐，`middle`使元素的中部与父元素的基线往上`x-height`的一半对齐。` top``bottom `使元素及其后代元素的询问与整行或整块的底部对齐。）
 - 文本类：
 - 上标下标：
 - 数值：
