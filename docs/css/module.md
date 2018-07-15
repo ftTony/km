@@ -110,6 +110,16 @@ OOCSS(Object-Oriented CSS)即面向对象 CSS，主要有两个核心原则
 
 命名空间分为以下几种。
 
+#### 6.1 Object:o-
+
+#### 6.2 Component: c-
+
+#### 6.3 Utility: u-
+
+#### 6.4 Theme: t-
+
+#### 6.5 Scope: s-
+
 ### 参考资料
 
 - [CSS 工程化演进](https://zhuanlan.zhihu.com/p/32117359)
