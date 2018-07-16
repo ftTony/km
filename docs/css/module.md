@@ -110,15 +110,20 @@ OOCSS(Object-Oriented CSS)即面向对象 CSS，主要有两个核心原则
 
 命名空间分为以下几种。
 
-#### 6.1 Object:o-
+#### 6.1 Component: c-
 
-#### 6.2 Component: c-
+`c-`应该是一个更为常见的 namespace，表示 Components(组件)。
 
-#### 6.3 Utility: u-
+```
+.c-list {}
+.c-avatar {}
+```
 
-#### 6.4 Theme: t-
+#### 6.2 Utility: u-
 
-#### 6.5 Scope: s-
+#### 6.3 Theme: t-
+
+#### 6.4 Scope: s-
 
 ### 参考资料
 
