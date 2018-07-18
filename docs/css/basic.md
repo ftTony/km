@@ -298,13 +298,19 @@ div:nth-child(5){
 属性值：
 
 - `normal`：默认值`normal`
+- 数值和百分比：最终会被计算为带单位的值，具体计算方法就是乘以字体大小`font-size`。
+- 长度值：就是`100px`这样带单位的值
+
+`line-height`的作用：
+
+`line-height`属性用于设置多行元素的空间量，如多行文本的间距。
 
 #### 3.3 vertical-align
 
 属性值：
 
 - 线类：如`baseline(默认值)`、`top`、`middle`、`bottom`（`baseline`使元素的基线与父元素的基线对齐，`middle`使元素的中部与父元素的基线往上`x-height`的一半对齐。` top``bottom `使元素及其后代元素的询问与整行或整块的底部对齐。）
-- 文本类：
+- 文本类：`text-top` `text-bottom`(使元素的顶部与父元素的字体顶部对齐。)
 - 上标下标：
 - 数值：
 - 百分比：
