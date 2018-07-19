@@ -55,6 +55,8 @@ css 的属性非常有意思，正常流下，如果块级元素的`width`是个
 
 内在盒子是决定元素内部一些忏悔是否生效的盒子。内在盒子负责内容显示。
 
+如`display:inline-table;`外在盒子就是`inline`，内在盒子就是`table`。外在盒子决定了元素要像内联元素一样并排在一排显示，内在盒子则决定了元素可以设置宽高、垂直方向的 margin 等属性。如下图
+
 #### 1.5 css 权重和超越`!important`
 
 | 权重值  | 选择器                                                                           |
@@ -71,9 +73,21 @@ css 的属性非常有意思，正常流下，如果块级元素的`width`是个
 
 元素的内在盒子是由`margin box`、`border box`、`padding box`、`content box`组成的，这四个盒子由外到内构成了盒模型。
 
-IE 模型：
+IE 模型：`box-sizing:border-box`此模式下，元素的宽度计算为`border+padding+content`的宽度总和。
 
-W3C 标准模型：
+W3C 标准模型：`box-sizing:content-box`此模式下，元素的宽度计算为`content`的宽度。
+
+由于`content-box`在计算宽度的时候不包含`broder padding`很烦人，而且又是默认值，业内一般采用以下代码重置样式：
+
+```
+:root {
+  box-sizing: border-box;
+}
+* {
+  box-sizing: inherit;
+}
+
+```
 
 #### 1.7 内联盒模型
 
