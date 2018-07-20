@@ -119,9 +119,29 @@ OOCSS(Object-Oriented CSS)即面向对象 CSS，主要有两个核心原则
 .c-avatar {}
 ```
 
+从命名中我们就能知道：这是一个 list 组件；或者这是一个 avatar 组件。
+
+- Components 应该是是一组具体的 UI。`c-`代表一个具体的组件。
+- 修改它们非常安全，只会对组件产生影响。
+
 #### 6.2 Utility: u-
 
+Untilities 符合单一职责原则，实现一个具体的功能或效果。其概念有些类似 JavaScript 中的通用工具方法。例如一个清除浮动的 Utility，或者一个文字居中的 Utility。
+
+```
+.u-clearfix {}
+.u-textCenter {}
+```
+
+由于 Utilities 作为一组工具集，在样式上具有更强的“话语权”，所以`!important`在 Utilities 中会更为常见。当我们看到下面这段 HTML，我们会更加确信，这个大号的字体是`.u-largeFont`这个样式引起的。
+
+```
+<h1 class="title u-largeFont">namespace</h1>
+```
+
 #### 6.3 Theme: t-
+
+当我们使用
 
 #### 6.4 Scope: s-
 
