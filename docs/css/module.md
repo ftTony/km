@@ -95,9 +95,43 @@ OOCSS(Object-Oriented CSS)即面向对象 CSS，主要有两个核心原则
 - 分离容器和内容
   打破容器内元素对于容器的依赖，元素样式应该独立存在。
 
+```
+<div class="container"><h2>xxx</h2></div>
+.container h2 {...}
+```
+
+上面的`h2`元素依赖于父元素`container`，对应此原则，`h2`元素需要使用一个单独的选择器，如下
+
+```
+<div class="container"><h2 class="category">xxx</h2></div>
+.category {...}
+```
+
+使用 OOSCC 范式，遵守了 DRY 的原则，能够大量减少重复的样式代码，提高代码复用；同时，视觉元素可以意灵活组合各个类名，展示不同的效果，丰富的类名也同时使得元素有着更好的可读性；另一方面，由于容器和内容的分离，CSS 完成了与 HTML 结构解耦。
+但同时也会带来一些缺点，抽象复用会使 class 越来越多，极端情况会产生可能产生很多原子类，这对于那些偏向于“单一来源原则”的开发者来说并不受欢迎。
+
 ### 四、CSS modlue
 
-### 五、CSS IN JS
+### 五、SMACSS
+
+SMACSS 即模块化架构的可扩展 CSS，它主要是将规则分为 5 类
+
+- 基础（Base）
+  `tag select`的样式，定义最基础全局样式，如`CSS REST`。
+
+```
+html, body, form { margin: 0; padding: 0; }
+a { color: #039; } a:hover { color: #03C; }
+```
+
+- 布局（Layout）
+  将页面分为各个区域的元素块
+
+```
+.header{}
+....
+.footer{}
+```
 
 ### 六、约定项目的命名空间
 
