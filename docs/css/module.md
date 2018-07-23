@@ -133,6 +133,30 @@ a { color: #039; } a:hover { color: #03C; }
 .footer{}
 ```
 
+- 模块（Module）
+  可复用的单元。在模块中需要注意的是选择器一律选择 class selector，避免嵌套子选择器，减少权重，方便外部覆盖。
+
+```
+<div class="pod pod-constrained">...</div>
+<div class="pod pod-callout">...</div>
+.pod { width: 100%; }
+.pod .pod-callout { width: 200px; }
+.pod .pod-constrained{}
+```
+
+- 状态（State）
+  状态 class 一般通过 js 动态挂载到元素上，可以根据状态覆盖元素上特定属性。
+
+```
+.tab { background-color: purple;... }
+.is-tab-active { background-color: white; }
+```
+
+- 主题（Theme）
+  可选的视觉外观。一般根据需求有颜色，字体，布局等等，实现是将这些样式单独抽出来，根据外部条件（ data 属性，媒体查询等）动态设置。
+
+SMACSS 的主要优点在于按照不同的业务逻辑，将整个 CSS 结构化分更加细致，约束好命名，最小化深度，在编写的时候，使用 SMACSS 规范能够更好的组织好 CSS 文件结构和 class 命名。
+
 ### 六、约定项目的命名空间
 
 在 BEM 的基础上，建立命名空间主要是为了进一步帮助我们：
