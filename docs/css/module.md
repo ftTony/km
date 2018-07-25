@@ -114,6 +114,18 @@ OOCSS(Object-Oriented CSS)即面向对象 CSS，主要有两个核心原则
 
 `CSS module`不同于 vjeux 的完全放弃 CSS，它只是选择了用 js 来管理样式与元素的关联，CSS Module 通过为每个本地定义的类名动态创建一个全局唯一类名，然后注入到 UI 上，实现编写样式规则的局部模块化。
 
+`css-loader`内置支持`css-module`，只需设置下查询参数，即可在 JS 中使用 CSS 文件的导入：
+
+```
+{
+  loader: 'css-loader',
+  query: {
+    module: true,
+    localInentName: '[name]__[local]--[hash:base64:5]'  //
+  }
+}
+```
+
 ### 五、SMACSS
 
 SMACSS 即模块化架构的可扩展 CSS，它主要是将规则分为 5 类
