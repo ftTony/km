@@ -126,6 +126,41 @@ OOCSS(Object-Oriented CSS)即面向对象 CSS，主要有两个核心原则
 }
 ```
 
+在 JS 中导入 css 文件，最终得到的其实是一个经过 CSS 文件进过`parse`后生成的类名映射对象`{[localName]: [hashed-Name], ....}`
+
+```
+// Header.jsx
+import style from './Header.css'
+...
+console.log(style) //  {header: 'Header__header--3kSIq_0'}
+export default () => <div className={style.header}></div>
+```
+
+同时 CSS 文件也会被编译成对应的类名
+
+```
+.Header__header--3kSIq_0- {}   // from Header.css  .header{}
+```
+
+从开发体验上看，`CSS-Module`这种做法让开发者不必在类名的命名上小心翼翼，直接使用随机编译生成唯一标识，让类名的成为局部变量成为了可能。但同时因为也因为随机性，失去了通过此局部类名实现样式覆盖的可能性，覆盖时不得不考虑使用其他选择器（如属性选择器）。对于复用的组件而言，灵活性是必不可少的，这种局部模块化方案并不适合这种高度抽象复用的组件，而对于一次性业务组件确实能够提升开发效率。
+
+同时 CSS module 还支持使用 composes 实现 CSS 代码的组合复用。
+
+```
+/* button.css */
+.base{}
+.normal {
+composes: base
+...
+}
+
+// button.jsx
+import style from './button.css'
+export default () => <button className={style.normal}>按按</button> // <button class="button__base--180HZ_0 button__normal--x38Eh_0">按按</button>
+```
+
+当然 `CSS-module` 还可以配合各种预处理器一起使用，只需在 `css-loader` 之前添加对于的`loader`，但是在编写的时候要注意`CSS-module`的语法要在处理器之后合法。实际使用中，对于 CSS 代码的解耦，如果引入了预处理器，代码文件的模块化就不建议使用 `composes`来解决。
+
 ### 五、SMACSS
 
 SMACSS 即模块化架构的可扩展 CSS，它主要是将规则分为 5 类
