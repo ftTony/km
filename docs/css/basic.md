@@ -131,6 +131,10 @@ CSS 中的`content`属性主要用于伪元素`:before/:after`中，除了做字
 
 #### 2.4 border
 
+`border`主要作用是做边框。`border-style`属性的值有`none/solid/dashed/dotted/double`等，效果如下：
+
+![images](border01.png)
+
 ### 三、好基友`line-height`和`vertical-align`
 
 - 字母 x 的角色
@@ -142,6 +146,10 @@ CSS 中的`content`属性主要用于伪元素`:before/:after`中，除了做字
 在内联元素的垂直方向对齐中，基线是最为重要的概念。
 
 #### 3.2 line-height
+
+属性值：
+
+- `normal`：默认值`normal`
 
 #### 3.3 vertical-align
 
