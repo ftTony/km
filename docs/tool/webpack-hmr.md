@@ -15,7 +15,8 @@ Hot Module Replacement（以下简称 HMR）是 webpack 发展至今引入的最
 在webpack HMR功能之前，已经有很多live reload的工具或库，比如[live-server](http://tapiov.net/live-server/)，这些库监控文件的变化，然后通知浏览器端刷新页面，那么我们为什么还需要HMR呢？答案其实在上文中已经提及一些。
 
 - live reload工具并不能够保存应用的状态（states），当刷新页面后，应用之前状态丢失，还是上文中的例子，点击按钮出现弹窗，当浏览器刷新后，弹窗也随即消失，要恢复到之前状态，还需再次点击按钮。而webpack HMR则不会刷新器，而是运行时对模块进行热替换，保证了应用状态不会丢失，提升了开发效率。
-- 在古老的开发流程中，我们
+- 在古老的开发流程中，我们可能需要手动运行命令对代码进行打包，并且打包后再手动刷新浏览器页面，而这一系列重复的工作都可以通过HMR工作流来自动化完成，让更多的精力投入到业务中，而不是时间浪费在重复的工作上。
+- HMR兼容市面上大多前端框架或库，比如[React Hot Loader](https://github.com/gaearon/react-hot-loader)，[Vue-loader](https://github.com/vuejs/vue-loader)，能够监听React或者Vue组件的变化，实时将最新的组件更新到浏览器端。[Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader)支持通过webpack对Elm语言代码进行转译并打包，当然它也实现了HMR功能。
 
 ### HMR 的工作原理图解
 
