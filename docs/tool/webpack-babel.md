@@ -1,21 +1,21 @@
-# babel学习
+# babel 学习
 
 ## 前言
 
-Babel是JavaScript编译器，更确切地说是源码到源码的编译器，通常也叫做“转换编译器”。意思是说你为Babel提供一些JavaScript代码，Babel更改这些代码，然后返回给你新生成的代码。
+Babel 是 JavaScript 编译器，更确切地说是源码到源码的编译器，通常也叫做“转换编译器”。意思是说你为 Babel 提供一些 JavaScript 代码，Babel 更改这些代码，然后返回给你新生成的代码。
 
 ## 内容
 
 - 抽象语法树
 - Babel 的处理步骤
 - 其他配套工具
-- Babel插件实践
+- Babel 插件实践
 
 ### 一、抽象语法树
 
 这个处理过程中的每一步都涉及到创建或是操作抽象语法树，亦称 AST。
 
->Babel 使用一个基于 ESTree 并修改过的 AST，它的内核说明文档可以在[这里](https://github.com/babel/babel/blob/master/doc/ast/spec.md)找到。
+> Babel 使用一个基于 ESTree 并修改过的 AST，它的内核说明文档可以在[这里](https://github.com/babel/babel/blob/master/doc/ast/spec.md)找到。
 
 ```
 function square(n) {
@@ -23,7 +23,7 @@ function square(n) {
 }
 ```
 
->[AST Explorer](http://astexplorer.net/)可以让你对 AST 节点有一个更好的感性认识。 [这里](http://astexplorer.net/#/Z1exs6BWMq)是上述代码的一个示例链接。
+> [AST Explorer](http://astexplorer.net/)可以让你对 AST 节点有一个更好的感性认识。 [这里](http://astexplorer.net/#/Z1exs6BWMq)是上述代码的一个示例链接。
 
 这个程序可以被表示成如下的一棵树：
 
@@ -111,9 +111,9 @@ function square(n) {
 }
 ```
 
->注意：出于简化的目的移除了某些属性
+> 注意：出于简化的目的移除了某些属性
 
-这样的每一层结构也被叫做**节点（Node）**。一个AST可以由单一的节点或是成百上千个节点构成。它们组合在一些可以描述用于静态分析的程序语法。
+这样的每一层结构也被叫做**节点（Node）**。一个 AST 可以由单一的节点或是成百上千个节点构成。它们组合在一些可以描述用于静态分析的程序语法。
 
 每一个节点都有如下所示的接口（Interface）：
 
@@ -125,7 +125,7 @@ interface Node {
 
 字符串形式的`type`字段表示节点的类型（如：`"FunctionDeclaration"`，`"Identifier"`，`"BinaryExpression"`）。每一种类型的节点定义了一些附加属性用来进一步描述该节点类型。
 
-Babel还为每个节点额外生成了一些属性，用于描述该节点在原始代码中的位置。
+Babel 还为每个节点额外生成了一些属性，用于描述该节点在原始代码中的位置。
 
 ```
 {
@@ -150,11 +150,11 @@ Babel还为每个节点额外生成了一些属性，用于描述该节点在原
 
 ### 二、Babel 的处理步骤
 
-Babel的三个主要处理步骤分别是：**解析(parse)**，**转换(transform)**，**生成(generate)**。
+Babel 的三个主要处理步骤分别是：**解析(parse)**，**转换(transform)**，**生成(generate)**。
 
 #### 2.1 解析
 
-将代码解析成抽象语法树(AST)，每个js引擎(比如Chrome浏览器中的V8引擎)都有自己的AST解析器，而Babel是通过[Babylon](https://github.com/babel/babylon)实现的。在解析过程中有两个阶段：**词法分析**和**语法分析**，词法分析阶段把字符串形式的代码转换为**令牌**(tokens)流，令牌类似于AST中节点；而语法分析阶段则会把一个令牌流转换成AST的形式，同时这个阶段会把令牌中的信息转换成AST的表述结构。
+将代码解析成抽象语法树(AST)，每个 js 引擎(比如 Chrome 浏览器中的 V8 引擎)都有自己的 AST 解析器，而 Babel 是通过[Babylon](https://github.com/babel/babylon)实现的。在解析过程中有两个阶段：**词法分析**和**语法分析**，词法分析阶段把字符串形式的代码转换为**令牌**(tokens)流，令牌类似于 AST 中节点；而语法分析阶段则会把一个令牌流转换成 AST 的形式，同时这个阶段会把令牌中的信息转换成 AST 的表述结构。
 
 **词法分析**
 
@@ -196,35 +196,35 @@ n * n;
 }
 ```
 
-和AST节点一样它们也有`start`、`end`、`loc`属性。
+和 AST 节点一样它们也有`start`、`end`、`loc`属性。
 
 **语法分析**
 
-语法分析阶段会把一个令牌流转换成AST的形式。这个阶段会使用令牌中的信息把它们转换成一个AST的表述结构，这样更易于后续的操作。
+语法分析阶段会把一个令牌流转换成 AST 的形式。这个阶段会使用令牌中的信息把它们转换成一个 AST 的表述结构，这样更易于后续的操作。
 
 #### 2.2 转换
 
-转换步骤接收AST并对其进行遍历，在此过程中对节点进行添加、更新及移除等操作。这是Babel或是其他编译器中最复杂的过程同时也是插件将要介入工作的部分。
+转换步骤接收 AST 并对其进行遍历，在此过程中对节点进行添加、更新及移除等操作。这是 Babel 或是其他编译器中最复杂的过程同时也是插件将要介入工作的部分。
 
 #### 2.3 生成
 
-代码生成步骤把最终（经过一系列转换之后）的AST转换成字符串形式的代码，同时还会创建源码映射。
+代码生成步骤把最终（经过一系列转换之后）的 AST 转换成字符串形式的代码，同时还会创建源码映射。
 
 代码生成其实很简单：深度优先遍历整个 AST，然后构建可以表示转换后代码的字符串。
 
-为了了解Babel在遍历时处理AST的具体过程，我们还需要了解下面几个重要知识点。
+为了了解 Babel 在遍历时处理 AST 的具体过程，我们还需要了解下面几个重要知识点。
 
 #### 2.4 Visitor
 
-当Babel处理一个节点时，是以访问者的形式获取节点信息，并进行相关操作，这种方式是通过一个visitor对象来完成的，在visitor对象中定义了对于各种节点的访问函数，这样就可以针对不同的节点做出不同的处理。我们编写的Babel插件其实也是通过定义一个实例化visitor对象处理一系列的AST节点来完成我们圣代的修改操作。举个例子：
+当 Babel 处理一个节点时，是以访问者的形式获取节点信息，并进行相关操作，这种方式是通过一个 visitor 对象来完成的，在 visitor 对象中定义了对于各种节点的访问函数，这样就可以针对不同的节点做出不同的处理。我们编写的 Babel 插件其实也是通过定义一个实例化 visitor 对象处理一系列的 AST 节点来完成我们圣代的修改操作。举个例子：
 
-我们想要处理代码中用来加载模块的import命令语句
+我们想要处理代码中用来加载模块的 import 命令语句
 
 ```
 import { Ajax } from '../lib/utils';
 ```
 
-那么我们的Babel插件就需要定义这样的一个visitor对象：
+那么我们的 Babel 插件就需要定义这样的一个 visitor 对象：
 
 ```
 visitor: {
@@ -243,14 +243,14 @@ visitor: {
 	}
 ```
 
-当把这个插件用于遍历中时，每当处理到一个import语句，即ImportDeclaration节点时，都会自动调用ImportDeclaration()方法，这个方法中定义了处理import语句具体操作。
+当把这个插件用于遍历中时，每当处理到一个 import 语句，即 ImportDeclaration 节点时，都会自动调用 ImportDeclaration()方法，这个方法中定义了处理 import 语句具体操作。
 
 #### 2.5 Path
 
-从上面的visitor对象中，可以看到每次访问节点方法时，都会传入一个path参数，这个path参数中包含了节点的信息以及节点和所在的位置，以供对特定节点进行操作。具体来说Path 是表示两个节点之间连接的对象。这个对象不仅包含了当前节点的信息，也有当前节点的父节点的信息，同时也包含了添加、更新、移动和删除节点有关的其他很多方法。具体地，Path对象包含的属性和方法主要如下：
+从上面的 visitor 对象中，可以看到每次访问节点方法时，都会传入一个 path 参数，这个 path 参数中包含了节点的信息以及节点和所在的位置，以供对特定节点进行操作。具体来说 Path 是表示两个节点之间连接的对象。这个对象不仅包含了当前节点的信息，也有当前节点的父节点的信息，同时也包含了添加、更新、移动和删除节点有关的其他很多方法。具体地，Path 对象包含的属性和方法主要如下：
 
 ```
-── 属性      
+── 属性
   - node   当前节点
   - parent  父节点
   - parentPath 父path
@@ -277,7 +277,7 @@ visitor: {
 
 在 JavaScript 中，每当你创建了一个引用，不管是通过变量（variable）、函数（function）、类型（class）、参数（params）、模块导入（import）还是标签（label）等，它都属于当前作用域。
 
-### 三、Babel使用方法
+### 三、Babel 使用方法
 
 - 使用方法
 - 插件
@@ -293,25 +293,25 @@ visitor: {
 
 - 使用单体文件(standalone script)
 - 命令行(cli)
-- 构建工具的插件(webpack的babel-loader,rollup的rollup-plugin-babel)。
+- 构建工具的插件(webpack 的 babel-loader,rollup 的 rollup-plugin-babel)。
 
-其中后面两种比较常见。第二种多见于package.json中的`scripts`段落中的某条命令；第三种就直接集成到构建工具中。
+其中后面两种比较常见。第二种多见于 package.json 中的`scripts`段落中的某条命令；第三种就直接集成到构建工具中。
 
 这三种方式只有入口不同而已，调用的 babel 内核，处理方式都是一样的，所以我们先不纠结入口的问题。
 
 #### 3.2 插件
 
-babel本身不具有任何转化功能，它把转化的功能都分解到一个个plugin里面。因此当我们不配置任何插件时，经过babel的代码和输入是相同的。
+babel 本身不具有任何转化功能，它把转化的功能都分解到一个个 plugin 里面。因此当我们不配置任何插件时，经过 babel 的代码和输入是相同的。
 
 插件总共分为两种：
 
-- 当我们添加**语法插件**之后，在解析这一步就使得babel能够解析更多的语法。（顺带一提，babel内部使用的解析类库叫做babylon，并非babel自行开发）
+- 当我们添加**语法插件**之后，在解析这一步就使得 babel 能够解析更多的语法。（顺带一提，babel 内部使用的解析类库叫做 babylon，并非 babel 自行开发）
 
 举个简单的例子，当我们定义或者调用方法时，最后一个参数之后是不允许增加逗号的，如`callFoo(param1, param2,)`就是非法的。如果源码是这种写法，经过 babel 之后就会提示语法错误。
 
 但最近的 JS 提案中已经允许了这种新的写法(让代码 diff 更加清晰)。为了避免 babel 报错，就需要增加语法插件`babel-plugin-syntax-trailing-function-commas`
 
-- 当我们添加**转译插件**之后，在转换这一步把源码转换并输出。这也是我们使用babel最本质的需求。
+- 当我们添加**转译插件**之后，在转换这一步把源码转换并输出。这也是我们使用 babel 最本质的需求。
 
 比起语法插件，转译插件其实更好理解，比如箭头函数`(a) => a`就会转化为`function (a) {return a}`。完成这个工作的插件叫做`babel-plugin-transform-es2015-arrow-functions`。
 
@@ -319,7 +319,7 @@ babel本身不具有任何转化功能，它把转化的功能都分解到一个
 
 #### 3.3 配置文件
 
-既然插件是babel的根本，那如何使用呢？总共分为2个步骤：
+既然插件是 babel 的根本，那如何使用呢？总共分为 2 个步骤：
 
 1. 将插件的名字增加到配置文件中(根目录下创建 .babelrc 或者 package.json 的`babel`里面，格式相同)
 2. 使用`npm install babel-plugin-xxx`进行安装
@@ -328,16 +328,16 @@ babel本身不具有任何转化功能，它把转化的功能都分解到一个
 
 preset 分为以下几种：
 
-1. 官方内容，目前包括env,react, flow, minify 等。这里最重要的是 env，后面会详细介绍。
+1. 官方内容，目前包括 env,react, flow, minify 等。这里最重要的是 env，后面会详细介绍。
 2. stage-x，这里面包含的都是当年最新规范的草案，每年更新。
-   - Stage 0 - 稻草人：只是一个想法，经过TC39成员提出即可。
+   - Stage 0 - 稻草人：只是一个想法，经过 TC39 成员提出即可。
    - Stage 1 - 提案：初步尝试。
    - Stage 2 - 初稿：完成初步规范。
    - Stage 3 - 候选：完成规范和浏览器初步实现。
    - Stage 4 - 完成：将被添加到下一年度发布。
-例如`syntax-dynamic-import`就是stage-2的内容，`transform-object-rest-spread`就是stage-3的内容。
+     例如`syntax-dynamic-import`就是 stage-2 的内容，`transform-object-rest-spread`就是 stage-3 的内容。
 
-此外，低一级的stage会包含所有高级stage的内容，例如 stage-1 会包含 stage-2, stage-3 的所有内容。
+此外，低一级的 stage 会包含所有高级 stage 的内容，例如 stage-1 会包含 stage-2, stage-3 的所有内容。
 
 stage-4 在下一年更新会直接放到 env 中，所以没有单独的 stage-4 可供使用。
 
@@ -355,7 +355,7 @@ latest 是 env 的雏形，它是一个每年更新的 preset，目的是包含�
 - Plugin 会从前到后顺序执行。
 - Preset 的顺序则**刚好相反**(从后向前)。
 
-preset的逆向顺序主要是为了保证向后兼容，因为大多数用户的编写顺序是`['es2015', 'stage-0']`。这样必须先执行`stage-0`才能确保babel不报错。因此我们编排preset的时候，也要注意顺序，**其实只要按照规范的时间顺序列出即可**。
+preset 的逆向顺序主要是为了保证向后兼容，因为大多数用户的编写顺序是`['es2015', 'stage-0']`。这样必须先执行`stage-0`才能确保 babel 不报错。因此我们编排 preset 的时候，也要注意顺序，**其实只要按照规范的时间顺序列出即可**。
 
 #### 3.6 插件和 preset 的配置项
 
@@ -383,11 +383,11 @@ preset的逆向顺序主要是为了保证向后兼容，因为大多数用户�
 
 #### 3.7 env (重点)
 
-因为env最为常用也最重要，所以我们必须重点关注。
+因为 env 最为常用也最重要，所以我们必须重点关注。
 
-env的核心目的是通过配置得知目标环境的特点，然后只做必要的转换。例如目标浏览器支持es2015，那么es2015这个preset其实是不需要的，于是代码就可以小一点(一般转化后的代码总是更长)，构建时间也可以缩短一些。
+env 的核心目的是通过配置得知目标环境的特点，然后只做必要的转换。例如目标浏览器支持 es2015，那么 es2015 这个 preset 其实是不需要的，于是代码就可以小一点(一般转化后的代码总是更长)，构建时间也可以缩短一些。
 
-如果不写任何任何配置项，env等价于latest，也等价于 es2015 + es2016 + es2017 三个相加(不包含 stage-x 中的插件)。env 包含的插件列表维护在[这里](https://github.com/babel/babel-preset-env/blob/master/data/plugin-features.js)
+如果不写任何任何配置项，env 等价于 latest，也等价于 es2015 + es2016 + es2017 三个相加(不包含 stage-x 中的插件)。env 包含的插件列表维护在[这里](https://github.com/babel/babel-preset-env/blob/master/data/plugin-features.js)
 
 下面列出几种比较常用的配置方法：
 
@@ -403,7 +403,7 @@ env的核心目的是通过配置得知目标环境的特点，然后只做必�
 }
 ```
 
-如上配置将考虑所有浏览器的最新2个版本(safari大于等于7.0的版本)的特性，将必要的代码进行转换。而这些版本已有的功能就不进行转化了。这里的语法可以参考[browserslist](https://github.com/browserslist/browserslist)
+如上配置将考虑所有浏览器的最新 2 个版本(safari 大于等于 7.0 的版本)的特性，将必要的代码进行转换。而这些版本已有的功能就不进行转化了。这里的语法可以参考[browserslist](https://github.com/browserslist/browserslist)
 
 ```
 {
@@ -417,7 +417,7 @@ env的核心目的是通过配置得知目标环境的特点，然后只做必�
 }
 ```
 
-如上配置将目标设置为nodejs，并且支持6.10及鸡皮疙瘩版本。也可以使用`node: 'current'`来支持最新稳定版本。例如箭头函数在nodejs6及以上将不被转化，但如果nodejs 0.12就会被转化了。
+如上配置将目标设置为 nodejs，并且支持 6.10 及鸡皮疙瘩版本。也可以使用`node: 'current'`来支持最新稳定版本。例如箭头函数在 nodejs6 及以上将不被转化，但如果 nodejs 0.12 就会被转化了。
 
 另外一个有用的配置项是`modules`。它的取值可以是`amd`, `umd`, `systemjs`, `commonjs` 和 `false`。这可以让 babel 以特定的模块化格式来输出代码。如果选择`false` 就不进行模块化处理。
 
@@ -435,31 +435,31 @@ env的核心目的是通过配置得知目标环境的特点，然后只做必�
 
 #### 4.1 babel-cli
 
-顾名思义，cli就是命令行工具。安装了`babel-cli`就能够在命令行中使用`babel`命令来编译文件。
+顾名思义，cli 就是命令行工具。安装了`babel-cli`就能够在命令行中使用`babel`命令来编译文件。
 
-在开发npm package时经常会使用如下模式：
+在开发 npm package 时经常会使用如下模式：
 
 - 把`babel-cli`安装为`devDependencies`
-- 在package.json中添加`scripts`(比如`prepublish`)，使用`babel`命令编译文件
+- 在 package.json 中添加`scripts`(比如`prepublish`)，使用`babel`命令编译文件
 - `npm puhlish`
 
-这样既可以使用较新规范的JS语法编写源码，同时又能支持旧版环境。因为项目可能不太大，用不到构建工具(webpack或者rollup)，于是在发布之前用`babel-cli`进行处理。
+这样既可以使用较新规范的 JS 语法编写源码，同时又能支持旧版环境。因为项目可能不太大，用不到构建工具(webpack 或者 rollup)，于是在发布之前用`babel-cli`进行处理。
 
 #### 4.2 babel-node
 
 `babel-node`是`babel-cli`的一部分，它不需要单独安装。
 
-它的作用是在node环境中，直接运行es2015的代码，而不需要额外进行转码。例如我们有一个js文件以es2015的语法进行编写进行编写(如使用了箭头函数)。我们可以直接使用`babel-node es2015.js`进行执行，而不用再进行转码了。
+它的作用是在 node 环境中，直接运行 es2015 的代码，而不需要额外进行转码。例如我们有一个 js 文件以 es2015 的语法进行编写进行编写(如使用了箭头函数)。我们可以直接使用`babel-node es2015.js`进行执行，而不用再进行转码了。
 
 可以说：`babel-node` = `babel-polyfill` + `babel-register`。
 
 #### 4.3 babel-register
 
-babel-register模块必写`require`命令，为它加上一个钩子。此后，每当使用`require`加载`.js`、`.jsx`、`.es`和`.es6`后缀名的文件，就会先用babel进行转码。
+babel-register 模块必写`require`命令，为它加上一个钩子。此后，每当使用`require`加载`.js`、`.jsx`、`.es`和`.es6`后缀名的文件，就会先用 babel 进行转码。
 
 使用时，必须首先加载`require('babel-register')`。
 
-需要注意的是，babel-register只会对`require`命令加载的文件转码，而**不会对当前文件转码**。
+需要注意的是，babel-register 只会对`require`命令加载的文件转码，而**不会对当前文件转码**。
 
 另外，由于它是实时转码，所以**只适合在开发环境使用**。
 
@@ -467,14 +467,14 @@ babel-register模块必写`require`命令，为它加上一个钩子。此后，
 
 babel 默认只转换 js 语法，而不转换新的 API，比如 Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise 等全局对象，以及一些定义在全局对象上的方法(比如`Object.assign`)都不会转码。
 
-举例来说，es2015在Array对象上新增了`Array.from`方法。babel就不会转码这个方法。如果想让这个方法运行，必须使用`babel-polyfill`。(内部集成了`core-js`和`regenerator`)
+举例来说，es2015 在 Array 对象上新增了`Array.from`方法。babel 就不会转码这个方法。如果想让这个方法运行，必须使用`babel-polyfill`。(内部集成了`core-js`和`regenerator`)
 
-使用时，在所有代码运行之前增加`require('babel-polyfill')`。或者更常规的操作是在`webpack.config.js`中将`babel-polyfill`作为第一个entry。因此必须把`babel-polyfill`作为`dependencies`而不是`devDependencies`
+使用时，在所有代码运行之前增加`require('babel-polyfill')`。或者更常规的操作是在`webpack.config.js`中将`babel-polyfill`作为第一个 entry。因此必须把`babel-polyfill`作为`dependencies`而不是`devDependencies`
 
 `babel-polyfill`主要有两个缺点：
 
 - 使用`babel-polyfill`会导致打出来的包非常大，因为`babel-polyfill`是一个整体，把所有方法都加到原型链上。比如我们只使用了`Array.from`，但它把`Object.defineProperty`也给加上了，这就是一种浪费了。这个问题可以通过单独`core-js`的某个类库来解决，`core-js`都是分开的。
-- ``
+- `babel-polyfill`会污染全局变量，给很多类的原型链上都作了修改，如果我们开发的也是一个类库供其他开发者使用，这种情况就会变得非常不可控。
 
 因此在实际使用中，如果我们无法忍受这两个缺点(尤其是第二个)，通常我们会倾向于使用`babel-plugin-transform-runtime`。
 
@@ -482,11 +482,11 @@ babel 默认只转换 js 语法，而不转换新的 API，比如 Iterator、Gen
 
 #### 4.5 babel-runtime 和 babel-plugin-transform-runtime
 
-我们时常在项目中看到.babelrc中使用`babel-plugin-transform-runtime`，而`package.json`中的`dependencies`(注意不是`devDependencies`)又包含了`babel-runtime`，那这两个是不是成套使用的呢？他们又起什么作用呢？
+我们时常在项目中看到.babelrc 中使用`babel-plugin-transform-runtime`，而`package.json`中的`dependencies`(注意不是`devDependencies`)又包含了`babel-runtime`，那这两个是不是成套使用的呢？他们又起什么作用呢？
 
 先说`babel-plugin-transform-runtime`。
 
-babel会转换js语法，之前已经提过了。以`async/await`举例，如果不使用这个plugin(即默认情况)，转换后的代码大概是：
+babel 会转换 js 语法，之前已经提过了。以`async/await`举例，如果不使用这个 plugin(即默认情况)，转换后的代码大概是：
 
 ```
 // babel 添加一个方法，把 async 转化为 generator
@@ -494,6 +494,22 @@ function _asyncToGenerator(fn) { return function () {....}} // 很长很长一�
 
 // 具体使用处
 var _ref = _asyncToGenerator(function* (arg1, arg2) {
+  yield (0, something)(arg1, arg2);
+});
+
+```
+
+不用过于纠结具体的语法，只需看到，这个`_asyncToGenerator`在当前文件被定义，然后被使用了，以替换源代码的`await`。但每个被转化的文件都会插入一段 `_asyncToGenerator`这就导致重复和浪费了。
+
+在使用了`babel-plugin-transform-runtime`了之后，转化后的代码会变成
+
+```
+// 从直接定义改为引用，这样就不会重复定义了。
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+// 具体使用处是一样的
+var _ref = _asyncToGenerator3(function* (arg1, arg2) {
   yield (0, something)(arg1, arg2);
 });
 
@@ -536,7 +552,7 @@ use: {
 
 #### 4.7 Babylon
 
-""可以说Babylon定义了把代码解析成AST的一套规范。
+""可以说 Babylon 定义了把代码解析成 AST 的一套规范。
 
 ```
 import * as babylon from "babylon";
@@ -588,19 +604,19 @@ traverse(ast, {
 
 | 名称                                           | 作用                                                        | 备注                                                                 |
 | ---------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------- |
-| babel-cli                                      | 允许命令行使用babel命令转译文件                             |
-| babel-node                                     | 允许命令行使用babel-node直接转译+执行node文件               | 随`babel-cli`一同安装 `babel-node`=`babel-polyfill`+`babel-register` |
+| babel-cli                                      | 允许命令行使用 babel 命令转译文件                           |
+| babel-node                                     | 允许命令行使用 babel-node 直接转译+执行 node 文件           | 随`babel-cli`一同安装 `babel-node`=`babel-polyfill`+`babel-register` |
 | babel-register                                 | 改写`require`命令，为其加载的文件进行转码，不对当前文件转码 | 只适用于开发环境                                                     |
 | babel-polyfill                                 | 为所有 API 增加兼容方法                                     | 需要在所有代码之前`require`，且体积比较大                            |
 | babel-plugin-transform-runtime & babel-runtime | 把帮助类方法从每次使用前定义改为统一 `require`，精简代码    | `babel-runtime`需要安装为依赖，而不是开发依赖                        |
 | babel-loader                                   | 使用 webpack 时作为一个 loader 在代码混淆之前进行代码转换   |
 
-### 五、Babel插件实践
+### 五、Babel 插件实践
 
 ## 参考资料
 
 - [一口(很长的)气了解 babel](https://juejin.im/post/5c19c5e0e51d4502a232c1c6)
-- [深入Babel，这一篇就够了](https://juejin.im/post/5c21b584e51d4548ac6f6c99)
+- [深入 Babel，这一篇就够了](https://juejin.im/post/5c21b584e51d4548ac6f6c99)
 - [前端中的编译原理 - 从零打造一个实用的 Babel 插件](https://mp.weixin.qq.com/s/XSzQ5nkLI369CDhMZtF-MQ)
 - [前端工程师需要了解的 Babel 知识](https://mp.weixin.qq.com/s/HdIvS75nJ0JFStoNPIl7Iw)
 - [深入浅出 Babel 上篇：架构和原理 + 实战](https://juejin.im/post/5d94bfbf5188256db95589be)
