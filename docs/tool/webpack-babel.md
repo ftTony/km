@@ -512,8 +512,15 @@ var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 var _ref = _asyncToGenerator3(function* (arg1, arg2) {
   yield (0, something)(arg1, arg2);
 });
-
 ```
+
+从定义方法改成引用，那重复定义就变成了重复引用，就不存在代码重复的问题了。
+
+但在这里，我们也发现`babel-runtime`出场了，它就是这些方法的集合处，也因此，**在使用`babel-plugin-transform-runtime`的时候必须把`babel-runtime`**
+
+再说`babel-runtime`，它内部集成了
+
+1. `core-js`：转换一些内置类
 
 #### 4.6 babel-loader
 
