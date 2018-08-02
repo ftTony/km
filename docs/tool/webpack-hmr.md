@@ -64,6 +64,10 @@ Hot Module Replacement（以下简称 HMR）是 webpack 发展至今引入的最
 --webpack.config.js
 ```
 
+项目中包含两个js文件，项目入口文件是index.js文件，hello.js文件是index.js文件一个依赖，js代码如你所见，将在body元素中添加一个包含`hello world`的div元素。
+
+
+
 ### 参考资料
 
 - [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
