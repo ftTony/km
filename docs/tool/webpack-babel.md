@@ -520,7 +520,9 @@ var _ref = _asyncToGenerator3(function* (arg1, arg2) {
 
 再说`babel-runtime`，它内部集成了
 
-1. `core-js`：转换一些内置类
+1. `core-js`：转换一些内置类(`Promise`，`Symbols`等等)和静态方法(`Array.from`等)。绝大部分转换是这里做的。自动引入。
+2. `regenerator`：作为`core-js`的拾遗补漏，主要是`generator/yield`和`async/await`两组的支持。当代码中有使用`generators/async`时自动引入。
+3. helpers，如上面的`asyncToGenerator`就是其中之一，其他还有如
 
 #### 4.6 babel-loader
 
