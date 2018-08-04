@@ -83,7 +83,9 @@ module.exports = {
 }
 ```
 
-值得一提的是，在上面的配置中并没有配置HotModuleReplacementPlugin，原因在于当我们设置
+值得一提的是，在上面的配置中并没有配置HotModuleReplacementPlugin，原因在于当我们设置devServer.hot为true后，并且在package.json文件中添加如下的script脚本：
+
+>"start": "webpack-dev-server --hot --open"
 
 ### 参考资料
 
