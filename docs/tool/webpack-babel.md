@@ -563,7 +563,7 @@ use: {
 
 #### 4.7 Babylon
 
-""可以说 Babylon 定义了把代码解析成 AST 的一套规范。
+可以说 Babylon 定义了把代码解析成 AST 的一套规范。
 
 ```
 import * as babylon from "babylon";
@@ -585,6 +585,8 @@ babylon.parse(code);
 ```
 
 #### 4.8 babel-traverse
+
+babel-traverse 用于维护操作 AST 的状态，定义了更新、添加和移除节点的操作方法。之前也说到，path 参数里面的属性和方法都是
 
 ```
 import * as babylon from "babylon";
