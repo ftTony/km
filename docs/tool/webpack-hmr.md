@@ -87,6 +87,10 @@ module.exports = {
 
 >"start": "webpack-dev-server --hot --open"
 
+添加——hot配置项后，devServer会告诉webpack自动引入HotModuleReplacementPlugin插件，而不用我们再手动引入了。
+
+进入到仓库目录，npm install安装依赖后，
+
 ### 参考资料
 
 - [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
