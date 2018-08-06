@@ -89,7 +89,9 @@ module.exports = {
 
 添加——hot配置项后，devServer会告诉webpack自动引入HotModuleReplacementPlugin插件，而不用我们再手动引入了。
 
-进入到仓库目录，npm install安装依赖后，
+进入到仓库目录，npm install安装依赖后，运行npm start就启动了devServer服务，访问[http://127.0.0.1:8080](http://127.0.0.1:8080)就可以看到我们的页面了。
+
+下面将进入到关键环节，在简单例子中，我将修改hello.js文件中的代码，在源码层面上来分析HMR的具体运行流程，当然我还是将按照上面图解来分析。修改代码如下：（以下所有代码块首行就是该文件的路径）
 
 ### 参考资料
 
