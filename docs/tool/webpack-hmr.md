@@ -93,6 +93,18 @@ module.exports = {
 
 下面将进入到关键环节，在简单例子中，我将修改hello.js文件中的代码，在源码层面上来分析HMR的具体运行流程，当然我还是将按照上面图解来分析。修改代码如下：（以下所有代码块首行就是该文件的路径）
 
+```
+// hello.js
+- const hello = () => 'hello world' // 将 hello world 字符串修改为 hello eleme
++ const hello = () => 'hello eleme'0
+```
+
+页面中hello world文件随即变成hello eleme。
+
+**第一步：webpack对文件系统进行watch打包到内存中**
+
+webpack-dev-middleware 调用 webpack 的 api 对文件系统 watch，当hello.js文件发生改变后
+
 ### 参考资料
 
 - [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
