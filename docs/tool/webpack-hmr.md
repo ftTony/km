@@ -103,7 +103,17 @@ module.exports = {
 
 **第一步：webpack对文件系统进行watch打包到内存中**
 
-webpack-dev-middleware 调用 webpack 的 api 对文件系统 watch，当hello.js文件发生改变后
+webpack-dev-middleware 调用 webpack 的 api 对文件系统 watch，当hello.js文件发生改变后，webpack重新对文件进行编译打包，然后保存到内存中。
+
+```
+// webpack-dev-middleware/lib/Shared.js
+if(!options.lazy) {
+    var watching = compiler.watch(options.watchOptions, share.handleCompilerCallback);
+    context.watching = watching;
+}
+```
+
+你可能会疑问了，为什么webpack没有将文件直接打包到output.path目录下呢？文件又去了哪儿？原来webpack将bundle.js文件打包到了内存中，不生成文件的原因就在于访问内存中的代码比访问文件系统中的文件更快，而且也减少了代码写入文件的开销，这一切都归功于[memory-fs](https://github.com/webpack/memory-fs)
 
 ### 参考资料
 
