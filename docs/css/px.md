@@ -25,7 +25,17 @@
 
 #### 3.1 css 中的子元素中的百分比（%）到底是谁的百分比？
 
+直观的理解，我们可能会认为子元素的百分比完全相对于直接父元素，height 百分比相对于 height，width 百分比相对于 width。当然这种理解是正确的，但是根据 css 的盒式模型，除了 height、width 属性外，还具有 padding、border、margin 等等属性。那么这些属性设置成百分比，是根据父元素的那些属性呢？此外还有 border-radius 和 translate 等属性中的百分比，又是相对于什么呢？
+
 #### 3.2 子元素 height 和 width 的百分比
+
+子元素的 height 或 width 中使用百分比，是相对于子元素的直接父元素，width 相对于父元素的 width，height 相对父元素的 height。比如：
+
+```
+<div class="parent">
+  <div class="child"></div>
+</div>
+```
 
 #### 3.3 top 和 bottom 、left 和 right
 
