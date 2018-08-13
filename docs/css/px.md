@@ -37,7 +37,13 @@
 </div>
 ```
 
+如果设置： .father{ width:200px; height:100px; } .child{ width:50%; height:50%; } 展示的效果为：
+
+![images](px01.png)
+
 #### 3.3 top 和 bottom 、left 和 right
+
+子元素的 top 和 bottom 如果设置百分比，则相对于直接非 static 定位(默认定位)的父元素的高度，同样子元素的 left 和 right 如果设置百分比，则相对直接非定位(默认定位的)父元素的宽度。
 
 #### 3.4 padding 和 margin
 
