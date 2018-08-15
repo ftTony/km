@@ -703,7 +703,37 @@ function plugin () {
 
 ### 五、Babel 插件实践
 
-## 参考资料
+#### 5.1 插件格式
+
+先从一个接收了当前`Babel`对象作为参数的`Function`开始。
+
+```
+export default function(bable){
+  // plugin contents
+}
+```
+
+我们经常会这样写
+
+```
+export default function({types:t}){
+  //
+}
+```
+
+接着返回一个对象，其`visitor`属性是这个插件的主要访问者。
+
+```
+export default function({ types: t }) {
+  return {
+    visitor: {
+      // visitor contents
+    }
+  };
+};
+```
+
+### 参考资料
 
 - [一口(很长的)气了解 babel](https://juejin.im/post/5c19c5e0e51d4502a232c1c6)
 - [深入 Babel，这一篇就够了](https://juejin.im/post/5c21b584e51d4548ac6f6c99)
@@ -713,6 +743,7 @@ function plugin () {
 - [深入浅出 Babel 下篇：既生 Plugin 何生 Macros](https://juejin.im/post/5da12397e51d4578364f6ffa)
 - [Babel 插件手册](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md)
 - [Babel 插件原理的理解与深入](https://github.com/frontend9/fe9-library/issues/154)
+- [Babel 是如何读懂 JS 代码的](https://zhuanlan.zhihu.com/p/27289600)
 
 ## 联系作者
 
