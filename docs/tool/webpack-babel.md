@@ -733,6 +733,38 @@ export default function({ types: t }) {
 };
 ```
 
+`visitor`中的每个函数接收 2 个参数：`path`和`state`
+
+```
+export default function({types:1}){
+  return {
+    visitor:{
+      CallExpression(path, state) {}
+    }
+  }
+}
+```
+
+#### 5.2 写一个简单的插件
+
+我们写一个简单的插件，把所有定义变量名为`a`的换成`b`
+
+```
+export default function({types:t}){
+  return {
+    visitor:{
+      VariableDeclarator(path, state) {
+        if(path.node.id.name == 'a'){
+          path.node.id = t.identifier('b')
+        }
+      }
+    }
+  }
+}
+```
+
+我们要把`id`属性是 a 的替换成 b 就好了。但是这里不能直接`path.node.id.name = 'b'` 。如果操作的是 Object，就没问题，但是这里是 AST 语法树，所以想改变某个值，就是用对应的 AST 来替换，现在我们用新的标识符来替换这个属性。
+
 ### 参考资料
 
 - [一口(很长的)气了解 babel](https://juejin.im/post/5c19c5e0e51d4502a232c1c6)
