@@ -355,6 +355,7 @@ module.exports = {
           'hash',
           'trees-1',
           'trees-2',
+          'heap',
           'trie',
           'graphs'
         ]
