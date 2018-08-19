@@ -235,6 +235,11 @@ module.exports = {
       {
         title: '工程测试',
         collapsable: false,
+        children: ['architecture-1', 'architecture-2', 'architecture-3']
+      },
+      {
+        title: '工程测试',
+        collapsable: false,
         children: ['test-1', 'test-2', 'test-3', 'test-4']
       },
       {
