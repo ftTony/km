@@ -276,7 +276,11 @@ div:nth-child(5){
 
 #### 3.1 字母 x 的角色
 
-在内联元素的垂直方向对齐中，基线是最为重要的概念。`line-height`
+在内联元素的垂直方向对齐中，基线是最为重要的概念。`line-height`定义的就是两基线之间的距离，`vertical-align`的默认值就是基线。基线定义是字母 x 的下边缘。
+
+css 中有个概念叫`x-height`，指的是小写字母 x 的高度。`vertical-align:middle`对齐的就是基线往上 1/2`x-height`高度的地方，可以理解为近似字母 x 的交叉点。
+
+css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 x 的高度，即`x-height`。
 
 #### 3.2 line-height
 
@@ -284,7 +288,7 @@ div:nth-child(5){
 
 - `normal`：默认值`normal`
 - 数值和百分比：最终会被计算为带单位的值，具体计算方法就是乘以字体大小`font-size`。
-- 长度值：就是`100px`这样带单位的值
+- 长度值：就是`100px`这样带单位的值。
 
 `line-height`的作用：
 
@@ -308,11 +312,31 @@ div:nth-child(5){
 
 #### 4.1 `float`属性的特性
 
+#### 4.2 `clear` 的作用和不足
+
+#### 4.3 BFC 块级格式化上下文
+
+#### 4.4 绝对定位`position: absolute`
+
+#### 4.5 固定定位 `position: fixed`
+
+#### 4.6 粘性定位`position: sticky`
+
 ### 五、层叠规则
 
 参考：[结构与层叠](https://km.xiaowuzi.info/css/stack.html)
 
 ### 六、文本控制
+
+#### 6.1 `::first-letter`应用实例
+
+#### 6.2 `text-transform` 应用
+
+#### 6.3 `word-spacing` 空格间隙
+
+#### 6.4 `white-space` 空白处理
+
+#### 6.5 `text-align: justify`
 
 ### 七、元素的显示与隐藏
 
