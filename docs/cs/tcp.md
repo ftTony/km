@@ -10,7 +10,8 @@
 
 - [面试专场之「计算机网络」知识](https://mp.weixin.qq.com/s/4UCkjMpFSy_mvvHdjUVPCw)
 - [面试官，不要再问我三次握手和四次挥手](https://mp.weixin.qq.com/s/WI9045Sd7gRsE-WZ5x8tcA)
-- [TCP三次握手和四次挥手](https://mp.weixin.qq.com/s/rWkD5ktlJDxcNFJ-5NH1eQ)
+- [TCP 三次握手和四次挥手](https://mp.weixin.qq.com/s/rWkD5ktlJDxcNFJ-5NH1eQ)
+- [面试官问:TCP 为啥要 3 次握手和 4 次挥手？握两次手不行吗？](https://mp.weixin.qq.com/s/KCEgz5FqQ44Vt3iUREJmaA)
 
 ## 联系作者
 
