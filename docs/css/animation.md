@@ -26,12 +26,22 @@ Animations 功能与 Transitions 功能相同，都是通过改变元素的属�
 #### 例子
 
 ```
-div{
-
+@-webkit-keyframes mycolor {
+   0% {background-color:red;}
+   40% {background-color:darkblue;}
+   70% {background-color: yellow;}
+   100% {background-color:red;}
+}
+.animate:hover {
+   -webkit-animation-name: mycolor;
+   -webkit-animation-duration: 5s;
+   -webkit-animation-timing-function:linear;
 }
 ```
 
 ### 二、name
+
+`animation-name`属性为`@keyframes` 动画规定名称。
 
 ### 三、duration
 
