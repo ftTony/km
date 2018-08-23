@@ -322,6 +322,12 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 #### 4.6 粘性定位`position: sticky`
 
+```
+#one{position:sticky;top:10px;}
+```
+
+在 viewport 视口滚动到元素 top 距离小于 10px 之前，元素为相对定位。之后，元素将固定在与顶部距离 10px 的位置，直到 viewport 视口回滚到阈值以下。
+
 ### 五、层叠规则
 
 参考：[结构与层叠](https://km.xiaowuzi.info/css/stack.html)
@@ -339,6 +345,10 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 #### 6.5 `text-align: justify`
 
 ### 七、元素的显示与隐藏
+
+#### 7.1 元素隐藏方法总结
+
+#### 7.2 `display: none` 与 `visibility: hidden` 的区别
 
 ### 八、弹性布局
 
