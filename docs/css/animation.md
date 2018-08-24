@@ -41,11 +41,37 @@ Animations 功能与 Transitions 功能相同，都是通过改变元素的属�
 
 ### 二、name
 
-`animation-name`属性为`@keyframes` 动画规定名称。
+#### 2.1 语法
+
+```
+animation-name: none | IDENT[,none | IDENT]*;
+```
+
+#### 2.2 取值说明
+
+`animation-name`定义使用的动画名称，需要和@keyframes 声明的动画名称一致
 
 ### 三、duration
 
+#### 3.1 语法
+
+```
+
+```
+
+#### 3.2 取值说明
+
+`animation-duration`是用来指定元素播放动画所持续的时间长。
+
 ### 四、timeing-function
+
+#### 4.1 语法
+
+```
+
+```
+
+#### 4.2 取值说明
 
 ### 五、delay
 
