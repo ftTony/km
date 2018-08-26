@@ -49,29 +49,56 @@ animation-name: none | IDENT[,none | IDENT]*;
 
 #### 2.2 取值说明
 
-`animation-name`定义使用的动画名称，需要和@keyframes 声明的动画名称一致
+`animation-name`定义使用的动画名称，其主要有两个值：IDENT 是由 `@Keyframes` 创建的动画名，换句话说此处的 IDENT 要和 `@Keyframes` 中的 IDENT 一致，如果不一致，将不能实现任何动画效果；none 为默认值，当值为 none 时，将没有任何动画效果。
+
+#### 2.3 @Keyframes
+
+`@keyframes` 规则通过在动画序列中定义关键帧（或 waypoints）的样式来控制 CSS 动画序列中的中间步骤。这比`transition`更能控制动画序列的中间步骤。
+
+```
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+```
 
 ### 三、duration
 
 #### 3.1 语法
 
 ```
-
+animation-duration: <time>[,<time>]*
 ```
 
 #### 3.2 取值说明
 
-`animation-duration`是用来指定元素播放动画所持续的时间长。
+`animation-duration`是用来指定元素播放动画所持续的时间长，取值:<time>为数值，单位为 s（秒）其默认值为“0”。
 
 ### 四、timeing-function
+
+`animation-timing-function`属性定义 CSS 动画在每一动画周期中执行的节奏。
 
 #### 4.1 语法
 
 ```
-
+animation-timing-function:ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>) [, ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>)]*
 ```
 
 #### 4.2 取值说明
+
+- `ease`：逐渐变慢（默认值），ease 函数等同于贝塞尔曲线(0.25, 0.1, 0.25, 1.0).
+- `linear`：匀速，linear 函数等同于贝塞尔曲线(0.0, 0.0, 1.0, 1.0).
+- `ease-in`：加速，ease-in 函数等同于贝塞尔曲线(0.42, 0, 1.0, 1.0).
+- `ease-out`：减速，ease-out 函数等同于贝塞尔曲线(0, 0, 0.58, 1.0).
+- `ease-in-out`：加速然后减速，ease-in-out 函数等同于贝塞尔曲线(0.42, 0, 0.58, 1.0)
+- `cubic-bezier`：该值允许你去自定义一个时间曲线，可能的值是 0 至 1 之间的数值。
 
 ### 五、delay
 
