@@ -102,13 +102,43 @@ animation-timing-function:ease | linear | ease-in | ease-out | ease-in-out | cub
 
 ### 五、delay
 
+`animation-delay`:属性定义动画于何时开始，即从动画应用在元素上到动画开始的这段时间的长度。
+
+#### 5.1 语法
+
+```
+animation-delay: <time>[,<time>]*
+```
+
+#### 5.2 取值说明
+
+取值为`<time>`为数值，单位为 s(秒)，其默认值也是 0。这个属性和 `transition-delay` 使用方法是一样的。
+
 ### 六、iterations-count
+
+`animation-iteration-count`是用来指定元素播放动画的循环次数。
+
+#### 6.1 语法
+
+#### 6.2 取值说明
 
 ### 七、direction
 
+#### 7.1 语法
+
+#### 7.2 取值说明
+
 ### 八、play-state
 
+#### 8.1 语法
+
+#### 8.2 取值说明
+
 ### 九、fill-mode
+
+#### 9.1 语法
+
+#### 9.2 取值说明
 
 ### 参考资料
 
