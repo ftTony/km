@@ -120,11 +120,23 @@ animation-delay: <time>[,<time>]*
 
 #### 6.1 语法
 
+```
+ animation-iteration-count:infinite | <number> [, infinite | <number>]*
+```
+
 #### 6.2 取值说明
+
+其可以取值`<number>`为数字，其默认值为“1”；`infinite`为无限次数循环。
 
 ### 七、direction
 
+`animation-direction`是用来指定元素动画播放的方向
+
 #### 7.1 语法
+
+```
+animation-direction: normal | alternate [, normal | alternate]*
+```
 
 #### 7.2 取值说明
 
