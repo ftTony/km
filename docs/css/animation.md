@@ -140,11 +140,21 @@ animation-direction: normal | alternate [, normal | alternate]*
 
 #### 7.2 取值说明
 
+其只有两个值，默认值为`normal`，如果设置为`normal`时，动画的每次循环都是向前播放；另一个值是`alternate`，他的作用是，动画播放在第偶数次向前播放，第奇数次向反方向播放。
+
 ### 八、play-state
+
+`animation-play-state`主要是用来控制元素动画的播放状态。
 
 #### 8.1 语法
 
+```
+animation-play-state:running | paused [, running | paused]*
+```
+
 #### 8.2 取值说明
+
+其主要有两个值，running 和 paused 其中 running 为默认值。他们的作用就类似于我们的音乐播放器一样，可以通过 paused 将正在播放的动画停下了，也可以通过 running 将暂停的动画重新播放，我们这里的重新播放不一定是从元素动画的开始播放，而是从你暂停的那个位置开始播放。另外如果暂时了动画的播放，元素的样式将回到最原始设置状态。
 
 ### 九、fill-mode
 
