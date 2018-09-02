@@ -323,7 +323,7 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 大家都知道`clear:boath`可以清除前面浮动元素的浮动，但实际上，他并不是真的清除了浮动。
 
-`clear`的定义是：
+`clear`的定义是：元素盒子的边不能与前面的浮动元素相邻。也就是虽然浮动元素高度坍塌，但是设置了`clear:both`的元素却将其高度视为仍然占据位置。
 
 `clear`只能作用于块级元素，并且其并不能解决后面元素可能发生的文字环绕问题。
 
@@ -365,9 +365,31 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 ### 七、元素的显示与隐藏
 
+元素的显示隐藏方法很多，不同方法的在不同的场景下页面效果不一，对页面的性能也有不同的影响。
+
 #### 7.1 元素隐藏方法总结
 
+1. 如果希望元素不可见、不占据空间、资源会加载、DOM 可访问：`display:none`;
+2. 如果希望元素不可见、不能点击、但占据空间、资源会加载，可以使用：`visibility:hidden`;
+3. 如果希望元素不可见、不占据空间、显隐时可以又 transition 淡入淡出效果
+
+```
+div{
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .5s linear;
+  background: cyan;
+}
+div.active{
+  visibility: visible;
+  opacity: 1;
+}
+```
+
 #### 7.2 `display: none` 与 `visibility: hidden` 的区别
+
+1. `display:none`的元素不占据任何空间，`visibility:hidden`的元素空间保留；
 
 ### 八、弹性布局
 
