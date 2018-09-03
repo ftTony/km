@@ -12,6 +12,8 @@ Hot Module Replacement（以下简称 HMR）是 webpack 发展至今引入的最
 
 ### 为什么需要HMR
 
+在webpack HMR功能之前，已经有很多live reload的工具或库，比如[live-server](http://tapiov.net/live-server/)
+
 ### HMR 的工作原理图解
 
 初识HMR的时候觉得其很神奇，一直有一些疑问萦绕在脑海。
@@ -40,7 +42,9 @@ Hot Module Replacement（以下简称 HMR）是 webpack 发展至今引入的最
 3. 第三步是webpack-dev-server对文件变化的一个监控，这一步不同于第一步，并不是监控代码变化重新打包。当我们在配置文件中配置了[devServer.watchContentBase](https://webpack.js.org/configuration/dev-server/#devserver-watchcontentbase)为true的时候，Server会监听这些配置文件夹中静态文件的变化，变化后会通知浏览器端对应用进行live reload。注意，这儿是浏览器刷新，和HMR是两个概念。
 4. 第四步也是webpack-dev-server代码的工作，该步骤主要是通过[sockjs](https://github.com/sockjs/sockjs-client)在浏览器端和服务端之间建立一个websocket长连接，将webpack编译打包的各个阶段的状态信息告浏览器端，同时也包括第三步中Server监听静态文件变化的信息。浏览器端根据这些socket消息进行不同的操作。当然服务端传递的最主要信息还是新模块的hash值，后面的步骤根据这一hash值来进行模块热替换。
 5. webpack-dev-server/client 端并不能够请求更新的代码，也不会执行热更模块操作，而把这些工作又交回给了webpack，webpack/hot/dev-server的工作就是根据webpack-dev-server/client传给它的信息以及dev-server的配置决定是刷新浏览器呢还是进行模块热更新。当然如果仅仅是刷新浏览器，也就没有后面那些步骤了。
-6. HotModuleReplacement.runtime 是客户端 HMR 的中枢，它接收到上一步传递给他的新模块的hash值，它通过 JsonpMainTemplate.runtime向server端发送ajax请求，服务端返回一个json，该json包含了所有要更新的模块的hash值，
+6. HotModuleReplacement.runtime 是客户端 HMR 的中枢，它接收到上一步传递给他的新模块的hash值，它通过 JsonpMainTemplate.runtime向server端发送ajax请求，服务端返回一个json，该json包含了所有要更新的模块的hash值，获取到更新列表后，该模块再次通过jsonp请求，获取到最新的模块代码。这就是上图中7、8、9步骤。
+7. 而第10步是决定HMR成功与否的关键步骤，在该步骤中，HotModulePlugin将会对新旧模块进行对比，决定是否更新模块，在决定更新模块后，检查模块之间的依赖关系，更新模块的同时更新模块间的依赖引用。
+8. 最后一步，当HMR失败后，回退到live reload操作，也就是进行浏览器刷新来获取最新打包代码。
 
 ### 运用 HMR 的简单例子
 
