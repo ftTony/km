@@ -355,7 +355,32 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 #### 6.1 `::first-letter`应用实例
 
+`first-letter`选中首个字符
+
+```
+<style>
+p{
+  font-weight: bold;
+  font-size: 22px;
+}
+p::first-letter{
+  font-size: 44px;
+  color: red;
+}
+</style>
+
+<p>￥ 1000</p>
+```
+
 #### 6.2 `text-transform` 应用
+
+假设有个输入框只能输入大写字母，那么如下设置，输入小写字母出现的却是大写字母，可用于身份证输入框或验证码输入框等：
+
+```
+  input {
+    text-transform: uppercase;
+  }
+```
 
 #### 6.3 `word-spacing` 空格间隙
 
@@ -386,6 +411,8 @@ div.active{
   opacity: 1;
 }
 ```
+
+这里使用`visibility: hidden`而不是`display: none`，是因为`display: none`会影响 css3 的`transition`过渡效果。 但是`display: none`并不会影响 css`animation`动画的效果。
 
 #### 7.2 `display: none` 与 `visibility: hidden` 的区别
 
