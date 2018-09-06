@@ -53,7 +53,11 @@ CSS 代码如下：
 
 ### 二、旋转 rotate
 
+rotate(<angle>)：通过指定的角度参数对原元素指定一个 2D，需先有 transform-origin 属性的定义。
+
 ### 三、移动 translate
+
+移动 translate 我们分为三种情况：translate(x,y)水平
 
 ### 四、缩放 scale
 
