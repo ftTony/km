@@ -53,7 +53,15 @@ Hot Module Replacement（以下简称 HMR）是 webpack 发展至今引入的最
 
 在上一个部分，通过一张 HMR 流程图，简要的说明了 HMR 进行模块热更新的过程。当然你可能感觉还是很迷糊，对上面出现的一些英文名词也可能比较陌生（上面这些英文名词代表着代码仓库或者仓库中的文件模块），没关系，在这一部分，我将通过一个[最简单最纯粹的例子](https://github.com/Jocs/webpack-HMR-demo)，通过分析 wepack及 webpack-dev-server 源码详细说明各个库在 HMR 过程中的具体职责。
 
+在开始这个例子之前简单对这个仓库文件进行下说明，仓库中包含文件如下：
 
+```
+--hello.js
+--index.js
+--index.html
+--package.json
+--webpack.config.js
+```
 
 ### 参考资料
 
