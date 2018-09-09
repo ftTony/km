@@ -339,9 +339,45 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 而且两者包含块不同，浮动元素包含只能是父级元素，绝对定位的包含块则是距离最近的`position`不为`static`的祖先元素。
 
+- 无依赖绝对定位
+
+大多数乃至绝对定位的时候，都是存在包含块和`left/top`等方向属性的。但其实`position:absolute`是非常独立的 css 属性，其样式和行为表现不依赖任何 css 属性就可以完成。
+
+- 绝对定位和`overflow:hidden`
+
+- `postion:absolute`的流体特性
+
 #### 4.5 固定定位 `position: fixed`
 
 `position:fixed`是相对于屏幕视口的位置来指定元素位置，祖先元素设置`position:relative`并不会对其产生影响。
+
+`position:fixed`只有一个要注意的点，那就是当元素祖先的`transform`属性非`none`时，容器由视口改为该祖先，代码如下：
+
+```
+body {
+  border: 1px dashed;
+}
+
+main {
+  height: 200px;
+  margin: 50px;
+  border: 1px solid;
+  transform: scale(1);
+}
+
+div {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100px;
+  height: 100px;
+  background: cyan;
+}
+
+<main>main
+    <div>div</div>
+</main>
+```
 
 #### 4.6 粘性定位`position: sticky`
 
