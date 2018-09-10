@@ -127,6 +127,30 @@ if(isMemoryFs) {
 
 首先判断当前fileSystem是否已经是MemoryFileSystem的实例，如果不是，用MemoryFileSystem的实例替换compiler之前outputFileSystem。这样bundle.js文件代码就作为一个简单javascript对象保存在了内存中，当浏览器请求bundle.js文件时，devServer就直接去内存中找到上面保存的javascript对象返回给浏览器端。
 
+**第二步：devServer通知浏览器端文件发生改变**
+
+在这一阶段，sockjs是服务器和浏览器端之间的桥梁，在启动devServer的时候，sockjs在服务端和浏览器端建立了一个webSocket长连接，以便将webpack编译和打包的各个阶段状态告知浏览器，最关键的步骤还是webpack-dev-server调用webpack api监听compile的done事件，当compile完成后，webpack-dev-server通过`_sendStatus`方法将编译打包后的新模块hash值发送到浏览器端。
+
+```
+// webpack-dev-server/lib/Server.js
+compiler.plugin('done', (stats) => {
+  // stats.hash 是最新打包文件的 hash 值
+  this._sendStats(this.sockets, stats.toJson(clientStats));
+  this._stats = stats;
+});
+...
+Server.prototype._sendStats = function (sockets, stats, force) {
+  if (!force && stats &&
+  (!stats.errors || stats.errors.length === 0) && stats.assets &&
+  stats.assets.every(asset => !asset.emitted)
+  ) { return this.sockWrite(sockets, 'still-ok'); }
+  // 调用 sockWrite 方法将 hash 值通过 websocket 发送到浏览器端
+  this.sockWrite(sockets, 'hash', stats.hash);
+  if (stats.errors.length > 0) { this.sockWrite(sockets, 'errors', stats.errors); } 
+  else if (stats.warnings.length > 0) { this.sockWrite(sockets, 'warnings', stats.warnings); }      else { this.sockWrite(sockets, 'ok'); }
+};
+```
+
 ### 参考资料
 
 - [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
@@ -139,3 +163,4 @@ if(isMemoryFs) {
     </p>
     <img :src="$withBase('/about/contact.png')" />
 </div>
+
