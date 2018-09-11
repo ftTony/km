@@ -125,6 +125,8 @@ if(isMemoryFs) {
 }
 ```
 
+首先判断当前fileSystem是否已经是MemoryFileSystem的实例，如果不是，用MemoryFileSystem的实例替换compiler之前outputFileSystem。这样bundle.js文件代码就作为一个简单javascript对象保存在了内存中，当浏览器请求bundle.js文件时，devServer就直接去内存中找到上面保存的javascript对象返回给浏览器端。
+
 ### 参考资料
 
 - [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
