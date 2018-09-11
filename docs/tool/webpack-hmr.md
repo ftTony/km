@@ -12,7 +12,9 @@ Hot Module Replacement（以下简称 HMR）是 webpack 发展至今引入的最
 
 ### 为什么需要HMR
 
-在webpack HMR功能之前，已经有很多live reload的工具或库，比如[live-server](http://tapiov.net/live-server/)
+在webpack HMR功能之前，已经有很多live reload的工具或库，比如[live-server](http://tapiov.net/live-server/)，这些库监控文件的变化，然后通知浏览器端刷新页面，那么我们为什么还需要HMR呢？答案其实在上文中已经提及一些。
+
+- live reload工具并不能够保存应用的状态（states），当刷新页面后，应用之前状态丢失，还是上文中的例子，点
 
 ### HMR 的工作原理图解
 
