@@ -113,7 +113,17 @@ if(!options.lazy) {
 }
 ```
 
-你可能会疑问了，为什么webpack没有将文件直接打包到output.path目录下呢？文件又去了哪儿？原来webpack将bundle.js文件打包到了内存中，不生成文件的原因就在于访问内存中的代码比访问文件系统中的文件更快，而且也减少了代码写入文件的开销，这一切都归功于[memory-fs](https://github.com/webpack/memory-fs)
+你可能会疑问了，为什么webpack没有将文件直接打包到output.path目录下呢？文件又去了哪儿？原来webpack将bundle.js文件打包到了内存中，不生成文件的原因就在于访问内存中的代码比访问文件系统中的文件更快，而且也减少了代码写入文件的开销，这一切都归功于[memory-fs](https://github.com/webpack/memory-fs)，memory-fs是webpack-dev-middleware的一个依赖库，webpack-dev-middleware将webpack原本的outputFileSystem替换成了MemoryFileSystem实例，这样代码就将输出到内存中，webpack-dev-middleware 中该部分源码如下：
+
+```
+// webpack-dev-middleware/lib/Shared.js
+var isMemoryFs = !compiler.compilers && compiler.outputFileSystem instanceof MemoryFileSystem;
+if(isMemoryFs) {
+    fs = compiler.outputFileSystem;
+} else {
+    fs = compiler.outputFileSystem = new MemoryFileSystem();
+}
+```
 
 ### 参考资料
 
