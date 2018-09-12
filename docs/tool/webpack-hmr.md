@@ -155,6 +155,8 @@ Server.prototype._sendStats = function (sockets, stats, force) {
 
 **第四步：webpack接收到最新hash值验证并请求模块代码**
 
+**第五步：HotModuleReplacement.runtime 对模块进行热更新**
+
 ### 参考资料
 
 - [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
