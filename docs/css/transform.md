@@ -42,11 +42,22 @@ CSS 代码如下：
     -o-transform:rotate(0deg);
     transition:1s all linear;
 }
-.rotate {}
-.rotate img:hover{}
+.rotate {width:520px;height:280px;overflow:hidden;}
+.rotate img:hover{
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform:rotate(90deg);
+    transform:rotate(90deg);
+}
 ```
 
+### 二、
+
 ### 参考资料
+
+- [css3 动画功能介绍](https://www.cnblogs.com/tugenhua0707/p/4306760.html)
+- [css3 中的变形（transform）、过渡(transtion)、动画(animation)](https://www.cnblogs.com/qianduanjingying/p/4937574.html)
+- [CSS3 transform 属性](https://www.w3school.com.cn/cssref/pr_transform.asp)
 
 ## 联系作者
 
