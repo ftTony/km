@@ -157,6 +157,21 @@ Server.prototype._sendStats = function (sockets, stats, force) {
 
 **第五步：HotModuleReplacement.runtime 对模块进行热更新**
 
+**第六步：业务代码需要做些什么？**
+
+当用新的模块代码替换老的模块后，但是我们的业务代码并不能知道代码已经发生变化，也就是说，当hello.js文件修改后，我们需要在index.js文件中调用HMR的accept方法，添加模块更新后的处理函数，及时将hello方法的返回值插入到页面中。代码如下：
+
+```
+// index.js
+if(module.hot) {
+    module.hot.accept('./hello.js', function() {
+        div.innerHTML = hello()
+    })
+}
+```
+
+这样就是整个 HMR 的工作流程了。
+
 ### 参考资料
 
 - [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
