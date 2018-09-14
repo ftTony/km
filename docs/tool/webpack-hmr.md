@@ -153,6 +153,8 @@ Server.prototype._sendStats = function (sockets, stats, force) {
 
 **第三步：webpack-dev-server/client接收到服务端消息做出响应**
 
+可能你又会有疑问，我并没有在业务代码里面添加接收websocket消息的代码，也没有在webpack.config.js中的entry属性中添加新的入口文件，那么bundle.js
+
 **第四步：webpack接收到最新hash值验证并请求模块代码**
 
 **第五步：HotModuleReplacement.runtime 对模块进行热更新**
