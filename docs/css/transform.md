@@ -24,8 +24,26 @@ Transform-functions 的取值如下：
 
 #### 例子
 
+HTML 代码：
+
+```
+<h2>transform属性</h2>
+<div class="rotate">
+    <img src="http://m1.img.srcdd.com/farm5/d/2015/0228/22/FD9886C5434AC71115812ED3DB6409B9_B500_900_500_269.jpeg"/>
+</div>
 ```
 
+CSS 代码如下：
+
+```
+.rotate img{
+    -webkit-transform:rotate(0deg);
+    -moz-transform:rotate(0deg);
+    -o-transform:rotate(0deg);
+    transition:1s all linear;
+}
+.rotate {}
+.rotate img:hover{}
 ```
 
 ### 参考资料
