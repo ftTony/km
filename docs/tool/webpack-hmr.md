@@ -155,7 +155,9 @@ Server.prototype._sendStats = function (sockets, stats, force) {
 
 可能你又会有疑问，我并没有在业务代码里面添加接收websocket消息的代码，也没有在webpack.config.js中的entry属性中添加新的入口文件，那么bundle.js中接收websocket消息的代码从哪来的呢？原来是webpack-dev-server修改了webpack配置中的entry属性，在里面添加了webpack-dev-client的代码，这样在最后bundle.js文件中就会有接收websocket消息的代码了。
 
-webpack-dev-server/client当接收到type为hash消息后
+webpack-dev-server/client当接收到type为hash消息后会将hash值暂存起来，当接收到type为ok的消息后对应用执行reload操作，如下图所示，hash消息是在ok消息之前。
+
+![images](webpack20.jpg)
 
 **第四步：webpack接收到最新hash值验证并请求模块代码**
 
