@@ -159,6 +159,34 @@ webpack-dev-server/client当接收到type为hash消息后会将hash值暂存起�
 
 ![images](webpack20.jpg)
 
+图二：websocket 接收 dev-server 通过 sockjs 发送到浏览器端的消息列表
+
+在 reload 操作中，webpack-dev-server/client 会根据 hot 配置决定是刷新浏览器还是对代码进行热更新（HMR）。代码如下：
+
+```
+/ webpack-dev-server/client/index.js
+hash: function msgHash(hash) {
+    currentHash = hash;
+},
+ok: function msgOk() {
+    // ...
+    reloadApp();
+},
+// ...
+function reloadApp() {
+  // ...
+  if (hot) {
+    log.info('[WDS] App hot update...');
+    const hotEmitter = require('webpack/hot/emitter');
+    hotEmitter.emit('webpackHotUpdate', currentHash);
+    // ...
+  } else {
+    log.info('[WDS] App updated. Reloading...');
+    self.location.reload();
+  }
+}
+```
+
 **第四步：webpack接收到最新hash值验证并请求模块代码**
 
 **第五步：HotModuleReplacement.runtime 对模块进行热更新**
