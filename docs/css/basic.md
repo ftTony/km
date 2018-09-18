@@ -343,6 +343,8 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 大多数乃至绝对定位的时候，都是存在包含块和`left/top`等方向属性的。但其实`position:absolute`是非常独立的 css 属性，其样式和行为表现不依赖任何 css 属性就可以完成。
 
+无依赖的 `position: absolute` 元素定位的位置和其本身无定位属性时候的位置和 `display` 的值有关。如果元素在没有 `position` 的情况下是内联元素，则和内联元素在同一行显示；如果元素在没有 `position` 属性的情况下是块级元素，则换行显示。
+
 - 绝对定位和`overflow:hidden`
 
 其实一句话就是可以表示两者之间的关系：当`overflow:hidden`元素在绝对定位元素和其包含块之间的时候，绝对定位元素不会被剪裁。
@@ -375,6 +377,14 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 - `postion:absolute`的流体特性
 
+当绝对定位元素的水平方向(`left/right`)或垂直方向(`top/bottom`)的两个定位属性同时存在的时候，绝对元素在该方向上便具有了流体特性。此时的 `width/height` 属性具有自动撑满的特性，和一个正常流的 `div` 元素的 `width` 属性别无二致。如图，设置了固定 `margin` 值的元素，宽高 `auto` 能够自动适应剩余空间：
+
+![images](position01.png)
+
+同样的，设置了固定宽高的元素，如果 `margin: auto`，则 `margin` 平分剩余空间导致垂直水平居中：
+
+![images](position02.png)
+
 #### 4.5 固定定位 `position: fixed`
 
 `position:fixed`是相对于屏幕视口的位置来指定元素位置，祖先元素设置`position:relative`并不会对其产生影响。
@@ -406,6 +416,10 @@ div {
     <div>div</div>
 </main>
 ```
+
+效果如下：
+
+![images](fixed.png)
 
 #### 4.6 粘性定位`position: sticky`
 
