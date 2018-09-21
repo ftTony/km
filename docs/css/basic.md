@@ -519,6 +519,11 @@ div.active{
 
 这里使用`visibility: hidden`而不是`display: none`，是因为`display: none`会影响 css3 的`transition`过渡效果。 但是`display: none`并不会影响 css`animation`动画的效果。
 
+4. 如果希望元素不可见、可以点击、占据空间，可以使用：`opacity:0`;
+5. 如果希望元素不可见、可以点击、不占据空间，可以使用：`opacity: 0; position: absolute;`;
+6. 如果希望元素不可见、不能点击、占据空间，可以使用： `position: relative; z-index: -1;`；
+7. 如果希望元素不可见、不能点击、不占据空间，可以使用：`position: absolute ; z-index: -1;`；
+
 #### 7.2 `display: none` 与 `visibility: hidden` 的区别
 
 1. `display:none`的元素不占据任何空间，`visibility:hidden`的元素空间保留；
