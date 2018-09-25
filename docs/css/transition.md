@@ -87,7 +87,18 @@ transition-duration:10s,30s,230ms;
 
 ### 四、timing-function
 
+`transition-timing-function` 的值允许你根据时间的推进去改变属性值的变换速率，`transition-timing-function` 有 6 个可能值：
+
+- `ease`：
+- `linear`：
+- `ease-in`：
+- `ease-out`：
+- `ease-in-out`：
+- `cubic-bezier`：
+
 ### 五、delay
+
+`transition-delay`是用来指定一个动画开始执行的时间，也就是说当改变元素属性值后多长时间开始执行`transition`效果，其取值：`<time>`为数值，单位为 s（秒）或者 ms(毫秒)，其使用和 transition-duration 极其相似，也可以作用于所有元素，包括:before 和:after 伪元素。 默认大小是"0"，也就是变换立即执行，没有延迟。
 
 ## 参考资料
 
