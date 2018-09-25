@@ -49,7 +49,41 @@ CSS 代码如下：
 
 ### 二、property
 
+`transition-property`指定应用过渡属性的名称。其主要有以下几个值：
+
+- `none`：没有属性改变；
+- `all`：所有属性改变（默认值）；
+- `indent`：元素属性名；
+
+当其值为 none 时，transition 马上停止执行，当指定为 all 时，则元素产生任何属性值变化时都将执行 transition 效果，ident 是可以指定元素的某一个属性值。
+
+#### 2.1 例子
+
+```
+transition-property: none;
+transition-property: all;
+transition-property: test_05;
+transition-property: -specific;
+transition-property: sliding-vertically;
+
+transition-property: test1;
+transition-property: test1, animation4;
+transition-property: all, height, all;
+transition-property: all, -moz-specific, sliding;
+```
+
 ### 三、duration
+
+`transition-duration`属性以秒或毫秒为单位指定过渡动画所需的时间。
+
+#### 3.1 例子
+
+```
+transition-duration:6s;
+transition-duration:120ms;
+transition-duration:1s 15s;
+transition-duration:10s,30s,230ms;
+```
 
 ### 四、timing-function
 
