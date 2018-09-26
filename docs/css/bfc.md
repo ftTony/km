@@ -26,7 +26,7 @@
 
 - 根元素
 - float 属性不为 none
-- position 为 absolute 或 fixed
+- position 的值不为 relative 和 static
 - display 为 inline-block，table-cell,table-caption,flex,inline-flex
 - overflow 不为 visible
 
