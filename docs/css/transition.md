@@ -89,12 +89,12 @@ transition-duration:10s,30s,230ms;
 
 `transition-timing-function` 的值允许你根据时间的推进去改变属性值的变换速率，`transition-timing-function` 有 6 个可能值：
 
-- `ease`：
-- `linear`：
-- `ease-in`：
-- `ease-out`：
-- `ease-in-out`：
-- `cubic-bezier`：
+- `ease`：逐渐变慢（默认值），ease
+- `linear`：匀速
+- `ease-in`：加速
+- `ease-out`：减速
+- `ease-in-out`：加速然后减速
+- `cubic-bezier`：该值允许你去自定义一个时间曲线
 
 ### 五、delay
 
