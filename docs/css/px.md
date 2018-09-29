@@ -47,6 +47,26 @@
 
 #### 3.4 padding 和 margin
 
+子元素的 padding 和 margin 如果设置百分比，不论是垂直方向或者是水平方向，都相对于直接父亲元素的 width，而与父元素的 height 无关。
+
+举例来说：
+
+```
+.parent{
+  width:200px;
+  height:100px;
+  background:green;
+}
+.child{
+  width:0px;
+  height:0px;
+  background:blue;
+  color:white;
+  padding-top:50%;
+  padding-left:50%;
+}
+```
+
 #### 3.5 border-radius
 
 border-radius 不一样，如果设置 border-radius 为百分比，则是相对于自身的宽度
@@ -55,7 +75,11 @@ border-radius 不一样，如果设置 border-radius 为百分比，则是相对
 
 百分比单位在布局上应用还是很广泛。
 
-比如我们要实现一个固定长宽比的长方形，比如要实现一个长宽比为 4：3 的长方形，我们可以根据 padding 属性来实现，
+比如我们要实现一个固定长宽比的长方形，比如要实现一个长宽比为 4：3 的长方形，我们可以根据 padding 属性来实现，因为 padding 不管是垂直方向还是水平方向，百分比单位都相对于父元素的宽度，因此我们可以设置 padding-top 为百分比来实现，长宽自适应的长方形：
+
+```
+<div class="trangle"></div>
+```
 
 #### 3.7 百分比单位缺点
 
