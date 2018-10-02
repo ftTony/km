@@ -1,4 +1,4 @@
-# Grid 布局
+# Web 动画帧率（FPS）计算（转载）
 
 ## 前言
 
@@ -7,6 +7,9 @@
 ## 内容
 
 ### 参考资料
+
+- [Web 动画帧率（FPS）计算](https://www.cnblogs.com/coco1s/p/8029582.html)
+- [盒子端 CSS 动画性能提升研究](https://www.cnblogs.com/coco1s/p/7851658.html)
 
 ## 联系作者
 
