@@ -65,7 +65,11 @@ rotate(<angle>)：通过指定的角度参数对原元素指定一个 2D，需�
 
 ### 四、缩放 scale
 
+缩放 scale 和移动 translate 是极其相似，他也具有三种情况：scale(x,y)
+
 ### 五、扭曲 skew
+
+扭曲 skew 和 translate、scale 一样同样具有三种情况：skew(x,y)使元素在水平和垂直方向
 
 ### 六、矩阵 matrix
 
