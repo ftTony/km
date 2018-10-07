@@ -304,6 +304,10 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 ![images](line-height02.png)
 
+`line-height`实现垂直居中的本质：行距
+
+行距是指一行文本和相邻文本之间的距离。行距=`line-height`-`font-size`。
+
 #### 3.3 vertical-align
 
 属性值：
