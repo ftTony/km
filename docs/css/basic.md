@@ -306,7 +306,13 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 `line-height`实现垂直居中的本质：行距
 
-行距是指一行文本和相邻文本之间的距离。行距=`line-height`-`font-size`。
+行距是指一行文本和相邻文本之间的距离。行距=`line-height`-`font-size`。行距具有上下等分的机制：意思就是文字上下的行距是一样的，各占一半，这也是`line-height`能让内联元素垂直剧中的原因。下图中字线 x 上下行距各占一半，共同撑起了`div`。
+
+![images](line-height03.png)
+
+下图中和上图唯一不同之处就是多了个 `display: inline-block` 的 `span` 元素，但是此处的 `span` 元素并没有影响 `div` 元素的高度，而只是靠着 `vertical-align: middle` 属性将自身中心点对齐了字母 x 的交叉点实现垂直居中而已。`div` 元素的高度仍然和上图一模一样，由字母 x 和行距共同撑起。此时如果删除字母 x，`div` 的高度不变，因为 `span` 元素的行框盒子前会产生幽灵空白节点，而幽灵空白节点+行高也能撑起 `div`。
+
+![images](line-height04.png)
 
 #### 3.3 vertical-align
 
