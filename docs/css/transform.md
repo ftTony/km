@@ -10,6 +10,24 @@
 
 ### 一、Transform 功能介绍
 
+Transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。
+
+**语法：** transform: none | transform-functions，初始值是 none;
+
+Transform-functions 的取值如下：
+
+- matrix：定义距阵元素对象。
+- translate：移动元素对象。
+- scale：缩放元素对象。
+- rotate：旋转元素对象。
+- skew：倾斜元素对象。
+
+#### 例子
+
+```
+
+```
+
 ### 参考资料
 
 ## 联系作者

@@ -177,6 +177,7 @@ module.exports = {
                     'grid',
                     'bfc',
                     'scss',
+                    'transform',
                     'select'
                 ]
             },
@@ -185,7 +186,6 @@ module.exports = {
                 collapsable: false,
                 children: [
                     'transition',
-                    'transform',
                     'animation'
                 ]
             },
