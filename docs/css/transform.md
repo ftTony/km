@@ -53,11 +53,15 @@ CSS 代码如下：
 
 ### 二、旋转 rotate
 
-rotate(<angle>)：通过指定的角度参数对原元素指定一个 2D，需先有 transform-origin 属性的定义。
+rotate(<angle>)：通过指定的角度参数对原元素指定一个 2D，需先有 transform-origin 属性的定义。transform-origin 定义的是旋转的基点，其中 angle 是指旋转角度，如果设置的值为正数表示顺时针旋转，如果设置的值为负数，则表示逆时针旋转。如：transform:rotate(30deg)；
+
+![images](translate-x.png)
 
 ### 三、移动 translate
 
-移动 translate 我们分为三种情况：translate(x,y)水平方向和垂直方向同时移动（也就是 X 轴和 Y 轴同时移动）；translateX(x)仅水平方向移动(X 轴移动)；translateY(Y)仅垂直方向移动（Y 轴移动），
+移动 translate 我们分为三种情况：translate(x,y)水平方向和垂直方向同时移动（也就是 X 轴和 Y 轴同时移动）；translateX(x)仅水平方向移动(X 轴移动)；translateY(Y)仅垂直方向移动（Y 轴移动），具体使用方法如下：
+
+![images](translate-x-y.png)
 
 ### 四、缩放 scale
 
