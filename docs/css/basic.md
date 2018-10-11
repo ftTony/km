@@ -345,6 +345,34 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 - 绝对定位和`overflow:hidden`
 
+其实一句话就是可以表示两者之间的关系：当`overflow:hidden`元素在绝对定位元素和其包含块之间的时候，绝对定位元素不会被剪裁。
+
+以下两种绝对定位元素不会被剪裁:
+
+```
+<div style="overflow: hidden;">
+  <img src="big.jpg" style="position: absolute;">
+</div>
+<div style="position: relative;">
+  <div style="overflow: hidden;">
+    <img src="big.jpg" style="position: absolute;">
+  </div>
+</div>
+```
+
+以下两种绝对定位元素会被剪裁：
+
+```
+<div style="overflow: hidden; position: relative;">
+  <img src="big.jpg" style="position: absolute;">
+</div>
+<div style="overflow: hidden;">
+  <div style="position: relative;">
+    <img src="big.jpg" style="position: absolute;">
+  </div>
+</div>
+```
+
 - `postion:absolute`的流体特性
 
 #### 4.5 固定定位 `position: fixed`
@@ -386,6 +414,10 @@ div {
 ```
 
 在 viewport 视口滚动到元素 top 距离小于 10px 之前，元素为相对定位。之后，元素将固定在与顶部距离 10px 的位置，直到 viewport 视口回滚到阈值以下。
+
+需注意当`position:sticky`的父元素的`overflow`属性设置了默认值`visible`以外的值时，`position:sticky`将失效。
+
+`position: sticky` 除了不兼容 ie 浏览器，其他还好。
 
 ### 五、层叠规则
 
