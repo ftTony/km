@@ -91,7 +91,15 @@ rotate(<angle>)：通过指定的角度参数对原元素指定一个 2D，需�
 
 #### 4.2 scaleX(<number>)
 
+使用 [sx,1] 缩放矢量执行缩放操作，sx 为所需参数。scaleX 表示元素只在 X 轴(水平方向)缩放元素，他的默认值是(1,1)，其基点一样是在元素的中心位置，我们同样是通过 transform-origin 来改变元素的基点。如：transform:scaleX(2):
+
+![images](scale-x.png)
+
 #### 4.3 scaleY(<number>)
+
+使用 [1,sy] 缩放矢量执行缩放操作，sy 为所需参数。scaleY 表示元素只在 Y 轴（垂直方向）缩放元素，其基点同样是在元素中心位置，可以通过 transform-origin 来改变元素的基点。如 transform:scaleY(2):
+
+![images](scale-y.png)
 
 ### 五、扭曲 skew
 
