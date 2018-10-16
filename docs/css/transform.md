@@ -105,6 +105,18 @@ rotate(<angle>)：通过指定的角度参数对原元素指定一个 2D，需�
 
 扭曲 skew 和 translate、scale 一样同样具有三种情况：skew(x,y)使元素在水平和垂直方向
 
+#### 5.1 skew(<angle> [, <angle>])
+
+![images](skew-x-y.png)
+
+#### 5.2 skewX(<angle>)
+
+![images](skew-y.png)
+
+#### 5.3 skewY(<angle>)
+
+![images](skew-y.png)
+
 ### 六、矩阵 matrix
 
 ### 参考资料
