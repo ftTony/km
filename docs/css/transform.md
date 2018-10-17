@@ -103,9 +103,11 @@ rotate(<angle>)：通过指定的角度参数对原元素指定一个 2D，需�
 
 ### 五、扭曲 skew
 
-扭曲 skew 和 translate、scale 一样同样具有三种情况：skew(x,y)使元素在水平和垂直方向
+扭曲 skew 和 translate、scale 一样同样具有三种情况：skew(x,y)使元素在水平和垂直方向同时扭曲（X 轴和 Y 轴同时按一定的角度值进行扭曲变形）；skewX(x)仅使元素在水平方向变形（X 轴扭曲变形）；skewY(y)仅使元素在垂直方向扭曲变形（Y 轴扭曲变形）
 
 #### 5.1 skew(<angle> [, <angle>])
+
+X 轴 Y 轴上的 skew transformation（斜切变换）。第一个参数对应 X 轴，第二个参数对应 Y 轴。如果第二个参数未提供，则值为 0，也就是 Y 轴方向上无斜切。skew 是用来对元素进行扭曲变行，第一个参数是水平方向扭曲角度，第二个参数是垂直方向扭曲角度。其中第二个参数是可选参数，如果没有设置第二个参数，那么 Y 轴为 0deg。同样是以元素中心为基点，我们也可以通过 transform-origin 来改变元素的基点位置。如：transform:skew(30deg,10deg):
 
 ![images](skew-x-y.png)
 
