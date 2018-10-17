@@ -125,6 +125,8 @@ X 轴 Y 轴上的 skew transformation（斜切变换）。第一个参数对应 
 
 ### 六、矩阵 matrix
 
+`matrix(<number>, <number>, <number>, <number>, <number>, <number>)`： 以一个含六值的(a,b,c,d,e,f)变换矩阵的形式指定一个 2D 变换，相当于直接应用一个[a b c d e f]变换矩阵。就是基于水平方向（X 轴）和垂直方向（Y 轴）重新定位元素,此属性值使用涉及到数学中的矩阵，我在这里只是简单的说一下 CSS3 中的 transform 有这么一个属性值，如果有感兴趣的朋友可以去了解更深层次的 martix 使用方法，这里就不多说了。
+
 ### 参考资料
 
 - [css3 动画功能介绍](https://www.cnblogs.com/tugenhua0707/p/4306760.html)
