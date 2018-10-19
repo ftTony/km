@@ -113,9 +113,13 @@ X 轴 Y 轴上的 skew transformation（斜切变换）。第一个参数对应 
 
 #### 5.2 skewX(<angle>)
 
+按给定的角度沿 X 轴指定一个 skew transformation（斜切变换）。skewX 是使元素以其中心为基点，并在水平方向（X 轴）进行扭曲变行，同样可以通过 transform-origin 来改变元素的基点。如：transform:skewX(30deg)
+
 ![images](skew-y.png)
 
 #### 5.3 skewY(<angle>)
+
+按给定的角度沿 Y 轴指定一个 skew transformation（斜切变换）。skewY 是用来设置元素以其中心为基点并按给定的角度在垂直方向（Y 轴）扭曲变形。同样我们可以通过 transform-origin 来改变元素的基点。如：transform:skewY（10deg）
 
 ![images](skew-y.png)
 
