@@ -10,6 +10,7 @@
 
 - [为 Vue 项目添加骨架屏](https://zhuanlan.zhihu.com/p/28465598)
 - [让骨架屏更快渲染 - 知乎](https://zhuanlan.zhihu.com/p/34550387)
+- [Vue 项目骨架屏注入实践](https://segmentfault.com/a/1190000016068682)
 
 ## 联系作者
 

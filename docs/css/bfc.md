@@ -210,6 +210,8 @@
 
 ## 参考资料
 
+- [CSS 中重要的 BFC](https://segmentfault.com/a/1190000013023485)
+- [CSS 中的 BFC 详解](https://www.cnblogs.com/chen-cong/p/7862832.html)
 - [深入理解 BFC](https://github.com/ljianshu/Blog/issues/15)
 
 ## 联系作者
