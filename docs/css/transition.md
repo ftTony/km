@@ -27,6 +27,10 @@
 
 ## 参考资料
 
+- [css3 动画功能介绍](https://www.cnblogs.com/tugenhua0707/p/4306760.html)
+- [css3 中的变形（transform）、过渡(transtion)、动画(animation)](https://www.cnblogs.com/qianduanjingying/p/4937574.html)
+- [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition)
+
 ## 联系作者
 
 <div align="center">
