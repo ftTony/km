@@ -25,6 +25,14 @@
 
 ```
 
+### 二、property
+
+### 三、duration
+
+### 四、timing-function
+
+### 五、delay
+
 ## 参考资料
 
 - [css3 动画功能介绍](https://www.cnblogs.com/tugenhua0707/p/4306760.html)
