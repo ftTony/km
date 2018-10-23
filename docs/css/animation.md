@@ -31,6 +31,22 @@ div{
 }
 ```
 
+### 二、name
+
+### 三、duration
+
+### 四、timeing-function
+
+### 五、delay
+
+### 六、iterations-count
+
+### 七、direction
+
+### 八、play-state
+
+### 九、fill-mode
+
 ### 参考资料
 
 - [css3 中的变形（transform）、过渡(transtion)、动画(animation)](https://www.cnblogs.com/qianduanjingying/p/4937574.html)
