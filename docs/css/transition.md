@@ -21,8 +21,30 @@
 
 #### 例子
 
+HTML 代码如下：
+
+```
+<div class="transitions">transition过渡功能</div>
 ```
 
+CSS 代码如下：
+
+```
+.transitions {
+    -webkit-transition-property: background-color;
+    -webkit-transition-duration: 1s;
+    -webkit-transition-timing-function: linear;
+    -moz-transition-property: background-color;
+    -moz-transition-duration: 1s;
+    -moz-transition-timing-function: linear;
+
+    -o-transition-property: background-color;
+    -o-transition-duration: 1s;
+    -o-transition-timing-function: linear;
+}
+.transitions:hover {
+　　background-color: #00ffff;
+}
 ```
 
 ### 二、property
