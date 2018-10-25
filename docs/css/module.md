@@ -265,6 +265,7 @@ Untilities 符合单一职责原则，实现一个具体的功能或效果。其
 
 - [CSS 工程化演进](https://zhuanlan.zhihu.com/p/32117359)
 - [使用 BEM 与命名空间来规范 CSS](https://github.com/alienzhou/blog/issues/14)
+- [【CSS 模块化之路 2】webpack 中的 Local Scope](https://github.com/alienzhou/blog/issues/15)
 
 ## 联系作者
 
