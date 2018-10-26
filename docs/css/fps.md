@@ -121,6 +121,22 @@ var observer = new PerformanceObserver(function(list) {
 observer.observe({entryTypes: ['frame']});
 ```
 
+每条记录包含的信息基本如下：
+
+```
+{
+  sourceFrameNumber: 120,
+  startTime: 1342.549374253
+  cpuTime: 6.454313323
+}
+```
+
+每个记录都包括唯一的 Frame Number、Frame 开始时间以及 cpuTime 时间。通过计算每一条记录的 startTime，我们就可以算出每两帧间的间隔，从而得到动画的帧率是否能够达到 60FPS。
+
+不过！看看 Web Performance Timing API 整体的兼容性：
+
+![images](fps05.png)
+
 ### 四、法三：借助 requestAnimationFrame API
 
 #### 4.1 使用 requestAnimationFrame 计算 FPS 原理
