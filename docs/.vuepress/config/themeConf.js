@@ -165,6 +165,7 @@ module.exports = {
         title: 'css基础',
         collapsable: false,
         children: [
+          'basic',
           'center',
           'background',
           'stack',
