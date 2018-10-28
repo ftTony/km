@@ -14,7 +14,11 @@
 
 ```
 function Queue(){
+    var items = [];
 
+    this.enqueue = function(element){
+        items.push(element);
+    };
 }
 ```
 
