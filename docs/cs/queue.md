@@ -10,6 +10,9 @@
 
 ### 一、创建队列
 
+- `enqueue(element)`:向队列尾部添加一个新的项。
+- `dequeue()`：移除队列的第一（即排在队列最前面的）项，并返回被移除的元素。
+
 **ES5代码实现**
 
 ```
@@ -19,6 +22,10 @@ function Queue(){
     this.enqueue = function(element){
         items.push(element);
     };
+
+    this.dequeue = function(){
+        return items.shift();
+    }
 }
 ```
 
