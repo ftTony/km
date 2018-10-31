@@ -6,6 +6,26 @@
 
 ## 内容
 
+- virtual dom
+- 分析diff
+- 算法实现
+
+### 一、virtual dom
+
+### 二、分析diff
+
+### 三、算法实现
+
+- 用JS对象模拟DOM树
+- 比较两棵虚拟DOM树的差异
+- 把差异应用到真正的DOM树上
+
+#### 3.1 用JS对象模拟DOM树
+
+#### 3.2 比较两棵虚拟DOM树的差异
+
+#### 3.3 把差异应用到真正的DOM树上
+
 ### 参考资料
 
 - [如何实现一个 Virtual DOM 算法](https://github.com/livoras/blog/issues/13)
