@@ -376,10 +376,11 @@ module.exports = {
             ]
         },
         {
-            title: 'docker配置',
+            title: '容器工具',
             collapsable: false,
             children: [
-                'docker'
+                'docker',
+                'k8s'
             ]
         },
         {
