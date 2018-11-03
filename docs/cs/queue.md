@@ -37,6 +37,18 @@ function Queue(){
     this.isEmpty = function(){
         return items.length==0;
     };
+
+    this.clear = function(){
+        items = [];
+    }
+
+    this.size = function(){
+        return items.length;
+    }
+
+    this.print = function(){
+        console.log(items.toString());
+    }
 }
 ```
 
