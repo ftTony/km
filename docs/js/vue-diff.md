@@ -22,9 +22,18 @@
 
 #### 3.1 用JS对象模拟DOM树
 
+```
+```
+
 #### 3.2 比较两棵虚拟DOM树的差异
 
+```
+```
+
 #### 3.3 把差异应用到真正的DOM树上
+
+```
+```
 
 ### 参考资料
 
@@ -33,6 +42,8 @@
 - [simple-virtual-dom](https://github.com/livoras/simple-virtual-dom)
 - [揭秘 Vue 中的 Virtual Dom](https://mp.weixin.qq.com/s/EeN7E8uQS4R_JJloPX8fCQ)
 - [Virtual Dom 和 Diff 算法](https://mp.weixin.qq.com/s/9nB2bfDczNFRpUTiBwup8Q)
+- [【Vue原理】Diff - 白话版](https://zhuanlan.zhihu.com/p/81752104)
+- [VirtualDOM与diff(Vue实现)](https://zhuanlan.zhihu.com/p/29450092)
 
 ## 联系作者
 
