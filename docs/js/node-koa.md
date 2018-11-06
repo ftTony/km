@@ -162,7 +162,178 @@ node get.js
 
 #### 3.2 POST 请求数据获取
 
+对于 POST 请求的处理，koa2 没有封装获取参数的方法，可以通过以下方式获取
+
+- 解析上下文 context 中的原生 node.js 请求对象 req，将 POST 表单数据解析成 query string（例如：`a=1&b=2&c=3`），再将 query string 解析成 JSON 格式（例如：`{"a":"1", "b":"2", "c":"3"}`）
+- 使用 `koa-bodyparser`中间件
+
+**解析上下文 context 中的原生 node.js 请求对象 req 相关代码**
+
+```
+const Koa = require('koa')
+const app = new Koa()
+
+app.use( async ( ctx ) => {
+
+  if ( ctx.url === '/' && ctx.method === 'GET' ) {
+    // 当GET请求时候返回表单页面
+    let html = `
+      <h1>koa2 request post demo</h1>
+      <form method="POST" action="/">
+        <p>userName</p>
+        <input name="userName" /><br/>
+        <p>nickName</p>
+        <input name="nickName" /><br/>
+        <p>email</p>
+        <input name="email" /><br/>
+        <button type="submit">submit</button>
+      </form>
+    `
+    ctx.body = html
+  } else if ( ctx.url === '/' && ctx.method === 'POST' ) {
+    // 当POST请求的时候，解析POST表单里的数据，并显示出来
+    let postData = await parsePostData( ctx )
+    ctx.body = postData
+  } else {
+    // 其他请求显示404
+    ctx.body = '<h1>404！！！ o(╯□╰)o</h1>'
+  }
+})
+
+// 解析上下文里node原生请求的POST参数
+function parsePostData( ctx ) {
+  return new Promise((resolve, reject) => {
+    try {
+      let postdata = "";
+      ctx.req.addListener('data', (data) => {
+        postdata += data
+      })
+      ctx.req.addListener("end",function(){
+        let parseData = parseQueryStr( postdata )
+        resolve( parseData )
+      })
+    } catch ( err ) {
+      reject(err)
+    }
+  })
+}
+
+// 将POST请求参数字符串解析成JSON
+function parseQueryStr( queryStr ) {
+  let queryData = {}
+  let queryStrList = queryStr.split('&')
+  console.log( queryStrList )
+  for (  let [ index, queryStr ] of queryStrList.entries()  ) {
+    let itemList = queryStr.split('=')
+    queryData[ itemList[0] ] = decodeURIComponent(itemList[1])
+  }
+  return queryData
+}
+
+app.listen(3000, () => {
+  console.log('[demo] request post is starting at port 3000')
+})
+```
+
+**使用 `koa-bodyparser`中间件相关代码**
+
+```
+const Koa = require('koa')
+const app = new Koa()
+const bodyParser = require('koa-bodyparser')
+
+// 使用ctx.body解析中间件
+app.use(bodyParser())
+
+app.use( async ( ctx ) => {
+
+  if ( ctx.url === '/' && ctx.method === 'GET' ) {
+    // 当GET请求时候返回表单页面
+    let html = `
+      <h1>koa2 request post demo</h1>
+      <form method="POST" action="/">
+        <p>userName</p>
+        <input name="userName" /><br/>
+        <p>nickName</p>
+        <input name="nickName" /><br/>
+        <p>email</p>
+        <input name="email" /><br/>
+        <button type="submit">submit</button>
+      </form>
+    `
+    ctx.body = html
+  } else if ( ctx.url === '/' && ctx.method === 'POST' ) {
+    // 当POST请求的时候，中间件koa-bodyparser解析POST表单里的数据，并显示出来
+    let postData = ctx.request.body
+    ctx.body = postData
+  } else {
+    // 其他请求显示404
+    ctx.body = '<h1>404！！！ o(╯□╰)o</h1>'
+  }
+})
+
+app.listen(3000, () => {
+  console.log('[demo] request post is starting at port 3000')
+})
+```
+
+**启动例子**
+
+```
+node post.js
+```
+
+**访问页面**
+
+![images](node03.png)
+
 ### 四、静态资源加载
+
+#### 4.1 安装·koa-static 中间件
+
+```
+npm install --save koa-static
+```
+
+#### 4.2 使用例子
+
+```
+const Koa = require('koa')
+const path = require('path')
+const static = require('koa-static')
+
+const app = new Koa()
+
+// 静态资源目录对于相对入口文件index.js的路径
+const staticPath = './static'
+
+app.use(static(
+  path.join( __dirname,  staticPath)
+))
+
+
+app.use( async ( ctx ) => {
+  ctx.body = 'hello world'
+})
+
+app.listen(3000, () => {
+  console.log('[demo] static-use-middleware is starting at port 3000')
+})
+```
+
+#### 4.3 效果
+
+访问http://localhost:3000
+
+![images](node04.png)
+
+访问http://localhost:3000/index.html
+
+![images](node05.png)
+
+访问http://localhost:3000/js/index.js
+
+![images](node06.png)
 
 ### 五、cookie/session
 
