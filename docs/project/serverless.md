@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [无服务架构实践手册](https://jimmysong.io/serverless-handbook/)
+
 ## 联系作者
 
 <div align="center">
