@@ -601,6 +601,7 @@ webpack 打包配置相对比较复杂，目前介绍应该可以满常规需求
 - [一文搞懂 Webpack 多入口配置](https://mp.weixin.qq.com/s/b45oLYScG8L40iVlg7qG7g)
 - [一步步从零开始用 webpack 搭建一个大型项目](https://juejin.im/post/5de06aa851882572d672c1ad)
 - [【Cute-Webpack】Webpack4 入门手册（共 18 章）](https://juejin.im/post/5d518b4de51d4561cc25f013)
+- [webpack 工程师的自我修养](https://github.com/luoxue-victor/webpack-box)
 
 ## 联系作者
 
