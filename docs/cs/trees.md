@@ -11,7 +11,11 @@
 
 ### 一、树的分类
 
-
+- 二叉树：`Binary Search Tree`
+- AVL树：`AVL Tree`
+- 红黑树：`Red-Black Tree`
+- 线段树：`Segment Tree`
+- 芬威克树：`Fenwick Tree`
 
 ### 二、创建树
 
