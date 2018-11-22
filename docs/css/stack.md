@@ -38,7 +38,7 @@
 - `opacity`属性值小于`1`的元素
 - `transform`属性值不为`none`的元素
 - `mix-blend-mode`属性值不`normal`的元素
-- `filter`、`perspective`、
+- `filter`、`perspective`、`clip-path`、`mask`、`mask-image`、`mask-border`、`motion-path`值不为`none`的元素
 - `isolation`属性被设置为`isolate`的元素
 - `will-change`中指定了任意 CSS 属性，即便你没有直接指定这些属性的值
 - `-webkit-overflow-scrolling`属性被设置`touch`的元素
