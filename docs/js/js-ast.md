@@ -53,7 +53,7 @@ function foo(x){
 
 解析器会产生如下的AST：
 
-![](./img/ast01.png)
+![](ast01.png)
 
 ### 五、预编译
 
