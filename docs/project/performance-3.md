@@ -275,9 +275,45 @@ CSS表达式的问题在于它被重新计算的次数远比我们想象的要�
 
 #### 7.1 检测规范的遵循情况工具
 
+- yslow（Firfox、chrome的插件）
+
+![images](performance01.png)
+
+- pagespeed
+
+参照google网页性能优化标准来评测，下面是一个网站的评测
+
+![images](performance02.png)
+
+如避免重定向、压缩图片、指定缓存验证工具、启用 Keep-Alive等这些建议在yslow中没有的，所以跑完yslow，可以再跑下pagespeed。
+
 #### 7.2 检测Js的执行效率工具
 
+- DynaTrace Ajax Edition
+
+需要本地安装，目前只支持IE，firefox。工具除了提供常规的性能优化建议外，还统计了Js方法的执行时间。
+
+![images](performance03.png)
+
+- speed tracer
+
+google的另外一套工具，speed tracer，追踪加载过程，以图形化方式展示，有执行时间，可以定位到Js代码，但一般都定位到封装库的源码中。
+
+![images](performance04.png)
+
 #### 7.3 监控网页的加载速度工具
+
+- 基调
+
+从分布在各省市、运营商的节点，测试出不同的系统、浏览器对同一网页的加载性能、首屏时间、脚本报错统计；更加接近用户角度。需要购买服务。
+
+下面是某站点一周的首屏加载时间统计
+
+![images](performance05.png)
+
+下面是即时监测某网页的一些数据
+
+![images](performance06.png)
 
 ### 参考资料
 
