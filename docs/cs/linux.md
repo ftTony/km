@@ -237,7 +237,7 @@ V      调用vi编辑器
 q       退出more
 ```
 
-##### less命令
+##### 5.1.13 less命令
 
 - **命令格式：** `[参数] 文件`
 - **功能：** less 与 more 类似，但使用 less 可以随意浏览文件，而 more 仅能向前移动，却不能向后移动，而且 less 在查看之前不会加载整个文件。
@@ -269,7 +269,7 @@ y  向前滚动一行
 [pageup]：   向上翻动一页
 ```
 
-##### head命令
+##### 5.1.14 head命令
 
 - **命令格式：** `head [参数]... [文件]...`
 - **功能：** head 用来显示档案的开头至标准输出中，默认head命令打印其相应文件的开头10行。
@@ -282,7 +282,7 @@ y  向前滚动一行
 -q：不显示文件名的头信息。
 ```
 
-##### tail命令
+##### 5.1.15 tail命令
 
 - **命令格式：** `tail[必要参数][选择参数][文件]`
 - **功能：** 用于显示指定文件末尾内容，不指定文件时，作为输入信息进行处理。常用查看日志文件。
@@ -422,9 +422,53 @@ y  向前滚动一行
 -xtype<文件类型>：此参数的效果和指定“-type”参数类似，差别在于它针对符号连接检查。
 ```
 
-#### 3. 文件打包上传和下载
+#### 5.3 文件打包上传和下载
 
-##### tar命令
+- 上传文件
+- 上传文件目录
+- 下传文件
+- 下传文件目录
+
+##### 5.3.1 上传文件
+
+```
+scp /path/filename username@servername:/path
+```
+
+例如 `scp /var/www/test.php root@192.168.0.101:/var/www/` #把本机`/var/www/`目录下的 `test.php` 文件上传到 `192.168.0.101` 这台服务器上的`/var/www/`目录中
+
+##### 5.3.2 上传文件目录
+
+```
+scp  -r local_dir username@servername:remote_dir
+```
+
+例如：`scp -r test root@192.168.0.101:/var/www/` #把当前目录下的`test`目录上传到服务器的`/var/www/`目录
+
+##### 5.3.3 下传文件
+
+```
+scp username@servername:/path/filename /var/www/local_dir（本地目录）
+```
+
+例如 `scp root@192.168.0.101:/var/www/test.txt` #把 `192.168.0.101` 上的`/var/www/test.txt` 的文件下载到`/var/www/local_dir`（本地目录）
+
+##### 5.3.4 下传文件目录
+
+```
+scp /path/filename username@servername:/path
+```
+
+例如 `scp /var/www/test.php root@192.168.0.101:/var/www/` #把本机`/var/www/`目录下的 `test.php` 文件上传到 `192.168.0.101` 这台服务器上的`/var/www/`目录中
+
+#### 5.4 打包跟压缩文件
+
+- tar命令
+- gzip命令
+- zip命令
+- 
+
+##### 5.4.1 tar命令
 
 - **命令格式：** `tar[必要参数][选择参数][文件]`
 - **功能：** 用来压缩和解压文件。tar本身不具有压缩功能。他是调用压缩功能实现的
@@ -456,7 +500,10 @@ y  向前滚动一行
 --exclude=<范本样式>：排除符合范本样式的文件。
 ```
 
-##### gzip命令
+- **解包：** `tar xvf FileName.tar`
+- **打包：** `tar cvf FileName.tar DirName`
+
+##### 5.4.2 gzip命令
 
 - **命令格式：** `gzip[参数][文件或者目录]`
 - **功能：** gzip是个使用广泛的压缩程序，文件经它压缩过后，其名称后面会多出".gz"的扩展名。
@@ -482,9 +529,35 @@ a或——ascii：使用ASCII文字模式；
 --fast：此参数的效果和指定“-1”参数相同。
 ```
 
-#### 5. linux文件权限设置
+##### 5.4.3 zip命令
 
-##### chmod命令
+- 解压：`unzip FileName.zip`
+- 压缩：`zip FileName.zip DirName`
+
+##### 5.4.4 rar命令
+
+- 解压：`rar x FileName.rar`
+- 压缩：`rar a FileName.rar DirName`
+
+##### 5.4.5 gz命令
+
+- 解压 1：`gunzip FileName.gz`
+- 解压 2：`gzip -d FileName.gz`
+- 压缩：`gzip FileName`
+
+##### 5.4.6 tar.gz命令和tgz命令
+
+- 解压：`tar zxvf FileName.tar.gz`
+- 压缩：`tar zcvf FileName.tar.gz DirName`
+
+参考资料：[linux 的压缩解压命令全解](https://www.cnblogs.com/lanqingzhou/p/8058571.html)
+
+#### 5.5 linux文件权限设置
+
+- chmod命令
+- 
+
+##### 5.5.1 chmod命令
 
 - **命令格式：** `chmod [-cfvR] [--help] [--version] mode file`
 - **功能：** 用于改变文件或目录的访问权限，用它控制文件或目录的访问权限。
@@ -519,7 +592,7 @@ x ：执行权限，用数字1表示
 <权限范围>=<权限设置>：指定权限范围的文件或目录的该选项权限设置；
 ```
 
-**s ：特殊权限**
+- **s：** 特殊权限
 
 ##### chgrp命令
 
@@ -556,6 +629,9 @@ x ：执行权限，用数字1表示
 ```
 
 #### 6. 磁盘存储相关
+
+- df命令
+- du命令
 
 ##### df命令
 
@@ -608,6 +684,10 @@ x ：执行权限，用数字1表示
 ```
 
 #### 7. 性能监控和优化命令
+
+- top命令
+- free命令
+- vmstat命令
 
 ##### top命令
 
@@ -711,6 +791,11 @@ vmstat [-V]
 ```
 
 #### 8. 网络命令
+
+- ifconfig命令
+- route命令
+- ping命令
+- traceroute命令
 
 ##### ifconfig命令
 
@@ -1199,125 +1284,6 @@ crontab [-u user] [ -e | -l | -r ]
 ```
 ssh root@49.235.171.183
 ```
-
-### 二、ssh 上传或下载
-
-- [上传文件](#_2-1-上传文件)
-- [上传文件目录](#_2-2-上传文件目录)
-- [下传文件](#_2-3-下传文件)
-- [下传文件目录](#_2-4-下传文件目录)
-
-#### 2.1 上传文件
-
-```
-scp /path/filename username@servername:/path
-```
-
-例如 `scp /var/www/test.php root@192.168.0.101:/var/www/` #把本机`/var/www/`目录下的 `test.php` 文件上传到 `192.168.0.101` 这台服务器上的`/var/www/`目录中
-
-#### 2.2 上传文件目录
-
-```
-scp  -r local_dir username@servername:remote_dir
-```
-
-例如：`scp -r test root@192.168.0.101:/var/www/` #把当前目录下的`test`目录上传到服务器的`/var/www/`目录
-
-#### 2.3 下传文件
-
-```
-scp username@servername:/path/filename /var/www/local_dir（本地目录）
-```
-
-例如 `scp root@192.168.0.101:/var/www/test.txt` #把 `192.168.0.101` 上的`/var/www/test.txt` 的文件下载到`/var/www/local_dir`（本地目录）
-
-#### 2.4 下传文件目录
-
-```
-scp /path/filename username@servername:/path
-```
-
-例如 `scp /var/www/test.php root@192.168.0.101:/var/www/` #把本机`/var/www/`目录下的 `test.php` 文件上传到 `192.168.0.101` 这台服务器上的`/var/www/`目录中
-
-### 三、打包跟压缩文件
-
-- tar
-- zip
-- rar
-- gz
-- tar.gz 和 tgz
-- bz2
-- tar.bz2
-- bz
-- tar.bz
-- Z
-- lha
-- rpm
-- deb
-
-#### 3.1 tar
-
-- 解包：`tar xvf FileName.tar`
-- 打包：`tar cvf FileName.tar DirName`
-
-#### 3.2 zip
-
-- 解压：`unzip FileName.zip`
-- 压缩：`zip FileName.zip DirName`
-
-#### 3.3 rar
-
-- 解压：`rar x FileName.rar`
-- 压缩：`rar a FileName.rar DirName`
-
-#### 3.4 gz
-
-- 解压 1：`gunzip FileName.gz`
-- 解压 2：`gzip -d FileName.gz`
-- 压缩：`gzip FileName`
-
-#### 3.5 tar.gz 和 tgz
-
-- 解压：`tar zxvf FileName.tar.gz`
-- 压缩：`tar zcvf FileName.tar.gz DirName`
-
-#### 3.6 bz2
-
-- 解压 1：`bzip2 -d FileName.bz2`
-- 解压 2：`bunzip2 FileName.bz2`
-- 压缩：`bzip2 -z FileName`
-
-#### 3.7 bz
-
-- 解压 1：`bzip2 -d FileName.bz`
-- 解压 2：`bunzip2 FileName.bz`
-- 压缩：未知
-
-#### 3.8 tar.bz
-
-- 解压：`tar jxvf FileName.tar.bz`
-- 压缩：未知
-
-#### 3.9 Z
-
-- 解压：`uncompress FileName.Z`
-- 压缩：`compress FileName`
-
-#### 3.10 lha
-
-- 解压：`lha -e FileName.lha`
-- 压缩：`lha -a FileName.lha FileName`
-
-#### 3.11 rpm
-
-- 解包：`rpm2cpio FileName.rpm | cpio -div`
-
-#### 3.12 deb
-
-- 解包：`ar p FileName.deb data.tar.gz | tar zxf -`
-
-参考资料：[linux 的压缩解压命令全解](https://www.cnblogs.com/lanqingzhou/p/8058571.html)
-
 
 ## 参考资料
 
