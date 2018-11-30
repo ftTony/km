@@ -2,3 +2,15 @@
     max-width: inherit !important;
     max-height: inherit !important; 
 }
+
+#vuepress-plugin-comment
+  max-width $contentWidth
+  margin 0 auto
+  padding 2rem 2.5rem
+  @media (max-width: $MQNarrow)
+    padding 2rem
+  @media (max-width: $MQMobileNarrow)
+    padding 1.5rem
+
+#main-title
+  display none !important 

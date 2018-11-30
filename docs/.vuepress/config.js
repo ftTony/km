@@ -9,7 +9,7 @@ module.exports = {
     markdown: mdConf,
     themeConfig: themeConf,
     head: [
-        ['link', { rel: 'icon', href: '/hero.jpeg' }]
+        ['link', { rel: 'icon', href: '/hero.jpg' }]
     ],
     plugins: [
         '@vuepress/back-to-top',
@@ -29,7 +29,7 @@ module.exports = {
                 }
             }
         ],
-        ['vuepress-plugin-comment', 
+        ['vuepress-plugin-comment',
             {
                 choosen: 'gitalk',
                 options: {
@@ -38,11 +38,10 @@ module.exports = {
                     repo: 'km',
                     owner: 'fttony',
                     admin: ['fttony'],
-                    id: '<%- frontmatter.commentid || frontmatter.permalink %>',
-                    distractionFreeMode: false,
-                    labels: ['Gitalk', 'Comment'],
-                    title: '「评论」<%- frontmatter.title %>',
-                    body: '<%- frontmatter.title %>：<%- window.location.origin %><%- frontmatter.to.path || window.location.pathname %>'
+                    distractionFreeMode: false
+                    // id: '<%- frontmatter.commentid || frontmatter.permalink %>',
+                    // title: '「Comment」<%- frontmatter.title %>',
+                    // body: '<%- frontmatter.title %>：<%-window.location.origin %><%- frontmatter.to.path || window.location.pathname %>'
                 }
             }
         ]
