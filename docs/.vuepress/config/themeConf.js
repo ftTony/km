@@ -290,6 +290,8 @@ module.exports = {
             title: 'Web安全',
             collapsable: false,
             children: [
+                'login-1',
+                'login-2',
                 'xss',
                 'csrf',
                 'sql'
