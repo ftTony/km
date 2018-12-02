@@ -292,6 +292,7 @@ module.exports = {
             children: [
                 'login-1',
                 'login-2',
+                'osi-hijack',
                 'xss',
                 'csrf',
                 'sql'
