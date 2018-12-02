@@ -401,7 +401,9 @@ module.exports = {
                 'base-sort',
                 'base-select',
                 'high-algorithm',
-                'high-sort'
+                'high-sort',
+                'offer',
+                'leetcode'
             ]
         },
         {
@@ -418,7 +420,7 @@ module.exports = {
             ]
         },
         {
-            title: '函数数据编程',
+            title: '函数式编程',
             collapsable: false,
             children: [
                 'base-functional'
