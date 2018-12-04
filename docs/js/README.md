@@ -1,13 +1,27 @@
-## js 基础
+# 目录
 
+- javascript基础
+- javascript进阶
+- es6学习
+- nodejs学习
+- 框架学习
 
-## es6 
+## javascript基础
 
-1. [ES6、ES7、ES8、ES9、ES10 新特性一览](https://juejin.im/post/5ca2e1935188254416288eb2)
-2. [ES6、ES7、ES8 特性一锅炖(ES6、ES7、ES8 学习指南)](https://juejin.im/post/5b9cb3336fb9a05d290ee47e)
-3. [深入理解 ES6](https://github.com/hyy1115/ES6-learning)
-4. [ECMAScript 6 入门第三版](https://yjhenan.gitbooks.io/-ecmascript-6/content/)
-5. [ES2019新特性你知道哪些？](https://mp.weixin.qq.com/s/V6XrD_bqJ8IKlNy--g3NWw)
-6. [详解ES2018新特性（推荐）](https://mp.weixin.qq.com/s/CTM4hspa1KcMVPxtsMaIeg)
+- 表达式与运算符
+- 数据类型与数据类型转换
+- 原型与原型链
+- this解析
+- 闭包
+- 继承
 
-## nodejs
+## javascript进阶
+
+- 函数柯里化
+- 节流与防抖动
+
+## es6学习
+
+## nodejs学习
+
+## 框架学习
