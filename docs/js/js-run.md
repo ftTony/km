@@ -129,6 +129,7 @@ foo();
 ### 参考资料
 
 - [JavaScript是如何工作的：引擎，运行时和调用堆栈的概述！](https://github.com/qq449245884/xiaozhi/issues/1)
+- [JavaScript的运行机制](https://www.cxymsg.com/guide/mechanism.html)
 
 ## 联系作者
 

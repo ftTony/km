@@ -175,29 +175,140 @@ class Category{
 
 #### 函子
 
+函数不仅可以用于同一个范畴中值的转换，还可以用于将一个范畴转换成另一个范畴。这就涉及到了函子(Functor)。
 
+函子是函数式编程里面最重要的数据类型，也是基本的运算单位和功能单位。
+
+它首先是一种范畴，也就是说，是一个容器，包含了值和变形关系。比较特殊的是，它的变形关系可以依次作用于每一个值，将当前容器变形成另一个容器。
+
+函子的代码实现：
 
 ```
+// 任何具有map方法的数据结构，都可以当作函子的实现。
+class Functor{
+    constructor(val){
+        this.val = val;
+    }
+
+    map(f){
+        return Functor.of(f(this.val));
+    }
+}
+
+Functor.of = function(value){
+    return new this(value);
+}
 ```
+
+上面代码中，Functor是一个函子，它的map方法接受函数f作为参数，然后返回一个新的函子，里面包含的值是被f处理过的f(this.val)。
+
+一般约定，函子的标志就是容器具有map方法。该方法将容器里面的每一个值，映射到另一个容器。
+
+```
+new Functor(2).map(function(two){
+    return two + 2;
+});
+// Functor(4)
+
+new Functor('flamethrowers').map(function(s){
+    return s.toUpperCase();
+});
+// Functor('FLAMETHROWERS')
+
+new Functor('bombs').map(_.concat('away')).map(_.prop('length'));
+// Functor(10)
+```
+
+上面的例子说明，函数式编程里面的运算，都是通过函子完成，即运算不直接针对值，而是针对这个值的容器---函子。函子本身具有对外接口（map方法），各种函数就是去处符，通过接口接入容器，引发容器里面的值的变形。
+
+因此，学习函数式编程，实际上就是学习函子的各种运算。由于可以把运算方法封装在函子里面，所以又衍生出各种不同类型的函子，有多少种运算，就有多少种函子。函数式编程就变成了运用不同的函子，解决实际问题。
 
 #### Of 方法
 
+你可能注意到了，上面生成新的函子的时候，用了 new 命令。这实在太不像函数式编程了，因为 new 命令是面向对象编程的标志。
+
+函数式编程一般约定，函子有一个 of 方法，用来生成新的容器。
+
+下面就用 of 方法替换掉 new。
+
 ```
+Functor.of = function(val){
+    return new Functor(val);
+};
 ```
+
+然后，前面的例子就可以改成下面这样。
+
+```
+Functor.of(2).map(function(two){
+    return two +2;
+});
+// Functor(2)
+```
+
+这就更像函数式编程了。
 
 #### Maybe 函子
 
+函子接受各种函数，处理容器内部的值。这里就有一个问题，容器内部的值可能是一个空值（比如null），而外部函数未必有处理空值的机制，如果传入空值，很可能就会出错。
+
+Maybe函子就是为了解决这一类问题而设计的。简单说，它的map方法里面设置了空值检查。
+
 ```
+class Maybe extends Functor{
+    constructor(value){
+        super();
+        this.val = value;
+    }
+    isnothing(){
+        return !!!this.val;
+    }
+
+    map(f){
+        if(this.isnothing()){
+            // 如果没有值，不执行变形函数，直接返回一个新函子null。
+            return Maybe.of(null);
+        }else{
+            return Maybe.of(f(this.val));
+        }
+    }
+}
 ```
 
 #### Either 函子
 
+条件运算 if...else 是最常见的运算之一，函数式编程里面，使用 Either 函子表达。
+
+Either 函子内部有两个值：左值（Left）和右值（Right）。右值是正常情况下使用的值，左值是右值不存在时使用的默认值。
+
 ```
+class Either extends Functor{
+    constructor(value){
+        super();
+        this.val = value;
+    }
+    isnothing(){
+        return !!!this.val;
+    }
+    map(left,right){
+        if(this.isnothing()){
+            return Either.of(left(null));
+        }else{
+            return Either.of(right(this.val));
+        }
+    }
+}
 ```
 
 #### AP 函子
 
 ```
+function addTwo(x){
+    return x+2;
+}
+
+const A = Functor.of(2);
+const B = Functor.of(addTwo);
 ```
 
 #### Monad 函子
