@@ -61,29 +61,80 @@ const b2 = array.splice(0, 2);
 **柯里化** 是指传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数。
 
 ```
+var checkage = min => age => age > min;
+var checkage20 = checkage(20);
+checkage20(100);
+// true
 ```
+
+第一步，根据参数20，返回一个检查年龄是否大于20的新函数，第二步，传递参数，检查年龄是否大于20。
 
 #### 1.3 函数组合
 
 **函数组合** 定义一个组合函数来讲多个函数调用组合成一个，国了解决类似的函数嵌套问题`f(h(j(h())))`。
 
 ```
+var compose = (f,g) => x => f(g(x));
+
+function add(a){
+    return a+a;
+}
+
+function multi(a){
+    return a*a;
+}
+
+const c = compose(add,multi);
+c(3);   //18
 ```
 
 #### 1.4 惰性函数
 
+**惰性函数** 是“比较懒的函数”，只执行一次就不执行了，是因为缓存了上一次的结果，直接拿来用。
+
 ```
+var t;
+function f(a){
+    if(t) return t;
+    var e = parseInt(a,10);
+    alert('测试有没有重复！');
+    e = e * e;
+    t = e;
+    return t;
+}
+alert(f('3'));
+alert(f('3'));
+alert(f('4')); // 不会弹出16的，因为这是“隋性”，只计算一次
 ```
 
 #### 1.5 高阶函数
 
+将函数当参数，把传入的函数做一个封装，然后返回这个封装函数，达到更高程序的抽象。
+
 ```
+function hoc(fn){
+    console.log('begin');
+    const result = fn();
+    console.log('end');
+    return result;
+}
 ```
 
 #### 1.6 闭包
 
+闭包的概念来源于 19 世纪 60 年代，在 1975 年被作为一个语言的编程特征实现，用作支持词法范围的函数是一等公民的函数式编程。
+
 ```
+function a(x){
+    return function(y){
+        return x+y;
+    }
+}
+var a1 = a(1);
+a1(3);  //4
 ```
+
+虽然外部 a 执行完毕，栈上的帧被释放，但是堆上的作用域并不能被释放，因此 x 依旧可以被外部函数访问，这样就形成的闭包。
 
 ### 三、函数式编程原理
 
@@ -123,6 +174,11 @@ class Category{
 总之，在函数式编程中，函数就是一个管道（pipe）。这头进去一个值，那头就会出来一个新的值，没有其他作用。
 
 #### 函子
+
+
+
+```
+```
 
 #### Of 方法
 

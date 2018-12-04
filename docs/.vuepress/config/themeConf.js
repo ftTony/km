@@ -313,7 +313,8 @@ module.exports = {
             title: 'WEB调试',
             collapsable: false,
             children: [
-                'mobile-debug'
+                'mobile-debug',
+                'seo'
             ]
         }
         ],
