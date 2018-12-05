@@ -12,7 +12,39 @@
 
 ### 一、virtual dom
 
+```
+
+```
+
 ### 二、分析diff
+
+一篇相当经典的文章[React’s diff algorithm](https://calendar.perfplanet.com/2013/diff/)中的图，react的diff其实和vue的diff大同小异。所以这张图能很好解释过程。**比较只会在同层级进行，不会跨层级比较。**
+
+![images](vue09.png)
+
+举个形象的例子。
+
+```
+<!-- 之前 -->
+<div>           <!-- 层级1 -->
+  <p>            <!-- 层级2 -->
+    <b> aoy </b>   <!-- 层级3 -->   
+    <span>diff</Span>
+  </P> 
+</div>
+
+<!-- 之后 -->
+<div>            <!-- 层级1 -->
+  <p>             <!-- 层级2 -->
+      <b> aoy </b>        <!-- 层级3 -->
+  </p>
+  <span>diff</Span>
+</div>
+```
+
+我们可能期望将`<span>`直接移动到`<p>`的后边，这是最优的操作。但是实际的diff操作是移除`<p>`里的`<span>`再创建一个新的`<span>`插到`<p>`的后边。因为新加的`<span>`在层级2，旧的在层级3，属于不同层级的比较。
+
+#### 源码分析
 
 ### 三、算法实现
 
@@ -22,7 +54,20 @@
 
 #### 3.1 用JS对象模拟DOM树
 
+用JavaScript来表示一个DOM节点是很简单的事情，你只需要记录它的节点类型、属性，还有子节点：
+
+element.js
+
 ```
+function Element(tagName,props,children){
+    this.tagName = tagName
+    this.props = props
+    this.children = children
+}
+
+module.exports = function(tagName,props,children){
+
+}
 ```
 
 #### 3.2 比较两棵虚拟DOM树的差异
