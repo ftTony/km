@@ -6,10 +6,10 @@
 
 ## 内容
 
-- 函数式编程定义
-- 函数式编程特性
-- 函数式编程原理
-- 函数式编程库
+- [函数式编程定义](一、函数式编程定义)
+- [函数式编程特性](#二、函数式编程特性)
+- [函数式编程原理](#三、函数式编程原理)
+- [函数式编程库](#四、函数式编程库)
 
 ### 一、函数式编程定义
 
@@ -27,12 +27,12 @@
 
 ### 二、函数式编程特性
 
-- 纯函数
-- 柯里化
-- 函数组合
-- 惰性函数
-- 高阶函数
-- 闭包
+- [纯函数](#_1-1-纯函数)
+- [柯里化](#_1-2-柯里化)
+- [函数组合](#_1-3-函数组合)
+- [惰性函数](#_1-4-惰性函数)
+- [高阶函数](#_1-5-高阶函数)
+- [闭包](#_1-6-闭包)
 
 #### 1.1 纯函数
 
@@ -329,17 +329,109 @@ class Ap extends Functor {
 }
 ```
 
+注意，ap 方法的参数不是函数，而是另一个函子。
+
+因此，前面例子可以写成下面的形式。
+
+```
+Ap.of(addTwo).ap(Functor.of(2));
+// Ap(4)
+```
+
+ap函子的意义在于，对于那些多参数的函数，就可以从多个容器之中取值，**实现函子的链式操作**。
+
+```
+function add(x){
+    return function(y){
+        return x+y;
+    }
+}
+
+Ap.of(add).ap(Maybe.of(2)).ap(Maybe.of(3));
+```
+
+上面代码中，函数 add 是柯里化以后的形式，一共需要两个参数。通过 ap 函子，我们就可以实现从两个容器之中取值。它还有另外一种写法。
+
+```
+Ap.of(add(2)).ap(Maybe.of(3));
+```
+
 #### Monad 函子
 
 函子是一个容器，可以包含任何值。函子之中再包含一个函子，也是完全合法的。但是，这样就会出现多层嵌套的函子。
 
 ```
+Maybe.of(Maybe.of(Maybe.of({ name: 'Mulburry', number: 8402 })));
 ```
+
+上面这个函子，一共有三个Maybe嵌套。如果要取出内部的值，就要连续取三次this.val。这当然很不方便，因此就出现了Monad函子。
+
+Monad 函子的作用是，总是返回一个单层的函子。它有一个 flatMap 方法，与 map 方法作用相同，唯一的区别是如果生成了一个嵌套函子，它会取出后者内部的值，保证返回的永远是一个单层的容器，不会出现嵌套的情况。
+
+```
+class Monad extends Functor {
+  join() {
+    return this.val;
+  }
+  flatMap(f) {
+    return this.map(f).join();
+  }
+}
+```
+
+上面代码中，如果函数 f 返回的是一个函子，那么 this.map(f)就会生成一个嵌套的函子。所以，join 方法保证了 flatMap 方法总是返回一个单层的函子。这意味着嵌套的函子会被铺平（flatten）。
 
 #### IO 函子
 
+Monad函子的重要应用，就是实现I/O（输入输出）操作。
+
+I/O是不纯的操作，普通的函数式编程没法做，这时就需要把I/O操作写成Monad函子，通过它来完成。
+
 ```
+var fs = require('fs');
+
+var readFile = function(filename){
+    return new IO(function(){
+        return fs.readFileSync(filename,'utf-8');
+    })
+}
+
+var print = function(x){
+    return new IO(function(){
+        console.log(x);
+        return x;
+    });
+};
 ```
+
+上面代码中，读取文件和打印本身都是不纯的操作，但readFile和print却是纯函数，因为它们总是返回IO函子。
+
+如果IO函子是一个Monad，具有flatMap方法，那么我们就可以像下面这样调用这两个函数。
+
+```
+readFile('./user.txt').flatMap(print);
+```
+
+这就是神奇的地方，上面的代码完成了不纯的操作，但是因为flatMap返回的还是一个IO函子，所以这个表达式是纯的。我们通过一个纯的表达式，完成带有副作用的操作，这就是Monad的作用。
+
+由于返回还是IO函子，所以可以实现链式操作。因此，在大多数库里面，flatMap方法被改名成chain。
+
+```
+var tail = function(x){
+    return new IO(function(){
+        return x[x.length-1];
+    });
+};
+
+readFile('./user.txt').flatMap(tail).flatMap(print);
+
+// 等同于
+readFile('./user.txt')
+  .chain(tail)
+  .chain(print);
+```
+
+上面代码读取了文件user.txt，然后选取最后一行输出。
 
 ### 四、函数式编程库
 
