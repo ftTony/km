@@ -244,6 +244,11 @@ CSS表达式的问题在于它被重新计算的次数远比我们想象的要�
 
 #### 6.1 优化图像
 
+- 检查GIF图片中图像颜色的数量是否和调色板规格一致。如果你发现图片中只用到了4种颜色，而在调色板的中显示的256色的颜色槽，那么这张图片就还有压缩的空间。可以使用imagemagick检查：`identify -verbose image.gif`
+- 尝试把GIF格式转换成PNG格式，看看是否节省空间。大多数情况下是可以压缩的。下面这条简单的命令可以安全地把GIF格式转换为PNG格式：`convert image.gif image.png`
+- 在所有的PNG图片上运行`pngcrush`或者其它PNG优化工具）。例如：`pngcrush image.png -rem alla -reduce -brute result.png`
+- 在所有的JPEG图片上运行`jpegtran`。这个工具可以对图片中的出现的锯齿等做无损操作，同时它还可以用于优化和清除图片中的注释以及其它无用信息`jpegtran -copy none -optimize -perfect src.jpg dest.jpg`
+
 #### 6.2 优化CSS Sprite
 
 #### 6.3 不要在HTML中缩放图片
