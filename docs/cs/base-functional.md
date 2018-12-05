@@ -311,7 +311,27 @@ const A = Functor.of(2);
 const B = Functor.of(addTwo);
 ```
 
+上面代码中，函子A内部的值是2，函子B内部的值是函数addTwo。
+
+有时，我们想让函子B内部的函数，可以使用函子A内部的值进行运算。这时就需要用到ap函子。
+
+ap 是 applicative（应用）的缩写。凡是部署了 ap 方法的函子，就是 ap 函子。
+
+```
+class Ap extends Functor {
+  constructor(value) {
+    super();
+    this.val = value;
+  }
+  ap(F) {
+    return Ap.of(this.val(F.val));
+  }
+}
+```
+
 #### Monad 函子
+
+函子是一个容器，可以包含任何值。函子之中再包含一个函子，也是完全合法的。但是，这样就会出现多层嵌套的函子。
 
 ```
 ```
