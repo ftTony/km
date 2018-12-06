@@ -244,7 +244,9 @@ module.exports = {
             title: '工程测试',
             collapsable: false,
             children: [
-                'test'
+                'test-1',
+                'test-2',
+                'test-3',
             ]
         },
         {
