@@ -268,17 +268,11 @@ module.exports = {
             title: '新技术',
             collapsable: false,
             children: [
+                'live',
                 'pwa-0',
                 'webAssembly',
                 'electron',
                 'serverless'
-            ]
-        },
-        {
-            title: '直播原理与实践',
-            collapsable: false,
-            children: [
-                'live'
             ]
         },
         {
