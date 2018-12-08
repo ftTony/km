@@ -272,6 +272,8 @@ module.exports = {
                 'pwa-0',
                 'webAssembly',
                 'electron',
+                'ssr',
+                'skeleton',
                 'serverless'
             ]
         },
