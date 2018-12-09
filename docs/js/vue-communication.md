@@ -96,7 +96,9 @@ export default{
         }
     },
     methods:{
-
+        changeTitle(){
+            this.$emit('titleChanged','子向父组件传值');    // 自定义事件  传递值“子向父组件传值”
+        }
     }
 }
 </script>
@@ -106,13 +108,28 @@ export default{
 // 父组件
 <template>
     <div id="app">
-        <app-header v-on:titleChanged="">
+        <app-header v-on:titleChanged="updateTitle">   // 与子组件titleChanged自定义事件保持一致，updateTitle($event)接受传递过来的文字
+        </app-header>
+        <h2>{{title}}</h2>
     </div>
 </template>
 <script>
 import Header from './components/Header'
 export default{
-
+    name:'App',
+    data(){
+        return {
+            title:"传递的是一个值"
+        }
+    },
+    methods:{
+        updateTitle(e){ //声明这个函数
+            this.title = e;
+        }
+    },
+    components:{
+        'app-header':Header
+    }
 }
 </script>
 ```
@@ -120,6 +137,8 @@ export default{
 **总结：子组件通过events给父组件发送消息，实际上就是子组件把自己的数据发送到父组件。**
 
 ### 二、`$emit`/`$on`
+
+**这种方法通过一个空的Vue实例作为中央事件总线（事件中心），用它来触发事件和监听，巧妙而轻量地实现了任何组件间的通信，包括父子、兄弟、跨级。**当我们的项目比较大的时，可以选择更好的状态管理解决方案vuex。
 
 #### 2.1 具体实现方式
 
