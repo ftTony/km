@@ -153,15 +153,167 @@ Event.$on(事件名，data=>{});
 假设兄弟组件有三个，分别是A、B、C组件，C组件如何获取A或者B组件的数据
 
 ```
+<div id="itany">
+    <my-a></my-a>
+    <my-b></my-b>
+    <my-c></my-c>
+</div>
+<template id="a">
+
+</template>
+<template id="b">
+
+</template>
+<template id="c">
+
+</template>
+<script>
+var Event = new Vue();  //定义一个空的Vue实例
+var A = {
+    template:'#a',
+    data(){
+        return{
+            name:'tom'
+        }
+    },
+    methods:{
+        send(){
+            Event.$emit('data-a',this.name);
+        }
+    }
+};
+var B = {
+    template:'#b',
+    data(){
+        return {
+            age:20
+        }
+    },
+    methods:{
+        send(){
+            Event.$emit('data-b',this.age);
+        }
+    }
+};
+var C = {
+    template:'#c',
+    data(){
+        return {
+            name:'',
+            age:''
+        }
+    },
+    mounted(){  //在模板编译完成执行
+        Event.$on('data-a',name=>{
+            this.name = name;     //箭头函数内部不会产生新this，这边如果不用=>，this指代Event
+        })
+        Event.$on('data-b',age=>{
+            this.age = age;
+        })
+    }
+};
+var vm = new Vue({
+    el:'#itany',
+    components:{
+        'my-a':A,
+        'my-b':B,
+        'my-c':C
+    }
+});
+</script>
 ```
+
+![images](vue05.gif)
+
+`$on`监听了自定义事件data-a和data-b，因为有时不确定何时会触发事件，一般会在mounted或created钩子中来监听。
 
 ### 三、vuex
 
+![images](vue06.png)
+
+#### 3.1 介绍Vuex
+
+Vuex实现了一个单向数据流，在全局拥有一个State存放数据，当组件要更改State中的数据时，必须通过
+
+#### 3.2 功能
+
+- `Vue Components`：Vue组件。HTML页面上，负责接收用户操作等交互行为，执行dispatch方法触发对应action进行回应。
+- `dispatch`：操作行为触发方法，是唯一能执行action的方法。
+- `actions`：**操作行为处理模块由组件中的`$store.dispatch('action 名称',data1)`来触发。然后由commit()来触发mutation的调用，间接更新state。**负责处理Vue Components接收到的所有交互行为。包含同步/异步操作，支持多个同名方法，按照注册的顺序依次触发。向后台API请求的操作就在这个模块中进行，包括触发其他action以及提交mutation的操作。该模块提供了Promise的封装，以支持action的链式触发。
+- `commit`：状态改变提交操作方法。对mutation进行提交，是唯一能执行mutation的方法。
+- `mutations`：****
+- `state`：
+- `getters`：state
+
+#### 3.3 Vuex与localStorage
+
+vuex是vue的状态管理器，存储的数据是响应式的。但是并不会保存起来，刷新之后就回到了初始状态，**具体做应该在vuex里数据改变的时候把数据拷贝一份保存到localStorage里面，刷新之后，如果localStorage里有保存的数据，取出来再替换store里的state。**
+
+```
+let defaultCity = "上海"
+try{
+
+}catch(e){}
+
+```
+
+这里需要注意的是：由于vuex里，我们保存的状态，都是数组，而localStorage只支持字符串，所以需要用JSON转换：
+
+```
+JSON.stringify(state.subscribeList);    //  array -> string
+JSON.parse(window.localStorage.getItem("subscribeList"))    // string -> array
+```
+
 ### 四、`$attrs`/`$listeners`
+
+#### 4.1 简介
+
+多级组件嵌套需要传递数据时，通常使用的方法是通过vuex。但如果仅仅是传递数据，而不做中间处理，使用vuex处理，未免有点大材小用。为此Vue2.4版本提供了另一种方法----`$attrs`/`$listeners`
+
+- `$attrs`：包含了父作用域中不被prop所识别(且获取)的除绑定(class和style除外)。当一个组件没有声明任何prop时，这里会包含所有父作用域的绑定(class和style除外)，并且可以通过v-bind="$attrs"传入内部组件。通常配合inheritAttrs选项一起使用。
+- `$listeners`：包含了父作用域中的(不含.native修饰器的)v-on事件听器。它可以通过v-on="$listeners"传入内部组件
+
+#### 4.2 例子
+
+接下来我们看个跨级通信的例子：
+
+```
+// index.vue
+<template>
+</template>
+```
+
+```
+// childCom1.vue
+
+```
 
 ### 五、`provide`/`inject`
 
+#### 5.1 简介
+
+#### 5.2 例子
+
+假设有两个组件：A.vue和B.vue，B是A的子组件
+
+```
+```
+
+```
+```
+
 ### 六、`$parent`/`$chilren`与ref
+
+- `ref`：如果在普通的DOM元素上使用，引用指向的就是DOM元素；如果用在子组件上，引用就指向组件实例
+- `$parent`/`$children`：访问父/子实例
+
+需要注意的是：这两种都是直接得到组件实例，使用后可以直接调用组件的方法或访问数据。我们先来看个用`ref`来访问组件的例子：
+
+```
+```
+
+```
+```
 
 ### 参考资料
 
