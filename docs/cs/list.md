@@ -55,6 +55,12 @@ class Node{
         this.next = null;
     }
 }
+
+class LinkedList{
+    constructor(){
+
+    }
+}
 ```
 
 ### 三、双链表
