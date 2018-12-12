@@ -241,9 +241,9 @@ Vuex实现了一个单向数据流，在全局拥有一个State存放数据，�
 - `dispatch`：操作行为触发方法，是唯一能执行action的方法。
 - `actions`：**操作行为处理模块由组件中的`$store.dispatch('action 名称',data1)`来触发。然后由commit()来触发mutation的调用，间接更新state。**负责处理Vue Components接收到的所有交互行为。包含同步/异步操作，支持多个同名方法，按照注册的顺序依次触发。向后台API请求的操作就在这个模块中进行，包括触发其他action以及提交mutation的操作。该模块提供了Promise的封装，以支持action的链式触发。
 - `commit`：状态改变提交操作方法。对mutation进行提交，是唯一能执行mutation的方法。
-- `mutations`：****
-- `state`：
-- `getters`：state
+- `mutations`：**状态改变操作方法，由actions中的`commit('mutation 名称')`来触发。**是Vuex修改state的唯一推荐方法。该方法只能进行同步操作，且方法名只能全局唯一。操作之中会有一些hook暴露出来，以进行state的监控等。
+- `state`：页面状态管理容器对象。集中存储Vue.components中data对象的零散数据，全局唯一，以进行统一的状态管理。页面显示所需的数据从该对象中进行读取，利用Vue的细粒度数据响应机制来进行高效的状态更新。
+- `getters`：state对象读取方法。图中没有单独列出该模块，应该被包含在了render中，Vue Components通过方法读取全局state对象。
 
 #### 3.3 Vuex与localStorage
 
@@ -251,10 +251,25 @@ vuex是vue的状态管理器，存储的数据是响应式的。但是并不会�
 
 ```
 let defaultCity = "上海"
-try{
-
+try{    // 用户关闭了本地存储功能，此时在外层加个try...catch
+    if(!defaultCity){
+        defaultCity = JSON.parse(window.localStorage.getItem('defaultCity'))
+    }
 }catch(e){}
-
+export default new Vuex.Store({
+    state:{
+        city: defaultCity
+    },
+    mutations:{
+        changeCity(state,city){
+            state.city = city
+            try{
+                window.localStorage.setItem('defaultCity',JSON.stringify(state.city));
+                // 数据改变的时候把数据拷贝一份保存到localStorage里面
+            }catch(e){}
+        }
+    }
+})
 ```
 
 这里需要注意的是：由于vuex里，我们保存的状态，都是数组，而localStorage只支持字符串，所以需要用JSON转换：
@@ -292,15 +307,45 @@ JSON.parse(window.localStorage.getItem("subscribeList"))    // string -> array
 
 #### 5.1 简介
 
+Vue2.2.0新增API,这对选项需要一起使用，**以允许一个祖先组件向其所有子孙后代注入一个依赖，不论组件层次有多深，并在起一下游关系成立的时间里始终生效。** 一言而蔽之：祖先组件中通过provider来提供变量，然后在子孙组件中通过inject来注入变量。
+
+provide/iject API **主要解决了跨级组件间的通信问题，不过它的使用场景，主要是子组件获取上级组件的状态，跨级组件间建立了一种主动提供与依赖注入的关系。**
+
 #### 5.2 例子
 
 假设有两个组件：A.vue和B.vue，B是A的子组件
 
 ```
+// A.vue
+export default{
+    provide:{
+        name:'小武子'
+    }
+}
 ```
 
 ```
+// B.vue
+export default{
+    inject:['name'],
+    mounted(){
+        console.log(this.name); // 小武子
+    }
+}
 ```
+
+可以看到，在A.vue里，我们设置了一个provide:name，值为小武子，它的作用就是将name这个变量提供给它的所有子组件。而在B.vue中，通过`inject`注入了从A组件中提供的name变量，那么在组件B中，
+
+需要注意的是：**provide和inject绑定并不是可响应的。这是刻意为之的。然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的**——vue官方访文档
+
+所以，上面A.vue的name如果改变了，B.vue的this.name是不会改变的，仍然是小武子。
+
+#### 5.3 provide与inject怎么实现数据响应式
+
+一般来说，有两种方法：
+
+- provide祖先组件的实例
+- 使用2.6最新API Vue.observable优化响应式provide(推荐)
 
 ### 六、`$parent`/`$chilren`与ref
 
