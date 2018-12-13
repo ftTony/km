@@ -506,6 +506,17 @@ new CommonsChunkPlugin({
 - `style-loader`：把 CSS 代码注入到 JavaScript 中，通过 DOM 操作去加载 CSS。
 - `eslint-loader`：通过 ESlint 检查 JavaScript 文件
 
+#### 七、webpack 与 grunt、gulp 的不同？
+
+- Grunt、Gulp 是基于任务运行的工具：它们会自动执行指定的任务，就像流水线，把资源放上去然后通过不同插件进行加工，它们饮食活跃的社区，丰富的插件，能方便的打造各种工作流。
+- Webpack 是基于模块化打包的工具：自动化处理模块，Webpack 把一切当成模块，当 webpack 处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle。
+
+因此这是完全不同的两类工具，而现在主流的方式是用`npm script`代替`Grunt`、`Gulp`，`npm script`同样可以打造任务流。
+
+#### 八、webpack、rollup、parcel 优劣？
+
+- webpack 适用于大型复杂的前端站点构建：webpack 有强大的 loader 和插件生态，打包后的文件实际上就是一个立即执行函数，这个立即执行函数接收一个参数，这个参数是模块对象，键为各个模块的路径，值为模块内容。立即执行函数内部则处理模块之间的引用，执行模块等，这种情况更适合文件依赖复杂的应用开发。
+
 ### 参考资料
 
 - [面试必备！webpack 中那些最易混淆的 5 个知识点](https://juejin.im/post/5cede821f265da1bbd4b5630)
