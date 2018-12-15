@@ -417,6 +417,10 @@ $ git stash pop
 
 这个问题同样也需要先了解 git 仓库的三个组成部分：工作区（Working Directory）、暂存区（Stage）和历史记录区（History）。
 
+- 工作区：在 git 管理下的正常目录都算是工作区，我们平时的编辑工作都是在工作区完成
+- 暂存区：
+
+![images](git03.png)
 
 ### 三、Git 常用命令导图
 
