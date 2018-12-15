@@ -7,8 +7,8 @@
 ## 内容
 
 - [分支模型](#一、分支模型)
-- [Git常用命令清单](#二、Git常用命令清单)
-- [Git常用命令导图](#三、Git常用命令导图)
+- [Git 常用命令清单](#二、Git常用命令清单)
+- [Git 常用命令导图](#三、Git常用命令导图)
 
 ### 一、分支模型
 
@@ -413,7 +413,12 @@ $ git stash
 $ git stash pop
 ```
 
-### 三、Git常用命令导图
+#### git reset、git revert 和 git checkout 有什么区别
+
+这个问题同样也需要先了解 git 仓库的三个组成部分：工作区（Working Directory）、暂存区（Stage）和历史记录区（History）。
+
+
+### 三、Git 常用命令导图
 
 ![images](git-Commands.png)
 
