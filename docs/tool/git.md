@@ -425,6 +425,15 @@ $ git stash pop
 
 ![images](git03.png)
 
+`git reset`、`git revert` 和 `git checkout`的共同点：用来撤销代码仓库中的某些更改。
+
+不同点：
+
+- 从`commit`层面来说：
+  - `git reset`可以将一个分支的末端指向之前的一个`commit`。然后再下次`git`
+- 从文件层面来说：
+  - `git reset`只是把文件
+
 ### 三、Git 常用命令导图
 
 ![images](git-Commands.png)
