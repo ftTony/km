@@ -13,18 +13,39 @@
 **相关代码**
 
 ```
+function LinkedList(){
 
+    var Node = function(element){
+      this.element = element;
+      this.next = null;  
+    };
+
+    var length = 0;
+    var head = null;
+
+    this.append = function(element){};
+    this.insert = function(position,element){};
+    this.removeAt = function(position){};
+    this.remove = function(element){};
+    this.indexOf = function(element){};
+    this.isEmpty = function(){};
+    this.size = function(){};
+    this.toString = function(){};
+    this.print = function(){};
+}
 ```
 
 ### 二、单链表
 
 ### 三、双链表
 
-### 四、反转链表
+### 四、循环链表
 
-### 五、LRU算法
+### 五、反转链表
 
-### 六、链表相关试题
+### 六、LRU算法
+
+### 七、链表相关试题
 
 ## 参考资料
 
