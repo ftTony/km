@@ -6,7 +6,20 @@
 
 ## 内容
 
-## 参考资料
+- 创建BinarySearchTree类
+
+### 一、创建树
+
+```
+function BinarySearchTree(){
+
+}
+
+```
+
+### 参考资料
+
+- 《学习JavaScript数据结构与算法》
 
 ## 联系作者
 
