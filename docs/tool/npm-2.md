@@ -577,6 +577,83 @@ npm run serve params  // 将params参数添加到process.env.argv数组中
 npm run serve -- params  // 将params参数添加到process.env.argv数组中
 ```
 
+**多命令运行**
+
+有的项目在启动时可能需要同时执行多个任务，多个任务的执行顺序决定了项目的表现。
+
+**串行执行**
+
+串行执行，要求前一个任务执行成功以后才能执行下一个任务，使用`&&`符号来连接。
+
+```
+npm run script1 && npm run script2
+```
+
+>串行命令执行过程中，只要一个命令执行失败，则整个脚本终止。
+
+**并行执行**
+
+并行执行，就是多个命令可以同时的平行执行，使用`&`符号来连接。
+
+```
+npm run script1 & npm run script2
+```
+
+这两个符号是`Bash`的内置功能。此外，还可以使用第三方的任务管理器模块：[script-runner](https://github.com/paulpflug/script-runner)、[npm-run-all](https://github.com/mysticatea/npm-run-all)、[redrun](https://github.com/mysticatea/npm-run-all)。
+
+**env 环境变量**
+
+在执行`npm run`脚本时，`npm`会设置一些特殊的`env`环境变量。其中`package.json`中的所有字段，都会被设置为以`npm_package_`开头的环境变量。比如`package.json`中有如下字段内容：
+
+```
+{
+  "name": "sh",
+  "version": "1.1.1",
+  "description": "shenhao",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/xxxx/sh.git"
+  }
+}
+```
+
+可以通过`process.env.npm_package_name`可以获取到`package.json`中`name`字段的值`sh`，也可以通过`process.env.npm_package_repository_type`获取到嵌套属性`type`的值`git`。
+
+同时，`npm`相关的所有配置也会被设置为以`npm_config_`开头的环境变量。
+
+此外，还会设置一个比较特殊的环境变量`npm_lifecycle_event`，表示正在运行的脚本名称。比如执行`npm run serve`的时候，`process.env.npm_lifecycle_event`值为`serve`，通过判断这个变量，可以将一个脚本使用在不同的`npm scripts`中。
+
+>这些环境变量只能在`npm run`的脚本执行环境内拿到，正常执行的`node`脚本是获取不到的。所以，不能直接通过`env $NODE_ENV`的形式访问，但可以在`scripts`中定义脚本`"scripts": "echo $NODE_ENV"`来访问。
+
+**指令钩子**
+
+在执行`npm scripts`命令（无论是自定义还是内置）时，都经历了pre和post两个钩子，在这两个钩子中可以定义某个命令执行前后的命令。
+
+比如在执行`npm run serve`命令时，会依次执行`npm run preserve`、`npm run serve`、`npm run postserve`，所以可以在这两个钩子中自定义一些动作：
+
+```
+"scripts": {
+  "preserve": "xxxxx",
+  "serve": "vue-cli-service serve",
+  "postserve": "xxxxxx"
+}
+```
+
+当然，如果没有指定`preserve`、`postserve`，会默默的跳过。如果想要指定钩子，必须严格按照`pre`和`post`前缀来添加。
+
+上面提到过一个环境变量`process.env.npm_lifecycle_event`可以配合钩子来一起使用：
+
+```
+const event = process.env.npm_lifecycle_event
+
+if (event === 'preserve') {
+    console.log('Running the preserve task!')
+} else if (_event === 'serve') {
+    console.log('Running the serve task!')
+}
+```
+
 ### 四、npm 配置
 
 `npm`的配置操作可以帮助我们预先设定好`npm`对项目的行为动作，也可以让我们预先定义好一些配置项以供项目中使用。所以了解`npm`的配置机制也是很有必要。
