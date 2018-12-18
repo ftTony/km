@@ -415,6 +415,7 @@ module.exports = {
             children: [
                 'base-sort',
                 'base-select',
+                'common-algorithm',
                 'high-algorithm',
                 'high-sort',
                 'offer',
