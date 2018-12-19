@@ -454,9 +454,11 @@ npm uninstall packageName
 这样就可以通过`npm run serve`脚本代替`vue-cli-service serve`脚本来启动项目，而无需每次敲一遍这么冗长的脚本。
 
 - 工作原理
-- PATH 环境变量
+- 用法指南
 
 #### 3.1 工作原理
+
+**package.json 中的 bin 字段**
 
 `package.json`中的字段[bin](https://docs.npmjs.com/files/package.json.html#bin)表示的是一个可执行文件到指定文件源的映射。例如在`@vue/cli`的`package.json`中：
 
@@ -474,9 +476,40 @@ npm uninstall packageName
 
 >软链接（符号链接）是一类特殊的可执行文件，其包含有一条以绝对路径或相对路径的形式指向其它文件或者目录的引用。在`bin`目录下执行`ll`指令可以查看具体的软链接指向。在对链接文件进行读或写操作的时候，系统会自动把该操作转换为对源文件的操作，但删除链接文件时，系统仅仅删除链接文件，而不删除源文件本身。
 
-#### 3.2 PATH 环境变量
+**PATH 环境变量**
 
 在`terminal`中执行命令时，**命令会在`PATH`环境变量里包含的路径中去寻找相同名字的可执行文件**。局部安装的包只在`./node_modules/.bin`中注册了它们的可执行文件，不会被包含在`PATH`环境变量中，这个时候在`terminal`中输入命令将会报无法找到的错误。
+
+那为什么通过`npm run`可以执行局部安装的命令行包呢？
+
+是因为**每当执行`npm run`时，会自动新建一个`Shell`，这个`Shell`会将当前项目的`node_modules/.bin`的绝对路径加入到环境变量`PATH`中，执行结束后，再将环境变量`PATH`恢复原样。**
+
+我们来验证下这个说法。首先执行[env](https://blog.csdn.net/elikang/article/details/88661467)查看当前所有的环境变量，可以看到PATH环境变量为：
+
+```
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+```
+
+可以看到运行时的`PATH`环境变量多了两个路径：`npm`指令路径和项目中`node_modules/.bin`的绝对路径。
+
+所以，通过`npm run`可以在不添加路径前缀的情况下直接访问当前项目`node_modules/.bin`目录里面的可执行文件。
+
+>`PATH`环境变量，是告诉系统，当要求系统运行一个程序而没有告诉它程序所在的完整路径时，系统除了在当前目录下面寻找此程序外，还应到哪些目录下去寻找
+
+#### 3.2 用法指南
+
+**传入参数**
+
+关于`scripts`中的参数，这里要多说几句。网上有很多不是很准确的说法，经过本人的反复试验`node`处理`scripts`参数其实很简单，比如：
+
+```
+"scripts": {
+  "serve": "vue-cli-service serve",
+  "serve1": "vue-cli-service --serve1",
+  "serve2": "vue-cli-service -serve2",
+  "serve3": "vue-cli-service serve --mode=dev --mobile -config build/example.js"
+}
+```
 
 ### 四、npm 配置
 
