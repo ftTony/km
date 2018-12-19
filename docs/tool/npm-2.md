@@ -511,6 +511,24 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 }
 ```
 
+**除了第一个可执行的命令，以空格分割的任何字符串（除了一些shell的语法）都是参数，并且都能通过`process.argv`属性访问。**
+
+>`process.argv`属性返回一个数组，这个数组包含了启动`node`进程时的命令行参数。第一个元素为启动`node`进程的可执行文件的绝对路径名[process.execPath](http://nodejs.cn/api/process.html#process_process_execpath)，第二个元素为当前执行的JavaScript文件路径。剩余的元素为其他命令行参数。
+
+比如执行`npm run serve3`命令，`process.argv`的具体内容为：
+
+```
+[ '/usr/local/Cellar/node/7.7.1_1/bin/node',
+  '/Users/mac/Vue-projects/hao-cli/node_modules/.bin/vue-cli-service',
+  'serve',
+  '--mode=dev',
+  '--mobile',
+  '-config',
+  'build/example.js']
+```
+
+很多命令行包之所以这么写，都是依赖了[minimist](https://github.com/substack/minimist) 或者 [yargs](https://github.com/yargs/yargs) 等参数解析工具来对命令行参数进行解析。
+
 ### 四、npm 配置
 
 `npm`的配置操作可以帮助我们预先设定好`npm`对项目的行为动作，也可以让我们预先定义好一些配置项以供项目中使用。所以了解`npm`的配置机制也是很有必要。
