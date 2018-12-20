@@ -529,6 +529,54 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 很多命令行包之所以这么写，都是依赖了[minimist](https://github.com/substack/minimist) 或者 [yargs](https://github.com/yargs/yargs) 等参数解析工具来对命令行参数进行解析。
 
+以`minimist`对`vue-cli-service serve --mode=dev --mobile -config build/example.js`解析为例，解析后的结果为：
+
+```
+{ _: [ 'serve' ],
+  mode: 'dev',
+  mobile: true,
+  config: 'build/example.js',
+  '$0': '/Users/mac/Vue-projects/hao-cli/node_modules/.bin/vue-cli-service'}
+```
+
+在`./node_modules/.bin/vue-cli-service`文件中可以看到`minimist`对命令行参数的处理：
+
+```
+const rawArgv = process.argv.slice(2)
+const args = require('minimist')(rawArgv, {
+  boolean: [
+    // build
+    'modern',
+    'report',
+    'report-json',
+    'watch',
+    // serve
+    'open',
+    'copy',
+    'https',
+    // inspect
+    'verbose'
+  ]
+})
+const command = args._[0]
+service.run(command, args, rawArgv).catch(err => {
+  error(err)
+  process.exit(1)
+})
+```
+
+我们还可以通过命令行传参的形式来进行参数传递：
+
+```
+npm run serve --params  // 参数params将转化成process.env.npm_config_params = true
+npm run serve --params=123 // 参数params将转化成process.env.npm_config_params = 123
+npm run serve -params  // 等同于--params参数
+
+npm run serve -- --params  // 将--params参数添加到process.env.argv数组中
+npm run serve params  // 将params参数添加到process.env.argv数组中
+npm run serve -- params  // 将params参数添加到process.env.argv数组中
+```
+
 ### 四、npm 配置
 
 `npm`的配置操作可以帮助我们预先设定好`npm`对项目的行为动作，也可以让我们预先定义好一些配置项以供项目中使用。所以了解`npm`的配置机制也是很有必要。
