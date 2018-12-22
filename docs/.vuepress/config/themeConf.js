@@ -348,6 +348,7 @@ module.exports = {
                 'webpack-babel',
                 'webpack-plugin',
                 'webpack-loader',
+                'webpack-hmr',
                 'webpack-interview',
                 'webpack-coder'
             ]
