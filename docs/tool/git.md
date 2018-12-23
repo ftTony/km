@@ -430,7 +430,12 @@ $ git stash pop
 不同点：
 
 - 从`commit`层面来说：
-  - `git reset`可以将一个分支的末端指向之前的一个`commit`。然后再下次`git`
+  - `git reset`可以将一个分支的末端指向之前的一个`commit`。然后再下次`git`执行垃圾回收的时候，会把这个`commit`之后的`commit`都扔掉。`git reset`还支持三种票房，用来标记`reset`指令影响的范围：
+    - `--mixed`：会影响到暂存区和历史记录区。也是默认选项
+    - `--soft`：只影响历史记录区
+    - `--hard`：影响工作区、暂存区和历史记录区
+      > 注意：因为 git reset 是删除 commit 记录，从而会影响到其他开发人员的分支，所以不要在公共分支（比如 develop）做这个操作。
+  - `gitcheckout`：可以 HEAD 移到一个新的分支，并更新工作目录。
 - 从文件层面来说：
   - `git reset`只是把文件
 
