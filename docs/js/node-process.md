@@ -264,6 +264,7 @@ for(let i=0;i<maxConnectCount;++i){
 
 - [Node.js 中文文档](http://nodejs.cn/api/process.html)
 - [浅谈NodeJS多进程服务架构基本原理](https://www.cnblogs.com/tugenhua0707/p/11141076.html)
+- [Node.js进阶之进程与线程](https://mp.weixin.qq.com/s/s4tLmVrUUKNVEWdk3CoB6A)
 - 《深入浅出Node.js》
 
 ## 联系作者
