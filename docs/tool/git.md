@@ -456,6 +456,10 @@ $ git stash pop
 
 ![images](git05.png)
 
+- rebase特点：会合并之前的commit历史
+- 优点：得到更简洁的项目历史，去掉了merge commit
+- 缺点：如果合并出现代码问题不容易定位，因为re-write了history
+
 ### 三、Git 常用命令导图
 
 ![images](git-Commands.png)
