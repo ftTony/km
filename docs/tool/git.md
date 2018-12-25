@@ -446,7 +446,15 @@ $ git stash pop
 
 `git rebase`和`git merge`一样都是用于从一个分支获取并且合并到当前分支。
 
-假设一
+假设一个场景，就是我们开发的`[feature/todo]`分支要合并到master主分支，那么用`rebase`或者`merge`有什么不同呢？
+
+![images](git04.png)
+
+- merge特点：自动创建创建一个新的commit如果合并的时候遇到冲突，仅需要修改后重新commit
+- 优点：记录了真实的commit情况，包括每个分支的详情
+- 缺点：
+
+![images](git05.png)
 
 ### 三、Git 常用命令导图
 
