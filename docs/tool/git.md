@@ -452,7 +452,7 @@ $ git stash pop
 
 - merge特点：自动创建创建一个新的commit如果合并的时候遇到冲突，仅需要修改后重新commit
 - 优点：记录了真实的commit情况，包括每个分支的详情
-- 缺点：
+- 缺点：因为每次merge会自动产生一个`merge commit`，所以在使用git的GUI tools，特别是commit比较频繁时，看到分支很杂乱。
 
 ![images](git05.png)
 
