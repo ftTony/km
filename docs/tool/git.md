@@ -460,6 +460,8 @@ $ git stash pop
 - 优点：得到更简洁的项目历史，去掉了merge commit
 - 缺点：如果合并出现代码问题不容易定位，因为re-write了history
 
+因此，当需要保留详细的合并信息的时候建议使用git merge，特别是需要将分支合并进入master分支时；当发现自己修改某个功能时，频繁进行了git commit提交时，发现其实过多的提交信息没必要时，可以尝试git rebase。
+
 ### 三、Git 常用命令导图
 
 ![images](git-Commands.png)
