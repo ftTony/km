@@ -35,7 +35,8 @@ Hot Module Replacement（以下简称 HMR）是 webpack 发展至今引入的最
 
 上图显示了我们修改代码到模块热更新完成的一个周期，通过深绿色的阿拉伯数字符号已经将HMR的整个过程标识了出来。
 
-
+1. 第一步，在webpack的watch模式下，文件系统中某一个文件发生修改，webpack监听到文件变化，根据配置文件对模块重新编译打包，并将打包后的代码通过简单的JavaScript对象保存在内存中。
+2. 第二步是webpack-dev-server和webpack之间的接口交互，而在这一步，主要是dev-server的中间件
 
 ### 运用 HMR 的简单例子
 
