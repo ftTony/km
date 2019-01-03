@@ -12,6 +12,7 @@
 - [Webpack 源码解析](https://github.com/lihongxun945/diving-into-webpack)
 - [webpack 处理流程分析](https://mp.weixin.qq.com/s/1BH90Nn6rfcOfywGpvWwhA)
 - [webpack源码精读](https://mp.weixin.qq.com/s/BuCRMzfmjSZKWk_zhEeVag)
+- [【webpack进阶】使用babel避免webpack编译运行时模块依赖](https://github.com/alienzhou/blog/issues/18)
 
 ## 联系作者
 
