@@ -284,6 +284,10 @@ document.write("<a href='"+x+">test</a>");
 - [如何让前端更安全？——XSS 攻击和防御详解](https://mp.weixin.qq.com/s/GMA2OpBLtRTEU2E2DoE_iQ)
 - [了解 XSS 攻击](https://zhuanlan.zhihu.com/p/21308080)
 - [前端安全之 XSS 攻击](http://www.cnblogs.com/lovesong/p/5199623.html)
+- [8大前端安全问题（上）](https://insights.thoughtworks.cn/eight-security-problems-in-front-end/)
+- [8大前端安全问题（下）](https://insights.thoughtworks.cn/eight-security-problems-in-front-end-2/)
+- [常见 Web 安全攻防总结](https://zoumiaojiang.com/article/common-web-security/)
+- [前端安全系列（一）：如何防止XSS攻击？](https://tech.meituan.com/2018/09/27/fe-security.html)
 
 ## 联系作者
 
