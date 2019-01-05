@@ -8,6 +8,7 @@
 
 ### 参考资料
 
+- [从头开始学习Vuex](https://github.com/ljianshu/Blog/issues/36)
 
 ## 联系作者
 
