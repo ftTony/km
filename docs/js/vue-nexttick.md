@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [Vue系列---理解Vue.nextTick使用及源码分析(五)](https://www.cnblogs.com/tugenhua0707/p/11756584.html)
+
 ## 联系作者
 
 <div align="center">
