@@ -236,6 +236,26 @@ Grid布局，是一个基于网格的二维布局系统，目的是用来优化�
 }
 .left{
     float:left;
+    width:200px;
+    height:400px;
+    background:red;
+    margin-left:-100%;
+}
+.center{
+    float:left;
+    width:100%;
+    height:500px;
+    background:yellow;
+}
+.center .inner{
+    margin: 0 200px;  //新增部分
+}
+.right{
+    float:left;
+    width:200px;
+    height:400px;
+    background:blue;
+    margin-left:-200px;
 }
 ```
 
@@ -248,6 +268,12 @@ Grid布局，是一个基于网格的二维布局系统，目的是用来优化�
     <div class="right"></div>
 </article>
 ```
+
+**实现步骤（前两步与圣杯布局一样）**
+
+**缺点**
+
+**多加一层dom树节点，增加渲染树生成的计算量。**
 
 #### 3.3 两种布局实现方式对比
 
