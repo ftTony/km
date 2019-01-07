@@ -6,11 +6,12 @@
 
 ## 内容
 
-- 安装
-- 路由
-- 请求数据获取
-- 静态资源加载
-- cookie/session
+- [安装](#一、安装-koa)
+- [路由](#二、路由)
+- [请求数据获取](#三、请求数据获取)
+- [静态资源加载](#四、静态资源加载)
+- [cookie/session](#五、cookie-session)
+- [数据库mysql](#六、数据库mysql)
 
 ### 一、安装 koa
 
@@ -490,6 +491,71 @@ node index.js
 `http://localhost:3000`
 
 ![images](node10.png)
+
+### 六、数据库mysql
+
+- 安装 node.js的mysql模块
+- 使用模块
+
+#### 6.1 安装 node.js的mysql模块
+
+```
+npm install --save mysql
+```
+
+#### 6.2 使用模块
+
+**创建数据库会话**
+
+```
+const mysql      = require('mysql')
+const connection = mysql.createConnection({
+  host     : '127.0.0.1',   // 数据库地址
+  user     : 'root',    // 数据库用户
+  password : '123456'   // 数据库密码
+  database : 'my_database'  // 选中数据库
+})
+
+// 执行sql脚本对数据库进行读写 
+connection.query('SELECT * FROM my_table',  (error, results, fields) => {
+  if (error) throw error
+  // connected! 
+
+  // 结束会话
+  connection.release() 
+});
+```
+
+>注意：一个事件就有一个从开始到结束的过程，数据库会话操作执行完后，就需要关闭掉，以免占用连接资源。
+
+**创建数据连接池**
+
+一般情况下操作数据库是很复杂的读写过程，不只是一个会话，如果直接用会话操作，就需要每次会话都要配置连接参数。所以这时候就需要连接池管理会话。
+
+```
+const mysql = require('mysql')
+
+// 创建数据池
+const pool  = mysql.createPool({
+  host     : '127.0.0.1',   // 数据库地址
+  user     : 'root',    // 数据库用户
+  password : '123456'   // 数据库密码
+  database : 'my_database'  // 选中数据库
+})
+
+// 在数据池中进行会话操作
+pool.getConnection(function(err, connection) {
+
+  connection.query('SELECT * FROM my_table',  (error, results, fields) => {
+
+    // 结束会话
+    connection.release();
+
+    // 如果有错误就抛出
+    if (error) throw error;
+  })
+})
+```
 
 ### 参考资料
 
