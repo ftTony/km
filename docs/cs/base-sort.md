@@ -114,7 +114,15 @@ console.log(bubbleSort2(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47,
 改进后的算法实现为:
 
 ```
-
+function bubbleSort3(arr3){
+    var low = 0;
+    var high = arr.length-1;    // 设置变量的初始值
+    var tmp,j;
+    console.time('');
+    while(low<high){
+        
+    }
+}
 ```
 
 ![images](sort03)
