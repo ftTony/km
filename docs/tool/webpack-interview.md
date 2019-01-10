@@ -255,10 +255,37 @@ async function getAsyncComponent() {
 
 现在问题来了，`lodash`是我们取的名字，按道理来说应该生成`lodash.bundle.js`啊，前面的 `vendors~` 是什么玩意？
 
+其实`webpack`懒加载是用内置的一个插件[SplitChunksPlugin](https://webpack.docschina.org/plugins/split-chunks-plugin)实现的，这个插件里面有些默认配置项，比如说`automaticNameDelimiter`，默认的分割符就是`~`，所以最后的文件名才会出现这个符号，这块儿内容我就不引申了，感兴趣的同学可以自己研究一下。
+
 **webpackPrefetch 和 webpackPreload**
 
+这两个配置一个叫预拉取（Prefetch），一个叫预加载（Preload），两者有些细微的不同，我们先说说 `webpackPrefetch`。
+
+在上面的懒加载代码里，我们是点击按钮时，才会触发异步加载`lodash`的动作，这时候会动态的生成一个`script`标签，加载到`head`头里：
+
+![images](webpack11.png)
+
+如果我们`import`的时候添加`webpackPrefetch`：
+
 ```
+...
+
+const { default: _ } = await import(/* webpackChunkName: "lodash" */ /* webpackPrefetch: true */ 'lodash');
+
+...
 ```
+
+就会以`<link rel="prefetch" as="script">`的形式预拉取`lodash`代码：
+
+![images](webpack12.png)
+
+这个异步加载的代码不需要手动点击 button 触发，webpack 会在父 chunk 完成加载后，闲时加载`lodash`文件。
+
+`webpackPreload`是预加载当前导航下可能需要资源，他和`webpackPrefetch`的主要区别是：
+
+- `preload chunk`会在父`chunk`加载时，以并行方式开始加载。`prefetch chunk`会在父`chunk`加载结束后开始加载。
+- `preload chunk`具有中等优先级，并立即下载。`prefetch chunk`在浏览器闲置时下载。
+- `preload chunk`会在父`chunk`中立即请求，用于当下时刻。`prefetch chunk`会用于未来的某个时刻
 
 #### 总结
 
@@ -267,6 +294,144 @@ async function getAsyncComponent() {
 - `webpackPreload`会在父chunk加载时并行下载文件
 
 ### 四、`hash`、`chunkhash`、`contenthash`有什么不同？
+
+首先来个背景介绍，哈希一般是结合 CDN 缓存来使用的。如果文件内容改变的话，那么对应文件哈希值也会改变，对应的 HTML 引用的 URL 地址也会改变，触发 CDN 服务器从源服务器上拉取对应数据，进而更新本地缓存。
+
+- hash
+- chunkhash
+- contenthash
+
+#### 4.1 hash
+
+hash 计算是跟整个项目的构建相关，我们做一个简单的demo。
+
+沿用案例 1 的 demo 代码，文件目录如下：
+
+```
+src/
+├── index.css
+├── index.html
+├── index.js
+└── utils.js
+```
+
+`webpack`的核心配置如下（省略了一些`module`配置信息）：
+
+```
+{
+    entry: {
+        index: "../src/index.js",
+        utils: '../src/utils.js',
+    },
+    output: {
+        filename: "[name].[hash].js",  // 改为 hash
+    },
+    
+    ......
+    
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'index.[hash].css' // 改为 hash
+        }),
+    ]
+}
+```
+
+生成的文件名如下：
+
+![images](webpack13.png)
+
+我们可以发现，生成文件的`hash`和项目的构建`hash`都是一模一样的。
+
+#### 4.2 chunkhash
+
+因为`hash`是项目构建的哈希值，项目中如果有些变动，`hash`一定会变，比如说我改动了`utils.js`的代码，`index.js`里的代码虽然没有改变，但是大家都是用的同一份`hash`。`hash`一变，缓存一定失效了，这样子是没办法实现 `CDN`和浏览器缓存的。
+
+`chunkhash`就是解决这个问题的，它根据不同的入口文件(Entry)进行依赖文件解析、构建对应的`chunk`，生成对应的哈希值。
+
+我们再举个例子，我们对`utils.js`里文件进行改动：
+
+```
+export function square(x) {
+    return x * x;
+}
+
+// 增加 cube() 求立方函数
+export function cube(x) {
+    return x * x * x;
+}
+```
+
+然后把`webpack`里的所有`hash`改为`chunkhash`：
+
+```
+{
+    entry: {
+        index: "../src/index.js",
+        utils: '../src/utils.js',
+    },
+    output: {
+        filename: "[name].[chunkhash].js", // 改为 chunkhash
+    },
+          
+    ......
+    
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'index.[chunkhash].css' // // 改为 chunkhash
+        }),
+    ]
+}
+```
+
+构建结果如下：
+
+![images](webpack14.png)
+
+我们可以看出，`chunk 0`的`hash`都是一样的，`chunk 1`的`hash`和上面的不一样。
+
+假设我又把`utils.js`里的`cube()`函数去掉，再打包：
+
+![images](webpack15.png)
+
+对比可以发现，只有`chunk 1`的`hash`发生变化，`chunk 0`的`hash`还是原来的。
+
+#### 4.3 contenthash
+
+我们更近一步，`index.js`和`index.css`同为一个`chunk`，如果`index.js`内容发生变化，但是 `index.css`没有变化，打包后他们的`hash`都发生变化，这对`css`文件来说是一种浪费。如何解决这个问题呢？
+
+`contenthash`将根据资源内容创建出唯一`hash`，也就是说文件内容不变，`hash`就不变。
+我们修改一下`webpack`的配置：
+
+```
+{
+    entry: {
+        index: "../src/index.js",
+        utils: '../src/utils.js',
+    },
+    output: {
+        filename: "[name].[chunkhash].js",
+    },
+      
+    ......
+    
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'index.[contenthash].css' // 这里改为 contenthash
+        }),
+    ]
+}
+```
+
+我们对`index.js`文件做了`3`次修改（就是改了改`log`函数的输出内容，过于简单就先不写了），然后分别构建，结果截图如下：
+
+![images](webpack16.png)
+
+![images](webpack17.png)
+
+![images](webpack18.png)
+
+我们可以发现，`css`文件的`hash`都没有发生改变。
 
 #### 4.4 总结
 
@@ -288,7 +453,6 @@ async function getAsyncComponent() {
 | cheap  | map映射只显示行不显示列，忽略源自loader的source map                 |
 | inline | 映射文件以base64格式编码，加在bundle文件最后，不产生独立的map文件   |
 | module | 增加对 loader source map 和第三方模块的映射                         |
-
 
 ### 参考资料
 
