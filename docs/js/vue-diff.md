@@ -105,11 +105,53 @@ Element.prototype.render = function(){
 
 #### 3.3 把差异应用到真正的DOM树上
 
+因为步骤一所构建的构建的JavaScript对象树和`render`出来真正的DOM树的信息、结构是一样的。所以我们可以对那棵DOM树也进行尝试优先的遍历，遍历的时候从步骤二生成的`patches`对象中找出当前遍历的节点差异，然后进DOM操作。
+
 ```
 function patch(node,patches){
-
+  var walker = {index:0}
+  dfsWalk(node,walker,patches)
 }
 
+function dfsWalk(node,walker,patches){
+  var currentPatches = patches[walker.index]  // 从patches拿出当前节点的差异
+
+  var len = node.childNodes ? node.childNodes.length:0
+  for(var i=0;i<len;i++){
+    var child = node.childNodes[i]
+    walker.index++
+    dfsWalk(child, walker, patches)
+  }
+
+  if(currentPatches){
+    applyPatches(node, currentPatches) // 对当前节点进行DOM操作
+  }
+}
+```
+
+applyPathes,根据不同类型的差异对当前节点进行DOM操作：
+
+```
+function applyPatches (node, currentPatches) {
+  currentPatches.forEach(function (currentPatch) {
+    switch (currentPatch.type) {
+      case REPLACE:
+        node.parentNode.replaceChild(currentPatch.node.render(), node)
+        break
+      case REORDER:
+        reorderChildren(node, currentPatch.moves)
+        break
+      case PROPS:
+        setProps(node, currentPatch.props)
+        break
+      case TEXT:
+        node.textContent = currentPatch.content
+        break
+      default:
+        throw new Error('Unknown patch type ' + currentPatch.type)
+    }
+  })
+}
 ```
 
 ### 参考资料
@@ -122,6 +164,7 @@ function patch(node,patches){
 - [【Vue原理】Diff - 白话版](https://zhuanlan.zhihu.com/p/81752104)
 - [VirtualDOM与diff(Vue实现)](https://zhuanlan.zhihu.com/p/29450092)
 - [虚拟 DOM 到底是什么？](https://mp.weixin.qq.com/s/oAlVmZ4Hbt2VhOwFEkNEhw)
+- [现代前端科技解析 —— Virtual DOM](https://www.404forest.com/2019/03/07/modern-web-development-tech-analysis-virtual-dom/)
 
 ## 联系作者
 
