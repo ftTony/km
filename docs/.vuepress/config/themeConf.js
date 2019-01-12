@@ -163,6 +163,7 @@ module.exports = {
                 'mvvm',
                 'jquery-code',
                 'undescore',
+                'vue-lifecycle',
                 'vue-bind',
                 'vue-code',
                 'vue-diff',
