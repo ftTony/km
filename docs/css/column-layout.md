@@ -320,6 +320,11 @@ Grid布局，是一个基于网格的二维布局系统，目的是用来优化�
 ![images](layout08.gif)
 
 ```
+<div class=”container clearfix”>
+    <div class=”left”></div>
+    <div  class=”content”></div>
+    <div class=”right”></div>
+</div>
 ```
 
 ```
@@ -330,6 +335,25 @@ Grid布局，是一个基于网格的二维布局系统，目的是用来优化�
 这是一种非常简单，易于实现的方法。不过兼容性不好，在ie6-7无法正常运行。
 
 ```
+   <div class="container table">
+      <div class="containerInner tableRow">
+        <div class="column tableCell cell1">
+          <div class="left aside">
+            ....
+          </div>
+        </div>
+        <div class="column tableCell cell2">
+          <div class="content section">
+            ...
+          </div>
+        </div>
+        <div class="column tableCell cell3">
+          <div class="right aside">
+            ...
+          </div>
+        </div>
+      </div>
+    </div>
 ```
 
 ```
