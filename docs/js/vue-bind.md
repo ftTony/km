@@ -6,9 +6,9 @@
 
 ## 内容
 
-- 几种实现双向数据绑定做法
-- 重新认识Object.defineProperty
-- 思路整理
+- [几种实现双向数据绑定做法](#一、几种实现双向数据绑定做法)
+- [重新认识Object.defineProperty](#二、重新认识object-defineproperty)
+- [思路整理](#三、思路整理)
 
 ### 一、几种实现双向数据绑定做法
 
@@ -36,9 +36,9 @@
 
 ### 二、重新认识Object.defineProperty()
 
-Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。
+`Object.defineProperty()`方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。
 
-#### 参数
+#### 2.1 参数
 
 - `obj` 要在其上定义属性。
 - `prop`要定义或修改的属性的名称
@@ -47,17 +47,26 @@ Object.defineProperty() 方法会直接在一个对象上定义一个新属性�
 属性描述符具有以下可选键值：
 
 - `configurable`当且仅当该属性的configurable为true时，该属性描述符才能被改变，同时该属性也能从对应的对象上被删除。默认为false.
-- `enumerable`
+- `enumerable` 当且仅当该属性的`enumerable`为`true`时，该属性才能够出现在对象的枚举属性中。**默认为false**。
 
-数据描述符同时具有以下可选键值：
+**数据描述符同时具有以下可选键值：**
 
 - `value`该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。默认为 undefined。
 - `writable`当且仅当该属性的writable为true时，value才能被赋值运算符改变。默认为 false。
 
-存取描述符同时具有以下可选键值：
+**存取描述符同时具有以下可选键值：**
 
 - `get`一个给属性提供 getter 的方法，如果没有 getter 则为 undefined。该方法返回值被用作属性值。默认为 undefined。
 - `set`一个给属性提供 setter 的方法，如果没有 setter 则为 undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认为 undefined。
+
+**描述符可同时具有键值**
+
+ | configurable | enumerable | value | writable | get | set |
+ | ------------ | ---------- | ----- | -------- | --- | --- | --- |
+ | 数据描述符   | Yes        | Yes   | Yes      | Yes | No  | No  |
+ | 存取描述符   | Yes        | Yes   | No       | No  | Yes | Yes |
+
+**如果一个描述符不具有value，writable，get和set任意一个关键字，那么它将被认为是一个数据描述符。如果一个描述符同时有(value或writable)和(get或set)关键字，将会产生一个异常。**
 
 示例：
 
@@ -85,8 +94,7 @@ Object.defineProperty(o, "a", {
 - 实现一个数据监听器Observer，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者
 - 实现一个指令解析器Compile，对每个元素节点的指令进行扫描和解析，根据指令模板替换以及绑定相应的更新函数。
 - 实现一个Watcher，作为连接Observer和Compile的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图。
-
-mvvm入口函数，整合以上三者
+- mvvm入口函数，整合以上三者
 
 上述流程如图所示：
 
