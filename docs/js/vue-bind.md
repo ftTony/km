@@ -16,23 +16,23 @@
 
 实现数据绑定的做法有大致如下几种：
 
-- 发布者-订阅者模式（backbone.js）
-- 脏值检查（angular.js）
-- 数据劫持（vue.js）
+- 发布者-订阅者模式（`backbone.js`）
+- 脏值检查（`angular.js`）
+- 数据劫持（`vue.js`）
 
 **发布者-订阅者模式:** 一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常做法是 vm.set('property', value)，这里有篇文章讲的比较详细，有兴趣可点[这里](http://www.html-js.com/article/Study-of-twoway-data-binding-JavaScript-talk-about-JavaScript-every-day)
 
 这种方式现在毕竟太low了，我们更希望通过 vm.property = value 这种方式更新数据，同时自动更新视图，于是有了下面两种方式
 
-**脏值检查:**angular.js 是通过脏值检测的方式比对数据是否有变更，来决定是否更新视图，最简单的方式就是通过 setInterval() 定时轮询检测数据变动，当然Google不会这么low，angular只有在指定的事件触发时进入脏值检测，大致如下：
+**脏值检查:** `angular.js`是通过脏值检测的方式比对数据是否有变更，来决定是否更新视图，最简单的方式就是通过 setInterval() 定时轮询检测数据变动，当然Google不会这么low，angular只有在指定的事件触发时进入脏值检测，大致如下：
 
-- DOM事件，譬如用户输入文本，点击按钮等。( ng-click )
-- XHR响应事件 ( $http )
-- 浏览器Location变更事件 ( $location )
-- Timer事件( $timeout , $interval )
-- 执行 $digest() 或 $apply()
+- DOM事件，譬如用户输入文本，点击按钮等。(`ng-click`)
+- XHR响应事件 (`$http`)
+- 浏览器Location变更事件 (`$location`)
+- Timer事件(`$timeout`, `$interval`)
+- 执行 `$digest()` 或 `$apply()`
 
-**数据劫持:** vue.js 则是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。
+**数据劫持:** `vue.js`则是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的`setter`，`getter`，在数据变动时发布消息给订阅者，触发相应的监听回调。
 
 ### 二、重新认识Object.defineProperty()
 
@@ -56,8 +56,8 @@
 
 **存取描述符同时具有以下可选键值：**
 
-- `get`一个给属性提供 getter 的方法，如果没有 getter 则为 undefined。该方法返回值被用作属性值。默认为 undefined。
-- `set`一个给属性提供 setter 的方法，如果没有 setter 则为 undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认为 undefined。
+- `get`一个给属性提供 `getter`的方法，如果没有`getter`则为`undefined`。该方法返回值被用作属性值。默认为 `undefined`。
+- `set`一个给属性提供`setter`的方法，如果没有`setter`则为`undefined`。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认为`undefined`。
 
 **描述符可同时具有键值**
 
@@ -91,10 +91,10 @@ Object.defineProperty(o, "a", {
 
 要实现mvvm的双向绑定，就必须要实现以下几点：
 
-- 实现一个数据监听器Observer，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者
-- 实现一个指令解析器Compile，对每个元素节点的指令进行扫描和解析，根据指令模板替换以及绑定相应的更新函数。
-- 实现一个Watcher，作为连接Observer和Compile的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图。
-- mvvm入口函数，整合以上三者
+- 实现一个数据监听器`Observer`，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者
+- 实现一个指令解析器`Compile`，对每个元素节点的指令进行扫描和解析，根据指令模板替换以及绑定相应的更新函数。
+- 实现一个`Watcher`，作为连接`Observer`和`Compile`的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图。
+- `mvvm`入口函数，整合以上三者
 
 上述流程如图所示：
 
@@ -133,7 +133,7 @@ function defineReactive(data,key,val){
 
 ```
 
-这样我们已经可以监听每个数据的变化了，那么监听到变化之后就是怎么通知订阅者了，所以接下来我们需要实现一个消息订阅器，很简单，维护一个数组，用来收集订阅者，数据变动触发notify，再调用订阅者的update方法，代码改善之后是这样：
+这样我们已经可以监听每个数据的变化了，那么监听到变化之后就是怎么通知订阅者了，所以接下来我们需要实现一个消息订阅器，很简单，维护一个数组，用来收集订阅者，数据变动触发`notify`，再调用订阅者的`update`方法，代码改善之后是这样：
 
 ```
 var data={name:'tony'};
@@ -181,7 +181,7 @@ Dep.prototype={
 
 ```
 
-上面的思路整理中我们已经明确订阅者应该是Watcher, 而且`var dep = new Dep();`是在 defineReactive方法内部定义的，所以想通过dep添加订阅者，就必须要在闭包内操作，所以我们可以在 getter里面动手脚：
+上面的思路整理中我们已经明确订阅者应该是`Watcher`, 而且`var dep = new Dep();`是在`defineReactive`方法内部定义的，所以想通过`dep`添加订阅者，就必须要在闭包内操作，所以我们可以在`getter`里面动手脚：
 
 ```
 var data={name:'tony'};
@@ -230,15 +230,15 @@ Dep.prototype={
 };
 ```
 
-这里已经实现了一个Observer了，已经具备了监听数据和数据变化通知订阅者的功能。
+这里已经实现了一个`Observer`了，已经具备了监听数据和数据变化通知订阅者的功能。
 
 #### 3.2 实现Compile
 
-compile主要做的事情是解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图，如图所示：
+`compile`主要做的事情是解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图，如图所示：
 
 ![image](vue02.png)
 
-因为遍历解析的过程有多次操作dom节点，为提高性能和效率，会先将跟节点el转换成文档碎片fragment进行解析编译操作，解析完成，再将fragment添加回原来的真实dom节点中
+因为遍历解析的过程有多次操作`dom`节点，为提高性能和效率，会先将跟节点`el`转换成文档碎片`fragment`进行解析编译操作，解析完成，再将`fragment`添加回原来的真实`dom`节点中
 
 ```
 function Compile(el){
@@ -262,7 +262,7 @@ Compile.prototype={
 }
 ```
 
-compileElement方法将遍历所有节点及其子节点，进行扫描解析编译，调用对应的指令渲染函数进行数据渲染，并调用对应的指令更新函数进行绑定，详看代码及注释说明：
+`compileElement`方法将遍历所有节点及其子节点，进行扫描解析编译，调用对应的指令渲染函数进行数据渲染，并调用对应的指令更新函数进行绑定，详看代码及注释说明：
 
 ```
 function Compile(el){
@@ -347,8 +347,8 @@ var updater={
 }
 ```
 
-这里通过递归遍历保证了每个节点及子节点都会解析编译到，包括了双括号表达式声明的文本节点。指令的声明规定是通过特定前缀的节点属性来标记，如`<span v-text="content" other-attr`中v-text便是指令，而other-attr不是指令，只是普通的属性。
-监听数据、绑定更新函数的处理是在compileUtil.bind()这个方法中，通过new Watcher()添加回调来接收数据变化的通知
+这里通过递归遍历保证了每个节点及子节点都会解析编译到，包括了双括号表达式声明的文本节点。指令的声明规定是通过特定前缀的节点属性来标记，如`<span v-text="content" other-attr`中`v-text`便是指令，而`other-attr`不是指令，只是普通的属性。
+监听数据、绑定更新函数的处理是在`compileUtil.bind()`这个方法中，通过`new Watcher()`添加回调来接收数据变化的通知
 
 #### 3.3 实现Watcher
 
@@ -388,7 +388,7 @@ Watcher.prototype={
 };
 ```
 
-实例化Watcher的时候，调用get()方法，通过Dep.target = watcherInstance标记订阅者是当前watcher实例，强行触发属性定义的getter方法，getter方法执行的时候，就会在属性的订阅器dep添加当前watcher实例，从而在属性值有变化的时候，watcherInstance就能收到更新通知。
+实例化`Watcher`的时候，调用`get()`方法，通过`Dep.target = watcherInstance`标记订阅者是当前`watcher`实例，强行触发属性定义的`getter`方法，`getter`方法执行的时候，就会在属性的订阅器`dep`添加当前`watcher`实例，从而在属性值有变化的时候，`watcherInstance`就能收到更新通知。
 
 #### 3.4 实现MVVM
 
@@ -405,7 +405,9 @@ function MVVM(options){
 
 但是这里有个问题，从代码中可看出监听的数据对象是options.data，每次需要更新视图，则必须通过`var vm = new MVVM({data:{name: 'kindeng'}}); vm._data.name = 'dmq';` 这样的方式来改变数据。
 
-改造后的代码如下：
+显然不符合我们一开始的期望，我们所期望的调用方式应用是这样的：`var vm = new MVVM({data: {name: 'kindeng'}}); vm.name = 'dmq';`
+
+所以这里需要给MVVM实例添加一个属性代理的方法，使访问vm的属性代理为访问vm._data的属性，改造后的代码如下：
 
 ```
 function MVVM(options){
@@ -434,8 +436,11 @@ MVVM.prototye={
 		}
 	}
 };
-
 ```
+
+这里主要还是利用`Object.definedProperty()`这个方法来支持了vm实例对象的属性的读写权，使读写vm实例的属性转成读写了`vm._data`的属性值，达到鱼目混珠的效果
+
+至此，全部模块和功能已经完成了，如本文开头所承诺的两点。一个简单的MVVM模块已经实现，其思想和原理大部分来自经过简化改造的vue[源码](https://github.com/vuejs/vue)，猛戳[这里](https://github.com/DMQ/mvvm)可以看到本文的所有相关代码。
 
 ### 参考资料
 
