@@ -157,8 +157,10 @@ function defineReactive(data,key,val){
 			return val;
 		},
 		set:function(newVal){
+            if(val === newVal) return;
 			console.log('监听到值的变化了',val,'-->',newVal);
-			val=newVal;
+			val = newVal;
+            dep.notify();   // 通知所有订阅者
 		}
 	});
 	
@@ -208,7 +210,7 @@ function defineReactive(data,key,val){
 		},
 		set:function(newVal){
 			console.log('监听到值的变化了',val,'-->',newVal);
-			val=newVal;
+			val = newVal;
 		}
 	});
 	
@@ -242,14 +244,14 @@ Dep.prototype={
 
 ```
 function Compile(el){
-	this.$el=this.isElementNode(el)?el:document.querySelector(el);
+	this.$el=this.isElementNode(el)? el : document.querySelector(el);
 	if(this.$el){
 		this.$fragment=this.node2Fragment(this.$el);
 		this.init();
 		this.$el.appendChild(this.$fragment);
 	}
 }
-Compile.prototype={
+Compile.prototype = {
 	init:function(){this.compileElement(this.$fragment);},
 	node2Fragment:function(el){
 		var fragment=document.createDocumentFragment(),child;
@@ -348,6 +350,7 @@ var updater={
 ```
 
 这里通过递归遍历保证了每个节点及子节点都会解析编译到，包括了双括号表达式声明的文本节点。指令的声明规定是通过特定前缀的节点属性来标记，如`<span v-text="content" other-attr`中`v-text`便是指令，而`other-attr`不是指令，只是普通的属性。
+
 监听数据、绑定更新函数的处理是在`compileUtil.bind()`这个方法中，通过`new Watcher()`添加回调来接收数据变化的通知
 
 #### 3.3 实现Watcher
