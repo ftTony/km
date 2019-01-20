@@ -165,6 +165,8 @@ module.exports = {
                 'undescore',
                 'vue-lifecycle',
                 'vue-bind',
+                'vue-nexttick',
+                'vue-watch',
                 'vue-code',
                 'vue-diff',
                 'vue-router-code',

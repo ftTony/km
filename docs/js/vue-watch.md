@@ -1,4 +1,4 @@
-# vuex 学习及原理
+# Vue中的computed,watch,methods理解与分析
 
 ## 前言
 
