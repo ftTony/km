@@ -388,11 +388,93 @@ Grid 布局，是一个基于网格的二维布局系统，目的是用来优化
 }
 ```
 
+#### 4.4 使用边框和定位
+
+这种方法是使用边框和绝对定位来实现一个假的高度相等列的效果。结构简单，兼容各浏览器，容易掌握。假设你需要实现一个两列等高布局，侧栏高度要和主内容高度相等。
+
+```
+#wrapper{
+    width:960px;
+    margin:0 auto;
+}
+#mainContent{
+    border-right:220px solid #dfdfdf;
+    position:absolute;
+    width:740px;
+    height:800px;
+    background:green;
+}
+#sidebar{
+    background:#dfdfdf;
+    margin-left:740px;
+    position:absolute;
+    height:800px;
+   width:220px;
+}
+```
+
+```
+<div id="wrapper">
+    <div id="mainContent">...</div>
+    <div id="sidebar">...</div>
+</div>
+```
+
 ### 五、粘连布局
 
+#### 5.1 特点
+
+- 有一块内容`<main>`，当`<main>`的高度足够长的时候，紧跟在`<main>`后面的元素`<footer>`会跟在`<main>`元素的后面。
+- 当`<main>`元素比较短的时候（比如小于屏幕的高度），我们期望这个`<footer>`元素能够“粘连”在屏幕的底部
+
+![images](layout09.png)
+
+具体代码如下：
+
+```
+<div id="wrap">
+    <div class="main">
+        main <br/>
+        main <br/>
+        main <br/>
+    </div>
+</div>
+<div id="footer">footer</div>
 ```
 
 ```
+*{
+    margin:0;
+    padding:0;
+}
+html,
+body{
+    height:100%;
+}
+#wrap{
+    min-height:100%;
+    background:pink;
+    text-align:center;
+    overflow:hidden;
+}
+#wrap .main{
+    padding-bottom:50px;
+}
+#footer{
+    height:50px;
+    line-height:50px;
+    background:deeppink;
+    text-align:center;
+    margin-top:50px;
+}
+```
+
+#### 5.2 实现步骤
+
+- footer 必须是一个独立的结构，与 wrap 没有任何嵌套关系
+- wrap 区域的高度通过设置 min-height，变为视口高度
+- footer 要使用 margin 为负来确定自己的位置
+- 在 main 区域需要调协 padding-bottom。这也为了防止负 margin 导致 footer 覆盖任何实际内容。
 
 ### 参考资料
 
