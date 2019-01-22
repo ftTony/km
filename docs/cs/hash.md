@@ -1,4 +1,4 @@
-# 散列表
+# 哈希
 
 ## 前言
 
@@ -8,7 +8,7 @@
 
 ### 创建散列表
 
-**ES5代码实现**
+**ES5 代码实现**
 
 ```
 function HashTable(){
@@ -38,9 +38,10 @@ var loseloseHashCode = function(key){
 }
 ```
 
-**ES6代码实现**
+**ES6 代码实现**
 
 ```
+
 ```
 
 ### 散列表相关方法
@@ -51,7 +52,7 @@ var loseloseHashCode = function(key){
 
 ### 参考资料
 
-- 《学习JavaScript数据结构与算法》
+- 《学习 JavaScript 数据结构与算法》
 
 ## 联系作者
 

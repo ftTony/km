@@ -387,13 +387,14 @@ module.exports = {
                 children: [
                     'base-o',
                     'array',
-                    'list',
+                    'queue',
                     'stack',
+                    'list',
                     'dictionary',
                     'hash',
                     'trees',
                     'trie',
-                    'queue'
+                    'graphs'
                 ]
             },
             {
