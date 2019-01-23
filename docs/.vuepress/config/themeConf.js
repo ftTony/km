@@ -502,26 +502,26 @@ module.exports = {
             //         ''
             //     ]
             // },
-            {
-                title: 'nodejs',
-                collapsable: false,
-                children: []
-            },
-            {
-                title: 'vue框架',
-                collapsable: false,
-                children: []
-            },
-            {
-                title: '工具',
-                collapsable: false,
-                children: []
-            },
-            {
-                title: '面试题',
-                collapsable: false,
-                children: []
-            }
+            // {
+            //     title: 'nodejs',
+            //     collapsable: false,
+            //     children: []
+            // },
+            // {
+            //     title: 'vue框架',
+            //     collapsable: false,
+            //     children: []
+            // },
+            // {
+            //     title: '工具',
+            //     collapsable: false,
+            //     children: []
+            // },
+            // {
+            //     title: '面试题',
+            //     collapsable: false,
+            //     children: []
+            // }
         ]
     }
 };
