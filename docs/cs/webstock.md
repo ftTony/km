@@ -172,6 +172,49 @@ ws.addEventListener("message", function(event) {
 });
 ```
 
+**webSocket.send()**
+
+实例对象的`send()`方法用于向服务器发送数据。
+
+发送文本的例子。
+
+```
+```
+
+发送Blob对象的例子。
+
+```
+```
+
+**webSocket.bufferedAmount**
+
+实例对象的`bufferedAmount`属性，表示还有多少字节的二进制数据没有发送出去。它可以用来判断发送是否结束。
+
+```
+var data = new ArrayBuffer(100000);
+socket.send(data);
+
+if(socket.bufferedAmount ===0){
+    // 发送完毕
+}else{
+    // 发送还没结束
+}
+```
+
+**webSocket.onerror**
+
+实例对象的`onerror`属性，用于指定报错时的回调函数。
+
+```
+socket.onerror = function(event){
+    // handle error event
+}
+
+socket.addEventListener('error',function(event){
+    // handle error event
+})
+```
+
 #### 4.2 服务端
 
 常用的Node实现有以下三种
