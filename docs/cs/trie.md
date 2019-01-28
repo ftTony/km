@@ -6,7 +6,9 @@
 
 ## 内容
 
-## 参考资料
+### 参考资料
+
+- [看动画轻松理解「Trie树」](https://mp.weixin.qq.com/s/Y5_r4C5a9gU0FDtqXD9bkQ)
 
 ## 联系作者
 
