@@ -106,9 +106,9 @@ output.libraryExport: 配置要导出的模块中哪些子模块需要被导出
 
 `rules`配置模块的读取和解析规则，通常用来配置 Loader。大致可以通过以下方式来完成
 
-- 条件匹配:通过 test、 include、 exclude 三个配置项来选中 Loader 要应用 规则的文件。
-- 应用规则：对选中的文件通过 use 配置项来应用 Loader，可以只应用一个 Loader或者按照从后往前的顺序应用一组 Loader，同时可以分别向 Loader传入参数。
-- 重置顺序:一组 Loader 的执行顺序默认是从右到左执行的，通过 enforce 选项可以将其中 一个 Loader 的执行顺序放到最前或者最后 。
+- 条件匹配:通过`test`、`include`、 `exclude`三个配置项来选中`Loader`要应用 规则的文件。
+- 应用规则：对选中的文件通过 `use`配置项来应用`Loader`，可以只应用一个`Loader`或者按照从后往前的顺序应用一组 `Loader`，同时可以分别向`Loader`传入参数。
+- 重置顺序:一组`Loader`的执行顺序默认是从右到左执行的，通过`enforce`选项可以将其中 一个`Loader`的执行顺序放到最前或者最后 。
 
 具体方法：
 
@@ -151,7 +151,7 @@ module:{
 noParse: /jquerylchartjs/
 ```
 
-注意，被忽略的文件里不应该包含 import、 require、 define 等模块化 语句，不 然会导致在构建出的代码中包含无法在浏览器环境下执行的模块化语句 。
+注意，被忽略的文件里不应该包含`import`、`require`、`define`等模块化 语句，不 然会导致在构建出的代码中包含无法在浏览器环境下执行的模块化语句 。
 
 - **parse**
 
@@ -185,8 +185,6 @@ module: {
 
 配置寻找模块的规则
 
-- **alias**
-
 ```
 配置项通过别名来将原导入路径映射成一个新的导入路径
 
@@ -199,7 +197,7 @@ resolve:{
 
 - **mainFields**
 
-会根据 mainFields 的配 置去决定 优先采用哪份代码，
+会根据`mainFields`的配 置去决定 优先采用哪份代码，
 
 ```
 mainFields : [’jsnext:main’,’browser’,’main’]
@@ -211,7 +209,6 @@ Webpack 会自动带上后缀后去尝试访问文件是否存在。 resolve.ext
 
 ```
 extensions:[’.ts’,’.j5 ’,’.json’]
-
 ```
 
 - **plugins**
@@ -411,14 +408,13 @@ module.exports = {
    - threadpool:代表共享进程池，即多个happypack实例都使用同一个共享进程池中的子进程去处理任务，以防止资源占用过多
 6. Babel使用缓存编译，主要loader参数后面增加cacheDirectory，关于[babel编译原理](https://mp.weixin.qq.com/s/NRZQI-Md0dqNAGY96qsn-A)
 7. 使用DllPlugin和DllReferencePlugin，这两个跟CommonsChunkPlugin（webpack3中的，webpack4中使用SplitChunksPlugin）有一些区别，主要区别如下
-
-- CommonsChunkPlugin 插件每次打包的时候还是会去处理一些第三方依赖库，只是它能把第三方库文件和我们的代码分开掉，生成一个独立的js文件，但它不能提高打包速度。
-- DLLPlugin 它能把第三方库代码分离开，并且每次文件更改的时候，它只会==打包该项目自身==的代码。所以打包速度会更快。
+   - CommonsChunkPlugin 插件每次打包的时候还是会去处理一些第三方依赖库，只是它能把第三方库文件和我们的代码分开掉，生成一个独立的js文件，但它不能提高打包速度。
+   - DLLPlugin 它能把第三方库代码分离开，并且每次文件更改的时候，它只会==打包该项目自身==的代码。所以打包速度会更快。
 
 介绍DllPlugin插件跟DllReferencePlugin插件
 
-DllPlugin插件 : 用于打包出一个个单独的动态链接库文件 。
-DllReferencePlugin 插件:用于在主要的配置文件中引入 DllP!ugin 插件打包好的动态链接库文件。
+- DllPlugin插件 : 用于打包出一个个单独的动态链接库文件 。
+- DllReferencePlugin 插件:用于在主要的配置文件中引入 DllP!ugin 插件打包好的动态链接库文件。
 
 具体配置如下：
 
@@ -484,11 +480,11 @@ const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
 
 #### 5.1 webpack运行流程
 
-**webpack事件流**
+- **webpack事件流**
 
 Webpack 就像一条生产线，要经过一系列处理流程后才能将源文件转换成输出结果。 这条生产线上的每个处理流程的职责都是单一的，多个流程之间有存在依赖关系，只有完成当前处理后才能交给下一个流程去处理。 插件就像是一个插入到生产线中的一个功能，在特定的时机对生产线上的资源做处理。 Webpack 通过 [Tapable](https://juejin.im/post/5abf33f16fb9a028e46ec352) 来组织这条复杂的生产线。 Webpack 在运行过程中会广播事件，插件只需要监听它所关心的事件，就能加入到这条生产线中，去改变生产线的运作。 Webpack 的事件流机制保证了插件的有序性，使得整个系统扩展性很好。
 
-1.2 webpack运行流程详解
+- **webpack运行流程详解**
 
 Webpack 的运行流程是一个串行的过程，从启动到结束会依次执行以下流程。
 
@@ -504,7 +500,7 @@ Webpack 的运行流程是一个串行的过程，从启动到结束会依次执
 
 ![01](webpack02.jpg)
 
-2.3 抽象语法树（AST）
+- **抽象语法树（AST）**
 
 > 在计算机科学中，抽象语法树（Abstract Syntax Tree，AST），或简称语法树（Syntax tree），是源代码语法结构的一种抽象表示。它以树状的形式表现编程语言的语法结构，树上的每个节点都表示源代码中的一种结构。之所以说语法是“抽象”的，是因为这里的语法并不会表示出真实语法中出现的每个细节。比如，嵌套括号被隐含在树的结构中，并没有以节点的形式呈现；而类似于 if-condition-then 这样的条件跳转语句，可以使用带有两个分支的节点来表示。
 
