@@ -6,7 +6,10 @@
 
 ## 内容
 
-## 参考资料
+### 参考资料
+
+- [从头开始学习vue-router](https://github.com/ljianshu/Blog/issues/39)
+- [vue-router实现单页面路由原理](https://zhang122622623.github.io/2018/03/14/vue-router%E5%AE%9E%E7%8E%B0%E5%8D%95%E9%A1%B5%E9%9D%A2%E8%B7%AF%E7%94%B1%E5%8E%9F%E7%90%86/)
 
 ## 联系作者
 
