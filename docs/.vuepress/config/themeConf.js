@@ -392,7 +392,8 @@ module.exports = {
                     'list',
                     'dictionary',
                     'hash',
-                    'trees',
+                    'trees-1',
+                    'trees-2',
                     'trie',
                     'graphs'
                 ]
