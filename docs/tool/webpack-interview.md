@@ -215,6 +215,57 @@ btn.addEventListener('click', () => {
 
 ### 三、`webpackPrefetch`、`webpackPreload` 和 `webpackChunkName` 到底是干什么的？
 
+这几个名词其实都是 webpack [魔法注释（magic comments）](https://webpack.docschina.org/api/module-methods/#magic-comments)里的，文档中说了 6 个配置，配置都可以组合起来用。我们说说最常用的三个配置。
+
+**webpackChunkName**
+
+```
+{
+    entry: {
+        index: "../src/index.js"
+    },
+    output: {
+        filename: "[name].min.js",  // index.min.js
+        chunkFilename: '[name].bundle.js', // 1.bundle.js，chunk id 为 1，辨识度不高
+    }
+}
+
+```
+
+![images](webpack09.png)
+
+这时候`webpackChunkName`就可以派上用场了。我们可以在`import`文件时，在`import`里以注释的形式为`chunk`文件取别名：
+
+```
+async function getAsyncComponent() {
+    var element = document.createElement('div');
+  
+    // 在 import 的括号里 加注释 /* webpackChunkName: "lodash" */ ，为引入的文件取别名
+    const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
+
+    element.innerHTML = _.join(['Hello!', 'dynamic', 'imports', 'async'], ' ');
+
+    return element;
+}
+```
+
+这时候打包生成的文件是这样的：
+
+![images](webpack10.png)
+
+现在问题来了，`lodash`是我们取的名字，按道理来说应该生成`lodash.bundle.js`啊，前面的 `vendors~` 是什么玩意？
+
+**webpackPrefetch 和 webpackPreload**
+
+```
+```
+
+#### 总结
+
+- `webpackChunkName`是为预加载的文件取别名
+- `webpackPrefetch`会在浏览器闲置下载文件
+- `webpackPreload`会在父chunk加载时并行下载文件
+
 ### 四、`hash`、`chunkhash`、`contenthash`有什么不同？
 
 #### 4.4 总结
