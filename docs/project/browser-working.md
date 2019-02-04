@@ -224,6 +224,7 @@ defer 与相比普通 script，有两点区别：**载入 JavaScript 文件时�
 - [深入理解现代浏览器](https://mp.weixin.qq.com/s/LkKNjrkx1V32lCjv92Cuuw)
 - [从浏览器多进程到 JS 单线程，JS 运行机制最全面的一次梳理](https://segmentfault.com/a/1190000012925872)
 - [11 道浏览器原理面试题](https://juejin.im/post/5d89798d6fb9a06b102769b1)
+- [你不知道的浏览器性能优化](https://mp.weixin.qq.com/s/az6wvBq5Q6p24UXnQtvxng)
 
 ## 联系作者
 
