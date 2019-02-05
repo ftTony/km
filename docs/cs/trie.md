@@ -6,6 +6,28 @@
 
 ## 内容
 
+- Tire树
+- Trie树的特点
+- Trie树的插入操作
+- Trie树的查询操作
+- Trie树的删除操作
+- Trie树的应用
+- Trie树的局限性
+
+### 一、Tire树
+
+### 二、Trie树的特点
+
+### 三、Trie树的插入操作
+
+### 四、Trie树的查询操作
+
+### 五、Trie树的删除操作
+
+### 六、Trie树的应用
+
+### 七、Trie树的局限性
+
 ### 参考资料
 
 - [看动画轻松理解「Trie树」](https://mp.weixin.qq.com/s/Y5_r4C5a9gU0FDtqXD9bkQ)
