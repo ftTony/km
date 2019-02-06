@@ -93,14 +93,36 @@
 
 #### 2.1 float+overflow:hidden
 
-如果是普通的两列布局，**浮动+普通元素的**
+如果是普通的两列布局，**浮动+普通元素的**margin便可以实现，但如果是自适应的两列布局，利用`float+overflow:hidden`便可以实现，这种办法主要通过`overflow`触发`BFC`不会重叠浮动元素。由于设置`overflow:hidden`并不会触发IE6-浏览的haslayout属性，所以需要调协`zoom:1`来兼容IE6-浏览器。具体代码如下：
 
 ```
-
+<div class="parent" style="background-color: lightgrey;">
+    <div class="left" style="background-color: lightblue;">
+        <p>left</p>
+    </div>
+    <div class="right"  style="background-color: lightgreen;">
+        <p>right</p>
+        <p>right</p>
+    </div>        
+</div>
 ```
 
 ```
+.parent {
+  overflow: hidden;
+  zoom: 1;
+}
+.left {
+  float: left;
+  margin-right: 20px;
+}
+.right {
+  overflow: hidden;
+  zoom: 1;
+}
 ```
+
+**注意点:如果侧边栏在右边时，注意渲染顺序。即在HTML中，先写侧边栏后写主内容**
 
 #### 2.2 Flex布局
 
