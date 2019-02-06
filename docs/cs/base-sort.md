@@ -120,9 +120,28 @@ function bubbleSort3(arr3){
     var tmp,j;
     console.time('');
     while(low<high){
-        
+        for(j=low;j<high;++j){
+            if(arr[j]>arr[j+1]){
+                tmp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = tmp;
+            }
+            --high;
+        }
+        for(j=high;j>low;--j){
+            if(arr[j]<arr[j-1]){
+                tmp = arr[j];
+                arr[j]=arr[j-1];
+                arr[j-1]=tmp;
+            }
+            ++low;
+        }
+        console.timeEnd('2.改进后冒泡排序耗时');
+        return arr3;
     }
 }
+var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
+console.log(bubbleSort3(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
 ```
 
 ![images](sort03)
@@ -181,7 +200,11 @@ function selectionSort(arr){
 }
 ```
 
-#### 3.4 算法分析
+#### 3.4 选择排序动图演示
+
+![images](sort05.png)
+
+#### 3.5 算法分析
 
 - 最佳情况：`T(n)` = `O(n2)`
 - 最差情况：`T(n)` = `O(n2)`
@@ -193,7 +216,11 @@ function selectionSort(arr){
 
 #### 4.1 算法简介
 
+>插入排序的算法描述是一种简单直观的排序算法。它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。插入排序在实现上，通常采用in-place排序（即只需用到O(1)）
+
 #### 4.2 算法描述
+
+
 
 #### 4.3 代码实现
 
