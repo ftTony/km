@@ -596,6 +596,7 @@ webpack打包配置相对比较复杂，目前介绍应该可以满常规需求�
 - [编写自定义webpack plugin](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-plugin.md)
 - [编写自定义webpack loader](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-loader.md)
 - [搜罗一切 webpack 的好文章好工具](https://github.com/webpack-china/awesome-webpack-cn)
+- [关于webpack4的14个知识点,童叟无欺](https://juejin.im/post/5cea1e1ae51d4510664d1652)
 
 ## 联系作者
 
