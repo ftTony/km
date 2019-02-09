@@ -14,6 +14,99 @@
 
 ### 一、`module`，`chunk`和`bundle`的区别是什么？
 
+我这里举个例子，给大家**形象化**的解释一下。
+
+首先我们在`src`目录下写我们的业务代码，引入`index.js`、`utils.js`、`common.js`和`index.css`这 4 个文件，目录结构如下：
+
+```
+src/
+├── index.css
+├── index.html # 这个是 HTML 模板代码
+├── index.js
+├── common.js
+└── utils.js
+```
+
+`index.css`写一点儿简单的样式：
+
+```
+body {
+    background-color: red;
+}
+```
+
+`utils.js`文件写个求平方的工具函数：
+
+```
+export function square(x) {
+    return x * x;
+}
+```
+
+`common.js`文件写个`log`工具函数：
+
+```
+module.exports = {
+  log: (msg) => {
+    console.log('hello ', msg)
+  }
+}
+```
+
+`index.js`文件做一些简单的修改，引入`css`文件和`common.js`：
+
+```
+import './index.css';
+const { log } = require('./common');
+
+log('webpack');
+```
+
+`webpack`的配置如下：
+
+```
+{
+    entry: {
+        index: "../src/index.js",
+        utils: '../src/utils.js',
+    },
+    output: {
+        filename: "[name].bundle.js", // 输出 index.js 和 utils.js
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader, // 创建一个 link 标签
+                    'css-loader', // css-loader 负责解析 CSS 代码, 处理 CSS 中的依赖
+                ],
+            },
+        ]
+    }
+    plugins: [
+        // 用 MiniCssExtractPlugin 抽离出 css 文件，以 link 标签的形式引入样式文件
+        new MiniCssExtractPlugin({
+            filename: 'index.bundle.css' // 输出的 css 文件名为 index.css
+        }),
+    ]
+}
+```
+
+我们运行一下 webpack，看一下打包的结果：
+
+![images](webpack04.png)
+
+我们可以看出，`index.css`和`common.js`在`index.js`中被引入，打包生成的`index.bundle.css`和`index.bundle.js` 都属于 `chunk 0`，`utils.js` 因为是独立打包的，它生成的 `utils.bundle.js` 属于 `chunk 1`。
+
+感觉还有些绕？我做了一张图，你肯定一看就懂：
+
+![images](webpack05.png)
+
+看这个图就很明白了：
+
+一般来说一个`chunk`对应一个`bundle`，比如上图中的`utils.js` -> `chunks 1` -> `utils.bundle.js`；但也有例外，比如说上图中，我就用 `MiniCssExtractPlugin` 从 `chunks 0` 中抽离出了 `index.bundle.css`文件。
+
 #### 一句话总结
 
 `module`，`chunk` 和 `bundle` 其实就是同一份逻辑代码在不同转换场景下的取了三个名字：我们直接写出来的是 module，webpack 处理时是 chunk，最后生成浏览器可以直接运行的 bundle。
