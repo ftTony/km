@@ -113,6 +113,106 @@ log('webpack');
 
 ### 二、`filename`和`chunkFilename`的区别
 
+- filename
+- chunkFilename
+
+#### 2.1 filename
+
+`filename`是一个很常见的配置，就是对应于`entry`里面的输入文件，经过webpack打包后输出文件的文件名。比如说经过下面的配置，生成出来的文件名为`index.min.js`。
+
+```
+{
+    entry: {
+        index: "../src/index.js"
+    },
+    output: {
+        filename: "[name].min.js", // index.min.js
+    }
+}
+```
+
+![images](webpack06.png)
+
+#### 2.2 chunkFilename
+
+`chunkFilename`指未被列在`entry`中，却又需要被打包出来的`chunk`文件的名称。一般来说，这个`chunk`文件指的就是要**懒加载**的代码。
+
+比如说我们业务代码中写了一份懒加载`lodash`的代码：
+
+```
+// 文件：index.js
+
+// 创建一个 button
+let btn = document.createElement("button");
+btn.innerHTML = "click me";
+document.body.appendChild(btn);
+
+// 异步加载代码
+async function getAsyncComponent() {
+    var element = document.createElement('div');
+    const { default: _ } = await import('lodash');
+
+    element.innerHTML = _.join(['Hello!', 'dynamic', 'imports', 'async'], ' ');
+
+    return element;
+}
+
+// 点击 button 时，懒加载 lodash，在网页上显示 Hello! dynamic imports async
+btn.addEventListener('click', () => {
+    getAsyncComponent().then(component => {
+        document.body.appendChild(component);
+    })
+})
+```
+
+我们的`webpack`不做任何配置，还是原来的配置代码：
+
+```
+{
+    entry: {
+        index: "../src/index.js"
+    },
+    output: {
+        filename: "[name].min.js", // index.min.js
+    }
+}
+```
+
+这时候的打包结果如下：
+
+![images](webpack07.png)
+
+这个`1.min.js`就是异步加载的`chunk`文件。[文档](https://webpack.docschina.org/configuration/output/#output-chunkfilename)里这么解释：
+
+>`output.chunkFilename` 默认使用`[id].js`或从`output.filename`中推断出的值（`[name]`会被预先替换为 `[id]` 或 `[id]`.）
+
+文档写的太抽象，我们不如结合上面的例子来看：
+
+`output.filename`的输出文件名是`[name].min.js`，`[name]` 根据`entry`的配置推断为`index`，所以输出为 `index.min.js`；
+
+由于`output.chunkFilename`没有显示指定，就会把`[name]`替换为`chunk`文件的`id`号，这里文件的`id`号是`1`，所以文件名就是`1.min.js`。
+
+如果我们显式配置`chunkFilename`，就会按配置的名字生成文件：
+
+```
+{
+    entry: {
+        index: "../src/index.js"
+    },
+    output: {
+        filename: "[name].min.js",  // index.min.js
+        chunkFilename: 'bundle.js', // bundle.js
+    }
+}
+```
+
+![images](webpack08.png)
+
+#### 2.3 总结
+
+- `filename`指列在`entry`中，打包后输出的文件的名称。
+- `chunkFilename`指未列在`entry`中，却又需要被打包出来的文件的名称。
+
 ### 三、`webpackPrefetch`、`webpackPreload` 和 `webpackChunkName` 到底是干什么的？
 
 ### 四、`hash`、`chunkhash`、`contenthash`有什么不同？
