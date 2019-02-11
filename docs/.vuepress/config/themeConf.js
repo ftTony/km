@@ -234,7 +234,16 @@ module.exports = {
                 'webserver',
                 'webrtc'
             ]
+        }, {
+            title: 'Native学习',
+            collapsable: false,
+            children: [
+                'hybird',
+                'flutter',
+                'electron'
+            ]
         }
+
         ],
         '/project/': [{
             title: '工程测试',
@@ -267,7 +276,6 @@ module.exports = {
                 'live',
                 'pwa-0',
                 'webAssembly',
-                'electron',
                 'ssr',
                 'skeleton',
                 'serverless'
