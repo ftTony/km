@@ -11,7 +11,9 @@
 
 ## 参考资料
 
-
+- [【译】2018 前端性能优化清单 —— 第一部分](https://juejin.im/post/5a67e49df265da3e377c2d59)
+- [[译] 2019 前端性能优化年度总结 — 第一部分](https://juejin.im/post/5c4418006fb9a049c043545e)
+- [前端性能优化-加载篇](https://www.cxymsg.com/guide/load.html)
 
 ## 联系作者
 
