@@ -124,7 +124,53 @@ switch (ws.readyState) {
 
 **webSocket.onopen**
 
-实例对象的onopen属性，用于指定连接成功后的回调函数。
+实例对象的`onopen`属性，用于指定连接成功后的回调函数。
+
+```
+ws.onopen = function () {
+  ws.send('Hello Server!');
+}
+```
+
+如果要指定多个回调函数，可以使用`addEventListener`方法。
+
+```
+ws.addEventListener('open', function (event) {
+  ws.send('Hello Server!');
+});
+```
+
+**webSocket.onclose**
+
+```
+ws.onclose = function(event) {
+  var code = event.code;
+  var reason = event.reason;
+  var wasClean = event.wasClean;
+  // handle close event
+};
+
+ws.addEventListener("close", function(event) {
+  var code = event.code;
+  var reason = event.reason;
+  var wasClean = event.wasClean;
+  // handle close event
+});
+```
+
+**webSocket.onmessage**
+
+```
+ws.onmessage = function(event) {
+  var data = event.data;
+  // 处理数据
+};
+
+ws.addEventListener("message", function(event) {
+  var data = event.data;
+  // 处理数据
+});
+```
 
 #### 4.2 服务端
 
