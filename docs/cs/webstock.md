@@ -72,13 +72,67 @@ WebSocket减少了延迟，因为一旦建立起WebSocket连接，服务器可�
 
 #### 4.1 客户端的API
 
+- WebSocket构造函数
+- webSocket.readyState
+- webSocket.onopen
+- webSocket.onclose
+- webSocket.onmessage
+- webSocket.send
+- webSocket.bufferedAmount
+- webSocket.onerror
+
+**WebSocket 构造函数**
+
+`WebSocket`对象作为一个构造函数，用于新建`WebSocket`实例。
+
 ```
+var ws = new WebSocket('ws://localhost:8080');
 ```
+
+执行上面语句之后，客户端就会与服务器进行连接。实例对象的所有属性和方法清单，参见[这里](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket)。
+
+**webSocket.readyState**
+
+`readyState`属性返回实例对象的当前状态，共有四种。
+
+- `CONNECTING`：值为0，表示正在连接。
+- `OPEN`：值为1，表示连接成功，可以通信了。
+- `CLOSING`：值为2，表示连接正在关闭。
+- `CLOSED`：值为3，表示连接已经关闭，或者打开连接失败。
+  
+下面是一个示例。
+
+```
+switch (ws.readyState) {
+  case WebSocket.CONNECTING:
+    // do something
+    break;
+  case WebSocket.OPEN:
+    // do something
+    break;
+  case WebSocket.CLOSING:
+    // do something
+    break;
+  case WebSocket.CLOSED:
+    // do something
+    break;
+  default:
+    // this never happens
+    break;
+}
+```
+
+**webSocket.onopen**
+
+实例对象的onopen属性，用于指定连接成功后的回调函数。
 
 #### 4.2 服务端
 
-```
-```
+常用的Node实现有以下三种
+
+- [µWebSockets](https://github.com/uWebSockets/uWebSockets)
+- [Socket.IO](http://socket.io/)
+- [WebSocket-Node](https://github.com/theturtle32/WebSocket-Node)
 
 ### 五、完整例子
 
