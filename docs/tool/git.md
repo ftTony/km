@@ -86,7 +86,7 @@ git flow hotfix finish bug-fixed
 
 下图为整体流程图：
 
-![](git01.png)
+![images](git01.png)
 
 #### 主要分支
 
@@ -116,7 +116,7 @@ git flow hotfix finish bug-fixed
 
 git 整体流程图：
 
-![](git02.png)
+![images](git02.png)
 
 - 初始化仓库
 - 配置 Git
@@ -415,7 +415,7 @@ $ git stash pop
 
 ### 三、Git常用命令导图
 
-![](git-Commands.png)
+![images](git-Commands.png)
 
 ### 参考资料
 
