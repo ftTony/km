@@ -423,6 +423,12 @@ $ git stash pop
 - [Gitflow 工作流](https://www.cnblogs.com/jiuyi/p/7690615.html)
 - [git-flow 的工作流程](https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow)
 - [Git 工作流](https://github.com/frank-lam/fullstack-tutorial/blob/master/notes/Git%E5%B7%A5%E4%BD%9C%E6%B5%81.md)
+- [git 学习](https://github.com/geeeeeeeeek/git-recipes)
+- [Git 工作流指南](https://github.com/oldratlee/translations/tree/master/git-workflows-and-tutorials)
+- [git 常用命令](https://github.com/ftTony/blog/issues/27)
+- [Git 的奇技淫巧](https://github.com/521xueweihan/git-tips)
+- [高质量的 Git 中文教程](https://github.com/geeeeeeeeek/git-recipes)
+- [Git Community Book 中文版](http://gitbook.liuhui998.com/index.html)
 
 ## 联系作者
 
