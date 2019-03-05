@@ -38,18 +38,12 @@
 
 如果再仔细看一下，就发现这 13 种大部分都是`eval`、`cheap`、`inline` 和 `module`这4个词排列组合的，我做了个简单的表格，比官网上直白多了：
 
-| 参数  | 参数解释                                                            |
-| ----- | ------------------------------------------------------------------- |
-| eval  | 打包后的模块都使用`eval()`执行，行映射可能不准；不产生独立的map文件 |
-| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
-| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
-| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
-| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
-| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
-| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
-
-
-
+| 参数   | 参数解释                                                            |
+| ------ | ------------------------------------------------------------------- |
+| eval   | 打包后的模块都使用`eval()`执行，行映射可能不准；不产生独立的map文件 |
+| cheap  | map映射只显示行不显示列，忽略源自loader的source map                 |
+| inline | 映射文件以base64格式编码，加在bundle文件最后，不产生独立的map文件   |
+| module | 增加对 loader source map 和第三方模块的映射                         |
 
 
 ### 参考资料
