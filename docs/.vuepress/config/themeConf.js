@@ -407,6 +407,7 @@ module.exports = {
                     'base-select',
                     'common-algorithm',
                     'high-algorithm',
+                    'recursion',
                     'greed',
                     'divide',
                     'backtracking',
