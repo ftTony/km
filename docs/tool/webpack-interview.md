@@ -14,11 +14,21 @@
 
 ### 一、`module`，`chunk`和`bundle`的区别是什么？
 
+#### 一句话总结
+
+`module`，`chunk` 和 `bundle` 其实就是同一份逻辑代码在不同转换场景下的取了三个名字：我们直接写出来的是 module，webpack 处理时是 chunk，最后生成浏览器可以直接运行的 bundle。
+
 ### 二、`filename`和`chunkFilename`的区别
 
 ### 三、`webpackPrefetch`、`webpackPreload` 和 `webpackChunkName` 到底是干什么的？
 
 ### 四、`hash`、`chunkhash`、`contenthash`有什么不同？
+
+#### 4.4 总结
+
+- `hash`计算与整个项目的构建相关；
+- `chunkhash`计算与同一`chunk`内容相关；
+- `contenthash`计算与文件内容本身相关。
 
 ### 五、`sourse-map` 中 `eval`、`cheap`、`inline` 和 `module` 各是什么意思？
 
