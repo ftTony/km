@@ -32,6 +32,10 @@
 
 ### 五、`sourse-map` 中 `eval`、`cheap`、`inline` 和 `module` 各是什么意思？
 
+`sourse-map`，里面都有个`map`了，肯定是映射的意思。`sourse-map`就是一份**源码和转换后代码的映射文件**。具体的原理内容较多，感兴趣的同学可以自行搜索，我这里就不多言了。
+
+![images](webpack03.png)
+
 ### 参考资料
 
 - [面试必备！webpack 中那些最易混淆的 5 个知识点](https://juejin.im/post/5cede821f265da1bbd4b5630)
