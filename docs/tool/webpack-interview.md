@@ -36,6 +36,22 @@
 
 ![images](webpack03.png)
 
+如果再仔细看一下，就发现这 13 种大部分都是`eval`、`cheap`、`inline` 和 `module`这4个词排列组合的，我做了个简单的表格，比官网上直白多了：
+
+| 参数  | 参数解释                                                            |
+| ----- | ------------------------------------------------------------------- |
+| eval  | 打包后的模块都使用`eval()`执行，行映射可能不准；不产生独立的map文件 |
+| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
+| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
+| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
+| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
+| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
+| cheap | map映射只显示行不显示列，忽略源自loader的source map                 |
+
+
+
+
+
 ### 参考资料
 
 - [面试必备！webpack 中那些最易混淆的 5 个知识点](https://juejin.im/post/5cede821f265da1bbd4b5630)
