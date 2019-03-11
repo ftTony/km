@@ -245,6 +245,12 @@ function insertionSort(array){
 
 ![images](sort07.gif)
 
+#### 4.5 算法分析
+
+- 最佳情况：
+- 最坏情况：
+- 平均情况：
+
 ## 参考资料
 
 - [十大经典排序算法](https://blog.damonare.cn/2016/12/20/%E5%8D%81%E5%A4%A7%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%EF%BC%88javascript%E6%8F%8F%E8%BF%B0%EF%BC%89/)
