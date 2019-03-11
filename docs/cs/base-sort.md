@@ -227,7 +227,14 @@ function selectionSort(arr){
 #### 4.3 代码实现
 
 ```
-function
+function insertionSort(array){
+    if(Object.prototype.toString.call(array).slice(8,-1)==='Array'){
+
+    }
+}
+```
+
+```
 ```
 
 **改进前后对比**
