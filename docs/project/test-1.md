@@ -6,7 +6,9 @@
 
 ## 内容
 
-## 参考资料
+### 参考资料
+
+- [万字长文总结前端测试体系建设与最佳实践](https://mp.weixin.qq.com/s/IgA29U-etBKUls7JnpE2Zw)
 
 ## 联系作者
 
