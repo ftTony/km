@@ -234,7 +234,13 @@ function insertionSort(array){
 }
 ```
 
+>**改进插入排序：**查找插入位置时使用二分查找的方式
+
 ```
+function binaryInsertionSort(array) {
+    if (Object.prototype.toString.call(array).slice(8, -1) === 'Array') {
+    }
+}
 ```
 
 **改进前后对比**
@@ -247,9 +253,9 @@ function insertionSort(array){
 
 #### 4.5 算法分析
 
-- 最佳情况：
-- 最坏情况：
-- 平均情况：
+- 最佳情况：输入数组按升序排列。`T(n)=O(n)`
+- 最坏情况：输入数组按降序排序。`T(n)=O(n2)`
+- 平均情况：`T(n)=O(n2)`
 
 ## 参考资料
 
