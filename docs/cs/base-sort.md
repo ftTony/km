@@ -148,7 +148,7 @@ console.log(bubbleSort3(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47,
 
 #### 2.3 冒泡排序动图演示
 
-![images](sort04.png)
+![images](sort04.gif)
 
 #### 2.4 算法分析
 
@@ -202,7 +202,7 @@ function selectionSort(arr){
 
 #### 3.4 选择排序动图演示
 
-![images](sort05.png)
+![images](sort05.gif)
 
 #### 3.5 算法分析
 
@@ -229,6 +229,14 @@ function selectionSort(arr){
 ```
 function
 ```
+
+**改进前后对比**
+
+![images](sort06.png)
+
+#### 4.4 插入排序动图
+
+![images](sort07.gif)
 
 ## 参考资料
 
