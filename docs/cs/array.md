@@ -6,8 +6,8 @@
 
 ## 内容
 
-[数组](./js/es5-array.html)
-[数组扩展](./js/es6-array.html)
+- [数组](./js/es5-array.html)
+- [数组扩展](./js/es6-array.html)
 
 ### 参考资料
 

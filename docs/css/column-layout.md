@@ -21,7 +21,24 @@
 - `header.content`和`footer`等宽的单列布局
 - `header与`footer`等宽`content`略窄的单列布局
 
+### 1.1 如何实现
+
 ```
+<div class="header"></div>
+<div class="content"></div>
+<div class="footer"></div>
+```
+
+```
+.header{
+    margin:0 auto;
+    max-width:960px;
+    height:100px;
+    background-color:blue;
+}
+.content{
+    
+}
 ```
 
 ### 二、两列自适应布局
