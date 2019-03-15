@@ -67,6 +67,53 @@ CSS 代码:
 `grid-template`属性是`grid-template-columns`、`grid-template-rows` 和 `grid-template-areas` 这三个属性的合并简写形式。
 
 - **grid-column-gap**/**grid-row-gap**/**grid-gap**
+
+指定风格线的大小。你可以把它想象为设置列/行之间间距的宽度。
+
+值：
+
+- `<line-size>`：长度值
+
+CSS 代码：
+
+```
+.container {
+  grid-column-gap: <line-size>;
+  grid-row-gap: <line-size>;
+}
+```
+
+示例代码：
+
+```
+.container {
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+}
+```
+
+`grid-gap`是`grid-column-gap`和`grid-row-gap`的简写语法
+
+值：
+
+- `<grid-row-gap> <grid-column-gap>`：长度值
+
+CSS 代码:
+
+```
+.container {
+  grid-gap: <grid-row-gap> <grid-column-gap>;
+}
+```
+
+示例代码：
+
+```
+.container {
+  grid-gap: 20px 20px;
+}
+```
+
 - **justify-items**/**align-items**/**place-items**
 - **justify-content**/**align-content**/**place-content**
 - **grid-auto-columns**/**grid-auto-rows**
