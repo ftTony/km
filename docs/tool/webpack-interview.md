@@ -6,6 +6,12 @@
 
 ## 内容
 
+- `module`，`chunk`和`bundle`的区别是什么？
+- `filename`和`chunkFilename`的区别
+- `hash`、`chunkhash`、`contenthash`有什么不同？
+
+
+
 ## 参考资料
 
 - [面试必备！webpack 中那些最易混淆的 5 个知识点](https://juejin.im/post/5cede821f265da1bbd4b5630)
