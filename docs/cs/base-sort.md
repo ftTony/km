@@ -244,6 +244,7 @@ function insertionSort(array){
 ```
 function binaryInsertionSort(array) {
     if (Object.prototype.toString.call(array).slice(8, -1) === 'Array') {
+        
     }
 }
 ```
