@@ -6,7 +6,12 @@
 
 ## 内容
 
-## 参考资料
+[数组](./js/es5-array.html)
+[数组扩展](./js/es6-array.html)
+
+### 参考资料
+
+- 《学习JavaScript数据结构与算法》
 
 ## 联系作者
 

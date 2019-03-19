@@ -18,8 +18,8 @@
 
 常见的单列布局有两种：
 
-- header.content和footer等宽的单列布局
-- header与footer等宽content略窄的单列布局
+- `header.content`和`footer`等宽的单列布局
+- `header与`footer`等宽`content`略窄的单列布局
 
 ```
 ```

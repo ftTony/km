@@ -63,6 +63,7 @@ module.exports = {
                 'es5-extends',
                 'es5-fn',
                 'es5-news',
+                'es5-array',
                 'es5-object',
                 'es5-reg',
                 'es5-scope'
