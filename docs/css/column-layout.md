@@ -37,11 +37,21 @@
     background-color:blue;
 }
 .content{
-    
+    margin:0 auto;
+    max-width:400px;
+    height:400px;
+    background-color:aquemarine;
+}
+.footer{
+    margin:0 auto;
+    max-width:960px;
+    height:100px;
 }
 ```
 
 ### 二、两列自适应布局
+
+**两列自适应布局是指一列由内容撑开，另一列撑满剩余宽度的布局方式**
 
 ```
 ```
