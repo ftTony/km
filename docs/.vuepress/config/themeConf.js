@@ -350,7 +350,8 @@ module.exports = {
                 'webpack-babel',
                 'webpack-plugin',
                 'webpack-loader',
-                'webpack-coder',
+                'webpack-interview',
+                'webpack-coder'
             ]
         },
         {

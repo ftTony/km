@@ -68,7 +68,33 @@ function Element(tagName,props,children){
 }
 
 module.exports = function(tagName,props,children){
+  return new Element(tagName,props,children)
+}
+```
 
+例如上面的DOM结构就可以简单的表示：
+
+```
+var el = require('./element')
+
+var ul = el('ul',{id:'list'},[
+  el('li',{class:'item'},['Item 1']),
+  el('li',{class:'item'},['Item 2']),
+  el('li',{class:'item'},['Item 3']),
+])
+```
+
+现在`ul`只是一个JavaScript对象表示的DOM结构，页面上并没有这个结构。我们可以根据这个`ul`构建真正的`<ul>`:
+
+```
+Element.prototype.render = function(){
+  var el = document.createElement(this.tagName) // 根据tagName构建
+  var props = this.props
+
+  for(var propName in props){ // 设置节点的DOM属性
+    var propValue = props[propName]
+    el.setAttribute(propName,propValue)
+  }
 }
 ```
 
@@ -80,6 +106,10 @@ module.exports = function(tagName,props,children){
 #### 3.3 把差异应用到真正的DOM树上
 
 ```
+function patch(node,patches){
+
+}
+
 ```
 
 ### 参考资料
