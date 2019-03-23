@@ -592,8 +592,10 @@ webpack打包配置相对比较复杂，目前介绍应该可以满常规需求�
 
 - 《深入浅出webpack》
 - [Webpack运行机制](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-principle.md)
+- [由浅入深 Webpack](https://github.com/yanlele/node-index/blob/master/book/11、深入webpack工程化/01、由浅入深Webpack/README.md)
 - [编写自定义webpack plugin](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-plugin.md)
 - [编写自定义webpack loader](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-loader.md)
+- [搜罗一切 webpack 的好文章好工具](https://github.com/webpack-china/awesome-webpack-cn)
 
 ## 联系作者
 

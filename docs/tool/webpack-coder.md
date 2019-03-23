@@ -6,7 +6,11 @@
 
 ## 内容
 
-## 参考资料
+### 参考资料
+
+12. [[webpack]源码解读：命令行输入 webpack 的时候都发生了什么？](https://github.com/DDFE/DDFE-blog/issues/12)
+13. [Webpack 源码解析](https://github.com/lihongxun945/diving-into-webpack)
+14. [webpack 处理流程分析](https://mp.weixin.qq.com/s/1BH90Nn6rfcOfywGpvWwhA)
 
 ## 联系作者
 
