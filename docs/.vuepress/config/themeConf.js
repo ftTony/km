@@ -404,9 +404,9 @@ module.exports = {
                 collapsable: false,
                 children: [
                     'base-sort',
+                    'high-sort',
                     'base-select',
                     'common-algorithm',
-                    'high-algorithm',
                     'recursion',
                     'greed',
                     'divide',
