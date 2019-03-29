@@ -16,6 +16,9 @@
 - Linux 容器
 - Docker 是什么？
 - Docker 的用途
+- 基本概念
+- 安装Docker
+- 指令
 
 ### 一、虚拟机
 
@@ -57,7 +60,20 @@ Docker的主要用途，目前有三大类。
 - **提供弹性的云服务**。因为Docker容器可以随开随关，很适合动态扩容和缩容。
 - **组件微服务架构**。通过多个容器，一台机器可以跑多个服务，因此在梧桐就可以模拟出微服务架构。
 
-### 安装Docker
+### 五、基本概念
+
+- 镜像
+- 容器
+- 仓库
+
+### 六、安装Docker
+
+- Windows
+- CentOS
+- macOS
+
+### 七、指令
+
 
 ### 参考资料
 
@@ -66,6 +82,7 @@ Docker的主要用途，目前有三大类。
 - [一文零基础教你学会 Docker 入门到实践](https://mp.weixin.qq.com/s/S7ksqF8z4SYJvcG1DOupNA)
 - [写给前端的Docker实战教程](https://juejin.im/post/5d8440ebe51d4561eb0b2751)
 - [使用 Docker 构建前端应用](https://zhuanlan.zhihu.com/p/39241059)
+- [Docker — 从入门到实践](https://docker_practice.gitee.io/zh-cn/)
 
 ## 联系作者
 
