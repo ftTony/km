@@ -1,4 +1,4 @@
-# docker 入门
+# docker 学习
 
 ## 前言
 
@@ -39,6 +39,7 @@ Docker的主要用途，目前有三大类。
 - [Node.js 服务 Docker 容器化应用实践](https://mp.weixin.qq.com/s/ZUw_qLk3m77ATkYXpfP08A)
 - [一文零基础教你学会 Docker 入门到实践](https://mp.weixin.qq.com/s/S7ksqF8z4SYJvcG1DOupNA)
 - [写给前端的Docker实战教程](https://juejin.im/post/5d8440ebe51d4561eb0b2751)
+- [使用 Docker 构建前端应用](https://zhuanlan.zhihu.com/p/39241059)
 
 ## 联系作者
 
