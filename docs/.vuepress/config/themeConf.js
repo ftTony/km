@@ -136,7 +136,6 @@ module.exports = {
                 'node-process',
                 'node-querystring',
                 'node-stream',
-                'node-session-cookie',
                 'node-url'
             ]
         },
