@@ -450,6 +450,8 @@ MVVM.prototye={
 - [Vue.js双向绑定的实现原理](http://www.cnblogs.com/kidney/p/6052935.html)
 - [剖析Vue原理&实现双向绑定MVVM](https://segmentfault.com/a/1190000006599500)
 - [深入响应式原理](https://github.com/DDFE/DDFE-blog/issues/7)
+- [vue系列---响应式原理实现及Observer源码解析(一)](https://www.cnblogs.com/tugenhua0707/p/11754291.html)
+- [最简化 VUE的响应式原理](https://zhuanlan.zhihu.com/p/88648401)
 
 ## 联系作者
 
