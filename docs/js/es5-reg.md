@@ -2368,27 +2368,239 @@ console.log( RegExp["$'"] );
 
 **使用构造函数生成正则表达式**
 
+我们知道要优先使用字面量来创建正则，但有时正则表达式的主体是不确定的，此时可以使用构造函数来创建。模拟`getElementsByClassName`方法，就是很能说明该问题的一个例子。
+
+这里`getElementsByClassName`函数的实现思路是：
+
+- 比如要获取`className`为"high"的dom元素；
+- 首先生成一个正则：`/(^|\s)high(\s|$)/`；
+- 然后再用其逐一验证页面上的所有dom元素的类名，拿到满足匹配的元素即可。
+
+代码如下(可以直接复制到本地查看运行效果)：
+
 ```
+<p class="high">1111</p>
+<p class="high">2222</p>
+<p>3333</p>
+<script>
+function getElementsByClassName(className) {
+	var elements = document.getElementsByTagName("*");
+	var regex = new RegExp("(^|\\s)" + className + "(\\s|$)");
+	var result = [];
+	for (var i = 0; i < elements.length; i++) {
+		var element = elements[i];
+		if (regex.test(element.className)) {
+			result.push(element)
+		}
+	}
+	return result;
+}
+var highs = getElementsByClassName('high');
+highs.forEach(function(item) {
+	item.style.color = 'red';
+});
+</script>
 ```
 
 **使用字符串保存数据**
 
+一般情况下，我们都愿意使用数组来保存数据。但我看到有的框架中，使用的却是字符串。
+
+使用时，仍需要把字符串切分成数组。虽然不一定用到正则，但总感觉酷酷的，这里分享如下：
+
 ```
+<p class="high">1111</p>
+<p class="high">2222</p>
+<p>3333</p>
+<script>
+function getElementsByClassName(className) {
+	var elements = document.getElementsByTagName("*");
+	var regex = new RegExp("(^|\\s)" + className + "(\\s|$)");
+	var result = [];
+	for (var i = 0; i < elements.length; i++) {
+		var element = elements[i];
+		if (regex.test(element.className)) {
+			result.push(element)
+		}
+	}
+	return result;
+}
+var highs = getElementsByClassName('high');
+highs.forEach(function(item) {
+	item.style.color = 'red';
+});
+</script>
 ```
 
 **if语句中使用正则替代&&**
 
+比如，模拟`ready`函数，即加载完毕后再执行回调（不兼容ie的）：
+
 ```
+var readyRE = /complete|loaded|interactive/;
+
+function ready(callback) {
+	if (readyRE.test(document.readyState) && document.body) {
+		callback()
+	} 
+	else {
+		document.addEventListener(
+			'DOMContentLoaded', 
+			function () {
+				callback()
+			},
+			false
+		);
+	}
+};
+ready(function() {
+	alert("加载完毕！")
+});
 ```
 
 **使用强大的replace**
 
+因为`replace`方法比较强大，有时用它根本不是为了替换，只是拿其匹配到的信息来做文章。
+
+这里以查询字符串（querystring）压缩技术为例，注意下面`replace`方法中，回调函数根本没有返回任何东西。
+
 ```
+function compress(source) {
+	var keys = {};
+	source.replace(/([^=&]+)=([^&]*)/g, function(full, key, value) {
+		keys[key] = (keys[key] ? keys[key] + ',' : '') + value;
+	});
+	var result = [];
+	for (var key in keys) {
+		result.push(key + '=' + keys[key]);
+	}
+	return result.join('&');
+}
+
+console.log( compress("a=1&b=2&a=3&b=4") );
+// => "a=1,3&b=2,4"
 ```
 
 **综合运用**
 
+最后这里再做个简单实用的正则测试器。
+
+具体效果如下：
+
+![images](reg26.gif)
+
+代码，直接贴了，相信你能看得懂：
+
 ```
+<section>
+	<div id="err"></div>
+	<input id="regex" placeholder="请输入正则表达式">
+	<input id="text" placeholder="请输入测试文本">
+	<button id="run">测试一下</button>
+	<div id="result"></div>
+</section>
+<style>
+section{
+	display:flex;
+	flex-direction:column;
+	justify-content:space-around;
+	height:300px;
+	padding:0 200px;
+}
+section *{
+	min-height:30px;
+}
+#err {
+	color:red;
+}
+#result{
+	line-height:30px;
+}
+.info {
+	background:#00c5ff;
+	padding:2px;
+	margin:2px;
+	display:inline-block;
+}
+</style>
+<script>
+(function() {
+	// 获取相应dom元素
+	var regexInput = document.getElementById("regex");
+	var textInput = document.getElementById("text");
+	var runBtn = document.getElementById("run");
+	var errBox = document.getElementById("err");
+	var resultBox = document.getElementById("result");
+	
+	// 绑定点击事件
+	runBtn.onclick = function() {
+		// 清除错误和结果
+		errBox.innerHTML = "";
+		resultBox.innerHTML = "";
+		
+		// 获取正则和文本
+		var text = textInput.value;
+		var regex = regexInput.value;
+		
+		if (regex == "") {
+			errBox.innerHTML = "请输入正则表达式";
+		} else if (text == "") {
+			errBox.innerHTML = "请输入测试文本";
+		} else {
+			regex = createRegex(regex);
+			if (!regex) return;
+			var result, results = [];
+			
+			// 没有修饰符g的话，会死循环
+			if (regex.global) {
+				while(result = regex.exec(text)) {
+					results.push(result);
+				}
+			} else {
+				results.push(regex.exec(text));
+			}
+						
+			if (results[0] == null) {
+				resultBox.innerHTML = "匹配到0个结果";
+				return;
+			}
+			
+			// 倒序是有必要的
+			for (var i = results.length - 1; i >= 0; i--) {
+				var result = results[i];
+				var match = result[0];
+				var prefix = text.substr(0, result.index);
+				var suffix = text.substr(result.index + match.length);
+				text = prefix 
+					+ '<span class="info">'
+					+ match
+					+ '</span>'
+					+ suffix;
+			}
+			resultBox.innerHTML = "匹配到" + results.length + "个结果:<br>" + text;
+		}
+	};
+	
+	// 生成正则表达式，核心函数
+	function createRegex(regex) {
+		try {
+			if (regex[0] == "/") {
+				regex = regex.split("/");
+				regex.shift();
+				var flags = regex.pop();
+				regex = regex.join("/");
+				regex = new RegExp(regex, flags);
+			} else {
+				regex = new RegExp(regex, "g");
+			}
+			return regex;
+		} catch(e) {
+			errBox.innerHTML = "无效的正则表达式";
+			return false;
+		}
+	}
+})();
+</script>
 ```
 
 ### 参考资料
