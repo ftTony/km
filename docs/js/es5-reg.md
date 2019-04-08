@@ -1895,27 +1895,123 @@ console.log( !!~string.search(regex) );
 // => true
 ```
 
-- 使用test
-
-
-```
-```
-
-- 使用match
+- 使用`test`
 
 ```
+var regex = /\d/;
+var string = "abc123";
+console.log( regex.test(string) );
+// => true
 ```
 
-- 使用exec
+- 使用`match`
 
 ```
+var regex = /\d/;
+var string = "abc123";
+console.log( !!string.match(regex) );
+// => true
+```
+
+- 使用`exec`
+
+```
+var regex = /\d/;
+var string = "abc123";
+console.log( !!regex.exec(string) );
+// => true
 ```
 
 其中，最常用的是`test`。
 
+**切片**
+
+```
+
+```
+
+**提取**
+
+```
+
+```
+
+**替换**
+
+```
+
+```
+
 #### 7.2 相关API注意要点
 
 ```
+
+```
+
+**search和match的参数问题**
+
+```
+
+```
+
+**match返回结果的格式问题**
+
+```
+
+```
+
+**exec比match更强大**
+
+```
+
+```
+
+**修饰符g，对exex和test的影响**
+
+```
+
+```
+
+**test整体匹配时需要使用^和$**
+
+```
+
+```
+
+**split相关注意事项**
+
+```
+
+```
+
+**replace是很强大的**
+
+```
+
+```
+
+**使用构造函数需要注意的问题**
+
+```
+
+```
+
+**修饰符**
+
+```
+
+```
+
+**source属性**
+
+```
+
+```
+
+**构造函数属性**
+
+```
+
 ```
 
 #### 7.3 真实案例
