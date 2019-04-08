@@ -53,19 +53,49 @@
 对于第二种，header、footer的内容宽度不设置，块级元素充满整个屏幕，但header、conter和footer的内容区设置同一个width，并通过margin:auto实现居中。
 
 ```
-<div class="">
+<div class="header">
+    <div class="nav"></div>
 </div>
+<div class="content"></div>
+<div class="footer"></div>
 ```
 
 ```
 .header{
     margin:0 auto;
+    max-width: 960px;
+    height:100px;
+    background-color: blue;
+}
+.nav{
+    margin: 0 auto;
+    max-width: 800px;
+    background-color: darkgray;
+    height: 50px;
+}
+.content{
+    margin: 0 auto;
+    max-width: 800px;
+    height: 400px;
+    background-color: aquamarine;
+}
+.footer{
+    margin: 0 auto;
+    max-width: 960px;
+    height: 100px;
+    background-color: aqua;
 }
 ```
 
 ### 二、两列自适应布局
 
 **两列自适应布局是指一列由内容撑开，另一列撑满剩余宽度的布局方式**
+
+#### 2.1 float+overflow:hidden
+
+```
+
+```
 
 ```
 ```
