@@ -53,10 +53,14 @@
 对于第二种，header、footer的内容宽度不设置，块级元素充满整个屏幕，但header、conter和footer的内容区设置同一个width，并通过margin:auto实现居中。
 
 ```
-
+<div class="">
+</div>
 ```
 
 ```
+.header{
+    margin:0 auto;
+}
 ```
 
 ### 二、两列自适应布局
