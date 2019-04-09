@@ -328,6 +328,15 @@ Grid布局，是一个基于网格的二维布局系统，目的是用来优化�
 ```
 
 ```
+.container{
+    background:url("column.png") repeat-y;
+    width:960px;
+    margin:0 auto;
+}
+.left{
+    float:left;
+    width:220px;
+}
 ```
 
 #### 4.3 模仿表格布局
