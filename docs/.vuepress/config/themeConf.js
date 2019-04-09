@@ -428,8 +428,8 @@ module.exports = {
                     'design-pattern-structure',
                     'design-pattern-skill',
                     'design-pattern-architecture',
-                    'design-pattern-dependency',
-                    'design-pattern-behavior'
+                    'design-pattern-behavior',
+                    'design-pattern-dependency'
                 ]
             },
             {
