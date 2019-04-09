@@ -392,6 +392,7 @@ module.exports = {
                     'stack',
                     'list',
                     'dictionary',
+                    'hashtable',
                     'hash',
                     'trees-1',
                     'trees-2',
