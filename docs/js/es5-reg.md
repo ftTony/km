@@ -1560,14 +1560,38 @@ console.log( string.match(regex)[0] );
 
 #### 6.2 构建正则前提
 
+**是否能使用正则**
+
+```
+var string = "2017-07-01";
+var regex = /^(\d{4})-(\d{2})-(\d{2})/;
+console.log( string.match(regex) );
+// => ["2017-07-01", "2017", "07", "01", index: 0, input: "2017-07-01"]
 ```
 
 ```
+var string = "2017-07-01";
+var result = string.split("-");
+console.log( result );
+// => ["2017", "07", "01"]
+```
+
+```
+var string = "?id=xx&act=search";
+console.log( string.indexOf("?") );
+// => 0
+```
+
+**是否有必要构建一个复杂的正则**
 
 #### 6.3 准确性
 
+**匹配固定电话**
+
 ```
 ```
+
+**匹配浮点数**
 
 #### 6.4 效率
 
