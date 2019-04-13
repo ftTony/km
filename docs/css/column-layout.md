@@ -154,9 +154,49 @@ Grid布局，是一个基于网格的二维布局系统，目的是用来优化�
 
 **特征：中间列自适应宽度，旁边两侧固定宽度**
 
+#### 3.1 圣怀布局
 
+**特点**
+
+**比较特殊的三栏布局，同样也是两固定宽度，中间自适应，唯一区别是dom结构必须是先写中间列部分，这样实现中间列可以优先加载。**
 
 ```
+.container{
+    padding-left:220px;     // 为左右拦腾出空间
+    padding-right:220px;
+}
+.left{
+    float:left;
+    width:200px;
+    height: 400px;
+    background: red;
+    margin-left:-100%;
+    position:relative;
+    left:-220px;
+}
+.center{
+    float:left;
+    width:100%;
+    height: 500px;
+    background: yellow;
+}
+.right{
+    float:left;
+    width:200px;
+    height:400px;
+    right:-220px;
+    position:relative;
+    background: blue;
+    margin-left:-200px;
+}
+```
+
+```
+<article class="container">
+    <div class="center">
+        <h2>圣怀布局</h2>
+    </div>
+</article>
 ```
 
 ### 四、等高布局
