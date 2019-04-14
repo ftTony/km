@@ -65,66 +65,77 @@
 - **JSONP优缺点：** JSONP优点是简单兼容性好，可用于解决主流浏览器的跨域数据访问的问题。缺点就是仅支持get方法具有局限性，不安全可能会遭受XSS攻击。
 - **JSONP的实现流程**
   - 声明一个回调函数，其函数名(如show)当做参数值，要传递给跨域请求数据的服务器，函数形参为要获取目标数据(服务器返回的data)。
+  - 创建一个`<script>`标签，把那个跨域API数据接口地址，同仁给`script`的`src`还要在这个地址中向服务器传递该函数名(可以通过问题传参:`?callback=show`)。
+  - 服务器接收到请求后，需要进行特殊的处理：把传递进来的函数名和它需要给你的数据拼接成一个字符串,例如：传递进去的函数名是`show`，它准备好的数据是`show('我不爱好')`。
+  - 最后服务器把准备的数据通过HTTP协议返回给客户端，客户端再调用执行之前声明的回调函数(show)，对返回的数据进行操作。
+
+在开发中可能会遇到多个`JSONP`请求的回调函数名是相同的，这时候就需要自己封装一个`JSONP`函数。
 
 ```
- <script>
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-
-    // 传参并指定回调执行函数为onBack
-    script.src = 'http://www.domain2.com:8080/login?user=admin&callback=onBack';
-    document.head.appendChild(script);
-
-    // 回调执行函数
-    function onBack(res) {
-        alert(JSON.stringify(res));
+// index.html
+function jsonp({ url, params, callback }) {
+  return new Promise((resolve, reject) => {
+    let script = document.createElement('script')
+    window[callback] = function(data) {
+      resolve(data)
+      document.body.removeChild(script)
     }
- </script>
+    params = { ...params, callback } // wd=b&callback=show
+    let arrs = []
+    for (let key in params) {
+      arrs.push(`${key}=${params[key]}`)
+    }
+    script.src = `${url}?${arrs.join('&')}`
+    document.body.appendChild(script)
+  })
+}
+jsonp({
+  url: 'http://localhost:3000/say',
+  params: { wd: 'Iloveyou' },
+  callback: 'show'
+}).then(data => {
+  console.log(data)
+})
+
+ // 回调执行函数
+function show(res) {
+    alert(JSON.stringify(res));
+}
+```
+
+上面这段代码相当于向`http://localhost:3000/say?wd=Iloveyou&callback=show`这个地址请求数据，然后后台返回`show('我不爱你')`，最后会运行show()这个函数，打印出'我不爱你'
+
+
+```
+// server.js
+let express = require('express')
+let app = express()
+app.get('/say', function(req, res) {
+  let { wd, callback } = req.query
+  console.log(wd) // Iloveyou
+  console.log(callback) // show
+  res.end(`${callback}('我不爱你')`)
+})
+app.listen(3000)
 
 ```
 
-服务端返回如下（返回时即执行全局函数）：
+- jQuery的jsonp形式
 
-```
-onBack({"status": true, "user": "admin"})
-
-```
-
-jquery ajax:
+**JSONP都是GET和异步请求的，不存在其他的请求方式和同步请求，且jQuery默认就会给JSONP的请求清除缓存。**
 
 ```
 $.ajax({
-    url: 'http://www.domain2.com:8080/login',
-    type: 'get',
-    dataType: 'jsonp',  // 请求方式为jsonp
-    jsonpCallback: "onBack",    // 自定义回调函数名
-    data: {}
+    url:"http://crossdomain.com/jsonServerResponse",
+    dataType:"jsonp",
+    type:"get",//可以省略
+    jsonpCallback:"show",//->自定义传递给服务器的函数名，而不是使用jQuery自动生成的，可省略
+    jsonp:"callback",//->把传递函数名的那个形参callback，可省略
+    success:function (data){
+        console.log(data);
+    }
 });
 ```
-
-后端 node.js 代码示例
-
-```
-var querystring = require('querystring');
-var http = require('http');
-var server = http.createServer();
-
-server.on('request', function(req, res) {
-    var params = qs.parse(req.url.split('?')[1]);
-    var fn = params.callback;
-
-    // jsonp返回设置
-    res.writeHead(200, { 'Content-Type': 'text/javascript' });
-    res.write(fn + '(' + JSON.stringify(params) + ')');
-
-    res.end();
-});
-
-server.listen('8080');
-console.log('Server is running at port 8080...');
-```
-
-jsonp 缺点：只能实现 get 一种请求。
 
 #### 3.2 document.domain+iframe 跨域
 
