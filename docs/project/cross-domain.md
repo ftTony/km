@@ -37,29 +37,14 @@
 
 ### 二、常见跨域场景
 
-```
-URL                                      说明                    是否允许通信
-http://www.domain.com/a.js
-http://www.domain.com/b.js         同一域名，不同文件或路径           允许
-http://www.domain.com/lab/c.js
+**当协议、子域名、主域名、端口号中任意一个不相同时，都算作不同域。**不同域之间相互请求资源，就算作“跨域”。常见跨域场景如下图所示：
 
-http://www.domain.com:8000/a.js
-http://www.domain.com/b.js         同一域名，不同端口                不允许
+![images](cross.png)
 
-http://www.domain.com/a.js
-https://www.domain.com/b.js        同一域名，不同协议                不允许
+特别说明两点：
 
-http://www.domain.com/a.js
-http://192.168.4.12/b.js           域名和域名对应相同ip              不允许
-
-http://www.domain.com/a.js
-http://x.domain.com/b.js           主域相同，子域不同                不允许
-http://domain.com/c.js
-
-http://www.domain1.com/a.js
-http://www.domain2.com/b.js        不同域名                         不允许
-
-```
+1. **如果是协议和端口造成的跨域问题“前台”是无能为力的。**
+2. **在跨域问题上，仅仅是通过“URL的首部”来识别而不会根据域名对应的IP地址是否相同来判断。“URL的首部”可以理解为“协议，域名和商品必须匹配”**
 
 ### 三、跨域解决方案
 
@@ -75,9 +60,11 @@ http://www.domain2.com/b.js        不同域名                         不允�
 
 #### 3.1 通过 jsonp 跨域
 
-通常为了减轻 web 服务器的负载，我们把 js、css、img 等表态资源分离到另一台独立域名的服务器上，在 html 页面中再通过相应的标签从不同域名下加载静态资源，而被浏览器允许，基于原理，我们可以通过动态创建 script，再请求一个带参网址实现跨域通信。
-
-原生实现：
+- **JSONP原理：** 利用`<script>`标签没有跨域限制的漏洞，网页可以可以得到从其他来源动态产生的JSON数据。JSONP请求一定需要对方的服务器做支持才可以。
+- **JSONP和AJAX对比：** JSONP和AJAX相同，都是客户端向服务器端发送请求，从服务器获取数据的方式。但AJAX属于同源策略，JSONP属于非同源策略(跨域请求)
+- **JSONP优缺点：** JSONP优点是简单兼容性好，可用于解决主流浏览器的跨域数据访问的问题。缺点就是仅支持get方法具有局限性，不安全可能会遭受XSS攻击。
+- **JSONP的实现流程**
+  - 声明一个回调函数，其函数名(如show)当做参数值，要传递给跨域请求数据的服务器，函数形参为要获取目标数据(服务器返回的data)。
 
 ```
  <script>
@@ -167,11 +154,10 @@ jsonp 缺点：只能实现 get 一种请求。
 
 #### 3.3 location.hash+iframe 跨域
 
-**实现原理：** a 欲与 b 跨域相互通信，通过中间页 c 来实现。 三个页面，不同域之间利用 iframe 的 location.hash 传值，相同域之间直接 js 访问来通信。
+- **实现原理：** a 欲与 b 跨域相互通信，通过中间页 c 来实现。 三个页面，不同域之间利用 iframe 的 location.hash 传值，相同域之间直接 js 访问来通信。
+- **具体实现：** A 域：a.html -> B 域：b.html -> A 域：c.html，a 与 b 不同域只能通过 hash 值单向通信，b 与 c 也不同域也只能单向通信，但 c 与 a 同域，所以 c 可通过 parent.parent 访问 a 页面所有对象。
 
-**具体实现：** A 域：a.html -> B 域：b.html -> A 域：c.html，a 与 b 不同域只能通过 hash 值单向通信，b 与 c 也不同域也只能单向通信，但 c 与 a 同域，所以 c 可通过 parent.parent 访问 a 页面所有对象。
-
-1. a.html：(http://www.domain1.com/a.html)
+1. `a.html：(http://www.domain1.com/a.html)`
 
 ```
 <iframe id="iframe" src="http://www.domain2.com/b.html" style="display:none;"></iframe>
@@ -331,9 +317,9 @@ origin： 协议+主机+端口号，也可以设置为"\*"，表示可以传递�
 
 #### 3.6 跨域资源共享（CORS）
 
-普通跨域请求：只服务端设置 Access-Control-Allow-Origin 即可，前端无须设置，若要带 cookie 请求：前后端都需要设置。
+普通跨域请求：只服务端设置 `Access-Control-Allow-Origin` 即可，前端无须设置，若要带 `cookie` 请求：前后端都需要设置。
 
-需注意的是：由于同源策略的限制，所读取的 cookie 为跨域请求接口所在域的 cookie，而非当前页。如果想实现当前页 cookie 的写入，可参考下文：七、nginx 反向代理中设置 proxy_cookie_domain 和 八、NodeJs 中间件代理中 cookieDomainRewrite 参数的设置。
+需注意的是：由于同源策略的限制，所读取的`cookie`为跨域请求接口所在域的`cookie`，而非当前页。如果想实现当前页 cookie 的写入，可参考下文：nginx 反向代理中设置`proxy_cookie_domain` 和`NodeJs`中间件代理中 `cookieDomainRewrite`参数的设置。
 
 目前，所有浏览器都支持该功能(IE8+：IE8/9 需要使用 XDomainRequest 对象来支持 CORS）)，CORS 也已经成为主流的跨域解决方案。
 
@@ -441,7 +427,7 @@ location / {
 
 **跨域原理：** 同源策略是浏览器的安全策略，不是 HTTP 协议的一部分。服务器端调用 HTTP 接口只是使用 HTTP 协议，不会执行 JS 脚本，不需要同源策略，也就不存在跨越问题。
 
-**实现思路：**通过 nginx 配置一个代理服务器（域名与 domain1 相同，端口不同）做跳板机，反向代理访问 domain2 接口，并且可以顺便修改 cookie 中 domain 信息，方便当前域 cookie 写入，实现跨域登录。
+**实现思路：** 通过 nginx 配置一个代理服务器（域名与 domain1 相同，端口不同）做跳板机，反向代理访问 domain2 接口，并且可以顺便修改 cookie 中 domain 信息，方便当前域 cookie 写入，实现跨域登录。
 
 nginx 具体配置：
 
@@ -505,7 +491,7 @@ node 中间件实现跨域代理，原理大致与 nginx 相同，都是通过�
 
 **非 vue 框架的跨域（2 次跨域）**
 
-利用 node + express + http-proxy-middleware 搭建一个 proxy 服务器。
+利用 `node + express + http-proxy-middleware` 搭建一个 `proxy` 服务器。
 
 前端代码示例：
 
@@ -546,13 +532,13 @@ app.listen(3000);
 console.log('Proxy server is listen at port 3000...');
 ```
 
-Nodejs 后台同（六：nginx）
+Nodejs 后台同**nginx**
 
 **vue 框架的跨域（1 次跨域）**
 
-利用 node + webpack + webpack-dev-server 代理接口跨域。在开发环境下，由于 vue 渲染服务和接口代理服务都是 webpack-dev-server 同一个，所以页面与代理接口之间不再跨域，无须设置 headers 跨域信息了。
+利用 `node` + `webpack` + `webpack-dev-server` 代理接口跨域。在开发环境下，由于`vue`渲染服务和接口代理服务都是`webpack-dev-server`同一个，所以页面与代理接口之间不再跨域，无须设置`headers`跨域信息了。
 
-webpack.config.js 部分配置：
+`webpack.config.js` 部分配置：
 
 ```
 module.exports = {
@@ -576,9 +562,9 @@ module.exports = {
 
 #### 3.9 WebSocket 协议跨域
 
-WebSocket protocol 是 HTML5 一种新的协议。它实现了浏览器与服务器全双工通信，同时允许跨域通讯，是 server push 技术的一种很好的实现。
+`WebSocket protocol`是`HTML5`一种新的协议。它实现了浏览器与服务器全双工通信，同时允许跨域通讯，是 server push 技术的一种很好的实现。
 
-原生 WebSocket API 使用起来不太方便，我们使用 Socket.io，它很好地封装了 webSocket 接口，提供了更简单、灵活的接口，也对不支持 webSocket 的浏览器提供了向下兼容。
+原生 `WebSocket API` 使用起来不太方便，我们使用`Socket.io`，它很好地封装了`webSocket`接口，提供了更简单、灵活的接口，也对不支持 `webSocket` 的浏览器提供了向下兼容。
 
 前端代码：
 
@@ -642,7 +628,9 @@ socket.listen(server).on('connection', function(client) {
 ## 参考资料
 
 - [前端常见跨域解决方案（全）](https://segmentfault.com/a/1190000011145364)
-- [九种跨域方式实现原理（完整版](https://github.com/ljianshu/Blog/issues/55)
+- [九种跨域方式实现原理（完整版)](https://github.com/ljianshu/Blog/issues/55)
+- [深度解析 CORS 跨域原理及 @koa/cors 源码](https://mp.weixin.qq.com/s/S9NYjMAXq31zbieYBRG-rg)
+- [关于CORS跨域问题的理解](https://www.cnblogs.com/lishanlei/p/8823823.html)
 
 ## 联系作者
 
