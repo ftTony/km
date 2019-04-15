@@ -328,99 +328,114 @@ origin： 协议+主机+端口号，也可以设置为"\*"，表示可以传递�
 
 #### 3.6 跨域资源共享（CORS）
 
-普通跨域请求：只服务端设置 `Access-Control-Allow-Origin` 即可，前端无须设置，若要带 `cookie` 请求：前后端都需要设置。
+**CORS需要浏览器和后端同时支持。IE8和9需要通过XDomainRequest来实现。**
 
-需注意的是：由于同源策略的限制，所读取的`cookie`为跨域请求接口所在域的`cookie`，而非当前页。如果想实现当前页 cookie 的写入，可参考下文：nginx 反向代理中设置`proxy_cookie_domain` 和`NodeJs`中间件代理中 `cookieDomainRewrite`参数的设置。
+浏览器会自动进行`CORS`通信，实现`CORS`通信的关键是后端。只要后端实现了`CORS`，就实现了跨域。
 
-目前，所有浏览器都支持该功能(IE8+：IE8/9 需要使用 XDomainRequest 对象来支持 CORS）)，CORS 也已经成为主流的跨域解决方案。
+服务端设置`Access-Control-Allow-Origin`就可以开启`CORS`。 该属性表示哪些域名可以访问资源，如果设置通配符则表示所有网站都可以访问资源。
 
-**前端设置**
+虽然设置`CORS`和前端没什么关系，但是通过这种方式解决跨域问题的话，会在发送请求时出现两种情况，分别为**简单请求**和**复杂请求**。
 
-1. 原生 ajax
+**简单请求**
+
+只要同时满足以下两大条件，就属于简单请求
+
+- **条件1：** 请求方法使用下列方法之一分别为`GET`、`HEAD`、`POST`
+- **条件2：** HTTP的头信息不超出以下几个种字段`Accept`、`Accept-Language`、`Content-Language`、`Last-Event-ID`、`Content-Type`只限于三个值`application/x-www-form-urlencoded`、`multipart/form-data`、`text/plain`
+
+**非简单请求**
+
+不同时满足上面两个条件，就是非简单请求了。
+
+复杂请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求,该请求是 option 方法的，通过该请求来知道服务端是否允许跨域请求。
+
+我们用`PUT`向后台请求时，属于复杂请求，后台需做如下配置：
 
 ```
-// 前端设置是否带cookie
-xhr.withCredentials = true;
+// 允许哪个方法访问我
+res.setHeader('Access-Control-Allow-Methods', 'PUT')
+// 预检的存活时间
+res.setHeader('Access-Control-Max-Age', 6)
+// OPTIONS请求不做任何处理
+if (req.method === 'OPTIONS') {
+  res.end()
+}
+// 定义后台返回的内容
+app.put('/getData', function(req, res) {
+  console.log(req.headers)
+  res.end('我不爱你')
+})
+```
 
-var xhr = new XMLHttpRequest(); // IE8/9需用window.XDomainRequest兼容
+接下来我们看下一个完整复杂请求的例子，并且介绍下CORS请求相关的字段
 
-// 前端设置是否带cookie
-xhr.withCredentials = true;
-
-xhr.open('post', 'http://www.domain2.com:8080/login', true);
-xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-xhr.send('user=admin');
-
+```
+// index.html
+let xhr = new XMLHttpRequest()
+document.cookie = 'name=xiamen' // cookie不能跨域
+xhr.withCredentials = true // 前端设置是否带cookie
+xhr.open('PUT', 'http://localhost:4000/getData', true)
+xhr.setRequestHeader('name', 'xiamen')
 xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-        alert(xhr.responseText);
+  if (xhr.readyState === 4) {
+    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+      console.log(xhr.response)
+      //得到响应头，后台需设置Access-Control-Expose-Headers
+      console.log(xhr.getResponseHeader('name'))
     }
-};
+  }
+}
+xhr.send()
 ```
 
-2. jQuery ajax
-
 ```
-$.ajax({
-    ...
-   xhrFields: {
-       withCredentials: true    // 前端设置是否带cookie
-   },
-   crossDomain: true,   // 会让请求头中包含跨域的额外信息，但不会含cookie
-    ...
-});
+//server1.js
+let express = require('express');
+let app = express();
+app.use(express.static(__dirname));
+app.listen(3000);
 ```
 
-3. vue 框架
-
-在 vue-resource 封装的 ajax 组件中加入以下代码：
-
 ```
-Vue.http.options.credentials = true
+//server2.js
+let express = require('express')
+let app = express()
+let whitList = ['http://localhost:3000'] //设置白名单
+app.use(function(req, res, next) {
+  let origin = req.headers.origin
+  if (whitList.includes(origin)) {
+    // 设置哪个源可以访问我
+    res.setHeader('Access-Control-Allow-Origin', origin)
+    // 允许携带哪个头访问我
+    res.setHeader('Access-Control-Allow-Headers', 'name')
+    // 允许哪个方法访问我
+    res.setHeader('Access-Control-Allow-Methods', 'PUT')
+    // 允许携带cookie
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    // 预检的存活时间
+    res.setHeader('Access-Control-Max-Age', 6)
+    // 允许返回的头
+    res.setHeader('Access-Control-Expose-Headers', 'name')
+    if (req.method === 'OPTIONS') {
+      res.end() // OPTIONS请求不做任何处理
+    }
+  }
+  next()
+})
+app.put('/getData', function(req, res) {
+  console.log(req.headers)
+  res.setHeader('name', 'jw') //返回一个响应头，后台需设置
+  res.end('我不爱你')
+})
+app.get('/getData', function(req, res) {
+  console.log(req.headers)
+  res.end('我不爱你')
+})
+app.use(express.static(__dirname))
+app.listen(4000)
 ```
 
-**服务端设置**
-
-若后端设置成功，前端浏览器控制台则不会出现跨域报错信息，反之，说明没设成功。
-
-nodejs 后台示例
-
-```
-var http = require('http');
-var server = http.createServer();
-var qs = require('querystring');
-
-server.on('request', function(req, res) {
-    var postData = '';
-
-    // 数据块接收中
-    req.addListener('data', function(chunk) {
-        postData += chunk;
-    });
-
-    // 数据接收完毕
-    req.addListener('end', function() {
-        postData = qs.parse(postData);
-
-        // 跨域后台设置
-        res.writeHead(200, {
-            'Access-Control-Allow-Credentials': 'true',     // 后端允许发送Cookie
-            'Access-Control-Allow-Origin': 'http://www.domain1.com',    // 允许访问的域（协议+域名+端口）
-            /*
-             * 此处设置的cookie还是domain2的而非domain1，因为后端也不能跨域写cookie(nginx反向代理可以实现)，
-             * 但只要domain2中写入一次cookie认证，后面的跨域接口都能从domain2中获取cookie，从而实现所有的接口都能跨域访问
-             */
-            'Set-Cookie': 'l=a123456;Path=/;Domain=www.domain2.com;HttpOnly'  // HttpOnly的作用是让js无法读取cookie
-        });
-
-        res.write(JSON.stringify(postData));
-        res.end();
-    });
-});
-
-server.listen('8080');
-console.log('Server is running at port 8080...');
-```
+上述代码由`http://localhost:3000/index.html`向`http://localhost:4000/`跨域请求，正如我们上面所说的，后端是实现`CORS`通信的关键。
 
 #### 3.7 nginx 代理跨域
 
