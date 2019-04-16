@@ -6,7 +6,11 @@
 
 ## 内容
 
-### 几种实现双向数据绑定做法
+- 几种实现双向数据绑定做法
+- 重新认识Object.defineProperty
+- 思路整理
+
+### 一、几种实现双向数据绑定做法
 
 目前几种主流的mvc(vm)框架都实现了单向数据绑定，而我所理解的双向数据绑定无非就是在单向绑定的基础上给可输入元素（input、textare等）添加了change(input)事件，来动态修改model和 view，并没有多高深。所以无需太过介怀是实现的单向或双向绑定。
 
@@ -30,7 +34,7 @@
 
 **数据劫持:** vue.js 则是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。
 
-### 重新认识Object.defineProperty()
+### 二、重新认识Object.defineProperty()
 
 Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。
 
@@ -74,7 +78,7 @@ Object.defineProperty(o, "a", {
 
 关于`Object.defineProperty()`[详细使用请点击这里阅读更多用法](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)。
 
-### 思路整理
+### 三、思路整理
 
 要实现mvvm的双向绑定，就必须要实现以下几点：
 
@@ -85,9 +89,10 @@ Object.defineProperty(o, "a", {
 mvvm入口函数，整合以上三者
 
 上述流程如图所示：
-![132184689-57b310ea1804f_articlex](https://user-images.githubusercontent.com/6395813/50559869-b43f8400-0d35-11e9-84b1-1faa697cae52.png)
 
-### 实现Observer
+![img](vue01.png)
+
+#### 3.1 实现Observer
 
 ```
 var data={name:'tony'};
@@ -219,11 +224,11 @@ Dep.prototype={
 
 这里已经实现了一个Observer了，已经具备了监听数据和数据变化通知订阅者的功能。
 
-### 2.实现Compile
+#### 3.2 实现Compile
 
 compile主要做的事情是解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图，如图所示：
 
-![1117380429-57b3110440af0](https://user-images.githubusercontent.com/6395813/50559873-c28da000-0d35-11e9-9326-481638d0e3a3.png)
+![image](vue02.png)
 
 因为遍历解析的过程有多次操作dom节点，为提高性能和效率，会先将跟节点el转换成文档碎片fragment进行解析编译操作，解析完成，再将fragment添加回原来的真实dom节点中
 
@@ -337,7 +342,7 @@ var updater={
 这里通过递归遍历保证了每个节点及子节点都会解析编译到，包括了双括号表达式声明的文本节点。指令的声明规定是通过特定前缀的节点属性来标记，如`<span v-text="content" other-attr`中v-text便是指令，而other-attr不是指令，只是普通的属性。
 监听数据、绑定更新函数的处理是在compileUtil.bind()这个方法中，通过new Watcher()添加回调来接收数据变化的通知
 
-### 3.实现Watcher
+#### 3.3 实现Watcher
 
 Watcher订阅者作为Observer和Compile之间通信的桥梁，主要做的事情是:
 
@@ -377,7 +382,7 @@ Watcher.prototype={
 
 实例化Watcher的时候，调用get()方法，通过Dep.target = watcherInstance标记订阅者是当前watcher实例，强行触发属性定义的getter方法，getter方法执行的时候，就会在属性的订阅器dep添加当前watcher实例，从而在属性值有变化的时候，watcherInstance就能收到更新通知。
 
-### 4、实现MVVM
+#### 3.4 实现MVVM
 
 MVVM作为数据绑定的入口，整合Observer、Compile和Watcher三者，通过Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起Observer和Compile之间的通信桥梁，达到数据变化 -> 视图更新；视图交互变化(input) -> 数据model变更的双向绑定效果。
 
