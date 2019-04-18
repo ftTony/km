@@ -201,12 +201,28 @@ Grid布局，是一个基于网格的二维布局系统，目的是用来优化�
 
 **实现步骤**
 
-- 三个部分都设定为左浮动
+- 三个部分都设定为左浮动，**否则左右两边内容上不去，就不可能与中间列同一行。**然后设置center的宽度为100%(**实现中间列内容自适应**)，此时，left和right部分会跳到下一行
+
+![images](layout02.png)
+
+- 通过设置`margin-left`为负值让`left`和`right`部分回到与`center`部分同一行
+
+![images](layout03.png)
+
+- 通过设置父容器的`padding-left`和`padding-right`，让左右两边留出间隙。
+
+![images](layout04.png)
+
+- 通过设置相对定位，让`left`和`right`部分移动到两边。
+
+![images](layout05.png)
 
 **缺点**
 
 - center部分的最小宽度不能小于left部分的宽度，否则会left总会掉到下一行
-- 如果其中一列内容高度
+- 如果其中一列内容高度拉长(如下图)，其他两列的背景并不会自动填充。(借助等高布局正padding+负margin可解决，下文会介绍)
+
+![images](layout06.png)
 
 #### 3.2 双飞翼布局
 
