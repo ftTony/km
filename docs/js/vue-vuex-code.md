@@ -8,6 +8,11 @@
 
 ### 参考资料
 
+- [vuex 原理及源码分析](https://github.com/dwqs/blog/issues/58)
+- [vuex-analysis](https://github.com/wabish/vuex-analysis)
+- [VUEX 源码学习笔记](https://github.com/DuLinRain/vuex-sourcecode-analysis)
+- [Vue2.x 源码解析系列一：我的源码阅读心得](https://github.com/lihongxun945/myblog/issues/22)
+
 ## 联系作者
 
 <div align="center">
