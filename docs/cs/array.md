@@ -11,7 +11,8 @@
 
 ### 参考资料
 
-- 《学习JavaScript数据结构与算法》
+- 《学习 JavaScript 数据结构与算法》
+- [18 张图带你彻底认识这些数据结构](https://mp.weixin.qq.com/s/bOafatF1jSMAkRY129Nu_A)
 
 ## 联系作者
 
