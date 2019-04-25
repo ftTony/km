@@ -89,6 +89,7 @@ Docker的主要用途，目前有三大类。
 - [使用 Docker 构建前端应用](https://zhuanlan.zhihu.com/p/39241059)
 - [Docker — 从入门到实践](https://docker_practice.gitee.io/zh-cn/)
 - [使用 Docker 构建前端应用](https://zhuanlan.zhihu.com/p/39241059)
+- [如何使用 docker 部署前端应用](https://juejin.im/post/5c83cbaa6fb9a04a0f65fdaa)
 
 ## 联系作者
 
