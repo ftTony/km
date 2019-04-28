@@ -442,6 +442,25 @@ npm uninstall packageName
 
 ### 三、npm scripts 脚本
 
+`package.json`中的[scripts](https://docs.npmjs.com/misc/scripts)字段可以用来自定义脚本命令，它的每一个属性，对应一段脚本。以`vue-cli3`为例：
+
+```
+"scripts": {
+  "serve": "vue-cli-service serve",
+  ...
+}
+```
+
+这样就可以通过`npm run serve`脚本代替`vue-cli-service serve`脚本来启动项目，而无需每次敲一遍这么冗长的脚本。
+
+- 工作原理
+- PATH 环境变量
+
+#### 3.1 工作原理
+
+
+#### 3.2 PATH 环境变量
+
 ### 四、npm 配置
 
 `npm`的配置操作可以帮助我们预先设定好`npm`对项目的行为动作，也可以让我们预先定义好一些配置项以供项目中使用。所以了解`npm`的配置机制也是很有必要。
