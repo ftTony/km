@@ -32,11 +32,32 @@
 
 ```
 function shellSort(arr){
-
+    var len = arr.length,
+        temp,
+        gap = 1;
+   console.time('希尔排序耗时：');
+   while(gap<len/5){
+       gap = gap*5+1;
+   }
+   for(gap;gap>0;gap=Math.floor(gap/5)){
+       for(var i = gap;i<len;i++){
+           temp=arr[i];
+           for(var j=i-gap;i>=0 && arr[j]>temp;j-=gap){
+               arr[j+gap]=arr[j];
+           }
+           arr[j+gap]=temp;
+       }
+   }
+   console.timeEnd('希尔排序耗时：')
+   return arr;
 }
+var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
+console.log(shellSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
 ```
 
 #### 1.3 希尔排序图示
+
+![images](sort08.gif)
 
 #### 1.4 算法分析
 
@@ -91,18 +112,33 @@ function mergeSort(arr){
 - 递归地把小于基准值元素的子数列和大于基准值元素的子数列和大于苦准值元素的子数列排序。
 
 ```
-
+function quickSort(array,left,right){
+    console.time('1.快速排序耗时');
+    console.time('1.快速排序耗时');
+}
 ```
 
 #### 3.3 动图演示
 
 #### 3.4 算法分析
 
+- 最佳情况：T(n)=O(nlogn)
+- 最差情况：T(n)=O(n2)
+- 平均情况：T(n)=O(nlogn)
+
 ### 四、堆排序
 
 #### 4.1 算法简介
 
+> 堆排序是指利用堆这种数据结构所设计的一种排序算法。堆积是一个挖完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。
+
 #### 4.2 算法描述和实现
+
+**具体算法描述如下：**
+
+- 将初始待排序关键字序列(R1,R2....Rn)构建成大顶堆，此堆为初始的无序区；
+
+**JavaScript 代码实现**
 
 ```
 
