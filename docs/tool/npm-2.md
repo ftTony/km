@@ -470,7 +470,7 @@ npm uninstall packageName
 
 ![images](npm01.png)
 
-如果局部安装`@vue/cli`的话，`npm`则会在本地项目`./node_modules/.bin`目录下创建一个指向``
+如果局部安装`@vue/cli`的话，`npm`则会在本地项目`./node_modules/.bin`目录下创建一个指向`./node_moudles/@vue/cli/bin/vue.js`文件的名为`vue`的软链接，这个时候需要在终端中输入`./node_modules/.bin/vue`来执行（也可以使用`npx vue`命令来执行，[npx](http://www.ruanyifeng.com/blog/2019/02/npx.html)的作用就是为了方便调用项目内部安装的模块）。
 
 >软链接（符号链接）是一类特殊的可执行文件，其包含有一条以绝对路径或相对路径的形式指向其它文件或者目录的引用。
 
