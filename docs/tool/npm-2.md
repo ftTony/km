@@ -458,8 +458,25 @@ npm uninstall packageName
 
 #### 3.1 工作原理
 
+`package.json`中的字段[bin](https://docs.npmjs.com/files/package.json.html#bin)表示的是一个可执行文件到指定文件源的映射。例如在`@vue/cli`的`package.json`中：
+
+```
+"bin": {
+  "vue": "bin/vue.js"
+}
+```
+
+如果全局安装`@vue/cli`的话，`@vue/cli`**源文件会被安装在全局源文件安装目录（`/user/local/lib/node_modules`）下，而`npm`会在全局可执行`bin`文件安装目录（`/usr/local/bin`）下创建一个指向`/usr/local/lib/node_modules/@vue/cli/bin/vue.js`文件的名为vue的软链接，**这样就可以直接在终端输入`vue`来执行相关命令。如下图所示：
+
+![images](npm01.png)
+
+如果局部安装`@vue/cli`的话，`npm`则会在本地项目`./node_modules/.bin`目录下创建一个指向``
+
+>软链接（符号链接）是一类特殊的可执行文件，其包含有一条以绝对路径或相对路径的形式指向其它文件或者目录的引用。
 
 #### 3.2 PATH 环境变量
+
+在terminal中执行命令时，命令会在PATH环境变量里包含的路径中去寻找相同名字的可执行文件。局部安装的包只在./node_modules/.bin中注册了它们的可执行文件，不会被包含在PATH环境变量中，这个时候在terminal中输入命令将会报无法找到的错误。
 
 ### 四、npm 配置
 
