@@ -114,25 +114,6 @@ module.exports = {
             collapsable: false,
             children: [
                 'ts-introduct'
-                // 'ts-types',
-                // 'ts-deciarations',
-                // 'ts-interfaces',
-                // 'ts-classes',
-                // 'ts-functions',
-                // 'ts-generics',
-                // 'ts-enums',
-                // 'ts-type-inference',
-                // 'ts-type-compatibility',
-                // 'ts-advanced-types',
-                // 'ts-symbols',
-                // 'ts-iterators-and-generators',
-                // 'ts-modules',
-                // 'ts-namespaces',
-                // 'ts-namespaces-and-modules',
-                // 'ts-module-resolution',
-                // 'ts-declaration-merging',
-                // 'ts-decorators',
-                // 'ts-mixins',
             ]
         },
         {
@@ -186,10 +167,11 @@ module.exports = {
                 'background',
                 'stack',
                 'layout',
+                'column-layout',
                 'px',
+                'font-size',
                 'flex',
                 'grid',
-                'column-layout',
                 'bfc',
                 'scss',
                 'select'
