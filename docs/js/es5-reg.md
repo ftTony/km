@@ -415,6 +415,47 @@ console.log(result);
 // => "#hello#"
 ```
 
+**^和\$**
+
+- `^`(脱字符) 匹配开头，在多行匹配中行开头。
+- `$`(美元符号)匹配结尾，在多行匹配中匹配行结尾。
+
+比如我们把字符串的开头和结尾用“#”替换（位置可以替换成字符的！）：
+
+```
+var result = "hello".replace(/^|$/g, '#');
+console.log(result);
+// => "#hello#"
+```
+
+多行匹配模式时，二者是行的概念，这个需要我们的注意：
+
+```
+var result = "I\nlove\njavascript".replace(/^|$/gm, '#');
+console.log(result);
+/*
+#I#
+#love#
+#javascript#
+*/
+```
+
+**\b 和\B**
+
+`\b` 是单词边界，具体就是`\w` 和`\W` 之间的位置，也包括`\w` 和`^`之间的位置，也包括`\w`和`\$`之间的位置。
+
+```
+var result = "[JS] Lesson_01.mp4".replace(/\b/g, '#');
+console.log(result);
+// => "[#JS#] #Lesson_01#.#mp4#"
+```
+
+```
+var result = "[JS] Lesson_01.mp4".replace(/\B/g, '#');
+console.log(result);
+// => "#[J#S]# L#e#s#s#o#n#_#0#1.m#p#4"
+```
+
 ### 三、正则表达式括号的作用
 
 ```
