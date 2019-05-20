@@ -262,7 +262,16 @@ var postOrderTraverseNode = function(node,callback){
 #### 3.4 最小的值/键
 
 ```
-
+// 最小值
+var minNode = function(node){
+    if(node){
+        while(node && node.left !== null){
+            node = node.left;
+        }
+        return node.key;
+    }
+    return null;
+};
 ```
 
 #### 3.5 最大的值/键
