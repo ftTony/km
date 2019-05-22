@@ -204,6 +204,8 @@ var maxNode = function(node){
 ### 参考资料
 
 - 《学习JavaScript数据结构与算法》
+- [二叉树有几种存储方式？(上)](https://mp.weixin.qq.com/s/h_mO28pmE_uNbHA5GVmWPA)
+- [二叉树基础（上）：什么样的二叉树适合用数组来存储？](https://time.geekbang.org/column/article/67856)
 
 ## 联系作者
 
