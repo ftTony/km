@@ -79,7 +79,15 @@
 
 ![images](tree08.png)
 
+数组的方式存储不需要开辟额外的指针空间，但是数组需要的内存空间是连续的，如果连续的内存空间不足，就无法进行存储。
+
 ### 二、创建树
+
+#### 2.1 树的相关方法
+
+- `insert(key)`：向树中插入一个新的键。
+- `search(key)`：在树中查找一个键，如果节点存在，则返回 true；如果不存在，则返回 false。
+- `remove(key)`：从树中移除某个键
 
 ```
 function BinarySearchTree(){
@@ -183,30 +191,6 @@ var searchNode = function(node,key){
     }
 }
 
-var inOrderTraverseNode = function(node,callback){
-    if(node !== null){
-        inOrderTraverseNode(node.left,callback);
-        callback(node.key);
-        inOrderTraverseNode(node.right,callback);
-    }
-};
-
-var preOrderTraverseNode = function(node,callback){
-    if(node!==null){
-        callback(node.key);
-        preOrderTraverseNode(node.left,callback);
-        preOrderTraverseNode(node.right,callback);
-    }
-};
-
-var postOrderTraverseNode = function(node,callback){
-    if(node!==null){
-        postOrderTraverseNode(node.left,callback);
-        postOrderTraverseNode(node.right,callback);
-        callback(node.key);
-    }
-}
-
 function printNode(value){
     console.log(value);
 }
@@ -227,18 +211,63 @@ var insertNode = function(node,newNode){
     }
 }
 
-// 最小值
-var minNode = function(node){
-    if(node){
-        while(node && node.left !== null){
-            node = node.left;
-        }
-        return node.key;
+```
+
+### 三、二叉树的遍历
+
+共有四种遍历的方式，分别为**前序遍历**、**中序遍历**、**后序遍历**、**按层遍历**。
+
+- `inOrderTraverse`：通过中序遍历方式遍历所有节点。
+- `preOrderTraverse`：通过先序遍历方式遍历所有节点。
+- `postOrderTraverse`：通过后序遍历方式遍历所有节点。
+- `min`：返回树中最小的值/键。
+- `max`：返回树中最大的值/键。
+
+#### 3.1 中序遍历相关代码
+
+```
+var inOrderTraverseNode = function(node,callback){
+    if(node !== null){
+        inOrderTraverseNode(node.left,callback);
+        callback(node.key);
+        inOrderTraverseNode(node.right,callback);
     }
-    return null;
 };
+```
 
+#### 3.2 前序遍历相关代码
 
+```
+var preOrderTraverseNode = function(node,callback){
+    if(node!==null){
+        callback(node.key);
+        preOrderTraverseNode(node.left,callback);
+        preOrderTraverseNode(node.right,callback);
+    }
+};
+```
+
+#### 3.3 后序遍历相关代码
+
+```
+var postOrderTraverseNode = function(node,callback){
+    if(node!==null){
+        postOrderTraverseNode(node.left,callback);
+        postOrderTraverseNode(node.right,callback);
+        callback(node.key);
+    }
+}
+```
+
+#### 3.4 最小的值/键
+
+```
+
+```
+
+#### 3.5 最大的值/键
+
+```
 // 最大值
 var maxNode = function(node){
     if(node){
@@ -249,19 +278,7 @@ var maxNode = function(node){
     }
     return null;
 };
-
 ```
-
-### 三、树的相关方法
-
-- `insert(key)`：向树中插入一个新的键。
-- `search(key)`：在树中查找一个键，如果节点存在，则返回 true；如果不存在，则返回 false。
-- `inOrderTraverse`：通过中序遍历方式遍历所有节点。
-- `preOrderTraverse`：通过先序遍历方式遍历所有节点。
-- `postOrderTraverse`：通过后序遍历方式遍历所有节点。
-- `min`：返回树中最小的值/键。
-- `max`：返回树中最大的值/键。
-- `remove(key)`：从树中移除某个键
 
 ### 参考资料
 
