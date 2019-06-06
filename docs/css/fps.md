@@ -48,6 +48,18 @@ Chrome 提供给开发者的功能十分强大，在开发者工具中，我们�
 
 #### 3.1 Blink 内核早期架构
 
+以 Chrome 浏览器内核 Blink 渲染页面为例。对早期的 Chrome 浏览器而言，每个页面 Tab 对应一个独立的 renderer 进程，Renderer 进程中包含了主线程和合成线程。早期 Chrome 内核架构：
+
+![images](fps02.jpg)
+
+其中，主线程主要负责：
+
+- Javascript 的计算与执行
+- CSS 样式计算
+- Layout 计算
+- 将页面元素绘制成位图（paint），也就是光栅化（Raster）
+- 将位图给合成线程
+
 #### 3.2 JS 动画与 CSS 动画的细微区别
 
 #### 3.3 什么是 Frame Timing API ？
