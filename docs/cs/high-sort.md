@@ -363,6 +363,21 @@ console.log(countingSort(arr)); //[1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 6, 
 **JavaScript 代码实现**
 
 ```
+// 桶排序
+function bucketSort(array,num){
+    if(array.length <=1){
+        return array;
+    }
+    var len = array.length,
+        buckets = [],
+        result = [],
+        mtn = max = array[0],
+        regex ='/^[1-9]+[0-9]*$/',
+        space,
+        n=0;
+        num = num || ((num>1 && regex.test(num))?num:10);
+        console.time('桶排序耗时');
+}
 
 ```
 
