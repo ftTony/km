@@ -115,6 +115,63 @@ CSS 代码:
 ```
 
 - **justify-items**/**align-items**/**place-items**
+
+`justify-items`属性设置单元格内容的水平位置（左中右）
+
+值：
+
+- `start`：将网格项对齐到其单元格的左侧起始边缘（左侧对齐）
+- `end`：将网格欺项对齐到其单元格的右侧结束边缘（右侧对齐）
+- `center`：将风格项对齐到其单元格的水平中间位置（水平居中对齐）
+- `stretch`：填满单元格的宽度（默认值）
+
+CSS 代码：
+
+```
+.container {
+  justify-items: start | end | center | stretch;
+}
+```
+
+示例：
+
+```
+.container {
+  justify-items: start;
+}
+```
+
+`align-items`属性设置单元内容的垂直位置（上中下）。
+
+值：
+
+- `start`：将网格项对齐到其单元格的顶部起始边缘（顶部对齐）
+- `end`：将网格项对齐到其单元格的底部结束边缘（底部对齐）
+- `center`：将网格项对齐到其单元格的垂直中间位置（垂直居中对齐）
+- `stretch`：填满单元格的宽度（默认值）
+
+  CSS 代码：
+
+```
+.container {
+  align-items: start | end | center | stretch;
+}
+```
+
+示例：
+
+```
+.container {
+  align-items: start;
+}
+```
+
+`place-items`是设置 `align-items` 和 `justify-items` 的简写形式。
+
+值：
+
+`<align-items> <justify-items>`：第一个值设置 `align-items` 属性，第二个值设置 `justify-items` 属性。如果省略第二个值，则将第一个值同时分配给这两个属性。
+
 - **justify-content**/**align-content**/**place-content**
 - **grid-auto-columns**/**grid-auto-rows**
 
