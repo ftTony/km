@@ -150,7 +150,7 @@ CSS 代码：
 - `center`：将网格项对齐到其单元格的垂直中间位置（垂直居中对齐）
 - `stretch`：填满单元格的宽度（默认值）
 
-  CSS 代码：
+CSS 代码：
 
 ```
 .container {
@@ -172,7 +172,68 @@ CSS 代码：
 
 `<align-items> <justify-items>`：第一个值设置 `align-items` 属性，第二个值设置 `justify-items` 属性。如果省略第二个值，则将第一个值同时分配给这两个属性。
 
+CSS 代码：
+
+```
+place-items: <align-items> <justify-items>;
+```
+
+示例：
+
+```
+place-items: start end;
+```
+
 - **justify-content**/**align-content**/**place-content**
+
+`justify-content`属性是整个内容区域在容器里面的水平位置（左中右）。
+
+值：
+
+CSS 代码：
+
+```
+
+```
+
+示例：
+
+```
+
+```
+
+`align-content`属性是整个内容区域的垂直位置（上中下）。
+
+值：
+
+CSS 代码：
+
+```
+
+```
+
+示例：
+
+```
+
+```
+
+`place-content`属性是`align-content`属性和`justify-content`属性的合并简写形式。
+
+值：
+
+CSS 代码：
+
+```
+
+```
+
+示例：
+
+```
+
+```
+
 - **grid-auto-columns**/**grid-auto-rows**
 
 #### 1.2 网格项(Grid Items) 属性
