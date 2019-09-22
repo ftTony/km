@@ -1,0 +1,23 @@
+{
+  "name": "km",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "km:dev": "vuepress dev docs",
+    "km:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ftTony/km.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ftTony/km/issues"
+  },
+  "homepage": "https://github.com/ftTony/km#readme",
+  "devDependencies": {
+    "vuepress": "^1.1.0"
+  }
+}
