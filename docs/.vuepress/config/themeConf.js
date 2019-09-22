@@ -1,5 +1,10 @@
 module.exports = {
     navbar: true,
+    editLinks: true,
+    editLinkText: "在 GitHub 上编辑此页",
+    lastUpdated: "更新于",
+    search: true,
+    searchMaxSuggestions: 10,
     nav: [{
             text: '首页',
             link: '/'
@@ -24,7 +29,7 @@ module.exports = {
             text: 'css',
             items: [{
                     text: 'css基础',
-                    link: '/css/basic'
+                    link: '/css/basic/'
                 },
                 {
                     text: 'css动画',
@@ -33,6 +38,18 @@ module.exports = {
                 {
                     text: 'css模块化',
                     link: '/css/module/'
+                }
+            ]
+        },
+        {
+            text: 'HTML5',
+            items: [{
+                    text: 'canvas ',
+                    link: '/html5/canvas'
+                },
+                {
+                    text: 'svg',
+                    link: '/html5/svg'
                 }
             ]
         },
@@ -52,11 +69,11 @@ module.exports = {
             text: '软件工程',
             items: [{
                     text: '测试',
-                    link: '/tool/git'
+                    link: '/project/test'
                 },
                 {
                     text: '规则化',
-                    link: '/tool/webpack'
+                    link: '/project/regularization'
                 }
             ]
         },
@@ -64,7 +81,7 @@ module.exports = {
             text: '计算机基础',
             items: [{
                     text: '设计模式',
-                    link: '/cs/git'
+                    link: '/cs/patterns'
                 },
                 {
                     text: '计算机网络',
@@ -85,5 +102,11 @@ module.exports = {
             ]
         },
     ],
-    sidebar: []
+    sidebar: {
+        '/js/es5/': [
+            '',
+            '1',
+            '2'
+        ]
+    }
 };
