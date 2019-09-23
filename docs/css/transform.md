@@ -57,7 +57,7 @@ rotate(<angle>)：通过指定的角度参数对原元素指定一个 2D，需�
 
 ### 三、移动 translate
 
-移动 translate 我们分为三种情况：translate(x,y)水平方向和垂直方向
+移动 translate 我们分为三种情况：translate(x,y)水平方向和垂直方向同时移动（也就是 X 轴和 Y 轴同时移动）；translateX(x)仅水平方向移动(X 轴移动)；translateY(Y)仅垂直方向移动（Y 轴移动），
 
 ### 四、缩放 scale
 
