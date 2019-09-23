@@ -1,3 +1,5 @@
+# 数据类型与数据类型转换
+
 ## 数据类型种类
 
 js 数据类型主要有 `String`、`Number`、`Boolean`、`Object`、`Null`、`Undefined`、`Symbol`
@@ -29,13 +31,13 @@ js 数据类型主要有 `String`、`Number`、`Boolean`、`Object`、`Null`、`
 | 1(无穷大，非零)        | "1"                                                                                                                        |                                                                                                                               | true   | new Number(1)         |
 | {}(任意对象)           | 调用对象的 toStirng()方法，如果值是原值则返回，否则，调用对象的 valueOf()方法，如果值是原值则返回，否则抛出 TypeError 错误 | 调用对象的 toValue()方法，如果值是原值则返回，否则，调用对象的 valueString()方法，如果值是原值则返回，否则抛出 TypeError 错误 | true   |
 | \[\](任意数组)         | ""                                                                                                                         | 0                                                                                                                             | true   |
-| \[9\](1个数字元素)     | "9"                                                                                                                        | 9                                                                                                                             | true   |
+| \[9\](1 个数字元素)    | "9"                                                                                                                        | 9                                                                                                                             | true   |
 | \['a'\](其他数组)      | 使用 join()方法                                                                                                            | NaN                                                                                                                           | true   |
 | function(){}(任意函数) | 将用户定义的函数转换为 JavaScript 源 eadc 字符串                                                                           | NaN                                                                                                                           | true   |
 
 **2.2 ToPrimitive**
 
-抽象操作ToPrimitive用于将引用类型转为原始类型。实现细节比较复杂，可以[参考这里](https://segmentfault.com/a/1190000016325587)。
+抽象操作 ToPrimitive 用于将引用类型转为原始类型。实现细节比较复杂，可以[参考这里](https://segmentfault.com/a/1190000016325587)。
 
 ```
 //模拟一个对象的转基本类型操作 ToPrimitive
@@ -53,7 +55,7 @@ o[Symbol.toPrimitive] = function(hint) {
       return o.toString()
     } else {
       return o.valueOf()
-    }  
+    }
   }
 }
 String(o) // string
@@ -67,9 +69,9 @@ o++ // number
 
 规则如下：
 
-- 如果传入参数是string（目前只有调用String()函数是执行这个顺序）：首先检查该值是否有toString()方法。如果有并且返回基本类型值，就使用该值进行强制类型转换。如果没有就检查该值是否有valueOf()方法。如果有并且返回基本类型值就使用该回值来进行强制类型转换，如果没有或者返回的不是基本类型值，就抛出错误。
+- 如果传入参数是 string（目前只有调用 String()函数是执行这个顺序）：首先检查该值是否有 toString()方法。如果有并且返回基本类型值，就使用该值进行强制类型转换。如果没有就检查该值是否有 valueOf()方法。如果有并且返回基本类型值就使用该回值来进行强制类型转换，如果没有或者返回的不是基本类型值，就抛出错误。
 
-- 如果传入参数是number/default（常见强制类型转换都是这个顺序）：首先检查该值是否有valueOf()方法。如果有并且返回基本类型值，就使用该值进行强制类型转换。如果没有就检查该值是否有toString()方法。如果有并且返回基本类型值就使用该回值来进行强制类型转换，如果没有或者返回的不是基本类型值，就抛出错误。
+- 如果传入参数是 number/default（常见强制类型转换都是这个顺序）：首先检查该值是否有 valueOf()方法。如果有并且返回基本类型值，就使用该值进行强制类型转换。如果没有就检查该值是否有 toString()方法。如果有并且返回基本类型值就使用该回值来进行强制类型转换，如果没有或者返回的不是基本类型值，就抛出错误。
 
 **2.3 ToString**
 
@@ -77,7 +79,7 @@ o++ // number
 
 String()函数就会执行抽象操作 ToString，遵循下列转换规则：
 
-- 如果值是基本类型，则直接转为字符串。如果是引用类型，则执行ToPrimitive抽象操作；
+- 如果值是基本类型，则直接转为字符串。如果是引用类型，则执行 ToPrimitive 抽象操作；
 - 如果值是 null，则返回"null"；
 - 如果值是 undefined，则返回"undefined"。
 
@@ -91,8 +93,8 @@ Number()执行抽象操作 ToNumber，函数的转换规则如下。
 - 如果是数字值，只是简单的传入和返回。
 - 如果是 null 值，返回 0。
 - 如果是 undefined，返回 NaN。
-- 如果是字符串：如果字符串是空的（不包含任何字符），则将其转换为0；如果含非数字，则将其转换为 NaN。
-- 如果是对象，则执行ToPrimitive抽象操作，返回基本类型再按照以上规则处理。
+- 如果是字符串：如果字符串是空的（不包含任何字符），则将其转换为 0；如果含非数字，则将其转换为 NaN。
+- 如果是对象，则执行 ToPrimitive 抽象操作，返回基本类型再按照以上规则处理。
 
 ```
 Number()  // 0
@@ -130,7 +132,7 @@ Number([1,2])  // NaN
 
 (2) 其他值会被被强制类型转换为 true
 
-这里有一个概念需要先理解：js的操作符和操作数组成了表达式，表达式必定会返回一个值。无论是一元操作++a，还是布尔操作[] || false，都会返回一个值。
+这里有一个概念需要先理解：js 的操作符和操作数组成了表达式，表达式必定会返回一个值。无论是一元操作++a，还是布尔操作[] || false，都会返回一个值。
 
 #### 2.6 相等运算符类型转换，一共有 12 步骤
 
@@ -184,20 +186,20 @@ typeof 不能细分 object,object 可以细分 Array、Function、Date、RegExp�
 
 ### 3.3 Instanceof
 
-instanceof用于检测引用类型，可以检测到它是什么类型的实例。
-instanceof 检测一个对象A是不是另一个对象B的实例的原理是：查看对象B的prototype指向的对象是否在对象A的[[prototype]]链上。如果在，则返回true,如果不在则返回false。不过有一个特殊的情况，当对象B的prototype为null将会报错(类似于空指针异常)。
+instanceof 用于检测引用类型，可以检测到它是什么类型的实例。
+instanceof 检测一个对象 A 是不是另一个对象 B 的实例的原理是：查看对象 B 的 prototype 指向的对象是否在对象 A 的[[prototype]]链上。如果在，则返回 true,如果不在则返回 false。不过有一个特殊的情况，当对象 B 的 prototype 为 null 将会报错(类似于空指针异常)。
 
 ```
-var sXzaver = new String("Xzavier"); 
+var sXzaver = new String("Xzavier");
 console.log(sXzaver instanceof String);   //  "true"
-var aXzaver = [1,2,3]; 
+var aXzaver = [1,2,3];
 console.log(aXzaver instanceof Array);   //  "true"
 检测数组在ECMA Script5中定义了一个新方法Array.isArray()
 ```
 
 ### 3.3 Instanceof
 
-constructor属性返回对创建此对象的数组函数的引用。可以用于检测自定义类型。
+constructor 属性返回对创建此对象的数组函数的引用。可以用于检测自定义类型。
 
 ```
     'xz'.constructor == String // true
@@ -236,8 +238,8 @@ var a = [1,2,3];
 function isType(obj) {
     return Object.prototype.toString.call(obj).slice(8, -1);
 }
-isType(obj);  // "Object" 
-isType(a)  // "Array"  
+isType(obj);  // "Object"
+isType(a)  // "Array"
 
 ```
 

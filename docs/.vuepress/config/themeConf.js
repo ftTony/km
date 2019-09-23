@@ -6,280 +6,283 @@ module.exports = {
     search: true,
     searchMaxSuggestions: 10,
     nav: [{
-        text: '首页',
-        link: '/'
-    },
-    {
-        text: 'javascript',
-        link: '/js/'
-    },
-    {
-        text: 'css',
-        link: '/css/'
-    },
-    {
-        text: 'HTML5',
-        link: '/html5/'
-    },
-    {
-        text: '工具',
-        link: '/tool/'
-    },
-    {
-        text: '软件工程',
-        link: '/project/',
-    },
-    {
-        text: '计算机基础',
-        link: '/cs/'
-    },
-    {
-        text: '面试',
-        link: '/interview-question/'
-    },
-    {
-        text: '资料收集',
-        link: '/materials/'
-    },
-    {
-        text: '关于作者',
-        link: '/about/'
-    }
+            text: '首页',
+            link: '/'
+        },
+        {
+            text: 'javascript',
+            link: '/js/'
+        },
+        {
+            text: 'css',
+            link: '/css/'
+        },
+        {
+            text: 'HTML5',
+            link: '/html5/'
+        },
+        {
+            text: '工具',
+            link: '/tool/'
+        },
+        {
+            text: '软件工程',
+            link: '/project/',
+        },
+        {
+            text: '计算机基础',
+            link: '/cs/'
+        },
+        {
+            text: '面试',
+            link: '/interview-question/'
+        },
+        {
+            text: '资料收集',
+            link: '/materials/'
+        },
+        {
+            text: '关于作者',
+            link: '/about/'
+        }
     ],
     sidebar: {
-        '/js/': [
-            {
+        '/js/': [{
                 title: 'javascript基础',
                 collapsable: false,
                 children: [
                     'es5-type',
                     'es5-prototype',
                     'es5-this',
+                    'es5-closure',
+                    'es5-apply-call-bind',
+                    'es5-curry',
+                    'es5-dom',
+                    'es5-event',
+                    'es5-execution-context',
+                    'es5-extends',
+                    'es5-fn',
+                    'es5-news',
+                    'es5-object',
+                    'es5-run',
+                    'es5-eventloop',
+                    'es5-scope'
                 ]
             },
             {
                 title: 'es6',
                 collapsable: false,
                 children: [
+                    'es6-array',
+                    'es6-fn',
+                    'es6-class',
+                    'es6-async',
+                    'es6-generator',
+                    'es6-iterator',
+                    'es6-let-const',
+                    'es6-module',
+                    'es6-number',
+                    'es6-object',
+                    'es6-promise',
+                    'es6-proxy-reflect',
+                    'es6-string',
+                    'es6-symbol'
                 ]
             },
             {
                 title: 'nodejs',
                 collapsable: false,
                 children: [
+                    'node-buffer',
+                    'node-cheerio',
+                    'node-cluster',
+                    'node-egg',
+                    'node-events',
+                    'node-express',
+                    'node-fs',
+                    'node-http',
+                    'node-introdect',
+                    'node-koa',
+                    'node-net',
+                    'node-process',
+                    'node-querystring',
+                    'node-stream',
+                    'node-url'
                 ]
             },
             {
                 title: 'vue框架',
                 collapsable: false,
                 children: [
+                    'mvvm'
                 ]
             }
         ],
-        '/css/': [
-            {
+        '/css/': [{
                 title: 'css基础',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'css动画',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'css模块化',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             }
         ],
-        '/html5/': [
-            {
+        '/html5/': [{
                 title: 'canvas',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'svg',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
-                title: 'webwork',
+                title: 'web service',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             }
         ],
-        '/project/': [
-            {
+        '/project/': [{
                 title: '工程测试',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: '规则化',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: '浏览器',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'CI/CD',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'Web安全',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'CI/CD',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'WEB Hook',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             }
         ],
-        '/tool/': [
-            {
+        '/tool/': [{
                 title: 'git版本工具',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'webpack打包',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'docker配置',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'ngnix配置',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             }
         ],
-        '/cs/': [
-            {
+        '/cs/': [{
                 title: '数据结构',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: '算法',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: '设计模式',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: '网络',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'linux',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             }
         ],
-        '/interview-question/': [
-            {
+        '/interview-question/': [{
                 title: 'js',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'css',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: '算法',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: '框架',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             }
         ],
-        '/materials/': [
-            {
+        '/materials/': [{
                 title: 'js基础',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'es6',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'nodejs',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: 'vue框架',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: '工具',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             },
             {
                 title: '面试题',
                 collapsable: false,
-                children: [
-                ]
+                children: []
             }
         ]
     }
