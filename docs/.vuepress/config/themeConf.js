@@ -6,107 +6,281 @@ module.exports = {
     search: true,
     searchMaxSuggestions: 10,
     nav: [{
-            text: '首页',
-            link: '/'
-        },
-        {
-            text: 'javascript',
-            items: [{
-                    text: 'javascript基础',
-                    link: '/js/es5/'
-                },
-                {
-                    text: 'es6',
-                    link: '/js/es6/'
-                },
-                {
-                    text: 'nodejs',
-                    link: '/js/nodejs/'
-                }
-            ]
-        },
-        {
-            text: 'css',
-            items: [{
-                    text: 'css基础',
-                    link: '/css/basic/'
-                },
-                {
-                    text: 'css动画',
-                    link: '/css/animation/'
-                },
-                {
-                    text: 'css模块化',
-                    link: '/css/module/'
-                }
-            ]
-        },
-        {
-            text: 'HTML5',
-            items: [{
-                    text: 'canvas ',
-                    link: '/html5/canvas'
-                },
-                {
-                    text: 'svg',
-                    link: '/html5/svg'
-                }
-            ]
-        },
-        {
-            text: '工具',
-            items: [{
-                    text: 'git管理工具 ',
-                    link: '/tool/git'
-                },
-                {
-                    text: 'webpack打包工具',
-                    link: '/tool/webpack'
-                }
-            ]
-        },
-        {
-            text: '软件工程',
-            items: [{
-                    text: '测试',
-                    link: '/project/test'
-                },
-                {
-                    text: '规则化',
-                    link: '/project/regularization'
-                }
-            ]
-        },
-        {
-            text: '计算机基础',
-            items: [{
-                    text: '设计模式',
-                    link: '/cs/patterns'
-                },
-                {
-                    text: '计算机网络',
-                    link: '/cs/net'
-                }
-            ]
-        },
-        {
-            text: '算法',
-            items: [{
-                    text: '数据结构',
-                    link: '/algorithm/structure'
-                },
-                {
-                    text: '算法',
-                    link: '/algorithm/algorithm'
-                }
-            ]
-        },
+        text: '首页',
+        link: '/'
+    },
+    {
+        text: 'javascript',
+        link: '/js/'
+    },
+    {
+        text: 'css',
+        link: '/css/'
+    },
+    {
+        text: 'HTML5',
+        link: '/html5/'
+    },
+    {
+        text: '工具',
+        link: '/tool/'
+    },
+    {
+        text: '软件工程',
+        link: '/project/',
+    },
+    {
+        text: '计算机基础',
+        link: '/cs/'
+    },
+    {
+        text: '面试',
+        link: '/interview-question/'
+    },
+    {
+        text: '资料收集',
+        link: '/materials/'
+    },
+    {
+        text: '关于作者',
+        link: '/about/'
+    }
     ],
     sidebar: {
-        '/js/es5/': [
-            '',
-            '1',
-            '2'
+        '/js/': [
+            {
+                title: 'javascript基础',
+                collapsable: false,
+                children: [
+                    'es5-type',
+                    'es5-prototype',
+                    'es5-this',
+                ]
+            },
+            {
+                title: 'es6',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'nodejs',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'vue框架',
+                collapsable: false,
+                children: [
+                ]
+            }
+        ],
+        '/css/': [
+            {
+                title: 'css基础',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'css动画',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'css模块化',
+                collapsable: false,
+                children: [
+                ]
+            }
+        ],
+        '/html5/': [
+            {
+                title: 'canvas',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'svg',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'webwork',
+                collapsable: false,
+                children: [
+                ]
+            }
+        ],
+        '/project/': [
+            {
+                title: '工程测试',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: '规则化',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: '浏览器',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'CI/CD',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'Web安全',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'CI/CD',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'WEB Hook',
+                collapsable: false,
+                children: [
+                ]
+            }
+        ],
+        '/tool/': [
+            {
+                title: 'git版本工具',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'webpack打包',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'docker配置',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'ngnix配置',
+                collapsable: false,
+                children: [
+                ]
+            }
+        ],
+        '/cs/': [
+            {
+                title: '数据结构',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: '算法',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: '设计模式',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: '网络',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'linux',
+                collapsable: false,
+                children: [
+                ]
+            }
+        ],
+        '/interview-question/': [
+            {
+                title: 'js',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'css',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: '算法',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: '框架',
+                collapsable: false,
+                children: [
+                ]
+            }
+        ],
+        '/materials/': [
+            {
+                title: 'js基础',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'es6',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'nodejs',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: 'vue框架',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: '工具',
+                collapsable: false,
+                children: [
+                ]
+            },
+            {
+                title: '面试题',
+                collapsable: false,
+                children: [
+                ]
+            }
         ]
     }
 };

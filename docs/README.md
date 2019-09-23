@@ -3,13 +3,14 @@ home: true
 heroText: 小武子技术知识库
 tagline: 大前端知识|计算机基础|工程化|工具
 actionText: 进入导航
-actionLink: /guide/
+heroImage: /timg.jpg
+actionLink: /js/
 features:
-  - title: 简洁至上
-    details: 追求重点和难点,剔除陈旧的知识。
-  - title: 清晰易懂
-    details: 将复杂的问题一一拆解。
-  - title: 紧跟热点
-    details: 当下热点技术一网打尽。
+  - title: 精益求精，工匠之心
+    details: 将军是打出来的，没有艰苦的战斗磨炼不会产生将军
+  - title: 求知若饥，虚心若愚
+    details: 只有积极努力，踏踏实实提高本职工作才能获得机会
+  - title: 岁月不居，未来可期
+    details: 不忘初心，坚守信念；乘风破浪， 直击沧海
 footer: MIT Licensed | Copyright © 2019-present tony
 ---

@@ -8,8 +8,12 @@ module.exports = {
     locales: localesConf,
     markdown: mdConf,
     themeConfig: themeConf,
+    head: [
+        ['link', { rel: 'icon', href: '/hero.jpeg' }]
+    ],
     plugins: [
         '@vuepress/back-to-top',
+        ['@vuepress/medium-zoom', true],
         // [
         //     '@vuepress/google-analytics', {
         //         'ga': ''
