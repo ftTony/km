@@ -121,33 +121,56 @@ module.exports = {
         '/css/': [{
                 title: 'css基础',
                 collapsable: false,
-                children: []
+                children: [
+                    'background',
+                    'index',
+                    'layout',
+                    'px',
+                    'select'
+                ]
             },
             {
                 title: 'css动画',
                 collapsable: false,
-                children: []
+                children: [
+                    'animation'
+                ]
             },
             {
                 title: 'css模块化',
                 collapsable: false,
-                children: []
+                children: [
+                    'module'
+                ]
             }
         ],
         '/html5/': [{
                 title: 'canvas',
                 collapsable: false,
-                children: []
+                children: [
+                    'canvas'
+                ]
             },
             {
                 title: 'svg',
                 collapsable: false,
-                children: []
+                children: [
+                    'savg'
+                ]
+            },
+            {
+                title: 'web work',
+                collapsable: false,
+                children: [
+                    'webwork'
+                ]
             },
             {
                 title: 'web service',
                 collapsable: false,
-                children: []
+                children: [
+                    'webserver'
+                ]
             }
         ],
         '/project/': [{
@@ -189,22 +212,30 @@ module.exports = {
         '/tool/': [{
                 title: 'git版本工具',
                 collapsable: false,
-                children: []
+                children: [
+                    'git'
+                ]
             },
             {
                 title: 'webpack打包',
                 collapsable: false,
-                children: []
+                children: [
+                    'webpack'
+                ]
             },
             {
                 title: 'docker配置',
                 collapsable: false,
-                children: []
+                children: [
+                    'docker'
+                ]
             },
             {
                 title: 'ngnix配置',
                 collapsable: false,
-                children: []
+                children: [
+                    'nginx'
+                ]
             }
         ],
         '/cs/': [{
@@ -225,12 +256,20 @@ module.exports = {
             {
                 title: '网络',
                 collapsable: false,
-                children: []
+                children: [
+                    'http',
+                    'https',
+                    'http2',
+                    'tcp',
+                    'webstock'
+                ]
             },
             {
                 title: 'linux',
                 collapsable: false,
-                children: []
+                children: [
+                    'linux'
+                ]
             }
         ],
         '/interview-question/': [{
