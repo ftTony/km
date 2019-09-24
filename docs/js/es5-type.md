@@ -1,6 +1,17 @@
 # 数据类型与数据类型转换
 
-## 数据类型种类
+## 前言
+
+本人平时学习及收集内容，欢迎参入一起讨论。
+
+## 内容
+
+- [数据类型种类](#一、数据类型种类)
+- [数据类型转换](#二、数据类型转换)
+- [数据类型判断](#三、数据类型判断)
+- [实现typeAPI](#四、实现 type API)
+
+## 一、数据类型种类
 
 js 数据类型主要有 `String`、`Number`、`Boolean`、`Object`、`Null`、`Undefined`、`Symbol`
 
@@ -10,7 +21,7 @@ js 数据类型主要有 `String`、`Number`、`Boolean`、`Object`、`Null`、`
 
 特殊类型：`Null`、`Undefined`
 
-## 数据类型转换
+## 二、数据类型转换
 
 ### 2.1 数据类型转换表
 
@@ -35,7 +46,7 @@ js 数据类型主要有 `String`、`Number`、`Boolean`、`Object`、`Null`、`
 | \['a'\](其他数组)      | 使用 join()方法                                                                                                            | NaN                                                                                                                           | true   |
 | function(){}(任意函数) | 将用户定义的函数转换为 JavaScript 源 eadc 字符串                                                                           | NaN                                                                                                                           | true   |
 
-**2.2 ToPrimitive**
+### 2.2 ToPrimitive
 
 抽象操作 ToPrimitive 用于将引用类型转为原始类型。实现细节比较复杂，可以[参考这里](https://segmentfault.com/a/1190000016325587)。
 
@@ -73,7 +84,7 @@ o++ // number
 
 - 如果传入参数是 number/default（常见强制类型转换都是这个顺序）：首先检查该值是否有 valueOf()方法。如果有并且返回基本类型值，就使用该值进行强制类型转换。如果没有就检查该值是否有 toString()方法。如果有并且返回基本类型值就使用该回值来进行强制类型转换，如果没有或者返回的不是基本类型值，就抛出错误。
 
-**2.3 ToString**
+### 2.3 ToString
 
 抽象操作 ToString，负责处理非字符串到字符串的强制类型转换。当需要一个值的字符串形式，就会进行 ToString 类型转换。
 
@@ -83,7 +94,7 @@ String()函数就会执行抽象操作 ToString，遵循下列转换规则：
 - 如果值是 null，则返回"null"；
 - 如果值是 undefined，则返回"undefined"。
 
-**2.4 ToNumber**
+### 2.4 ToNumber
 
 抽象操作 ToNumber，负责处理非数字到数字的强制类型转换。
 
@@ -116,7 +127,7 @@ Number([1,2])  // NaN
 
 ```
 
-**2.5 ToBoolean**
+### 2.5 ToBoolean
 
 抽象操作 ToBoolean，负责处理非布尔值到布尔值的强制类型转换。
 
@@ -134,7 +145,7 @@ Number([1,2])  // NaN
 
 这里有一个概念需要先理解：js 的操作符和操作数组成了表达式，表达式必定会返回一个值。无论是一元操作++a，还是布尔操作[] || false，都会返回一个值。
 
-#### 2.6 相等运算符类型转换，一共有 12 步骤
+### 2.6 相等运算符类型转换，一共有 12 步骤
 
 1. 如果 y 不是正常值，中断执行。
 2. 如果 Type(x)与 Type(y)相同，执行严格相等运算 x === y。
@@ -151,7 +162,7 @@ Number([1,2])  // NaN
 理解如图：
 ![运算转换过程](type.jpg)
 
-## 数据类型判断
+## 三、数据类型判断
 
 - typeof
 - Object.prototype.toString
@@ -243,7 +254,7 @@ isType(a)  // "Array"
 
 ```
 
-## 实现 type API
+## 四、实现 type API
 
 既然有了 Object.prototype.toString 这个神器！那就让我们写个 type 函数帮助我们以后识别各种类型的值了。
 
@@ -270,3 +281,12 @@ function type(obj) {
 
 - 《JavaScript 权威第六版》
 - [JavaScript 专题之类型判断(上) ](https://github.com/mqyqingfeng/Blog/issues/28)
+
+## 联系作者
+
+<div align="center">
+    <p>
+        平凡世界，贵在坚持。
+    </p>
+    <img :src="$withBase('/about/contact.png')" />
+</div>
