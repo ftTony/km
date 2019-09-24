@@ -64,9 +64,10 @@ module.exports = {
                 'es5-fn',
                 'es5-news',
                 'es5-object',
-                'es5-run',
                 'es5-eventloop',
-                'es5-scope'
+                'es5-scope',
+                'js-run',
+                'js-principle'
             ]
         },
         {
@@ -282,13 +283,30 @@ module.exports = {
             title: '算法',
             collapsable: false,
             children: [
-                ''
+                'base-sort',
+                'base-select',
+                'high-algorithm',
+                'high-sort'
             ]
         },
         {
             title: '设计模式',
             collapsable: false,
-            children: []
+            children: ['base-design-pattern']
+        },
+        {
+            title: '函数数据编程',
+            collapsable: false,
+            children: [
+                'base-functional'
+            ]
+        },
+        {
+            title: '计算机组成原理',
+            collapsable: false,
+            children: [
+                'base-computer'
+            ]
         },
         {
             title: '网络',
