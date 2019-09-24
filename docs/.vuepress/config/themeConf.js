@@ -276,6 +276,9 @@ module.exports = {
                 'array',
                 'list',
                 'stack',
+                'hash',
+                'trees',
+                'trie',
                 'queue'
             ]
         },
