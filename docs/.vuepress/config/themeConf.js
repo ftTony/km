@@ -117,7 +117,7 @@ module.exports = {
                 collapsable: false,
                 children: [
                     'mvvm',
-                    'juqery',
+                    'jquery-code',
                     'undescore',
                     'vue-bind',
                     'vue-code',
