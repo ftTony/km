@@ -67,6 +67,8 @@ module.exports = {
                 'es5-eventloop',
                 'es5-scope',
                 'js-run',
+                'js-memory',
+                'js-ast',
                 'js-principle'
             ]
         },
