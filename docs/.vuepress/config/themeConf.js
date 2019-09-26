@@ -94,6 +94,7 @@ module.exports = {
             title: 'nodejs',
             collapsable: false,
             children: [
+                'node-introdect',
                 'node-buffer',
                 'node-cheerio',
                 'node-cluster',
@@ -102,7 +103,6 @@ module.exports = {
                 'node-express',
                 'node-fs',
                 'node-http',
-                'node-introdect',
                 'node-koa',
                 'node-net',
                 'node-process',
