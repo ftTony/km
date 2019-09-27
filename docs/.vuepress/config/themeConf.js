@@ -56,7 +56,6 @@ module.exports = {
                     'es5-this',
                     'es5-closure',
                     'es5-apply-call-bind',
-                    'es5-curry',
                     'es5-dom',
                     'es5-event',
                     'es5-execution-context',
@@ -71,9 +70,12 @@ module.exports = {
                 title: 'javascript进阶',
                 collapsable: false,
                 children: [
+                    'js-curry',
+                    'js-debounce',
                     'js-run',
                     'js-memory',
                     'js-ast',
+                    'js-bit',
                     'js-eventloop',
                     'js-principle'
                 ]
