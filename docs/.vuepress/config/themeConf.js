@@ -256,14 +256,6 @@ module.exports = {
             ]
         },
         {
-            title: 'WEB集成化',
-            collapsable: false,
-            children: [
-                'ci-cd',
-                'webhook',
-            ]
-        },
-        {
             title: 'WEB调试',
             collapsable: false,
             children: [
@@ -279,10 +271,44 @@ module.exports = {
             ]
         },
         {
+            title: 'WEB集成化',
+            collapsable: false,
+            children: [
+                'ci-cd',
+                'webhook',
+            ]
+        },
+        {
             title: 'webpack打包',
             collapsable: false,
             children: [
-                'webpack'
+                'webpack-basic',
+                'webpack-babel',
+                'webpack-plugin',
+                'webpack-loador',
+                'webpack-coder',
+            ]
+        },
+        {
+            title: 'gulp打包',
+            collapsable: false,
+            children: [
+                'gulp-basic',
+                'gulp-plugin'
+            ]
+        },
+        {
+            title: 'rollup打包',
+            collapsable: false,
+            children: [
+                'rollup-basic'
+            ]
+        },
+        {
+            title: '自定义脚手架',
+            collapsable: false,
+            children: [
+                'cli'
             ]
         },
         {
