@@ -9,6 +9,7 @@
 ### 参考资料
 
 - [前端高频算法面试——动态规划](https://mp.weixin.qq.com/s/po9s6cod7AGGqKsh5ufBjw)
+- [前端跳槽面试算法——动态规划](https://juejin.im/post/5cde316f6fb9a07ed9118f01)
 - [递归和动态规划](https://mp.weixin.qq.com/s/GtnJYvvOoyeXH0h3tZZAkA)
 
 ## 联系作者

@@ -10,6 +10,7 @@
 
 - [用 JS 开发跨平台桌面应用，从原理到实践](https://mp.weixin.qq.com/s/owtLBHgpzXqbJs3P1mjmLA)
 - [Electron 构建跨平台应用 Mac/Windows/Linux](https://juejin.im/post/5c46ab47e51d45522b4f55b1)
+- [[electron]终极奥义 五千字教程丢给你](https://juejin.im/post/5ba06b67f265da0ae343e89c)
 - [electron 中文教程](https://wizardforcel.gitbooks.io/electron-doc/)
 - [大前端时代，浅谈JavaScript开发重型跨平台应用以及架构](https://juejin.im/post/5d8f3062e51d45782632e363)
 
