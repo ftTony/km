@@ -102,6 +102,31 @@ module.exports = {
                 ]
             },
             {
+                title: 'TypeScript',
+                collapsable: false,
+                children: [
+                    'ts-types',
+                    'ts-deciarations',
+                    'ts-interfaces',
+                    'ts-classes',
+                    'ts-functions',
+                    'ts-generics',
+                    'ts-enums',
+                    'ts-inference',
+                    'ts-compatibility',
+                    'ts-advanced-types',
+                    'ts-symbols',
+                    'ts-iterators-and-generators',
+                    'ts-modules',
+                    'ts-namespaces',
+                    'ts-namespaces-and-modules',
+                    'ts-module-resolution',
+                    'ts-declaration-merging',
+                    'ts-decorators',
+                    'ts-mixins',
+                ]
+            },
+            {
                 title: 'nodejs',
                 collapsable: false,
                 children: [
