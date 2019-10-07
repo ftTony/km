@@ -112,8 +112,8 @@ module.exports = {
                     'ts-functions',
                     'ts-generics',
                     'ts-enums',
-                    'ts-inference',
-                    'ts-compatibility',
+                    'ts-type-inference',
+                    'ts-type-compatibility',
                     'ts-advanced-types',
                     'ts-symbols',
                     'ts-iterators-and-generators',
@@ -174,6 +174,7 @@ module.exports = {
                     'layout',
                     'px',
                     'flex',
+                    'bfc',
                     'select'
                 ]
             },
