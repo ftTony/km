@@ -7,17 +7,17 @@
 ## 内容
 
 - [分支模型](#一、分支模型)
-- [Git常用命令清单](#二、Git常用命令清单)
+- [Git 常用命令清单](#二、Git常用命令清单)
 
 ### 一、分支模型
 
 用 git flow 初始化工程目录完成后，只能看到两个分支（长期分支）：
 
 - master 分支：用于上线的分支，保护性分支，只包含经过测试的稳定代码，开发人员不能直接工作在此分支上，也不能直接提交改动到 master 分支上。
-- develop分支：是开发人员进行任何新的开发的基础分支，当开始一个新的feature 分支的时候，要从 develop 分出去；另外此分支也汇集所有的已完成的功能，等待合并到 master 分支上线。上面两个分支被称为 长期分支  ，存在于项目的整个生命周期中，其他分支，是临时性的，根据需要来创建，当完成了自己的任务后，就会被删掉。
+- develop 分支：是开发人员进行任何新的开发的基础分支，当开始一个新的 feature 分支的时候，要从 develop 分出去；另外此分支也汇集所有的已完成的功能，等待合并到 master 分支上线。上面两个分支被称为 长期分支 ，存在于项目的整个生命周期中，其他分支，是临时性的，根据需要来创建，当完成了自己的任务后，就会被删掉。
 - feature 分支：平常的开发工作使用最频繁的分支。
 
-创建功能分支，如下命令会创建一个名为”feature/” 的功能分支，该分支默认从 develop检出，在做功能性开发的时候，检出一个独立的分支，是版本控制中一个重要 的原则。
+创建功能分支，如下命令会创建一个名为”feature/” 的功能分支，该分支默认从 develop 检出，在做功能性开发的时候，检出一个独立的分支，是版本控制中一个重要 的原则。
 
 ```
 git flow feature start <branch-name>
@@ -40,7 +40,7 @@ git flow release start 1.1.5
 ```
 
 当你认为现在的‘develop’分支的代码已经是一个成熟的 release 版本的时候，这意味着，首先它包括所有新功能和必要的修复；其二，它已经被彻底的测试过了。如果上述两点都满足，那就是时候创建 release 分支了。
-note：release 分支是使用版本号命名的，这个命名方案会让 Git-flow在我们完成 release 后，适当的自动去标记那些 release 提交。
+note：release 分支是使用版本号命名的，这个命名方案会让 Git-flow 在我们完成 release 后，适当的自动去标记那些 release 提交。
 
 完成 release 分支：
 
@@ -51,13 +51,13 @@ git flow release finish 1.1.5
 上述命令会完成如下一系列操作：
 
 - `git-flow`会拉取远程仓库，确保目前是最新的版本。
-- `release` 内容会被合并到 master和develop两个长期分支中去。这样不仅产品代码是最新的，新开的功能分支也将基于最新的代码。
+- `release` 内容会被合并到 master 和 develop 两个长期分支中去。这样不仅产品代码是最新的，新开的功能分支也将基于最新的代码。
 
 为了便于识别和做历史参考，release 提交会被标记上这个`release`的名字清理操作，版本分支会被删除，并且回到 develop 分支。
 
->note： 从 Git 的角度看来，release 版本现在已经完成，依据设置，对 master的提交可能已经触发了编译部署流程。或者手动部署。
+> note： 从 Git 的角度看来，release 版本现在已经完成，依据设置，对 master 的提交可能已经触发了编译部署流程。或者手动部署。
 
-- hotfix分支：很多时候，当对 release版本做全面测试的时候，可能就会发现一些小错误，在这种情况下，git-flow会提供一个特定的hotfix工作流程。
+- hotfix 分支：很多时候，当对 release 版本做全面测试的时候，可能就会发现一些小错误，在这种情况下，git-flow 会提供一个特定的 hotfix 工作流程。
 
 创建 hotfix 分支:
 
@@ -69,7 +69,7 @@ git flow hotfix start bug-fixed
 这也是和`release`分支最明显的区别，`release`分支是基于`develop`分支检出的。因为不能再一个还不完全稳定的分支上对产品代码进行修复。
 就像`release`一样，修复这个错误，会直接影响到项目的版本号。
 
-完成 hotfix分支：
+完成 hotfix 分支：
 
 ```
 git flow hotfix finish bug-fixed
@@ -81,7 +81,7 @@ git flow hotfix finish bug-fixed
 - 这个`hotfix`将会被标记起来以便于参考；
 - 当前的`hotfix`分支将会被删除，然后切换到`develop`分支；
 
->note： 完成`hotfix`分支之后，自动或手动启动编译部署流程
+> note： 完成`hotfix`分支之后，自动或手动启动编译部署流程
 
 下图为整体流程图：
 
@@ -96,7 +96,7 @@ git flow hotfix finish bug-fixed
 
 - `feature`: 开发新功能的分支, 基于 develop, 完成后 merge 回 develop
 - `release`: 准备要发布版本的分支, 用来修复 bug. 基于 develop, 完成后 merge 回 develop 和 master
-- `hotfix`: 修复 master 上的问题, 等不及 release 版本就必须马上上线. 基于 master, 完成后 merge回 master 和 develop
+- `hotfix`: 修复 master 上的问题, 等不及 release 版本就必须马上上线. 基于 master, 完成后 merge 回 master 和 develop
 
 #### 总结
 
@@ -109,9 +109,9 @@ git flow hotfix finish bug-fixed
 
 - feature: 开发新功能的分支, 基于 develop, 完成后 merge 回 develop
 - release: 准备要发布版本的分支, 用来修复 bug. 基于 develop, 完成后 merge 回 develop 和 master
-- hotfix: 修复 master 上的问题, 等不及 release 版本就必须马上上线. 基于 master, 完成后 merge回 master 和 develop
+- hotfix: 修复 master 上的问题, 等不及 release 版本就必须马上上线. 基于 master, 完成后 merge 回 master 和 develop
 
-### 二、Git常用命令清单
+### 二、Git 常用命令清单
 
 git 整体流程图：
 
@@ -142,7 +142,7 @@ $ git clone [url]
 
 ### 配置 Git
 
-Git的设置文件为 .gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。
+Git 的设置文件为 .gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。
 
 ```
 # 显示当前的Git配置
@@ -414,9 +414,10 @@ $ git stash pop
 
 ### 参考资料
 
-- [git 常用命令收集与git-flow 简介](https://juejin.im/post/5ad99c05f265da0b9265231b)
-- [Gitflow工作流](https://www.cnblogs.com/jiuyi/p/7690615.html)
+- [git 常用命令收集与 git-flow 简介](https://juejin.im/post/5ad99c05f265da0b9265231b)
+- [Gitflow 工作流](https://www.cnblogs.com/jiuyi/p/7690615.html)
 - [git-flow 的工作流程](https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow)
+- [Git 工作流](https://github.com/frank-lam/fullstack-tutorial/blob/master/notes/Git%E5%B7%A5%E4%BD%9C%E6%B5%81.md)
 
 ## 联系作者
 
