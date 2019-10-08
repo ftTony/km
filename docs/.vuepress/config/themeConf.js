@@ -6,10 +6,6 @@ module.exports = {
     search: true,
     searchMaxSuggestions: 10,
     nav: [{
-<<<<<<< HEAD
-            text: '首页',
-            link: '/'
-=======
         text: '首页',
         link: '/'
     },
@@ -108,7 +104,6 @@ module.exports = {
                 'es6-string',
                 'es6-symbol'
             ]
->>>>>>> 'es6内容添加'
         },
         {
             text: 'javascript',
@@ -146,9 +141,9 @@ module.exports = {
             text: '关于作者',
             link: '/about/'
         }
-    ],
-    sidebar: {
-        '/js/': [{
+        ],
+        sidebar: {
+            '/js/': [{
                 title: 'javascript基础',
                 collapsable: false,
                 children: [
@@ -265,8 +260,8 @@ module.exports = {
                     'vue-vuex-code'
                 ]
             }
-        ],
-        '/css/': [{
+            ],
+            '/css/': [{
                 title: 'css基础',
                 collapsable: false,
                 children: [
@@ -293,8 +288,8 @@ module.exports = {
                     'module'
                 ]
             }
-        ],
-        '/html5/': [{
+            ],
+            '/html5/': [{
                 title: 'canvas',
                 collapsable: false,
                 children: [
@@ -331,8 +326,8 @@ module.exports = {
                     'webserver'
                 ]
             }
-        ],
-        '/project/': [{
+            ],
+            '/project/': [{
                 title: '工程测试',
                 collapsable: false,
                 children: [
@@ -389,8 +384,8 @@ module.exports = {
                     'mobile-debug'
                 ]
             }
-        ],
-        '/tool/': [{
+            ],
+            '/tool/': [{
                 title: 'git版本工具',
                 collapsable: false,
                 children: [
@@ -452,8 +447,8 @@ module.exports = {
                     'nginx'
                 ]
             }
-        ],
-        '/cs/': [{
+            ],
+            '/cs/': [{
                 title: '数据结构',
                 collapsable: false,
                 children: [
@@ -522,8 +517,8 @@ module.exports = {
                     'linux'
                 ]
             }
-        ],
-        '/interview-question/': [{
+            ],
+            '/interview-question/': [{
                 title: 'js',
                 collapsable: false,
                 children: [
@@ -542,8 +537,8 @@ module.exports = {
                 collapsable: false,
                 children: []
             }
-        ],
-        '/materials/': [{
+            ],
+            '/materials/': [{
                 title: 'js基础',
                 collapsable: false,
                 children: [
@@ -577,6 +572,6 @@ module.exports = {
                 collapsable: false,
                 children: []
             }
-        ]
-    }
-};
+            ]
+        }
+    };
