@@ -1,0 +1,5 @@
+<<<<<<< HEAD:docs/.vuepress/dist/assets/js/47.f00f0f0a.js
+(window.webpackJsonp=window.webpackJsonp||[]).push([[47],{352:function(t,s,e){"use strict";e.r(s);var r=e(2),a=Object(r.a)({},(function(){var t=this.$createElement,s=this._self._c||t;return s("ContentSlotsDistributor",{attrs:{"slot-key":this.$parent.slotKey}},[s("h1",{attrs:{id:"html5-内容"}},[s("a",{staticClass:"header-anchor",attrs:{href:"#html5-内容","aria-hidden":"true"}},[this._v("#")]),this._v(" HTML5 内容")])])}),[],!1,null,null,null);s.default=a.exports}}]);
+=======
+(window.webpackJsonp=window.webpackJsonp||[]).push([[46],{309:function(t,s,e){"use strict";e.r(s);var r=e(2),a=Object(r.a)({},(function(){var t=this.$createElement,s=this._self._c||t;return s("ContentSlotsDistributor",{attrs:{"slot-key":this.$parent.slotKey}},[s("h1",{attrs:{id:"html5-内容"}},[s("a",{staticClass:"header-anchor",attrs:{href:"#html5-内容","aria-hidden":"true"}},[this._v("#")]),this._v(" HTML5 内容")])])}),[],!1,null,null,null);s.default=a.exports}}]);
+>>>>>>> 'es6内容添加':docs/.vuepress/dist/assets/js/46.d233218e.js

@@ -6,8 +6,109 @@ module.exports = {
     search: true,
     searchMaxSuggestions: 10,
     nav: [{
+<<<<<<< HEAD
             text: '首页',
             link: '/'
+=======
+        text: '首页',
+        link: '/'
+    },
+    {
+        text: 'javascript',
+        link: '/js/'
+    },
+    {
+        text: 'css',
+        link: '/css/'
+    },
+    {
+        text: 'HTML5',
+        link: '/html5/'
+    },
+    {
+        text: '工具',
+        link: '/tool/'
+    },
+    {
+        text: '软件工程',
+        link: '/project/',
+    },
+    {
+        text: '计算机基础',
+        link: '/cs/'
+    },
+    {
+        text: '面试',
+        link: '/interview-question/'
+    },
+    {
+        text: '资料收集',
+        link: '/materials/'
+    },
+    {
+        text: '关于作者',
+        link: '/about/'
+    }
+    ],
+    sidebar: {
+        '/js/': [{
+            title: 'javascript基础',
+            collapsable: false,
+            children: [
+                'es5-type',
+                'es5-prototype',
+                'es5-this',
+                'es5-closure',
+                'es5-apply-call-bind',
+                'es5-dom',
+                'es5-event',
+                'es5-execution-context',
+                'es5-extends',
+                'es5-fn',
+                'es5-news',
+                'es5-object',
+                'es5-scope'
+            ]
+        },
+        {
+            title: 'javascript进阶',
+            collapsable: false,
+            children: [
+                'js-curry',
+                'js-debounce',
+                'js-run',
+                'js-memory',
+                'js-ast',
+                'js-bit',
+                'js-eventloop',
+                'js-module',
+                'js-v8',
+                'js-principle'
+            ]
+        },
+        {
+            title: 'es6',
+            collapsable: false,
+            children: [
+                'es6-array',
+                'es6-fn',
+                'es6-class-1',
+                'es6-class-2',
+                'es6-async',
+                'es6-generator-1',
+                'es6-generator-2',
+                'es6-iterator',
+                'es6-let-const',
+                'es6-module',
+                'es6-number',
+                'es6-object',
+                'es6-promise',
+                'es6-proxy-reflect',
+                'es6-set-map',
+                'es6-string',
+                'es6-symbol'
+            ]
+>>>>>>> 'es6内容添加'
         },
         {
             text: 'javascript',

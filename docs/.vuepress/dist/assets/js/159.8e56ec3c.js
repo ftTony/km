@@ -1,0 +1,5 @@
+<<<<<<< HEAD:docs/.vuepress/dist/assets/js/173.af25ec50.js
+(window.webpackJsonp=window.webpackJsonp||[]).push([[173],{268:function(t,e,s){"use strict";s.r(e);var a=s(2),r=Object(a.a)({},(function(){var t=this.$createElement,e=this._self._c||t;return e("ContentSlotsDistributor",{attrs:{"slot-key":this.$parent.slotKey}},[e("h1",{attrs:{id:"babel学习"}},[e("a",{staticClass:"header-anchor",attrs:{href:"#babel学习","aria-hidden":"true"}},[this._v("#")]),this._v(" babel学习")])])}),[],!1,null,null,null);e.default=r.exports}}]);
+=======
+(window.webpackJsonp=window.webpackJsonp||[]).push([[159],{235:function(t,e,s){"use strict";s.r(e);var a=s(2),r=Object(a.a)({},(function(){var t=this.$createElement,e=this._self._c||t;return e("ContentSlotsDistributor",{attrs:{"slot-key":this.$parent.slotKey}},[e("h1",{attrs:{id:"babel学习"}},[e("a",{staticClass:"header-anchor",attrs:{href:"#babel学习","aria-hidden":"true"}},[this._v("#")]),this._v(" babel学习")])])}),[],!1,null,null,null);e.default=r.exports}}]);
+>>>>>>> 'es6内容添加':docs/.vuepress/dist/assets/js/159.8e56ec3c.js

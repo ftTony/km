@@ -1,1 +1,5 @@
+<<<<<<< HEAD:docs/.vuepress/dist/assets/js/171.77db1b58.js
 (window.webpackJsonp=window.webpackJsonp||[]).push([[171],{272:function(t,r,s){"use strict";s.r(r);var e=s(2),l=Object(e.a)({},(function(){var t=this.$createElement,r=this._self._c||t;return r("ContentSlotsDistributor",{attrs:{"slot-key":this.$parent.slotKey}},[r("h1",{attrs:{id:"rollup常用配置"}},[r("a",{staticClass:"header-anchor",attrs:{href:"#rollup常用配置","aria-hidden":"true"}},[this._v("#")]),this._v(" rollup常用配置")])])}),[],!1,null,null,null);r.default=l.exports}}]);
+=======
+(window.webpackJsonp=window.webpackJsonp||[]).push([[157],{237:function(t,r,s){"use strict";s.r(r);var e=s(2),l=Object(e.a)({},(function(){var t=this.$createElement,r=this._self._c||t;return r("ContentSlotsDistributor",{attrs:{"slot-key":this.$parent.slotKey}},[r("h1",{attrs:{id:"rollup常用配置"}},[r("a",{staticClass:"header-anchor",attrs:{href:"#rollup常用配置","aria-hidden":"true"}},[this._v("#")]),this._v(" rollup常用配置")])])}),[],!1,null,null,null);r.default=l.exports}}]);
+>>>>>>> 'es6内容添加':docs/.vuepress/dist/assets/js/157.4f55373e.js
