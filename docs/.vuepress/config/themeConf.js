@@ -173,6 +173,7 @@ module.exports = {
             title: 'css基础',
             collapsable: false,
             children: [
+                'center',
                 'background',
                 'stack',
                 'layout',
@@ -426,26 +427,26 @@ module.exports = {
             ]
         }
         ],
-        '/interview-question/': [{
-            title: 'js',
-            collapsable: false,
-            children: [
-                'js-eventloop'
-            ]
-        },
-        {
-            title: 'css',
-            collapsable: false,
-            children: [
-                'css-center'
-            ]
-        },
-        {
-            title: '框架',
-            collapsable: false,
-            children: []
-        }
-        ],
+        // '/interview-question/': [{
+        //     title: 'js',
+        //     collapsable: false,
+        //     children: [
+        //         'js-eventloop'
+        //     ]
+        // },
+        // {
+        //     title: 'css',
+        //     collapsable: false,
+        //     children: [
+        //         'css-center'
+        //     ]
+        // },
+        // {
+        //     title: '框架',
+        //     collapsable: false,
+        //     children: []
+        // }
+        // ],
         '/materials/': [{
             title: 'js基础',
             collapsable: false,
