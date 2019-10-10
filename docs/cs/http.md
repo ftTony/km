@@ -6,8 +6,11 @@
 
 ## 内容
 
-- http的定义和历史
-- http三次握手
+- [http的定义和历史](#一、http的定义和历史)
+- [http三次握手](#二、http三次握手)
+- [http的主要特点](#三、http的主要特点)
+- [http请求详解](#四、http请求详解)
+- [http响应详解](#五、http响应详解)
 
 ### 一、http的定义和历史
 
@@ -31,29 +34,26 @@ HTTP是基于传输层的TCP协议，而TCP是一个端到端的面向连接的�
 http请求由三部分组成，分别是：请求行、消息报头、请求正文
 ![http-resource-3](http02.png)
 
+**http的请求方法：** `GET`、`POST`、`HEAD`、`PUT`、`DELETE`、`TRACE`、`CONNECT`、`OPTIONS`
 
-**http的请求方法：**GET POST HEAD PUT DELETE TRACE CONNECT OPTIONS 
+- `GET`：请求获取Request-URI所标识的资源
+- `POST`：在Request-URI所标识的资源后附加新的数据
+- `HEAD`：请求获取由Request-URI所标识的资源的响应消息报头
+- `PUT`：请求服务器存储一个资源，并用Request-URI作为其标识
+- `DELETE`：请求服务器删除Request-URI所标识的资源
+- `TRACE`：请求服务器回送收到的请求信息，主要用于测试或诊断
+- `CONNECT`：保留将来使用
+- `OPTIONS`：请求查询服务器的性能，或者查询与资源相关的选项和需求
 
-* GET     请求获取Request-URI所标识的资源
-* POST    在Request-URI所标识的资源后附加新的数据
-* HEAD    请求获取由Request-URI所标识的资源的响应消息报头
-* PUT     请求服务器存储一个资源，并用Request-URI作为其标识
-* DELETE  请求服务器删除Request-URI所标识的资源
-* TRACE   请求服务器回送收到的请求信息，主要用于测试或诊断
-* CONNECT 保留将来使用
-* OPTIONS 请求查询服务器的性能，或者查询与资源相关的选项和需求
+**HTTP请求由三部分组成：** 请求行、http头、内容
 
-**HTTP请求由三部分组成：**请求行  http头  内容
-
-请求行内容如下：`GET www.cnblogs.com HTTP/1.1`请求行写法是固定的，由三部分组成，第一部分是请求方法，第二部分是请求网址，第三部分是HTTP版本。
-
-第二部分HTTP头在HTTP请求可以是3种HTTP头：1.请求头(request header)  2.普通头(general header)  3.实体头(entity header) 通常来说，由于Get请求往往不包含内容实体，因此也不会有实体头。
-
-第三部分内容只在POST请求中存在，因为GET请求并不包含任何实体。
+- 请求行内容如下：`GET www.cnblogs.com HTTP/1.1`请求行写法是固定的，由三部分组成，第一部分是请求方法，第二部分是请求网址，第三部分是HTTP版本。
+- 第二部分HTTP头在HTTP请求可以是3种HTTP头：1.请求头(request header)  2.普通头(general header)  3.实体头(entity header) 通常来说，由于Get请求往往不包含内容实体，因此也不会有实体头。
+- 第三部分内容只在POST请求中存在，因为GET请求并不包含任何实体。
 
 完整的http请求图如下：
 
-![201204271057105124](http04.png)
+![](http03.png)
 
 #### 请求报文示例
 
@@ -74,23 +74,21 @@ Cookie: PSTM=1490844191; BIDUPSID=2145FF54639208435F60E1E165379255; BAIDUID=CFA3
 
 请求行由请求方法、URL 和 HTTP 协议版本组成，它们之间用空格分开。
 
-`
-GET / HTTP/1.1
-`
+`GET / HTTP/1.1`
 
 #### 请求头
 
 请求头由 key-value 对组成，每行一对，key (键) 和 value (值)用英文冒号 : 分隔。请求头通知服务器有关于客户端请求的信息，典型的请求头有：
 
-- **User-Agent：** 用户代理信息 - `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36` ...
-- **Accept：** 客户端可识别的内容类型列表 - text/html,application/xhtml+xml,application/xml
-- **Accept-Language：** 客户端可接受的自然语言 - zh-CN,zh;q=0.8,en;q=0.6,id;q=0.4
-- **Accept-Encoding：** 客户端可接受的编码压缩格式 - gzip, deflate, sdch, br
-- **Host：** 请求的主机名，允许多个域名同处一个IP地址，即虚拟主机 - www.baidu.com
-- **connection：** 连接方式
-- **close：** 告诉WEB服务器或代理服务器，在完成本次请求的响应后，断开连接
-- **keep-alive：** 告诉WEB服务器或代理服务器。在完成本次请求的响应后，保持连接，以等待后续请求
-- **Cookie：** 存储于客户端扩展字段，向同一域名的服务端发送属于该域的cookie - PSTM=1490844191; BIDUPSID=2145FF54639208435F60E1E165379255;
+- `User-Agent`：用户代理信息 - `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36` ...
+- `Accept`：客户端可识别的内容类型列表 - text/html,application/xhtml+xml,application/xml
+- `Accept-Language`：客户端可接受的自然语言 - zh-CN,zh;q=0.8,en;q=0.6,id;q=0.4
+- `Accept-Encoding`：客户端可接受的编码压缩格式 - gzip, deflate, sdch, br
+- `Host`：请求的主机名，允许多个域名同处一个IP地址，即虚拟主机 - www.baidu.com
+- `connection`：连接方式
+- `close`：告诉WEB服务器或代理服务器，在完成本次请求的响应后，断开连接
+- `keep-alive`：告诉WEB服务器或代理服务器。在完成本次请求的响应后，保持连接，以等待后续请求
+- `Cookie`：存储于客户端扩展字段，向同一域名的服务端发送属于该域的cookie - PSTM=1490844191; BIDUPSID=2145FF54639208435F60E1E165379255;
 
 #### 空行
 
@@ -104,7 +102,7 @@ GET / HTTP/1.1
 
 当Web服务器收到HTTP请求后，会根据请求的信息做某些处理(这些处理可能仅仅是静态的返回页，或是包含Asp.net,PHP,Jsp等语言进行处理后返回)，相应的返回一个HTTP响应。HTTP响应在结构上很类似于HTTP请求,也是由三部分组成，分别为:状态行  HTTP头  返回内容
 
-![http-resource-4](http05.png)
+![](http04.png)
 
 响应报文示例
 
@@ -121,26 +119,26 @@ Set-Cookie: BDSVRTM=0; path=/
 
 #### 状态行
 
-状态行格式： HTTP-Version Status-Code Reason-Phrase CRLF
+状态行格式： `HTTP-Version`、`Status-Code`、`Reason-Phrase`、`CRLF`
 
-1. HTTP-Version - HTTP 协议版本
-2. Status-Code - 状态码
-3. Reason-Phrase - 状态码描述
-4. CRLF - 回车/换行符
+1. `HTTP-Version` - HTTP协议版本
+2. `Status-Code` - 状态码
+3. `Reason-Phrase` - 状态码描述
+4. `CRLF` - 回车/换行符
 
 #### 响应头
 
 响应头由 key-value 对组成，每行一对，key (键) 和 value (值)用英文冒号 : 分隔。响应头域允许服务器传递不能放在状态行的附加信息，这些域主要描述服务器的信息和Request-URI进一步的信息，典型的响应头有：
 
-- Server：包含处理请求的原始服务器的软件信息
-- Date：服务器日期
-- Content-Type：返回的资源类型 (MIME)
-- Connection：连接方式
-- close：连接已经关闭
-- keep-alive：连接已保持，在等待本次连接的后续请求
-- Cache-Control：缓存控制
-- Expires：设置过期时间
-- Set-Cookie：设置 Cookie 信息
+- `Server`：包含处理请求的原始服务器的软件信息
+- `Date`：服务器日期
+- `Content-Type`：返回的资源类型 (MIME)
+- `Connection`：连接方式
+- `close`：连接已经关闭
+- `keep-alive`：连接已保持，在等待本次连接的后续请求
+- `Cache-Control`：缓存控制
+- `Expires`：设置过期时间
+- `Set-Cookie`：设置 Cookie 信息
 
 #### 空行
 
@@ -170,26 +168,26 @@ Set-Cookie: BDSVRTM=0; path=/
 
 状态代码由三位数字组成，第一个数字定义了响应的类别，且有五种可能取值：
 
-- **1xx：** 指示信息 – 表示请求已接收，继续处理
-- **2xx：** 成功 – 表示请求已被成功接收
-- **3xx：** 重定向 – 要完成请求必须进行更进一步的操作
-- **4xx：** 客户端错误 – 请求有语法错误或请求无法实现
-- **5xx：** 服务器错误 – 服务器未能实现合法的请求
+- `1xx`：指示信息 – 表示请求已接收，继续处理
+- `2xx`：成功 – 表示请求已被成功接收
+- `3xx`：重定向 – 要完成请求必须进行更进一步的操作
+- `4xx`：客户端错误 – 请求有语法错误或请求无法实现
+- `5xx`：服务器错误 – 服务器未能实现合法的请求
 
 常见状态代码、状态描述的说明如下：
 
-- 200 OK：客户端请求成功
-- 204 No Content：没有新文档，浏览器应该继续显示原来的文档
-- 206 Partial Content：客户发送了一个带有Range头的GET请求，服务器完成了它
-- 301 Moved Permanently：所请求的页面已经转移至新的url
-- 302 Found：所请求的页面已经临时转移至新的url
-- 304 Not Modified：客户端有缓冲的文档并发出了一个条件性的请求，服务器告诉客户，原来缓冲的文档还可以继续使用。
-- 400 Bad Request：客户端请求有语法错误，不能被服务器所理解
-- 401 Unauthorized：请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用
-- 403 Forbidden：对被请求页面的访问被禁止
-- 404 Not Found：请求资源不存在
-- 500 Internal Server Error：服务器发生不可预期的错误
-- 503 Server Unavailable：请求未完成，服务器临时过载或当机，一段时间后可能恢复正常
+- `200 OK`：客户端请求成功
+- `204 No Content`：没有新文档，浏览器应该继续显示原来的文档
+- `206 Partial Content`：客户发送了一个带有Range头的GET请求，服务器完成了它
+- `301 Moved Permanently`：所请求的页面已经转移至新的url
+- `302 Found`：所请求的页面已经临时转移至新的url
+- `304 Not Modified`：客户端有缓冲的文档并发出了一个条件性的请求，服务器告诉客户，原来缓冲的文档还可以继续使用。
+- `400 Bad Request`：客户端请求有语法错误，不能被服务器所理解
+- `401 Unauthorized`：请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用
+- `403 Forbidden`：对被请求页面的访问被禁止
+- `404 Not Found`：请求资源不存在
+- `500 Internal Server Error`：服务器发生不可预期的错误
+- `503 Server Unavailable`：请求未完成，服务器临时过载或当机，一段时间后可能恢复正常
 
 ## 参考资料
 
