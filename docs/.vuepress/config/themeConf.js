@@ -51,6 +51,7 @@ module.exports = {
             title: 'javascript基础',
             collapsable: false,
             children: [
+                'es5-expression',
                 'es5-type',
                 'es5-prototype',
                 'es5-this',
