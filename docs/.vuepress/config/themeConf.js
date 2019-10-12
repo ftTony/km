@@ -182,6 +182,7 @@ module.exports = {
                 'layout',
                 'px',
                 'flex',
+                'grid',
                 'bfc',
                 'select'
             ]
