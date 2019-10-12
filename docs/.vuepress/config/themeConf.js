@@ -418,8 +418,8 @@ module.exports = {
             children: [
                 'http',
                 'https',
-                'http-cache',
                 'http2',
+                'http-cache',
                 'tcp',
                 'webstock'
             ]
