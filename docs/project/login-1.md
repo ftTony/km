@@ -122,6 +122,7 @@ Sparklr 网站也是一脸茫然的样子，因为在它看来，自己收到的
 - [OAuth 授权的工作原理是怎样的？足够安全吗？](https://www.zhihu.com/question/19781476/answer/81020455)
 - [理解 OAuth 2.0](http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
 - [第三方登录 OAuth](https://lmjben.github.io/blog/osi-web-login.html#%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95-oauth)
+- [【全栈修炼】OAuth2 修炼宝典](https://juejin.im/post/5db90c0ae51d452a17370626)
 
 ## 联系作者
 
