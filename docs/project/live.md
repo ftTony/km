@@ -15,34 +15,27 @@
 
 ### 一、直播构成
 
-![c19343ac6b031af7s](https://user-images.githubusercontent.com/6395813/49803209-256cc680-fd8a-11e8-9492-84c1c260de6a.png)
+![c19343ac6b031af7s](live01.png)
 
 目前牛牛支持情况：
 
-移动牛牛（安卓、IOS）主播端只支持摄像头直播，观众端支持展示
-
-PC牛牛主播端支持摄像头直播、录屏直播、摄像头+录屏直播，观众端支持展示
-
-MAC牛牛跟web端主播端不支持，观众端支持展示
+- 移动牛牛（安卓、IOS）主播端只支持摄像头直播，观众端支持展示
+- PC牛牛主播端支持摄像头直播、录屏直播、摄像头+录屏直播，观众端支持展示
+- MAC牛牛跟web端主播端不支持，观众端支持展示
 
 ### 二、直播流程
 
-视频直播，可以分为 采集，前处理，编码，传输，解码，渲染 这几个环节
+视频直播，可以分为以下这几个环节
 
-采集，一般是由客户端（IOS、安卓、PC或其它工具，如OBS）完成的，iOS是比较简单的，Android则要做些机型适配工作，PC最麻烦各种奇葩摄像头驱动，当然这些问题，腾讯云已经帮我们处理好了，呵呵。
-
-前处理，主要是处理直播美颜，美颜算法需要用到GPU编程，需要懂图像处理算法的人，没有好的开源实现，要自己参考论文去研究。难点不在于美颜效果，而在于GPU占用和美颜效果之间找平衡。
-
-编码，肯定要采用硬编码，软编码720p完全没希望，勉强能编码也会导致CPU过热烫到摄像头。编码要在分辨率，帧率，码率，GOP等参数设计上找到最佳平衡点。
-
-传输，一般交给了CDN服务商。
-
-解码，是对之前编码的操作，进行解码，在web里需要解码是hls。
-
-渲染，主要用播放器来解决，web中常用到的播放器有video.js，目前我们使用是腾讯云播放器。
+- 采集：一般是由客户端（IOS、安卓、PC或其它工具，如OBS）完成的，iOS是比较简单的，Android则要做些机型适配工作，PC最麻烦各种奇葩摄像头驱动，当然这些问题，腾讯云已经帮我们处理好了，呵呵。
+- 前处理：主要是处理直播美颜，美颜算法需要用到GPU编程，需要懂图像处理算法的人，没有好的开源实现，要自己参考论文去研究。难点不在于美颜效果，而在于GPU占用和美颜效果之间找平衡。
+- 编码：肯定要采用硬编码，软编码720p完全没希望，勉强能编码也会导致CPU过热烫到摄像头。编码要在分辨率，帧率，码率，GOP等参数设计上找到最佳平衡点。
+- 传输：一般交给了CDN服务商。
+- 解码：是对之前编码的操作，进行解码，在web里需要解码是hls。
+- 渲染：主要用播放器来解决，web中常用到的播放器有video.js，目前我们使用是腾讯云播放器。
 
 其实一个完成直播，远远不上面这几个环节，下面是腾讯云直播方案的整个流程图：
-![2d4844429b6c24c5s](https://user-images.githubusercontent.com/6395813/49803259-3fa6a480-fd8a-11e8-98a5-e8bcb96a68b7.png)
+![2d4844429b6c24c5s](live02.png)
 
 ### 三、web中直播技术
 
@@ -54,7 +47,7 @@ HLS（HTTP Live Streaming全称）是一个基于 HTTP 的视频流协议，由 
 
 HLS工作流程：
 
-![ebf24281ef5b0221s](https://user-images.githubusercontent.com/6395813/49803276-4a613980-fd8a-11e8-8f57-8c55e6440938.png)
+![ebf24281ef5b0221s](live03.png)
 
 - `Server`:服务器组件负责获取的媒体输入流 , 然后Media编码后 MPEG-4（H.264 video 和 AAC audio）格式然后用硬件打包到 MPEG-2 (MPEG-2 transport stream)的传输流中。图中显示,传输流会经过stream segmenter, 这里的工作是MPEG-2传输流会被分散为小片段然后保存为一个或多个系列的 .ts 格式的媒体文件。这个过程需要借助编码工具来完成，比如 Apple stream segmenter。
 (视频类是.ts文件,纯音频会被编码为一些音频小片段，通常为 ADTS头的AAC、MP3、或者 AC-3格式。)
@@ -64,7 +57,7 @@ HLS工作流程：
 
 索引文件结构图
 
-![764764-551e7aa6c8f2b86e](https://user-images.githubusercontent.com/6395813/49803291-55b46500-fd8a-11e8-894d-8eedccc49574.png)
+![764764-551e7aa6c8f2b86e](live04.png)
 
 主索引文件
 
@@ -72,16 +65,11 @@ HLS工作流程：
 #EXTM3U
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=409037,RESOLUTION=416x234,CODECS="mp4a.40.2, avc1.42001e"
 Gear1/prog_index.m3u8
-
 ```
 
-`\#EXTM3U`
+`\#EXTM3U`：每个M3U文件第一行必须是这个tag，请标示作用
 
-每个M3U文件第一行必须是这个tag，请标示作用
-
-`\#EXT-X-STREAM-INF`
-
-标签的属性列表中直接指明当前流是VIDEO还是AUDIO
+`\#EXT-X-STREAM-INF`：标签的属性列表中直接指明当前流是VIDEO还是AUDIO
 
 属性 :
 
@@ -111,7 +99,6 @@ fileSequence4.ts
 #EXTINF:10.000000,
 fileSequence5.ts
 #EXT-X-ENDLIST
-
 ```
 
 - `\#EXTM3U`：m3u文件头，必须放在第一行
@@ -126,10 +113,10 @@ fileSequence5.ts
 - 主索引文件和子索引文件都是.M3U8的playlist
 - 主索引文件只需下载一次，但对于直播节目子索引文件定期重新加载
 
-videojs-contrib-hls解析过程
-![aed1d13465cd5422s](https://user-images.githubusercontent.com/6395813/49803300-6238bd80-fd8a-11e8-9ccc-33687d9c053c.png)
+**videojs-contrib-hls解析过程**
+![aed1d13465cd5422s](live05.png)
 
-HLS简单讲就是把整个流分成一个个小的，基于 HTTP 的文件来下载，每次只下载一些，前面提到了用于 H5 播放直播视频时引入的一个 .m3u8 的文件，这个文件就是基于 HLS 协议，存放视频流元数据的文件。 每一个 .m3u8 文件，分别对应若干个 ts 文件，这些 ts 文件才是真正存放视频的数据，m3u8 文件只是存放了一些 ts 文件的配置信息和相关路径，当视频播放时，.m3u8 是动态改变的，再通过解析器（videojs-contrib-hls.js）解析这个文件，并找到对应的 ts 文件来播放，所以一般为了加快速度，.m3u8 放在 web 服务器上，ts 文件放在 cdn 上。
+HLS简单讲就是把整个流分成一个个小的，基于HTTP的文件来下载，每次只下载一些，前面提到了用于 `H5`播放直播视频时引入的一个`.m3u8`的文件，这个文件就是基于`HLS`协议，存放视频流元数据的文件。 每一个`.m3u8`文件，分别对应若干个`ts`文件，这些`ts`文件才是真正存放视频的数据，`m3u8` 文件只是存放了一些`ts`文件的配置信息和相关路径，当视频播放时，`.m3u8`是动态改变的，再通过解析器（videojs-contrib-hls.js）解析这个文件，并找到对应的`ts`文件来播放，所以一般为了加快速度，`.m3u8`放在`web`服务器上，`ts`文件放在`cdn`上。
 
 #### 3.2 RTMP
 
@@ -172,14 +159,12 @@ brew install nginx
 
 ```
 brew install nginx-full --with-rtmp-module
-
 ```
 
 安装FFmpeg（是一个集录制、转换、音/视频编码解码功能 为一体的完整的开源工具，我们下面用它来做推流跟切片）
 
 ```
 brew install ffmpeg
-
 ```
 
 #### 4.3 nginx.conf配置文件，配置RTMP、HLS
@@ -206,7 +191,6 @@ rtmp {
 		}
 	}
 }
-
 ```
 
 在http中添加`hls`的配置
@@ -223,56 +207,54 @@ location /hls {
 	#add_header Cache-Controll no-cache;
 	expires -1;
 }
-
 ```
 
 #### 4.4 重启nginx
 
 ```
 sudo nginx -s reload
-
 ```
 
 #### 4.5 查看端口是否启动
 
 ```
 netstat -an | grep 1935
-
 ```
 
 如果显示如下，显示已经启用
 
-![edf1708baf6fbc90s](https://user-images.githubusercontent.com/6395813/49803333-7381ca00-fd8a-11e8-9f03-d088f16bbaa1.png)
+![edf1708baf6fbc90s](live06.png)
 
 http端口同理
 
-到现在我们已经完成了，服务的搭建（rtmp、hls推流地址分别为:rtmp://127.0.0.1:1935/rtmplive/home,rtmp://localhost:1935/rtmplive/hls）
+到现在我们已经完成了，服务的搭建（rtmp、hls推流地址分别为:`rtmp://127.0.0.1:1935/rtmplive/home`,`rtmp://localhost:1935/rtmplive/hls`）
 
 #### 4.6 FFmpeg执行命令
 
-我们以推流MP4文件为例，我的视频文件地址：/Users/tony/Desktop/w01661pl9vw.p702.1.mp4 
+我们以推流MP4文件为例，我的视频文件地址：`/Users/tony/Desktop/w01661pl9vw.p702.1.mp4`
 
-RTMP 协议推流命令
+- RTMP 协议推流命令
 
 ```
 ffmpeg -re -i /Users/tony/Desktop/w01661pl9vw.p702.1.mp4 -vcodec libx264 -acodec aac -f flv rtmp://127.0.0.1:1935/rtmplive/home
-
 ```
 
-HLS 协议推流命令
+- HLS 协议推流命令
 
 ```
-ffmpeg -re -i  /Users/tony/Desktop/w01661pl9vw.p702.1.mp4 -vcodec libx264 -vprofile baseline -acodec aac -ar 44100 -strict -2 -ac 1 -f flv -q 10 rtmp://127.0.0.1:1935/hls/test 
-
+ffmpeg -re -i  /Users/tony/Desktop/w01661pl9vw.p702.1.mp4 -vcodec libx264 -vprofile baseline -acodec aac -ar 44100 -strict -2 -ac 1 -f flv -q 10 rtmp://127.0.0.1:1935/hls/test
 ```
 
-/Users/tony/Desktop/w01661pl9vw.p702.1.mp4 表示视频的地址
+`/Users/tony/Desktop/w01661pl9vw.p702.1.mp4` 表示视频的地址
 
-rtmp://127.0.0.1:1935/rtmplive/home、rtmp://localhost:1935/rtmplive/hls表示推流地址
+`rtmp://127.0.0.1:1935/rtmplive/home`、`rtmp://localhost:1935/rtmplive/hls`表示推流地址
 
 上面的命令操作后，命令行出现了如下图，表示已经成功了
 
+```
 <img width="793" alt="wx20180126-111328 2x" src="https://user-images.githubusercontent.com/6395813/49803352-81cfe600-fd8a-11e8-8dee-41f4f0e2d008.png">
+
+```
 
 关于FFmpeg功能命令可参考：
 
@@ -282,7 +264,7 @@ rtmp://127.0.0.1:1935/rtmplive/home、rtmp://localhost:1935/rtmplive/hls表示�
 
 两种推流方式播放的话，我们都使用video.js播放器播放(牛牛里使用的是腾讯云播放器)
 
-rtmp
+**rtmp**
 
 ```
 <!DOCTYPE html>
@@ -325,7 +307,7 @@ rtmp
 
 其它src中的地址填的是RTMP推流地址，注意播放时，如果出现“当前系统环境不支持播放该视频格式”，浏览器需要启用flash，才能正常播放。
 
-hls
+**hls**
 
 ```
 <!DOCTYPE html>
@@ -351,21 +333,19 @@ hls
 </html>
 ```
 
-src填的是切片地址
-
 #### 4.8 效果
 
-rtmp效果
+**rtmp效果**
 
-![0b20b027406625d2s](https://user-images.githubusercontent.com/6395813/49803383-9613e300-fd8a-11e8-8fbb-01ec193f5580.png)
+![0b20b027406625d2s](live08.png)
 
-hls效果
+**hls效果**
 
-![fbd49eed2bd3f92es](https://user-images.githubusercontent.com/6395813/49803393-9e6c1e00-fd8a-11e8-8770-0cc694cabfa9.png)
+![fbd49eed2bd3f92es](live09.png)
 
-ts和m3u8文件
+**ts和m3u8文件**
 
-![14e622f03c4a9193s](https://user-images.githubusercontent.com/6395813/49803405-aa57e000-fd8a-11e8-9940-a25a9dbf66e4.png)
+![14e622f03c4a9193s](live10.png)
 
 ### 五、直播中遇到问题
 
@@ -376,7 +356,7 @@ ts和m3u8文件
 
 #### 5.1 自动播放问题
 
-在X5内核浏览器里必须使用触发touchend、click、doubleclick或 keydown 事件等标准的事件才能触发
+在X5内核浏览器里必须使用触发`touchend`、`click`、`doubleclick`或`keydown`事件等标准的事件才能触发
 
 #### 5.2 各平台播放器表现不统一
 
