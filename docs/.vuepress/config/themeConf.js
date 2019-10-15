@@ -263,6 +263,20 @@ module.exports = {
             ]
         },
         {
+            title: 'PWA介绍',
+            collapsable: false,
+            children: [
+                'pwa-0'
+            ]
+        },
+        {
+            title: '直播原理与实践',
+            collapsable: false,
+            children: [
+                'live'
+            ]
+        },
+        {
             title: '性能',
             collapsable: false,
             children: [
