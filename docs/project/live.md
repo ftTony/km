@@ -6,12 +6,12 @@
 
 ## 内容
 
-- 直播构成
-- 直播流程
-- web中直播技术
-- 实践
-- 直播中遇到坑
-- 总结
+- [直播构成](#一、直播构成)
+- [直播流程](#二、直播流程)
+- [web中直播技术](#三、web中直播技术)
+- [实践](#四、实践（搭建rtmp、hls直播流服务）)
+- [直播中遇到坑](#五、直播中遇到问题)
+- [总结](#六、总结)
 
 ### 一、直播构成
 
@@ -40,6 +40,10 @@
 ### 三、web中直播技术
 
 目前互联网上web做直播，主要是展示，主流web展示的话可能涉及到hls跟rtmp这两个东西，现在我们重点讲解hls跟rtmp协议。
+
+- [HLS](#_3-1-hls)
+- [RTMP](#_3-2-rtmp)
+- [HLS与RTMP对应](#_3-3-hls与rtmp对应)
 
 #### 3.1 HLS
 
@@ -140,7 +144,7 @@ this.play();
 </script>
 ```
 
-#### 3.4 hls与RTMP对应
+#### 3.3 HLS与RTMP对应
 
 | 协议      | 原理                                     | 延时    | 优点             | 缺点     | 使用场景                      |
 | --------- | ---------------------------------------- | ------- | ---------------- | -------- | ----------------------------- |
@@ -148,6 +152,15 @@ this.play();
 | RTMP(TCP) | 每个时刻的数据收到后立即发送             | 2s      | 延时低、实时性好 | 跨平台差 | PC+直播+实时性要求高+互动性强 |
 
 ### 四、实践（搭建RTMP、HLS直播流服务）
+
+- [安装`nginx`](#_4-1-安装nginx)
+- [安装`nginx-rtmp-module`](#_4-2-安装nginx-rtmp-module)
+- [`nginx.conf`配置文件，配置`RTMP`、`HLS`](#_4-3-nginx-conf配置文件，配置rtmp、hls)
+- [重启`nginx`](#_4-4-重启nginx)
+- [查看端口是否启动](#_4-5-查看端口是否启动)
+- [`FFmpeg`执行命令](#_4-6-ffmpeg执行命令)
+- [代码实现](#_4-7-代码实现)
+- [效果](#_4-8-效果)
 
 #### 4.1 安装nginx
 
@@ -233,13 +246,13 @@ http端口同理
 
 我们以推流MP4文件为例，我的视频文件地址：`/Users/tony/Desktop/w01661pl9vw.p702.1.mp4`
 
-- RTMP 协议推流命令
+- `RTMP`协议推流命令
 
 ```
 ffmpeg -re -i /Users/tony/Desktop/w01661pl9vw.p702.1.mp4 -vcodec libx264 -acodec aac -f flv rtmp://127.0.0.1:1935/rtmplive/home
 ```
 
-- HLS 协议推流命令
+- `HLS`协议推流命令
 
 ```
 ffmpeg -re -i  /Users/tony/Desktop/w01661pl9vw.p702.1.mp4 -vcodec libx264 -vprofile baseline -acodec aac -ar 44100 -strict -2 -ac 1 -f flv -q 10 rtmp://127.0.0.1:1935/hls/test
@@ -264,7 +277,7 @@ ffmpeg -re -i  /Users/tony/Desktop/w01661pl9vw.p702.1.mp4 -vcodec libx264 -vprof
 
 两种推流方式播放的话，我们都使用video.js播放器播放(牛牛里使用的是腾讯云播放器)
 
-**rtmp**
+- **RTMP**
 
 ```
 <!DOCTYPE html>
@@ -307,7 +320,7 @@ ffmpeg -re -i  /Users/tony/Desktop/w01661pl9vw.p702.1.mp4 -vcodec libx264 -vprof
 
 其它src中的地址填的是RTMP推流地址，注意播放时，如果出现“当前系统环境不支持播放该视频格式”，浏览器需要启用flash，才能正常播放。
 
-**hls**
+- **HLS**
 
 ```
 <!DOCTYPE html>
@@ -335,24 +348,24 @@ ffmpeg -re -i  /Users/tony/Desktop/w01661pl9vw.p702.1.mp4 -vcodec libx264 -vprof
 
 #### 4.8 效果
 
-**rtmp效果**
+- **rtmp效果**
 
 ![0b20b027406625d2s](live08.png)
 
-**hls效果**
+- **hls效果**
 
 ![fbd49eed2bd3f92es](live09.png)
 
-**ts和m3u8文件**
+- **ts和m3u8文件**
 
 ![14e622f03c4a9193s](live10.png)
 
 ### 五、直播中遇到问题
 
-- 自动播放问题
-- 各平台播放器表现不统一
-- 内页面调试困难
-- Native与web通信问题
+- [自动播放问题](#_5-1-自动播放问题)
+- [各平台播放器表现不统一](#_5-2-各平台播放器表现不统一)
+- [内页面调试困难](#_5-3-内嵌页面调试困难)
+- [Native与web通信问题](#_5-4-native与web通信)
 
 #### 5.1 自动播放问题
 
@@ -370,7 +383,7 @@ ffmpeg -re -i  /Users/tony/Desktop/w01661pl9vw.p702.1.mp4 -vcodec libx264 -vprof
 
 schema跟jsBridge，schema只能做到web调用native，而且做不到native调用web；jsBridge虽然可以做native调用web，但在iframe没加载完的情况下，也是通知不到web的；
 
-### 总结
+### 六、总结
 
 整个直播是一个非常复杂的过程，实现过程中会遇到很多性能问题，需要在性能跟即时性做一个权衡，ts跟m3u8尽量做到缓存，浏览器里尽量使用推流。
 
