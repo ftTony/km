@@ -443,7 +443,8 @@ module.exports = {
             collapsable: false,
             children: [
                 'os',
-                'linux'
+                'linux',
+                'shell'
             ]
         }
         ],
