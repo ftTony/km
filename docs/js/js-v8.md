@@ -1,4 +1,4 @@
-# V8简介
+# V8 简介
 
 ## 前言
 
@@ -6,7 +6,11 @@
 
 ## 内容
 
-## 参考资料
+### 参考资料
+
+- [认识 V8 引擎](https://zhuanlan.zhihu.com/p/27628685)
+- [JavaScript 深入浅出第 4 课：V8 引擎是如何工作的？](https://blog.fundebug.com/2019/07/16/how-does-v8-work/)
+- [JavaScript 是如何工作的：深入 V8 引擎&编写优化代码的 5 个技巧](https://github.com/qq449245884/xiaozhi/issues/2)
 
 ## 联系作者
 
