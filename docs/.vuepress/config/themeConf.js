@@ -444,6 +444,7 @@ module.exports = {
             children: [
                 'os',
                 'linux',
+                'linux-1',
                 'shell'
             ]
         }
