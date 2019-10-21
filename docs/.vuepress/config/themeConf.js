@@ -282,6 +282,8 @@ module.exports = {
             children: [
                 'performance-1',
                 'performance-2',
+                'performance-3',
+                'performance-4'
             ]
         },
         {
