@@ -73,14 +73,14 @@ module.exports = {
             children: [
                 'js-curry',
                 'js-debounce',
-                'js-run',
+                'js-precision',
                 'js-memory',
                 'js-async',
-                'js-ast',
                 'js-bit',
                 'js-eventloop',
-                'js-precision',
                 'js-module',
+                'js-run',
+                'js-ast',
                 'js-v8',
                 'js-principle'
             ]
