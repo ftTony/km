@@ -263,10 +263,13 @@ module.exports = {
             ]
         },
         {
-            title: 'PWA介绍',
+            title: '新技术',
             collapsable: false,
             children: [
-                'pwa-0'
+                'pwa-0',
+                'webAssembly',
+                'electron',
+                'serverless'
             ]
         },
         {
