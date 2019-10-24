@@ -12,12 +12,12 @@
 
 ## 内容
 
-- props/$emit
-- $emit/$on
-- vuex
-- $attrs/$listeners
-- provide/inject
-- $parent/$chilren与ref
+- [props/$emit](#一、props-emit)
+- [$emit/$on](#二、-emit-on)
+- [vuex](#三、vuex)
+- [$attrs/$listeners](#四、-attrs-listeners)
+- [provide/inject](#五、provide-inject)
+- [$parent/$chilren与ref](#六、-parent-chilren与ref)
 
 ### 一、`props`/`$emit`
 
@@ -295,13 +295,105 @@ JSON.parse(window.localStorage.getItem("subscribeList"))    // string -> array
 ```
 // index.vue
 <template>
+  <div>
+    <h2>小武子</h2>
+    <child-com1
+      :foo="foo"
+      :boo="boo"
+      :coo="coo"
+      title="fttony"
+    ></child-com1>
+  </div>
 </template>
+<script>
+const childCom1 = () => import('./attrsChild.vue')
+export default {
+  components: { childCom1 },
+  data () {
+    return {
+      foo: 'JavaScript',
+      boo: 'Html',
+      coo: 'CSS',
+      doo: 'Vue'
+    }
+  }
+}
+</script>
 ```
 
 ```
 // childCom1.vue
 
+<template>
+  <div>
+    <p>foo:{{foo}}</p>
+    <p>childCom1的$attrs:{{$attrs}}</p>
+    <child-com2 v-bind="$attrs"></child-com2>
+  </div>
+</template>
+<script>
+const childCom2 = () => import('./attrsChild2.vue');
+export default {
+  components: {
+    childCom2
+  },
+  inheritAttrs: false, // 可以关闭自动挂载到组件根元素上的没有在props声明的属性
+  props: {
+    foo: String // foo作为props属性绑定
+  },
+  created () {
+    console.log(this.$attrs);
+  }
+}
+</script>
 ```
+
+```
+<template>
+  <div>
+    <p>boo:{{boo}}</p>
+    <p>childCom2:{{$attrs}}</p>
+    <child-com3 v-bind="$attrs"></child-com3>
+  </div>
+</template>
+<script>
+const childCom3 = () => import('./attrsChild3.vue');
+export default {
+  components: {
+    childCom3
+  },
+  inheritAttrs: false,
+  props: {
+    boo: String
+  },
+  created () {
+    console.log(this.$attrs)
+  }
+}
+</script>
+```
+
+```
+<template>
+  <div>
+    <p>childCom3{{$attrs}}</p>
+  </div>
+</template>
+<script>
+export default {
+  props: {
+    coo: String,
+    title: String
+  }
+}
+</script>
+```
+
+![images](vue07.png)
+
+如上图所示`$attrs`表示没有继承数据的对象，格式的{属性名：属性值}。Vue2.4提供了`$attrs`、`$listeners`来传递数据与事件，跨级组件之间的通讯变得更简单。
+
+简单来说：`$attrs`与`$listeners`是两个对象，`$attrs`里存放的是父组件中绑定的非Props属性，`$listeners`里存放的是父组件中绑定的非原生事件。
 
 ### 五、`provide`/`inject`
 
@@ -347,6 +439,30 @@ export default{
 - provide祖先组件的实例
 - 使用2.6最新API Vue.observable优化响应式provide(推荐)
 
+我们来看个例子：孙组件D、E和F获取A组件传递过来的color值，并能实现数据响应变化，即A组件的color变化后，组件D、E、F会跟着变（核心代码如下：）
+
+![images](vue08.png)
+
+```
+//父组件:
+provide: { //provide 是一个对象,提供一个属性或方法
+  foo: '这是 foo',
+  fooMethod:()=>{
+    console.log('父组件 fooMethod 被调用')
+  }
+},
+
+// 子或者孙子组件
+inject: ['foo','fooMethod'], //数组或者对象,注入到子组件
+mounted() {
+  this.fooMethod()
+  console.log(this.foo)
+}
+//在父组件下面所有的子组件都可以利用inject
+```
+
+虽说provide 和 inject 主要为高阶插件/组件库提供用例，但如果你能在业务中熟练运用，可以达到事半功倍的效果！
+
 ### 六、`$parent`/`$chilren`与ref
 
 - `ref`：如果在普通的DOM元素上使用，引用指向的就是DOM元素；如果用在子组件上，引用就指向组件实例
@@ -355,10 +471,55 @@ export default{
 需要注意的是：这两种都是直接得到组件实例，使用后可以直接调用组件的方法或访问数据。我们先来看个用`ref`来访问组件的例子：
 
 ```
+// component-a 子组件
+export default{
+    data(){
+        return {
+            title:'Vue.js'
+        }
+    },
+    methods:{
+        sayHello(){
+            console.log('Hello');
+        }
+    }
+}
 ```
 
 ```
+// 父组件
+<template>
+    <component-a ref="comA"></component-a>
+</template>
+<script>
+    export default{
+        mounted(){
+            const comA = this.$refs.comA;
+            console.log(comA.title);    // Vue.js
+            comA.sayHello();    // 弹窗
+        }
+    }
+</script>
 ```
+
+不过，**这两种方法的弊端是，无法在跨级或兄弟间通信。**
+
+```
+// parent.vue
+<component-a></component-a>
+<component-b></component-b>
+<component-b></component-b>
+```
+
+我们想在component-a中，访问到引用它的页面中（这里就是parent.vue）的两个component-b组件，那这种情况下，就得配置额外的插件或工具了，比如Vuex和Bus的解决方案。
+
+### 总结
+
+常用使用场景可以分为三类：
+
+- 父子通信：父向子传递数据是通过props，子向父是通过events(`$emit`)；通过父链/子链也可以通信（`$parent`/`$children`）；ref也可以访问组件实例；provide/inject API;`$attrs/$listeners`；
+- 兄弟通信：Bus、Vuex；
+- 跨级通信：Bus、Vuex、provide / inject API、`$attrs/$listeners`
 
 ### 参考资料
 
