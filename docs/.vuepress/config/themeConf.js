@@ -238,7 +238,8 @@ module.exports = {
             title: 'web service',
             collapsable: false,
             children: [
-                'webserver'
+                'webserver',
+                'webrtc'
             ]
         }
         ],
@@ -333,7 +334,8 @@ module.exports = {
             collapsable: false,
             children: [
                 'ci-cd',
-                'npm',
+                'npm-1',
+                'npm-2',
                 'webhook',
             ]
         },
