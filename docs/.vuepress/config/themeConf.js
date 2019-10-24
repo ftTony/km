@@ -64,6 +64,7 @@ module.exports = {
                 'es5-fn',
                 'es5-news',
                 'es5-object',
+                'es5-reg',
                 'es5-scope'
             ]
         },

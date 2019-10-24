@@ -19,9 +19,24 @@
 
 - 函数柯里化
 - 节流与防抖动
+- js工作原理
+- V8引擎
 
 ## es6学习
 
+- Promise对象
+- async
+- let与const
+- Set与Map数据结构
+
 ## nodejs学习
 
+- stream模块
+- koa 基础应用
+- koa源码分析
+
 ## 框架学习
+
+- 双向数据绑定原理
+- Vuex学习
+- Vue组件通信
