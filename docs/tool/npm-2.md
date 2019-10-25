@@ -68,6 +68,12 @@ C@1.0.0 -> D@1.0.0
 - **bundledDependencies / bundleDependencies - 打包依赖**
 - **optionalDependencies - 可选依赖**
 
+作为`npm`的使用者，我们常用的依赖是`dependencies`和`devDependencies`，剩下三种依赖则是作为包的发布才会使用到的字段。
+
+#### 2.1 dependencies
+
+
+
 ### 三、npm scripts 脚本
 
 ### 四、npm 配置
