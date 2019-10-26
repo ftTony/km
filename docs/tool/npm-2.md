@@ -468,7 +468,7 @@ npm uninstall packageName
 }
 ```
 
-如果全局安装`@vue/cli`的话，`@vue/cli`**源文件会被安装在全局源文件安装目录（`/user/local/lib/node_modules`）下，而`npm`会在全局可执行`bin`文件安装目录（`/usr/local/bin`）下创建一个指向`/usr/local/lib/node_modules/@vue/cli/bin/vue.js`文件的名为 vue 的软链接，**这样就可以直接在终端输入`vue`来执行相关命令。如下图所示：
+如果全局安装`@vue/cli`的话，`@vue/cli` **源文件会被安装在全局源文件安装目录（`/user/local/lib/node_modules`）下，而`npm`会在全局可执行`bin`文件安装目录（`/usr/local/bin`）下创建一个指向`/usr/local/lib/node_modules/@vue/cli/bin/vue.js`文件的名为 vue 的软链接，** 这样就可以直接在终端输入`vue`来执行相关命令。如下图所示：
 
 ![images](npm01.png)
 
@@ -802,11 +802,339 @@ npm config edit [-g|--global]
 
 #### 5.1 项目版本号管理
 
+`package.json`中的`version`字段代表的是该项目的版本号。每当项目发布新版本时，需要将`version`字段进行相应的更新以便后期维护。虽然可以手动的修改`vsersion`字段，但是为了整个发布过程的自动化，尽量使用`npm version`指令来自动更新`version`：
+
+```
+npm version (v)1.2.3  # 显示设置版本号为 1.2.3
+npm version major  # 大版本号加 1，其余版本号归 0
+npm version minor  # 小版本号加 1，修订号归 0
+npm version patch  # 修订号加 1
+```
+
+> 显示的设置版本号时，版本号必须符合`semver`规范，允许在版本号前加上个`v`标识。
+
+如果不想让此次更新正式发布，还可以创建预发布版本：
+
+```
+# 当前版本号为 1.2.3
+npm version prepatch  # 版本号变为 1.2.4-0，也就是 1.2.4 版本的第一个预发布版本
+npm version preminor  # 版本号变为 1.3.0-0，也就是 1.3.0 版本的第一个预发布版本
+npm version premajor  # 版本号变为 2.0.0-0，也就是 2.0.0 版本的第一个预发布版本
+npm version prerelease  # 版本号变为 2.0.0-1，也就是使预发布版本号加一
+```
+
+**在`git`环境中，执行`npm version`修改完版本号以后，还会默认执行`git add->git commit->git tag`操作：**
+
+![images](npm02.png)
+
+其中 `commit message` 默认是自动修改完的版本号，可以通过添加`-m/--message` 选项来自定义`commit message`：
+
+```
+npm version xxx -m "upgrade to %s for reasons"  # %s 会自动替换为新版本号
+```
+
+比如执行`npm version minor -m "feat(version): upgrade to %s for reasons"`后：
+
+![images](npm03.png)
+
+如果`git`工作区还未提交的修改，`npm version`将会执行失败，可以加上`-f/--force`后缀来强制执行。
+
+```
+npm --no-git-tag-version version xxx
+```
+
+如果想默认不影响你的`git`仓库，可以在`npm`设置中禁止：
+
+```
+npm config set git-tag-version false  # 不自动打 tag
+npm config set commit-hooks false     # 不自动 commit
+```
+
 #### 5.2 模块 tag 管理
+
+不经常发布包的同学可能对模块[tag](https://docs.npmjs.com/cli/dist-tag)概念不是很清楚。以`vue`为例，首先执行`npm dist-tag ls vue`查看`vue`包的`tag`：
+
+```
+beta: 2.6.0-beta.3
+csp: 1.0.28-csp
+latest: 2.6.10
+```
+
+上面列出的`beta`、`csp`、`latest`就是`tag`。每个`tag`对应了一个版本。
+
+那`tag`到底有什么用呢？**`tag`类似于`git`里面分支的概念，发布者可以在指定的`tag`上发布版本，而使用者可以选择指定的`tag`来安装包。不同的标签下的版本之间互不影响，这在发布者发布预发布版本包和使用者尝鲜预发布版本包的同时，不影响到正式版本。**
+
+在发布包的时候执`npm publish`默认会打上`latest`这个`tag`，实际上是执行了`npm publish --tag latest`。而在安装包的时候执行`npm install xxx`则会默认下载`latest`这个`tag`下面的最新版本，实际上是执行了`npm install xxx@latest`。当然，我们也可以自定义 tag：
+
+```
+# 当前版本为1.0.1
+npm version prerelease  # 1.0.2-0
+npm publish --tag beta
+npm dist-tag ls xxx  # # beta: 1.0.2-0
+npm install xxx@beta  # 下载beta版本 1.0.2-0
+```
+
+当`prerelease`版本已经稳定了，可以将`prerelease`版本设置为稳定版本：
+
+```
+npm dist-tag add xxx@1.0.2-0 latest
+npm dist-tag ls xxx  # latest: 1.0.2-0
+```
 
 #### 5.3 域级包管理
 
+细心的同学会发现，在`package.json`中的依赖有两种形式：
+
+```
+"devDependencies": {
+  "@commitlint/cli": "^7.2.1",
+  "commitizen": "^3.0.4"
+}
+```
+
+其中以`@`开头的包名，是一个域级包（[scoped package](https://docs.npmjs.com/misc/scope#publishing-public-scoped-packages-to-the-public-npm-registry)），这种域级包的作用是将一些`packages`集中在一个命名空间下，一方面可以集中管理，一方面可以防止与别的包产生命名冲突。
+
+要发布域级包，首先要在项目的`package.json`的`name`属性中添加`scope`相关的声明，可以通过指令添加：
+
+```
+npm init --scope=scopeName -y
+```
+
+`package.json`变为：
+
+```
+{
+  "name": "@scopeName/package"
+}
+```
+
+> 可以将用户名作为域名，也可以将组织名作为域名。
+
+由于用`@`声明了该包，`npm`会默认将此包认定为私有包，而在`npm`上托管私有包是需要收费的，所以为了避免发布私有包，可以在发布时添加`--accss=public`参数告知`npm`这不是一个私有包：
+
+```
+npm publish --access=public
+```
+
+> 域级包不一定就是私有包，但是私有包一定是一个域级包。
+
+同时，在安装域级包时需要按照域级包全名来安装：
+
+```
+npm install @scopeName/package
+```
+
 ### 六、npm 的几个实用技巧
+
+- 自定义默认的 npm init
+- 查看 npm 脚本命令
+- 查看环境变量
+- 模块管理
+- 查看模块文档
+- 在不同的目录下运行脚本
+- 模块全局化
+- 安全漏洞检查
+- 依赖锁定
+
+#### 6.1 自定义默认的 npm init
+
+使用`npm init`初始化一个新的项目时会提示你去填写一些项目描述信息。如果觉得填写这些信息比较麻烦的话，可以使用`-y`标记表示接受`package.json`中的一些默认值：
+
+```
+npm init -y
+```
+
+也可以设置初始化的默认值：
+
+```
+npm config set init-author-name <name> // 为 npm init 设置了默认的作者名
+```
+
+#### 6.2 查看 npm 脚本命令
+
+查看当前项目的所有`npm`脚本命令最直接的办法就是打开项目中的`package.json`文件并检查`scripts`字段。我们还可以使用不带任何参数的`npm run`命令查看：
+
+```
+npm run
+```
+
+#### 6.3 查看环境变量
+
+通过`env`查看当前的所有环境变量，而查看运行时的所有环境变量可以执行：
+
+```
+npm run env
+```
+
+#### 6.4 模块管理
+
+检查当前项目依赖的所有模块，包括子模块以及子模块的子模块：
+
+```
+npm list/ls
+```
+
+如果还想查看模块的一些描述信息（`package.json`中的`description`中的内容）：
+
+```
+npm la/ll // 相当于npm ls --long
+```
+
+一个项目依赖的模块往往很多，可以限制输出模块的层级来查看：
+
+```
+npm list/ls --depth=0 // 只列出父包依赖的模块
+```
+
+检查项目中依赖的某个模块的当前版本信息：
+
+```
+npm list/ls <packageName>
+```
+
+查看某个模块包的版本信息：
+
+```
+npm view/info <packageName> version // 模块已经发布的最新的版本信息（不包括预发布版本）
+npm view/info <packageName> versions // 模块所有的历史版本信息（包括预发布版本）
+```
+
+查看一个模块到底是因为谁被安装进来的，如果显示为空则表明该模块为内置模块或者不存在：
+
+```
+npm ll <packageName>
+```
+
+查看某个模块的所有信息，包括它的依赖、关键字、更新日期、贡献者、仓库地址和许可证等：
+
+```
+npm view/info <packageName>
+```
+
+查看当前项目中可升级的模块：
+
+```
+npm outdated
+```
+
+整理项目中无关的模块：
+
+```
+npm prune
+```
+
+#### 6.5 查看模块文档
+
+打开模块的 github 主页：
+
+```
+npm repo <packageName>
+```
+
+打开模块的文档地址：
+
+```
+npm docs <packageName>
+```
+
+打开模块的 issues 地址：
+
+```
+npm bugs <packageName>
+```
+
+#### 6.6 在不同的目录下运行脚本
+
+你的文件夹中肯定存在很多应用程序，而当你想要启动某个应用程序时，肯定是通过`cd`指令一步步进入到你所想要启动的应用程序目录下，然后再执行启动命令。`npm`提供了`--prefix`可以指定启动目录：
+
+```
+npm run dev --prefix /path/to/your/folder
+```
+
+#### 6.7 模块全局化
+
+假设你在开发一个模块`A`，同时需要在另外一个项目`B`中测试它，当然你可以将该模块的代码拷贝到需要使用它的项目中，但这也不是理想的方法，可以在模块`A`的目录下执行：
+
+```
+npm link
+```
+
+`npm link`命令通过链接目录和可执行文件，实现任意位置的`npm`包命令的全局可执行。
+
+`npm link`主要做了两件事：
+
+1. 为目标`npm`模块创建软链接，将其链接到全局`node`模块安装路径`/usr/local/lib/node_modules/`
+2. 为目标`npm`模块的可执行`bin`文件创建软链接，将其链接到全局`node`命令安装路径`/usr/local/bin/`
+
+#### 6.8 安全漏洞检查
+
+[检查项目中是否存在具有安全漏洞的依赖包](https://docs.npmjs.com/auditing-package-dependencies-for-security-vulnerabilities#update-dependent-packages-if-a-fix-exists)，如果存在，则将生成其漏洞报告显示在控制台中：
+
+```
+npm audit [--json]  # 加上--json，以 JSON 格式生成漏洞报告
+```
+
+> `npm`升级到`6.x`版本以后，在项目中更新或者下载新的依赖包以后会自动执行[npm audit](https://docs.npmjs.com/cli/audit)命令，对项目依赖包进行安全检查，如果存在安全漏洞，将生成漏洞报告并在控制台中显示。
+
+修复存在安全漏洞的依赖包（自动更新到兼容的安全版本）：
+
+```
+npm audit fix
+```
+
+执行`npm audit fix`能修复大部分存在安全漏洞的依赖包，对于一些没能自动修复漏洞的依赖包，说明出现了`SERVER WARNING`之类的警告（主要发生在依赖包更改了不兼容的`api`或者大版本做了升级的情况下），这意味着推荐的修复版本还可能出现问题，这时可以执行如下命令来修复这些依赖包：
+
+```
+npm audit fix --force
+```
+
+> `--force`会将依赖包版本号升级到最新的大版本，而不是兼容的安全版本。大版本的升级可能会出现一些不兼容的用法，所以尽量避免使用`--force`。
+
+如果执行`npm audit fix --force`后还是存在有安全漏洞的依赖包，手动执行`npm audit`打印出还存在安全漏洞的依赖包的具体信息，其中`More info`对应的链接中可能给出了解决方案。
+
+如果想知道`audit fix`会怎么处理项目中的依赖包，可以预先查看：
+
+```
+npm audit fix --dry-run --json
+```
+
+如果只想修复生产环境的依赖包（只更新`dependencies`中的依赖包，不更新`devDependencies`中的依赖包）：
+
+```
+npm audit --only=prod
+```
+
+如果不想修复依赖包，只修改`package-lock.json`文件：
+
+```
+npm audit fix --package-lock-only
+```
+
+如果想安装某个包时不进行安全漏洞检查：
+
+```
+npm install packageName --no-audit
+```
+
+要想安装所有包时都不进行安全漏洞检查，则可以修改`npm`配置：
+
+```
+npm config set audit false
+```
+
+#### 6.9 依赖锁定
+
+`npm`默认安装模块时，会通过脱字符^来限定所安装模块的主版本号。可以配置`npm`通过波浪符`~`来限定安装模块版本号：
+
+```
+npm config set save-prefix="~"
+```
+
+当然还可以配置`npm`仅安装精确版本号的模块：
+
+```
+npm config set save-exact true
+```
 
 ### 参考资料
 
