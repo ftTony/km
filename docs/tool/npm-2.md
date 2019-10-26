@@ -675,6 +675,8 @@ npm run serve --params=123
 
 **env 环境变量**
 
+如果`env`环境变量中存在以 `npm_config_`为前缀的环境变量，则会被识别为`npm`的配置属性。比如在 `env`环境变量中设置`npm_config_package_lock` 变量：
+
 **npmrc 文件**
 
 **默认配置**
