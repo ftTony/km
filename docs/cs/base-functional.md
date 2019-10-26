@@ -459,7 +459,7 @@ readFile('./user.txt')
 
 ## 参考资料
 
-- [函数式编程](https://yhlben.github.io/blog/base-functional.html)
+- [函数式编程](https://lmjben.github.io/blog/base-functional.html)
 - [JavaScript 轻量级函数式编程](https://wizardforcel.gitbooks.io/functional-light-js/content/)
 - [函数式编程](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
 - [函数式编程入门教程](http://www.ruanyifeng.com/blog/2017/02/fp-tutorial.html)

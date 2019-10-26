@@ -131,7 +131,7 @@ for(var i=0;i<10;i++){
 
 ### 参考资料
 
-- [JS 编译器，解释引擎](https://yhlben.github.io/blog/js-principle.html)
+- [JS 编译器，解释引擎](https://lmjben.github.io/blog/js-principle.html)
 
 ## 联系作者
 
