@@ -671,6 +671,8 @@ if (event === 'preserve') {
 npm run serve --params=123
 ```
 
+执行上述命令时，会将配置项 `params` 的值设为 `123`，通过 `process.env.npm_config_params` 可以访问其配置值。这个时候的 `params` 配置值将覆盖所有其他来源存在的 `params` 配置值。
+
 **env 环境变量**
 
 **npmrc 文件**
