@@ -681,7 +681,32 @@ npm run serve --params=123
 export npm_config_package_lock=false // 修改的是内存中的变量，只对当前终端有效
 ```
 
+这时候执行`npm install`，`npm`会从环境亦是中读取到这个配置项，从而不会生成`package-lock.json`文件
+
+> 查看某个环境变量：echo \$NODE_ENV
+> 删除某个环境变量：unset NODE_ENV
+
 **npmrc 文件**
+
+通过修改[npmrc](https://docs.npmjs.com/files/npmrc)文件可以直接修改配置。系统中存在多个`npmrc`文件，这些`npmrc`文件被访问的优先级从高到低的顺序为：
+
+- 项目级的`.npmrc`文件
+
+只作用在本项目下。在其他项目中，这些配置不生效。通过创建这个`.npmrc`文件可以统一团队的`npm`配置规范。
+
+- 用户级的`.npmrc`文件
+
+`mac`下的地址为`~/.npmrc`。（`npm config get userconfig`可以看到存放的路径）
+
+- 全局级的`npmrc`文件
+
+`mac`下的地址为`$PREFIX/etc/npmrc`。（`npm config get globalconfig`可以看到存放在路径）
+
+- `npm`内置的`npmrc`文件
+
+这是一个不可更改的内置配置文件，为了维护者以标准和一致的方式覆盖默认配置。`mac`下的地址为`/path/to/npm/npmrc`。
+
+> .npmrc 参照 `npm/ini` 格式编写。
 
 **默认配置**
 
