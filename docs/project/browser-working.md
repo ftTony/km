@@ -220,6 +220,7 @@ defer 与相比普通 script，有两点区别：**载入 JavaScript 文件时�
 
 - [浏览器的工作原理](https://github.com/muwoo/blogs/issues/34)
 - [深入浅出浏览器渲染原理](https://github.com/ljianshu/Blog/issues/51)
+- [渲染树的形成原理你真的很懂吗？](https://mp.weixin.qq.com/s/dEz3rV8IraLV2ZPhtQ_JwA)
 
 ## 联系作者
 
