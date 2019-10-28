@@ -233,7 +233,8 @@ module.exports = {
             title: 'web work',
             collapsable: false,
             children: [
-                'webwork'
+                'webwork',
+                'pit'
             ]
         },
         {
