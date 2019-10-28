@@ -18,6 +18,20 @@ function replaceSpace(str){
 }
 ```
 
+### 反向链表
+
+```
+// 节点定义
+class Node{
+    constructor(value,next){
+        this.value = value;
+        this.next = next;
+    }
+}
+
+```
+
+
 ### 参考资料
 
 - [剑指 offer -- JavaScript 版](https://www.nowcoder.com/discuss/49349)
