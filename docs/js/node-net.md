@@ -237,6 +237,7 @@ server.on('upgrade',function(req,socket,upgradeHead){
 ### 参考资料
 
 - [net 模块](https://github.com/wscats/node-tutorial/tree/master/tutorial/net)
+- [入门 Node.js Net 模块构建 TCP 网络服务](https://mp.weixin.qq.com/s/fJB3T6g3yFf4yn_HYEZGPg)
 - 《深入浅出 nodejs》
 
 ## 联系作者
