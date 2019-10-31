@@ -289,6 +289,7 @@ instanceof 用来判断一个构造函数的prototype属性所指向的对象是
 - [深入理解JavaScript之从原型到原型链](https://juejin.im/post/5a0a5dc4f265da430b7abffb?utm_source=gold_browser_extension)
 - [原型图解](https://segmentfault.com/a/1190000011880268)
 - [深入理解 JavaScript 原型](https://mp.weixin.qq.com/s/1UDILezroK5wrcK-Z5bHOg)
+- [【THE LAST TIME】一文吃透所有JS原型相关知识点](https://mp.weixin.qq.com/s/1F0cJus31Pjq0YXo-rCkwQ)
 - [重新认识构造函数、原型和原型链](https://muyiy.vip/blog/5/5.1.html)
 
 ## 联系作者
