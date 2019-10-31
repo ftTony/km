@@ -121,6 +121,7 @@ function patch(node,patches){
 - [Virtual Dom 和 Diff 算法](https://mp.weixin.qq.com/s/9nB2bfDczNFRpUTiBwup8Q)
 - [【Vue原理】Diff - 白话版](https://zhuanlan.zhihu.com/p/81752104)
 - [VirtualDOM与diff(Vue实现)](https://zhuanlan.zhihu.com/p/29450092)
+- [虚拟 DOM 到底是什么？](https://mp.weixin.qq.com/s/oAlVmZ4Hbt2VhOwFEkNEhw)
 
 ## 联系作者
 
