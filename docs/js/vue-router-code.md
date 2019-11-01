@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [vue-router的超神之路](https://mp.weixin.qq.com/s/a5yAusm9dCryQ61xZOCjnA)
+
 ## 联系作者
 
 <div align="center">
