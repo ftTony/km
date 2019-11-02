@@ -16,7 +16,6 @@
 
 ![](http2-01.jpeg)
 
-
 ### 二、http1.x存在的问题
 
 - 协议规定客户端对同一域的迸发连接最多只能2个（浏览器实现一般2~8个），但是现代网页平均一个页面需要加载40个资源。
@@ -36,7 +35,7 @@
 #### 3.1 二进制分帧
 
 HTTP2在维持原有HTTP范式的前提下，实现突破性能限制，改进传输性能，实现低延迟和高吞吐量的其中一个关键是：**在应用层（HTTP2）和传输层（TCP or UDP）**之间增加了二进分帧层。
-![](http2-02.png)
+![images](http2-02.png)
 
 帧（Frame）是 HTTP2 通讯中的最小传输单位，所有帧以固定的 9 个八位字节头部开头，随后是一个可变长度的有效载荷
 
@@ -58,7 +57,7 @@ HTTP2在维持原有HTTP范式的前提下，实现突破性能限制，改进�
 
 一个真正的HTTP2请求类似下图：
 
-![](http2-03.png)
+![images](http2-03.png)
 
 #### 3.2 首部压缩
 
@@ -70,11 +69,11 @@ HTTP2 增加了两个特性解决上述问题：
 
 - [HPACK](https://link.juejin.im/?target=http%3A%2F%2Fhttp2.github.io%2Fhttp2-spec%2Fcompression.html)，专门为头部压缩设计的算法，还被指定成单独的草案中。
 
-![](http2-04.png)
+![images](http2-04.png)
 
 - 首部表，HTTP2 在户端和服务器端使用“首部表”来跟踪和存储之前发送的键-值对，对于相同的数据，不再通过每次请求和响应发送；通信期间几乎不会改变的通用键-值对（用户代理、可接受的媒体类型，等等）只需发送一次。
 
-![](http2-05.png)
+![images](http2-05.png)
 
 #### 3.3 http2支持服务器推送
 
@@ -205,11 +204,11 @@ server {
 	ssl_certificate /path/to/public.crt;
 	ssl_certificate_key /path/to/private.key;
 	
-	ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #允许的协议 
-	ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5; #加密算法(CloudFlare 推荐的加密套件组) 
-	ssl_prefer_server_ciphers on; #优化 SSL 加密套件 
-	ssl_session_timeout 10m; #客户端会话缓存时间 
-	ssl_session_cache builtin:1000 shared:SSL:10m; #SSL 会话缓存类型和大小 
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #允许的协议
+	ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5; #加密算法(CloudFlare 推荐的加密套件组)
+	ssl_prefer_server_ciphers on; #优化 SSL 加密套件
+	ssl_session_timeout 10m; #客户端会话缓存时间
+	ssl_session_cache builtin:1000 shared:SSL:10m; #SSL 会话缓存类型和大小
 	ssl_buffer_size 1400; # 1400 bytes to fit in one MTU
 }
 ```
@@ -221,6 +220,7 @@ server {
 - [openssl 版本升级操作记录](https://cloud.tencent.com/developer/article/1027523)
 - [怎样把网站升级到 http/2](https://zhuanlan.zhihu.com/p/29609078)
 - [升级 Nginx 开启 HTTP/2](https://juejin.im/entry/5b5ae460e51d45195423ecca)
+- [解密HTTP/2与HTTP/3的新特性](https://mp.weixin.qq.com/s/5jR7MrWQ9v3w_E8BhNWrpA)
 
 ## 联系作者
 
