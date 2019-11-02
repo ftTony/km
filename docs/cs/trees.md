@@ -6,9 +6,14 @@
 
 ## 内容
 
+- 树的分类
 - 创建BinarySearchTree类
 
-### 一、创建树
+### 一、树的分类
+
+
+
+### 二、创建树
 
 ```
 function BinarySearchTree(){
