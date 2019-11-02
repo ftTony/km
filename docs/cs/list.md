@@ -49,6 +49,11 @@ function LinkedList(){
 **ES6相关代码**
 
 ```
+class Node{
+    constructor(data){
+        this.data = data;
+    }
+}
 ```
 
 ### 三、双链表
