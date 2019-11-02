@@ -299,6 +299,7 @@ Extension机制是调用V8的接口注入新函数，动态扩展非常方便，
 
 - [认识 V8 引擎](https://zhuanlan.zhihu.com/p/27628685)
 - [JavaScript 深入浅出第 4 课：V8 引擎是如何工作的？](https://blog.fundebug.com/2019/07/16/how-does-v8-work/)
+- [V8 引擎初步介绍](https://github.com/yanlele/node-index/tree/master/18%E5%B9%B4/12%E6%9C%88/03%E3%80%81V8%E5%BC%95%E6%93%8E%E5%88%9D%E6%AD%A5%E4%BB%8B%E7%BB%8D#%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E4%B8%8E%E7%BD%91%E9%A1%B5%E6%B8%B2%E6%9F%93)
 - [JavaScript 是如何工作的：深入 V8 引擎&编写优化代码的 5 个技巧](https://github.com/qq449245884/xiaozhi/issues/2)
 
 ## 联系作者
