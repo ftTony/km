@@ -16,12 +16,21 @@
 
 **OAuth 就是一种授权机制。数据的所有者告诉系统，同意授权第三方应用进入系统，获取这些数据。系统从而产生一个短期的进入令牌（token），用来代替密码，供第三方应用使用。**
 
+### 二、OAuth2 机制实现流程
+
+OAuth 认证的整个运行流程：
+
+- 客户端在自己站点实现 163 的第三方认证之前，需要到 163 服务提供商申请帐号，其中的账号有两张门票，一张门票叫 App Id，另一张门票叫做 Secret。
+
+![images](login01.jpg)
+
 ### 参考资料
 
 - [简述 OAuth 2.0 的运作流程](https://www.barretlee.com/blog/2016/01/10/oauth2-introduce/)
 - [移花接木：针对 OAuth2 的攻击](http://insights.thoughtworkers.org/attack-aim-at-oauth2/)
 - [OAuth 授权的工作原理是怎样的？足够安全吗？](https://www.zhihu.com/question/19781476/answer/81020455)
 - [理解 OAuth 2.0](http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
+- [第三方登录 OAuth](https://lmjben.github.io/blog/osi-web-login.html#%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95-oauth)
 
 ## 联系作者
 
