@@ -1148,6 +1148,7 @@ npm config set save-exact true
 - [npm 依赖：框架平台](https://juejin.im/post/5c457d656fb9a04a0730af07)
 - [npm 依赖：类库工具](https://juejin.im/post/5c457e516fb9a049ec6b6341)
 - [文件 package.json 的说明文档](https://github.com/jaywcjlove/package.json)
+- [yarn、npm、cnpm 三者如何优雅的在一起使用 ？](https://segmentfault.com/a/1190000019299845)
 
 ## 联系作者
 
