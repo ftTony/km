@@ -16,6 +16,7 @@
 - [[译] 2019 前端性能优化年度总结 — 第一部分](https://juejin.im/post/5c4418006fb9a049c043545e)
 - [前端性能优化-加载篇](https://www.cxymsg.com/guide/load.html)
 - [网站性能优化实战——从12.67s到1.06s的故事](https://juejin.im/post/5b6fa8c86fb9a0099910ac91)
+- [你必须懂的前端性能优化](https://mp.weixin.qq.com/s/DdbaiuZd4RbqUod0jhn_vg)
 
 ## 联系作者
 
