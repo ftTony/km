@@ -405,6 +405,7 @@ Node 端的处理过程如下：
 - [面试问到 Event Loop，这样回答最完美](https://mp.weixin.qq.com/s/8xyccve0e9uA2mnk07CAWw)
 - [分享 10 道 Nodejs EventLoop 和事件相关面试题](https://mp.weixin.qq.com/s/RNYYNR7A01V-Y2aC1wNsGw)
 - [「前端进阶」从多线程角度来看 Event Loop](https://mp.weixin.qq.com/s/DLunwkzknoQ0tczLHuqpHg)
+- [【THE LAST TIME】彻底吃透 JavaScript 执行机制](https://mp.weixin.qq.com/s/nQgsEQorv00fr4XqU764bA)
 
 ## 联系作者
 
