@@ -315,6 +315,8 @@ server {
 - [Nginx标准HTTP模块](http://manual.51yip.com/nginx/StandardHTTPModules/index.html)
 - [nginx从入门到实践](https://juejin.im/post/5a2600bdf265da432b4aaaba)
 - [前端想要了解的Nginx](https://juejin.im/post/5cae9de95188251ae2324ec3)
+- [Nginx 配置详解](https://www.cnblogs.com/knowledgesea/p/5175711.html)
+- [Nginx 代理功能与负载均衡详解](https://www.cnblogs.com/knowledgesea/p/5199046.html)
 
 ## 联系作者
 
