@@ -173,7 +173,7 @@ console.log(xz.getName());  // "xzavier"
 ### 参考资料
 
 - [详解js闭包](https://segmentfault.com/a/1190000006855822)
-
+- [动画：什么是闭包？](https://mp.weixin.qq.com/s/Un057KVwWgJxEcUHSVZKbw)
 
 ## 联系作者
 
