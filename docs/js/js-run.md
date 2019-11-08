@@ -131,6 +131,7 @@ foo();
 - [JavaScript是如何工作的：引擎，运行时和调用堆栈的概述！](https://github.com/qq449245884/xiaozhi/issues/1)
 - [JavaScript的运行机制](https://www.cxymsg.com/guide/mechanism.html)
 - [这一次，彻底弄懂 JavaScript 执行机制](https://juejin.im/post/59e85eebf265da430d571f89)
+- [[译] JavaScript 运行原理](https://juejin.im/post/5da17d7cf265da5b7b3ee8f5)
 
 ## 联系作者
 

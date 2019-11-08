@@ -214,6 +214,7 @@ vertical-align: middle;
 - [16种方法实现水平居中垂直居中](https://juejin.im/post/58f818bbb123db006233ab2a)
 - [六种实现元素水平居中_水平居中, 垂直居中 教程_大漠](https://www.w3cplus.com/css/elements-horizontally-center-with-css.html)
 - [如何居中一个元素（终结版）](https://github.com/ljianshu/Blog/issues/29)
+- [剖析一些经典的CSS布局问题，为前端开发+面试保驾护航](https://mp.weixin.qq.com/s/IgHNVEvK92TW2WZnWn_2BQ)
 
 ## 联系作者
 
