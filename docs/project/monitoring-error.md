@@ -6,7 +6,9 @@
 
 ## 内容
 
-## 参考资料
+### 参考资料
+
+- [接入sentry-让你的错误别再裸奔](https://mp.weixin.qq.com/s/JEDt9BL2eWpVTrtbfEPiAA)
 
 ## 联系作者
 
