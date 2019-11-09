@@ -169,6 +169,7 @@ module.exports = {
                     'background',
                     'stack',
                     'layout',
+                    'responsive',
                     'column-layout',
                     'px',
                     'font-size',
