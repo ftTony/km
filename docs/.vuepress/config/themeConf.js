@@ -405,7 +405,11 @@ module.exports = {
                     'base-select',
                     'common-algorithm',
                     'high-algorithm',
-                    'high-sort',
+                    'greed',
+                    'divide',
+                    'backtracking',
+                    'dp-1',
+                    'dp-2',
                     'offer',
                     'leetcode'
                 ]

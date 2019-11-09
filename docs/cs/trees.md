@@ -299,6 +299,8 @@ var maxNode = function(node){
 };
 ```
 
+### 四、二叉查找树
+
 ### 参考资料
 
 - 《学习 JavaScript 数据结构与算法》
