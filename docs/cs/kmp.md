@@ -9,6 +9,7 @@
 ### 参考资料
 
 - [动态规划之 KMP 算法详解（配代码版）](https://mp.weixin.qq.com/s/kCjRuY6ygYJWWX5HPVLa5A)
+- [动画：七分钟理解什么是 KMP 算法](https://mp.weixin.qq.com/s/2JyZoy9pESrcd5hsGWLWgw)
 
 ## 联系作者
 
