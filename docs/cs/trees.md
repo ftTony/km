@@ -109,29 +109,6 @@ function BinarySearchTree(){
         }
     };
 
-    this.min = function(){
-        return minNode(root);
-    }
-
-    this.max = function(){
-        return maxNode(root);
-    }
-
-    // 中序遍历
-    this.inOrderTraverse = function(callback){
-        inOrderTraverseNode(root,callback);
-    }
-
-    // 前序遍历
-    this.preOrderTraverse = function(callback){
-        preOrderTraverseNode(root,callback);
-    }
-
-    // 后序遍历
-    this.postOrderTraverse = function(callback){
-        postOrderTraverseNode(root,callback);
-    }
-
     // 搜索一个特定的值
     this.search = function(key){
         return searchNode(root,key);
@@ -223,21 +200,16 @@ var insertNode = function(node,newNode){
 - `min`：返回树中最小的值/键。
 - `max`：返回树中最大的值/键。
 
-#### 3.1 中序遍历相关代码
+#### 3.1 前序遍历相关代码
+
+**前序遍历是指，对于树中的任意节点来说，先打印这个节点，然后再打印它的左子树，最后打印它的右子树。**
 
 ```
-var inOrderTraverseNode = function(node,callback){
-    if(node !== null){
-        inOrderTraverseNode(node.left,callback);
-        callback(node.key);
-        inOrderTraverseNode(node.right,callback);
-    }
-};
-```
+// 前序遍历
+this.preOrderTraverse = function(callback){
+    preOrderTraverseNode(root,callback);
+}
 
-#### 3.2 前序遍历相关代码
-
-```
 var preOrderTraverseNode = function(node,callback){
     if(node!==null){
         callback(node.key);
@@ -247,9 +219,38 @@ var preOrderTraverseNode = function(node,callback){
 };
 ```
 
-#### 3.3 后序遍历相关代码
+![images](tree09.gif)
+
+#### 3.2 中序遍历相关代码
+
+**中序遍历是指，对于树中的任意节点来说，先打印左子树，然后再打印它本身，最后打印它的右子树。**
 
 ```
+// 中序遍历
+this.inOrderTraverse = function(callback){
+    inOrderTraverseNode(root,callback);
+}
+
+var inOrderTraverseNode = function(node,callback){
+    if(node !== null){
+        inOrderTraverseNode(node.left,callback);
+        callback(node.key);
+        inOrderTraverseNode(node.right,callback);
+    }
+};
+```
+
+![images](tree10.gif)
+
+#### 3.3 后序遍历相关代码
+
+**后序遍历是指，对于树中的任意节点来说，先打印它的左子树，然后再打印它的右子树，最后打印它节点本身。**
+
+```
+// 后序遍历
+this.postOrderTraverse = function(callback){
+    postOrderTraverseNode(root,callback);
+}
 var postOrderTraverseNode = function(node,callback){
     if(node!==null){
         postOrderTraverseNode(node.left,callback);
@@ -259,9 +260,15 @@ var postOrderTraverseNode = function(node,callback){
 }
 ```
 
+![images](tree11.gif)
+
 #### 3.4 最小的值/键
 
 ```
+  this.min = function(){
+     return minNode(root);
+  }
+
 // 最小值
 var minNode = function(node){
     if(node){
@@ -277,6 +284,9 @@ var minNode = function(node){
 #### 3.5 最大的值/键
 
 ```
+this.max = function(){
+    return maxNode(root);
+}
 // 最大值
 var maxNode = function(node){
     if(node){
