@@ -6,31 +6,38 @@
 
 ## 内容
 
-- Tire树
-- Trie树的特点
-- Trie树的插入操作
-- Trie树的查询操作
-- Trie树的删除操作
-- Trie树的应用
-- Trie树的局限性
+- Tire 树
+- Trie 树的特点
+- Trie 树的插入操作
+- Trie 树的查询操作
+- Trie 树的删除操作
+- Trie 树的应用
+- Trie 树的局限性
 
-### 一、Tire树
+### 一、Tire 树
 
-### 二、Trie树的特点
+> Trie 这个名字取自“retrieval”，检索，因为 Trie 可以只用一个前缀便可以在一部字典中找到想要的单词。
 
-### 三、Trie树的插入操作
+Tire 树，也叫“字典树”。顾名思义，它是一个**树形结构**。它是一种专门处理字符串切尔西的数据结构，用来解决在一组字符串集合中快速查找某个字符串的问题。
 
-### 四、Trie树的查询操作
+此外 Trie 树也称前缀树
 
-### 五、Trie树的删除操作
+### 二、Trie 树的特点
 
-### 六、Trie树的应用
+### 三、Trie 树的插入操作
 
-### 七、Trie树的局限性
+### 四、Trie 树的查询操作
+
+### 五、Trie 树的删除操作
+
+### 六、Trie 树的应用
+
+### 七、Trie 树的局限性
 
 ### 参考资料
 
-- [看动画轻松理解「Trie树」](https://mp.weixin.qq.com/s/Y5_r4C5a9gU0FDtqXD9bkQ)
+- [看动画轻松理解「Trie 树」](https://mp.weixin.qq.com/s/Y5_r4C5a9gU0FDtqXD9bkQ)
+- [Trie 树：如何实现搜索引擎的搜索关键词提示功能？](https://time.geekbang.org/column/article/72414)
 
 ## 联系作者
 
