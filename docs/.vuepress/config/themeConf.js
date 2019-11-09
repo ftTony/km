@@ -412,6 +412,7 @@ module.exports = {
                     'backtracking',
                     'dp-1',
                     'dp-2',
+                    'kmp',
                     'offer',
                     'leetcode'
                 ]
