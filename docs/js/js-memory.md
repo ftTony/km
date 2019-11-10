@@ -237,7 +237,9 @@ David 大叔主要介绍了 2 个优化方案，而这也是最主要的 2 个�
 - [JavaScript 是如何工作的：JavaScript 的内存模型](https://github.com/qq449245884/xiaozhi/issues/21)
 - [JavaScript 如何工作:内存管理+如何处理 4 个常见的内存泄漏](https://github.com/qq449245884/xiaozhi/issues/3)
 - [「前端进阶」JS 中的内存管理](https://juejin.im/post/5d0706a6f265da1bc23f77a9)
+- [Node.js 内存管理和 V8 垃圾回收机制](https://mp.weixin.qq.com/s?__biz=MzIyNDU2NTc5Mw==&mid=2247483715&idx=1&sn=00600d07ce4fd2b465d6cc7692d050f0&scene=21#wechat_redirect)
 - 《高程第 3 版》
+- 《深入浅出 nodejs》
 
 ## 联系作者
 
