@@ -8,6 +8,7 @@
 
 ### 参考资料
 
+- [前端部署发展史](https://juejin.im/post/5dc4ae67f265da4cfa7bbb9a)
 - [持续集成是什么？](http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html)
 - [持续集成 vs 持续交付 vs 持续部署](https://mp.weixin.qq.com/s/Y09_FYS2IWae24geE7tK-Q)
 - [基于 GitLab CI/CD 的自动化构建、发布实践](https://mp.weixin.qq.com/s/z2f1i2FgrVGofQR6nKTd1A)
