@@ -17,6 +17,7 @@
 - [【中高级前端必备】手摸手教你撸一个脚手架](https://mp.weixin.qq.com/s/noKG8ylD2EbsB1dENh2xug)
 - [【手把手】15 分钟搭一个企业级脚手架](https://juejin.im/post/5d650613f265da03951a0364)
 - [一个零配置开箱即用的 React/Vue 应用自动化构建脚手架](https://github.com/JowayYoung/bruce-cli)
+- [从零开发一个node命令行工具](https://mp.weixin.qq.com/s/tShhZrmCi-K38ZBfuu_j2Q)
 
 ## 联系作者
 

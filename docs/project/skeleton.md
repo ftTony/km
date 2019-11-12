@@ -9,6 +9,7 @@
 ### 参考资料
 
 - [为 Vue 项目添加骨架屏](https://zhuanlan.zhihu.com/p/28465598)
+- [让骨架屏更快渲染 - 知乎](https://zhuanlan.zhihu.com/p/34550387)
 
 ## 联系作者
 
