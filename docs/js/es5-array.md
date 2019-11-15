@@ -436,6 +436,7 @@ plants.pop();
 - 《权威第6版》
 - [温故js系列（16）-数组&数组方法使用详解](https://segmentfault.com/a/1190000007058765)
 - [MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)
+- [JavaScript 数组的特别之处](https://mp.weixin.qq.com/s/jfMEkngHNyo-uW_izoP48w)
 
 ## 联系作者
 
