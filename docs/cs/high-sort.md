@@ -377,8 +377,35 @@ function bucketSort(array,num){
         n=0;
         num = num || ((num>1 && regex.test(num))?num:10);
         console.time('桶排序耗时');
+        for(var i =1;i<len;i++){
+            min = min <= array[i] ? min : array[i];
+            max = max>= arr[i]? max : array[i];
+        }
+        space = (max - min+1)/num;
+        for(var j=0; j<len;j++){
+            var index = Math.floor((array[j]-min)/space);
+            if(buckets[index]){
+                var k = buckets[index].length -1;
+                while(k>=0 && buckets[index][k]>array[j]){
+                    buckets[index][k+1] = buckets[index][k];
+                    k--;
+                }
+                buckets[index][k+1] = array[j];
+            }else{
+                // 穿桶，初始化
+                buckets[index]=[];
+                buckets[index].push(array[j]);
+            }
+        }
+    while(n<num){
+        result = result.concat(buckets[n]);
+        n++;
+    }
+    console.timeEnd('桶排序耗时');
+    return result;
 }
-
+var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
+console.log(bucketSort(arr,4));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
 ```
 
 #### 6.3 动图演示
@@ -386,6 +413,12 @@ function bucketSort(array,num){
 ![images](sort13.gif)
 
 #### 6.4 算法分析
+
+> 桶排序最好情况下使用线性时间 O(n)，桶排序的时间复杂度，取决与对各个数据进行排序的时间得复杂度，因为其它部分的时间复杂度都为 O(n)。很显然，桶划分的越小，各个桶之间的数据越少，排序手忙脚乱的时间也会越少。但相应的空间消耗就会增大。
+
+- 最佳情况：T(n) = O(n+k)
+- 最差情况：T(n) = O(n+k)
+- 平均情况：T(n) = O(n2)
 
 ### 七、基数排序
 
@@ -404,7 +437,43 @@ function bucketSort(array,num){
 - 对 radix 进行计数排序（利用计数排序适用于小范围数的特点）；
 
 ```
+/**
+* 基数排序适用于
+*  (1)数据范围较小，建议在小于1000
+*  (2)每个数值都要大于等于0
+* @author domonare
+* @param arr 待排序数据
+* @param maxDigit 最大位数
+*/
 
+function radixSort(arr,maxDigit){
+    var mod = 10;
+    var dev = 1;
+    var counter = [];
+    console.time('基数排序耗时');
+    for(var i=0;i< maxDigit;i++,dev*=10,mod*=10){
+        for(var j=0;j<arr.length;j++){
+            var bucket = parseInt((arr[j] % mod)/dev);
+            if(counter[bucket] == null){
+                counter[bucket] = [];
+            }
+            counter[bucket].push(arr[j]);
+        }
+        var pos = 0;
+        for(var j=0;j<counter.length;j++){
+            var value = null;
+            if(counter[j]!=null){
+                while((value=counter[j].shift()) !=null){
+                    arr[pos++] = value;
+                }
+            }
+        }
+    }
+    console.timeEnd('基数排序耗时');
+    return arr;
+}
+var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
+console.log(radixSort(arr,2)); //[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
 ```
 
 #### 7.3 动图演示
