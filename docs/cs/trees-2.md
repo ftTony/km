@@ -25,6 +25,7 @@
 
 - 《学习 JavaScript 数据结构与算法》
 - [什么是平衡二叉树（AVL）](https://mp.weixin.qq.com/s/zav3hOoj6eszlOM7YfgYeA)
+- [动画：二叉树在实际中的应用(下）](https://mp.weixin.qq.com/s/tFJqwKa-adXW0kXGxldisg)
 
 ## 联系作者
 
