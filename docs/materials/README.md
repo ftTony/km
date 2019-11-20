@@ -13,3 +13,4 @@
 - [前端回忆录](https://github.com/windiest/Front-end-tutorial)
 - [免费的计算机编程类中文书籍](https://github.com/justjavac/free-programming-books-zh_CN)
 - [前端学习、开发资源、求职面试](https://github.com/helloqingfeng/Awsome-Front-End-learning-resource)
+- [8 年前端开发的知识点沉淀](https://juejin.im/post/5d0878aaf265da1b83338f74)
