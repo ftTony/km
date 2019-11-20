@@ -452,6 +452,7 @@ MVVM.prototye={
 - [深入响应式原理](https://github.com/DDFE/DDFE-blog/issues/7)
 - [vue系列---响应式原理实现及Observer源码解析(一)](https://www.cnblogs.com/tugenhua0707/p/11754291.html)
 - [最简化 VUE的响应式原理](https://zhuanlan.zhihu.com/p/88648401)
+- [0 到 1 掌握：Vue 核心之数据双向绑定](https://juejin.im/post/5d421bcf6fb9a06af23853f1)
 
 ## 联系作者
 

@@ -165,6 +165,7 @@ function applyPatches (node, currentPatches) {
 - [VirtualDOM与diff(Vue实现)](https://zhuanlan.zhihu.com/p/29450092)
 - [虚拟 DOM 到底是什么？](https://mp.weixin.qq.com/s/oAlVmZ4Hbt2VhOwFEkNEhw)
 - [现代前端科技解析 —— Virtual DOM](https://www.404forest.com/2019/03/07/modern-web-development-tech-analysis-virtual-dom/)
+- [深入剖析：Vue核心之虚拟DOM](https://juejin.im/post/5d36cc575188257aea108a74)
 
 ## 联系作者
 
