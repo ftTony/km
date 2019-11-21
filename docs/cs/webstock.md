@@ -1,4 +1,4 @@
-# webstock
+# webstock学习
 
 ## 前言
 
@@ -13,6 +13,8 @@
 - 完整例子
 
 ### 一、什么是WebSocket协议
+
+`websocket`是`HTML5`规范中的一部分，它借鉴了`socket`这种思想，为`web`应用程序客户端和服务端之间提供了一种全双工通信机制。同时，它又是一种新的应用层协议，`websocket`协议是为了提供web应用程序和服务端全双工通信而专门制定的一种应用层协议，通常它表示`ws://echo.websocket.org/?encoding=text HTTP/1.1`，可以看到除了前面的协议名和`http`不同之外，它的表示地址就是传统的`url`地址。
 
 ### 二、为什么要用WebSocket
 
