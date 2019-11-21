@@ -9,6 +9,7 @@
 ### 参考资料
 
 - [面试专场之「计算机网络」知识](https://mp.weixin.qq.com/s/4UCkjMpFSy_mvvHdjUVPCw)
+- [面试官，不要再问我三次握手和四次挥手](https://mp.weixin.qq.com/s/WI9045Sd7gRsE-WZ5x8tcA)
 
 ## 联系作者
 

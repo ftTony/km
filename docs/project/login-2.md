@@ -151,6 +151,7 @@ sso 认证中心一直监听全局会话的状态，一旦全局会话销毁，�
 - [单点登录（SSO），从原理到实现](https://www.cnblogs.com/ywlaker/p/6113927.html)
 - [单点登录（SSO）看这一篇就够了](https://yq.aliyun.com/articles/636281)
 - [彻底理解 cookie、session、token](https://mp.weixin.qq.com/s/1Kh18uyEJzM21mc2l5MMCg)
+- [jwt 实践应用以及特殊案例思考](https://mp.weixin.qq.com/s/uxeOKy6flWXJIn4D0iqGzw)
 
 ## 联系作者
 
