@@ -160,6 +160,8 @@ ws.addEventListener("close", function(event) {
 
 **webSocket.onmessage**
 
+实例对象的`onmessage`属性，用于指定收到服务器数据后的回调函数。
+
 ```
 ws.onmessage = function(event) {
   var data = event.data;
@@ -172,6 +174,37 @@ ws.addEventListener("message", function(event) {
 });
 ```
 
+注意，服务器数据可能是文本，也可能是二进制数据(`blob`对象或`Arraybuffer`对象)。
+
+```
+ws.onmessage = function(event){
+    if(typeof event.data === String){
+        console.log("Received data string");
+    }
+
+    if(event.data instanceof ArrayBuffer){
+        var buffer = event.data;
+        console.log('Received arraybuffer');
+    }
+}
+```
+
+除了动态判断收到的数据类型，也可以使用`binaryType`属性，显示指定收到的二进制数据类型。
+
+```
+// 收到的是blob数据
+ws.binaryType = 'blob';
+ws.onmessage = function(e){
+    console.log(e.data.size);
+}
+
+// 收到的是ArrayBuffer数据
+ws.binaryType = 'arraybuffer';
+ws.onmessage = function(e){
+    console.log(e.data.byteLength);
+}
+```
+
 **webSocket.send()**
 
 实例对象的`send()`方法用于向服务器发送数据。
@@ -179,11 +212,26 @@ ws.addEventListener("message", function(event) {
 发送文本的例子。
 
 ```
+ws.send('你大爷');
 ```
 
-发送Blob对象的例子。
+发送`Blob`对象的例子。
 
 ```
+var file = document.querySelector('input[type="file"]').files[0];
+ws.send(file);
+```
+
+发送`ArrayBuffer`对象的例子。
+
+```
+// Sending canvas ImageData as ArrayBuffer
+var img = canvas_context.getImageData(0, 0, 400, 320);
+var binary = new Uint8Array(img.data.length);
+for (var i = 0; i < img.data.length; i++) {
+  binary[i] = img.data[i];
+}
+ws.send(binary.buffer);
 ```
 
 **webSocket.bufferedAmount**
