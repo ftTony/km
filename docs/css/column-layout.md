@@ -479,6 +479,7 @@ body{
 ### 参考资料
 
 - [几种常见的 CSS 布局](https://github.com/ljianshu/Blog/issues/40)
+- [面试必考点：前端布局知识](https://mp.weixin.qq.com/s/bPfdwdF1SR9Pt03zNhNebw)
 
 ## 联系作者
 
