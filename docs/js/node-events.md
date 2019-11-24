@@ -178,6 +178,7 @@ emitter.emit('error');
 
 - 《nodejs 开发指南》
 - [event 模块](https://github.com/chyingp/nodejs-learning-guide/blob/master/%E6%A8%A1%E5%9D%97/events.md)
+- [[源码解读]一文彻底搞懂 Events 模块](https://juejin.im/post/5d69eef7f265da03f12e70a5)
 
 ## 联系作者
 
