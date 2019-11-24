@@ -1,4 +1,4 @@
-# webpack面试题
+# webpack 面试题
 
 ## 前言
 
@@ -461,12 +461,14 @@ export function cube(x) {
 - 常用的 plugin
 - 常用的 loader
 
-### 6.1 主要区别
+#### 6.1 主要区别
 
 - `loader`用于加载某些资源文件。因为 `webpack` 本身只能打包`commonjs`规范的 `js` 文件，对于其他资源例如 `css`，图片，或者其他的语法集，比如 `jsx`，`coffee`，是没有办法加载的。这就是需要对应的 `loader` 将资源转化，加载进来。从字面意思也能看出，`loader` 是用于加载的，它作用于一个个文件上。
 - `plugin`用于扩展 `webpack` 的功能。它直接作用 `webpack`，扩展了它的功能。当然 `loader` 也时变相的扩展了 `webpack`，但是它只专注于文件（transform）这一个领域。而 `plugin` 的功能更加的丰富，而不仅局限于资源的加载。
+- **Loader**在`module.rules`中配置，也就是说他作为模块的解析规则而存在。类型为数组，每一项都是一个`Object`，里面描述了对于什么类型的文件（`test`），使用什么加载（`loader`）和使用参数（`options`）
+- **Plugin**在`plugins`中单独配置。类型为数组，每一项是一个`plugin`的实例，参数都通过构造函数传入。
 
-### 6.2 常用的 plugin
+#### 6.2 常用的 plugin
 
 - `CommonsChunkPlugin` 创建一个公用的 `chunk`，常用于将第三方 `lib` 抽取成公用 js，例如
 
@@ -484,20 +486,32 @@ new CommonsChunkPlugin({
 
 ```
 
+- `define-plugin`：定义环境变量
+- `html-webpack-plugin`：简化 html 文件创建
+- `uglifyjs-webpack-plugin`：通过`UglifyES`压缩`ES6`代码
+- `webpack-parallel-uglify-plugin`：多核压缩，提高压缩速度
+- `webpack-bundle-analyzer`：可以视化 webpack 输出文件的体积
+- `mini-css-extract-plugin`：CSS 提取到单独的文件中，支持按需加载
+
 -`HotMouleReplacementPlugin` 启用 `module`热替换
 
-### 6.3 常用的 loader
+#### 6.3 常用的 loader
 
-`loader` 的功能就是加载资源到 `webpack`
-
-- `css` 和 `style` cssloader 和 styleloader 做两件事件
-  - `css-loader`遍历所有 require 的 css 文件，输出文件内容
-  - `style-loader`将 css 内容输出到页面的`style`标签中
+- `file-loader`：把文件输出到一个文件夹中，在代码中通过相对 URL 去引用输出的文件
+- `url-loader`：和`file-loader`类似，但是能在文件很小的情况下以 base64 的方式把文件内容注入到代码中去
+- `source-map-loader`：加载额外的 Source Map 文件，以方便断点调试
+- `image-loader`：加载并且压缩图片文件
+- `babel-loader`：把 ES6 转换成 ES5
+- `css-loader`：加载 CSS，支持模块化、压缩、文件导入等特性
+- `style-loader`：把 CSS 代码注入到 JavaScript 中，通过 DOM 操作去加载 CSS。
+- `eslint-loader`：通过 ESlint 检查 JavaScript 文件
 
 ### 参考资料
 
 - [面试必备！webpack 中那些最易混淆的 5 个知识点](https://juejin.im/post/5cede821f265da1bbd4b5630)
 - [【webpack 进阶】你真的掌握了 loader 么？- loader 十问](https://github.com/alienzhou/blog/issues/21)
+- [分别介绍 bundle，chunk，module 是什么](https://www.cxymsg.com/guide/webpack.html#%E5%88%86%E5%88%AB%E4%BB%8B%E7%BB%8Dbundle%EF%BC%8Cchunk%EF%BC%8Cmodule%E6%98%AF%E4%BB%80%E4%B9%88)
+- [webpack 与 grunt、gulp 的不同？](https://www.cxymsg.com/guide/webpack.html#webpack%E4%B8%8Egrunt%E3%80%81gulp%E7%9A%84%E4%B8%8D%E5%90%8C%EF%BC%9F)
 
 ## 联系作者
 
