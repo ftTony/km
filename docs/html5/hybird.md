@@ -138,7 +138,47 @@ Hybrid 开发模式下，由原生提供统一的 API 给 JS 调用，实际的�
 
 这种实现交互的核心方法其实都可以认为是通过方法注入来实现的，Native 应用将协议注入到系统 Scheme，或将 Native 方法直接注入到页面的全局亦是反之也可以在 HTML5 页面全局作用域中添加方法，让 Native App 调用。这样就完成了与 Native App 的相互调用。
 
-#### 3.5 JsBridge 实现原理
+#### 3.5 JsBridge 协议
+
+jsBridge 简单来讲，主要是**给 JavaScript 提供调用 Native 功能的接口，**让混合开发中的前端部分可以方便地使用地址位置、摄像头甚至支付等 Native 功能。
+
+JSBridge 就像其名称中的 “Bridge” 的意义一样，**是 Native 和非 Native 之间的桥梁**，它的核心是**构建 Native 和非 Native 间消息通信的通道，而且是 双向通信的通道**。
+
+JSBridge 另一个叫法及大家熟知的 Hybrid app 技术。
+
+![images](jsbridge01.png)
+
+所谓**双向通信的通道：**
+
+- JS 向 Native 发送消息
+
+调用相关功能、通知 Native 当前 JS 的相关状态等。
+
+- Native 向 JS 发送消息
+
+回溯调用结果、消息推送、通知 JS 当前 Native 的状态等。
+
+**JS Bridge 实现原理**
+
+Android 和 iOS 的 JSBridge 实现方式：
+
+![images](jsbridge02.jpeg)
+
+基本流程
+
+![images](jsbridge03.png)
+
+- H5 页面通过某种方式触发一个`url scheme`;
+- Native 捕获到`url scheme`，并进行分析和处理;
+- Native 调用 H5 的 JSBridge 对象传递回调;
+
+原生的 WebView/UIWebView 控件已经能够和 JS 实现数据通信了，那为什么还要 JSBridge 呢？
+
+其实使用 JSBridge 有很多方面的考虑：
+
+- Android4.2 以下，`a`ddJavascriptInterface` 方式有安全漏掉。
+- iOS7 以下，JS 无法调用 Native。
+- `url scheme` 交互方式是一套现有的成熟方案，可以完美兼容各种版本，对以前老版本技术的兼容。
 
 ### 四、Hybrid App 与 Native App 及 Web App 之间的区别
 
