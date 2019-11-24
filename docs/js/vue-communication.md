@@ -2,30 +2,30 @@
 
 ## 前言
 
-组件是vue.js最强大的功能之一，而组件实例的作用域是相互独立的，这就意味着不同组件之间的数据无法相互引用。一般来说，组件可以有以下几种关系：
+组件是 vue.js 最强大的功能之一，而组件实例的作用域是相互独立的，这就意味着不同组件之间的数据无法相互引用。一般来说，组件可以有以下几种关系：
 
 ![images](vue03.png)
 
-如上图所示，A和B、B和C、B和D都是父子关系，C和D是兄弟关系，A和C是隔代关系（可能隔多代）。
+如上图所示，A 和 B、B 和 C、B 和 D 都是父子关系，C 和 D 是兄弟关系，A 和 C 是隔代关系（可能隔多代）。
 
-针对不同的使用场景，如何选择行之有效的通信方式？这是我们所要探讨的主题。本文总结了vue组件间通信的几种方式，如`props`、`$emit`/`$on`、`vuex`、`$parent` / `$children`、`$attrs`/`$listeners`和`provide`/`inject`，以通俗易懂的实例讲述这其中的差别及使用场景，希望对小伙伴有些许帮助。
+针对不同的使用场景，如何选择行之有效的通信方式？这是我们所要探讨的主题。本文总结了 vue 组件间通信的几种方式，如`props`、`$emit`/`$on`、`vuex`、`$parent` / `$children`、`$attrs`/`$listeners`和`provide`/`inject`，以通俗易懂的实例讲述这其中的差别及使用场景，希望对小伙伴有些许帮助。
 
 ## 内容
 
-- [props/$emit](#一、props-emit)
+- [props/\$emit](#一、props-emit)
 - [$emit/$on](#二、-emit-on)
 - [vuex](#三、vuex)
 - [$attrs/$listeners](#四、-attrs-listeners)
 - [provide/inject](#五、provide-inject)
-- [$parent/$chilren与ref](#六、-parent-chilren与ref)
+- [$parent/$chilren 与 ref](#六、-parent-chilren与ref)
 
 ### 一、`props`/`$emit`
 
-父组件A通过props的方式向子组件B传递，B to A通过在B组件中v-on的方式实现。
+父组件 A 通过 props 的方式向子组件 B 传递，B to A 通过在 B 组件中 v-on 的方式实现。
 
 #### 1.1 父组件向子组件传值
 
-接下来我们通过一个例子，说明父组件如何向子组件传递值：在子组件User.vue中如何获取父组件App.vue中的数据`users:["Henry","Bucky","Emily"]`
+接下来我们通过一个例子，说明父组件如何向子组件传递值：在子组件 User.vue 中如何获取父组件 App.vue 中的数据`users:["Henry","Bucky","Emily"]`
 
 ```
 // App.vue组件
@@ -72,7 +72,7 @@ export default{
 </script>
 ```
 
-**总结：父组件通过props向下传递数据给子组件。注：组件中的数据共有三种形式：data、props、computed**
+**总结：父组件通过 props 向下传递数据给子组件。注：组件中的数据共有三种形式：data、props、computed**
 
 #### 1.2 子组件向父组件传值（通过事件形式）
 
@@ -134,11 +134,11 @@ export default{
 </script>
 ```
 
-**总结：子组件通过events给父组件发送消息，实际上就是子组件把自己的数据发送到父组件。**
+**总结：子组件通过 events 给父组件发送消息，实际上就是子组件把自己的数据发送到父组件。**
 
 ### 二、`$emit`/`$on`
 
-**这种方法通过一个空的Vue实例作为中央事件总线（事件中心），用它来触发事件和监听，巧妙而轻量地实现了任何组件间的通信，包括父子、兄弟、跨级。**当我们的项目比较大的时，可以选择更好的状态管理解决方案vuex。
+**这种方法通过一个空的 Vue 实例作为中央事件总线（事件中心），用它来触发事件和监听，巧妙而轻量地实现了任何组件间的通信，包括父子、兄弟、跨级。**当我们的项目比较大的时，可以选择更好的状态管理解决方案 vuex。
 
 #### 2.1 具体实现方式
 
@@ -150,7 +150,7 @@ Event.$on(事件名，data=>{});
 
 ### 2.2 举个例子
 
-假设兄弟组件有三个，分别是A、B、C组件，C组件如何获取A或者B组件的数据
+假设兄弟组件有三个，分别是 A、B、C 组件，C 组件如何获取 A 或者 B 组件的数据
 
 ```
 <div id="itany">
@@ -225,29 +225,29 @@ var vm = new Vue({
 
 ![images](vue05.gif)
 
-`$on`监听了自定义事件data-a和data-b，因为有时不确定何时会触发事件，一般会在mounted或created钩子中来监听。
+`$on`监听了自定义事件 data-a 和 data-b，因为有时不确定何时会触发事件，一般会在 mounted 或 created 钩子中来监听。
 
 ### 三、vuex
 
 ![images](vue06.png)
 
-#### 3.1 介绍Vuex
+#### 3.1 介绍 Vuex
 
-Vuex实现了一个单向数据流，在全局拥有一个State存放数据，当组件要更改State中的数据时，必须通过
+Vuex 实现了一个单向数据流，在全局拥有一个 State 存放数据，当组件要更改 State 中的数据时，必须通过
 
 #### 3.2 功能
 
-- `Vue Components`：Vue组件。HTML页面上，负责接收用户操作等交互行为，执行dispatch方法触发对应action进行回应。
-- `dispatch`：操作行为触发方法，是唯一能执行action的方法。
-- `actions`：**操作行为处理模块由组件中的`$store.dispatch('action 名称',data1)`来触发。然后由commit()来触发mutation的调用，间接更新state。**负责处理Vue Components接收到的所有交互行为。包含同步/异步操作，支持多个同名方法，按照注册的顺序依次触发。向后台API请求的操作就在这个模块中进行，包括触发其他action以及提交mutation的操作。该模块提供了Promise的封装，以支持action的链式触发。
-- `commit`：状态改变提交操作方法。对mutation进行提交，是唯一能执行mutation的方法。
-- `mutations`：**状态改变操作方法，由actions中的`commit('mutation 名称')`来触发。**是Vuex修改state的唯一推荐方法。该方法只能进行同步操作，且方法名只能全局唯一。操作之中会有一些hook暴露出来，以进行state的监控等。
-- `state`：页面状态管理容器对象。集中存储Vue.components中data对象的零散数据，全局唯一，以进行统一的状态管理。页面显示所需的数据从该对象中进行读取，利用Vue的细粒度数据响应机制来进行高效的状态更新。
-- `getters`：state对象读取方法。图中没有单独列出该模块，应该被包含在了render中，Vue Components通过方法读取全局state对象。
+- `Vue Components`：Vue 组件。HTML 页面上，负责接收用户操作等交互行为，执行 dispatch 方法触发对应 action 进行回应。
+- `dispatch`：操作行为触发方法，是唯一能执行 action 的方法。
+- `actions`：**操作行为处理模块由组件中的`$store.dispatch('action 名称',data1)`来触发。然后由 commit()来触发 mutation 的调用，间接更新 state。**负责处理 Vue Components 接收到的所有交互行为。包含同步/异步操作，支持多个同名方法，按照注册的顺序依次触发。向后台 API 请求的操作就在这个模块中进行，包括触发其他 action 以及提交 mutation 的操作。该模块提供了 Promise 的封装，以支持 action 的链式触发。
+- `commit`：状态改变提交操作方法。对 mutation 进行提交，是唯一能执行 mutation 的方法。
+- `mutations`：**状态改变操作方法，由 actions 中的`commit('mutation 名称')`来触发。**是 Vuex 修改 state 的唯一推荐方法。该方法只能进行同步操作，且方法名只能全局唯一。操作之中会有一些 hook 暴露出来，以进行 state 的监控等。
+- `state`：页面状态管理容器对象。集中存储 Vue.components 中 data 对象的零散数据，全局唯一，以进行统一的状态管理。页面显示所需的数据从该对象中进行读取，利用 Vue 的细粒度数据响应机制来进行高效的状态更新。
+- `getters`：state 对象读取方法。图中没有单独列出该模块，应该被包含在了 render 中，Vue Components 通过方法读取全局 state 对象。
 
-#### 3.3 Vuex与localStorage
+#### 3.3 Vuex 与 localStorage
 
-vuex是vue的状态管理器，存储的数据是响应式的。但是并不会保存起来，刷新之后就回到了初始状态，**具体做应该在vuex里数据改变的时候把数据拷贝一份保存到localStorage里面，刷新之后，如果localStorage里有保存的数据，取出来再替换store里的state。**
+vuex 是 vue 的状态管理器，存储的数据是响应式的。但是并不会保存起来，刷新之后就回到了初始状态，**具体做应该在 vuex 里数据改变的时候把数据拷贝一份保存到 localStorage 里面，刷新之后，如果 localStorage 里有保存的数据，取出来再替换 store 里的 state。**
 
 ```
 let defaultCity = "上海"
@@ -272,7 +272,7 @@ export default new Vuex.Store({
 })
 ```
 
-这里需要注意的是：由于vuex里，我们保存的状态，都是数组，而localStorage只支持字符串，所以需要用JSON转换：
+这里需要注意的是：由于 vuex 里，我们保存的状态，都是数组，而 localStorage 只支持字符串，所以需要用 JSON 转换：
 
 ```
 JSON.stringify(state.subscribeList);    //  array -> string
@@ -283,10 +283,10 @@ JSON.parse(window.localStorage.getItem("subscribeList"))    // string -> array
 
 #### 4.1 简介
 
-多级组件嵌套需要传递数据时，通常使用的方法是通过vuex。但如果仅仅是传递数据，而不做中间处理，使用vuex处理，未免有点大材小用。为此Vue2.4版本提供了另一种方法----`$attrs`/`$listeners`
+多级组件嵌套需要传递数据时，通常使用的方法是通过 vuex。但如果仅仅是传递数据，而不做中间处理，使用 vuex 处理，未免有点大材小用。为此 Vue2.4 版本提供了另一种方法----`$attrs`/`$listeners`
 
-- `$attrs`：包含了父作用域中不被prop所识别(且获取)的除绑定(class和style除外)。当一个组件没有声明任何prop时，这里会包含所有父作用域的绑定(class和style除外)，并且可以通过v-bind="$attrs"传入内部组件。通常配合inheritAttrs选项一起使用。
-- `$listeners`：包含了父作用域中的(不含.native修饰器的)v-on事件听器。它可以通过v-on="$listeners"传入内部组件
+- `$attrs`：包含了父作用域中不被 prop 所识别(且获取)的除绑定(class 和 style 除外)。当一个组件没有声明任何 prop 时，这里会包含所有父作用域的绑定(class 和 style 除外)，并且可以通过 v-bind="\$attrs"传入内部组件。通常配合 inheritAttrs 选项一起使用。
+- `$listeners`：包含了父作用域中的(不含.native 修饰器的)v-on 事件听器。它可以通过 v-on="\$listeners"传入内部组件
 
 #### 4.2 例子
 
@@ -391,21 +391,21 @@ export default {
 
 ![images](vue07.png)
 
-如上图所示`$attrs`表示没有继承数据的对象，格式的{属性名：属性值}。Vue2.4提供了`$attrs`、`$listeners`来传递数据与事件，跨级组件之间的通讯变得更简单。
+如上图所示`$attrs`表示没有继承数据的对象，格式的{属性名：属性值}。Vue2.4 提供了`$attrs`、`$listeners`来传递数据与事件，跨级组件之间的通讯变得更简单。
 
-简单来说：`$attrs`与`$listeners`是两个对象，`$attrs`里存放的是父组件中绑定的非Props属性，`$listeners`里存放的是父组件中绑定的非原生事件。
+简单来说：`$attrs`与`$listeners`是两个对象，`$attrs`里存放的是父组件中绑定的非 Props 属性，`$listeners`里存放的是父组件中绑定的非原生事件。
 
 ### 五、`provide`/`inject`
 
 #### 5.1 简介
 
-Vue2.2.0新增API,这对选项需要一起使用，**以允许一个祖先组件向其所有子孙后代注入一个依赖，不论组件层次有多深，并在起一下游关系成立的时间里始终生效。** 一言而蔽之：祖先组件中通过provider来提供变量，然后在子孙组件中通过inject来注入变量。
+Vue2.2.0 新增 API,这对选项需要一起使用，**以允许一个祖先组件向其所有子孙后代注入一个依赖，不论组件层次有多深，并在起一下游关系成立的时间里始终生效。** 一言而蔽之：祖先组件中通过 provider 来提供变量，然后在子孙组件中通过 inject 来注入变量。
 
 provide/iject API **主要解决了跨级组件间的通信问题，不过它的使用场景，主要是子组件获取上级组件的状态，跨级组件间建立了一种主动提供与依赖注入的关系。**
 
 #### 5.2 例子
 
-假设有两个组件：A.vue和B.vue，B是A的子组件
+假设有两个组件：A.vue 和 B.vue，B 是 A 的子组件
 
 ```
 // A.vue
@@ -426,20 +426,20 @@ export default{
 }
 ```
 
-可以看到，在A.vue里，我们设置了一个provide:name，值为小武子，它的作用就是将name这个变量提供给它的所有子组件。而在B.vue中，通过`inject`注入了从A组件中提供的name变量，那么在组件B中，
+可以看到，在 A.vue 里，我们设置了一个 provide:name，值为小武子，它的作用就是将 name 这个变量提供给它的所有子组件。而在 B.vue 中，通过`inject`注入了从 A 组件中提供的 name 变量，那么在组件 B 中，
 
-需要注意的是：**provide和inject绑定并不是可响应的。这是刻意为之的。然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的**——vue官方访文档
+需要注意的是：**provide 和 inject 绑定并不是可响应的。这是刻意为之的。然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的**——vue 官方访文档
 
-所以，上面A.vue的name如果改变了，B.vue的this.name是不会改变的，仍然是小武子。
+所以，上面 A.vue 的 name 如果改变了，B.vue 的 this.name 是不会改变的，仍然是小武子。
 
-#### 5.3 provide与inject怎么实现数据响应式
+#### 5.3 provide 与 inject 怎么实现数据响应式
 
 一般来说，有两种方法：
 
-- provide祖先组件的实例
-- 使用2.6最新API Vue.observable优化响应式provide(推荐)
+- provide 祖先组件的实例
+- 使用 2.6 最新 API Vue.observable 优化响应式 provide(推荐)
 
-我们来看个例子：孙组件D、E和F获取A组件传递过来的color值，并能实现数据响应变化，即A组件的color变化后，组件D、E、F会跟着变（核心代码如下：）
+我们来看个例子：孙组件 D、E 和 F 获取 A 组件传递过来的 color 值，并能实现数据响应变化，即 A 组件的 color 变化后，组件 D、E、F 会跟着变（核心代码如下：）
 
 ![images](vue08.png)
 
@@ -461,11 +461,11 @@ mounted() {
 //在父组件下面所有的子组件都可以利用inject
 ```
 
-虽说provide 和 inject 主要为高阶插件/组件库提供用例，但如果你能在业务中熟练运用，可以达到事半功倍的效果！
+虽说 provide 和 inject 主要为高阶插件/组件库提供用例，但如果你能在业务中熟练运用，可以达到事半功倍的效果！
 
-### 六、`$parent`/`$chilren`与ref
+### 六、`$parent`/`$chilren`与 ref
 
-- `ref`：如果在普通的DOM元素上使用，引用指向的就是DOM元素；如果用在子组件上，引用就指向组件实例
+- `ref`：如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例
 - `$parent`/`$children`：访问父/子实例
 
 需要注意的是：这两种都是直接得到组件实例，使用后可以直接调用组件的方法或访问数据。我们先来看个用`ref`来访问组件的例子：
@@ -511,13 +511,13 @@ export default{
 <component-b></component-b>
 ```
 
-我们想在component-a中，访问到引用它的页面中（这里就是parent.vue）的两个component-b组件，那这种情况下，就得配置额外的插件或工具了，比如Vuex和Bus的解决方案。
+我们想在 component-a 中，访问到引用它的页面中（这里就是 parent.vue）的两个 component-b 组件，那这种情况下，就得配置额外的插件或工具了，比如 Vuex 和 Bus 的解决方案。
 
 ### 总结
 
 常用使用场景可以分为三类：
 
-- 父子通信：父向子传递数据是通过props，子向父是通过events(`$emit`)；通过父链/子链也可以通信（`$parent`/`$children`）；ref也可以访问组件实例；provide/inject API;`$attrs/$listeners`；
+- 父子通信：父向子传递数据是通过 props，子向父是通过 events(`$emit`)；通过父链/子链也可以通信（`$parent`/`$children`）；ref 也可以访问组件实例；provide/inject API;`$attrs/$listeners`；
 - 兄弟通信：Bus、Vuex；
 - 跨级通信：Bus、Vuex、provide / inject API、`$attrs/$listeners`
 
@@ -525,8 +525,8 @@ export default{
 
 - [vue 组件通信全揭秘(共 7 章)](https://juejin.im/post/5bd97e7c6fb9a022852a71cf)
 - [vue 组件间通信六种方式（完整版）](https://juejin.im/post/5cde0b43f265da03867e78d3)
-- [vue系列---Vue组件化的实现原理（八）](https://www.cnblogs.com/tugenhua0707/p/11761280.html)
-
+- [vue 系列---Vue 组件化的实现原理（八）](https://www.cnblogs.com/tugenhua0707/p/11761280.html)
+- [vue 中 8 种组件通信方式, 值得收藏!](https://juejin.im/post/5d267dcdf265da1b957081a3)
 
 ## 联系作者
 
