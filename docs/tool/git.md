@@ -442,6 +442,12 @@ $ git stash pop
   - `git checkout`则是把文件从历史记录拿到工作，不影响暂存区的内容。
   - `git revert`不支持文件层面的操作。
 
+#### rebase 与 merge的区别?
+
+`git rebase`和`git merge`一样都是用于从一个分支获取并且合并到当前分支。
+
+假设一
+
 ### 三、Git 常用命令导图
 
 ![images](git-Commands.png)
