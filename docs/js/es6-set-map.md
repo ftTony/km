@@ -304,6 +304,7 @@ const wm = new WeakMap();
 - [《ECMAScript 6 入门》 第三版](https://yjhenan.gitbooks.io/-ecmascript-6/content/docs/set-map.html)
 - [ECMAScript 6 入门](http://es6.ruanyifeng.com/#docs/set-map)
 - [Set、Map、WeakSet 和 WeakMap](https://github.com/sisterAn/blog/issues/24)
+- [ES6的Set和Map数据结构，由你制造](https://juejin.im/post/5acc57eff265da237f1e9f7c)
 
 ## 联系作者
 
