@@ -40,6 +40,7 @@ ViewModel 层：把 View 需要的层数据暴露，并对 View 层的数据绑�
 - [你对 MVVM 的理解?](https://www.cxymsg.com/guide/vue.html#%E4%BD%A0%E5%AF%B9mvvm%E7%9A%84%E7%90%86%E8%A7%A3)
 - [看完这篇关于 MVVM 的文章，面试通过率提升了 80%](https://juejin.im/post/5af8eb55f265da0b814ba766)
 - [MVC、MVP 及 MVVM 之间的关系](https://www.cnblogs.com/shenyf/p/9532342.html)
+- [不好意思！耽误你的十分钟，让MVVM原理还给你](https://juejin.im/post/5abdd6f6f265da23793c4458)
 - 《现代化前端技术解析》
 
 ## 联系作者
