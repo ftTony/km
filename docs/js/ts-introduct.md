@@ -1,4 +1,4 @@
-# ts学习
+# ts 学习
 
 ## 前言
 
@@ -9,6 +9,9 @@
 ### 参考资料
 
 - [【TS 演化史 -- 破晓】一步一个脚印入门 TS](https://mp.weixin.qq.com/s/fvRvtcdrigcQzjUKwyzvHw)
+- [TypeScript 手册指南](https://www.tslang.cn/docs/handbook/basic-types.html)
+- [TypeScript Handbook（中文版）](https://zhongsp.gitbooks.io/typescript-handbook/content/)
+- [TypeScript 入门教程](https://ts.xcatliu.com/)
 
 ## 联系作者
 
