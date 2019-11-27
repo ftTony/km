@@ -9,7 +9,8 @@ Babel是JavaScript编译器，更确切地说是源码到源码的编译器，�
 - 抽象语法树
 - Babel 的处理步骤
 - 其他配套工具
-- Babel 7.x
+- Babel的工具集
+- Babel插件实践
 
 ### 一、抽象语法树
 
@@ -214,6 +215,13 @@ n * n;
 
 为了了解Babel在遍历时处理AST的具体过程，我们还需要了解下面几个重要知识点。
 
+#### 2.4 Visitor
+
+#### 2.5 Path
+
+#### 2.6 State
+
+#### 2.7 Scopes(作用域)
 
 ### 三、Babel使用方法
 
@@ -480,7 +488,9 @@ use: {
 | babel-plugin-transform-runtime & babel-runtime | 把帮助类方法从每次使用前定义改为统一 `require`，精简代码    | `babel-runtime`需要安装为依赖，而不是开发依赖                        |
 | babel-loader                                   | 使用 webpack 时作为一个 loader 在代码混淆之前进行代码转换   |
 
-### 五、Babel 7.x
+### 五、Babel的工具集
+
+### 六、Babel插件实践
 
 ## 参考资料
 
