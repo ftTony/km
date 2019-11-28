@@ -24,6 +24,13 @@ Hot Module Replacement（以下简称 HMR）是 webpack 发展至今引入的最
 
 带着上面的问题，于是决定深入到 webpack 源码，寻找 HMR 底层的奥秘。
 
+![images](webpack19.jpg)
+
+图一：HMR工作流程图解
+
+上图是webpack配合`webpack-dev-server`进行应用开发的模块热更新流程图。
+
+- 上图底部红色框内是服务端，而上面的橙色框是浏览器端。
 
 ### 运用 HMR 的简单例子
 
