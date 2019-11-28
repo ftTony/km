@@ -217,6 +217,8 @@ n * n;
 
 #### 2.4 Visitor
 
+
+
 #### 2.5 Path
 
 #### 2.6 State
@@ -501,6 +503,7 @@ use: {
 - [深入浅出 Babel 上篇：架构和原理 + 实战](https://juejin.im/post/5d94bfbf5188256db95589be)
 - [深入浅出 Babel 下篇：既生 Plugin 何生 Macros](https://juejin.im/post/5da12397e51d4578364f6ffa)
 - [Babel 插件手册](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md)
+- [Babel 插件原理的理解与深入](https://github.com/frontend9/fe9-library/issues/154)
 
 ## 联系作者
 
