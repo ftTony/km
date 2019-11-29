@@ -6,9 +6,9 @@ branches:
     - master
 language: node_js
 node_js:
-  - "10"
+  - '10'
 install:
   - npm install
 script:
   - npm run km:build
-  - ./deploy.sh
+  - chmod ./deploy.sh
