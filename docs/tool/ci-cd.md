@@ -1,4 +1,4 @@
-# CI与CD介绍
+# CI 与 CD 介绍
 
 ## 前言
 
@@ -21,7 +21,8 @@
 - [要进大厂？前端灰度发布必须要知道](https://mp.weixin.qq.com/s/54GgUM1saYvZCRP1sJ0Kug)
 - [Jenkins 打造强大的前端自动化工作流](https://juejin.im/post/5ad1980e6fb9a028c42ea1be)
 - [一文搞定前端 Jenkins 自动化部署](https://mp.weixin.qq.com/s/DLXnbY3AcZHMgrPw0T28mQ)
-- [使用阿里云OSS与github actions自动托管个人网站](https://mp.weixin.qq.com/s/DPPOeWHShkasvKAxwH30JA)
+- [使用阿里云 OSS 与 github actions 自动托管个人网站](https://mp.weixin.qq.com/s/DPPOeWHShkasvKAxwH30JA)
+- [Jenkins 实现前端自动打包,自动部署代码及邮件提醒功能](https://www.cnblogs.com/tugenhua0707/p/11949644.html)
 
 ## 联系作者
 
