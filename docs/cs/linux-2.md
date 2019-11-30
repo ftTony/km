@@ -33,9 +33,88 @@ scp ./my_key.pub root@目标服务器:/root/.ssh/
 cat my_key.pub >> authorized_keys
 ```
 
+#### 1.4 使用免密登录
+
+```
+ssh -i ~/.ssh/my_key root@192.168.1.1
+# -i 指定私钥的路径
+```
+
+基本配置已经完成了，但每一次连接都得手动指定本机的私钥地址，能不能省略这一步呢？
+
 ### 二、进阶配置
 
 进阶配置中，我们要配置本地 .ssh 下的 config 文件，实现自动登录，而不需要手动指定私钥地址。
+
+#### 2.1 进入 config 文件
+
+```
+cd ~/.ssh/
+vi config
+```
+
+#### 2.2 编辑 config 文件
+
+```
+User root
+Host tencent
+HostName 49.235.171.183
+Port 22
+StrictHostKeyChecking no
+IdentityFile ~/.ssh/id_rsa
+IdentitiesOnly yes
+Protocol 2
+Compression yes
+ServerAliveInterval 60
+ServerAliveCountMax 20
+LogLevel INFO
+```
+
+#### 2.3 配置完成，体验一下吧
+
+```
+ssh tencent
+```
+
+#### 2.4 配置多个服务器登录
+
+```
+User root
+Host tencent
+HostName 49.235.171.183
+Port 22
+StrictHostKeyChecking no
+IdentityFile ~/.ssh/id_rsa
+IdentitiesOnly yes
+Protocol 2
+Compression yes
+ServerAliveInterval 60
+ServerAliveCountMax 20
+LogLevel INFO
+
+Host aliyun
+User root
+HostName 112.74.54.47
+Port 22
+StrictHostKeyChecking no
+IdentityFile ~/.ssh/id_rsa
+IdentitiesOnly yes
+Protocol 2
+Compression yes
+ServerAliveInterval 60
+ServerAliveCountMax 20
+Loglevel INFO
+```
+
+#### 2.5 使用免密登录
+
+```
+ssh aliyun
+ssh tencent
+```
+
+> **提示**
+> 文中的 ip 地址是为了演示，具体的 ip 需要根据服务器真实 ip 来定。
 
 ### 参考资料
 
