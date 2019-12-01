@@ -185,6 +185,7 @@ module.exports = {
                 collapsable: false,
                 children: [
                     'transition',
+                    'transform',
                     'animation'
                 ]
             },
