@@ -1,4 +1,4 @@
-# webpack配置
+# webpack 配置
 
 ## 前言
 
@@ -7,48 +7,48 @@
 ## 内容
 
 - [介绍、安装及常用命令](#一、介绍、安装及常用命令)
-- [webpack基本配置说明](#二、最简单配置)
-- [webpack配置](#三、webpack配置)
+- [webpack 基本配置说明](#二、最简单配置)
+- [webpack 配置](#三、webpack配置)
 - [优化](#四、优化)
 - [原理](#五、原理)
-- [手写webpack插件](#六、手写webpack插件)
-- [手写loader](#七、手写loader)
+- [手写 webpack 插件](#六、手写webpack插件)
+- [手写 loader](#七、手写loader)
 - [总结](#总结)
 
 ### 一、介绍、安装及常用命令
 
-- 什么是webpack
-- webpack特点
-- webpack安装
+- 什么是 webpack
+- webpack 特点
+- webpack 安装
 - 常用命令
 
-#### 1.1 什么是webpack
+#### 1.1 什么是 webpack
 
 自从出现模块化以后，大家可以将原本一坨代码分离到个个模块中，但是由此引发了一个问题。每个 JS 文件都需要从服务器去拿，由此会导致加载速度变慢。Webpack 最主要的目的就是为了解决这个问题，将所有小文件打包成一个或多个大文件，官网的图片很好的诠释了这个事情，除此之外，Webpack 也是一个能让你使用各种前端新技术的工具。
 
 ![image](webpack01.jpg)
 
-webpack一共经历了4个版本，分别是1、2、3、4，最新版本是4，以下案例是基于4实践的
+webpack 一共经历了 4 个版本，分别是 1、2、3、4，最新版本是 4，以下案例是基于 4 实践的
 
-#### 1.2 webpack特点
+#### 1.2 webpack 特点
 
 1. 专注于处理模块化的项目，能做到开箱即用、一步到位；
-2. 可通过Plugin扩展，完整好用又不失灵活；
-3. 使用场景不局限于web开发；
+2. 可通过 Plugin 扩展，完整好用又不失灵活；
+3. 使用场景不局限于 web 开发；
 4. 社区庞大活跃，经常引入紧跟时代发展的新特性，能为大多数场景找到自己有的开源扩展；
 5. 良好的开发体验；
 
-——自来《深入浅出webpack》
+——自来《深入浅出 webpack》
 
-#### 1.3 webpack安装
+#### 1.3 webpack 安装
 
-全局安装webpack
+全局安装 webpack
 
 ```
 npm install -g webpack
 ```
 
-局部安装webpack
+局部安装 webpack
 
 ```
 npm install --save-dev webpack
@@ -70,17 +70,17 @@ webapck --display-error-details 显示更多报错信息
 
 ### 二、最简单配置
 
-#### 2.1 webpack相关参数介绍
+#### 2.1 webpack 相关参数介绍
 
 - **entry**
 
-配置模块的入口，Entry参数说明，类型可以是以下三种中的一种或者相互组合
+配置模块的入口，Entry 参数说明，类型可以是以下三种中的一种或者相互组合
 
-| 类型   | 例子                                                        | 含义                                |
-| ------ | ----------------------------------------------------------- | ----------------------------------- |
-| string | './app/entry'                                               | 入口模块的文件路径，可以相对路径    |
-| array  | ['./app/entry1','./app/entry2']                             | 入口模块的文件路径，可以是相对路径  |
-| object | {a:['./app/entry-a'],b:['./app/entry-b1','./app/entry-b2']} | 配置多个入口，每个入口生成一个chunk |
+| 类型   | 例子                                                        | 含义                                 |
+| ------ | ----------------------------------------------------------- | ------------------------------------ |
+| string | './app/entry'                                               | 入口模块的文件路径，可以相对路径     |
+| array  | ['./app/entry1','./app/entry2']                             | 入口模块的文件路径，可以是相对路径   |
+| object | {a:['./app/entry-a'],b:['./app/entry-b1','./app/entry-b2']} | 配置多个入口，每个入口生成一个 chunk |
 
 - **output**
 
@@ -98,7 +98,7 @@ output.path：path .resolve( dirname, ’ dist [hash]’) //path 配置输出文
 output.publicPath:'https://cdn.example.com/assets/' //配置发布到线上资源的 URL 前缀
 output.libraryTarget://配置以何种方式导出库，可选值var、commonjs、commonjs2、this、window、global
 output.library://配置导出库的名称。
-output.libraryExport: 配置要导出的模块中哪些子模块需要被导出 
+output.libraryExport: 配置要导出的模块中哪些子模块需要被导出
 
 ```
 
@@ -121,7 +121,7 @@ module:{
             //用 babel-loader 转换 JavaScript 文件
             //?cacheDirectory 表示传给 babel-loader 的参数，用于缓存 babel 的编译结果，
             use : [’ babel-loader?cacheDirectory ’],
-            //只命中 src 目录里的 JavaScript 文件，加快 Webpack 的搜索速度 
+            //只命中 src 目录里的 JavaScript 文件，加快 Webpack 的搜索速度
             include: path.resolve( dirname, ’ src ’)
         },
         {
@@ -144,7 +144,7 @@ module:{
 
 - **noParse**
 
-配置项可以让Webpack忽略对部分没采用模块化的文件的递归解析和处理，这样做的好处能提高构建性能。
+配置项可以让 Webpack 忽略对部分没采用模块化的文件的递归解析和处理，这样做的好处能提高构建性能。
 
 ```
     //使用正则表达式
@@ -215,7 +215,7 @@ extensions:[’.ts’,’.j5 ’,’.json’]
 
 配置扩展插件
 
-plugins配置项接收一个数组，数组里的每一项都是一个要使用 的 Plugin 的实例， Plugin 需要的参数通过构造函数传入,`mini-css-extract-plugin`、`clean-webpack-plugin`、`DllReferencePlugin`、`html-webpack-plugin`、`happyPack`、`webpack-parallel-uglify-plugin`
+plugins 配置项接收一个数组，数组里的每一项都是一个要使用 的 Plugin 的实例， Plugin 需要的参数通过构造函数传入,`mini-css-extract-plugin`、`clean-webpack-plugin`、`DllReferencePlugin`、`html-webpack-plugin`、`happyPack`、`webpack-parallel-uglify-plugin`
 
 ```
 const ClearWebpackPlugin = require('clean-webpack-plugin');
@@ -230,10 +230,10 @@ module.exports=[
 - **DevServer**
 
   - `hot`,开启模块热替换功能后，将在不刷新整个页面的情况下通过用新模块替换老模块来做到实时预览
-  - `inline`,依赖一个注入页面里的代理客户端，去接收来自 DevServer的 命令并负责刷新网页的工作。
-  - `contentBase`,配置 DevServerHTTP服务器的文件根目录
+  - `inline`,依赖一个注入页面里的代理客户端，去接收来自 DevServer 的 命令并负责刷新网页的工作。
+  - `contentBase`,配置 DevServerHTTP 服务器的文件根目录
 
-### 三、webpack配置
+### 三、webpack 配置
 
 ```
 const path = require('path');
@@ -394,26 +394,26 @@ module.exports = {
 2. 使用 ES6 模块来开启 tree shaking，这个技术可以移除没有使用的代码
 3. 优化图片，对于小图可以使用 base64 的方式写入文件中
 4. 按照路由拆分代码，实现按需加载
-5. 给打包出来的文件名添加哈希，实现浏览器缓存文件(主要采用chunkFilename)
+5. 给打包出来的文件名添加哈希，实现浏览器缓存文件(主要采用 chunkFilename)
 
 #### 4.1 打包速度
 
-1. 减少文件搜索范围，比如通过另名，loader的test,include & exclude
-2. resolve.module，配置webpack去哪些目录下妙手第三方模块
-3. resolve.aslias配置，通过另外来将原导入路径映射成一个新的导入路径
-4. Webpack4默认压缩并行
-5. Happypack并发调用
-   - threads:开启几个子进程去处理这一类型的文件，默认是3个，必须整数
-   - verbose:是否允许happypack输出日志，默认是true
-   - threadpool:代表共享进程池，即多个happypack实例都使用同一个共享进程池中的子进程去处理任务，以防止资源占用过多
-6. Babel使用缓存编译，主要loader参数后面增加cacheDirectory，关于[babel编译原理](https://mp.weixin.qq.com/s/NRZQI-Md0dqNAGY96qsn-A)
-7. 使用DllPlugin和DllReferencePlugin，这两个跟CommonsChunkPlugin（webpack3中的，webpack4中使用SplitChunksPlugin）有一些区别，主要区别如下
-   - CommonsChunkPlugin 插件每次打包的时候还是会去处理一些第三方依赖库，只是它能把第三方库文件和我们的代码分开掉，生成一个独立的js文件，但它不能提高打包速度。
+1. 减少文件搜索范围，比如通过另名，loader 的 test,include & exclude
+2. resolve.module，配置 webpack 去哪些目录下妙手第三方模块
+3. resolve.aslias 配置，通过另外来将原导入路径映射成一个新的导入路径
+4. Webpack4 默认压缩并行
+5. Happypack 并发调用
+   - threads:开启几个子进程去处理这一类型的文件，默认是 3 个，必须整数
+   - verbose:是否允许 happypack 输出日志，默认是 true
+   - threadpool:代表共享进程池，即多个 happypack 实例都使用同一个共享进程池中的子进程去处理任务，以防止资源占用过多
+6. Babel 使用缓存编译，主要 loader 参数后面增加 cacheDirectory，关于[babel 编译原理](https://mp.weixin.qq.com/s/NRZQI-Md0dqNAGY96qsn-A)
+7. 使用 DllPlugin 和 DllReferencePlugin，这两个跟 CommonsChunkPlugin（webpack3 中的，webpack4 中使用 SplitChunksPlugin）有一些区别，主要区别如下
+   - CommonsChunkPlugin 插件每次打包的时候还是会去处理一些第三方依赖库，只是它能把第三方库文件和我们的代码分开掉，生成一个独立的 js 文件，但它不能提高打包速度。
    - DLLPlugin 它能把第三方库代码分离开，并且每次文件更改的时候，它只会==打包该项目自身==的代码。所以打包速度会更快。
 
-介绍DllPlugin插件跟DllReferencePlugin插件
+介绍 DllPlugin 插件跟 DllReferencePlugin 插件
 
-- DllPlugin插件 : 用于打包出一个个单独的动态链接库文件 。
+- DllPlugin 插件 : 用于打包出一个个单独的动态链接库文件 。
 - DllReferencePlugin 插件:用于在主要的配置文件中引入 DllP!ugin 插件打包好的动态链接库文件。
 
 具体配置如下：
@@ -451,7 +451,7 @@ module.exports = {
          比如在jquery.manifest文件中有 name: '_dll_jquery'
         */
         name: '_dll_[name]',
-  
+
         /* 生成manifest文件输出的位置和文件名称 */
         path: path.join(__dirname, 'dill', '[name].manifest.json')
       })
@@ -478,22 +478,22 @@ const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
 
 ### 五、原理
 
-#### 5.1 webpack运行流程
+#### 5.1 webpack 运行流程
 
-- **webpack事件流**
+- **webpack 事件流**
 
 Webpack 就像一条生产线，要经过一系列处理流程后才能将源文件转换成输出结果。 这条生产线上的每个处理流程的职责都是单一的，多个流程之间有存在依赖关系，只有完成当前处理后才能交给下一个流程去处理。 插件就像是一个插入到生产线中的一个功能，在特定的时机对生产线上的资源做处理。 Webpack 通过 [Tapable](https://juejin.im/post/5abf33f16fb9a028e46ec352) 来组织这条复杂的生产线。 Webpack 在运行过程中会广播事件，插件只需要监听它所关心的事件，就能加入到这条生产线中，去改变生产线的运作。 Webpack 的事件流机制保证了插件的有序性，使得整个系统扩展性很好。
 
-- **webpack运行流程详解**
+- **webpack 运行流程详解**
 
 Webpack 的运行流程是一个串行的过程，从启动到结束会依次执行以下流程。
 
-- 初始化参数：从配置文件和Shell语句中读取与合并参数，得出最终的参数。
-- 开始编译：用上一步得到的参数初始化Compiler对象，加载所有配置的插件，通过执行对象的run方法开始执行编译。
-- 确定入口：根据配置中的entry找出所有入口文件。
-- 编译模块：从入口文件出发，调用所有配置的loader对模块进行翻译，再找出该模块依赖的模块，再递归本步骤走到所有入口依赖的文件都经过了本步骤的处理。
-- 完成模块编译：在经过第4步使用loader翻译完所有模块后，得到了每个模块被翻译后的最终内容及它们之间的依赖关系。
-- 输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的Chunk，再将每个Chunk转换成一个单独的文件加入输出列表中，这是可以修改输出内容的最后机会。
+- 初始化参数：从配置文件和 Shell 语句中读取与合并参数，得出最终的参数。
+- 开始编译：用上一步得到的参数初始化 Compiler 对象，加载所有配置的插件，通过执行对象的 run 方法开始执行编译。
+- 确定入口：根据配置中的 entry 找出所有入口文件。
+- 编译模块：从入口文件出发，调用所有配置的 loader 对模块进行翻译，再找出该模块依赖的模块，再递归本步骤走到所有入口依赖的文件都经过了本步骤的处理。
+- 完成模块编译：在经过第 4 步使用 loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容及它们之间的依赖关系。
+- 输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再将每个 Chunk 转换成一个单独的文件加入输出列表中，这是可以修改输出内容的最后机会。
 - 输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，将文件的内容写入文件系统中。
 
 流程图：
@@ -506,12 +506,12 @@ Webpack 的运行流程是一个串行的过程，从启动到结束会依次执
 
 实际上一段代码经过编译器的词分析、语法分析等阶段之后，会生成一个树状结构的“抽象语法树（AST）”，该语法树的每一个节点都对应着代码当中不同含义片段。
 
-解释器是将AST翻译成目标语言并运行的工具。
+解释器是将 AST 翻译成目标语言并运行的工具。
 
-### 六、手写webpack插件
+### 六、手写 webpack 插件
 
-- 调用插件apply函数传入compiler对象
-- 通过compiler对象监听
+- 调用插件 apply 函数传入 compiler 对象
+- 通过 compiler 对象监听
 
 插件代码
 
@@ -531,7 +531,7 @@ class myPlugin {
 module.exports = myPlugin
 ```
 
-webpack代码
+webpack 代码
 
 ```
 const MyPlugin = require('./plugins/myplugin-4.js')
@@ -544,17 +544,17 @@ module.exports = {
 }
 ```
 
-具体参数可以参考《深入浅出webpack》
+具体参数可以参考《深入浅出 webpack》
 
-### 七、手写loader
+### 七、手写 loader
 
-1. 获得loader的options，是通过`require (’ loader-utils ’);`
+1. 获得 loader 的 options，是通过`require (’ loader-utils ’);`
 2. 返回其他结果，是调用`callback`
-3. 缓存加速，调用this.cacheable(false);
+3. 缓存加速，调用 this.cacheable(false);
 
-具体参数可以参考《深入浅出webpack》
+具体参数可以参考《深入浅出 webpack》
 
-#### 7.1 loader文件
+#### 7.1 loader 文件
 
 ```
 const loaderUtils = require('loader-utils');
@@ -568,7 +568,7 @@ module.exports = function (content) {
 }
 ```
 
-#### 7.2 webpack配置文件
+#### 7.2 webpack 配置文件
 
 ```
 {
@@ -586,19 +586,21 @@ module.exports = function (content) {
 
 ### 总结
 
-webpack打包配置相对比较复杂，目前介绍应该可以满常规需求。
+webpack 打包配置相对比较复杂，目前介绍应该可以满常规需求。
 
 ### 参考资料
 
-- 《深入浅出webpack》
-- [Webpack运行机制](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-principle.md)
+- 《深入浅出 webpack》
+- [Webpack 运行机制](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-principle.md)
 - [由浅入深 Webpack](https://github.com/yanlele/node-index/blob/master/book/11、深入webpack工程化/01、由浅入深Webpack/README.md)
-- [编写自定义webpack plugin](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-plugin.md)
-- [编写自定义webpack loader](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-loader.md)
+- [编写自定义 webpack plugin](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-plugin.md)
+- [编写自定义 webpack loader](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-loader.md)
 - [搜罗一切 webpack 的好文章好工具](https://github.com/webpack-china/awesome-webpack-cn)
-- [关于webpack4的14个知识点,童叟无欺](https://juejin.im/post/5cea1e1ae51d4510664d1652)
-- [Webpack优化——将你的构建效率提速翻倍](https://mp.weixin.qq.com/s/R9hyFWIvRlzHj9owa-aDjA)
+- [关于 webpack4 的 14 个知识点,童叟无欺](https://juejin.im/post/5cea1e1ae51d4510664d1652)
+- [Webpack 优化——将你的构建效率提速翻倍](https://mp.weixin.qq.com/s/R9hyFWIvRlzHj9owa-aDjA)
 - [一文搞懂 Webpack 多入口配置](https://mp.weixin.qq.com/s/b45oLYScG8L40iVlg7qG7g)
+- [一步步从零开始用 webpack 搭建一个大型项目](https://juejin.im/post/5de06aa851882572d672c1ad)
+- [【Cute-Webpack】Webpack4 入门手册（共 18 章）](https://juejin.im/post/5d518b4de51d4561cc25f013)
 
 ## 联系作者
 
