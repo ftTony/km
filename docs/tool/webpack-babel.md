@@ -776,6 +776,7 @@ export default function({types:t}){
 - [Babel 插件手册](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md)
 - [Babel 插件原理的理解与深入](https://github.com/frontend9/fe9-library/issues/154)
 - [Babel 是如何读懂 JS 代码的](https://zhuanlan.zhihu.com/p/27289600)
+- [不容错过的 Babel7 知识](https://juejin.im/post/5ddff3abe51d4502d56bd143)
 
 ## 联系作者
 
