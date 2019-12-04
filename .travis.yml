@@ -1,34 +1,26 @@
-# 参考资料
-# Travis-CI自动化测试并部署至自己的CentOS服务器(https://juejin.im/post/5a9e1a5751882555712bd8e1)
-# Travis CI 自动化部署博客(https://segmentfault.com/a/1190000011218410)
-
 sudo: true
 git:
   submodules: false
 branches:
   only:
-    - master
+  - master
 language: node_js
 cache:
   directories:
-    - node_modules
+  - node_modules
 node_js:
-  - '10'
+- '10'
 before_install:
-  # 注意 这里我改成了 ~/.ssh/id_rsa 而不是自动生成的 ~\/.ssh/id_rsa
-  - openssl aes-256-cbc -K $encrypted_######_key -iv $encrypted_######_iv -in id_rsa.enc -out ~/.ssh/id_rsa -d
-  # 赋予权限
-  - chmod 600 ~/.ssh/id_rsa
+- openssl aes-256-cbc -K $encrypted_c4d1162000ca_key -iv $encrypted_c4d1162000ca_iv
+  -in id_rsa.enc -out ~\/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
 install:
-  - npm install
+- npm install
 script:
-  - npm km:build
+- npm km:build
 after_success:
-  # $DEPLOY_USER 环境变量：服务器用户名
-  # $DEPLOY_HOST 环境变量：服务器IP
-  # 项目目录 你在服务器上的项目目录
-  - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" -o StrictHostKeyChecking=no 'cd /data/www/km && git pull && bash ./deploy.sh'
+- ssh "$DEPLOY_USER"@"$DEPLOY_HOST" -o StrictHostKeyChecking=no 'cd /data/www/km &&
+  git pull && bash ./deploy.sh'
 addons:
   ssh_known_hosts:
-    # 你的服务器IP
-    - '$DEPLOY_HOST'
+  - $DEPLOY_HOST
