@@ -16,6 +16,7 @@
 - [面向传统，Serverless 进化之路](https://mp.weixin.qq.com/s/DSFms7ovOMMuhe914Z7vcw)
 - [写给前端工程师的 Serverless 入门](https://mp.weixin.qq.com/s/JXDMAmKfUOj4V66yVaT_6Q)
 - [[译] 微前端](https://juejin.im/post/5d0e367b6fb9a07ebf4b781a)
+- [万字长文之 Serverless 实战详细指南](https://mp.weixin.qq.com/s/Ad-lyV85_000infAe_hZ2Q)
 
 ## 联系作者
 
