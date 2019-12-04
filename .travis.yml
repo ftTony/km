@@ -19,7 +19,7 @@ install:
 script:
 - npm km:build
 after_success:
-- ssh "$DEPLOY_USER"@"$DEPLOY_HOST" -o StrictHostKeyChecking=no 'cd /data/www/km &&
+- ssh "$DEPLOY_USER"@"$DEPLOY_HOST" -o StrictHostKeyChecking=no 'cd /root/km &&
   git pull && bash ./deploy.sh'
 addons:
   ssh_known_hosts:
