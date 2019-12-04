@@ -46,6 +46,14 @@ Chrome 提供给开发者的功能十分强大，在开发者工具中，我们�
 
 ### 三、法二：借助 Frame Timing API
 
+#### 3.1 Blink 内核早期架构
+
+#### 3.2 JS 动画与 CSS 动画的细微区别
+
+#### 3.3 什么是 Frame Timing API ？
+
+#### 3.4 Frame Timing API 示意
+
 ### 四、法三：借助 requestAnimationFrame API
 
 ### 参考资料
