@@ -7,12 +7,12 @@
 ## 内容
 
 - [几种实现双向数据绑定做法](#一、几种实现双向数据绑定做法)
-- [重新认识Object.defineProperty](#二、重新认识object-defineproperty)
+- [重新认识 Object.defineProperty](#二、重新认识object-defineproperty)
 - [思路整理](#三、思路整理)
 
 ### 一、几种实现双向数据绑定做法
 
-目前几种主流的mvc(vm)框架都实现了单向数据绑定，而我所理解的双向数据绑定无非就是在单向绑定的基础上给可输入元素（input、textare等）添加了change(input)事件，来动态修改model和 view，并没有多高深。所以无需太过介怀是实现的单向或双向绑定。
+目前几种主流的 mvc(vm)框架都实现了单向数据绑定，而我所理解的双向数据绑定无非就是在单向绑定的基础上给可输入元素（input、textare 等）添加了 change(input)事件，来动态修改 model 和 view，并没有多高深。所以无需太过介怀是实现的单向或双向绑定。
 
 实现数据绑定的做法有大致如下几种：
 
@@ -20,21 +20,21 @@
 - 脏值检查（`angular.js`）
 - 数据劫持（`vue.js`）
 
-**发布者-订阅者模式:** 一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常做法是 vm.set('property', value)，这里有篇文章讲的比较详细，有兴趣可点[这里](http://www.html-js.com/article/Study-of-twoway-data-binding-JavaScript-talk-about-JavaScript-every-day)
+**发布者-订阅者模式:** 一般通过 sub, pub 的方式实现数据和视图的绑定监听，更新数据方式通常做法是 vm.set('property', value)，这里有篇文章讲的比较详细，有兴趣可点[这里](http://www.html-js.com/article/Study-of-twoway-data-binding-JavaScript-talk-about-JavaScript-every-day)
 
-这种方式现在毕竟太low了，我们更希望通过 vm.property = value 这种方式更新数据，同时自动更新视图，于是有了下面两种方式
+这种方式现在毕竟太 low 了，我们更希望通过 vm.property = value 这种方式更新数据，同时自动更新视图，于是有了下面两种方式
 
-**脏值检查:** `angular.js`是通过脏值检测的方式比对数据是否有变更，来决定是否更新视图，最简单的方式就是通过 setInterval() 定时轮询检测数据变动，当然Google不会这么low，angular只有在指定的事件触发时进入脏值检测，大致如下：
+**脏值检查:** `angular.js`是通过脏值检测的方式比对数据是否有变更，来决定是否更新视图，最简单的方式就是通过 setInterval() 定时轮询检测数据变动，当然 Google 不会这么 low，angular 只有在指定的事件触发时进入脏值检测，大致如下：
 
-- DOM事件，譬如用户输入文本，点击按钮等。(`ng-click`)
-- XHR响应事件 (`$http`)
-- 浏览器Location变更事件 (`$location`)
-- Timer事件(`$timeout`, `$interval`)
+- DOM 事件，譬如用户输入文本，点击按钮等。(`ng-click`)
+- XHR 响应事件 (`$http`)
+- 浏览器 Location 变更事件 (`$location`)
+- Timer 事件(`$timeout`, `$interval`)
 - 执行 `$digest()` 或 `$apply()`
 
-**数据劫持:** `vue.js`则是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的`setter`，`getter`，在数据变动时发布消息给订阅者，触发相应的监听回调。
+**数据劫持:** `vue.js`则是采用数据劫持结合发布者-订阅者模式的方式，通过 Object.defineProperty()来劫持各个属性的`setter`，`getter`，在数据变动时发布消息给订阅者，触发相应的监听回调。
 
-### 二、重新认识Object.defineProperty()
+### 二、重新认识 Object.defineProperty()
 
 `Object.defineProperty()`方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。
 
@@ -46,13 +46,13 @@
 
 属性描述符具有以下可选键值：
 
-- `configurable`当且仅当该属性的configurable为true时，该属性描述符才能被改变，同时该属性也能从对应的对象上被删除。默认为false.
-- `enumerable` 当且仅当该属性的`enumerable`为`true`时，该属性才能够出现在对象的枚举属性中。**默认为false**。
+- `configurable`当且仅当该属性的 configurable 为 true 时，该属性描述符才能被改变，同时该属性也能从对应的对象上被删除。默认为 false.
+- `enumerable` 当且仅当该属性的`enumerable`为`true`时，该属性才能够出现在对象的枚举属性中。**默认为 false**。
 
 **数据描述符同时具有以下可选键值：**
 
 - `value`该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。默认为 undefined。
-- `writable`当且仅当该属性的writable为true时，value才能被赋值运算符改变。默认为 false。
+- `writable`当且仅当该属性的 writable 为 true 时，value 才能被赋值运算符改变。默认为 false。
 
 **存取描述符同时具有以下可选键值：**
 
@@ -61,12 +61,12 @@
 
 **描述符可同时具有键值**
 
- | configurable | enumerable | value | writable | get | set |
- | ------------ | ---------- | ----- | -------- | --- | --- | --- |
- | 数据描述符   | Yes        | Yes   | Yes      | Yes | No  | No  |
- | 存取描述符   | Yes        | Yes   | No       | No  | Yes | Yes |
+| configurable | enumerable | value | writable | get | set |
+| ------------ | ---------- | ----- | -------- | --- | --- |
+| 数据描述符   | Yes        | Yes   | Yes      | Yes | No  | No |
+| 存取描述符   | Yes        | Yes   | No       | No  | Yes | Yes |
 
-**如果一个描述符不具有value，writable，get和set任意一个关键字，那么它将被认为是一个数据描述符。如果一个描述符同时有(value或writable)和(get或set)关键字，将会产生一个异常。**
+**如果一个描述符不具有 value，writable，get 和 set 任意一个关键字，那么它将被认为是一个数据描述符。如果一个描述符同时有(value 或 writable)和(get 或 set)关键字，将会产生一个异常。**
 
 示例：
 
@@ -89,7 +89,7 @@ Object.defineProperty(o, "a", {
 
 ### 三、思路整理
 
-要实现mvvm的双向绑定，就必须要实现以下几点：
+要实现 mvvm 的双向绑定，就必须要实现以下几点：
 
 - 实现一个数据监听器`Observer`，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者
 - 实现一个指令解析器`Compile`，对每个元素节点的指令进行扫描和解析，根据指令模板替换以及绑定相应的更新函数。
@@ -100,7 +100,7 @@ Object.defineProperty(o, "a", {
 
 ![img](vue01.png)
 
-#### 3.1 实现Observer
+#### 3.1 实现 Observer
 
 ```
 var data={name:'tony'};
@@ -128,7 +128,7 @@ function defineReactive(data,key,val){
 			val=newVal;
 		}
 	});
-	
+
 }
 
 ```
@@ -163,7 +163,7 @@ function defineReactive(data,key,val){
             dep.notify();   // 通知所有订阅者
 		}
 	});
-	
+
 }
 
 function Dep(){
@@ -213,7 +213,7 @@ function defineReactive(data,key,val){
 			val = newVal;
 		}
 	});
-	
+
 }
 
 function Dep(){
@@ -234,7 +234,7 @@ Dep.prototype={
 
 这里已经实现了一个`Observer`了，已经具备了监听数据和数据变化通知订阅者的功能。
 
-#### 3.2 实现Compile
+#### 3.2 实现 Compile
 
 `compile`主要做的事情是解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图，如图所示：
 
@@ -338,7 +338,7 @@ var compileUtil={
 			updateFn && updateFn(node,value,oldValue);
 		});
 	},
-	
+
 }
 
 //更新函数
@@ -353,13 +353,13 @@ var updater={
 
 监听数据、绑定更新函数的处理是在`compileUtil.bind()`这个方法中，通过`new Watcher()`添加回调来接收数据变化的通知
 
-#### 3.3 实现Watcher
+#### 3.3 实现 Watcher
 
-Watcher订阅者作为Observer和Compile之间通信的桥梁，主要做的事情是:
+Watcher 订阅者作为 Observer 和 Compile 之间通信的桥梁，主要做的事情是:
 
 1. 在自身实例化时往属性订阅器(dep)里面添加自己
-2. 自身必须有一个update()方法
-3. 待属性变动dep.notice()通知时，能调用自身的update()方法，并触发Compile中绑定的回调，则功成身退。
+2. 自身必须有一个 update()方法
+3. 待属性变动 dep.notice()通知时，能调用自身的 update()方法，并触发 Compile 中绑定的回调，则功成身退。
 
 ```
 function Watcher(vm,exp,cb){
@@ -393,9 +393,9 @@ Watcher.prototype={
 
 实例化`Watcher`的时候，调用`get()`方法，通过`Dep.target = watcherInstance`标记订阅者是当前`watcher`实例，强行触发属性定义的`getter`方法，`getter`方法执行的时候，就会在属性的订阅器`dep`添加当前`watcher`实例，从而在属性值有变化的时候，`watcherInstance`就能收到更新通知。
 
-#### 3.4 实现MVVM
+#### 3.4 实现 MVVM
 
-MVVM作为数据绑定的入口，整合Observer、Compile和Watcher三者，通过Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起Observer和Compile之间的通信桥梁，达到数据变化 -> 视图更新；视图交互变化(input) -> 数据model变更的双向绑定效果。
+MVVM 作为数据绑定的入口，整合 Observer、Compile 和 Watcher 三者，通过 Observer 来监听自己的 model 数据变化，通过 Compile 来解析编译模板指令，最终利用 Watcher 搭起 Observer 和 Compile 之间的通信桥梁，达到数据变化 -> 视图更新；视图交互变化(input) -> 数据 model 变更的双向绑定效果。
 
 ```
 function MVVM(options){
@@ -406,11 +406,11 @@ function MVVM(options){
 }
 ```
 
-但是这里有个问题，从代码中可看出监听的数据对象是options.data，每次需要更新视图，则必须通过`var vm = new MVVM({data:{name: 'kindeng'}}); vm._data.name = 'dmq';` 这样的方式来改变数据。
+但是这里有个问题，从代码中可看出监听的数据对象是 options.data，每次需要更新视图，则必须通过`var vm = new MVVM({data:{name: 'kindeng'}}); vm._data.name = 'dmq';` 这样的方式来改变数据。
 
 显然不符合我们一开始的期望，我们所期望的调用方式应用是这样的：`var vm = new MVVM({data: {name: 'kindeng'}}); vm.name = 'dmq';`
 
-所以这里需要给MVVM实例添加一个属性代理的方法，使访问vm的属性代理为访问vm._data的属性，改造后的代码如下：
+所以这里需要给 MVVM 实例添加一个属性代理的方法，使访问 vm 的属性代理为访问 vm.\_data 的属性，改造后的代码如下：
 
 ```
 function MVVM(options){
@@ -422,7 +422,7 @@ function MVVM(options){
 	});
 	observe(data,this);
 	this.$compile=new Compile(options.el || document.body,this);
-	
+
 }
 MVVM.prototye={
 	_proxy:function(key){
@@ -441,18 +441,19 @@ MVVM.prototye={
 };
 ```
 
-这里主要还是利用`Object.definedProperty()`这个方法来支持了vm实例对象的属性的读写权，使读写vm实例的属性转成读写了`vm._data`的属性值，达到鱼目混珠的效果
+这里主要还是利用`Object.definedProperty()`这个方法来支持了 vm 实例对象的属性的读写权，使读写 vm 实例的属性转成读写了`vm._data`的属性值，达到鱼目混珠的效果
 
-至此，全部模块和功能已经完成了，如本文开头所承诺的两点。一个简单的MVVM模块已经实现，其思想和原理大部分来自经过简化改造的vue[源码](https://github.com/vuejs/vue)，猛戳[这里](https://github.com/DMQ/mvvm)可以看到本文的所有相关代码。
+至此，全部模块和功能已经完成了，如本文开头所承诺的两点。一个简单的 MVVM 模块已经实现，其思想和原理大部分来自经过简化改造的 vue[源码](https://github.com/vuejs/vue)，猛戳[这里](https://github.com/DMQ/mvvm)可以看到本文的所有相关代码。
 
 ### 参考资料
 
-- [Vue.js双向绑定的实现原理](http://www.cnblogs.com/kidney/p/6052935.html)
-- [剖析Vue原理&实现双向绑定MVVM](https://segmentfault.com/a/1190000006599500)
+- [Vue.js 双向绑定的实现原理](http://www.cnblogs.com/kidney/p/6052935.html)
+- [剖析 Vue 原理&实现双向绑定 MVVM](https://segmentfault.com/a/1190000006599500)
 - [深入响应式原理](https://github.com/DDFE/DDFE-blog/issues/7)
-- [vue系列---响应式原理实现及Observer源码解析(一)](https://www.cnblogs.com/tugenhua0707/p/11754291.html)
-- [最简化 VUE的响应式原理](https://zhuanlan.zhihu.com/p/88648401)
+- [vue 系列---响应式原理实现及 Observer 源码解析(一)](https://www.cnblogs.com/tugenhua0707/p/11754291.html)
+- [最简化 VUE 的响应式原理](https://zhuanlan.zhihu.com/p/88648401)
 - [0 到 1 掌握：Vue 核心之数据双向绑定](https://juejin.im/post/5d421bcf6fb9a06af23853f1)
+- [Vue 源码解析：深入响应式原理](https://mp.weixin.qq.com/s/NBcnkDQRmCPMxhrP7MyP9Q)
 
 ## 联系作者
 

@@ -54,6 +54,7 @@ var loseloseHashCode = function(key){
 
 - 《学习 JavaScript 数据结构与算法》
 - [动画：什么是散列表？](https://mp.weixin.qq.com/s/EJt0wvsVujKy040Juq28Qw)
+- [重学算法：Hash 算法原理及应用漫谈](https://mp.weixin.qq.com/s/Q0w59YQmZN7tWxSXPR1vrA)
 
 ## 联系作者
 
