@@ -139,6 +139,8 @@ observer.observe({entryTypes: ['frame']});
 
 ### 四、法三：借助 requestAnimationFrame API
 
+费了这么多笔墨描述 Frame Timing API 但最后因为兼容性问题完全没办法使用。
+
 #### 4.1 使用 requestAnimationFrame 计算 FPS 原理
 
 ```
