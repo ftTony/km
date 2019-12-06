@@ -2,9 +2,32 @@
 
 ## 前言
 
-本人平时学习及收集内容，欢迎参入一起讨论。
+CSS Grid(网格)布局，是一个二维的基于风格的布局系统，它的目标是完全改变我们基于风格的用户界面的布局方式。
 
 ## 内容
+
+- 相关属性
+- 基本术语
+- 浏览器支持
+
+### 一、相关属性
+
+- display
+- grid-template-columns
+- grid-template-rows
+- grid-template-areas
+- grid-template
+- grid-column-gap
+- grid-row-gap
+- grid-gap
+- justify-items
+- align-items
+- place-items
+- justify-content
+- place-content
+- grid-auto-columns
+- grid-auto-rows
+- grid
 
 ### 参考资料
 
