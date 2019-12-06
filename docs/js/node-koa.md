@@ -11,7 +11,7 @@
 - [请求数据获取](#三、请求数据获取)
 - [静态资源加载](#四、静态资源加载)
 - [cookie/session](#五、cookie-session)
-- [数据库mysql](#六、数据库mysql)
+- [数据库 mysql](#六、数据库mysql)
 
 ### 一、安装 koa
 
@@ -492,12 +492,12 @@ node index.js
 
 ![images](node10.png)
 
-### 六、数据库mysql
+### 六、数据库 mysql
 
-- 安装 node.js的mysql模块
+- 安装 node.js 的 mysql 模块
 - 使用模块
 
-#### 6.1 安装 node.js的mysql模块
+#### 6.1 安装 node.js 的 mysql 模块
 
 ```
 npm install --save mysql
@@ -516,17 +516,17 @@ const connection = mysql.createConnection({
   database : 'my_database'  // 选中数据库
 })
 
-// 执行sql脚本对数据库进行读写 
+// 执行sql脚本对数据库进行读写
 connection.query('SELECT * FROM my_table',  (error, results, fields) => {
   if (error) throw error
-  // connected! 
+  // connected!
 
   // 结束会话
-  connection.release() 
+  connection.release()
 });
 ```
 
->注意：一个事件就有一个从开始到结束的过程，数据库会话操作执行完后，就需要关闭掉，以免占用连接资源。
+> 注意：一个事件就有一个从开始到结束的过程，数据库会话操作执行完后，就需要关闭掉，以免占用连接资源。
 
 **创建数据连接池**
 
@@ -561,6 +561,7 @@ pool.getConnection(function(err, connection) {
 
 - 《Koa 与 Node.js 开发实战》
 - [Koa2 进阶学习笔记](https://chenshenhai.github.io/koa2-note/)
+- [KOA2 框架原码解析和实现](https://juejin.im/post/5db7eaf7f265da4cee4d61b9)
 
 ## 联系作者
 
