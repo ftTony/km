@@ -281,8 +281,10 @@ CSS 代码：
 
 ```
 .container {
-  grid-template-columns: 60px 60px;
-  grid-template-rows: 90px 90px
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  grid-auto-rows: 50px;
 }
 ```
 
