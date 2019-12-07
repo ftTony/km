@@ -2,7 +2,7 @@
 
 ## 前言
 
-CSS Grid(网格)布局，是一个二维的基于风格的布局系统，它的目标是完全改变我们基于风格的用户界面的布局方式。
+CSS Grid(网格)布局，是一个二维的基于风格的布局系统，它的目标是完全改变我们基于风格的用户界面的布局方式。案例源码放在[这里](https://github.com/ftTony/notes/tree/master/css/grid)
 
 ## 内容
 
@@ -52,7 +52,7 @@ CSS 代码:
 - `fit-content`：相当于公式`min(max-content, max(auto, argument))`，类似于 `auto` 的计算(即 minmax(auto, max-content))，除了网格轨道大小值是确定下来的，否则该值都大于 `auto` 的最小值。
 - `repeat`：表示网格重复部分，以一种更简洁的方式去表示大量而且重复列的表达式。可值有`positive-integer`、`auto-fill`、`auto-fit`
 
-- grid-template-areas
+- **grid-template-areas**
 
 通过引用`grid-area`属性指定的风格区域名称来定义网格模板。重复网格区域的名称导致内容跨越这些单元格。
 
@@ -62,17 +62,14 @@ CSS 代码:
 - `.`(点号)：代表一个空的风格单元
 - `none`：不定义网格区域
 
-- grid-template
-- grid-column-gap/grid-row-gap
-- grid-gap
-- justify-items
-- align-items
-- place-items
-- justify-content
-- place-content
-- grid-auto-columns
-- grid-auto-rows
-- grid
+- **grid-template**/**grid**
+
+`grid-template`属性是`grid-template-columns`、`grid-template-rows` 和 `grid-template-areas` 这三个属性的合并简写形式。
+
+- **grid-column-gap**/**grid-row-gap**/**grid-gap**
+- **justify-items**/**align-items**/**place-items**
+- **justify-content**/**align-content**/**place-content**
+- **grid-auto-columns**/**grid-auto-rows**
 
 #### 1.2 网格项(Grid Items) 属性
 
