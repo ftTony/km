@@ -290,16 +290,10 @@ CSS 代码：
 
 #### 1.2 网格项(Grid Items) 属性
 
-- grid-column-start
-- grid-column-end
-- grid-row-start
-- grid-row-end
-- grid-column
-- grid-row
-- grid-area
-- justify-self
-- align-self
-- place-self
+- **grid-column-start**/**grid-column-end**/**grid-row-start**/**grid-row-end**
+- **grid-column**/**grid-row**
+- **grid-area**
+- **justify-self**/**align-self**/**place-self**
 
 ### 二、基本术语
 
