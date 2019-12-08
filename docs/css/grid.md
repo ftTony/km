@@ -280,7 +280,10 @@ CSS 代码：
 示例：
 
 ```
-
+.container {
+  grid-template-columns: 60px 60px;
+  grid-template-rows: 90px 90px
+}
 ```
 
 #### 1.2 网格项(Grid Items) 属性
