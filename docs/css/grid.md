@@ -190,42 +190,91 @@ place-items: start end;
 
 值：
 
+- `start`：将网格对齐到网格容器的左侧起始边缘（左侧对齐）
+- `end`：将网格对齐到网格容器的右侧结束边缘（右侧对齐）
+- `center`：将网格对齐到网格容器的水平中间位置（水平居中对齐）
+- `stretch`：调整网格项的宽度，允许该网格填充满整个网格容器
+- `space-around`：在每个网格项之间旋转一个均匀的空间，左右两端放置一半的空间。
+- `space-between`：在每个网格项之间放置一个均匀的空间，左右两端没有空间
+- `space-evenly`：在每个网格项目之间放置一个均匀的空间，左右两端放置一个均匀的空间
+
 CSS 代码：
 
 ```
-
+.container {
+  justify-content: start | end | center | stretch | space-around | space-between | space-evenly;
+}
 ```
 
 示例：
 
 ```
-
+.container {
+  justify-content: start;
+}
 ```
 
 `align-content`属性是整个内容区域的垂直位置（上中下）。
 
 值：
 
+- `start`：将网格对齐到 网格容器(grid container) 的顶部起始边缘（顶部对齐）
+- `end`：将网格对齐到 网格容器 的底部结束边缘（底部对齐）
+- `center`：将网格对齐到 网格容器 的垂直中间位置（垂直居中对齐）
+- `stretch`：调整 网格项(grid items) 的高度，允许该网格填充满整个 网格容器 的高度
+- `space-around`：在每个网格项之间放置一个均匀的空间，上下两端放置一半的空间
+- `space-between`：在每个网格项之间放置一个均匀的空间，上下两端没有空间
+- `space-evenly`：在每个网格项目之间放置一个均匀的空间，上下两端放置一个均匀的空间
+
 CSS 代码：
 
 ```
-
+.container {
+  align-content: start | end | center | stretch | space-around | space-between | space-evenly;
+}
 ```
 
 示例：
 
 ```
-
+.container {
+  align-content: start;
+}
 ```
 
 `place-content`属性是`align-content`属性和`justify-content`属性的合并简写形式。
 
 值：
 
+- `<align-content> <justify-content>`：第一个值设置`align-content`属性，第二个值设置 `justify-content`属性。如果省略第二个值，则将第一个值同时分配给这两个属性。
+
 CSS 代码：
 
 ```
+place-content: <align-content> <justify-content>
+```
 
+示例：
+
+```
+place-content: space-around space-evenly;
+```
+
+- **grid-auto-columns**/**grid-auto-rows**
+
+`grid-auto-columns` 属性和 `grid-auto-rows` 属性用来设置，浏览器自动创建的多余网格的列宽和行高。
+
+值：
+
+- `<track-size>`：可以是长度值，百分比，或者等份网格容器中可用空间的分数（使用 fr 单位）
+
+CSS 代码：
+
+```
+.container {
+  grid-auto-columns: <track-size> ...;
+  grid-auto-rows: <track-size> ...;
+}
 ```
 
 示例：
@@ -233,8 +282,6 @@ CSS 代码：
 ```
 
 ```
-
-- **grid-auto-columns**/**grid-auto-rows**
 
 #### 1.2 网格项(Grid Items) 属性
 
