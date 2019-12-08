@@ -291,9 +291,24 @@ CSS 代码：
 #### 1.2 网格项(Grid Items) 属性
 
 - **grid-column-start**/**grid-column-end**/**grid-row-start**/**grid-row-end**
+
+`grid-column-start`属性：左边框所在的垂直网格线；`grid-coloumn-end`属性：右边框所在的垂直网格线；`grid-row-start`属性：上边框所在的水平网格线；`grid-row-end`属性：下边框所在的水平网格线；
+
 - **grid-column**/**grid-row**
+
+`grid-column` 属性是 `grid-column-start` 和 `grid-column-end` 的合并简写形式，`grid-row` 属性是 `grid-row-start` 属性和 `grid-row-end` 的合并简写形式。
+
 - **grid-area**
 - **justify-self**/**align-self**/**place-self**
+
+CSS 代码:
+
+```
+.item {
+  grid-column:  / ;
+  grid-row:  / ;
+}
+```
 
 ### 二、基本术语
 
