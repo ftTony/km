@@ -294,12 +294,26 @@ CSS 代码：
 
 `grid-column-start`属性：左边框所在的垂直网格线；`grid-coloumn-end`属性：右边框所在的垂直网格线；`grid-row-start`属性：上边框所在的水平网格线；`grid-row-end`属性：下边框所在的水平网格线；
 
+CSS 代码:
+
+```
+.item {
+  grid-column-start: <number> | <name> | span <number> | span <name> | auto
+  grid-column-end: <number> | <name> | span <number> | span <name> | auto
+  grid-row-start: <number> | <name> | span <number> | span <name> | auto
+  grid-row-end: <number> | <name> | span <number> | span <name> | auto
+}
+```
+
+示例代码：
+
+```
+
+```
+
 - **grid-column**/**grid-row**
 
 `grid-column` 属性是 `grid-column-start` 和 `grid-column-end` 的合并简写形式，`grid-row` 属性是 `grid-row-start` 属性和 `grid-row-end` 的合并简写形式。
-
-- **grid-area**
-- **justify-self**/**align-self**/**place-self**
 
 CSS 代码:
 
@@ -309,6 +323,9 @@ CSS 代码:
   grid-row:  / ;
 }
 ```
+
+- **grid-area**
+- **justify-self**/**align-self**/**place-self**
 
 ### 二、基本术语
 
