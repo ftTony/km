@@ -601,6 +601,7 @@ define(function (require) {
 - [前端模块化：CommonJS,AMD,CMD,ES6](https://juejin.im/post/5aaa37c8f265da23945f365c)
 - [《JavaScript 标准参考教程（alpha）》](http://javascript.ruanyifeng.com/nodejs/module.html)
 - [前端模块化之 AMD 与 CMD 原理(附源码)](https://juejin.im/post/5c3592b26fb9a049aa6f4456)
+- [前端模块化的今生](https://mp.weixin.qq.com/s/AkjrTduPc0Wcm6noD-b1GA)
 
 ## 参考资料
 
