@@ -25,6 +25,8 @@
 ### 参考资料
 
 - [koa 源码](https://github.com/koajs/koa)
+- [Koa 源码阅读](https://yhlben.com/blog/library-koa.html)
+- [koa 源码-核心库原理](https://xin-tan.com/passages/2019-06-21-deep-in-koa/)
 - [读 koa2 源码后的一些思考与实践](https://mp.weixin.qq.com/s/j0DjaQ2LwwV_uEzbmeoFiw)
 
 ## 联系作者
