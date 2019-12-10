@@ -1,4 +1,4 @@
-# svg学习
+# svg 学习
 
 ## 前言
 
@@ -6,7 +6,9 @@
 
 ## 内容
 
-## 参考资料
+### 参考资料
+
+- [SVG 入门指南(看完,对 SVG 结构不在陌生)](https://mp.weixin.qq.com/s/_u6De6IZXFnL2yXmvJQ7Gg)
 
 ## 联系作者
 

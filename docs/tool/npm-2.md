@@ -1151,6 +1151,8 @@ npm config set save-exact true
 - [yarn、npm、cnpm 三者如何优雅的在一起使用 ？](https://segmentfault.com/a/1190000019299845)
 - [前端工程化（一）NPM 如何管理依赖包版本？](https://mp.weixin.qq.com/s/Qrzn3rLKfMI9V6diQ_7vBg)
 - [package.json 知多少？](https://mp.weixin.qq.com/s/jMWoXzrw6WDi5VG9Y8Mn0Q)
+- [你不知道的 package.json](https://mp.weixin.qq.com/s/KqnbA8lB6CdGpNRW1-Lz7w)
+- [NPM 命令实用使用技巧总结](https://mp.weixin.qq.com/s/fwskK5DLa6Kbbj555GaDUQ)
 
 ## 联系作者
 
