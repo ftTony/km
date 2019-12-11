@@ -168,7 +168,6 @@ module.exports = {
           'center',
           'background',
           'stack',
-          'layout',
           'responsive',
           'column-layout',
           'px',
@@ -418,4 +417,4 @@ module.exports = {
     ],
     '/materials/': []
   }
-}
+};
