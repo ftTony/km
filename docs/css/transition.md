@@ -7,6 +7,10 @@
 ## 内容
 
 - transition 介绍
+- property
+- duration
+- timing-function
+- delay
 
 ### 一、 transition 介绍
 

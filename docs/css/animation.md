@@ -7,6 +7,14 @@
 ## 内容
 
 - Animations 功能介绍
+- name
+- duration
+- timeing-function
+- delay
+- iterations-count
+- direction
+- play-state
+- fill-mode
 
 ### 一、Animations 功能介绍
 
