@@ -239,6 +239,7 @@ var foo = (function foo(x) {
 - [手写一个四则运算表达式转换成 AST 的方法（上）](https://mp.weixin.qq.com/s/HMggcevKJ9afZFqHgm0e5A)
 - [手写一个四则运算表达式转换成 AST 的方法（下）](https://mp.weixin.qq.com/s/lHYZja_EFRl4s5UQH-kL3w)
 - [【第 1471 期】AST 抽象语法树——最基础的 javascript 重点知识](https://mp.weixin.qq.com/s/EnS22WGKiXnTCdFnqrVahA)
+- [前端工程师为什么要学习编译原理？](https://mp.weixin.qq.com/s/Ka9-eGx4Y7MGj_wpWtjE8w)
 
 ## 联系作者
 
