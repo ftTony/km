@@ -238,6 +238,7 @@ server.on('upgrade',function(req,socket,upgradeHead){
 
 - [net 模块](https://github.com/wscats/node-tutorial/tree/master/tutorial/net)
 - [入门 Node.js Net 模块构建 TCP 网络服务](https://mp.weixin.qq.com/s/fJB3T6g3yFf4yn_HYEZGPg)
+- [如何用 nodejs 编写 TCP 长连接应用](https://mp.weixin.qq.com/s/iPe1cVR2vsqkYCjDdITRZA)
 - 《深入浅出 nodejs》
 
 ## 联系作者

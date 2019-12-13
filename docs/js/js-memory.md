@@ -241,6 +241,7 @@ David 大叔主要介绍了 2 个优化方案，而这也是最主要的 2 个�
 - [【JavaScript】【重温基础】22.内存管理](http://www.pingan8787.com/2019/02/16/140-%E3%80%90JavaScript%E3%80%91%E3%80%90%E9%87%8D%E6%B8%A9%E5%9F%BA%E7%A1%80%E3%80%9122-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/)
 - [浏览器垃圾回收机制与 Vue 项目内存泄漏场景分析](https://mp.weixin.qq.com/s/sMV4KyUb6RORJ4la7MfC4Q)
 - [V8 引擎如何进行垃圾内存的回收？](https://sanyuan0704.github.io/frontend_daily_question/week07/038.html)
+- [一文搞懂 V8 引擎的垃圾回收](https://mp.weixin.qq.com/s/1SGodqhTRM9mBy0Q9J0qow)
 - 《高程第 3 版》
 - 《深入浅出 nodejs》
 
