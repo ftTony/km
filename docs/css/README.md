@@ -30,3 +30,4 @@
 28. [彻底搞懂移动 Web 开发中的 viewport 与跨屏适配](https://mp.weixin.qq.com/s/Qur8JLPdqxm7xIIOjuXmSQ)
 29. [你需掌握的 CSS 知识都在这了（长文建议收藏，文末有福利）](https://juejin.im/post/5d8336d2f265da03df5f4a06)
 30. [纯 CSS 实现简单骨骼动画](https://juejin.im/post/5deb49a251882512302daa92)
+31. [CSS 像素、物理像素、逻辑像素、设备像素比、PPI、Viewport](https://www.cnblogs.com/zaoa/p/8630393.html)
