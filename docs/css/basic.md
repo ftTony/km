@@ -318,6 +318,11 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 间隙产生本质上是由基线对齐引发的错位造成的，源头上是`vertical-align`和`line-height`共同造成的，所以要想解决这个问题，只要直接或间接改造两个属性中的一个就行了：
 
+1. 给元素设置块状化`display:block`使`vertical-align`属性失败；
+2. 尝试不同的`vertical-align`值如`bottom/middle/top`;
+3. 直接修改`line-height`值；
+4. 如果`line-height`为相对值如`1.4`，设置`font-size:0`间接改变`line-height`。
+
 ### 四、流的破坏
 
 现在 UI 框架横行的年代，我们的 css 写的越来越少了。这对于很多老鸟来说是件好事，但是对于初入前端的小白却未必。因为写的少了，就少了很多练手和总结的机会，对于很多样式理解就不透彻。本章介绍的`float`、`position` 和 `BFC` 对于前端页面布局非常重要，希望诸位看官们静下心来仔细研读
