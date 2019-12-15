@@ -310,7 +310,13 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 `vertical-align`的作用前提
 
-**vertical-align 属性起作用的前提必须是作用在内联元素上。**即`display`计算值为`inline`、`inline-block`
+**vertical-align 属性起作用的前提必须是作用在内联元素上。**即`display`计算值为`inline`、`inline-block`、`inline-table`、`table-cell`的元素。所以如果元素设置了`float:left`或者`position:absolute`，则其`vertical-align`属性不能生效，因为此时元素的`display`计算值为`block`了。
+
+好基友`line-height`、`vertical-align`和第三者幽灵空白节点的爱恨情仇
+
+解决问题
+
+间隙产生本质上是由基线对齐引发的错位造成的，源头上是`vertical-align`和`line-height`共同造成的，所以要想解决这个问题，只要直接或间接改造两个属性中的一个就行了：
 
 ### 四、流的破坏
 
