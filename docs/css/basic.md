@@ -334,6 +334,13 @@ css 中除了`px/em/rem`等，还有个单位是`ex`。指的就是小写字母 
 
 好基友`line-height`、`vertical-align`和第三者幽灵空白节点的爱恨情仇
 
+`display:inline-block`基线不同之处
+
+一个设置了`display:inline-block`的元素：
+
+1. 如果元素内部没有内联元素，则该元素基线就是该元素下边缘；
+2. 如果元素设置了`overflow`为`hidden auto scroll`，则其基线就是该元素下边缘；
+
 解决问题
 
 间隙产生本质上是由基线对齐引发的错位造成的，源头上是`vertical-align`和`line-height`共同造成的，所以要想解决这个问题，只要直接或间接改造两个属性中的一个就行了：
