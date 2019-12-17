@@ -1154,6 +1154,7 @@ npm config set save-exact true
 - [你不知道的 package.json](https://mp.weixin.qq.com/s/KqnbA8lB6CdGpNRW1-Lz7w)
 - [NPM 命令实用使用技巧总结](https://mp.weixin.qq.com/s/fwskK5DLa6Kbbj555GaDUQ)
 - [【第 1283 期】从 0 开始发布一个无依赖、高质量的 npm](https://mp.weixin.qq.com/s/aKwEF0ES1ldH5e0jgvh6qA)
+- [npm install 原理分析](https://mp.weixin.qq.com/s/izPqa7sn3bJ73iEJkUW64w)
 
 ## 联系作者
 
