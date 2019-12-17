@@ -229,6 +229,7 @@ defer 与相比普通 script，有两点区别：**载入 JavaScript 文件时�
 - [从 Node 实例推导浏览器的渲染机制](https://mp.weixin.qq.com/s/C8zzgVL24FihofbfrUSSnw)
 - [浏览器合成与渲染层优化](https://mp.weixin.qq.com/s/1Ow3Y9anTx7B2I6WIUYzUg)
 - [【第 1804 期】Web 内容如何影响电池的使用](https://mp.weixin.qq.com/s/EPhsY0LZ5qNuUtBbKny9Bw)
+- [浏览器帧原理剖析](https://mp.weixin.qq.com/s/Codj7hpO0Wyeu6ff4fffig)
 
 ## 联系作者
 
