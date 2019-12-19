@@ -166,23 +166,23 @@ module.exports = {
         collapsable: false,
         children: [
           'basic',
+          'box-sizing',
+          'select',
           'inherit',
+          'px',
+          'pic',
           'center',
           'background',
           'stack',
-          'responsive',
-          'column-layout',
-          'px',
-          'pic',
-          'font-size',
           'flex',
           'grid',
           'bfc',
-          'scss',
+          'column-layout',
+          'responsive',
           'transform',
-          'fps',
-          'box-sizing',
-          'select'
+          'font-size',
+          'scss',
+          'fps'
         ]
       },
       {
@@ -404,7 +404,15 @@ module.exports = {
       {
         title: '网络',
         collapsable: false,
-        children: ['http', 'https', 'http2', 'http-cache', 'tcp', 'webstock']
+        children: [
+          'net',
+          'http',
+          'https',
+          'http2',
+          'http-cache',
+          'tcp',
+          'webstock'
+        ]
       },
       {
         title: '操作系统',
