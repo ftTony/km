@@ -6,7 +6,23 @@
 
 ## 内容
 
-## 参考资料
+- 性能概念
+- performance数据
+- performance.timing信息计算出网页性能数据
+
+### 一、性能概念
+
+### 二、performance数据
+
+### 三、performance.timing信息计算出网页性能数据
+
+### 参考资料
+
+- [前端感官性能的衡量和优化实践](https://tech.meituan.com/Optimization_of_front_end_sensory_properties.html)
+- [初探 performance – 监控网页与程序性能](http://www.alloyteam.com/2015/09/explore-performance/)
+- [前端性能——监控起步](https://www.cnblogs.com/chuaWeb/p/PerformanceMonitoring.html)
+- [前端性能监控](https://juejin.im/entry/58ba9cb5128fe100643da2cc)
+- [前端数据之美 -- 基础篇](http://fex.baidu.com/blog/2014/05/front_end-data/)
 
 ## 联系作者
 
