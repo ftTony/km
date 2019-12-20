@@ -159,6 +159,8 @@ DHCP 动态主机设置协议（Dynamic Host Configuration Protocol）是一个�
 
 #### 6.5 HTTP 协议
 
+参考这里[HTTP 详情](https://km.xiaowuzi.info/cs/http.html)
+
 ### 参考资料
 
 - [计算机网络](https://github.com/frank-lam/fullstack-tutorial/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md)
