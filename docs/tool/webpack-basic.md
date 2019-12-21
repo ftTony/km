@@ -605,6 +605,7 @@ webpack 打包配置相对比较复杂，目前介绍应该可以满常规需求
 - [【Cute-Webpack】Webpack4 入门手册（共 18 章）](https://juejin.im/post/5d518b4de51d4561cc25f013)
 - [webpack 工程师的自我修养](https://github.com/luoxue-victor/webpack-box)
 - [【第 619 期】如何 10 倍提高你的 Webpack 构建效率](https://mp.weixin.qq.com/s/zy8GfmfM8tg6uiKAhItGIg)
+- [Webpack 深入浅出之公司级分享总结(内附完整 ppt)](https://juejin.im/post/5df884ad6fb9a0164e7f979d)
 
 ## 联系作者
 
