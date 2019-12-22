@@ -6,14 +6,33 @@
 
 ## 内容
 
+- 图片格式选择
+
+### 一、图片格式选择
+
+| 图片格式 | 压缩方式 | 透明度 | 动画   | 浏览器兼容 | 适应场景                   |
+| -------- | -------- | ------ | ------ | ---------- | -------------------------- |
+| JPEG     | 有损压缩 | 不支持 | 不支持 | 所有       | 复杂颜色及形状、尤其是照片 |
+
+### 二、图的类型分类
+
+- 位图(点阵图)
+- 矢量图
+
+#### 2.1 位图(点阵图)
+
+### 三、图的压缩分类
+
+### 四、常见的图片格式解析
+
 ### 参考资料
 
 - [Web 性能优化：图片优化](http://www.cnblogs.com/wizcabbit/p/web-image-optimization.html)
 - [每个前端工程师都应该了解的图片知识(长文建议收藏)](https://mp.weixin.qq.com/s/O1n7_t4izdmpvn2mFrB-kg)
 - [你必须知道的图片优化技巧](https://mp.weixin.qq.com/s/oJy2fncLjtlt9XmPRWnqVw)
 - [为你重新系统梳理下， Web 体验优化中和图有关的那些事（万字长文）](https://mp.weixin.qq.com/s/euvdMHkYUXHmgkV9D334NQ)
-- [Web性能优化：图片优化](https://www.cnblogs.com/wizcabbit/p/web-image-optimization.html)
-- [webp图片实践之路](https://www.cnblogs.com/season-huang/p/5804884.html)
+- [Web 性能优化：图片优化](https://www.cnblogs.com/wizcabbit/p/web-image-optimization.html)
+- [webp 图片实践之路](https://www.cnblogs.com/season-huang/p/5804884.html)
 
 ## 联系作者
 
