@@ -242,6 +242,7 @@ David 大叔主要介绍了 2 个优化方案，而这也是最主要的 2 个�
 - [浏览器垃圾回收机制与 Vue 项目内存泄漏场景分析](https://mp.weixin.qq.com/s/sMV4KyUb6RORJ4la7MfC4Q)
 - [V8 引擎如何进行垃圾内存的回收？](https://sanyuan0704.github.io/frontend_daily_question/week07/038.html)
 - [一文搞懂 V8 引擎的垃圾回收](https://mp.weixin.qq.com/s/1SGodqhTRM9mBy0Q9J0qow)
+- [day038:V8 引擎如何进行垃圾内存的回收？](https://mp.weixin.qq.com/s/47IoOxXYoxhh00XfTIntDQ)
 - 《高程第 3 版》
 - 《深入浅出 nodejs》
 
