@@ -139,6 +139,10 @@ border-radius 不一样，如果设置 border-radius 为百分比，则是相对
 
 ### 四、em
 
+em（font size of the element）是指相对于父元素的字体大小的单位。
+
+1em 默认为 16px。
+
 ### 五、rem
 
 rem 是一个灵活的、可扩展的单位，由浏览器转化像素并显示。rem 单位无论嵌套层级如何，都只相对于浏览器的根元素的 font-size。
