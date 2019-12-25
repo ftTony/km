@@ -6,12 +6,32 @@
 
 ## 内容
 
-- letter-spacing
+- `letter-spacing` 与 `word-spacing`
 - text-tranfrom
-- word-break 和 word-wrap
+- `word-break` 和 `word-wrap`
 - white-space
 
-### 一、letter-spacing 与 text-indent
+### 一、`letter-spacing` 与 `word-spacing`
+
+`letter-spacing`可以用来控制字符之间的间距，这里说的“字符”包括英文字母、汉字以及空格等。例如：
+
+```
+.lt{
+  letter-spacing:.5em;
+}
+```
+
+`word-spacing`如果一段文字中没有空格，则该属性无效。下面代码设定空格间隙是`20px`，也就是说空格现在占据的宽度是原有的空格宽度+`20px`的宽度：
+
+```
+<p>我有空 格，我该死......</p>
+<style>
+  p {
+    word-spacing: 20px;
+  }
+</style>
+
+```
 
 ### 二、text-tranfrom
 
@@ -31,21 +51,12 @@
   }
 ```
 
-### 三、word-break 和 word-wrap
+### 三、`word-break` 和 `word-wrap`
 
-### 四、`word-spacing` 与 `white-space`
+- `word-wrap`：内容将在边界内换行，如果需要，单词内部允许断行。
+- `word-wrap`： 对于 Non-CJK 文本允许在任意字符内发生换行。
 
-如果一段文字中没有空格，则该属性无效。下面代码设定空格间隙是`20px`，也就是说空格现在占据的宽度是原有的空格宽度+`20px`的宽度：
-
-```
-<p>我有空 格，我该死......</p>
-<style>
-  p {
-    word-spacing: 20px;
-  }
-</style>
-
-```
+### 四、 `white-space`
 
 `white-space`属性声明了如何处理元素内的空白字符，这类空白字符包括 Space（空格）键、Enter(回车)键、Tab（制表符）键产生的空白。
 
@@ -77,9 +88,9 @@ p::first-letter{
 
 ### 六、text-align 与元素对齐
 
-`text-align:justify`为两端对齐。除了实现文字的两端对齐，还能用来做一些两端对齐的布局。
+`text-align`：定义元素内容的水平对齐方式。
 
-### 六、font-size
+`text-align:justify`为两端对齐。除了实现文字的两端对齐，还能用来做一些两端对齐的布局。
 
 ### 参考资料
 
