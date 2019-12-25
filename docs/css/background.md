@@ -7,6 +7,9 @@
 ## 内容
 
 - 理解 background-size
+- 理解 background-position
+- 理解 background-origin
+- 理解 background-clip
 
 ### 一、理解 background-size
 
@@ -29,6 +32,28 @@
 #### 1.4 contain
 
 把图像扩展到最大尺寸，以使宽度和高度完全适应内容区域。
+
+### 二、理解 background-position
+
+`background-position`：指定背景图像在元素中出现的位置
+
+取值：
+
+- `<percentage>`： 用百分比指定背景图像在元素中出现的位置。可以为负值。参考容器尺寸减去背景图尺寸进行换算。
+- `<length>`： 用长度值指定背景图像在元素中出现的位置。可以为负值。
+- `center`： 背景图像横向或纵向居中。
+- `left`： 背景图像从元素左边开始出现。
+- `right`： 背景图像从元素右边开始出现。
+- `top`： 背景图像从元素顶部开始出现。
+- `bottom`： 背景图像从元素底部开始出现。
+
+### 三、理解 background-origin
+
+指定的背景图像计算`background-position`时的参考原点(位置)。
+
+### 四、理解 background-clip
+
+`background-clip`：指定对象的背景图像向外裁剪的区域。
 
 ### 参考资料
 
