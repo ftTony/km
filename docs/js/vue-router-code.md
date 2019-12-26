@@ -8,7 +8,8 @@
 
 ### 参考资料
 
-- [vue-router的超神之路](https://mp.weixin.qq.com/s/a5yAusm9dCryQ61xZOCjnA)
+- [vue-router 的超神之路](https://mp.weixin.qq.com/s/a5yAusm9dCryQ61xZOCjnA)
+- [深入了解 Vue | Vue-Router | Vuex 源码与架构](https://github.com/biaochenxuying/vue-family-mindmap)
 
 ## 联系作者
 

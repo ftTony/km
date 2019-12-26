@@ -31,13 +31,13 @@ src
 
 #### 1.1 compiler
 
-`compiler`目录包含`Vue.js`所有编译相关的代码。它包括把模板解析成ast语法树、ast语法树优化，代码生成等功能。
+`compiler`目录包含`Vue.js`所有编译相关的代码。它包括把模板解析成 ast 语法树、ast 语法树优化，代码生成等功能。
 
 编译的工作可以在构建时做（借助`webpack`、`vue-loader`等辅助插件）；也可以在运行时做，使用包含构建功能的`vue.js`。显然，编译是一项耗性能的工作，所以更推荐前者——离线编译。
 
 #### 1.2 core
 
-`core`目录包含了`Vue.js`的核心代码，包括内置组件、全局API封装，Vue实例化、观察者、虚拟DOM、工具函数等等。
+`core`目录包含了`Vue.js`的核心代码，包括内置组件、全局 API 封装，Vue 实例化、观察者、虚拟 DOM、工具函数等等。
 
 这里的代码可谓是 Vue.js 的灵魂，也是我们之后需要重点分析的地方
 
@@ -71,6 +71,8 @@ src
 - [Vue.js 源码解析](https://github.com/answershuto/learnVue)
 - [你想要的 vue 源码分析](https://github.com/dirkhe1051931999/hjBlog/tree/master/blog-vue-sourcecode-study)
 - [学习 Vue 源码的必要知识储备](https://juejin.im/post/5ce5565d6fb9a07ed2244513)
+- [逐行剖析 Vue.js 源码](https://nlrx-wjc.github.io/Learn-Vue-Source-Code/start/)
+- [渲染器](http://hcysun.me/vue-design/zh/)
 
 ## 联系作者
 

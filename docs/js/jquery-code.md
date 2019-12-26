@@ -6,7 +6,10 @@
 
 ## 内容
 
-## 参考资料
+### 参考资料
+
+- [jQuery 源码分析](https://github.com/JsAaron/jQuery)
+- [jQuery-3.3.1 源码解析](https://github.com/AttackXiaoJinJin/jQueryExplain)
 
 ## 联系作者
 
