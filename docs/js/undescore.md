@@ -6,7 +6,10 @@
 
 ## 内容
 
-## 参考资料
+### 参考资料
+
+- [underscore-1.8.3.js 源码解读 & 系列文章（完）](https://github.com/lessfish/underscore-analysis)
+- [underscore 源码分析](https://yoyoyohamapi.gitbooks.io/undersercore-analysis/content/)
 
 ## 联系作者
 
