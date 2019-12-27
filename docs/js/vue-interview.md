@@ -112,6 +112,7 @@ history 路由模式的实现主要基于存在下面几个特性：
 - [Vue 开发必须知道的 36 个技巧【近 1W 字】](https://juejin.im/post/5d9d386fe51d45784d3f8637)
 - [Vue 项目里戳中你痛点的问题及解决办法](https://juejin.im/post/5b174de8f265da6e410e0b4e)
 - [VueRouter 源码深度解析](https://juejin.im/post/5b5697675188251b11097464)
+- [12 道 vue 高频原理面试题,你能答出几道?](https://juejin.im/post/5e04411f6fb9a0166049a073)
 
 ## 联系作者
 
