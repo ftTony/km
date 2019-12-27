@@ -14,6 +14,7 @@
 - [webpack 源码精读](https://mp.weixin.qq.com/s/BuCRMzfmjSZKWk_zhEeVag)
 - [【webpack 进阶】使用 babel 避免 webpack 编译运行时模块依赖](https://github.com/alienzhou/blog/issues/18)
 - [webpack 原理](https://segmentfault.com/a/1190000015088834)
+- [急速 debug 实战三（Node - webpack 插件,babel 插件,vue 源码篇）](https://juejin.im/post/5c6b6defe51d45798b51e4b2)
 
 ## 联系作者
 

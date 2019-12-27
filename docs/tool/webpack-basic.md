@@ -606,6 +606,7 @@ webpack 打包配置相对比较复杂，目前介绍应该可以满常规需求
 - [webpack 工程师的自我修养](https://github.com/luoxue-victor/webpack-box)
 - [【第 619 期】如何 10 倍提高你的 Webpack 构建效率](https://mp.weixin.qq.com/s/zy8GfmfM8tg6uiKAhItGIg)
 - [Webpack 深入浅出之公司级分享总结(内附完整 ppt)](https://juejin.im/post/5df884ad6fb9a0164e7f979d)
+- [2020 年了,再不会 webpack 敲得代码就不香了(近万字实战)](https://juejin.im/post/5de87444518825124c50cd36)
 
 ## 联系作者
 
