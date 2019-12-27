@@ -1,4 +1,4 @@
-# Class继承
+# Class 继承
 
 ## 前言
 
@@ -225,6 +225,7 @@ class DistributedEdit extends mix(Loggable, Serializable) {
 
 - [ECMAScript 6 入门](http://es6.ruanyifeng.com/#docs/class-extends)
 - [《ECMAScript 6 入门》 第三版](https://yjhenan.gitbooks.io/-ecmascript-6/content/docs/class-extends.html)
+- [你需要知道的 JavaScript 类(class)的这些知识](https://mp.weixin.qq.com/s/iwsyIUtTmoEXvS8ytHS1vw)
 
 ## 联系作者
 
