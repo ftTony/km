@@ -32,7 +32,15 @@
 
 #### 2.1 Hash 模式
 
+早期的前端路由实现就是基于`location.hash`来实现的。其实原理也很简单，`location.hash`的值就是`URL`中#后面的内容，比如下面这个网站，它的`location.hash`的值为`#search`：
+
+```
+https://www.word.com#search
+```
+
 #### 2.2 History 模式
+
+前面的`hash`虽然也很不错，但使用时都需要加上#，并不是很美观。因此到了`HTML5`，又提供了``
 
 ### 三、Vue-router 学习
 
