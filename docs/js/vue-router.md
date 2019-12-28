@@ -38,9 +38,19 @@
 https://www.word.com#search
 ```
 
+此外，`hash`也
+
+**hash 原理图**
+
+![images](hash.png)
+
 #### 2.2 History 模式
 
 前面的`hash`虽然也很不错，但使用时都需要加上#，并不是很美观。因此到了`HTML5`，又提供了``
+
+**history 原理图**
+
+![images](history).png)
 
 ### 三、Vue-router 学习
 
