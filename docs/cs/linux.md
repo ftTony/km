@@ -1309,6 +1309,7 @@ ssh root@49.235.171.183
 - [每天一个 linux 命令目录](http://www.cnblogs.com/peida/archive/2012/12/05/2803591.html)
 - [Linux 命令大全](http://man.linuxde.net/)
 - [45 分钟带你入门 Linux（附：笔者在工作室开讨论班录制的视频讲解）](https://www.cnblogs.com/liumt/p/6117168.html)
+- [学习 linux 命令，看这篇 2w 多字的 linux 命令详解](https://www.cnblogs.com/zhonglongbo/p/12115548.html)
 
 ## 联系作者
 
