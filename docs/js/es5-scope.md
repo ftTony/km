@@ -229,6 +229,7 @@ data[2]();	// 2
 - [深入浅出图解作用域链和闭包](https://muyiy.cn/blog/2/2.1.html)
 - [深入理解 JavaScript 系列（14）：作用域链(Scope Chain)](https://www.cnblogs.com/TomXu/archive/2012/01/18/2312463.html)
 - [深入理解 JavaScript, 从作用域与作用域链开始](https://juejin.im/post/5d13a5fce51d455a694f9560)
+- [【动画演示】：JS 作用域链不在话下](https://mp.weixin.qq.com/s/hnxxKgPcPGecP3K-m6eZ7w)
 
 ## 联系作者
 

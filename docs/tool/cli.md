@@ -19,6 +19,7 @@
 - [一个零配置开箱即用的 React/Vue 应用自动化构建脚手架](https://github.com/JowayYoung/bruce-cli)
 - [从零开发一个 node 命令行工具](https://mp.weixin.qq.com/s/tShhZrmCi-K38ZBfuu_j2Q)
 - [教你从零开始搭建一款前端脚手架工具](https://segmentfault.com/a/1190000006190814)
+- [有趣又实用的命令行工具](https://github.com/ConardLi/awesome-cli)
 
 ## 联系作者
 
