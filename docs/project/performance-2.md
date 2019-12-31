@@ -19,6 +19,7 @@
 - [前端性能优化之旅](https://github.com/alienzhou/fe-performance-journey)
 - [前端性能优化之白屏时间](https://mp.weixin.qq.com/s/N_6faORvlDSxFQMh1o2naA)
 - [Web 性能领域常见的专业术语](https://mp.weixin.qq.com/s/GIpmZIY6yxGRBpkTDHuJuw)
+- [如何使页面交互更流畅](https://mp.weixin.qq.com/s/eoZyeJahkBpaYxzC2n5NLQ)
 
 ## 联系作者
 
