@@ -308,7 +308,7 @@ module.exports = {
       {
         title: 'WEB集成化',
         collapsable: false,
-        children: ['ci-cd', 'npm-2', 'npm-1', 'webhook']
+        children: ['ci-cd', 'npm-2', 'npm-1']
       },
       {
         title: 'webpack打包',
