@@ -8,6 +8,7 @@
 
 - [RPC 介绍](#一、-rpc-介绍)
 - [RPC 与 AJAX 及 HTTP 的区别](#二、-rpc-与-ajax-及-http-的区别)
+- RPC 基本原理
 
 ### 一、 RPC 介绍
 
@@ -31,10 +32,11 @@ RPC 中文名**远程过程调用**，拆开理解，**过程**也叫方法或�
 - RPC 通常所讲是一个框架，而 HTTP 是基于 TCP 的实现的超文本传输协议，HTTP 是无状态协议；最初用于浏览器与服务器的通信，后来广泛用于各个服务间的通信。
 - RPC 是远程过程调用，RPC 框架的通信过程可以使用各种通信协议（如 HTTP，TCP 以及各种自定义协议）实现。良好的 rpc 调用是面向服务的封装，针对服务的可用性和效率等都做了优化。单纯使用 http 调用则缺少了这些特性。
 
+### 三、RPC 基本原理
+
 ### 参考资料
 
 - [Nodejs 之 RPC 调研](https://shopee-sc.github.io/blog/2019/11/22/rpc)
-- [Nodejs 之 RPC 协议简介](https://mp.weixin.qq.com/s/AhKoUpYA4mCwhbxMRRqjBA)
 - [聊聊 Node.js RPC（一）— 协议](https://zhuanlan.zhihu.com/p/38012481)
 - [聊聊 Node.js RPC（二）— 服务发现](https://zhuanlan.zhihu.com/p/40606909)
 

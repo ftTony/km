@@ -26,9 +26,35 @@
 
 ### 3. 直接给一个数组项赋值，Vue 能检测到变化吗？
 
+由于 JavaScript 的限制，Vue 不能检测到以下数组的变动：
+
+- 当你利用索引直接设置一个数组项时，例如：`vm.items[indexOfItem]=newValue`
+- 当你修改数组的长度时，例如：`vm.items.length=newLength`
+
+为了解决第一个问题，Vue 提供了以下操作方法：
+
+```
+// Vue.set
+Vue.set(vm.items, indexOfItem, newValue)
+// vm.$set，Vue.set的一个别名
+vm.$set(vm.items, indexOfItem, newValue)
+// Array.prototype.splice
+vm.items.splice(indexOfItem, 1, newValue)
+
+```
+
+为了解决第二个问题，Vue 提供了以下操作方法：
+
+```
+// Array.prototype.splice
+vm.items.splice(newLength)
+```
+
 ### 4. 组件通讯
 
 ### 5. 谈谈你对 Vue 生命周期的理解？
+
+参考[Vue 生命周期](https://km.xiaowuzi.info/js/vue-lifecycle.html)
 
 ### 6. 在什么阶段才能访问操作 DOM？
 
