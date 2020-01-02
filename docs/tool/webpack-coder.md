@@ -6,6 +6,24 @@
 
 ## 内容
 
+### webpack配置文件vscode调试配置文件
+
+```
+"version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "启动程序",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+            "args": ["--progress", "--inline", "--config", "build/webpack.demo.js"]
+        }
+    ]
+```
+
 ### 参考资料
 
 - [[webpack]源码解读：命令行输入 webpack 的时候都发生了什么？](https://github.com/DDFE/DDFE-blog/issues/12)
