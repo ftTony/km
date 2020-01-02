@@ -20,6 +20,7 @@
 - [基于 NodeJS 的 serverless 架构实践](https://mp.weixin.qq.com/s/rR8VK7RodyCofOiSehF6fA)
 - [了解什么是微前端](https://juejin.im/post/5d1f19e3f265da1bab29ce5f)
 - [Serverless（无服务）基础知识](https://juejin.im/post/5d42945ff265da03a715b2f0)
+- [【第 1824 期】Serverless 函数应用架构升级](https://mp.weixin.qq.com/s/uWX6zdG7EFc43orrzAdWpA)
 
 ## 联系作者
 

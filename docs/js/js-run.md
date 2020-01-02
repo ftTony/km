@@ -136,6 +136,7 @@ foo();
 - [彻底吃透 JavaScript 的执行机制](https://mp.weixin.qq.com/s/cOMlH-z5noHrg6Upg6zyNw)
 - [浏览器和 Node 中的 JavaScript 是如何工作的? 可视化解释](https://juejin.im/post/5d693d8b6fb9a06aca383488)
 - [day039: 描述一下 V8 执行一段 JS 代码的过程？](https://mp.weixin.qq.com/s/vsl-6pk3s5VjdOAcGNkg2Q)
+- [【动画演示】JavaScript 引擎运行原理](https://mp.weixin.qq.com/s/WUdz5sJfaPy9qAr_Bdl2CA)
 
 ## 联系作者
 
