@@ -24,11 +24,11 @@ Vuex 实现了一个单向数据流，在全局拥有一个 State 存放数据�
 vuex 主要包括以下几个模块：
 
 - `Vue Components`：Vue 组件。HTML 页面上，负责接收用户操作等交互行为，执行 dispatch 方法触发对应 action 进行回应。
-- `State`：定义了应用状态的数据结构，可以在这里设置默认的初始状态。
-- `Getter`：允许组件从 Store 中获取数据，mapGetters 辅助函数仅仅是将 store 中的 getter 映射到局部计算属性。
-- `Mutation`：是唯一更改 store 中状态的方法，且必须是同步函数。
-- `Action`：用于提交 mutation，而不是直接变更状态，可以包含任意异步操作。
-- `Module`：允许将单一的 Store 拆分为多个 store 且同时保存在单一的状态树中。
+- `dispatch`：操作行为触发方法，是唯一能执行action的方法。
+- `State`：页面状态管理容器对象。集中存储Vue components中data对象的零散数据，全局唯一，以进行统一的状态管理。页面显示所需的数据从该对象中进行读取，利用Vue的细粒度数据响应机制来进行高效的状态更新。
+- `Getter`：state对象读取方法。图中没有单独列出该模块，应该被包含在了render中，Vue Components通过该方法读取全局state对象。
+- `Mutation`：**状态改变操作方法，由actions中的commit('mutation 名称')来触发。**是Vuex修改state的唯一推荐方法。该方法只能进行同步操作，且方法名只能全局唯一。操作之中会有一些hook暴露出来，以进行state的监控等。
+- `Action`：**操作行为处理模块,由组件中的`$store.dispatch('action 名称', data1)`来触发。然后由commit()来触发mutation的调用 , 间接更新 state。**负责处理Vue Components接收到的所有交互行为。包含同步/异步操作，支持多个同名方法，按照注册的顺序依次触发。向后台API请求的操作就在这个模块中进行，包括触发其他action以及提交mutation的操作。该模块提供了Promise的封装，以支持action的链式触发。
 
 ### 三、什么时候使用 Vuex
 
