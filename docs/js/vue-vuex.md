@@ -19,10 +19,11 @@ Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用�
 
 ![images](vuex.png)
 
-Vuex 实现了一个单向数据流，在全局拥有一个 State 存放数据，当组件要更改 State 中的数据时，必须通过 Mutation 进行，Mutation 同时提供了订阅者模式供外部插件调用
+Vuex 实现了一个单向数据流，在全局拥有一个 State 存放数据，当组件要更改 State 中的数据时，必须通过 Mutation 进行，Mutation 同时提供了订阅者模式供外部插件调用获取 State 数据的更新。而当所有异步操作(常见调用后端接口异步获取更新数据)或批量的同步操作需要走 Action，但 Action 也是无法直接修改 State 的，还是需要通过 Mutation 来修改 State 的数据。最后，根据 State 的变化，渲染到视图上。
 
 vuex 主要包括以下几个模块：
 
+- `Vue Components`：Vue 组件。HTML 页面上，负责接收用户操作等交互行为，执行 dispatch 方法触发对应 action 进行回应。
 - `State`：定义了应用状态的数据结构，可以在这里设置默认的初始状态。
 - `Getter`：允许组件从 Store 中获取数据，mapGetters 辅助函数仅仅是将 store 中的 getter 映射到局部计算属性。
 - `Mutation`：是唯一更改 store 中状态的方法，且必须是同步函数。
