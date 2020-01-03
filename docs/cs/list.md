@@ -239,6 +239,7 @@ function DoublyLinkedList(){
 
 ## 参考资料
 
+- [图解：我终于让女朋友学会了翻转链表！](https://mp.weixin.qq.com/s/kpaap25Y-2EOZsJnKyXbLQ)
 - 《学习JavaScript数据结构与算法》
 
 ## 联系作者

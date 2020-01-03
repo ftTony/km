@@ -230,6 +230,7 @@ data[2]();	// 2
 - [深入理解 JavaScript 系列（14）：作用域链(Scope Chain)](https://www.cnblogs.com/TomXu/archive/2012/01/18/2312463.html)
 - [深入理解 JavaScript, 从作用域与作用域链开始](https://juejin.im/post/5d13a5fce51d455a694f9560)
 - [【动画演示】：JS 作用域链不在话下](https://mp.weixin.qq.com/s/hnxxKgPcPGecP3K-m6eZ7w)
+- [10 | 作用域链和闭包 ：代码中出现相同的变量，JavaScript引擎是如何选择的？](https://time.geekbang.org/column/article/127495)
 
 ## 联系作者
 
