@@ -10,11 +10,11 @@
 
 ## 内容
 
-- Web App
-- Native App
-- Hybrid App
-- Hybrid App 与 Native App 及 Web App 之间的区别
-- 三者如何选择
+- [Web App](#一、web-app)
+- [Native App](#二、native-app)
+- [Hybrid App](#三、hybrid-app)
+- [Hybrid App 与 Native App 及 Web App 之间的区别](#四、hybrid-app-与-native-app-及-web-app-之间的区别)
+- [三者如何选择](#五、三者如何选择)
 
 ### 一、Web App
 
@@ -184,11 +184,11 @@ Android 和 iOS 的 JSBridge 实现方式：
 
 #### 4.1 三者使用场景对比
 
-![images](hybird02.png)
+![images](hybrid02.png)
 
 #### 4.2 三者技术特征对比
 
-![images](hybird03.png)
+![images](hybrid03.png)
 
 #### 4.3 ReactNative 一起放入作对比
 
@@ -226,6 +226,7 @@ React Native 这种模式学习成本较高，所以需要前期投入不少时�
 ### 参考资料
 
 - [什么是 Hybrid App，与 Native App 及 Web App 有什么区别](http://js.pingan8787.com/)
+- [Hybrid App 离线包方案实践](https://juejin.im/post/5e04128d51882512727f35f6)
 - 《现代 web 前端》
 
 ## 联系作者
