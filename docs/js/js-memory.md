@@ -244,6 +244,7 @@ David 大叔主要介绍了 2 个优化方案，而这也是最主要的 2 个�
 - [一文搞懂 V8 引擎的垃圾回收](https://mp.weixin.qq.com/s/1SGodqhTRM9mBy0Q9J0qow)
 - [day038:V8 引擎如何进行垃圾内存的回收？](https://mp.weixin.qq.com/s/47IoOxXYoxhh00XfTIntDQ)
 - [【第 1821 期】前端内存优化的探索与实践](https://mp.weixin.qq.com/s/iRHiu404yYXqCO_PGiJ7yA)
+- [13 | 垃圾回收：垃圾数据是如何自动回收的？](https://time.geekbang.org/column/article/131233)
 - 《高程第 3 版》
 - 《深入浅出 nodejs》
 
