@@ -258,7 +258,7 @@ module.exports = {
       {
         title: '浏览器',
         collapsable: false,
-        children: ['browser-working', 'cross-domain']
+        children: ['browser-working','browser-url', 'cross-domain']
       },
       {
         title: '新技术',

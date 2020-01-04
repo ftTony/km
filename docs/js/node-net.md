@@ -52,7 +52,7 @@ Node 提供了`net`、`dgram`、`http`、`https`这 4 个模块分别处理`TCP`
 浏览器发送异步请求
 ```
 
-参考资料：[从 URL 输入到页面展现到底发生什么？](https://github.com/ljianshu/Blog/issues/24)
+参考资料：[从 URL 输入到页面展现到底发生什么？](https://km.xiaowuzi.info/project/browser-url.html)
 
 ### 三、构建 TCP 服务
 
