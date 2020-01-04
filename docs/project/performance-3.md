@@ -321,6 +321,7 @@ google 的另外一套工具，speed tracer，追踪加载过程，以图形化�
 - [毫秒必争，前端网页性能最佳实践](http://www.cnblogs.com/developersupport/p/webpage-performance-best-practices.html)
 - [7 天打造前端性能监控系统](http://fex.baidu.com/blog/2014/05/build-performance-monitor-in-7-days/)
 - [Web 前端优化最佳实践及工具集锦](https://www.csdn.net/article/2013-09-23/2817020-web-performance-optimization)
+- [前端性能优化原理与实践](https://juejin.im/book/5b936540f265da0a9624b04b/)
 
 ## 联系作者
 
