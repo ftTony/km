@@ -24,11 +24,11 @@ Vuex 实现了一个单向数据流，在全局拥有一个 State 存放数据�
 vuex 主要包括以下几个模块：
 
 - `Vue Components`：Vue 组件。HTML 页面上，负责接收用户操作等交互行为，执行 dispatch 方法触发对应 action 进行回应。
-- `dispatch`：操作行为触发方法，是唯一能执行action的方法。
-- `State`：页面状态管理容器对象。集中存储Vue components中data对象的零散数据，全局唯一，以进行统一的状态管理。页面显示所需的数据从该对象中进行读取，利用Vue的细粒度数据响应机制来进行高效的状态更新。
-- `Getter`：state对象读取方法。图中没有单独列出该模块，应该被包含在了render中，Vue Components通过该方法读取全局state对象。
-- `Mutation`：**状态改变操作方法，由actions中的commit('mutation 名称')来触发。**是Vuex修改state的唯一推荐方法。该方法只能进行同步操作，且方法名只能全局唯一。操作之中会有一些hook暴露出来，以进行state的监控等。
-- `Action`：**操作行为处理模块,由组件中的`$store.dispatch('action 名称', data1)`来触发。然后由commit()来触发mutation的调用 , 间接更新 state。**负责处理Vue Components接收到的所有交互行为。包含同步/异步操作，支持多个同名方法，按照注册的顺序依次触发。向后台API请求的操作就在这个模块中进行，包括触发其他action以及提交mutation的操作。该模块提供了Promise的封装，以支持action的链式触发。
+- `dispatch`：操作行为触发方法，是唯一能执行 action 的方法。
+- `State`：页面状态管理容器对象。集中存储 Vue components 中 data 对象的零散数据，全局唯一，以进行统一的状态管理。页面显示所需的数据从该对象中进行读取，利用 Vue 的细粒度数据响应机制来进行高效的状态更新。
+- `Getter`：state 对象读取方法。图中没有单独列出该模块，应该被包含在了 render 中，Vue Components 通过该方法读取全局 state 对象。
+- `Mutation`：**状态改变操作方法，由 actions 中的 commit('mutation 名称')来触发。**是 Vuex 修改 state 的唯一推荐方法。该方法只能进行同步操作，且方法名只能全局唯一。操作之中会有一些 hook 暴露出来，以进行 state 的监控等。
+- `Action`：**操作行为处理模块,由组件中的`$store.dispatch('action 名称', data1)`来触发。然后由 commit()来触发 mutation 的调用 , 间接更新 state。**负责处理 Vue Components 接收到的所有交互行为。包含同步/异步操作，支持多个同名方法，按照注册的顺序依次触发。向后台 API 请求的操作就在这个模块中进行，包括触发其他 action 以及提交 mutation 的操作。该模块提供了 Promise 的封装，以支持 action 的链式触发。
 
 ### 三、什么时候使用 Vuex
 
@@ -44,20 +44,95 @@ vuex 主要包括以下几个模块：
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
-const store
+const store = new Vuex.Store({
+    state: {
+        count: 0
+    },
+    mutations: {// 包含了多个直接更新state函数的对象
+        INCREMENT(state) {
+            state.count = state.count + 1;
+        },
+        DECREMENT(state) {
+            state.count = state.count - 1;
+        }
+    },
+    getters: {   // 当读取属性值时自动调用并返回属性值
+        evenOrOdd(state) {
+            return state.count % 2 === 0 ? "偶数" : "奇数";
+        }
+    },
+    actions: { // 包含了多个对应事件回调函数的对象
+        incrementIfOdd({ commit, state }) { // 带条件的action
+            if (state.count % 2 === 1) {
+                commit('INCREMENT')
+            }
+        },
+        incrementAsync({ commit }) { //异步的action
+            setInterval(() => {
+                commit('INCREMENT')
+            }, 2000);
+        }
+
+    }
+})
+export default store //用export default 封装代码，让外部可以引用
 ```
 
-### 五、使用Vuex的注意点
+### 五、使用 Vuex 的注意点
 
-#### 5.1 如何在Mutations里传递参数
+#### 5.1 如何在 Mutations 里传递参数
 
-#### 5.2 如何理解getters
+先`store.js`文件里给 add 方法加上一个参数 n
 
-#### 5.3 actions和mutations区别
+```
+ mutations: {
+    INCREMENT(state,n) {
+      state.count+=n;
+    },
+    DECREMENT(state){
+        state.count--;
+    }
+  }
+```
 
-actions和上面的Muations功能基本一样，不同点是，**actions是异步的改变state状态，而Mutation是同步改变状态。**
+然后在 HelloWorld.vue 里修改按钮的 commit( )方法传递的参数
 
-同步的意义在于这样每一个mutation执行完成后都可以对应到一个新的状态，这样devtools就可以打个snapshot存下来，然后就可以随便time-travel了。如果你开着devtool调用一个异步的action，你可以清楚地看到它所调用的mutation是何时被记录下来的，并且可以立刻查看它们对应的状态
+```
+ increment() {
+      return this.$store.commit("INCREMENT",2);
+    },
+ decrement() {
+      return this.$store.commit("DECREMENT");
+    }
+```
+
+#### 5.2 如何理解 getters
+
+**getter 从表面是获得的意思，可以把他看作在获取数据之前进行的一种再编辑，相当于对数据的一个过虑和加工。**getters 就像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
+
+例如：要对 store.js 文件中的 count 进行操作，在它输出前，给它加上 100。
+
+首先要在 store.js 里 Vuex.Store()里引入 getters
+
+```
+getters:{
+     count:state=>state.count+=100
+  }
+```
+
+然后在 HelloWorld.vue 中对 computed 进行配置，在 vue 的构造器里边只能有一个 computed 属性，如果你写多个，只有最后一个 computed 属性可用，所以要用展开运算符”…”对上节写的 computed 属性进行一个改造。
+
+```
+computed: {
+   ...mapGetters(["count"])
+}
+```
+
+#### 5.3 actions 和 mutations 区别
+
+actions 和上面的 Muations 功能基本一样，不同点是，**actions 是异步的改变 state 状态，而 Mutation 是同步改变状态。**
+
+同步的意义在于这样每一个 mutation 执行完成后都可以对应到一个新的状态，这样 devtools 就可以打个 snapshot 存下来，然后就可以随便 time-travel 了。如果你开着 devtool 调用一个异步的 action，你可以清楚地看到它所调用的 mutation 是何时被记录下来的，并且可以立刻查看它们对应的状态
 
 ### 参考资料
 
