@@ -78,6 +78,64 @@ const store = new Vuex.Store({
 export default store //用export default 封装代码，让外部可以引用
 ```
 
+#### 4.2 在 main.js 文件中引入 store.js 文件
+
+```
+import store from './store'
+new Vue({
+  el: '#app',
+  router,
+  store,//注册上vuex的store: 所有组件对象都多一个属性$store
+  components: { App },
+  template: '<App/>'
+})
+```
+
+#### 4.3 新建一个模板 HelloWorld.vue
+
+```
+<template>
+  <div class="hello">
+    <p>click {{count}} times,count is {{evenOrOdd}}</p>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+    <button @click="incrementIfOdd">increment if odd</button>
+    <button @click="incrementAsync">increment async</button>
+  </div>
+</template>
+<script>
+export default {
+  name: "HelloWorld",
+  computed: {
+    count() {
+      return this.$store.state.count;
+    },
+    evenOrOdd() {
+      return this.$store.getters.evenOrOdd;
+    }
+  },
+  methods: {
+    increment() {
+      this.$store.commit("INCREMENT");
+    },
+    decrement() {
+      this.$store.commit("DECREMENT");
+    },
+    // 只有是奇数才加1
+    incrementIfOdd() {
+      this.$store.dispatch("incrementIfOdd"); //触发store中对应的action调用
+    },
+    // 过两秒才加1
+    incrementAsync() {
+      this.$store.dispatch("incrementAsync");
+    }
+  }
+};
+</script>
+```
+
+由于 store 中的状态是响应式的，当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。**在组件中调用 store 中的状态简单到仅需要在计算属性中返回即可。改变 store 中的状态的唯一途径就是显式地提交 (commit) mutations。**
+
 ### 五、使用 Vuex 的注意点
 
 #### 5.1 如何在 Mutations 里传递参数
