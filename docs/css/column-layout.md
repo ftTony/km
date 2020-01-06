@@ -481,6 +481,7 @@ body{
 - [几种常见的 CSS 布局](https://github.com/ljianshu/Blog/issues/40)
 - [面试必考点：前端布局知识](https://mp.weixin.qq.com/s/bPfdwdF1SR9Pt03zNhNebw)
 - [「前端进阶」深度解析瀑布流布局](https://juejin.im/post/5ddb7a7c51882573520fb185)
+- [蘑菇街 PC 首页瀑布流实践](https://juejin.im/post/5e05acf0f265da33d158a1b1)
 
 ## 联系作者
 

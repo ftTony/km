@@ -27,4 +27,3 @@
 25. [巧用 CSS 实现酷炫的充电动画](https://juejin.im/post/5e00240ee51d45583c1cc9a7)
 26. [给你梳理了 44 个 CSS 精选知识点](https://mp.weixin.qq.com/s/Pw3VgFpijTYRkJyYPvlJgA)
 27. [前端开发中 79 条不可忽视的知识点汇总](https://juejin.im/post/5d8989296fb9a06b1f147070)
-28. [蘑菇街 PC 首页瀑布流实践](https://juejin.im/post/5e05acf0f265da33d158a1b1)
