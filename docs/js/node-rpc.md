@@ -39,6 +39,9 @@ RPC 中文名**远程过程调用**，拆开理解，**过程**也叫方法或�
 
 1. 调用方（Client）通过本地的 RPC 代理（Proxy）调用相应的接口
 2. 本地代理将 RPC 的服务名，方法名和参数等等信息转换成一个标准的 RPC Request 对象，即组装成能够进行网络传输的消息体
+3. RPC框架采用RPC协议（RPC Protocol）将RPC Request对象序列化成二进制形式，然后通过TCP通道传递给服务提供方（Server）
+4. 服务端（Server）收到二进制数据后，将它反序列化成RPC Request对象（解码）
+5. 服务端（Server）根据RPC Request中的解码信息找到本地对应的方法，传入参数执行，得到结果，并将结果封装成RPC Response交给RPC框架
 
 ### 四、Nodejs 实现 RPC 通讯协议
 
