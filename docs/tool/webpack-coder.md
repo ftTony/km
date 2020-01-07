@@ -26,7 +26,7 @@
 
 ### 参考资料
 
-- [[webpack]源码解读：命令行输入 webpack 的时候都发生了什么？](https://github.com/DDFE/DDFE-blog/issues/12)
+- [webpack打包原理 ? 看完这篇你就懂了 !](https://juejin.im/post/5e116fce6fb9a047ea7472a6)
 - [Webpack 源码解析](https://github.com/lihongxun945/diving-into-webpack)
 - [webpack 处理流程分析](https://mp.weixin.qq.com/s/1BH90Nn6rfcOfywGpvWwhA)
 - [webpack 源码精读](https://mp.weixin.qq.com/s/BuCRMzfmjSZKWk_zhEeVag)
