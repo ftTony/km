@@ -138,6 +138,7 @@ foo();
 - [day039: 描述一下 V8 执行一段 JS 代码的过程？](https://mp.weixin.qq.com/s/vsl-6pk3s5VjdOAcGNkg2Q)
 - [【动画演示】JavaScript 引擎运行原理](https://mp.weixin.qq.com/s/WUdz5sJfaPy9qAr_Bdl2CA)
 - [14 | 编译器和解释器：V8是如何执行一段JavaScript代码的？](https://time.geekbang.org/column/article/131887)
+- [从敲下一行JS代码到这行代码被执行，中间发生了什么？](https://zhuanlan.zhihu.com/p/101137995)
 
 ## 联系作者
 

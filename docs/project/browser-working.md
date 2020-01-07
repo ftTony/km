@@ -233,6 +233,7 @@ defer 与相比普通 script，有两点区别：**载入 JavaScript 文件时�
 - [浏览器相关原理(面试题)详细总结一](https://juejin.im/post/5da18b1af265da5bb318ed07)
 - [浏览器相关原理(面试题)详细总结二](https://juejin.im/post/5da985fae51d4525292d3145)
 - [一文带你看透 Chrome 浏览器架构](https://mp.weixin.qq.com/s/Xqb3Vg_jR_s33wG4X7vsDA)
+- [Chromium 中文文档](https://github.com/ahangchen/Chromium_doc_zh)
 
 ## 联系作者
 
