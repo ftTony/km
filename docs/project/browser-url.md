@@ -48,7 +48,7 @@ URL（Uniform Resource Locator），统一资源定位符，用于定位互联�
 
 ### 三、TCP 三次握手
 
-[TCP 与 UDP](https://km.xiaowuzi.info/cs/tcp.html)
+参考[TCP 与 UDP](https://km.xiaowuzi.info/cs/tcp.html)
 
 ### 四、发送 HTTP 请求
 
@@ -61,6 +61,10 @@ URL（Uniform Resource Locator），统一资源定位符，用于定位互联�
 参考[http 详情](https://km.xiaowuzi.info/cs/http.html)
 
 ### 五、服务器处理请求并返回 HTTP 报文
+
+#### 5.1 服务器
+
+#### 5.2 MVC 后台处理阶段
 
 ### 六、浏览器解析渲染页面
 
@@ -103,6 +107,8 @@ URL（Uniform Resource Locator），统一资源定位符，用于定位互联�
 - 回流：某个元素的尺寸发生了变化，则需重计算渲染树，重新渲染。
 
 ### 七、断开连接
+
+参考[TCP 与 UDP](https://km.xiaowuzi.info/cs/tcp.html)
 
 ### 参考资料
 
