@@ -19,8 +19,41 @@
 
 #### 1.1 模拟真实 DOM
 
-```
+用 JavaScript 来表示一个 DOM 节点是很简单的事情，你只需要记录它的节点类型、属性，还有子节点：
 
+element.js
+
+```
+function Element(tagName,props,children){
+    if(!(this instanceof Element)){
+        if(!_.isArray(children) && children !=null){
+            children = _.slice(arguments,2).filter(_.truthy)
+        }
+        return new Element(tagName,props,children)
+    }
+
+    if(_.isArray(props)){
+        children = props
+        props = {}
+    }
+}
+
+Element.prototype.render = function(){
+    var el = document.createElement(this.tagName)
+    var props = this.props
+
+    for(var propName in props){
+        var propValue = props[propName]
+        _.setAttr(el,propName,propValue)
+    }
+
+    _.each(this.children,function(child){
+        var childEl = (child instanceof Element)?child.render():document.createTextNode(child)
+        el.appendChild(childEl)
+    })
+
+    return el
+}
 ```
 
 #### 1.2 diff 算法
