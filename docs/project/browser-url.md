@@ -44,7 +44,7 @@ URL（Uniform Resource Locator），统一资源定位符，用于定位互联�
 
 ### 二、域名解析（DNS）
 
-在浏览器输入网址后，首先要经过域名解析，
+在浏览器输入网址后，首先要经过域名解析，因为浏览器并不能直接通过域名找到对应的服务器，而是要通过 IP 地址。大家
 
 ### 三、TCP 三次握手
 
@@ -75,6 +75,7 @@ URL（Uniform Resource Locator），统一资源定位符，用于定位互联�
 - [从 URL 输入到页面展现到底发生什么？](https://github.com/ljianshu/Blog/issues/24)
 - [说一说从输入 URL 到页面呈现发生了什么？](https://juejin.im/post/5df5bcea6fb9a016091def69#heading-24)
 - [04 | 导航流程：从输入 URL 到页面展示，这中间发生了什么？](https://time.geekbang.org/column/article/117637)
+- 《网络是怎么连接的》
 
 ## 联系作者
 
