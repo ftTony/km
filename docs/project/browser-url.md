@@ -27,6 +27,21 @@
 
 ### 一、URL 到底是啥
 
+URL（Uniform Resource Locator），统一资源定位符，用于定位互联网上资源，俗称网址。
+
+比如 [http://www.w3school.com.cn/html/index.asp](http://www.w3school.com.cn/html/index.asp)，遵守以下的语法规则：
+
+**scheme://host.domain:port/path/filename**
+
+各部分解释如下：
+
+- `scheme` - 定义因特网服务的类型。常见的协议有 http、https、ftp、file，其中最常见的类型是 http，而 https 则是进行加密的网络传输。
+- `host` - 定义域主机（http 的默认主机是 www）
+- `domain` - 定义因特网域名，比如 w3school.com.cn
+- `port` - 定义主机上的端口号（http 的默认端口号是 80）
+- `path` - 定义服务器上的路径（如果省略，则文档必须位于网站的根目录中）。
+- `filename` - 定义文档/资源的名称
+
 ### 二、域名解析（DNS）
 
 ### 三、TCP 三次握手
