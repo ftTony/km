@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vue 双向数据绑定原理 | 小武子知识库</title>
+    <meta name="description" content="用心，谈技术。大前端">
+    <link rel="icon" href="/hero.jpg">
+    
+    <link rel="preload" href="/assets/css/0.styles.56546b06.css" as="style"><link rel="preload" href="/assets/js/app.6aacbf09.js" as="script"><link rel="preload" href="/assets/js/2.274a054e.js" as="script"><link rel="preload" href="/assets/js/168.df97f2ba.js" as="script"><link rel="preload" href="/assets/js/3.65dbdf4c.js" as="script"><link rel="prefetch" href="/assets/js/10.41ce036f.js"><link rel="prefetch" href="/assets/js/100.1bed68cf.js"><link rel="prefetch" href="/assets/js/101.56f66592.js"><link rel="prefetch" href="/assets/js/102.0a3c642d.js"><link rel="prefetch" href="/assets/js/103.359e13a5.js"><link rel="prefetch" href="/assets/js/104.8640bc68.js"><link rel="prefetch" href="/assets/js/105.4c5eeb58.js"><link rel="prefetch" href="/assets/js/106.0e9faaab.js"><link rel="prefetch" href="/assets/js/107.6e6348f8.js"><link rel="prefetch" href="/assets/js/108.6275d34c.js"><link rel="prefetch" href="/assets/js/109.009cea44.js"><link rel="prefetch" href="/assets/js/11.f679bcd2.js"><link rel="prefetch" href="/assets/js/110.738008ac.js"><link rel="prefetch" href="/assets/js/111.305fe1b0.js"><link rel="prefetch" href="/assets/js/112.f9ea57ac.js"><link rel="prefetch" href="/assets/js/113.d362b7f8.js"><link rel="prefetch" href="/assets/js/114.5866adc5.js"><link rel="prefetch" href="/assets/js/115.b8d85a71.js"><link rel="prefetch" href="/assets/js/116.ba70d3be.js"><link rel="prefetch" href="/assets/js/117.02c01ee6.js"><link rel="prefetch" href="/assets/js/118.2f4312e0.js"><link rel="prefetch" href="/assets/js/119.045969aa.js"><link rel="prefetch" href="/assets/js/12.7da01917.js"><link rel="prefetch" href="/assets/js/120.7d4597db.js"><link rel="prefetch" href="/assets/js/121.8f6b70f7.js"><link rel="prefetch" href="/assets/js/122.f6395169.js"><link rel="prefetch" href="/assets/js/123.6a44ac6f.js"><link rel="prefetch" href="/assets/js/124.0539e58f.js"><link rel="prefetch" href="/assets/js/125.e16f80de.js"><link rel="prefetch" href="/assets/js/126.7500273a.js"><link rel="prefetch" href="/assets/js/127.2c1927bb.js"><link rel="prefetch" href="/assets/js/128.2e0faa95.js"><link rel="prefetch" href="/assets/js/129.0e63c52a.js"><link rel="prefetch" href="/assets/js/13.d35f8ae6.js"><link rel="prefetch" href="/assets/js/130.579996fc.js"><link rel="prefetch" href="/assets/js/131.5f22f73b.js"><link rel="prefetch" href="/assets/js/132.3dc88dca.js"><link rel="prefetch" href="/assets/js/133.cfeefa89.js"><link rel="prefetch" href="/assets/js/134.8ab9058d.js"><link rel="prefetch" href="/assets/js/135.5569de0c.js"><link rel="prefetch" href="/assets/js/136.fc913cf0.js"><link rel="prefetch" href="/assets/js/137.b51d2a5a.js"><link rel="prefetch" href="/assets/js/138.2c709f44.js"><link rel="prefetch" href="/assets/js/139.226be34d.js"><link rel="prefetch" href="/assets/js/14.daf27202.js"><link rel="prefetch" href="/assets/js/140.c783098e.js"><link rel="prefetch" href="/assets/js/141.7faf135c.js"><link rel="prefetch" href="/assets/js/142.c8bd3f67.js"><link rel="prefetch" href="/assets/js/143.d0d86661.js"><link rel="prefetch" href="/assets/js/144.ecbc7909.js"><link rel="prefetch" href="/assets/js/145.255ceaf5.js"><link rel="prefetch" href="/assets/js/146.389f0010.js"><link rel="prefetch" href="/assets/js/147.7d936bac.js"><link rel="prefetch" href="/assets/js/148.5832be2e.js"><link rel="prefetch" href="/assets/js/149.d0459508.js"><link rel="prefetch" href="/assets/js/15.e9281232.js"><link rel="prefetch" href="/assets/js/150.d21bfb7a.js"><link rel="prefetch" href="/assets/js/151.0305f70a.js"><link rel="prefetch" href="/assets/js/152.d184f7b5.js"><link rel="prefetch" href="/assets/js/153.bb7af36c.js"><link rel="prefetch" href="/assets/js/154.ef9d854f.js"><link rel="prefetch" href="/assets/js/155.26522864.js"><link rel="prefetch" href="/assets/js/156.94b99759.js"><link rel="prefetch" href="/assets/js/157.b0317c0a.js"><link rel="prefetch" href="/assets/js/158.b79c624b.js"><link rel="prefetch" href="/assets/js/159.7dec96ba.js"><link rel="prefetch" href="/assets/js/16.3f725610.js"><link rel="prefetch" href="/assets/js/160.a357c7d6.js"><link rel="prefetch" href="/assets/js/161.460c0640.js"><link rel="prefetch" href="/assets/js/162.8b102e13.js"><link rel="prefetch" href="/assets/js/163.d4bbd0c6.js"><link rel="prefetch" href="/assets/js/164.ac7ef787.js"><link rel="prefetch" href="/assets/js/165.625b54c2.js"><link rel="prefetch" href="/assets/js/166.c7dd8694.js"><link rel="prefetch" href="/assets/js/167.a15efe30.js"><link rel="prefetch" href="/assets/js/169.1494a5a9.js"><link rel="prefetch" href="/assets/js/17.529dd1b9.js"><link rel="prefetch" href="/assets/js/170.b3bb610b.js"><link rel="prefetch" href="/assets/js/171.592d329d.js"><link rel="prefetch" href="/assets/js/172.7ffd6eec.js"><link rel="prefetch" href="/assets/js/173.c6e02c01.js"><link rel="prefetch" href="/assets/js/174.b26405a9.js"><link rel="prefetch" href="/assets/js/175.b70477ab.js"><link rel="prefetch" href="/assets/js/176.f25273f9.js"><link rel="prefetch" href="/assets/js/177.fc13d79d.js"><link rel="prefetch" href="/assets/js/178.7388c140.js"><link rel="prefetch" href="/assets/js/179.a502fedb.js"><link rel="prefetch" href="/assets/js/18.e23753ee.js"><link rel="prefetch" href="/assets/js/180.41c4d4be.js"><link rel="prefetch" href="/assets/js/181.b0a89203.js"><link rel="prefetch" href="/assets/js/182.ab0693bc.js"><link rel="prefetch" href="/assets/js/183.5eaf07aa.js"><link rel="prefetch" href="/assets/js/184.723d9830.js"><link rel="prefetch" href="/assets/js/185.a59b8d4a.js"><link rel="prefetch" href="/assets/js/186.580e16e9.js"><link rel="prefetch" href="/assets/js/187.ff46b8a2.js"><link rel="prefetch" href="/assets/js/188.babb86a0.js"><link rel="prefetch" href="/assets/js/189.3c7f8200.js"><link rel="prefetch" href="/assets/js/19.de7e4d94.js"><link rel="prefetch" href="/assets/js/190.36a08b6a.js"><link rel="prefetch" href="/assets/js/191.21be82c9.js"><link rel="prefetch" href="/assets/js/192.3f99cc85.js"><link rel="prefetch" href="/assets/js/193.9ed524ec.js"><link rel="prefetch" href="/assets/js/194.9cad0ae5.js"><link rel="prefetch" href="/assets/js/195.f225506a.js"><link rel="prefetch" href="/assets/js/196.e5cd869b.js"><link rel="prefetch" href="/assets/js/197.a26d6b94.js"><link rel="prefetch" href="/assets/js/198.9eb1699a.js"><link rel="prefetch" href="/assets/js/199.1d8e2461.js"><link rel="prefetch" href="/assets/js/20.76a96924.js"><link rel="prefetch" href="/assets/js/200.b59a408c.js"><link rel="prefetch" href="/assets/js/201.9cb65bec.js"><link rel="prefetch" href="/assets/js/202.fde97487.js"><link rel="prefetch" href="/assets/js/203.bdbf520d.js"><link rel="prefetch" href="/assets/js/204.fb5a699b.js"><link rel="prefetch" href="/assets/js/205.f9099038.js"><link rel="prefetch" href="/assets/js/206.b962a066.js"><link rel="prefetch" href="/assets/js/207.756ac5b0.js"><link rel="prefetch" href="/assets/js/208.73d2c66e.js"><link rel="prefetch" href="/assets/js/209.d4eecb53.js"><link rel="prefetch" href="/assets/js/21.8311c26f.js"><link rel="prefetch" href="/assets/js/210.7cd47f65.js"><link rel="prefetch" href="/assets/js/211.3045a9af.js"><link rel="prefetch" href="/assets/js/212.e044ccf3.js"><link rel="prefetch" href="/assets/js/213.0b2d5c47.js"><link rel="prefetch" href="/assets/js/214.fb135a55.js"><link rel="prefetch" href="/assets/js/215.d8063ec4.js"><link rel="prefetch" href="/assets/js/216.a0b5fbab.js"><link rel="prefetch" href="/assets/js/217.e98dd8de.js"><link rel="prefetch" href="/assets/js/218.b5c77d92.js"><link rel="prefetch" href="/assets/js/219.a7af6c1b.js"><link rel="prefetch" href="/assets/js/22.1eb76b31.js"><link rel="prefetch" href="/assets/js/220.cc8c74f6.js"><link rel="prefetch" href="/assets/js/221.104a8098.js"><link rel="prefetch" href="/assets/js/222.7ddb0015.js"><link rel="prefetch" href="/assets/js/223.0a67ede4.js"><link rel="prefetch" href="/assets/js/224.c3e1132a.js"><link rel="prefetch" href="/assets/js/225.3d8b2489.js"><link rel="prefetch" href="/assets/js/226.82cf9dd5.js"><link rel="prefetch" href="/assets/js/227.7b85bbc4.js"><link rel="prefetch" href="/assets/js/228.d213a274.js"><link rel="prefetch" href="/assets/js/229.b3e010df.js"><link rel="prefetch" href="/assets/js/23.95442279.js"><link rel="prefetch" href="/assets/js/230.45551985.js"><link rel="prefetch" href="/assets/js/231.8ff1eb77.js"><link rel="prefetch" href="/assets/js/232.a0a0c19d.js"><link rel="prefetch" href="/assets/js/233.25382fa0.js"><link rel="prefetch" href="/assets/js/234.42afc5d3.js"><link rel="prefetch" href="/assets/js/235.591dcfaa.js"><link rel="prefetch" href="/assets/js/236.fbed2bc3.js"><link rel="prefetch" href="/assets/js/237.0129c863.js"><link rel="prefetch" href="/assets/js/238.88c59f4e.js"><link rel="prefetch" href="/assets/js/239.1710aec8.js"><link rel="prefetch" href="/assets/js/24.b596ea23.js"><link rel="prefetch" href="/assets/js/240.f9d3c775.js"><link rel="prefetch" href="/assets/js/241.e629c94c.js"><link rel="prefetch" href="/assets/js/242.459d3b93.js"><link rel="prefetch" href="/assets/js/25.2147f8d5.js"><link rel="prefetch" href="/assets/js/26.aeb28ef9.js"><link rel="prefetch" href="/assets/js/27.512961f4.js"><link rel="prefetch" href="/assets/js/28.be458b10.js"><link rel="prefetch" href="/assets/js/29.18d3b728.js"><link rel="prefetch" href="/assets/js/30.8c35ef70.js"><link rel="prefetch" href="/assets/js/31.735a204f.js"><link rel="prefetch" href="/assets/js/32.7571cdd8.js"><link rel="prefetch" href="/assets/js/33.7ab5f1e7.js"><link rel="prefetch" href="/assets/js/34.50d4cb23.js"><link rel="prefetch" href="/assets/js/35.7198cb04.js"><link rel="prefetch" href="/assets/js/36.299947a7.js"><link rel="prefetch" href="/assets/js/37.b072b42e.js"><link rel="prefetch" href="/assets/js/38.ab12e043.js"><link rel="prefetch" href="/assets/js/39.fe7c3bca.js"><link rel="prefetch" href="/assets/js/4.62bccd38.js"><link rel="prefetch" href="/assets/js/40.bd08266e.js"><link rel="prefetch" href="/assets/js/41.0886459b.js"><link rel="prefetch" href="/assets/js/42.ca35e006.js"><link rel="prefetch" href="/assets/js/43.2deb1a21.js"><link rel="prefetch" href="/assets/js/44.8c065aa4.js"><link rel="prefetch" href="/assets/js/45.34783cff.js"><link rel="prefetch" href="/assets/js/46.17405e17.js"><link rel="prefetch" href="/assets/js/47.00609f51.js"><link rel="prefetch" href="/assets/js/48.aeddff98.js"><link rel="prefetch" href="/assets/js/49.0334e283.js"><link rel="prefetch" href="/assets/js/5.444b0f34.js"><link rel="prefetch" href="/assets/js/50.d0db8661.js"><link rel="prefetch" href="/assets/js/51.b8f40f0f.js"><link rel="prefetch" href="/assets/js/52.2311d874.js"><link rel="prefetch" href="/assets/js/53.9e96c3e5.js"><link rel="prefetch" href="/assets/js/54.704ad674.js"><link rel="prefetch" href="/assets/js/55.56c2bb0d.js"><link rel="prefetch" href="/assets/js/56.17f54544.js"><link rel="prefetch" href="/assets/js/57.7ed95df7.js"><link rel="prefetch" href="/assets/js/58.80321713.js"><link rel="prefetch" href="/assets/js/59.ae747b03.js"><link rel="prefetch" href="/assets/js/6.16f0284b.js"><link rel="prefetch" href="/assets/js/60.a5c3a7a3.js"><link rel="prefetch" href="/assets/js/61.5fa91370.js"><link rel="prefetch" href="/assets/js/62.303b74c1.js"><link rel="prefetch" href="/assets/js/63.cdf1218a.js"><link rel="prefetch" href="/assets/js/64.f401c1ea.js"><link rel="prefetch" href="/assets/js/65.13b81137.js"><link rel="prefetch" href="/assets/js/66.d5f35a04.js"><link rel="prefetch" href="/assets/js/67.7d3160d8.js"><link rel="prefetch" href="/assets/js/68.905c1a8c.js"><link rel="prefetch" href="/assets/js/69.16d97be2.js"><link rel="prefetch" href="/assets/js/7.8db5b640.js"><link rel="prefetch" href="/assets/js/70.0724471a.js"><link rel="prefetch" href="/assets/js/71.909cb792.js"><link rel="prefetch" href="/assets/js/72.df2f288f.js"><link rel="prefetch" href="/assets/js/73.139887b1.js"><link rel="prefetch" href="/assets/js/74.d9ec01e0.js"><link rel="prefetch" href="/assets/js/75.eb1f6099.js"><link rel="prefetch" href="/assets/js/76.cd61ad11.js"><link rel="prefetch" href="/assets/js/77.91cac937.js"><link rel="prefetch" href="/assets/js/78.2ac9e213.js"><link rel="prefetch" href="/assets/js/79.11984647.js"><link rel="prefetch" href="/assets/js/8.7b0a045e.js"><link rel="prefetch" href="/assets/js/80.b15c1452.js"><link rel="prefetch" href="/assets/js/81.fc4ca074.js"><link rel="prefetch" href="/assets/js/82.425564e7.js"><link rel="prefetch" href="/assets/js/83.bb67e725.js"><link rel="prefetch" href="/assets/js/84.2c05fccc.js"><link rel="prefetch" href="/assets/js/85.607d8803.js"><link rel="prefetch" href="/assets/js/86.7584a827.js"><link rel="prefetch" href="/assets/js/87.129a80a3.js"><link rel="prefetch" href="/assets/js/88.ac171a59.js"><link rel="prefetch" href="/assets/js/89.ae5e1075.js"><link rel="prefetch" href="/assets/js/9.867e8f67.js"><link rel="prefetch" href="/assets/js/90.e6d57f34.js"><link rel="prefetch" href="/assets/js/91.807e8411.js"><link rel="prefetch" href="/assets/js/92.d7f9da28.js"><link rel="prefetch" href="/assets/js/93.5194f4a6.js"><link rel="prefetch" href="/assets/js/94.0a96c50c.js"><link rel="prefetch" href="/assets/js/95.54a0c60b.js"><link rel="prefetch" href="/assets/js/96.54fc9d87.js"><link rel="prefetch" href="/assets/js/97.3302914b.js"><link rel="prefetch" href="/assets/js/98.238c6b6a.js"><link rel="prefetch" href="/assets/js/99.c563cfb5.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.56546b06.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">小武子知识库</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/js/" class="nav-link router-link-active">javascript</a></div><div class="nav-item"><a href="/css/" class="nav-link">css</a></div><div class="nav-item"><a href="/html5/" class="nav-link">HTML5</a></div><div class="nav-item"><a href="/tool/" class="nav-link">工具</a></div><div class="nav-item"><a href="/project/" class="nav-link">软件工程</a></div><div class="nav-item"><a href="/cs/" class="nav-link">计算机基础</a></div><div class="nav-item"><a href="/materials/" class="nav-link">资料收集</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于作者</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/js/" class="nav-link router-link-active">javascript</a></div><div class="nav-item"><a href="/css/" class="nav-link">css</a></div><div class="nav-item"><a href="/html5/" class="nav-link">HTML5</a></div><div class="nav-item"><a href="/tool/" class="nav-link">工具</a></div><div class="nav-item"><a href="/project/" class="nav-link">软件工程</a></div><div class="nav-item"><a href="/cs/" class="nav-link">计算机基础</a></div><div class="nav-item"><a href="/materials/" class="nav-link">资料收集</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于作者</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>javascript基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/es5-expression.html" class="sidebar-link">表达式与运算符</a></li><li><a href="/js/es5-type.html" class="sidebar-link">数据类型与数据类型转换</a></li><li><a href="/js/es5-prototype.html" class="sidebar-link">原型与原型链</a></li><li><a href="/js/es5-this.html" class="sidebar-link">this 解析</a></li><li><a href="/js/es5-closure.html" class="sidebar-link">闭包</a></li><li><a href="/js/es5-apply-call-bind.html" class="sidebar-link">apply&amp;bind&amp;call</a></li><li><a href="/js/es5-dom.html" class="sidebar-link">DOM与BOM</a></li><li><a href="/js/es5-event.html" class="sidebar-link">事件</a></li><li><a href="/js/es5-execution-context.html" class="sidebar-link">执行上下文与执行上下文栈</a></li><li><a href="/js/es5-extends.html" class="sidebar-link">继承</a></li><li><a href="/js/es5-fn.html" class="sidebar-link">函数</a></li><li><a href="/js/es5-news.html" class="sidebar-link">new 理解</a></li><li><a href="/js/es5-array.html" class="sidebar-link">数组</a></li><li><a href="/js/es5-object.html" class="sidebar-link">对象</a></li><li><a href="/js/es5-reg.html" class="sidebar-link">正则表达式学习</a></li><li><a href="/js/es5-scope.html" class="sidebar-link">作用域</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>javascript进阶</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/js-curry.html" class="sidebar-link">函数柯理化</a></li><li><a href="/js/js-debounce.html" class="sidebar-link">节流与防抖动</a></li><li><a href="/js/js-precision.html" class="sidebar-link">js 精度丢失问题</a></li><li><a href="/js/js-memory.html" class="sidebar-link">js 内存管理</a></li><li><a href="/js/js-async.html" class="sidebar-link">事件循环和异步编程的崛起</a></li><li><a href="/js/js-bit.html" class="sidebar-link">js 位运算</a></li><li><a href="/js/js-eventloop.html" class="sidebar-link">理解 EventLoop</a></li><li><a href="/js/js-module.html" class="sidebar-link">js 模块化</a></li><li><a href="/js/js-run.html" class="sidebar-link">javascript 执行过程</a></li><li><a href="/js/js-ast.html" class="sidebar-link">解析、抽象语法树（AST）+ 提升编译速度 5 个技巧</a></li><li><a href="/js/js-v8.html" class="sidebar-link">V8 简介</a></li><li><a href="/js/js-principle.html" class="sidebar-link">JS 编译器，解释引擎</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>es6</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/es6-array.html" class="sidebar-link">数组扩展</a></li><li><a href="/js/es6-fn.html" class="sidebar-link">函数扩展</a></li><li><a href="/js/es6-class-1.html" class="sidebar-link">Class 基本用法</a></li><li><a href="/js/es6-class-2.html" class="sidebar-link">Class 继承</a></li><li><a href="/js/es6-async.html" class="sidebar-link">async 函数</a></li><li><a href="/js/es6-generator-1.html" class="sidebar-link">Generator 函数的语法</a></li><li><a href="/js/es6-generator-2.html" class="sidebar-link">Generator 函数的异步应用</a></li><li><a href="/js/es6-iterator.html" class="sidebar-link">Iterator 和 for...of 循环</a></li><li><a href="/js/es6-let-const.html" class="sidebar-link">let 与 const</a></li><li><a href="/js/es6-module.html" class="sidebar-link">Module 对象</a></li><li><a href="/js/es6-number.html" class="sidebar-link">数值扩展</a></li><li><a href="/js/es6-object.html" class="sidebar-link">对象扩展</a></li><li><a href="/js/es6-promise.html" class="sidebar-link">Promise 对象</a></li><li><a href="/js/es6-proxy-reflect.html" class="sidebar-link">Proxy 和 Reflect</a></li><li><a href="/js/es6-set-map.html" class="sidebar-link">Set和Map数据结构</a></li><li><a href="/js/es6-string.html" class="sidebar-link">字符串扩展</a></li><li><a href="/js/es6-symbol.html" class="sidebar-link">Symbol</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>TypeScript</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/ts-introduct.html" class="sidebar-link">ts 学习</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>nodejs</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/node-introdect.html" class="sidebar-link">node 介绍</a></li><li><a href="/js/node-buffer.html" class="sidebar-link">buffer 模块</a></li><li><a href="/js/node-cheerio.html" class="sidebar-link">cheerio 模块</a></li><li><a href="/js/node-cluster.html" class="sidebar-link">cluster 集群</a></li><li><a href="/js/node-egg.html" class="sidebar-link">egg 基础应用</a></li><li><a href="/js/node-events.html" class="sidebar-link">events 模块</a></li><li><a href="/js/node-express.html" class="sidebar-link">express 基础应用</a></li><li><a href="/js/node-fs.html" class="sidebar-link">fs 模块</a></li><li><a href="/js/node-http.html" class="sidebar-link">http 模块</a></li><li><a href="/js/node-rpc.html" class="sidebar-link">RPC 调用</a></li><li><a href="/js/node-koa.html" class="sidebar-link">koa 基础应用</a></li><li><a href="/js/node-koa-code.html" class="sidebar-link">koa 源码分析</a></li><li><a href="/js/node-net.html" class="sidebar-link">net 模块</a></li><li><a href="/js/node-process.html" class="sidebar-link">process 进程</a></li><li><a href="/js/node-querystring.html" class="sidebar-link">querystring 模块</a></li><li><a href="/js/node-stream.html" class="sidebar-link">stream 模块</a></li><li><a href="/js/node-url.html" class="sidebar-link">url 模块</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>vue框架</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/mvvm.html" class="sidebar-link">mvvm 框架介绍</a></li><li><a href="/js/jquery-code.html" class="sidebar-link">jquery 源码分析</a></li><li><a href="/js/undescore.html" class="sidebar-link">undescore 源码分析</a></li><li><a href="/js/vue-lifecycle.html" class="sidebar-link">Vue 生命周期</a></li><li><a href="/js/vue-bind.html" class="active sidebar-link">vue 双向数据绑定原理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/js/vue-bind.html#前言" class="sidebar-link">前言</a></li><li class="sidebar-sub-header"><a href="/js/vue-bind.html#内容" class="sidebar-link">内容</a></li><li class="sidebar-sub-header"><a href="/js/vue-bind.html#联系作者" class="sidebar-link">联系作者</a></li></ul></li><li><a href="/js/vue-nexttick.html" class="sidebar-link">Vue.netTick 理解与分析</a></li><li><a href="/js/vue-watch.html" class="sidebar-link">Vue 中的 computed,watch,methods 理解与分析</a></li><li><a href="/js/vue-router.html" class="sidebar-link">vue-router 学习及原理</a></li><li><a href="/js/vue-vuex.html" class="sidebar-link">vuex 学习及原理</a></li><li><a href="/js/vue-dom.html" class="sidebar-link">Vue 虚拟 DOM</a></li><li><a href="/js/vue-diff.html" class="sidebar-link">diff 算法</a></li><li><a href="/js/vue-router-code.html" class="sidebar-link">vue-router 源码分析</a></li><li><a href="/js/vue-communication.html" class="sidebar-link">vue 组件通信</a></li><li><a href="/js/vue-vuex-code.html" class="sidebar-link">vue-vuex 源码分析</a></li><li><a href="/js/vue-code.html" class="sidebar-link">vue 源码分析</a></li><li><a href="/js/vue-interview.html" class="sidebar-link">vue 相关面试题</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vue-双向数据绑定原理"><a href="#vue-双向数据绑定原理" aria-hidden="true" class="header-anchor">#</a> vue 双向数据绑定原理</h1> <h2 id="前言"><a href="#前言" aria-hidden="true" class="header-anchor">#</a> 前言</h2> <p>本人平时学习及收集内容，欢迎参入一起讨论。</p> <h2 id="内容"><a href="#内容" aria-hidden="true" class="header-anchor">#</a> 内容</h2> <ul><li><a href="#%E4%B8%80%E3%80%81%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%81%9A%E6%B3%95">几种实现双向数据绑定做法</a></li> <li><a href="#%E4%BA%8C%E3%80%81%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86object-defineproperty">重新认识 Object.defineProperty</a></li> <li><a href="#%E4%B8%89%E3%80%81%E6%80%9D%E8%B7%AF%E6%95%B4%E7%90%86">思路整理</a></li></ul> <h3 id="一、几种实现双向数据绑定做法"><a href="#一、几种实现双向数据绑定做法" aria-hidden="true" class="header-anchor">#</a> 一、几种实现双向数据绑定做法</h3> <p>目前几种主流的 mvc(vm)框架都实现了单向数据绑定，而我所理解的双向数据绑定无非就是在单向绑定的基础上给可输入元素（input、textare 等）添加了 change(input)事件，来动态修改 model 和 view，并没有多高深。所以无需太过介怀是实现的单向或双向绑定。</p> <p>实现数据绑定的做法有大致如下几种：</p> <ul><li>发布者-订阅者模式（<code>backbone.js</code>）</li> <li>脏值检查（<code>angular.js</code>）</li> <li>数据劫持（<code>vue.js</code>）</li></ul> <p><strong>发布者-订阅者模式:</strong> 一般通过 sub, pub 的方式实现数据和视图的绑定监听，更新数据方式通常做法是 vm.set('property', value)，这里有篇文章讲的比较详细，有兴趣可点<a href="http://www.html-js.com/article/Study-of-twoway-data-binding-JavaScript-talk-about-JavaScript-every-day" target="_blank" rel="noopener noreferrer">这里<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>这种方式现在毕竟太 low 了，我们更希望通过 vm.property = value 这种方式更新数据，同时自动更新视图，于是有了下面两种方式</p> <p><strong>脏值检查:</strong> <code>angular.js</code>是通过脏值检测的方式比对数据是否有变更，来决定是否更新视图，最简单的方式就是通过 setInterval() 定时轮询检测数据变动，当然 Google 不会这么 low，angular 只有在指定的事件触发时进入脏值检测，大致如下：</p> <ul><li>DOM 事件，譬如用户输入文本，点击按钮等。(<code>ng-click</code>)</li> <li>XHR 响应事件 (<code>$http</code>)</li> <li>浏览器 Location 变更事件 (<code>$location</code>)</li> <li>Timer 事件(<code>$timeout</code>, <code>$interval</code>)</li> <li>执行 <code>$digest()</code> 或 <code>$apply()</code></li></ul> <p><strong>数据劫持:</strong> <code>vue.js</code>则是采用数据劫持结合发布者-订阅者模式的方式，通过 Object.defineProperty()来劫持各个属性的<code>setter</code>，<code>getter</code>，在数据变动时发布消息给订阅者，触发相应的监听回调。</p> <h3 id="二、重新认识-object-defineproperty"><a href="#二、重新认识-object-defineproperty" aria-hidden="true" class="header-anchor">#</a> 二、重新认识 Object.defineProperty()</h3> <p><code>Object.defineProperty()</code>方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。</p> <h4 id="_2-1-参数"><a href="#_2-1-参数" aria-hidden="true" class="header-anchor">#</a> 2.1 参数</h4> <ul><li><code>obj</code> 要在其上定义属性。</li> <li><code>prop</code>要定义或修改的属性的名称</li> <li><code>descriptor</code> 将被定义或个性的属性描述符。</li></ul> <p>属性描述符具有以下可选键值：</p> <ul><li><code>configurable</code>当且仅当该属性的 configurable 为 true 时，该属性描述符才能被改变，同时该属性也能从对应的对象上被删除。默认为 false.</li> <li><code>enumerable</code> 当且仅当该属性的<code>enumerable</code>为<code>true</code>时，该属性才能够出现在对象的枚举属性中。<strong>默认为 false</strong>。</li></ul> <p><strong>数据描述符同时具有以下可选键值：</strong></p> <ul><li><code>value</code>该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。默认为 undefined。</li> <li><code>writable</code>当且仅当该属性的 writable 为 true 时，value 才能被赋值运算符改变。默认为 false。</li></ul> <p><strong>存取描述符同时具有以下可选键值：</strong></p> <ul><li><code>get</code>一个给属性提供 <code>getter</code>的方法，如果没有<code>getter</code>则为<code>undefined</code>。该方法返回值被用作属性值。默认为 <code>undefined</code>。</li> <li><code>set</code>一个给属性提供<code>setter</code>的方法，如果没有<code>setter</code>则为<code>undefined</code>。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认为<code>undefined</code>。</li></ul> <p><strong>描述符可同时具有键值</strong></p> <table><thead><tr><th>configurable</th> <th>enumerable</th> <th>value</th> <th>writable</th> <th>get</th> <th>set</th></tr></thead> <tbody><tr><td>数据描述符</td> <td>Yes</td> <td>Yes</td> <td>Yes</td> <td>Yes</td> <td>No</td></tr> <tr><td>存取描述符</td> <td>Yes</td> <td>Yes</td> <td>No</td> <td>No</td> <td>Yes</td></tr></tbody></table> <p><strong>如果一个描述符不具有 value，writable，get 和 set 任意一个关键字，那么它将被认为是一个数据描述符。如果一个描述符同时有(value 或 writable)和(get 或 set)关键字，将会产生一个异常。</strong></p> <p>示例：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>var o = {}; // 创建一个新对象
+
+// 在对象中添加一个属性与数据描述符的示例
+Object.defineProperty(o, &quot;a&quot;, {
+  value : 37,
+  writable : true,
+  enumerable : true,
+  configurable : true
+});
+
+//对象o拥有了属性a，值为37
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>关于<code>Object.defineProperty()</code><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener noreferrer">详细使用请点击这里阅读更多用法<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。</p> <h3 id="三、思路整理"><a href="#三、思路整理" aria-hidden="true" class="header-anchor">#</a> 三、思路整理</h3> <p>要实现 mvvm 的双向绑定，就必须要实现以下几点：</p> <ul><li>实现一个数据监听器<code>Observer</code>，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者</li> <li>实现一个指令解析器<code>Compile</code>，对每个元素节点的指令进行扫描和解析，根据指令模板替换以及绑定相应的更新函数。</li> <li>实现一个<code>Watcher</code>，作为连接<code>Observer</code>和<code>Compile</code>的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图。</li> <li><code>mvvm</code>入口函数，整合以上三者</li></ul> <p>上述流程如图所示：</p> <p><img src="vue01.png" alt="img"></p> <h4 id="_3-1-实现-observer"><a href="#_3-1-实现-observer" aria-hidden="true" class="header-anchor">#</a> 3.1 实现 Observer</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>var data={name:'tony'};
+observe(data);
+data.name='xiaowuzi';
+
+function observe(data){
+	if(!data || typeof data!=='object') return;
+	//取出所有属性遍历
+	Object.keys(data).forEach(function(key){
+		defineReactive(data,key,data[key]);
+	});
+}
+
+function defineReactive(data,key,val){
+	observe(val);	//监听子属性
+	Object.defineProperty(data,key,{
+		enumerable:true,		//可枚举
+		configurable:false,	//不能再define
+		get:function(){
+			return val;
+		},
+		set:function(newVal){
+			console.log('监听到值的变化了',val,'--&gt;',newVal);
+			val=newVal;
+		}
+	});
+
+}
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div><p>这样我们已经可以监听每个数据的变化了，那么监听到变化之后就是怎么通知订阅者了，所以接下来我们需要实现一个消息订阅器，很简单，维护一个数组，用来收集订阅者，数据变动触发<code>notify</code>，再调用订阅者的<code>update</code>方法，代码改善之后是这样：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>var data={name:'tony'};
+observe(data);
+data.name='xiaowuzi';
+
+function observe(data){
+	if(!data || typeof data!=='object') return;
+	//取出所有属性遍历
+	Object.keys(data).forEach(function(key){
+		defineReactive(data,key,data[key]);
+	});
+}
+
+function defineReactive(data,key,val){
+	observe(val);	//监听子属性
+	Object.defineProperty(data,key,{
+		enumerable:true,		//可枚举
+		configurable:false,	//不能再define
+		get:function(){
+			return val;
+		},
+		set:function(newVal){
+            if(val === newVal) return;
+			console.log('监听到值的变化了',val,'--&gt;',newVal);
+			val = newVal;
+            dep.notify();   // 通知所有订阅者
+		}
+	});
+
+}
+
+function Dep(){
+	this.subs=[];
+}
+
+Dep.prototype={
+	addSub:function(sub){
+		this.subs.push(sub);
+	},
+	notify:function(){
+		this.subs.forEach(function(sub){
+			sub.update();
+		});
+	}
+};
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br></div></div><p>上面的思路整理中我们已经明确订阅者应该是<code>Watcher</code>, 而且<code>var dep = new Dep();</code>是在<code>defineReactive</code>方法内部定义的，所以想通过<code>dep</code>添加订阅者，就必须要在闭包内操作，所以我们可以在<code>getter</code>里面动手脚：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>var data={name:'tony'};
+observe(data);
+data.name='xiaowuzi';
+
+function observe(data){
+	if(!data || typeof data!=='object') return;
+	//取出所有属性遍历
+	Object.keys(data).forEach(function(key){
+		defineReactive(data,key,data[key]);
+	});
+}
+
+function defineReactive(data,key,val){
+	observe(val);	//监听子属性
+	Object.defineProperty(data,key,{
+		enumerable:true,		//可枚举
+		configurable:false,	//不能再define
+		get:function(){
+			//由于需要在装饰内添加watcher，所以通过Dep定义一个全局target属性，暂存watcher，添加完移除
+			Dep.target &amp;&amp; dep.addDep(Dep.target);
+			return val;
+		},
+		set:function(newVal){
+			console.log('监听到值的变化了',val,'--&gt;',newVal);
+			val = newVal;
+		}
+	});
+
+}
+
+function Dep(){
+	this.subs=[];
+}
+
+Dep.prototype={
+	addSub:function(sub){
+		this.subs.push(sub);
+	},
+	notify:function(){
+		this.subs.forEach(function(sub){
+			sub.update();
+		});
+	}
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br></div></div><p>这里已经实现了一个<code>Observer</code>了，已经具备了监听数据和数据变化通知订阅者的功能。</p> <h4 id="_3-2-实现-compile"><a href="#_3-2-实现-compile" aria-hidden="true" class="header-anchor">#</a> 3.2 实现 Compile</h4> <p><code>compile</code>主要做的事情是解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图，如图所示：</p> <p><img src="vue02.png" alt="image"></p> <p>因为遍历解析的过程有多次操作<code>dom</code>节点，为提高性能和效率，会先将跟节点<code>el</code>转换成文档碎片<code>fragment</code>进行解析编译操作，解析完成，再将<code>fragment</code>添加回原来的真实<code>dom</code>节点中</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function Compile(el){
+	this.$el=this.isElementNode(el)? el : document.querySelector(el);
+	if(this.$el){
+		this.$fragment=this.node2Fragment(this.$el);
+		this.init();
+		this.$el.appendChild(this.$fragment);
+	}
+}
+Compile.prototype = {
+	init:function(){this.compileElement(this.$fragment);},
+	node2Fragment:function(el){
+		var fragment=document.createDocumentFragment(),child;
+		//将原生节点拷贝到fragment
+		while(child==el.firstChild){
+			fragment.appendChild(child);
+		}
+		return;
+	}
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p><code>compileElement</code>方法将遍历所有节点及其子节点，进行扫描解析编译，调用对应的指令渲染函数进行数据渲染，并调用对应的指令更新函数进行绑定，详看代码及注释说明：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function Compile(el){
+	this.$el=this.isElementNode(el)?el:document.querySelector(el);
+	if(this.$el){
+		this.$fragment=this.node2Fragment(this.$el);
+		this.init();
+		this.$el.appendChild(this.$fragment);
+	}
+}
+Compile.prototype={
+	init:function(){this.compileElement(this.$fragment);},
+	node2Fragment:function(el){
+		var fragment=document.createDocumentFragment(),child;
+		//将原生节点拷贝到fragment
+		while(child==el.firstChild){
+			fragment.appendChild(child);
+		}
+		return;
+	}
+	compileElement:function(el){
+		var childNodes=el.childNodes,me=this;
+	[].slice.call(childNodes).forEach(function(node){
+			var text=node.textContent;
+			var reg=/\{(.*)\}\}/;	//表达式文本
+			//按元素节点方式编译
+			if(me.isElementNode(node)){
+				me.compile(node);
+			}else if(me.isTextNode(node) &amp;&amp; reg.test(text)){
+				me.compileText(node,RegExp.$1);
+			}
+			//遍历编译子节点
+			if(node.childNodes &amp;&amp; node.childNodes.length){
+				me.compileElement(node);
+			}
+		});
+	},
+	compile:function(node){
+		var nodeAttrs=node.attributes,me=this;
+		[].slice.call(nodeAttrs).forEach(function(attr){
+		//规定：指令v-xx命名
+		//如&lt;span v-text=&quot;content&quot;&gt;&lt;/span&gt;中指令为v-text
+			var attrName=attr.name;	//v-text
+			if(me.isDirective(attrName)){
+				var exp=attr.value;
+				var dir=attrName.substring(2);
+				if(me.isEventDirective(dir)){
+					//事件指令，如v-on:click
+					compileUtil.eventHandler(node,me.$vm,exp,dir);
+				}else{
+					//普通指令
+					compileUtil[dir] &amp;&amp; compileUtil[dir](node,me.$vm,exp);
+				}
+			}
+		});
+	}
+}
+
+//指令处理集合
+var compileUtil={
+	text:function(node,vm,exp){
+		this.bind(node,vm,exp,'text');
+	},
+	bind:function(node,vm,exp,dir){
+		var updateFn=updater[dir+'Updater'];
+		//第一次初始化视图
+		updateFn &amp;&amp; updateFn(node,vm[exp]);
+		//实例化订阅者，此操作会在对应的属性消息订阅器中添加了该订阅者watcher
+		new Watcher(vm,exp,function(value,oldVale){
+			//一旦属性值有变化，会收到通知执行此更新函数，更新视图
+			updateFn &amp;&amp; updateFn(node,value,oldValue);
+		});
+	},
+
+}
+
+//更新函数
+var updater={
+	textUpdater:function(node,value){
+		node.textContent=typeof value=='undefined'?'':value;
+	}
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br></div></div><p>这里通过递归遍历保证了每个节点及子节点都会解析编译到，包括了双括号表达式声明的文本节点。指令的声明规定是通过特定前缀的节点属性来标记，如<code>&lt;span v-text=&quot;content&quot; other-attr</code>中<code>v-text</code>便是指令，而<code>other-attr</code>不是指令，只是普通的属性。</p> <p>监听数据、绑定更新函数的处理是在<code>compileUtil.bind()</code>这个方法中，通过<code>new Watcher()</code>添加回调来接收数据变化的通知</p> <h4 id="_3-3-实现-watcher"><a href="#_3-3-实现-watcher" aria-hidden="true" class="header-anchor">#</a> 3.3 实现 Watcher</h4> <p>Watcher 订阅者作为 Observer 和 Compile 之间通信的桥梁，主要做的事情是:</p> <ol><li>在自身实例化时往属性订阅器(dep)里面添加自己</li> <li>自身必须有一个 update()方法</li> <li>待属性变动 dep.notice()通知时，能调用自身的 update()方法，并触发 Compile 中绑定的回调，则功成身退。</li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>function Watcher(vm,exp,cb){
+	this.cb=cb;
+	this.vm=vm;
+	this.exp=exp;
+	//此处为了触发属性的getter，从而在dep添加自己，结合Observer更易理解
+	this.value=this.get();
+}
+
+Watcher.prototype={
+	update:function(){
+		this.run();	//属性值变化收到通知
+	},
+	run:function(){
+		var value=this.get(); // 取到最新值
+		var oldVal=this.value;
+		if(value!==oldVal){
+			this.value=value;
+			this.cb.call(this.vm,value,oldVal); // 执行Compile中绑定的回调，更新视图
+		}
+	},
+	get:function(){
+		Dep.target=this;// 将当前订阅者指向自己
+		var value=this.vm[exp];// 触发getter，添加自己到属性订阅器中
+		Dep.target=null; // 添加完毕，重置
+		return value;
+	}
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br></div></div><p>实例化<code>Watcher</code>的时候，调用<code>get()</code>方法，通过<code>Dep.target = watcherInstance</code>标记订阅者是当前<code>watcher</code>实例，强行触发属性定义的<code>getter</code>方法，<code>getter</code>方法执行的时候，就会在属性的订阅器<code>dep</code>添加当前<code>watcher</code>实例，从而在属性值有变化的时候，<code>watcherInstance</code>就能收到更新通知。</p> <h4 id="_3-4-实现-mvvm"><a href="#_3-4-实现-mvvm" aria-hidden="true" class="header-anchor">#</a> 3.4 实现 MVVM</h4> <p>MVVM 作为数据绑定的入口，整合 Observer、Compile 和 Watcher 三者，通过 Observer 来监听自己的 model 数据变化，通过 Compile 来解析编译模板指令，最终利用 Watcher 搭起 Observer 和 Compile 之间的通信桥梁，达到数据变化 -&gt; 视图更新；视图交互变化(input) -&gt; 数据 model 变更的双向绑定效果。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function MVVM(options){
+	this.$options=options;
+	var data=this._data=this.$options.data;
+	observe(data,this);
+	this.$compile=new Compile(optiosn.el || document.body,this);
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>但是这里有个问题，从代码中可看出监听的数据对象是 options.data，每次需要更新视图，则必须通过<code>var vm = new MVVM({data:{name: 'kindeng'}}); vm._data.name = 'dmq';</code> 这样的方式来改变数据。</p> <p>显然不符合我们一开始的期望，我们所期望的调用方式应用是这样的：<code>var vm = new MVVM({data: {name: 'kindeng'}}); vm.name = 'dmq';</code></p> <p>所以这里需要给 MVVM 实例添加一个属性代理的方法，使访问 vm 的属性代理为访问 vm._data 的属性，改造后的代码如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function MVVM(options){
+	this.$options=options;
+	var data=this._data=this.$options.data,me=this;
+	//属性代理，实现 vm.xxx-&gt;vm._data.xxx
+	Object.keys(data).forEach(function(key){
+		me._proxy(key);
+	});
+	observe(data,this);
+	this.$compile=new Compile(options.el || document.body,this);
+
+}
+MVVM.prototye={
+	_proxy:function(key){
+		var me=this;
+		_proxy:function(key){
+			configurable:false,
+			enumerable:true,
+			get:function proxyGetter(){
+				return me._data[key];
+			},
+			set:function proxySetter(newVal){
+				me._data[key]=newVal;
+			}
+		}
+	}
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br></div></div><p>这里主要还是利用<code>Object.definedProperty()</code>这个方法来支持了 vm 实例对象的属性的读写权，使读写 vm 实例的属性转成读写了<code>vm._data</code>的属性值，达到鱼目混珠的效果</p> <p>至此，全部模块和功能已经完成了，如本文开头所承诺的两点。一个简单的 MVVM 模块已经实现，其思想和原理大部分来自经过简化改造的 vue<a href="https://github.com/vuejs/vue" target="_blank" rel="noopener noreferrer">源码<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>，猛戳<a href="https://github.com/DMQ/mvvm" target="_blank" rel="noopener noreferrer">这里<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>可以看到本文的所有相关代码。</p> <h3 id="参考资料"><a href="#参考资料" aria-hidden="true" class="header-anchor">#</a> 参考资料</h3> <ul><li><a href="http://www.cnblogs.com/kidney/p/6052935.html" target="_blank" rel="noopener noreferrer">Vue.js 双向绑定的实现原理<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://segmentfault.com/a/1190000006599500" target="_blank" rel="noopener noreferrer">剖析 Vue 原理&amp;实现双向绑定 MVVM<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://github.com/DDFE/DDFE-blog/issues/7" target="_blank" rel="noopener noreferrer">深入响应式原理<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://www.cnblogs.com/tugenhua0707/p/11754291.html" target="_blank" rel="noopener noreferrer">vue 系列---响应式原理实现及 Observer 源码解析(一)<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://zhuanlan.zhihu.com/p/88648401" target="_blank" rel="noopener noreferrer">最简化 VUE 的响应式原理<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://juejin.im/post/5d421bcf6fb9a06af23853f1" target="_blank" rel="noopener noreferrer">0 到 1 掌握：Vue 核心之数据双向绑定<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://mp.weixin.qq.com/s/NBcnkDQRmCPMxhrP7MyP9Q" target="_blank" rel="noopener noreferrer">Vue 源码解析：深入响应式原理<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://juejin.im/post/5d9da45af265da5b8072de5d" target="_blank" rel="noopener noreferrer">一张图理清 Vue 3.0 的响应式系统<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul> <h2 id="联系作者"><a href="#联系作者" aria-hidden="true" class="header-anchor">#</a> 联系作者</h2> <div align="center"><p>
+        平凡世界，贵在坚持。
+    </p> <img src="/about/contact.png"></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">更新于:</span> <span class="time">2019-12-23 9:00:21 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/js/vue-lifecycle.html" class="prev">Vue 生命周期</a></span> <span class="next"><a href="/js/vue-nexttick.html">Vue.netTick 理解与分析</a>→
+    </span></p></div> </main></div><div class="global-ui"><!----><!----><div></div></div></div>
+    <script src="/assets/js/app.6aacbf09.js" defer></script><script src="/assets/js/2.274a054e.js" defer></script><script src="/assets/js/168.df97f2ba.js" defer></script><script src="/assets/js/3.65dbdf4c.js" defer></script>
+  </body>
+</html>
