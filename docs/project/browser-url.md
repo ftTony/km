@@ -52,6 +52,10 @@ URL（Uniform Resource Locator），统一资源定位符，用于定位互联�
 
 ### 四、发送 HTTP 请求
 
+**TCP 三次结束后，开始发送 HTTP 请求报文。**
+
+请求报文由请求行（request line）、请求头（header）、请求休息三个部分组成，如下图所示：
+
 ### 五、服务器处理请求并返回 HTTP 报文
 
 ### 六、浏览器解析渲染页面
