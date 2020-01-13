@@ -58,9 +58,7 @@ URL（Uniform Resource Locator），统一资源定位符，用于定位互联�
 
 ![images](url01.png)
 
-#### 4.1 请求行包含请求方法、URL、协议版本
-
-#### 4.2 请求头包含请求的附加信息，由关键字/值对组成，每行一对，关键字和值用英文冒号“:”分隔
+参考[http 详情](https://km.xiaowuzi.info/cs/http.html)
 
 ### 五、服务器处理请求并返回 HTTP 报文
 
@@ -77,6 +75,10 @@ URL（Uniform Resource Locator），统一资源定位符，用于定位互联�
 - 结合 DOM 树和 CSS 规则树、生成渲染树
 - 根据渲染树计算每一个节点的信息
 - 根据计算好的信息绘制页面
+
+#### 6.1 根据 HTML 解析 DOM 树
+
+- 根据 HTML
 
 ### 七、断开连接
 
