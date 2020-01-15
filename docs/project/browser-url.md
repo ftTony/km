@@ -62,6 +62,14 @@ DNS 协议提供通过域名查找 IP 地址，域逆向从 IP 地址反查域�
 
 #### 2.3 浏览器如何通过域名去查询 URL 对应的 IP 呢
 
+- 浏览器缓存：
+- 操作系统缓存：
+- 路由缓存：
+- ISP 的 DNS 服务器：
+- 根服务器：
+
+![images](browser14.png)
+
 ### 三、TCP 三次握手
 
 参考[TCP 与 UDP](https://km.xiaowuzi.info/cs/tcp.html)
@@ -72,7 +80,7 @@ DNS 协议提供通过域名查找 IP 地址，域逆向从 IP 地址反查域�
 
 请求报文由请求行（request line）、请求头（header）、请求休息三个部分组成，如下图所示：
 
-![images](url01.png)
+![images](browser13.png)
 
 参考[http 详情](https://km.xiaowuzi.info/cs/http.html)
 
