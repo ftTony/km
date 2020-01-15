@@ -318,14 +318,9 @@ module.exports = {
         ]
       },
       {
-        title: 'gulp打包',
+        title: '其它打包工具',
         collapsable: false,
-        children: ['gulp-basic', 'gulp-plugin']
-      },
-      {
-        title: 'rollup打包',
-        collapsable: false,
-        children: ['rollup-basic']
+        children: ['gulp-basic', 'rollup-basic', 'gulp-plugin', 'pm2']
       },
       {
         title: '自定义脚手架',
