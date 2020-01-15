@@ -20,6 +20,7 @@
 - [从零开发一个 node 命令行工具](https://mp.weixin.qq.com/s/tShhZrmCi-K38ZBfuu_j2Q)
 - [教你从零开始搭建一款前端脚手架工具](https://segmentfault.com/a/1190000006190814)
 - [有趣又实用的命令行工具](https://github.com/ConardLi/awesome-cli)
+- [前端轻量化部署脚手架实践](https://juejin.im/post/5e1bfbadf265da3e3077005e)
 
 ## 联系作者
 
