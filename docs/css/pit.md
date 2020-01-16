@@ -64,11 +64,19 @@ img{
 -webkit-font-smoothing:antialiased;
 ```
 
-#### 7. 点击样式闪动
+#### 7. 设置 input 里面 placeholder 字体大小
 
-#### 8. 点击样式闪动
+#### 8. audio 元素和 video 元素在 ios 和 andriod 中无法自动播放
 
-#### 9. 点击样式闪动
+代码如下：
+
+```
+$('html').one('touchstart',function(){
+audio.play()
+})
+```
+
+#### 9. 手机拍照和上传图片
 
 #### 10. 点击样式闪动
 
