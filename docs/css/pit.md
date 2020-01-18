@@ -250,6 +250,10 @@ input{
 
 #### 30. 图片居中显示
 
+```
+object-fit: cover;
+```
+
 #### 31. 父元素设置了 border-radius，子元素应用了 transform，并且父元素设置了 overflow:hidden，但是却失效？
 
 代码如下：
