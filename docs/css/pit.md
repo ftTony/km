@@ -96,6 +96,15 @@ audio.play()
 
 #### 10. 输入框自动填充颜色
 
+Q：针对 input 标签已经输入过的，会针对曾经输入的内容填充黄色背景，这是 webkit 内核自动添加的，对应的属性是 autocomplete，默认是 on，另对应的样式是 input:-webkit-autofill 且是不可更改的。
+
+A：方案如下 1 设置标签 autocomplete="off"，亲测无效可能 2 调置盒子的内阴影为你常态的颜色，代码如下：
+
+```
+ box-shadow:0 0  0 1000px  #fff inset ;
+ -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+```
+
 #### 11. 开启硬件加速
 
 Q：优化渲染性能
