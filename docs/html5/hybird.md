@@ -227,6 +227,7 @@ React Native 这种模式学习成本较高，所以需要前期投入不少时�
 
 - [什么是 Hybrid App，与 Native App 及 Web App 有什么区别](http://js.pingan8787.com/)
 - [Hybrid App 离线包方案实践](https://juejin.im/post/5e04128d51882512727f35f6)
+- [得到 Hybrid 架构的演进之路](https://juejin.im/post/5e20483bf265da3e3a53767b)
 - 《现代 web 前端》
 
 ## 联系作者
