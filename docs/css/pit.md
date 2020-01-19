@@ -212,8 +212,15 @@ run(canvasEl){
 
 #### 16. 用同等比例的图片在 PC 机上很清楚,但是手机上很模糊,原因是什么呢?
 
-```
+经研究发现是 devicePixelRatio 作怪，因为手机分辨率太小，如果按照分辨率来显示网页字会非常小，所以苹果就把 iPhone 4 的 `960*640`
 
+```
+background:url(../images/icon/all.png) no-repeat center center;
+-webkit-background-size:50px 50px;
+background-size:50px 50px;
+display:inline-block;
+width:100%;
+height:50px;
 ```
 
 #### 17. 启动或禁用自动识别页面中的电话号码;
