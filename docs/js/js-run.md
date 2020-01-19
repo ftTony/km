@@ -137,8 +137,9 @@ foo();
 - [浏览器和 Node 中的 JavaScript 是如何工作的? 可视化解释](https://juejin.im/post/5d693d8b6fb9a06aca383488)
 - [day039: 描述一下 V8 执行一段 JS 代码的过程？](https://mp.weixin.qq.com/s/vsl-6pk3s5VjdOAcGNkg2Q)
 - [【动画演示】JavaScript 引擎运行原理](https://mp.weixin.qq.com/s/WUdz5sJfaPy9qAr_Bdl2CA)
-- [14 | 编译器和解释器：V8是如何执行一段JavaScript代码的？](https://time.geekbang.org/column/article/131887)
-- [从敲下一行JS代码到这行代码被执行，中间发生了什么？](https://zhuanlan.zhihu.com/p/101137995)
+- [14 | 编译器和解释器：V8 是如何执行一段 JavaScript 代码的？](https://time.geekbang.org/column/article/131887)
+- [从敲下一行 JS 代码到这行代码被执行，中间发生了什么？](https://zhuanlan.zhihu.com/p/101137995)
+- [「硬核 JS」一次搞懂 JS 运行机制](https://juejin.im/post/5e22b391f265da3e204d8c14)
 
 ## 联系作者
 
