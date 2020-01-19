@@ -399,6 +399,16 @@ object-fit: cover;
 
 ```
 
+#### 32. IOS 点击 input 不聚焦问题
+
+代码如下：
+
+```
+clickTextarea(){
+    document.getElementsByClassName('cont-inp')[0].focus();
+}
+```
+
 ### 参考资料
 
 - [移动端 H5 页面开发坑点指南](https://juejin.im/post/5dafc3df5188257a63539c64)
