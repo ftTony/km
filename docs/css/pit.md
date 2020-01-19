@@ -275,10 +275,20 @@ select::-ms-expand { display:none; }
 
 #### 22. html5 碰到上下拉动滚动条时卡顿/慢怎么解决
 
+首先你可能会给页面的 html 和 body 增加了 height:100%，然后就可能造成 IOS 上页面没去的卡顿问题。
+
+解决方案是：
+
+1. 让 html 和 body 固定 100%（或者 100vh）
+2. 然后再在内部放一个 height:100%的 div，设置 overflow-y:auto;和-webkit-overflow-scrolling:touch;
+
 ```
 .scroll-box{
    /* 模态框之类的div不能放在这个容器中，否则关闭模态框有时候关闭不了*/
     height:100%;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    overflow-scrolling:touch;
 }
 ```
 
