@@ -420,6 +420,16 @@ let data = new FormData();
 data.append('fileName',file[0],file[0].name);
 ```
 
+#### 34. IOS 中对 input 键盘事件 keyup/keydown/keypress 等支持不好的问题
+
+经查发现，IOS 的输入法(不管是第三方还是自带)能检测到英文或数字的 keyup,但检测不到中文 keyup，在输入中文后需要点回退键才开始搜索；解决办法是用 html5 的 oninput 事件去代替 keyup，通过如下代码达到类似 keyup 的效果；
+
+1. 修改了 input:checkbox 或 input:radio 元素的选择中状态，checked 属性发生变化
+
+```
+
+```
+
 ### 参考资料
 
 - [移动端 H5 页面开发坑点指南](https://juejin.im/post/5dafc3df5188257a63539c64)
