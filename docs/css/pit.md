@@ -401,12 +401,23 @@ object-fit: cover;
 
 #### 32. IOS 点击 input 不聚焦问题
 
+IOS 系统中点击 Input 输入框点击事件，没有反应，无法聚集光标，调不起键盘。
+
 代码如下：
 
 ```
 clickTextarea(){
     document.getElementsByClassName('cont-inp')[0].focus();
 }
+```
+
+#### 33. 上传图片，iPhone7 iPhone7p 在上传图片的时候，传不过去图片的 name
+
+解决方案：手动添加图片 name
+
+```
+let data = new FormData();
+data.append('fileName',file[0],file[0].name);
 ```
 
 ### 参考资料
