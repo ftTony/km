@@ -9,7 +9,11 @@
 - [MVVM 是什么?](#一、mvvm-是什么)
 - [MVVM 的优缺点?](#二、mvvm-的优缺点)
 
-### 一、MVVM 是什么?
+### 一、MVC
+
+### 二、MVP
+
+### 三、MVVM 是什么?
 
 MVVM 模式，顾名思义即 Model-View-ViewModel 模式。它萌芽于 2005 年微软推出的基于 Windows 的用户界面框架 WPF，前端最早的 MVVM 框架 knockout 在 2010 年发布。
 
@@ -21,7 +25,7 @@ ViewModel 层：把 View 需要的层数据暴露，并对 View 层的数据绑�
 
 ![images](mvvm.png)
 
-### 二、MVVM 的优缺点?
+### 四、MVVM 的优缺点?
 
 **优点：**
 
@@ -39,7 +43,7 @@ ViewModel 层：把 View 需要的层数据暴露，并对 View 层的数据绑�
 
 - [你对 MVVM 的理解?](https://www.cxymsg.com/guide/vue.html#%E4%BD%A0%E5%AF%B9mvvm%E7%9A%84%E7%90%86%E8%A7%A3)
 - [看完这篇关于 MVVM 的文章，面试通过率提升了 80%](https://juejin.im/post/5af8eb55f265da0b814ba766)
-- [MVC、MVP 及 MVVM 之间的关系](https://www.cnblogs.com/shenyf/p/9532342.html)
+- [MVC、MVP 和 MVVM 对比笔记](https://www.cnblogs.com/shenyf/p/9532342.html)
 - [不好意思！耽误你的十分钟，让 MVVM 原理还给你](https://juejin.im/post/5abdd6f6f265da23793c4458)
 - [mvvm 与 mvc](https://github.com/qappleh/Web-Daily-Question/blob/master/%E6%9E%B6%E6%9E%84/MVC%E5%92%8CMVVM/README.md)
 - 《现代化前端技术解析》
