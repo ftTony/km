@@ -17,9 +17,17 @@
 
 ### 一、MVC 模式
 
-MVC 是一个架构设计模式，它通过分离关注点
+MVC 是一个架构设计模式，它通过分离关注点的方式支持改进应用组织方式。它促成了业务数据(Models)从用户面(Views)中分离出来，还有第三个组成部分(Controllers)负责管理传统意义上的业务逻辑和用户输入。
 
 ![images](mvc.jpeg)
+
+#### 1.1 Models
+
+#### 1.2 Models
+
+#### 1.3 Models
+
+#### 1.4 MVC 模式的优势
 
 ### 二、MVP 模式
 
@@ -27,19 +35,19 @@ MVC 是一个架构设计模式，它通过分离关注点
 
 ![images](mvp.png)
 
+#### 2.1 Presenter
+
+MVP 中的 P 代表展示器。它是一个包含视图的用户界而逻辑的组件。不像 MVC，来自视图的调用被委派给了控制器，它是从视图中解耦出来的，并且转而通过一个接口来同它进行对话。
+
 ### 三、MVVM 是什么?
-
-MVVM 模式，顾名思义即 Model-View-ViewModel 模式。它萌芽于 2005 年微软推出的基于 Windows 的用户界面框架 WPF，前端最早的 MVVM 框架 knockout 在 2010 年发布。
-
-Model 层：对应数据层的域模型，它主要做域模型的同步。通过 Ajax/fetch 等 API 完成客户端和服务端业务 Model 的同步。在层间关系里，它主要用于抽象出 ViewModel 中视图的 Model。
-
-View 层：作为视图模板存在，在 MVVM 里，整个 View 是一个动态模板。除了定义结构、布局外，它展示的是 ViewModel 层的数据和状态。View 层不负责处理状态，View 层做的是数据绑定的声明、指令的声明、事件绑定的声明。
-
-ViewModel 层：把 View 需要的层数据暴露，并对 View 层的数据绑定绑定声明、指令声明、事件绑定声明负责，也就是处理 View 层的具体业务逻辑。ViewModel 底层会做好绑定属性的监听。当 ViewModel 中数据变化，View 层会得到更新；而当 View 中声明了数据的双向绑定（通常是表单元素），框架也会监听 View 层（表单）值的变化。一旦值变化，View 层绑定的 ViewModel 中的数据也会得到自动更新。
 
 ![images](mvvm.png)
 
-### 四、MVVM 的优缺点?
+#### 3.1 ViewModel
+
+ViewModel 层：把 View 需要的层数据暴露，并对 View 层的数据绑定绑定声明、指令声明、事件绑定声明负责，也就是处理 View 层的具体业务逻辑。ViewModel 底层会做好绑定属性的监听。当 ViewModel 中数据变化，View 层会得到更新；而当 View 中声明了数据的双向绑定（通常是表单元素），框架也会监听 View 层（表单）值的变化。一旦值变化，View 层绑定的 ViewModel 中的数据也会得到自动更新。
+
+#### 3.2 MVVM 模式优劣
 
 **优点：**
 
