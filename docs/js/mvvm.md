@@ -2,16 +2,22 @@
 
 ## 前言
 
-本人平时学习及收集内容，欢迎参入一起讨论。
+三个非常重要的架构模式
+
+- MVC（Model(模型)-View(视图)-Controller(控制器)）
+- MVP（Model(模型)-View(视图)-Presenter(中介者)）
+- MVVM（Model(模型)-View(视图)-ViewModel(视图模型)）
 
 ## 内容
 
-- [MVVM 是什么?](#一、mvvm-是什么)
-- [MVVM 的优缺点?](#二、mvvm-的优缺点)
+- [MVC 模式](#一、MVC-模式)
+- [MVP 模式](#二、MVP-模式)
+- [MVVM 是什么?](#三、mvvm-是什么)
+- [MVVM 的优缺点?](#四、mvvm-的优缺点)
 
-### 一、MVC
+### 一、MVC 模式
 
-### 二、MVP
+### 二、MVP 模式
 
 ### 三、MVVM 是什么?
 
