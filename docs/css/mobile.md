@@ -7,7 +7,6 @@
 ## 内容
 
 - meta 基础知识
-- 常见问题
 
 ### 一、meta 基础知识
 
@@ -36,7 +35,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta content="wdith=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta content="wdith=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" target-densitydpi=device-dpi">
 <meta content="yes" name="apple-mobile-web-app-capable">
 <meta content="black" name="apple-mobile-web-app-status-bar-style">
 <meta content="email=no" name="format-detection">

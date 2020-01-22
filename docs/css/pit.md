@@ -445,6 +445,27 @@ data.append('fileName',file[0],file[0].name);
 <input type="text" autocapitalize="none">
 ```
 
+#### 36. 什么是 Retina 显示屏，带来了什么问题
+
+retina:一种具备超高像素密度的液晶屏，同样大小的屏幕上显示的像素点由 1 个变为多个，如在同样带下的屏幕上，苹果设备的 retina 显示屏中，像素点 1 个变为 4 个
+
+在高清显示屏中的位图被放大，图片会变得模糊，因此移动端的视觉稿通常会设计为传统 PC 的 2 倍
+
+那么，前端的应对方案是：
+
+设计稿切出来的图片长宽保证为偶数，并使用 background-size 把图片缩小为原来的 1/2
+
+```
+//例如图片宽高为：200px*200px，那么写法如下
+.css{width:100px;height:100px;background-size:100px 100px;}
+```
+
+其它元素的取值为原来的 1/2，例如视觉稿 40px 的字体，使用样式的写法为 20px
+
+```
+.css{font-size:20px}
+```
+
 ### 参考资料
 
 - [移动端 H5 页面开发坑点指南](https://juejin.im/post/5dafc3df5188257a63539c64)
