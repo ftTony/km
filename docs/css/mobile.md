@@ -34,8 +34,18 @@
 ```
 <!DOCTYPE html>
 <html>
+<head>
 <meta charset="utf-8">
 <meta content="wdith=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="email=no" name="format-detection">
+<title>标题</title>
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+这里开始内容
+</body>
 </html>
 ```
 
