@@ -70,7 +70,11 @@ function deviceMotionHandler(eventData){
 var docEl = window.document.documentElement;
 var width = docEl.getBoundingClientRect().width;
 // 根据屏幕尺寸进行缩放
-
+if(width!==750){
+    var rate = width / 750;
+    var content = 'width=750,minimum-scale=' + rate +',maximum-scale=' + rate + ',initial-scale=' + rate + ',initial-scale=' + rate + ,user-scalable=no'
+    document.getElementById('viewport').setAttribute('content',content);
+}
 </script>
 ```
 
