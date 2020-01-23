@@ -50,6 +50,39 @@
 
 #### 1.5 重力感应事件
 
+```
+// 运用HTML5的deviceMotion，调用重力感应事件
+if(window.DeviceMotionEvent){
+    document.addEventListener('devicemotion',deviceMotionHandler,false);
+}
+
+var speed = 30;
+var x=y=z-lastX=lastY=lastZ=0;
+function deviceMotionHandler(eventData){
+
+}
+```
+
+#### 1.6 根据屏幕尺寸修改 viewpoint 来实现自适应
+
+```
+<script>
+var docEl = window.document.documentElement;
+var width = docEl.getBoundingClientRect().width;
+// 根据屏幕尺寸进行缩放
+
+</script>
+```
+
+#### 1.7 根据设备尺寸尺寸来修改 rem 的值以达到自适应
+
+```
+<!--动态计算rem-->
+<script type="text/javascript">
+
+</script>
+```
+
 ### 参考资料
 
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
