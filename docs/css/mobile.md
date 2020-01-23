@@ -142,6 +142,30 @@ if(width!==750){
 /* ----------重写chrome滚动条--end*/
 ```
 
+#### 1.9 屏幕旋转的事件和样式
+
+```
+// JS处理
+function orientInit(){
+    var orientChk = document.documentElement.clientWidth > document.documentElement.clientHeight?'landscape':'portrait';
+    if(orientChk =='lapdscape'){
+		//这里是横屏下需要执行的事件
+	}else{
+		//这里是竖屏下需要执行的事件
+	}
+}
+
+orientInit();
+window.addEventListener('onorientationchange' in window?'orientationchange':'resize',function(){
+    setTimeout(orientInit,100);
+},false);
+//CSS处理
+//竖屏时样式
+@media all and (orientation:portrait){   }
+//横屏时样式
+@media all and (orientation:landscape){   }
+```
+
 ### 参考资料
 
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
