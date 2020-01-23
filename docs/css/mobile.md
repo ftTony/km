@@ -28,7 +28,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 ```
 
-#### viewport 模板
+#### 1.4 viewport 模板
 
 ```
 <!DOCTYPE html>
@@ -47,6 +47,8 @@
 </body>
 </html>
 ```
+
+#### 1.5 重力感应事件
 
 ### 参考资料
 
