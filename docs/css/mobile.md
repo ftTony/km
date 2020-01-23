@@ -83,7 +83,41 @@ if(width!==750){
 ```
 <!--动态计算rem-->
 <script type="text/javascript">
+(function(doc,win){
+    var docEl = doc.documentElement;
+    var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+    var recalc = function(){
+        var clientWidth = docEl.clientWidth;
+        if(!clientWidth) return;
+        if(clientWidth>750){
+            clientWidth = 750;
+        }
+        docEl.style.fontSize = 100 * (clientWidth/750)+'px';
+        adjustRem(docEl,clientWidth);
+    };
+    if(!doc.addEventListener) return;
+    win.addEventListener(resizeEvt,recalc,false);
+    doc.addEventListener('DOMContentLoaded',recalc,false);
+    recalc();
+    function adjustRem(docElE, clientWidth) {
+            if (!clientWidth || clientWidth >= 750) return;
+            var div = document.createElement('div');
+            div.style.width = '1.4rem';
+            div.style.height = '0';
 
+            if(!document.body){
+                return;
+            }
+
+            document.body.appendChild(div);
+            var expectWidth = 140 * clientWidth / 750;
+            var fitRadio = (div.clientWidth / expectWidth);
+            if (fitRadio > 1.1 || fitRadio < 0.9) {
+                docElE.style.fontSize = 100 * (clientWidth / 750) / fitRadio + 'px';
+            }
+            document.body.removeChild(div);
+        }
+})(document,window);
 </script>
 ```
 
