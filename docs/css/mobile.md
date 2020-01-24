@@ -235,6 +235,14 @@ function onlineStatus(){
 
 #### 1.23 浏览器活跃窗口监听
 
+`window.onblur & window.onfocus`：这两个 API 分别表示窗口失去焦点和窗口牌活跃状态。
+
+代码如下：
+
+```
+
+```
+
 ### 参考资料
 
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
