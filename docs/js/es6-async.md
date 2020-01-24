@@ -264,6 +264,7 @@ async function chainAnimationsAsync(elem,animations){
 - [ECMAScript 6 入门](http://es6.ruanyifeng.com/#docs/async)
 - [《ECMAScript 6 入门》 第三版](https://yjhenan.gitbooks.io/-ecmascript-6/docs/async.html)
 - 《你不知道的 javascript(中)》
+- 《深入浅出 Node.js》
 
 ## 联系作者
 

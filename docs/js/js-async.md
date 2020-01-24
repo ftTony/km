@@ -668,6 +668,8 @@ loadData.catch(function(e){
 ### 参考资料
 
 - [JavaScript 是如何工作的:事件循环和异步编程的崛起+ 5 种使用 async/await 更好地编码方式！](https://github.com/qq449245884/xiaozhi/issues/4)
+- 《你不知道的 javascript(中)》
+- 《深入浅出 Node.js》
 
 ## 联系作者
 
