@@ -262,6 +262,23 @@ function doFlashTitle(){
 }
 ```
 
+#### 1.24 全屏 API
+
+`Fullscreen`：这个 API 可以使你所打开的页面全屏展示，没有其他页面外的内容展示在屏幕上。
+
+- `Element.requestFullscreen()` 方法用于发出异步请求使元素进入全屏模式。
+- 当进入/退出全屏模式时,会触发`fullscreenchange` 事件。
+
+```
+
+```
+
+相关：
+
+1. document.fullscreenElement：当前处于全屏状态的元素 element
+2. document.fullscreenEnabled：标记 fullscreen 当前是否可用
+3. document.exitFullscreen()：退出全屏
+
 ### 参考资料
 
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
