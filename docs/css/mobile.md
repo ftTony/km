@@ -237,10 +237,29 @@ function onlineStatus(){
 
 `window.onblur & window.onfocus`：这两个 API 分别表示窗口失去焦点和窗口牌活跃状态。
 
+> 浏览其他窗口、浏览器最小化、点击其他程序等，window.onblur 事件就会触发； 回到该窗口，window.onfocus 事件就会触发。
+
 代码如下：
 
 ```
+let timer = null
+let flashFlag = true;
+window.addEventListener('blur',doFlashTitle,true);
+window.addEventListener('focus',function(){
+    clearInterval(timer);
+    document.title='微信网页版';
+},true);
 
+function doFlashTitle(){
+    timer = setInterval(()=>{
+        if(!flashFlag){
+            document.title='微信网页页版';
+        }else{
+            document.title='微信';
+        }
+        flashFlag=!flashFlag
+    },500)
+}
 ```
 
 ### 参考资料
