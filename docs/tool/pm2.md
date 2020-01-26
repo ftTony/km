@@ -118,9 +118,19 @@ pm2 descripe app_name | app_id
 ```
 {
     "apps":{
-        "name": "project",
-        "script":"app.js",
-
+        "name": "project",  // 项目名
+        "script":"app.js",  // 执行文件
+        "cwd":"./",         // 根目录
+        "args":"",          // 传递给脚本的参数
+        "interpreter":"",      // 指定的脚本解释器
+        "interpreter_args":"",  // 传递给解释器的参数
+        "watch":true,       // 是否监听文件变动然后重启
+        "ignore_watch": [    // 不用监听的文件
+            "node_modules",
+            "public"
+        ],
+       "exec_mode": "cluster_mode"      // 应用启动模式，支持fork和cluster模式
+       "instances": "max"   //
     }
 }
 ```
@@ -146,6 +156,8 @@ pm2 logs
 ```
 
 则我们可以在命令窗口实时看到日志输出：
+
+![images](pm2-05.png)
 
 #### 4.3 监控
 
@@ -176,11 +188,26 @@ pm2 start app.js --max-memory-restart 100M
 
 但在 windows 中运行 pm2 startup 时，会报以下错误，因为其不适合 windows 系统；
 
+![images](pm2-06.png)
+
 我们需要额外安装其它库，如下所示：
+
+```
+npm install pm2-windows-startup -g
+pm2-startup install
+```
+
+然后我们只需要运行以下保存命令，就可以将现在正在运行的服务添加到开机自启动命令中；后面即服务器开机重启，也会将我们保存的服务自动重启；
+
+```
+pm2 save
+```
 
 ### 参考资料
 
 - [pm2 实践指南](https://juejin.im/post/5e1fa941e51d451c774dcc18)
+- [PM2 实用入门指南](https://www.cnblogs.com/chyingp/p/pm2-documentation.html)
+- [学习使用 PM2 管理 nodejs 进程](https://www.cnblogs.com/tugenhua0707/p/10230975.html)
 
 ## 联系作者
 
