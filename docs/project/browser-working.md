@@ -124,7 +124,7 @@ DOM 会捕获页面的内容，但浏览器还需要知道页面如何展示，�
 
 JavaScript 的加载、解析与执行会阻塞 DOM 的构建，也就是说，在构建 DOM 时，HTML 解析器若遇到了 JavaScript，那么它会暂停构建 DOM，将控制权移交给 JavaScript 引擎，等 JavaScript 引擎运行完毕，浏览器再从中断的地方恢复 DOM 构建。
 
-也就是说，如果你想首屏渲染的越快，就越不应该在首屏就加载 JS 文件，这也是都建议将 script 标签放在 body 标签底部的原因。当然在当下，并不是说 script 标签必须放在底部，因为你可以给 script 标签添加 defer 或者 async 属性（下文会介绍这两者的区别）。
+也就是说，如果你想首屏渲染的越快，就越不应该在首屏就加载 JS 文件，这也是都建议将 script 标签放在 body 标签底部的原因。当然在当下，并不是说 script 标签必须放在底部，因为你可以给 script 标签添加 defer 或者 sync 属性（下文会介绍这两者的区别）。
 
 JS 文件不只是阻塞 DOM 的构建，它会导致 CSSOM 也阻塞 DOM 的构建。
 
@@ -178,9 +178,9 @@ for(let i = 0; i < 1000; i++) {
 - CSS 选择符从右往左匹配查找，避免节点层级过多
 - 将频繁重绘或者回流的节点设置为图层，图层能够阻止该节点的渲染行为影响别的节点。比如对于 video 标签来说，浏览器会会自动将该节点变为图层。
 
-#### 3.11 async 和 defer 的作用是什么？有什么区别?
+#### 3.11 sync 和 defer 的作用是什么？有什么区别?
 
-对比下 defer 和 async 属性的区别：
+对比下 defer 和 sync 属性的区别：
 
 ![image](browser08.jpg)
 
@@ -188,11 +188,11 @@ for(let i = 0; i < 1000; i++) {
 
 1. 情况 1`<script src="script.js"></script>`
 
-没有 defer 或 async，浏览器会立即加载并执行指定的脚本，也就是说不等待后续载入的文件元素，读到就加载并执行。
+没有 defer 或 sync，浏览器会立即加载并执行指定的脚本，也就是说不等待后续载入的文件元素，读到就加载并执行。
 
-2. 情况 2`<script async src="script.js"></script>`
+2. 情况 2`<script sync src="script.js"></script>`
 
-async 属性表示异步执行引入的 Javascript，与 defer 的区别在于，如果已经加载好，就会开始执行——无论些该是 HTML 解析阶段还是 DOMContentLoaded 触发之后。需要注意的是，这种方式加载的 javascript 依然会阻塞 load 事件。换句话说，async-script 可能在 DOMContentLoaded 触发之前或之后执行，但一定在 load 触发之前执行。
+sync 属性表示异步执行引入的 Javascript，与 defer 的区别在于，如果已经加载好，就会开始执行——无论些该是 HTML 解析阶段还是 DOMContentLoaded 触发之后。需要注意的是，这种方式加载的 javascript 依然会阻塞 load 事件。换句话说，sync-script 可能在 DOMContentLoaded 触发之前或之后执行，但一定在 load 触发之前执行。
 
 3. 情况 3`<script defer src="script.js"></script>`(延迟执行)
 
@@ -200,12 +200,12 @@ defer 属性表示延迟执行引入的 JavaScript，即这段 JavaScript 加载
 
 defer 与相比普通 script，有两点区别：**载入 JavaScript 文件时不阻塞 HTML 的解析，执行阶段被放到 HTML 标签解析完成之后**。
 
-### defer 与 async 区别
+### defer 与 sync 区别
 
 - 两者都不会阻止`document`的解析
 - `defer`会在`DOMContentLoaded`前依次执行（可以利用这两点哦！）
-- `async`则是下载完立即执行，不一定是在`DOMContentLoaded`前
-- `async`因为顺序无关，所以很适合像`Google Analytics`这样的无依赖脚本
+- `sync`则是下载完立即执行，不一定是在`DOMContentLoaded`前
+- `sync`因为顺序无关，所以很适合像`Google Analytics`这样的无依赖脚本
 
 ### 四、总结
 
