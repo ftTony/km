@@ -172,6 +172,11 @@ pm2 start app.js --max-memory-restart 100M
 在 linux 中，设置开机自动启动，只需要执行以下两个步骤：
 
 - 运行`pm2 startup`，即在`/etc/init.d`目录下生成`pm2-root`的启动脚本，且自动将`pm2-root`设为服务；
+- 运行`pm2 save`，会将当前 pm2 所运行的应用保存在`/root/.pm2/dump.pm2`下，当开机重启时，运行`pm2-root`服务脚本，并且到`/root/.pm2/dump.pm2`下读取应用并启动；
+
+但在 windows 中运行 pm2 startup 时，会报以下错误，因为其不适合 windows 系统；
+
+我们需要额外安装其它库，如下所示：
 
 ### 参考资料
 
