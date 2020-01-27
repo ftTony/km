@@ -26,6 +26,7 @@
 - [我是如何让公司后台管理系统焕然一新的（下）-封装组件](https://juejin.im/post/5c7b4761f265da2db2795036)
 - [提升 90%加载速度——vuecli 下的首屏性能优化](https://segmentfault.com/a/1190000019499007)
 - [【第 843 期】前端性能优化](https://mp.weixin.qq.com/s/Hcp60sfDOyXcP9TM0CX2Bw)
+- [25 | 页面性能：如何系统地优化页面？](https://time.geekbang.org/column/article/143889)
 
 ## 联系作者
 
