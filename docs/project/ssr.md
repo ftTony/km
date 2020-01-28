@@ -29,6 +29,7 @@
 
 - [细说后端模板渲染、客户端渲染、node 中间层、服务器端渲染（ssr）](https://github.com/senntyou/blogs/blob/master/web-extend/5.md)
 - [Vue SSR 踩坑之旅](https://juejin.im/post/5cb6c36e6fb9a068af37aa35)
+- [后端渲染、客户端渲染(CSR)、同构应用(SSR)](https://github.com/amandakelake/blog/issues/60)
 
 ## 联系作者
 
