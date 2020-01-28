@@ -196,6 +196,7 @@ actions 和上面的 Muations 功能基本一样，不同点是，**actions 是�
 
 - [从头开始学习 Vuex](https://github.com/ljianshu/Blog/issues/36)
 - [学习 vuex 源码整体架构，打造属于自己的状态管理库](https://mp.weixin.qq.com/s/qQxUCbPBYSq9vU7dvDOCzg)
+- [一张思维导图辅助你深入了解 Vue | Vue-Router | Vuex 源码架构](https://juejin.im/post/5cd7dcff51882569562224a5)
 
 ## 联系作者
 

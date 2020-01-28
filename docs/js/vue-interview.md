@@ -167,6 +167,7 @@ keep-alive 的实现正是用到了 LRU 策略,将最近访问的组件 push 到
 - [VueRouter 源码深度解析](https://juejin.im/post/5b5697675188251b11097464)
 - [12 道 vue 高频原理面试题,你能答出几道?](https://juejin.im/post/5e04411f6fb9a0166049a073)
 - [吃透 Vue 项目开发实践｜ 16 个方面深入前端工程化开发技巧《上》](https://juejin.im/post/5e0202fc6fb9a0165721e39a)
+- [vue 面试题总汇](https://juejin.im/post/59ffb4b66fb9a04512385402)
 
 ## 联系作者
 
