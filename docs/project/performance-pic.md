@@ -100,7 +100,9 @@ npm install imagemin-webpack-plugin
 
 #### 3.1 使用强大的 IntersectionObserver
 
-IntersectionObserver 提供给我们一项能力：可以用来监听元素是否进入了设备的可视区域之内，这意味着：我们等待图片元素进入可视区域后，
+IntersectionObserver 提供给我们一项能力：可以用来监听元素是否进入了设备的可视区域之内，这意味着：我们等待图片元素进入可视区域后，再决定是否加载它，毕竟用户没有看到图片前，根本不关心它是否已经加载了。
+
+这是 Chrome51 率先提出和支持的 API，而在 2019 年的今天，各大浏览器对它的支持度已经有所改善(除了 IE，全线崩~)：
 
 #### 3.2 还是 Chrome 的黑科技——loading 属性
 
@@ -109,6 +111,32 @@ IntersectionObserver 提供给我们一项能力：可以用来监听元素是�
 我们经常会遇到这种情况：一张在普通笔记本上显示清晰的图片，到了苹果的 Retina 屏幕或是其他高清晰度的屏幕上，就变得模糊了。
 
 这是因为，在同样尺寸的屏幕上，高清屏可以展示的物理像素点比普通屏多，比如 Retina 屏，同样的屏幕尺寸下，它的物理像素点的个数是普通屏的 4 倍(`2*2`)，所以普通屏上显示清晰的图片，在高清屏上就像是被放大了，自然就变得模糊了，要从图片资源上解决这个问题，就需要在设备像素密度为 2 的高清屏中，对应地展示一张两倍大小的图。
+
+而通常来讲，对于背影图片，我们可以使用 css 的@media 进行媒体查询，以决定不同像素密度下该用哪张倍图，例如：
+
+```
+.bg{
+    background-image:url("bg.png");
+    width:100px;
+    height:100px;
+    background-size:100% 100%;
+}
+@media(-webkit-min-device-pixel-ratio:2),(min-device-pixel-ratio:2){
+    .bg {
+            background-image: url("bg@2x.png") // 尺寸为200 * 200的图
+        }
+}
+```
+
+这么做有两个好处，一是保证高像素密度的设备下，图片仍能保持应有的清晰度，二是防止在低像素密度的设备下加载大尺寸图片千万浪费。
+
+那么如何处理 img 标签呢？
+
+我们可以使用 HTML5 中 img 标签的 srcset 来达到这个效果，代码如下：
+
+```
+<img width="320" src="bg@2x.png" srcset="bg.png 1x;bg@2x.png 2x" />>
+```
 
 ### 五、安全地使用 WebP 图片
 
