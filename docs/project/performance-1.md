@@ -84,6 +84,28 @@ http2 是非常好的解决办法，http2 本身的机制就跢快：
 
 #### 4.4 开启浏览器缓存
 
+参考[web 缓存](https://km.xiaowuzi.info/cs/http-cache.html)
+
+#### 4.5 webpack 打包优化
+
+通常情况下我们的 WebApp 是有我们的自身代码和第三方库组成的，我们自身的代码是会常常变动的，而第三方库除非有较大的版本升级，不然是不会变的，所以第三方库和我们的代码需要分开打包，我们可以给第三方库设置一个较长的强缓存时间，这样就不会频繁请求第三方库的代码了。
+
+那么如何提取第三方库呢？在 webpack4.x 中 SplitChuncksPlugin 插件取代了 CommonsChunkPlugin 插件来进行公共模块抽取，我们可以对 SplitChunksPlugin 进行配置进行**拆包**操作。
+
+SplitChunksPlugins 配置示意如下：
+
+```
+optimization:{
+    splitChunks:{
+
+    }
+}
+```
+
+```
+
+```
+
 ## 参考资料
 
 - [前端性能优化之白屏时间](https://mp.weixin.qq.com/s/N_6faORvlDSxFQMh1o2naA)
