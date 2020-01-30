@@ -96,15 +96,37 @@ SplitChunksPlugins 配置示意如下：
 
 ```
 optimization:{
-    splitChunks:{
-
+    splitChunks: {
+        chunks: "initial",          // 代码块类型 必须三选一："initial" (初始化) | "all"(默认就是all) | "async" (动态加载)
+        minSize: 0,     // 最小尺寸，默认0
     }
 }
 ```
 
-```
+[split-chunks-plugin](https://webpack.js.org/plugins/split-chunks-plugin/)的配置项很多，可以去官网了解如何配置，我们现在只简单列举了一下配置元素。
+
+如果我们想抽取第三方库可以这样简单配置
 
 ```
+splitChunks:{
+    chunks: 'all',
+    minSize: 30000,
+    maxAsyncRequests: 5,
+    maxInitialRequests: 3,      // 最大初始化请求数
+    automaticNameDelimiter: '~',    // 打包分割符
+    name: true
+}
+```
+
+### 五、FMP(首次有意义绘制)
+
+### 六、TTI(可交互时间)
+
+### 七、组件加载
+
+### 八、组件懒加载
+
+### 九、组件预加载
 
 ## 参考资料
 
