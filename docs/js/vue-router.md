@@ -381,6 +381,7 @@ export default {
 - [「vue 基础」Vue Router 使用指南下篇](https://mp.weixin.qq.com/s/wiuIwybeSEUjxw-WN_Fm6A)
 - [深度剖析：前端路由原理](https://juejin.im/post/5d469f1e5188254e1c49ae78)
 - [前端开发需要了解的「路由跳转原理」](https://mp.weixin.qq.com/s/2RXM0c22e30mZbtrPNzrYw)
+- [「前端进阶」彻底弄懂前端路由](https://juejin.im/post/5d2d19ccf265da1b7f29b05f)
 - [【第 1611 期】前端路由原理解析和实现](https://mp.weixin.qq.com/s/XV7tGdB6bDbZT4h5H8Y3yw)
 
 ## 联系作者
