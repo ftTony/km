@@ -349,15 +349,44 @@ polyfill 是为了浏览器兼容性而生，是否需要 polyfill 应该有客�
 
 ```
 export default new Router({
-
+    routes:[
+        {
+            path:'/',
+            name:'Home',
+            component:Home
+        },
+        {
+            path:'/login',
+            name:'login',
+            component:()=>import('@components/login')
+        }
+    ]
 })
 ```
+
+你的登录页面会被单独打包
+
+对于 react，其内置的`React.lazy()`就可以动态加载路由和组件，效果与 vue 大同小异，当然`lazy()`目前还没有支持服务端渲染，如果你想在服务端渲染使用，可以用[React Loadable](https://github.com/jamiebuilds/react-loadable)
 
 ### 七、组件加载
 
 路由其实是一个大组件，很多时候人们忽略了路由跳转之间的加载优化，更多的时候我们的精力都留在首屏加载之上，但是路由跳转间的加载同样重要，如果加载过慢同样影响用户体验。
 
 我们不可忽视的是在很多时候，首屏的加载反而比路由跳转要快，也更容易优化。
+
+比如石墨文档的首页是这样的:
+
+![images](performance30.png)
+
+一个非常常见的官网首页，代码量也不会太多，处理好第三方资源的加载后，是很容易就达到性能要求的页面类型。
+
+加载过程不过几秒钟，而当我跳转到真正的工作界面时，这是个类似 word 的在线编辑器
+
+![images](performance31.png)
+
+我用 Lighthouse 的测试结果是,可交互时间高达 17.2s
+
+![images](performance32.png)
 
 ### 八、组件懒加载
 
