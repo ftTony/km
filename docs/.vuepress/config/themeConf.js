@@ -402,6 +402,7 @@ module.exports = {
           'http',
           'https',
           'http2',
+          'http3',
           'http-cache',
           'tcp',
           'webstock'

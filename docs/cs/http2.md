@@ -215,14 +215,13 @@ server {
 
 ### 参考资料
 
+- [30 ｜ HTTP/2：如何提升网络速度？](https://time.geekbang.org/column/article/148546)
 - [HTTP2 基本概念学习笔记](https://juejin.im/post/5acccf966fb9a028d043c6ec)
 - [【第 505 期】谈谈 HTTP/2 对前端的影响](https://mp.weixin.qq.com/s/aFGMPhL3PpjGS4ZKtypeSQ)
 - [HTTP 2.0 的那些事](https://juejin.im/entry/57fa127d816dfa0056b7d710)
 - [openssl 版本升级操作记录](https://cloud.tencent.com/developer/article/1027523)
 - [怎样把网站升级到 http/2](https://zhuanlan.zhihu.com/p/29609078)
 - [升级 Nginx 开启 HTTP/2](https://juejin.im/entry/5b5ae460e51d45195423ecca)
-- [解密 HTTP/2 与 HTTP/3 的新特性](https://mp.weixin.qq.com/s/5jR7MrWQ9v3w_E8BhNWrpA)
-- [HTTP/3 要点](https://mp.weixin.qq.com/s/qBD90RdofvYDNX2sSJWgNA)
 - [【第 515 期】HTTPS, SPDY 和 HTTP/2 性能的简单对比](https://mp.weixin.qq.com/s/XCmUsAAY4uoXKLV7H6v0KQ)
 
 ## 联系作者
