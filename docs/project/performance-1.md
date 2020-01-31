@@ -314,6 +314,22 @@ polyfill 是为了浏览器兼容性而生，是否需要 polyfill 应该有客�
 
 那么如何动态加载呢？秘诀就是`<script type="module">`这个标签来判断浏览器是否支持 es6。
 
+体积大小对比：
+
+| Version             | Size(minified) | Size(minified+gzipped) |
+| ------------------- | -------------- | ---------------------- |
+| ES2015+(main.js)    | 80K            | 21K                    |
+| ES5(main-legacy.js) | 175K           | 43K                    |
+
+执行时间对比：
+
+| Version             | Parse/eval time(individual runs) | Parse/eval time(avg) |
+| ------------------- | -------------------------------- | -------------------- |
+| ES2015+(main.js)    | 184ms,164ms,166ms                | 172ms                |
+| ES5(main-legacy.js) | 389ms,351ms,360ms                | 367ms                |
+
+双方对比的结果是,es6 的代码体积在小了一倍的同时,性能高出一倍.
+
 #### 6.4 路由级别拆解代码
 
 我们在上文中已经通过 SplitChunksPlugin 将第三方库进行了抽离，但是在首屏加载过程中依然有很多冗余代码，比如我们的首页是个登录界面，那么其实用到的代码很简单
@@ -325,7 +341,17 @@ polyfill 是为了浏览器兼容性而生，是否需要 polyfill 应该有客�
 
 登录界面的代码很少的，为什么不只加载登录界面的代码呢？
 
-这就需要我们进行对代码在跌幅级别的拆分
+这就需要我们进行对代码在路由级别的拆分，除了基础的框架和 UI 库之外，我们只需要加载当前页面的代码即可，这就有得用到 Code Splitting 技术进行代码分割，我们要做的其实很简单
+
+我们得先给 babel 设置 plugin-syntax-dynamic-import 这个动态 import 的插件，然后就可以就函数内使用 import 了
+
+对于 Vue 你可以这样引入路由
+
+```
+export default new Router({
+
+})
+```
 
 ### 七、组件加载
 
