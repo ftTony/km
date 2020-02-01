@@ -71,6 +71,7 @@ Code Review 的过程，就是根据提交者的描述阅读代码的逻辑，�
 - [【译】Google 官方文章——如何去做 code review](https://juejin.im/post/5d80c27cf265da03e61b45c7)
 - [关于代码评审（Code Review）](https://mp.weixin.qq.com/s/2Fpqlhl2XLuk7dFXCPUD-A)
 - [前端代码评审 Checklist 清单](https://github.com/fengshi123/blog/issues/1)
+- [Code Review 最佳实践](https://zhuanlan.zhihu.com/p/73809355)
 
 ## 联系作者
 
