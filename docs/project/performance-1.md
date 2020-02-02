@@ -474,7 +474,6 @@ const ModalEchart = (props) =>(
 - [提升 90%加载速度——vuecli 下的首屏性能优化](https://segmentfault.com/a/1190000019499007)
 - [【第 843 期】前端性能优化](https://mp.weixin.qq.com/s/Hcp60sfDOyXcP9TM0CX2Bw)
 - [25 | 页面性能：如何系统地优化页面？](https://time.geekbang.org/column/article/143889)
-- [【性能优化】DNS 预解析](https://github.com/amandakelake/blog/issues/50)
 
 ## 联系作者
 

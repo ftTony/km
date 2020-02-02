@@ -232,7 +232,6 @@ Web Worker 使得网页中进行多线程编程成为可能。当主线程在处
 - [性能优化三部曲之一——构建篇](https://github.com/lcxfs1991/blog/issues/4)
 - [Web 性能](https://github.com/laoqiren/web-performance)
 - [前端性能优化之旅](https://github.com/alienzhou/fe-performance-journey)
-- [Web 性能领域常见的专业术语](https://mp.weixin.qq.com/s/GIpmZIY6yxGRBpkTDHuJuw)
 - [如何使页面交互更流畅](https://mp.weixin.qq.com/s/eoZyeJahkBpaYxzC2n5NLQ)
 - [从 8 道面试题看浏览器渲染过程与性能优化](https://juejin.im/post/5e143104e51d45414a4715f7)
 - [页面需要渲染 10 万条数据，应该怎么实现？](https://www.cnblogs.com/ldld/p/11028179.html)
