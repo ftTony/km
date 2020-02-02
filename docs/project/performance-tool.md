@@ -6,9 +6,18 @@
 
 ## 内容
 
+- 谷歌开发者工具 Audits
+- 谷歌开发者工具 Performance
+
+### 一、Audits
+
+### 二、Performance
+
 ### 参考资料
 
-- [【性能优化】DNS 预解析](https://github.com/amandakelake/blog/issues/50)
+- [加餐三｜加载阶段性能：使用 Audits 来优化 Web 性能](https://time.geekbang.org/column/article/174254)
+- [加餐四｜页面性能工具：如何使用 Performance？](https://time.geekbang.org/column/article/177070)
+- [加餐五 | 性能分析工具：如何分析 Performance 中的 Main 指标？](https://time.geekbang.org/column/article/179428)
 
 ## 联系作者
 
