@@ -227,6 +227,7 @@ HTTPS 原理与优势：身份验证、信息加密与完整性校验等，且�
 
 ### 参考资料
 
+- [加餐六｜ HTTPS：浏览器如何验证数字证书？](https://time.geekbang.org/column/article/180213)
 - [HTTPS 过程](http://www.cnblogs.com/Jote/articles/4854958.html)
 - [全站`HTTPS`来了](https://segmentfault.com/a/1190000004199917)
 - [数字签名和数字证书](http://www.cnblogs.com/heart-runner/archive/2012/01/30/2332020.html)
