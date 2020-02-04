@@ -4,9 +4,9 @@
 
 ## 相关作品
 
-- [nodejs智能聊天系统](http://www.baidu.com)
-- [vue音乐播放器](http://www.baidu.com)
-- [行情系统](http://www.baidu.com)
+- [nodejs 智能聊天系统](https://chat.xiaowuzi.info)
+- [vue 音乐播放器](https://music.xiaowuzi.info)
+- [行情系统](https://www.q-stock.cn)
 
 ## 联系作者
 

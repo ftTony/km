@@ -44,6 +44,9 @@ module.exports = {
     {
       text: '关于作者',
       link: '/about/'
+    }, {
+      text: 'GitHub',
+      link: 'https://www.github.com/fttony'
     }
   ],
   sidebar: {
