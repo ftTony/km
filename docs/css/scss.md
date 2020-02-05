@@ -1,4 +1,4 @@
-# sass学习
+# sass 学习
 
 ## 前言
 
@@ -7,6 +7,8 @@
 ## 内容
 
 ### 参考资料
+
+- [再谈 CSS 预处理器](https://efe.baidu.com/blog/revisiting-css-preprocessors/)
 
 ## 联系作者
 
