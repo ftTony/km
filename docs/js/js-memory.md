@@ -246,6 +246,7 @@ David 大叔主要介绍了 2 个优化方案，而这也是最主要的 2 个�
 - [【第 1821 期】前端内存优化的探索与实践](https://mp.weixin.qq.com/s/iRHiu404yYXqCO_PGiJ7yA)
 - [13 | 垃圾回收：垃圾数据是如何自动回收的？](https://time.geekbang.org/column/article/131233)
 - [Chrome 浏览器垃圾回收机制与内存泄漏分析](https://mp.weixin.qq.com/s/m_cwfM0PgivmmCKaK-TviQ)
+- [讲讲 js 的内存泄漏、如何监控和分析](https://mp.weixin.qq.com/s/5qDzvMLx_DAMWOwU7dFNWA)
 - 《高程第 3 版》
 - 《深入浅出 nodejs》
 
