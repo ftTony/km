@@ -18,6 +18,7 @@
 - [if 我是前端团队 Leader，怎么制定前端协作规范?](https://juejin.im/post/5d3a7134f265da1b5d57f1ed)
 - [文档与源码编写风格](https://github.com/fex-team/styleguide)
 - [前端代码质量—怎样实现一个支持多语言、高扩展性的 Linter](https://mp.weixin.qq.com/s/yFa2hFkmCQFyGcPiHeC0Tg)
+- [前端开发规范梳理(全面记录)](https://juejin.im/post/5e3d0362e51d4526d87c605d)
 
 ## 联系作者
 
