@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [微信小程序开发资源汇总](https://github.com/justjavac/awesome-wechat-weapp)
+
 ## 联系作者
 
 <div align="center">
