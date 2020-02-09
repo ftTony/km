@@ -41,7 +41,13 @@ Vue-Router 的源码都在 src 目录下，其目录结构如下。
     └── warn.js  // 打印一些警告
 ```
 
-### 二、入口
+### 二、Vue-router 整体流程图
+
+![images](vue11.png)
+
+### 三、官方案例
+
+官方仓库下 `examples/basic` 基础例子
 
 ```
 import Vue from 'vue'
@@ -137,7 +143,49 @@ new Vue({
 }).$mount('#app')
 ```
 
-### 三、vueRouter 内部方法
+### 三、vueRouter 内部方法分析
+
+#### 3.1 index
+
+```
+
+```
+
+#### 3.2 install
+
+```
+
+```
+
+#### 3.3 match 匹配函数
+
+```
+
+```
+
+#### 3.4 实例化 History
+
+```
+
+```
+
+#### 3.5 transitionTo
+
+```
+
+```
+
+#### 3.6 router-link 组件
+
+```
+
+```
+
+#### 3.7 router-view 组件
+
+```
+
+```
 
 ### 参考资料
 
