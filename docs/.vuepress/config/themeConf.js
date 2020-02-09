@@ -76,6 +76,7 @@ module.exports = {
           'js-debounce',
           'js-precision',
           'js-memory',
+          'js-memory-1',
           'js-async',
           'js-bit',
           'js-eventloop',
