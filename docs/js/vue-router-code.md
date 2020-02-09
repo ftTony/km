@@ -145,16 +145,145 @@ new Vue({
 
 ### 三、vueRouter 内部方法分析
 
-#### 3.1 index
+#### 3.1 index 入口
 
 ```
+
+import { install } from './install'
+import { START } from './util/route'
+import { assert } from './util/warn'
+import { inBrowser } from './util/dom'
+import { cleanPath } from './util/path'
+import { createMatcher } from './create-matcher'
+import { normalizeLocation } from './util/location'
+import { supportsPushState } from './util/push-state'
+
+import { HashHistory } from './history/hash'
+import { HTML5History } from './history/html5'
+import { AbstractHistory } from './history/abstract'
+
+import type { Matcher } from './create-matcher'
+
+export default class VueRouter {
+  static install: () => void;
+  static version: string;
+
+  app: any;
+  apps: Array<any>;
+  ready: boolean;
+  readyCbs: Array<Function>;
+  options: RouterOptions;
+  mode: string;
+  history: HashHistory | HTML5History | AbstractHistory;
+  matcher: Matcher;
+  fallback: boolean;
+  beforeHooks: Array<?NavigationGuard>;
+  resolveHooks: Array<?NavigationGuard>;
+  afterHooks: Array<?AfterNavigationHook>;
+
+  constructor (options: RouterOptions = {}) {
+    this.app = null
+    this.apps = []
+    this.options = options
+    this.beforeHooks = []
+    this.resolveHooks = []
+    this.afterHooks = []
+    this.matcher = createMatcher(options.routes || [], this)
+
+    let mode = options.mode || 'hash'
+    this.fallback = mode === 'history' && !supportsPushState && options.fallback !== false
+    if (this.fallback) {
+      mode = 'hash'
+    }
+    if (!inBrowser) {
+      mode = 'abstract'
+    }
+    this.mode = mode
+
+    switch (mode) {
+      case 'history':
+        this.history = new HTML5History(this, options.base)
+        break
+      case 'hash':
+        this.history = new HashHistory(this, options.base, this.fallback)
+        break
+      case 'abstract':
+        this.history = new AbstractHistory(this, options.base)
+        break
+      default:
+        if (process.env.NODE_ENV !== 'production') {
+          assert(false, `invalid mode: ${mode}`)
+        }
+    }
+  }
+
+ // 省略相关代码
+
+VueRouter.install = install
+VueRouter.version = '__VERSION__'
+
+if (inBrowser && window.Vue) {
+  window.Vue.use(VueRouter)
+}
 
 ```
 
 #### 3.2 install
 
 ```
+//
+import View from './components/view'
+import Link from './components/link'
 
+export let _Vue
+
+export function install (Vue) {
+  if (install.installed && _Vue === Vue) return
+  install.installed = true
+
+  _Vue = Vue
+
+  const isDef = v => v !== undefined
+
+  const registerInstance = (vm, callVal) => {
+    let i = vm.$options._parentVnode
+    if (isDef(i) && isDef(i = i.data) && isDef(i = i.registerRouteInstance)) {
+      i(vm, callVal)
+    }
+  }
+
+  Vue.mixin({
+    beforeCreate () {
+      if (isDef(this.$options.router)) {
+        this._routerRoot = this
+        this._router = this.$options.router
+        this._router.init(this)
+        Vue.util.defineReactive(this, '_route', this._router.history.current)
+      } else {
+        this._routerRoot = (this.$parent && this.$parent._routerRoot) || this
+      }
+      registerInstance(this, this)
+    },
+    destroyed () {
+      registerInstance(this)
+    }
+  })
+
+  Object.defineProperty(Vue.prototype, '$router', {
+    get () { return this._routerRoot._router }
+  })
+
+  Object.defineProperty(Vue.prototype, '$route', {
+    get () { return this._routerRoot._route }
+  })
+
+  Vue.component('RouterView', View)
+  Vue.component('RouterLink', Link)
+
+  const strats = Vue.config.optionMergeStrategies
+  // use the same hook merging strategy for route hooks
+  strats.beforeRouteEnter = strats.beforeRouteLeave = strats.beforeRouteUpdate = strats.created
+}
 ```
 
 #### 3.3 match 匹配函数
