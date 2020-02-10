@@ -291,6 +291,7 @@ document.write("<a href='"+x+">test</a>");
 - [8 大前端安全问题（下）](https://insights.thoughtworks.cn/eight-security-problems-in-front-end-2/)
 - [常见 Web 安全攻防总结](https://zoumiaojiang.com/article/common-web-security/)
 - [前端安全系列（一）：如何防止 XSS 攻击？](https://tech.meituan.com/2018/09/27/fe-security.html)
+- [前端安全—你必须要注意的依赖安全漏洞](https://mp.weixin.qq.com/s/kCqD0ikh9h5xc42sKkESVA)
 
 ## 联系作者
 
