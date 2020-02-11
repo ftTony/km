@@ -12,9 +12,20 @@
 - 理解 MutationObserver
 - nextTick 源码分析
 
+### 一、什么是 Vue.nextTick()？
+
+### 二、Vue.nextTick 的调用方式
+
+### 三、`vm.$nextTick` 与 `setTimeout` 的区别是什么？
+
+### 四、理解 MutationObserver
+
+### 五、nextTick 源码分析
+
 ### 参考资料
 
 - [Vue 系列---理解 Vue.nextTick 使用及源码分析(五)](https://www.cnblogs.com/tugenhua0707/p/11756584.html)
+- [你真的理解\$nextTick 么](https://juejin.im/post/5cd9854b5188252035420a13)
 
 ## 联系作者
 
