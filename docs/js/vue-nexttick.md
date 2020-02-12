@@ -20,17 +20,88 @@
 
 #### 1.1 更改数据后，进行节点DOM操作
 
-比如修改数据、修改节点样式等操作。比如说修改data中的
+比如修改数据、修改节点样式等操作。比如说修改data中的一个属性数据后，如果我这个时候直接获取该html内容的话，它还是老数据的，那么此刻，我们可以使用Vue.nextTick()，在该函数内部获取数据即可：
 
 ```
+<!DOCTYPE html>
+<html>
+<head>
+  <title>vue.nextTick()方法的使用</title>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="https://cn.vuejs.org/js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <template>
+      <div ref="list">{{name}}</div>
+    </template>
+  </div>
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: {
+        name: 'kongzhi111'
+      },
+      mounted() {
+        this.updateData();
+      },
+      methods: {
+        updateData() {
+          this.name = 'kongzhi222';
+          console.log(this.$refs.list.textContent); // 打印 kongzhi111
+          this.$nextTick(() => {
+            console.log('-------');
+            console.log(this.$refs.list.textContent); // 打印 kongzhi222
+          });
+        }
+      }
+    })
+  </script>
+</body>
+</html>
 ```
 
 #### 1.2 在created生命周期中进行DOM操作
 
+在Vue生命周期中，只有在mounted生命周期中我们的HTML才渲染完成，因此在该生命周期中，我们就可以获取到页面中的html DOM节点，但如果我们在created生命周期中是访问不到DOM节点的。在该生命周期中我们想要获取DOM节点的话，我们需要使用`this.$nextTick()`函数。
+
 代码如下：
 
 ```
+<!DOCTYPE html>
+<html>
+<head>
+  <title>vue.nextTick()方法的使用</title>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="https://cn.vuejs.org/js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <template>
+      <div ref="list">{{name}}</div>
+    </template>
+  </div>
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: {
+        name: 'kongzhi111'
+      },
+      created() {
+        console.log(this.$refs.list); // 打印undefined
+        this.$nextTick(() => {
+          console.log(this.$refs.list); // 打印出 "<div>kongzhi111</div>"
+        });
+      },
+      methods: {
+        
+      }
+    })
+  </script>
+</body>
+</html>
 ```
+
 ### 二、Vue.nextTick 的调用方式
 
 调用方式主要有以下两种：Vue.nextTick([callback,context])和 `vm.$nextTick([callback])`;
@@ -39,6 +110,8 @@
 2. `vm.$nextTick([callback])`: 该方法是实列方法，执行时自动绑定 this 到当前的实列上。
 
 ### 三、`vm.$nextTick` 与 `setTimeout` 的区别是什么？
+
+通过看vue源码我们知道，nextTick源码在`src/core/util/next-tick.js`里面。在vue中使用三种情况来延迟调用该函数，首先我们会判断我们的设备是否支持Promise对象，如果支持的话，会使用Promise.then来做延迟调用函数。如果设备不支持Promise对象，再判断是否支持MutationObserver对象，如果支持该对象，就使用MutationObserver来做延迟，最后如果上面两种都不支持的话，我们会使用`setTimeout(()=>{},0)`;setTimeout来做延迟操作。
 
 在比较 nextTick 与 setTimeout 的区别，其实我们可以比较 promise 或 MutationObserver 对象与 setTimeout 的区别的了，因为 nextTick 会先判断设备是否支持 promise 及 MutationObserver 对象的，只要我们弄懂 promise 和 setTimeout 的区别，也就是弄明白 nextTick 与 setTimeout 的区别了。
 
@@ -50,8 +123,10 @@
 
 但是异步任务队列又分为：macrotasks(宏任务)和microtasks(微任务)。他们两者分别有如下API：
 
-- **macrotasks(宏任务)：**
+- **macrotasks(宏任务)：** setTimeout、setInterval、setImmediate、I/O、UI rendering等。
 - **microtasks(微任务)：** Promise、process.nextTick、MutationObserver等。
+
+如上我们的promise的then方法的函数会被
 
 ```
 
