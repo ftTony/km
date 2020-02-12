@@ -40,18 +40,18 @@
     new Vue({
       el: '#app',
       data: {
-        name: 'kongzhi111'
+        name: 'tony'
       },
       mounted() {
         this.updateData();
       },
       methods: {
         updateData() {
-          this.name = 'kongzhi222';
-          console.log(this.$refs.list.textContent); // 打印 kongzhi111
+          this.name = '小武子';
+          console.log(this.$refs.list.textContent); // 打印 tony
           this.$nextTick(() => {
             console.log('-------');
-            console.log(this.$refs.list.textContent); // 打印 kongzhi222
+            console.log(this.$refs.list.textContent); // 打印 小武子
           });
         }
       }
@@ -60,6 +60,10 @@
 </body>
 </html>
 ```
+
+如上代码，页面初始化时候，页面显示的是“tony”；当页面中的所有的DOM更新完成后，我估mounted()生命周期中调用updateData()方法，然后在该方法内部修改this.name这个数据，再打印this.
+
+**理解DOM更新：** 在VUE中，当我们修改了data中的某一个值后，并不会立刻去渲染html页面，而是将vue更改的数据放到watcher的一个异步队列中，只有当前任务空闲的才会执行watcher中的队列任务，因此这就会有一个延迟时间，因此我们把代码放到nextTick函数后就可以获取到html页面的最新值了。
 
 #### 1.2 在created生命周期中进行DOM操作
 
