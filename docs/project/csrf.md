@@ -23,7 +23,7 @@ CSRF（Cross Site Request Forgery），中文是跨站点请求伪造。CSRF 攻
 1. 登录受信任网站 A，并在本地生成 Cookie。
 1. 在不登出 A 的情况下，访问危险网站 B。
 
-示例一、使用 get 请求
+#### 2.1 使用 get 请求
 
 银行网站 A，它以 GET 请求来完成银行转账的操作，如：`http://www.mybank.com/Transfer.php?toBankId=11&money=1000`
 
@@ -33,7 +33,7 @@ CSRF（Cross Site Request Forgery），中文是跨站点请求伪造。CSRF 攻
 
 银行网站 A 违反了 HTTP 规范，使用 GET 请求更新资源。在访问危险网站 B 的之前，你已经登录了银行网站 A，而 B 中的<img>以 GET 的方式请求第三方资源（这里的第三方就是指银行网站了，原本这是一个合法的请求，但这里被不法分子利用了），所以你的浏览器会带上你的银行网站 A 的 Cookie 发出 Get 请求，去获取资源`http://www.mybank.com/Transfer.php?toBankId=11&money=1000`，结果银行网站服务器收到请求后，认为这是一个更新资源操作（转账操作），所以就立刻进行转账操作......
 
-示例二、使用 POST 请求完成转账操作
+#### 2.3 使用 POST 请求完成转账操作
 
 ```
 <html>
@@ -57,6 +57,8 @@ CSRF（Cross Site Request Forgery），中文是跨站点请求伪造。CSRF 攻
 　　</body>
 </html>
 ```
+
+#### 2.3 引诱用户点击链接
 
 总结：CSRF 攻击是源于 WEB 的隐式身份验证机制！WEB 的身份验证机制虽然可以保证一个请求是来自于某个用户的浏览器，但却无法保证该请求是用户批准发送的！
 
@@ -107,6 +109,12 @@ set-cookie: 1P_JAR=2019-10-20-06; expires=Tue, 19-Nov-2019 06:36:21 GMT; path=/;
 ```
 
 **SameSite 选项通常有 Strict、Lax 和 None 三个值。**
+
+- Strict 最为严格。如果 SameSite 的值是 Strict，那么浏览器会完全禁止第三方 Cookie。简言之，如果你从极客时间的页面中访问 InfoQ 的资源，而 InfoQ 的某些 Cookie
+- Lax 相对宽松一点。在跨站点的情况下，从第三方站点的链接打开和从第三方站点提交 Get 方式的表单这两种方式都会携带 Cookie。但如果在第三方站点中使用 Post 方法，或者通过 img、iframe 等标签加载的 URL，这些场景都不会携带 Cookie。
+- 而如果使用 None 的话，在任何情况下都会发送 Cookie 数据。
+
+对于防范 CSRF 攻击，我们可以针对实际情况将一些关键的 Cookie 设置的 Strict 或者 Lax 模式，这样在跨站点请求时，这些关键的 Cookie 就不会被发送到服务器，从而使得黑客的 CSRF 攻击失效。
 
 ### 参考资料
 
