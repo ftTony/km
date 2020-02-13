@@ -67,6 +67,7 @@ CSRF（Cross Site Request Forgery），中文是跨站点请求伪造。CSRF 攻
 - 验证 HTTP Referer 字段；
 - 在请求地址中添加 token 并验证；
 - 在 HTTP 头中自定义属性并验证;
+- 充分利用好 Cookie 的 SameSite 属性;
 
 #### 3.1 验证 http referer 字段
 
@@ -89,6 +90,23 @@ CSRF 攻击之所能够成功，是为黑客可以完全伪造用户的请求，
 #### 3.3 在 HTTP 头中自定义属性并验证
 
 这种方法也是使用 token 并进行验证，和上一种方法不同的是，这里并不是把 token 以参数的形式置于 HTTP 请求之中，而是把它放到 HTTP 头中自定义的属性里。通过 XMLHttpRequest 这个类，可以一次性给所有该类请求加上 csrftoken 这个 HTTP 头属性，并把 token 值放入其中。这样解决了上种方法在请求中加入 token 的不便，同时，通过 XMLHttpRequest 请求的地址不会被记录到浏览器的地址栏，也不用担心 token 会透过 Referer 泄露到其他网站中去。 然而这种方法的局限性非常大。XMLHttpRequest 请求通常用于 Ajax 方法中对于页面局部的异步刷新，并非所有的请求都适合用这个类来发起，而且通过该类请求得到的页面不能被浏览器所记录下，从而进行前进，后退，刷新，收藏等操作，给用户带来不便。另外，对于没有进行 CSRF 防护的遗留系统来说，要采用这种方法来进行防护，要把所有请求都改为 XMLHttpRequest 请求，这样几乎是要重写整个网站，这代价无疑是不能接受的。
+
+#### 3.4 充分利用好 Cookie 的 SameSite 属性
+
+通常 CSRF 攻击都是从第三方站点发起的，要防止 CSRF 攻击，我们最好能实现从第三方站点发送请求时禁止 Cookie 的发送，因此在浏览器通过不同来源发送 HTTP 请求时，有如下区别：
+
+- 如果是从第三方站发起的请求，那么需要浏览器禁止发送某些关键 Cookie 数据到服务器；
+- 如果是同一个站点发起的请求，那么就需要保证 Cookie 数据正常发送。
+
+Cookie 中的 SameStie 属性是为了解决这个问题的，通过使用 SameSite 可以有效地降低 SCRF 攻击的风险。
+
+在 HTTP 响应头中，通过 set-cookie 字段设置 Cookie 时，可以带上 SameSite 选项，如下：
+
+```
+set-cookie: 1P_JAR=2019-10-20-06; expires=Tue, 19-Nov-2019 06:36:21 GMT; path=/; domain=.google.com; SameSite=none
+```
+
+**SameSite 选项通常有 Strict、Lax 和 None 三个值。**
 
 ### 参考资料
 
