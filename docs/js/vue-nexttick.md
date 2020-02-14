@@ -430,6 +430,8 @@ else if (!isIE && typeof MutationObserver !== 'undefined' && (
 } 
 ```
 
+如上代码，首先也是判断我们的设备是否支持MutationObserver对象，如果支持的话，我们就会创建一个MutationObserver构造函数，并且把flushCallbacks函数当做callback的回调，然后我们会创建一个文本节点，之后会使用MutationObserver对象的observe来监听该文本节点，如果广西节点的内容有任何变动的话，它就会触发flushCallbacks回调函数。那么要怎么样触发呢？在该代码内有一个timerFunc函数，如果我们触发该函数，会导致文本节点的数据发生改变，进而触发MutationObserver构造函数。
+
 #### 5.3 setImmediate 监听
 
 基本代码如下：
@@ -441,6 +443,8 @@ else if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
   }
 } 
 ```
+
+如上面的Promise和MutationObserver都不支持的话，我们继续会判断设备是否支持setImmediate，setImmediate属于macrotasks(宏任务)的。该任务会在一个宏任务里执行回调队列。
 
 #### 5.4 使用setTimeout 做降级处理
 
@@ -454,6 +458,8 @@ else {
   }
 }
 ```
+
+如果我们上面三种情况, 设备都不支持的话, 我们会使用 setTimeout 来做降级处理, 实现延迟效果。
 
 ### 参考资料
 
