@@ -323,6 +323,21 @@ function fullScreenFun(){
 }
 ```
 
+#### 1.26 判断手机开屏/息屏
+
+`visibilitychange`：浏览器标签页隐藏或显示的时候会触发visibilitychange事件
+
+```
+document.addEventListener('visibilitychange',()=>{
+    console.log(document.visibilityState)
+    if(document.visibilityState === 'hidden'){
+        console.log('息屏时间')
+    }else if(document.visibilityState === 'visiblie' && vm.hidden){
+        console.log('开屏时间')
+    }
+})
+```
+
 ### 参考资料
 
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
