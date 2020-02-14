@@ -214,6 +214,65 @@ options 类型有如下：
 - childList：子节点的变动。
 - attributes：属性的变动。
 - charatcterData：节点内容或节点文本的变动。
+- subtree：所有后代节点的变动。
+
+需要观察哪一种变动类型，需要在options对象中指定为true即可；但是如果设置subtree的变动，必须同时指定childList，attributes和characterData中的一种或多种。
+
+示例代码如下：
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MutationObserver实例的方法</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li>tony</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+    var MutationObserver = window.MutationObserver || window.WebkitMutationObserver || window.MozMutationObserver;
+    var list = document.querySelector('ul');
+    var Observer = new MutationObserver(function(mutations,instance){
+        console.log(mutations);         // 打印mutations
+        console.log(instance);      // 打印 instance
+        mutations.forEach(function(mutation){
+            console.log(mutation);     // 打印mutation
+        });
+    });
+    Observer.observe(list,{
+        childList:true,     //  子节点的变动
+        characterData: true, // 节点内容或节点文本变动
+        attributes: true,       // 属性变化时
+        subtree:true        // 所有后代节点的变动
+    });
+    list.childNodes[0].data = "小武子";
+    var li = document.createElement('li');
+    var textNode = document.createTextNode('肖能武');
+    li.appendChild(textNode);
+    list.appendChild(li);
+    // 设置节点的属性，会触发回调函数
+    list.setAttribute('data-value', 'tugenhua111');
+
+    // 重新设置属性，会触发回调函数
+    list.setAttribute('data-value', 'tugenhua222');
+
+    // 删除属性，也会触发回调函数
+    list.removeAttribute('data-value');
+    </script>
+</body>
+</html>
+```
+
+打印相应属性如下：
+
+![images](mutationObserver.png)
+
+如上就是MutationObserver的基本使用，它能监听子节点的变动、属性的变动、节点内容或节点文本的变动及所有后代节点的变动。
 
 ### 五、nextTick 源码分析
 
@@ -265,11 +324,6 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
   const p = Promise.resolve()
   timerFunc = () => {
     p.then(flushCallbacks)
-    // In problematic UIWebViews, Promise.then doesn't completely break, but
-    // it can get stuck in a weird state where callbacks are pushed into the
-    // microtask queue but the queue isn't being flushed, until the browser
-    // needs to do some other work, e.g. handle a timer. Therefore we can
-    // "force" the microtask queue to be flushed by adding an empty timer.
     if (isIOS) setTimeout(noop)
   }
   isUsingMicroTask = true
@@ -293,9 +347,6 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
   }
   isUsingMicroTask = true
 } else if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
-  // Fallback to setImmediate.
-  // Technically it leverages the (macro) task queue,
-  // but it is still a better choice than setTimeout.
   timerFunc = () => {
     setImmediate(flushCallbacks)
   }
@@ -357,6 +408,26 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
 基本代码如下：
 
 ```
+else if (!isIE && typeof MutationObserver !== 'undefined' && (
+  isNative(MutationObserver) ||
+  // PhantomJS and iOS 7.x
+  MutationObserver.toString() === '[object MutationObserverConstructor]'
+)) {
+  // Use MutationObserver where native Promise is not available,
+  // e.g. PhantomJS, iOS7, Android 4.4
+  // (#6466 MutationObserver is unreliable in IE11)
+  let counter = 1
+  const observer = new MutationObserver(flushCallbacks)
+  const textNode = document.createTextNode(String(counter))
+  observer.observe(textNode, {
+    characterData: true
+  })
+  timerFunc = () => {
+    counter = (counter + 1) % 2
+    textNode.data = String(counter)
+  }
+  isUsingMicroTask = true
+} 
 ```
 
 #### 5.3 setImmediate 监听
@@ -364,6 +435,11 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
 基本代码如下：
 
 ```
+else if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
+  timerFunc = () => {
+    setImmediate(flushCallbacks)
+  }
+} 
 ```
 
 #### 5.4 使用setTimeout 做降级处理
@@ -371,6 +447,12 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
 基本代码如下：
 
 ```
+else {
+  // Fallback to setTimeout.
+  timerFunc = () => {
+    setTimeout(flushCallbacks, 0)
+  }
+}
 ```
 
 ### 参考资料
