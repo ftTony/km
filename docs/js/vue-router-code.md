@@ -981,6 +981,7 @@ export default {
 - [VueRouter 源码深度解析](https://juejin.im/post/5b5697675188251b11097464)
 - [vue-router 源码分析-整体流程](https://github.com/DDFE/DDFE-blog/issues/9)
 - [vue-router 源码分析-整体流程](https://github.com/dwqs/blog/issues/53)
+- [带你全面分析vue-router源码（万字长文）](https://juejin.im/post/5e456513f265da573c0c6d4b)
 
 ## 联系作者
 
