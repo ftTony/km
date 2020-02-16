@@ -14,7 +14,20 @@
 
 ### 一、理解 Vue 中的 computed 用法
 
+computed是计算属性的；它会根据所依赖的数据动态显示新计算结果，该计算结果会被缓存起来。computed的值在getter执行后会被缓存的。
+
+#### 1.1 computed应用场景
+
+- 适用于一些重复使用数据
+- 如果我们需要的数据依赖于其他的数据的话，我们可以把数据设计为computed中。
+
 ### 二、Vue 中的 watch 的用法
+
+watch它是一个对data的数据监听回调，当依赖的data的数据变化时，会执行回调。在回调中会传入newVal和oldVal两个参数。
+
+Vue实例将会在实例化时调用$watch()，他会遍历watch对象的每一个属性。
+
+#### 2.1 watch的使用场景
 
 ### 三、computed 和 watch 的区别
 
