@@ -6,6 +6,46 @@
 
 ## 内容
 
+- 什么是认证
+- 什么是授权
+- 什么是凭证
+- 什么是Cookie
+- 什么是Session
+- Cookie和Session的区别
+- 什么是Token（令牌）
+- Token和Session的区别
+- 什么是JWT
+- Token和JWT的区别
+- 常见的前后端端鉴权方式
+- 常见的加密算法
+- 常见问题
+
+### 一、什么是认证
+
+### 二、什么是授权
+
+### 三、什么是凭证
+
+### 四、什么是Cookie
+
+### 五、什么是Session
+
+### 六、Cookie和Session的区别
+
+### 七、什么是Token（令牌）
+
+### 八、Token和Session的区别
+
+### 九、什么是JWT
+
+### 十、Token和JWT的区别
+
+### 十一、常见的前后端端鉴权方式
+
+### 十二、常见的加密算法
+
+### 十三、常见问题
+
 ### 参考资料
 
 - [彻底理解 cookie、session、token](https://mp.weixin.qq.com/s/1Kh18uyEJzM21mc2l5MMCg)
