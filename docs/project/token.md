@@ -107,20 +107,32 @@
 5. 客户端每次向服务端请求资源的时候需要带着服务端签发的 token
 6. 服务端收到请求，然后去验证客户端请求里面带着的 token ，如果验证成功，就向客户端返回请求的数据
 
+- **每一次请求都需要携带 token，需要把 token 放到 HTTP 的 Header 里**
+- **基于 token 的用户认证是一种服务端无状态的认证方式，服务端不用存放 token 数据。用解析 token 的计算时间换取 session 的存储空间，从而减轻服务器的压力，减少频繁的查询数据库**
+- **token 完全由应用管理，所以它可以避开同源策略**
+
 #### 7.2 Refresh Token
 
 - 另外一种token——refresh token
-- refresh token是专用于刷新
+- refresh token是专用于刷新access token 的 token。如果没有 refresh token，也可以刷新 access token，但每次刷新都要用户输入登录用户名与密码，会很麻烦。有了 refresh token，可以减少这个麻烦，客户端直接用 refresh token 去更新 access token，无需用户进行额外的操作。
 
 ![images](token03.png)
 
+- Access Token 的有效期比较短，当 Acesss Token 由于过期而失效时，使用 Refresh Token 就可以获取到新的 Token，如果 Refresh Token 也失效了，用户就只能重新登录了。
+- Refresh Token 及过期时间是存储在服务器的数据库中，只有在申请新的 Acesss Token 时才会验证，不会对业务接口响应时间造成影响，也不需要向 Session 一样一直保持在内存中以应对大量的请求。
+
 ### 八、Token和Session的区别
 
-- Session是一种记录服务器和客户会话状态的机制
+- Session是一种**记录服务器和客户会话状态的机制，使服务端有状态化，可以记录会话信息**。而 Token 是**令牌，访问资源接口（API）时所需要的资源凭证。Token 使服务端无状态化，不会存储会话信息**。
+- Session 和 Token 并不矛盾，作为身份认证 Token 安全性比 Session 好，因为每一个请求都有签名还能防止监听以及重放攻击，而 Session 就必须依赖链路层来保障通讯安全了。**如果你需要实现有状态的会话，仍然可以增加 Session 来在服务器端保存一些状态**。
+- 所谓 Session 认证只是简单的把 User 信息存储到 Session 里，因为 SessionID 的不可预测性，暂且认为是安全的。而 Token ，如果指的是 OAuth Token 或类似的机制的话，提供的是 认证 和 授权 ，认证是针对用户，授权是针对 App 。其目的是让某 App 有权利访问某用户的信息。这里的 Token 是唯一的。不可以转移到其它 App上，也不可以转到其它用户上。Session 只提供一种简单的认证，即只要有此 SessionID ，即认为有此 User 的全部权利。是需要严格保密的，这个数据应该只保存在站方，不应该共享给其它网站或者第三方 App。所以简单来说：**如果你的用户数据可能需要和第三方共享，或者允许第三方调用 API 接口，用 Token 。如果永远只是自己的网站，自己的 App，用什么就无所谓了**。
 
 ### 九、什么是JWT
 
 #### 9.1 生成JW工具
+
+- [jwt](http://jwt.io/)
+- [jsonwebtoken](https://www.jsonwebtoken.io/)
 
 #### 9.2 JWT的原理
 
