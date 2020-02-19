@@ -527,11 +527,19 @@ body{-webkit-text-size-adjust: 100%!important;}
 **IOS 键盘弹起挡住原来的视图**
 
 - 可以通过监听移动端软键盘弹起 Element.scrolltoViewlfNeeded（Boolean）方法用来将不在浏览器窗口的可见域内的元素滚动到浏览器窗口的可见区域。如果该元素已经在浏览器窗口的可见区域内，则不会发生滚动。
+- true，则元素将在其所在滚动以区可视域中剧中对齐。
+- false，则元素将与其所在滚动区的可视区域最近的边缘对齐。根据可见区域最靠近元素的哪个边缘，元素的顶部将与可见区域的顶部边缘对准，或者元素的底部边缘将与可见区域的底部边缘对准。
 
 ```
 window.addEventListener('resize',function(){
     if(document.activeElement.tagName ==='INPUT' || document.activeElement.tagName === 'TEXTAREA'){
-
+        window.setTimeout(function(){
+            if('scrollIntoView' in document.activeElement){
+                document.activeElement.scrollIntoView(false)
+            }else{
+                document.activeElement.scrollIntoViewIfNeeded(false)
+            }
+        },0)
     }
 },false)
 ```
@@ -542,9 +550,21 @@ IOS 中 input 键盘事件 keyup、keydown 等支持不是很好，用 input 监
 
 **IOS12 输入框难以点击获取焦点，弹不出软键盘**
 
+定位找到问题是 fastclick.js 对 IOS12 的兼容性，可在 fastclick.js 源码或者 main.js 做以下修改
+
 **IOS 键盘收起时页面没用回落，底部会留白**
 
+通过监听键盘回落时间滚动到原来位置
+
+```
+window.addEventListener('focusout',function(){
+
+})
+```
+
 **IOS 下 fixed 失效的原因**
+
+软键盘唤起后，页面的 fixed 元素将失效，变成了 absolute，所以当页面超过一屏且滚动时，失效的 fixed 元素就会跟随滚动了。
 
 #### 40. IOS 上拉边界下拉出现空白
 
