@@ -522,19 +522,51 @@ body{-webkit-text-size-adjust: 100%!important;}
 
 - 整个页面用 rem 或者百分比布局
 
-#### 39. IOS 键盘弹起挡住原来的视图
+#### 39. 软键盘问题
 
-- 可以通过监听移动端软键盘弹起 Element
+**IOS 键盘弹起挡住原来的视图**
 
-#### 40. onkeyUp 和 onKeydown 兼容性问题
+- 可以通过监听移动端软键盘弹起 Element.scrolltoViewlfNeeded（Boolean）方法用来将不在浏览器窗口的可见域内的元素滚动到浏览器窗口的可见区域。如果该元素已经在浏览器窗口的可见区域内，则不会发生滚动。
+
+```
+window.addEventListener('resize',function(){
+    if(document.activeElement.tagName ==='INPUT' || document.activeElement.tagName === 'TEXTAREA'){
+
+    }
+},false)
+```
+
+**onkeyUp 和 onKeydown 兼容性问题**
 
 IOS 中 input 键盘事件 keyup、keydown 等支持不是很好，用 input 监听键盘 keyup 事件，在安卓手机浏览器中没有问题，但是在 IOS 手机浏览器中用输入法输入之后，并未立刻相应 keyup 事件
 
-#### 41. IOS12 输入框难以点击获取焦点，弹不出软键盘
+**IOS12 输入框难以点击获取焦点，弹不出软键盘**
 
-#### 42. IOS 下 fixed 失效的原因
+**IOS 键盘收起时页面没用回落，底部会留白**
 
-#### 43. iOS 上拉边界下拉出现空白
+**IOS 下 fixed 失效的原因**
+
+#### 40. IOS 上拉边界下拉出现空白
+
+手指按住屏幕下拉，屏幕顶部会多出一块白色区域。手指按住屏幕上拉，底部多出一声白色区域。
+
+在 IOS 中，手指按住
+
+**解决方案**
+
+```
+document.body.addEventListener(
+    'touchmove',
+    function(e){
+        if(e._isScroller) return
+        // 阻止事件
+        e.preventDefault()
+    },
+    {
+        passive:false
+    }
+)
+```
 
 ### 参考资料
 
