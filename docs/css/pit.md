@@ -522,6 +522,20 @@ body{-webkit-text-size-adjust: 100%!important;}
 
 - 整个页面用 rem 或者百分比布局
 
+#### 39. IOS 键盘弹起挡住原来的视图
+
+- 可以通过监听移动端软键盘弹起 Element
+
+#### 40. onkeyUp 和 onKeydown 兼容性问题
+
+IOS 中 input 键盘事件 keyup、keydown 等支持不是很好，用 input 监听键盘 keyup 事件，在安卓手机浏览器中没有问题，但是在 IOS 手机浏览器中用输入法输入之后，并未立刻相应 keyup 事件
+
+#### 41. IOS12 输入框难以点击获取焦点，弹不出软键盘
+
+#### 42. IOS 下 fixed 失效的原因
+
+#### 43. iOS 上拉边界下拉出现空白
+
 ### 参考资料
 
 - [移动端 H5 页面开发坑点指南](https://juejin.im/post/5dafc3df5188257a63539c64)
