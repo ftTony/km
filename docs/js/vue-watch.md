@@ -129,6 +129,8 @@ Vue 实例将会在实例化时调用`$watch()`，他会遍历 watch 对象的�
 </html>
 ```
 
+如上代码，当我们在 input 输入框中输入年龄后，比如 32，那么 watch 就能对'age'这个属性进行监听，当值发生改变的时候，就会把最新的计算结果赋值给'basicMsg'属性值，因此最后在页面上就会显示'basicMsg'属性值了。
+
 #### 3.2 handler 方法及 immediate 属性
 
 watch 有一个特点是：第一次寝化页面的时候，是不会去执行 age 这个属性监听的，只有当 age 值发生改变的时候才会执行监听计算。因此我们上面第一次初始化页面的时候，'basicMsg'属性默认为空字符串。那么我们现在想要第一次初始化页面的时候也希望它能够执行'age'进行监听，最后能把结果返回给'basicMsg'值来。因此我们需要修改下我们的 watch 的方法，需要引入 handler 方法和 immediate 属性，代码如下所示：
@@ -168,9 +170,11 @@ watch 有一个特点是：第一次寝化页面的时候，是不会去执行 a
 </html>
 ```
 
+如上代码，我们给我们的 age 属性绑定了一个 handler 方法。其实我们之前的 watch 当中的方法默认就是这个 handler 方法。但是在这里我们使用了 immediate:true 属性，含义是：如果在 watch 里面声明了 age 的话，就会立即执行里面的 handler 方法。如果 immediate 值为 false 的话，那么效果就和之前的一样，就不会立即执行 handler 这个方法的。因此设置了 immediate:true 的话，第一次页面加载的时候也会执行该 handler 函数的。即第一次 basicMsg 有值。
+
 #### 3.3 理解 deep 属性
 
-deep 属性作用是否深度监听某个对象的值，该值默认为 false。
+deep 属性作用是否深度监听某个对象的值，该值默认为 false。代码如下：
 
 ```
 <!DOCTYPE html>
