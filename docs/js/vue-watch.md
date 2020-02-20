@@ -91,30 +91,137 @@ watch 它是一个对 data 的数据监听回调，当依赖的 data 的数据�
 
 Vue 实例将会在实例化时调用`$watch()`，他会遍历 watch 对象的每一个属性。
 
-#### 2.1 watch 的使用场景
+#### 3.1 watch 的使用场景
 
 当在 data 的某个数据发生变化时，我们需要做一些操作，或者当需要在数据变化时执行异步或开销较大的操作时，我们就可以使用 watch 来进行监听。
 
-#### 2.2 handler 方法及 immediate 属性
+普通代码如下：
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <title>vue</title>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="https://cn.vuejs.org/js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>空智个人信息情况: {{ basicMsg }}</p>
+    <p>空智今年的年龄: <input type="text" v-model="age" /></p>
+  </div>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        basicMsg: '',
+        age: 31,
+        single: '单身'
+      },
+      watch: {
+        age(newVal, oldVal) {
+          this.basicMsg = '今年' + newVal + '岁' + ' ' + this.single;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+#### 3.2 handler 方法及 immediate 属性
 
 watch 有一个特点是：第一次寝化页面的时候，是不会去执行 age 这个属性监听的，只有当 age 值发生改变的时候才会执行监听计算。因此我们上面第一次初始化页面的时候，'basicMsg'属性默认为空字符串。那么我们现在想要第一次初始化页面的时候也希望它能够执行'age'进行监听，最后能把结果返回给'basicMsg'值来。因此我们需要修改下我们的 watch 的方法，需要引入 handler 方法和 immediate 属性，代码如下所示：
 
-#### 2.3 理解 deep 属性
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <title>vue</title>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="https://cn.vuejs.org/js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>空智个人信息情况: {{ basicMsg }}</p>
+    <p>空智今年的年龄: <input type="text" v-model="age" /></p>
+  </div>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        basicMsg: '',
+        age: 31,
+        single: '单身'
+      },
+      watch: {
+        age: {
+          handler(newVal, oldVal) {
+            this.basicMsg = '今年' + newVal + '岁' + ' ' + this.single;
+          },
+          immediate: true
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+#### 3.3 理解 deep 属性
 
 deep 属性作用是否深度监听某个对象的值，该值默认为 false。
 
-### 三、computed 和 watch 的区别
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <title>vue</title>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="https://cn.vuejs.org/js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>空智个人信息情况: {{ basicMsg }}</p>
+    <p>空智今年的年龄: <input type="text" v-model="obj.age" /></p>
+  </div>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        obj: {
+          basicMsg: '',
+          age: 31,
+          single: '单身'
+        }
+      },
+      watch: {
+        'obj': {
+          handler(newVal, oldVal) {
+            this.basicMsg = '今年' + newVal.age + '岁' + ' ' + this.obj.single;
+          },
+          immediate: true,
+          deep: true // 需要添加deep为true即可对obj进行深度监听
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+### 四、computed 和 watch 的区别
 
 `computed`：是计算属性，依赖其它属性值，并且 computed 的值有缓存，只有它依赖的属性值发生改变，下一次获取 computed 的值时才会重新计算 computed 的值；
 
 `watch`：更多的是「观察」的作用，类似于某些数据的监听回调，每当监听的数据变化时都会执行回调进行后续操作；
 
-### 四、运用的场景
+### 五、运用的场景
 
 - 当我们需要进行数值计算，并且依赖于其它数据时，应该使用 computed，因为可以利用 computed 的缓存特性，避免每次获取值时，都要重新计算；
 - 当我们需要在数据变化时执行异步或开销圈套的操作时，应该使用 watch，使用 watch 选项允许我们执行异步操作（访问一个 API），限制我们执行该操作的频率，并在我们得到最终结果前，设置中间状态。这些都是计算计算属性无法做到的。
 
-### 五、computed 的基本原理及源码实现
+### 六、computed 的基本原理及源码实现
 
 ### 参考资料
 
