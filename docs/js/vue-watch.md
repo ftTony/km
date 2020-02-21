@@ -249,6 +249,46 @@ initMixin(Vue);
 export default Vue;
 ```
 
+上面代码，会执行`this._init(options);`方法内部，因此会调用`vue/src/core/instance/init.js` 文件中的_init方法, 基本代码如下所示:
+
+```
+import { initState } from './state';
+export function initMixin (Vue: Class<Component>) {
+  Vue.prototype._init = function (options?: Object) {
+    .... 更多代码省略
+    initState(vm);
+    .... 更多代码省略
+  }
+}
+```
+
+继续执行initState(vm);中的代码了，因此会调用`vue/src/core/instance/state.js `中的文件代码，基本代码如下：
+
+```
+import config from '../config'
+import Watcher from '../observer/watcher'
+import Dep, { pushTarget, popTarget } from '../observer/dep'
+
+// ..... 更多代码省略
+
+export function initState (vm: Component) {
+  vm._watchers = []
+  const opts = vm.$options
+  if (opts.props) initProps(vm, opts.props)
+  if (opts.methods) initMethods(vm, opts.methods)
+  if (opts.data) {
+    initData(vm)
+  } else {
+    observe(vm._data = {}, true /* asRootData */)
+  }
+  if (opts.computed) initComputed(vm, opts.computed)
+  if (opts.watch && opts.watch !== nativeWatch) {
+    initWatch(vm, opts.watch)
+  }
+}
+```
+
+
 
 打开源码文件`initComputed`中的文件代码，initComputed函数代码如下：
 
