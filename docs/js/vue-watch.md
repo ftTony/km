@@ -7,10 +7,11 @@
 ## 内容
 
 - [理解 Vue 中的 computed 用法](#一、理解-vue-中的-computed-用法)
-- [Vue 中的 watch 的用法](#二、vue-中的-watch-的用法)
-- [computed 和 watch 的区别](#三、computed-和-watch-的区别)
-- [运用的场景](#四、运用的场景)
-- [computed 的基本原理及源码实现](#五、computed-的基本原理及源码实现)
+- [computed 和 methods 的区别](#二、computed-和-methods-的区别)
+- [Vue 中的 watch 的用法](#三、vue-中的-watch-的用法)
+- [computed 和 watch 的区别](#四、computed-和-watch-的区别)
+- [运用的场景](#五、运用的场景)
+- [computed 的基本原理及源码实现](#六、computed-的基本原理及源码实现)
 
 ### 一、理解 Vue 中的 computed 用法
 
