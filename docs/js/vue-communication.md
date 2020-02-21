@@ -527,6 +527,7 @@ export default{
 - [vue 组件间通信六种方式（完整版）](https://juejin.im/post/5cde0b43f265da03867e78d3)
 - [vue 系列---Vue 组件化的实现原理（八）](https://www.cnblogs.com/tugenhua0707/p/11761280.html)
 - [vue 中 8 种组件通信方式, 值得收藏!](https://juejin.im/post/5d267dcdf265da1b957081a3)
+- [Vue组件间通信方式](http://www.zhufengpeixun.cn/train/vue-info/component.html)
 
 ## 联系作者
 
