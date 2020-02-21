@@ -24,7 +24,7 @@ Animations 功能与 Transitions 功能相同，都是通过改变元素的属�
 
 - name：定义使用的动画名称，需要和@keyframes 声明的动画名称一致
 - duration：用来指定元素播放动画所持续的时间长
-- timeing-function：动画的播放方式
+- timing-function：动画的播放方式
 - delay：指定元素动画开始播放的时间
 - iterations-count：指定元素播放的循环次数
 - direction：指定元素动画播放的方向，包括单向循环和双向循环
