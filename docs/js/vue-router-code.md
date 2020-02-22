@@ -154,12 +154,8 @@ new Vue({
 ```
 
 import { install } from './install'
-i// ...
+// ...
 import { inBrowser } from './util/dom'
-import { cleanPath } from './util/path'
-import { createMatcher } from './create-matcher'
-import { normalizeLocation } from './util/location'
-import { supportsPushState } from './util/push-state'
 
 import { HashHistory } from './history/hash'
 import { HTML5History } from './history/html5'
@@ -239,6 +235,8 @@ if (inBrowser && window.Vue) {
 
 #### 3.2 install
 
+利用`Vue.js`提供的插件机制`.use(plugin)`来安装`VueRouter`，而这个插件机制则会调用该`plugin`对象的`install`方法
+
 ```
 // 引入router-view router-link 组件
 import View from './components/view'
@@ -310,6 +308,11 @@ export function install (Vue) {
 #### 3.3 match 匹配函数
 
 匹配函数是由`src/create-matcher.js`中的`createMatcher`创建的，内部进行路由地址路由对象的转换、路由记录的映射、路由参数处理等操作
+
+路由匹配器`macther`是由`create-matcher`生成一个对象，其将传入VueRouter类的路由记录进行内部转换，对外提供根据location匹配路由方法——match、注册路由方法——addRoutes。
+
+- match方法：根据内部的路由映射匹配location对应的路由对象route
+- addRoutes方法：将路由记录添加matcher实例的路由映射中
 
 ```
 export function createMatcher (
@@ -654,16 +657,21 @@ export class History {
 
 #### 3.5 transitionTo
 
+使用`transitionTo`触发路由变化
+
 ```
 transitionTo (
     location: RawLocation,
     onComplete?: Function,
     onAbort?: Function
   ) {
+      //  获取匹配的路上信息
     const route = this.router.match(location, this.current)
+    // 确认切换路由
     this.confirmTransition(
       route,
       () => {
+
         this.updateRoute(route)
         onComplete && onComplete(route)
         this.ensureURL()
@@ -693,6 +701,8 @@ transitionTo (
 
 #### 3.6 confirmTransition 方法
 
+根据路由变化，更改相应视图
+
 ```
 // 确认过滤
 confirmTransition (route: Route, onComplete: Function, onAbort?: Function) {
@@ -714,6 +724,7 @@ confirmTransition (route: Route, onComplete: Function, onAbort?: Function) {
       }
       onAbort && onAbort(err)
     }
+    //  如果路由没有变化，则放弃视图变化
     if (
       isSameRoute(route, current) &&
       // in the case the route map has been dynamically appended to
@@ -743,12 +754,16 @@ confirmTransition (route: Route, onComplete: Function, onAbort?: Function) {
     )
 
     this.pending = route
+    // 迭代器，用于执行queue中的导航守卫钩子
     const iterator = (hook: NavigationGuard, next) => {
+        // 路由不相等就不跳转路由
       if (this.pending !== route) {
         return abort()
       }
       try {
+        // 执行钩子
         hook(route, current, (to: any) => {
+            
           if (to === false || isError(to)) {
             // next(false) -> abort navigation, ensure current URL
             this.ensureURL(true)
@@ -775,7 +790,7 @@ confirmTransition (route: Route, onComplete: Function, onAbort?: Function) {
       }
     }
 
-    // 执行队列
+    // 执行异步函数
     runQueue(queue, iterator, () => {
       const postEnterCbs = []
       const isValid = () => this.current === route
@@ -784,6 +799,7 @@ confirmTransition (route: Route, onComplete: Function, onAbort?: Function) {
       const enterGuards = extractEnterGuards(activated, postEnterCbs, isValid)
       const queue = enterGuards.concat(this.router.resolveHooks)
       runQueue(queue, iterator, () => {
+          // 跳转完成
         if (this.pending !== route) {
           return abort()
         }
