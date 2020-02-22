@@ -309,7 +309,7 @@ export function install (Vue) {
 
 #### 3.3 match 匹配函数
 
-匹配函数是由`src/create-matcher.js`中的`createMatcher`创建的
+匹配函数是由`src/create-matcher.js`中的`createMatcher`创建的，内部进行路由地址路由对象的转换、路由记录的映射、路由参数处理等操作
 
 ```
 export function createMatcher (
@@ -813,7 +813,11 @@ confirmTransition (route: Route, onComplete: Function, onAbort?: Function) {
 
 #### 3.6 router-view 组件
 
-`router-view`组件比较简单，所以这里就先来分析它，他是在源码的`src/components/view.js`中定义的：
+router-view是一个函数式组件不存在自己的组件实例，只负责调用父组组件上存储的`keepAlive`、`$route.match`等相关的属性/方法来控制路由对应的组件的渲染情况。
+
+router-view组件可以嵌套来配合实现嵌套路由，其自身所在的页面位置最终是其匹配上的路由组件所挂载的位置。
+
+相关代码如下：
 
 ```
 export default {
@@ -830,9 +834,11 @@ export default {
 }
 ```
 
-从上面代码看，逻辑还是比较简单的，拿到匹配的组件进行渲染就可以了。
-
 #### 3.7 router-link 组件
+
+router-link是一个普通组件，内部取消了`a标签`的默认跳转行为，并控制了组件与`control`、`meta`等按键同时存在的兼容性问题，提供了当前激活路由切尔西的样式类；
+
+通过`to`来决定点击事件跳转的目标路由，通过`append``replace`等属性改变默认路由跳转的行为。
 
 导航链接组件，他在源码的`src/components/link.js`中定义的：
 
@@ -968,6 +974,27 @@ export default {
         return h(this.tag, data, this.$slots.default)
     }
   }
+}
+
+// 统一处理事件
+
+function guardEvent (e) {
+  // don't redirect with control keys
+  if (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey) return
+  // don't redirect when preventDefault called
+  if (e.defaultPrevented) return
+  // don't redirect on right click
+  if (e.button !== undefined && e.button !== 0) return
+  // don't redirect if `target="_blank"`
+  if (e.currentTarget && e.currentTarget.getAttribute) {
+    const target = e.currentTarget.getAttribute('target')
+    if (/\b_blank\b/i.test(target)) return
+  }
+  // this may be a Weex event which doesn't have this method
+  if (e.preventDefault) {
+    e.preventDefault()
+  }
+  return true
 }
 
 ```
