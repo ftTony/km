@@ -238,6 +238,9 @@ keep-alive 的实现正是用到了 LRU 策略,将最近访问的组件 push 到
 
 **不同点：**
 
+- React依赖Virtual DOM，而Vue.js使用的是DOM模板。React采用的Virtual DOM会对渲染出来的结果做脏检查。
+- Vue.js在模板中提供了指令，过滤器等，可以非常方便，快捷地操作DOM。
+
 ### 参考资料
 
 - [公司要求会使用框架 vue，面试题会被问及哪些？](https://juejin.im/post/5cf495e96fb9a07ef5622025)
