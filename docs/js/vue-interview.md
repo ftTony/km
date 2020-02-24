@@ -241,6 +241,32 @@ keep-alive 的实现正是用到了 LRU 策略,将最近访问的组件 push 到
 - React依赖Virtual DOM，而Vue.js使用的是DOM模板。React采用的Virtual DOM会对渲染出来的结果做脏检查。
 - Vue.js在模板中提供了指令，过滤器等，可以非常方便，快捷地操作DOM。
 
+### 16.长列表性能优化
+
+Vue会通过Object.defineProperty对数据进行劫持，来实现视图响应的变化，然而有些时候我们的组件就是纯粹的数据展示，不会有任何改变，我们就不需要Vue来支持我们的数据，在大量数据展示的情况下，这能够很明显的减少组件初始的时间，那如何禁止Vue劫持我们的数据呢？可以通过Object.freeze方法来冻结一个对象，一旦被冻结的对象就再也不能被修改了。
+
+```
+export default{
+    data:()=>({
+        users:{}
+    }),
+    async created(){
+        const users = await axios.get('/api/users');
+        this.users = Object.freeze(users);
+    }
+}
+```
+
+### 17.事件的销毁
+
+Vue组件销毁时，会自动清理它与其它实例的连接，解绑它的全部指令及事件监听器，但是仅限于组件本身的事件。如果
+
+### 19.图片资源懒加载
+
+### 20. 优化无限列表性能
+
+如果你的应用存在非常长或者无限滚动的列表，
+
 ### 参考资料
 
 - [公司要求会使用框架 vue，面试题会被问及哪些？](https://juejin.im/post/5cf495e96fb9a07ef5622025)
