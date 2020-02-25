@@ -119,11 +119,11 @@ function convert(source,parentId=0){
 方法三：类似方法一，比方法浅析
 
 ```
-function convert(source,parentId=0){
+function convert(list){
     const obj = {}
     const res = []
     list.forEach(item=>{
-        obj[item] = item
+        obj[item.id] = item
     })
     list.forEach(item=>{
         if(item.parentId !==0){
@@ -163,13 +163,26 @@ class Node{
                 </div>
             </div>
             <div class="child-1-2">
+                <div class="child-1-2-1">
+                    b
+                </div>
             </div>
             <div class="child-1-3">
+                c
             </div>
         </div>
         <div class="child-2">
+            <div class="child-2-1">
+                d
+            </div>
+            <div class="child-2-2">
+                e
+            </div>
         </div>
         <div class="child-3">
+            <div class="child-3-1">
+                f
+            </div>
         </div>
     </div>
 </body>
@@ -177,10 +190,11 @@ class Node{
 
 **深度优先遍历**
 
-深度优先遍历DFS与树的先序遍历比较类似。假设初始状态是代码中所有顶点均未被访问，则从某个顶点v出发，首先访问该顶点然后
+深度优先遍历DFS与树的先序遍历比较类似。假设初始状态是代码中所有顶点均未被访问，则从某个顶点v出发，首先访问该顶点然后依次从它的各个未被访问的邻接点出发深度优先搜索遍历图，直至图中所有和v有
 
 ```
 /*深度优先遍历三种方式*/
+let deepTraversal1=(node)
 ```
 
 **广度优先遍历**
