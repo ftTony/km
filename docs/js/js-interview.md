@@ -439,7 +439,12 @@ EventTarget.prototype = {
             event.target = this;
         }
         if(this.handlers[event.type] instanceof Array){
-            
+            const handlers = this.handlers[event.type];
+            handlers.forEach((handler)=>{
+                handlers.forEach((handler)=>{
+                    handler(event);
+                })
+            })
         }
     },
     removeHandler:function(type,handler){
