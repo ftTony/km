@@ -103,6 +103,8 @@ p::first-letter{
 
 - [撸了这么多代码，你真的了解字体吗？](https://mp.weixin.qq.com/s/NHKSKMNEIjSY5Eo27-CI0Q)
 - [彻底搞懂 word-break、word-wrap、white-space](https://mp.weixin.qq.com/s/revhs0WEGiew-OSNQVMZGw)
+- [可能是最全的 “文本溢出截断省略” 方案合集](https://mp.weixin.qq.com/s/HhSdZ1RBSRZt9I84qZj6oA)
+- [轻轻松松实现高难度懒加载、吸顶、触底](https://mp.weixin.qq.com/s?__biz=MzA4Nzg0MDM5Nw==&mid=2247484430&idx=1&sn=5014aee107292b56abc8d794df0c5fb4&=41#wechat_redirect)
 - 《CSS 世界》
 
 ## 联系作者
