@@ -296,6 +296,8 @@ Math.max(...[14,3,77,30]);
 
 ### 26.setTimeout 倒计时为什么会出现误差？
 
+setTimeout()只是将事件插入了“任务队列”，必须等当前代码（执行栈）执行完，主线程才会去执行它指定的回调函数。要是当前代码消耗时间很长，也有可能要等很久。所以并没办法保证回调函数一定会在 setTimeout()指定的时间执行。所以，setTimeout 的第二个参数表示的是最少时间，并非是确切时间。
+
 ### 27.为什么 0.1 + 0.2 != 0.3 ?
 
 参考[js 精度丢失问题](https://km.xiaowuzi.info/js/js-precision.html)
@@ -330,6 +332,25 @@ Promise.all = function(promise){
     return new Promise((resolve,reject)=>{
         let index = 0;
         let result = [];
+        if(promise.length === 0){
+            resolve(result);
+        }else{
+            function processValue(i,data){
+                result[i] = data;
+                if(++index === promises.length){
+                    resolve(result);
+                }
+            }
+            for(let i =0; i<promises.length;i++){
+                // promises[i] 可能是普通值
+                Promise.resolve(promise[i]).then((data)=>{
+                    processValue(i,data);
+                },(err)=>{
+                    reject(err);
+                    return;
+                })
+            }
+        }
     })
 }
 ```
