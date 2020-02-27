@@ -204,6 +204,8 @@ DevTools 按函数显示内存分配明细。默认视图为 Heavy (Bottom Up)�
 - [V8 引擎垃圾内存回收原理解析](https://juejin.im/post/5dcb7f706fb9a04aad01615a)
 - [13 | 垃圾回收：垃圾数据是如何自动回收的？](https://time.geekbang.org/column/article/131233)
 - [Chrome 浏览器垃圾回收机制与内存泄漏分析](https://juejin.im/post/5db2beb8e51d455b450a64b4)
+- [解读 V8 GC Log（一）: Node.js 应用背景与 GC 基础知识](yq.aliyun.com/articles/592878)
+- [解读 V8 GC Log（二）: 堆内外内存的划分与 GC 算法](yq.aliyun.com/articles/592880)
 
 ## 联系作者
 
