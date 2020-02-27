@@ -247,17 +247,23 @@ this 的绑定规则有四种：默认绑定，隐匿绑定，显式绑定，new
 
 ### 18.谈谈你对原型的理解？
 
+请戳链接：[原型与原型链](https://km.xiaowuzi.info/js/es5-prototype.html)
+
 ### 19.什么是原型链？【原型链解决的是什么问题？】
 
-### 20.prototype 和 **proto** 区别是什么？
+### 20.prototype 和 `__proto__` 区别是什么？
 
 ### 21.使用 ES5 实现一个继承？
 
+请戳链接：[继承](https://km.xiaowuzi.info/js/es5-extends.html)
+
 ### 22.什么是深拷贝？深拷贝和浅拷贝有什么区别？
 
-参考[JS 的浅拷贝与深拷贝](https://km.xiaowuzi.info/js/js-clone.html)
+请戳链接：[JS 的浅拷贝与深拷贝](https://km.xiaowuzi.info/js/js-clone.html)
 
 ### 23.防抖和节流的区别是什么？防抖和节流的实现。
+
+请戳链接：[节流与防抖动](https://km.xiaowuzi.info/js/js-debounce.html)
 
 ### 24.取数组的最大值（ES5、ES6）
 
