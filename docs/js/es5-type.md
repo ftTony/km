@@ -283,6 +283,7 @@ function type(obj) {
 - 《你不知道的 JavaSctipt(中)》
 - [JS 类型转换的规则是什么？](https://juejin.im/post/5cbd1e33e51d45789161d053#heading-6)
 - [JavaScript 专题之类型判断(上) ](https://github.com/mqyqingfeng/Blog/issues/28)
+- [从一道面试题说起—js 隐式转换踩坑合集](https://juejin.im/post/5bc5c752f265da0a9a399a62)
 
 ## 联系作者
 

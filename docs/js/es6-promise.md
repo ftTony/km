@@ -1105,6 +1105,7 @@ console.log('end')
 - [JS 高级之手写一个 Promise,Generator,async 和 await【近 1W 字】](https://juejin.im/post/5df83b93f265da33f8652ccc)
 - [细说 JS 异步发展历程](https://juejin.im/post/5ce40e5ee51d4556be5b39b7)
 - [马蹄疾 | 详解 JavaScript 异步机制及发展历程(万字长文)](https://juejin.im/post/5cda1492e51d453a8f348c02)
+- [【建议星星】要就来 45 道 Promise 面试题一次爽到底(1.1w 字用心整理)](https://juejin.im/post/5e58c618e51d4526ed66b5cf)
 - 《你不知道的 javascript(中)》
 - 《深入浅出 Node.js》
 
