@@ -625,7 +625,6 @@ body {
 ### 参考资料
 
 - [《css 大法》之使用伪元素实现超实用的图标库](https://mp.weixin.qq.com/s/udMV3ocpdj7Ks9xmPV2xdg)
-- [《css 大法》之使用伪元素实现超实用的图标库](https://mp.weixin.qq.com/s/PxP62LlEl0jB7cVAPMjXyg)
 - [趣味 CSS3 效果挑战小汇总](https://juejin.im/post/5d3810fd6fb9a07ed13716d9)
 - [请收下这 72 个炫酷的 CSS 技巧](https://juejin.im/post/5e033c946fb9a0164b4ef360)
 - [45 个值得收藏的 CSS 形状](https://juejin.im/post/5cbd1f0ae51d456e5e035f45)
