@@ -197,13 +197,52 @@
 **HTML 代码**
 
 ```
-
+<div class="bagua"></div>
 ```
 
 **CSS 代码**
 
 ```
+body {
+    background-color: #ccc;
+}
 
+.bagua {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 100px auto;
+    border-radius: 50%;
+    background-color: #000;
+    background-image: linear-gradient(to right, transparent 50%, #fff 50%);
+}
+
+.bagua::before {
+    content: '';
+    position: absolute;
+    left: 75px;
+    width: 0;
+    height: 0;
+    padding: 25px;
+    border-radius: 50%;
+    border: 50px solid #000;
+    background: #fff;
+    background-clip: padding-box;
+}
+
+.bagua::after {
+    content: '';
+    position: absolute;
+    top: 150px;
+    left: 75px;
+    width: 0;
+    height: 0;
+    padding: 25px;
+    border-radius: 50%;
+    border: 50px solid #fff;
+    background: #000;
+    background-clip: padding-box;
+}
 ```
 
 ### 6.超级棒棒糖
@@ -360,12 +399,90 @@
 
 ```
 
-- 左下角
-- 右下角
-- 箭头
-- 梯形
-- 平行四边形
-- 星星 (6 角)
+### 16. 左下角
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+### 17. 右下角
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+### 18. 箭头
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+### 19. 梯形
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+### 20. 平行四边形
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+### 21. 星星 (6 角)
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
 - 星星 (5 角)
 - 五边形
 - 六边形
