@@ -250,13 +250,33 @@ body {
 **HTML 代码**
 
 ```
-
+<div class="linear"></div>
 ```
 
 **CSS 代码**
 
 ```
+.linear {
+    width: 300px;
+    height: 300px;
+    margin: 20px auto;
+    border-radius: 50%;
+    /* 重复性径向渐变 */
+    background-image: repeating-radial-gradient(red 0px, green 30px, orange 40px);
+    position: relative;
+}
 
+.linear::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 10px;
+    height: 500px;
+    border-radius: 0 0 10px 10px;
+    /* 线性渐变 */
+    background-image: linear-gradient(to top, red 20%, orange 40%, lightblue 60%, green 80%);
+}
 ```
 
 ### 7.跳动的字节
