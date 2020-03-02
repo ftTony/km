@@ -7,3 +7,4 @@
 - [字节跳动面试官：请你实现一个大文件上传和断点续传](https://juejin.im/post/5dff8a26e51d4558105420ed)
 - [字节跳动面试官，我也实现了大文件上传和断点续传](https://juejin.im/post/5e367f6951882520ea398ef6)
 - [复制黏贴上传图片和跨浏览器自动化测试](https://mp.weixin.qq.com/s/DLq_GIkdnuOayThfi3jI0A)
+- [从设计到实现前端 Uploader 基础类](https://juejin.im/post/5e5badce51882549652d55c2)

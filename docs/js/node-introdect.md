@@ -122,6 +122,7 @@ Node.js 是基于 Chrome V8 引擎构建的，由事件循环（Event Loop）分
 - [【面试】迄今为止把同步/异步/阻塞/非阻塞/BIO/NIO/AIO 讲的这么清楚的好文章（快快珍藏）](https://www.cnblogs.com/lixinjie/p/a-post-about-io-clearly.html)
 - [如何正确的学习 Node.js](https://github.com/i5ting/How-to-learn-node-correctly)
 - [Node.js 是什么？我为什么选择它？](https://mp.weixin.qq.com/s/Evzp8RdmEw_ZPwYlzjRJTg)
+- [Node.js 如何利用 Libuv 实现事件循环和异步](https://mp.weixin.qq.com/s/WyZ_DJqbjG82n0IzuAtNpQ)
 
 ## 联系作者
 
