@@ -72,8 +72,8 @@ let result = [{
         }
     ],
     id:2,
-    name:'部门B'
-    parent
+    name:'部门B',
+    parent:0
 }]
 ```
 
@@ -84,7 +84,7 @@ let result = [{
 ```
 function convert(list){
     const res = []
-    const map = list.reduce((res,v)=>(res[v.id]=v,res),{});         //  转换成对象数据结构
+    const map = list.reduce((res,v)=>{res[v.id]=v; return res},{});         //  转换成对象数据结构
     for(const item of list){
         if(item.parentId === 0){
             res.push(item)

@@ -47,6 +47,7 @@
 - [前端响应式布局原理与方案（详细版）](https://juejin.im/post/5caaa230e51d452b672f9703)
 - [吃透移动端 H5 响应式布局 ｜深入原理到目前最佳实践方案](https://juejin.im/post/5df59139518825123e7af459)
 - [移动端适配 - 基础知识篇](https://juejin.im/post/5e36c4fce51d450268661344)
+- [设计体系的响应式设计](https://zhuanlan.zhihu.com/p/109781992)
 
 ## 联系作者
 

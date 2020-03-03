@@ -629,13 +629,19 @@ body {
 **HTML 代码**
 
 ```
-
+<div id="trapezoid"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+#trapezoid {
+    border-bottom: 100px solid red;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    height: 0;
+    width: 100px;
+}
 ```
 
 ### 21. 平行四边形
@@ -643,13 +649,20 @@ body {
 **HTML 代码**
 
 ```
-
+<div class="parallel"></div>
 ```
 
 **CSS 代码**
 
 ```
-
+.parallel {
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 200px;
+    height: 100px;
+    background: lightblue;
+    transform: skew(-20deg, 0);
+}
 ```
 
 ### 22. 星星 (6 角)
