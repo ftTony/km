@@ -235,6 +235,73 @@ function DoublyLinkedList(){
 
 ### 六、LRU算法
 
+```
+作者：王天笑
+链接：https://zhuanlan.zhihu.com/p/60731274
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+/**
+ * @param {number} capacity
+ */
+var LRUCache = function(capacity) {
+  this.capacity = capacity;
+  this.tail = {};
+  this.head = {};
+  this.tail.prev = this.head;
+  this.head.next = this.tail;
+  this.map = new Map();
+};
+
+ /**
+ * @param {number} key
+ * @return {number}
+ */
+LRUCache.prototype.get = function(key) {
+  if (this.map.has(key)) {
+    const node = this.map.get(key);
+
+    node.prev.next = node.next;
+    node.next.prev = node.prev;
+
+     this.tail.prev.next = node;
+    node.prev = this.tail.prev;
+    node.next = this.tail;
+    this.tail.prev = node;
+
+     return node.value;
+  } else {
+    return -1;
+  }
+};
+
+ /**
+ * @param {number} key
+ * @param {number} value
+ * @return {void}
+ */
+LRUCache.prototype.put = function(key, value) {
+  if (this.get(key) !== -1) {
+    this.tail.prev.value = value;
+  } else {
+    // capacity 限制
+    if (this.capacity === this.map.size) {
+      this.map.delete(this.head.next.key);
+      this.head.next = this.head.next.next;
+      this.head.next.prev = this.head;
+    }
+
+     const newNode = { key, value };
+    this.map.set(key, newNode);
+
+     this.tail.prev.next = newNode;
+    newNode.prev = this.tail.prev;
+    newNode.next = this.tail;
+    this.tail.prev = newNode;
+  }
+};
+```
+
 ### 七、链表相关试题
 
 ## 参考资料
