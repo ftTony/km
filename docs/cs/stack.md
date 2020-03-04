@@ -66,6 +66,10 @@ class Stack{
         return this.items.length == 0;
     }
 
+    peek(){
+        return this.items[this.items.length-1];
+    }
+
     size (){
         return this.items.length;
     }
