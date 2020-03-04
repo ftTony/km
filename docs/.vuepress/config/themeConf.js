@@ -125,6 +125,7 @@ module.exports = {
                 collapsable: false,
                 children: [
                     'node-introdect',
+                    'node-eventloop',
                     'node-buffer',
                     'node-cheerio',
                     'node-cluster',
@@ -353,13 +354,14 @@ module.exports = {
                     'array',
                     'queue',
                     'stack',
+                    'heap',
                     'list',
                     'dictionary',
                     'hashtable',
                     'hash',
                     'trees-1',
                     'trees-2',
-                    'heap',
+                    'character',
                     'trie',
                     'graphs'
                 ]
