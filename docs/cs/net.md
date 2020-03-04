@@ -234,6 +234,7 @@ DHCP 动态主机设置协议（Dynamic Host Configuration Protocol）是一个�
 - [计算机网络太难？了解这一篇就够了](https://zhuanlan.zhihu.com/p/84316213)
 - [全面分析前端的网络请求](https://mp.weixin.qq.com/s/8mBJuv-1nHIo-2BU1X4MhA)
 - [进阶必备的网络基础](https://juejin.im/post/5c591fda6fb9a049dc02b1cc)
+- [前端需要了解的计算机网络知识， 这一篇就够了！(图文并茂，万字长文，点赞收藏哦！)](https://juejin.im/post/5e51febde51d4526c932b390)
 
 ## 联系作者
 
