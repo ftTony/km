@@ -295,6 +295,159 @@
 
 ### 加载动画
 
+#### 动画一
+
+**HTML 代码**
+
+```
+<div class="load-container">
+    <div class="boxLoading"></div>
+</div>
+```
+
+**CSS 代码**
+
+```
+.load-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+.load-container .boxLoading {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.load-container .boxLoading::before {
+    content: '';
+    width: 50px;
+    height: 5px;
+    background-color: #000;
+    opacity: 0.1;
+    position: absolute;
+    top: 59px;
+    left: 0;
+    border-radius: 50%;
+    animation: shadow 0.5s linear infinite;
+}
+.load-container .boxLoading::after {
+    content: '';
+    width: 50px;
+    height: 50px;
+    background-color: #00adb5;
+    animation: animate 0.5s linear infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 3px;
+}
+@keyframes animate {
+    17% {
+        border-bottom-right-radius: 3px;
+    }
+    25% {
+        transform: translateY(9px) rotate(22.5deg);
+    }
+    50% {
+        transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+        border-bottom-right-radius: 40px;
+    }
+    75% {
+        transform: translateY(9px) rotate(67.5deg);
+    }
+    100% {
+        transform: translateY(0) rotate(90deg);
+    }
+}
+@keyframes shadow {
+    0%,
+    100% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.2, 1);
+    }
+}
+```
+
+#### 动画二
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+#### 动画三
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+#### 动画四
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+#### 动画五
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+#### 动画六
+
+**HTML 代码**
+
+```
+
+```
+
+**CSS 代码**
+
+```
+
+```
+
+#### 动画七
+
 **HTML 代码**
 
 ```
@@ -312,13 +465,71 @@
 **HTML 代码**
 
 ```
-
+<div class="container">
+  <section>
+    <h1>弹簧动画</h1>
+  </section>
+  <section>
+    <div class="moveBox"></div>
+  </section>
+</div>
 ```
 
 **CSS 代码**
 
 ```
+// Stylues
 
+// 弹跳函数
+spring-wobbly(t)
+  return -0.5 * (2.71828 ** (-6 * t)) * (-2 * (2.71828 ** (6 * t)) + sin(12 * t) + 2 * cos(12 * t))
+
+// 线性函数
+lerp($a, $b, $p)
+  return $a + $p * ($b - $a)
+
+@keyframes moveLeft {
+  for i in (0 .. 100) {
+    {i + '%'} {
+      left: lerp(0, 200px, spring-wobbly(i / 100))
+    }
+  }
+}
+
+@keyframes scale {
+  for i in (0 .. 100) {
+    {i + '%'} {
+      transform: scale(lerp(.3, 1, spring-wobbly(i / 100)),lerp(.3, 1, spring-wobbly(i / 100)));
+    }
+  }
+}
+
+h1
+  text-align:center;
+  font-size:40px;
+  margin:0;
+  line-height:50px;
+  animation scale 1.5s linear infinite
+
+.moveBox
+  animation: 2s moveLeft linear infinite;
+  width: 30px;
+  height: 30px;
+  background-color: #00adb5;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin:auto;
+
+section
+  margin-bottom: 30px;
+  height: 50px;
+  position: relative;
+
+.container
+  width:500px;
+  margin: 0 auto;
 ```
 
 ### 粘性球
