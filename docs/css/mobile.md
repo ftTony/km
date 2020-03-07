@@ -325,7 +325,7 @@ function fullScreenFun(){
 
 #### 1.26 判断手机开屏/息屏
 
-`visibilitychange`：浏览器标签页隐藏或显示的时候会触发visibilitychange事件
+`visibilitychange`：浏览器标签页隐藏或显示的时候会触发 visibilitychange 事件
 
 ```
 document.addEventListener('visibilitychange',()=>{
@@ -338,11 +338,20 @@ document.addEventListener('visibilitychange',()=>{
 })
 ```
 
+#### 1.27 强制横屏
+
+代码如下：
+
+```
+.landscape-container{
+    position:absolute;
+    overflow:hidden;
+}
+
+```
+
 ### 参考资料
 
-- [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
-- [彻底搞懂移动 Web 开发中的 viewport 与跨屏适配](https://mp.weixin.qq.com/s/aaXgFw4isWq1RrHkv75zLA)
-- [深入浅出 Viewport 设计原理](https://www.cnblogs.com/onepixel/p/12144364.html)
 - [浅谈移动 Web 开发（上）：深入概念](https://www.infoq.cn/article/development-of-the-mobile-web-deep-concept/)
 - [【原】移动 web 资源整理](https://www.cnblogs.com/PeunZhang/p/3407453.html)
 - [移动 web 最佳实践](https://juejin.im/post/5d759f706fb9a06afa32adec)
