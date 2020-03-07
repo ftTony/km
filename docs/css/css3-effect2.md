@@ -824,13 +824,52 @@ section
 **HTML 代码**
 
 ```
-
+<div class="sticky-container">
+    <div class="blurfield">
+    <div class="ball1"></div>
+    <div class="ball2"></div>
+    </div>
+</div>
 ```
 
 **CSS 代码**
 
 ```
+.sticky-container {
+    background-color: #000;
+    overflow: hidden;
+}
+.sticky-container .blurfield {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    filter: blur(10px) contrast(30);
+}
+.sticky-container .ball1,
+.sticky-container .ball2 {
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    position: absolute;
+    animation: ball 10s infinite;
+    border-radius: 100%;
+}
+.sticky-container .ball2 {
+    animation-delay: -2s;
+}
 
+@keyframes ball {
+    0%,
+    100% {
+        transform: translateX(-100px);
+    }
+
+    50% {
+        transform: translateX(100px);
+    }
+}
 ```
 
 ### 抛物线
@@ -933,6 +972,7 @@ section
 
 ### 参考资料
 
+- [css-tricks](http://css-tricks.neatbang.com/)
 - [《css 大法》之使用伪元素实现超实用的图标库](https://mp.weixin.qq.com/s/udMV3ocpdj7Ks9xmPV2xdg)
 - [趣味 CSS3 效果挑战小汇总](https://juejin.im/post/5d3810fd6fb9a07ed13716d9)
 - [请收下这 72 个炫酷的 CSS 技巧](https://juejin.im/post/5e033c946fb9a0164b4ef360)
