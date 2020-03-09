@@ -356,6 +356,7 @@ module.exports = {
                     'stack',
                     'heap',
                     'list',
+                    'set',
                     'dictionary',
                     'hashtable',
                     'hash',

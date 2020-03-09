@@ -829,13 +829,23 @@ var reverseList = function(head){
     const stack = {}
     let node = head;
     while(node){
-
+        stack.push(node.val);
+        node = node.next;
     }
 
     const newHead = {
         val: stack.pop(),
         next: null
     };
+    node = newHead;
+    while(stack.length){
+        node.next = {
+            val:stack.pop(),
+            next:null
+        };
+        node = node.next;
+    }
+    return newHead;
 }
 ```
 
@@ -846,6 +856,17 @@ var reverseList = function(head){
     if(!head){
         return null;
     }
+
+    let node = head;
+    let preNode = null;
+    while(node.next){
+        const nextNode = node.next;
+        node.next = preNode;
+        preNode = node;
+        node = nextNode;
+    }
+    node.next = preNode;
+    return node;
 }
 ```
 
