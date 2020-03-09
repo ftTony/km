@@ -19,7 +19,7 @@
 - [万字长文之 Serverless 实战详细指南](https://mp.weixin.qq.com/s/Ad-lyV85_000infAe_hZ2Q)
 - [基于 NodeJS 的 serverless 架构实践](https://mp.weixin.qq.com/s/rR8VK7RodyCofOiSehF6fA)
 - [了解什么是微前端](https://juejin.im/post/5d1f19e3f265da1bab29ce5f)
-- [Serverless（无服务）基础知识](https://juejin.im/post/5d42945ff265da03a715b2f0)
+- [Serverless（无服务）基础知识](https://juejin.im/post/5d42945ff265da03a715b2f0)\
 - [【第 1824 期】Serverless 函数应用架构升级](https://mp.weixin.qq.com/s/uWX6zdG7EFc43orrzAdWpA)
 - [前端微服务在字节跳动的打磨与应用](https://juejin.im/post/5e17f064e51d45315d648b95)
 - [ICBU 跨境供应链前端架构演进与 Serverless 实践](https://mp.weixin.qq.com/s/GFZ5MmYxmwtZmY8Q92IjBg)
