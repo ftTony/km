@@ -816,9 +816,28 @@ class SortedLinkedList extends LinkList{
 
 #### 2.5 反转链表
 
-**借助栈**
+**题目描述**
+
+输入一个链表，反转链表后，输出新链表的表头。
+
+**示例：**
 
 ```
+输入：1->2->3->4->5->null
+输出：5->4->3->2->1->null
+```
+
+**解法 1：借助栈**
+
+借助栈的后入先出的顺序，可以将顺序列表逆序。
+
+处理过程如下：
+
+- 从头到尾遍历链表，将节点 val 依次放入栈
+- 从栈中依次取出 val，构造新节点，并连接节点
+
+```
+地址：https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/
 参考地址：https://xxoo521.com/2020-01-12-reverse-link/
 
 var reverseList = function(head){
@@ -850,6 +869,14 @@ var reverseList = function(head){
 ```
 
 **原地反转**
+
+思路如下：
+
+- 保留当前节点的下一个节点
+- 将当前节点的 next 指向前一节点 preNode
+- 更新 preNode 当前节点，更新当前节点为第一步保留的下一节点
+- 判断当前节点是否是最后节点，如果不是，回到第一步；如果是，进入最后一步
+- 将当前节点的 next 指向前一个 preNode
 
 ```
 var reverseList = function(head){
