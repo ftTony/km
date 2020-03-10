@@ -6,8 +6,9 @@
 
 ## 内容
 
-- 树的分类
-- 创建 BinarySearchTree 类
+- [树的分类](#一、树的分类)
+- [创建树](#二、创建树)
+- [二叉树的遍历](#三、二叉树的遍历)
 
 ### 一、树的分类
 
@@ -299,12 +300,10 @@ var maxNode = function(node){
 };
 ```
 
-### 四、二叉查找树
-
 ### 参考资料
 
 - 《学习 JavaScript 数据结构与算法》
-- [二叉树有几种存储方式？(上)](https://mp.weixin.qq.com/s?__biz=MzAxNDYwODEzNw==&mid=2247485609&amp;idx=1&amp;sn=5da6085d2d33aff9176e55a697f1f157&source=41#wechat_redirect)
+- [二叉树有几种存储方式？(上)](https://mp.weixin.qq.com/s?__biz=MzAxNDYwODEzNw==&mid=2247485609&idx=1&sn=5da6085d2d33aff9176e55a697f1f157&=41#wechat_redirect)
 - [二叉树基础（上）：什么样的二叉树适合用数组来存储？](https://time.geekbang.org/column/article/67856)
 
 ## 联系作者
