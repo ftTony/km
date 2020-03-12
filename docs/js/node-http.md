@@ -233,6 +233,7 @@ http.ClientResponse 还提供了以下几个特殊的函数。
 
 - 《nodejs 开发指南》
 - [http 模块概览](https://github.com/chyingp/nodejs-learning-guide/blob/master/%E6%A8%A1%E5%9D%97/http.md)
+- [【第 1882 期】基于 Unix Socket 的可靠 Node.js HTTP 代理实现（支持 WebSocket 协议）](https://mp.weixin.qq.com/s/SiBVU3NzrSCcd_clpeOXfw)
 
 ## 联系作者
 
