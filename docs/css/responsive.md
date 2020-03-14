@@ -132,6 +132,7 @@
 - [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
 - [彻底搞懂移动 Web 开发中的 viewport 与跨屏适配](https://mp.weixin.qq.com/s/aaXgFw4isWq1RrHkv75zLA)
 - [深入浅出 Viewport 设计原理](https://www.cnblogs.com/onepixel/p/12144364.html)
+- [前端基础知识概述 -- 移动端开发的屏幕、图像、字体与布局的兼容适配](https://www.cnblogs.com/coco1s/p/11463599.html)
 
 ## 联系作者
 
