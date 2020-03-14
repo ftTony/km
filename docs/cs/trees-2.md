@@ -87,6 +87,41 @@ rotationRR(node){
 }
 ```
 
+#### 4.3 左-右（LR）：向右的双旋转
+
+这种情况出现于左侧子节点的高度大于右侧子节点的高度，并且左侧子节点右侧较重。
+
+执行的操作：
+
+- 将节点 X 置于节点 Y（平衡因子为-2）所在的位置；
+- 将节点 Z 的左子节点置为节点 X 的右子节点；
+
+相关代码：
+
+```
+rotationLR(node){
+    node.left = this.rotationRR(node.left);
+    return this.rotationLL(node);
+}
+```
+
+#### 4.4 右-左（RL）：向左的双旋转
+
+右-左的情况和左-右的情况相反。这种情况出现于右侧子节点的高度大于左侧子节点的高度，并且右侧子节点左侧较重。
+
+执行的操作：
+
+- 将节点 X 置于节点 Y（平衡因子为+2）所在的位置；
+
+相关代码：
+
+```
+rotationRL(node){
+    node.right = this.rotationLL(node.right);
+    return this.rotationRR(node);
+}
+```
+
 ### 五、AVL 树的四种插入节点方式
 
 假设一颗 AVL 树的某个节点为 A，有四种操作会使 A 的左右子树高度差大于 1，从而破坏了原有 AVL 树的平衡性。平衡二叉树插入节点的情况分为以下四种：
