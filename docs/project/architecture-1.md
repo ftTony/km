@@ -78,8 +78,9 @@
 - [从零到百亿互联网金融架构发展史](https://www.cnblogs.com/ityouknow/p/6276686.html)
 - [从零开始搭建创业公司后台技术栈](https://mp.weixin.qq.com/s/HlEDjrVKbH_KZo_SXjfzIQ)
 - [多机房多活，多机房平滑迁移架构方案全集（上+中+下）](https://mp.weixin.qq.com/s/a_LQjdis8MCBYSeuw98ExQ)
-- [架构师之路，19年文章精选120篇](https://mp.weixin.qq.com/s/syli7vs7Jw_VOTl5B2YUqg)
-- [架构师之路18年精选100篇](https://mp.weixin.qq.com/s/V1hGa6D9aGrP6PiCWEmc0w)
+- [架构师之路，19 年文章精选 120 篇](https://mp.weixin.qq.com/s/syli7vs7Jw_VOTl5B2YUqg)
+- [架构师之路 18 年精选 100 篇](https://mp.weixin.qq.com/s/V1hGa6D9aGrP6PiCWEmc0w)
+- [高性能前端架构解决方案](https://mp.weixin.qq.com/s/eITZC-eEBV5c4pnSQ7Z1Fg)
 
 ## 联系作者
 
