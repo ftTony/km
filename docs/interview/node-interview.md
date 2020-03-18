@@ -14,6 +14,7 @@
 - [浅谈 Node.js 模块机制及常见面试问题解答](https://mp.weixin.qq.com/s/e2c4NF2U6B2hVqTTfPx8DQ)
 - [分享 10 道 Nodejs 进程相关面试题](https://mp.weixin.qq.com/s/dKN95zcRI7qkwGYKhPXrcg)
 - [Node.js 面试题](https://github.com/jimuyouyou/node-interview-questions)
+- [面试官问:Node 与底层之间如何执行异步 I/O 调用？](https://mp.weixin.qq.com/s/kAmS_1VZHfmBH6YMWFN6BA)
 
 ## 联系作者
 

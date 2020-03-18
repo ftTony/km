@@ -101,14 +101,25 @@ Element.prototype.render = function(){
 
 #### 3.2 比较两棵虚拟 DOM 树的差异——diff 算法
 
-`diff`算法用来比较两棵`Virtual DOM`树的差异，如果需要两棵树的完全比较，那么`diff`算法的时间复杂为`O(n^3)`。但是前端当中，你很少会跨越层级地移动`DOM`元素，
+`diff`算法用来比较两棵`Virtual DOM`树的差异，如果需要两棵树的完全比较，那么`diff`算法的时间复杂为`O(n^3)`。但是前端当中，你很少会跨越层级地移动`DOM`元素，所以`Virtual DOM`只会对同一个层级的元素进行对比，如下图所示，
 
 ```
 function diff(oldTree,newTree){
     var index= 0
-    var index = 0
+    var patches = {}
+    dfsWalk(oldTree,newTree,index,patches)
+    return patches
 }
 ```
+
+**差异类型**
+
+`DOM` 操作导致的差异类型包括以下几种：
+
+- 节点替换：节点改变了，例如将上面的`div`换成`h1`；
+- 顺序互换：移动、删除、新增子节点
+- 属性更改：
+- 文本改变：
 
 #### 3.3 把差异应用到真正的 DOM 树上
 
