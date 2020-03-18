@@ -7,7 +7,8 @@
 ## 内容
 
 - [分析 diff](#一、分析-diff)
-- [算法实现](#二、算法实现)
+- [pach 方法](#二、pach-方法)
+- [算法实现](#三、算法实现)
 
 ### 一、分析 diff
 
@@ -39,7 +40,9 @@
 
 #### 源码分析
 
-### 二、算法实现
+### 二、pach 方法
+
+### 三、算法实现
 
 - 用 JS 对象模拟 DOM 树
 - 比较两棵虚拟 DOM 树的差异
@@ -86,13 +89,25 @@ Element.prototype.render = function(){
     var propValue = props[propName]
     el.setAttribute(propName,propValue)
   }
+
+  var children = this.children || []
+  children.forEach(function(child){
+      var childEl = (child instancedof Element) ? child.render():document.createTextNode(child)
+    el.appendChild(childEl)
+  })
+  return el
 }
 ```
 
-#### 3.2 比较两棵虚拟 DOM 树的差异
+#### 3.2 比较两棵虚拟 DOM 树的差异——diff 算法
+
+`diff`算法用来比较两棵`Virtual DOM`树的差异，如果需要两棵树的完全比较，那么`diff`算法的时间复杂为`O(n^3)`。但是前端当中，你很少会跨越层级地移动`DOM`元素，
 
 ```
-
+function diff(oldTree,newTree){
+    var index= 0
+    var index = 0
+}
 ```
 
 #### 3.3 把差异应用到真正的 DOM 树上

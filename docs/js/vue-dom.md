@@ -78,7 +78,9 @@ Element.prototype.render = function(){
 
 参考[diff 算法](https://km.xiaowuzi.info/js/vue-diff.html)
 
-#### 1.3 pach 算法
+#### 1.3 pach 方法
+
+参考[diff 算法](https://km.xiaowuzi.info/js/vue-diff.html)
 
 ### 二、虚拟 DOM 的优缺点
 
