@@ -313,6 +313,10 @@ export default class VNode {
 
 - `tag`属性即这个`vnode`的标签属性
 - `data`属性包含了最后渲染成真实`dom`节点后，节点上的`class`，`attribute`，`style`以及绑定的事件
+- `children`属性是`vnode`的子节点
+- `text`属性是文本属性
+- `elm`属性为这个`vnode`对应的真实`dom`节点
+- `key`属性`vnode`的标记，在`diff`过程中可以提高`diff`的效率
 
 **源码创建 VNode 过程**
 
@@ -330,10 +334,21 @@ function Vue(options){
 通过查看`Vue`的`function`，我们知道`Vue`只能通过`new`关键字初始化，然后调用`this._init`方法，该方法在`src/core/instance/init.js`中定义。
 
 ```
+Vue.prototype._init = function(options){
+    const vm = this
 
+    // 省略一系列其它初始化的代码
+
+    if(vm.$options.el){
+        console.log('');
+        vm.$mount(vm.$options.el)
+    }
+}
 ```
 
 **Vue 实例挂载**
+
+`Vue`中是通过`$mount`实例方法去挂载`dom`的，下面我们通过分析
 
 ```
 const mount = Vue.prototype.$mount
