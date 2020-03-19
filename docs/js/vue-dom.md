@@ -72,7 +72,11 @@ function Element(tagName,props,children){
 
     this.count = count
 }
+```
 
+如何将`ul`渲染页面上真实的`DOM`结构，相关渲染函数如下：
+
+```
 Element.prototype.render = function(){
     var el = document.createElement(this.tagName)
     var props = this.props
@@ -89,6 +93,8 @@ Element.prototype.render = function(){
 
     return el
 }
+
+module.exports = Element
 ```
 
 ### 四、diff 算法实现
@@ -98,6 +104,8 @@ Element.prototype.render = function(){
 - 列表对比算法
 
 `diff`算法用来比较两棵`Virtual DOM`树的差异，如果需要两棵树的完全比较，那么`diff`算法的时间复杂为`O(n^3)`。但是前端当中，你很少会跨越层级地移动`DOM`元素，所以`Virtual DOM`只会对同一个层级的元素进行对比，如下图所示，
+
+#### 4.1 深度优先遍历，记录差异
 
 ```
 function diff(oldTree,newTree){
@@ -154,7 +162,7 @@ var PROPS = 2 // 修改了节点的属性
 var TEXT = 3 // 文本内容改变
 ```
 
-#### 4.3 差异类型
+#### 4.3 列表对比算法
 
 ### 五、pach 方法实现
 
@@ -193,7 +201,7 @@ function dfsWalk(node,walker,patches){
 
 #### 5.2 对原有 DOM 树进行 DOM 操作
 
-applyPathes,根据不同类型的差异对当前节点进行 DOM 操作：
+我们根据不同类型的差异对当前节点进行不同的`DOM`操作 ，例如如果进行了节点替换，就进行节点替换`DOM`操作 ；如果节点文本发生了改变，则进行文本替换的`DOM`操作 ；以及子节点重排属性改变等`DOM`操作，相关代码如`applyPathes`所示：
 
 ```
 function applyPatches (node, currentPatches) {
