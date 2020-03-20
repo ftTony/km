@@ -496,6 +496,25 @@ Vue.prototype._update = function(vnode,hydrating){
     const prevVnode = vm._vnode
     const restoreActiveInstance = setActiveInstance(vm)
     vm._vnode = vnode
+    if (!prevVnode) {
+      // 第一个参数为真实的node节点，则为初始化
+      vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */)
+    } else {
+      // 如果需要diff的prevVnode存在，那么对prevVnode和vnode进行diff
+      vm.$el = vm.__patch__(prevVnode, vnode)
+    }
+    restoreActiveInstance()
+    // update __vue__ reference
+    if (prevEl) {
+      prevEl.__vue__ = null
+    }
+    if (vm.$el) {
+      vm.$el.__vue__ = vm
+    }
+    // if parent is an HOC, update its $el as well
+    if (vm.$vnode && vm.$parent && vm.$vnode === vm.$parent._vnode) {
+      vm.$parent.$el = vm.$el
+    }
 }
 ```
 
@@ -528,7 +547,35 @@ function sameVnode(a,b){
 
 ```
 function patchVnode(oldVnode,vnode,insertedVnodeQueue,ownerArray,index,removeOnly){
-
+......
+    const elm = vnode.elm = oldVnode.elm
+    const oldCh = oldVnode.children
+    const ch = vnode.children
+    // 如果vnode没有文本节点
+    if (isUndef(vnode.text)) {
+      // 如果oldVnode的children属性存在且vnode的children属性也存在
+      if (isDef(oldCh) && isDef(ch)) {
+        // updateChildren，对子节点进行diff
+        if (oldCh !== ch) updateChildren(elm, oldCh, ch, insertedVnodeQueue, removeOnly)
+      } else if (isDef(ch)) {
+        if (process.env.NODE_ENV !== 'production') {
+          checkDuplicateKeys(ch)
+        }
+        // 如果oldVnode的text存在，那么首先清空text的内容,然后将vnode的children添加进去
+        if (isDef(oldVnode.text)) nodeOps.setTextContent(elm, '')
+        addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue)
+      } else if (isDef(oldCh)) {
+        // 删除elm下的oldchildren
+        removeVnodes(elm, oldCh, 0, oldCh.length - 1)
+      } else if (isDef(oldVnode.text)) {
+        // oldVnode有子节点，而vnode没有，那么就清空这个节点
+        nodeOps.setTextContent(elm, '')
+      }
+    } else if (oldVnode.text !== vnode.text) {
+      // 如果oldVnode和vnode文本属性不同，那么直接更新真是dom节点的文本元素
+      nodeOps.setTextContent(elm, vnode.text)
+    }
+    ......
 }
 ```
 
