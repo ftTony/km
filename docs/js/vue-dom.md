@@ -373,6 +373,34 @@ Vue.prototype.$mount = function(el,hydrating){
 ```
 export function mountComponent(vm,el,hydrating){
     vm.$el = el
+     // 省略一系列其它代码
+  let updateComponent
+  /* istanbul ignore if */
+  if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+    updateComponent = () => {
+      // 生成虚拟 vnode
+      const vnode = vm._render()
+      // 更新 DOM
+      vm._update(vnode, hydrating)
+
+    }
+  } else {
+    updateComponent = () => {
+      vm._update(vm._render(), hydrating)
+    }
+  }
+
+  // 实例化一个渲染Watcher，在它的回调函数中会调用 updateComponent 方法
+  new Watcher(vm, updateComponent, noop, {
+    before () {
+      if (vm._isMounted && !vm._isDestroyed) {
+        callHook(vm, 'beforeUpdate')
+      }
+    }
+  }, true /* isRenderWatcher */)
+  hydrating = false
+
+  return vm
 }
 ```
 
@@ -401,7 +429,7 @@ Vue.prototype._render = function(){
 }
 ```
 
-`Vue.js`利用`_createElement`方法创建`VNode`，它定义在``中：
+`Vue.js`利用`_createElement`方法创建`VNode`，它定义在`src/core/vdom/create-elemenet.js`中：
 
 ```
 export function _createElement (
@@ -468,9 +496,16 @@ export function mountComponent(vm,el,hydrating){
     let updateComponent
 
     if (process.env.NODE_ENV !== 'production' && config.performance && mark){
-
+        updateComponent = () => {
+            // 生成虚拟 vnode
+            const vnode = vm._render()
+            // 更新DOM
+            vm._update(vnode,hydrating)
+        }
     }else{
-
+        updateComponent = () => {
+            vm._update(vm._render(),hydrating)
+        }
     }
 
     // 实例化一个渲染Watcher，在它的回调函数中会调用 updateComponent方法
@@ -530,7 +565,13 @@ function patch(oldVnode,vnode,hydrating,removeOnly){
         isInitialPatch = true
         createElm(vnode,insertedVnodeQueue)
     }else{
-
+        // 对oldVnode和vnode进行diff，并对oldVnode打patch
+      const isRealElement = isDef(oldVnode.nodeType)
+      if (!isRealElement && sameVnode(oldVnode, vnode)) {
+        // patch existing root node
+        patchVnode(oldVnode, vnode, insertedVnodeQueue, null, null, removeOnly)
+      }
+    ......
     }
 }
 ```
@@ -661,33 +702,33 @@ function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
 }
 ```
 
-在开始遍历`diff`前，首先给`oldCh`和`newCh`分别分配一个`startIndex`和`endIndex`来作为遍历的索引，当`oldCh`或者`newCh`遍历完后（），就停止`oldCh`和`newCh`的`diff`过程。接下来通过实例来看下整个`diff`的过程。
+在开始遍历`diff`前，首先给`oldCh`和`newCh`分别分配一个`startIndex`和`endIndex`来作为遍历的索引，当`oldCh`或者`newCh`遍历完后（`startIndex >= endIndex`），就停止`oldCh`和`newCh`的`diff`过程。接下来通过实例来看下整个`diff`的过程。
 
 **无`key`的`diff`过程**
 
 我们通过以下示意图对以上代码过程进行讲解：
 
-首先从第一个节点开始比较，不管是`oldCh`还是`newCh`的起始或者终止节点都不存在`sameVnode`，同时节点属性中是不带`key`标记的，因此第一轮的`diff`完后，`newCh`的`startVnode`被添加到`oldStartVnode`的前面，同时`newStartIndex`前移一位；
+1. 首先从第一个节点开始比较，不管是`oldCh`还是`newCh`的起始或者终止节点都不存在`sameVnode`，同时节点属性中是不带`key`标记的，因此第一轮的`diff`完后，`newCh`的`startVnode`被添加到`oldStartVnode`的前面，同时`newStartIndex`前移一位；
 
 ![images](vue-diff-01.png)
 
-第二轮的`diff`中，满足`sameVnode(oldStartVnode,newStartVnode)`，因此对这 2 个`vnode`进行`diff`，最后将`patch`打到`oldStartVnode`上，同时`oldStartVnode`和`newStartIndex`都向前移动一位；
+2. 第二轮的`diff`中，满足`sameVnode(oldStartVnode,newStartVnode)`，因此对这 2 个`vnode`进行`diff`，最后将`patch`打到`oldStartVnode`上，同时`oldStartVnode`和`newStartIndex`都向前移动一位；
 
 ![images](vue-diff-02.png)
 
-第三轮的`diff`中，满足`sameVnode(oldEndVnode,newStartVnode)`，那么首先对`oldEndVnode`和`newStartVnode`进行`diff`，并对`oldEndVnode`进行`patch`，并完成`oldEndVnode`移位的操作，最后`newStartIndex`前移一位，`oldStartVnode`后移一位；
+3. 第三轮的`diff`中，满足`sameVnode(oldEndVnode,newStartVnode)`，那么首先对`oldEndVnode`和`newStartVnode`进行`diff`，并对`oldEndVnode`进行`patch`，并完成`oldEndVnode`移位的操作，最后`newStartIndex`前移一位，`oldStartVnode`后移一位；
 
 ![images](vue-diff-03.png)
 
-第四轮的`diff`中，过程同步骤 3；
+4. 第四轮的`diff`中，过程同步骤 3；
 
 ![images](vue-diff-04.png)
 
-第五轮的`diff`中，同过程 1；
+5. 第五轮的`diff`中，同过程 1；
 
 ![images](vue-diff-05.png)
 
-遍历的过程结束后，`newStartIdx > newEndIdx`，说明此时`oldCh`存在多余的节点，那么最后就需要将这些多余的节点删除。
+6. 遍历的过程结束后，`newStartIdx > newEndIdx`，说明此时`oldCh`存在多余的节点，那么最后就需要将这些多余的节点删除。
 
 ![images](vue-diff-06.png)
 
