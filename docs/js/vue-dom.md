@@ -655,18 +655,24 @@ function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
 
 带有`key`属性的`vnode`的`diff`过程可见下图：
 
-1. 首先从第一个节点开始比较，
+1. 首先从第一个节点开始比较，不管是`oldCh`还是`newCh`的起始或者终止节点都不存在`sameVnode`，但节点属性中是带`key`标记的，然后在`oldKeyToIndx`中找到对应的节点，这样第一轮`diff`过后`oldCh`上的`B节点`被删除了，但是`newCh`上的`B节点`上`elm`属性保持对`oldCh`上`B节点`的`elm`引用。
 
 ![images](vue-diff-07.png)
 
-2. 第二轮的`diff`中，满足`sameVnode(oldStartVnode,newStartVnode)`，因此对这 2 个`vnode`进行`diff`，最后将
+2. 第二轮的`diff`中，满足`sameVnode(oldStartVnode,newStartVnode)`，因此对这 2 个`vnode`进行`diff`，最后将`patch`打到`oldStartVnode`上，同时`oldStartVnode`和`newStartIndex`都向前移动一位；
 
 ![images](vue-diff-08.png)
 
-3. 第三轮的`diff`中，满足`sameVnode(oldEndVnode,newStartVnode)`，那么首先对
+3. 第三轮的`diff`中，满足`sameVnode(oldEndVnode,newStartVnode)`，那么首先对`oldEndVnode`和`newStartVnode`进行`diff`，并对`oldEndVnode`进行`patch`，并完成`oldEndVnode`移位的操作，最后`newStartIndex`前移一位，`oldStartVnode`后移一位；
 
 ![images](vue-diff-09.png)
+
+4. 第四轮的`diff`中，过程同步骤 2；
+
 ![images](vue-diff-10.png)
+
+5. 第五轮的`diff`中，因为此时`oldStartIndex`已经大于`oldEndIndex`，所以将剩余的`Vnode`队列插入队列最后。
+
 ![images](vue-diff-11.png)
 
 #### 6.3 patch 过程
