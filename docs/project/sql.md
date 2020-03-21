@@ -8,6 +8,8 @@
 
 ## 参考资料
 
+- [一网打尽！每个程序猿都该了解的黑客技术大汇总](https://www.cnblogs.com/xuanyuan/p/12529598.html)
+
 ## 联系作者
 
 <div align="center">
