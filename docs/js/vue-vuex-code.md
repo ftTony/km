@@ -6,6 +6,18 @@
 
 ## 内容
 
+- Vuex 是什么？
+- Vuex 源码解读
+- 总结
+
+### 一、Vuex 是什么？
+
+Vuex 是什么及相关使用参考[vuex 学习及原理](https://km.xiaowuzi.info/js/vue-vuex.html)
+
+### 二、Vuex 源码解读
+
+### 三、总结
+
 ### 参考资料
 
 - [vuex 原理及源码分析](https://github.com/dwqs/blog/issues/58)

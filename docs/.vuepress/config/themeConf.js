@@ -154,14 +154,14 @@ module.exports = {
                     "undescore",
                     "vue-jsx",
                     "vue-lifecycle",
+                    "vue-dom",
+                    "vue-communication",
                     "vue-bind",
                     "vue-nexttick",
                     "vue-watch",
                     "vue-router",
-                    "vue-vuex",
-                    "vue-dom",
                     "vue-router-code",
-                    "vue-communication",
+                    "vue-vuex",
                     "vue-vuex-code",
                     "vue-code"
                 ]
