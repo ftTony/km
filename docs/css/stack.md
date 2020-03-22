@@ -78,6 +78,7 @@ z-index 只适用于定位的元素，对非定位元素无效，它可以被设
 - [CSS 中重要的层叠概念](https://juejin.im/post/5ba4efe36fb9a05cf52ac192)
 - [深入理解 CSS 中的层叠上下文和层叠顺序](https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)
 - [深入理解 CSS（Cascading Style Sheets）中的层叠（Cascading）](https://www.cnblogs.com/coco1s/p/12200445.html)
+- [CSS 的“层”峦“叠”翠 - 一文掌握 z-index 用法 ​​​​​​​](https://mp.weixin.qq.com/s/cbeN51u8Rn9Ta7WjRdE9hg)
 - 《CSS 世界》
 
 ## 联系作者

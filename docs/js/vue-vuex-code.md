@@ -28,27 +28,81 @@ Vuex 是什么及相关使用参考[vuex 学习及原理](https://km.xiaowuzi.in
 - mapActions
 - module
 
-#### 2.1 入口文件
+本文分析是基本 vuex 的`3.1.2`版本
 
-#### 2.2 install
+#### 2.1 Vuex 目录
 
-#### 2.3 state
+```
 
-#### 2.4 mapState
+```
 
-#### 2.5 getter
+#### 2.2 入口文件
 
-#### 2.6 mapGetters
+相关代码
 
-#### 2.7 mutation
+```
 
-#### 2.8 mapMutation
+```
 
-#### 2.7 action
+#### 2.3 install
 
-#### 2.8 mapActions
+```
 
-#### 2.9 module
+```
+
+#### 2.4 state
+
+```
+
+```
+
+#### 2.5 mapState
+
+```
+
+```
+
+#### 2.6 getter
+
+```
+
+```
+
+#### 2.7 mapGetters
+
+```
+
+```
+
+#### 2.8 mutation
+
+```
+
+```
+
+#### 2.9 mapMutation
+
+```
+
+```
+
+#### 2.10 action
+
+```
+
+```
+
+#### 2.11 mapActions
+
+```
+
+```
+
+#### 2.12 module
+
+```
+
+```
 
 ### 三、总结
 
