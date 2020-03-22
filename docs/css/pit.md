@@ -644,6 +644,7 @@ document.body.addEventListener(
 - [【建议收藏】90%的前端都会踩的坑，你中了吗？](https://juejin.im/post/5dfb3e73f265da33b12ea9d3)
 - [移动端常见 bug 汇总](https://juejin.im/post/5af918636fb9a07ac5603ecb)
 - [吃透移动端 H5 与 Hybrid](https://juejin.im/post/5dfadb91e51d45584006e486)
+- [【第 1891 期】iOS 键盘难题与可见视口（VisualViewport）API](https://mp.weixin.qq.com/s/ERBxrGXYfcAHdlZTWWw0Aw)
 
 ## 联系作者
 
