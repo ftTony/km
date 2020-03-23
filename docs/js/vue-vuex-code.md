@@ -314,7 +314,7 @@ subscribeAction (fn) {
 }
 ```
 
-5. `installModule`：接收 5 个参数`store`、`rootState`、`path`、`module`、`hot`、`store`
+5. `installModule`：接收 5 个参数`store`、`rootState`、`path`、`module`、`hot`、`store`表示当前`Store`实例，`rootState`表示
 
 ```
 function installModule (store, rootState, path, module, hot) {
