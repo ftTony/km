@@ -33,8 +33,28 @@ Vuex 是什么及相关使用参考[vuex 学习及原理](https://km.xiaowuzi.in
 #### 2.1 Vuex 目录
 
 ```
-
+├── helpers.js
+├── index.esm.js
+├── index.js
+├── mixin.js
+├── module
+│   ├── module-collection.js
+│   └── module.js
+├── plugins
+│   ├── devtool.js
+│   └── logger.js
+├── store.js
+└── util.js
 ```
+
+Vuex 提供了非常强大的状态管理功能，源码代码数量不多，结构划分很清晰，各个目录文件的功能：
+
+- module：提供 module 对象与 module 对象树的创建功能
+- plugins：提供开发的辅助插件
+- helpers.js：提供`mapGetters`，`mapGetions`等 API
+- index.js/index.esm.js：源码主入口文件
+- mixin.js：在 Vue 实例注入`store`
+- util.js：提供`vuex`开发的一系列工具方法，如`forEachValue/assert`等
 
 #### 2.2 入口文件
 
