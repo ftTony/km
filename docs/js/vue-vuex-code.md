@@ -58,10 +58,22 @@ Vuex 提供了非常强大的状态管理功能，源码代码数量不多，结
 
 #### 2.2 入口文件
 
-相关代码
+`vuex`提供了 UMD 和 ESM(ES module)两个构建入口，分别对应`src/index.js`和`src/index.esm.js`文件，在入口文件中，主要是导出`vuex`提供给 Vue 应用的 API：
 
 ```
+import { Store, install } from './store'
+import { mapState, mapMutations, mapGetters, mapActions, createNamespacedHelpers } from './helpers'
 
+export default {
+  Store,
+  install,
+  version: '__VERSION__',
+  mapState,
+  mapMutations,
+  mapGetters,
+  mapActions,
+  createNamespacedHelpers
+}
 ```
 
 #### 2.3 install
