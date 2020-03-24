@@ -207,7 +207,7 @@ constructor (options = {}) {
 
 Store 类的成员方法有下面几个：
 
-1. `commit`：
+1. `commit`：如果需要同步改变状态的话，使用 commit。
 
 ```
 commit (_type, _payload, _options) {
@@ -248,7 +248,7 @@ commit (_type, _payload, _options) {
   }
 ```
 
-2. `dispatch`：
+2. `dispatch`：如果需要异步改变状态，就需要通过 dispatch 的方式实现。
 
 ```
 dispatch (_type, _payload) {
@@ -373,7 +373,7 @@ function installModule (store, rootState, path, module, hot) {
 }
 ```
 
-6. resetStoreVM
+6. resetStoreVM：该方法实现了状态的响应式，并且将`_wrappedGetters`作为`computed`属性。
 
 ```
 function resetStoreVM (store, state, hot) {
@@ -386,22 +386,24 @@ function resetStoreVM (store, state, hot) {
   store._makeLocalGettersCache = Object.create(null)
   const wrappedGetters = store._wrappedGetters
   const computed = {}
+
+  // 循环所有处理过的getters
   forEachValue(wrappedGetters, (fn, key) => {
-    // use computed to leverage its lazy-caching mechanism
-    // direct inline function use will lead to closure preserving oldVm.
-    // using partial to return function with only arguments preserved in closure environment.
+      // 给computed对象添加属性
     computed[key] = partial(fn, store)
+    // 重写 get 方法
+    // store.getters.xx 其实是访问了 store._vm[xx] 也就是computed中的属性
     Object.defineProperty(store.getters, key, {
       get: () => store._vm[key],
       enumerable: true // for local getters
     })
   })
 
-  // use a Vue instance to store the state tree
-  // suppress warnings just in case the user has added
-  // some funky global mixins
+  // 使用 Vue 来保存state树
+  // 同时也让state变成响应式
   const silent = Vue.config.silent
   Vue.config.silent = true
+  // 当访问了 store.state时，其实是访问了store._vm.data.$$state
   store._vm = new Vue({
     data: {
       $$state: state
@@ -411,6 +413,7 @@ function resetStoreVM (store, state, hot) {
   Vue.config.silent = silent
 
   // enable strict mode for new vm
+  // 确保只能通过 commit 的方式改变状态
   if (store.strict) {
     enableStrictMode(store)
   }
