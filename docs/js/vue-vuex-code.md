@@ -314,7 +314,7 @@ subscribeAction (fn) {
 }
 ```
 
-5. `installModule`：接收 5 个参数`store`、`rootState`、`path`、`module`、`hot`、`store`表示当前`Store`实例，`rootState`表示
+5. `installModule`：接收 5 个参数`store`、`rootState`、`path`、`module`、`hot`、`store`表示当前`Store`实例，`rootState`表示根`state`，`path`表示当前嵌套模块的路径数组，`module`表示当前安装的模块，`hot`当动态改变`modules`或者热更新的时候为`true`
 
 ```
 function installModule (store, rootState, path, module, hot) {
@@ -345,19 +345,23 @@ function installModule (store, rootState, path, module, hot) {
     })
   }
 
+  //  设置上下文环境
   const local = module.context = makeLocalContext(store, namespace, path)
 
+    // 注册 mutations
   module.forEachMutation((mutation, key) => {
     const namespacedType = namespace + key
     registerMutation(store, namespacedType, mutation, local)
   })
 
+    //  注册actions
   module.forEachAction((action, key) => {
     const type = action.root ? key : namespace + key
     const handler = action.handler || action
     registerAction(store, type, handler, local)
   })
 
+    // 注册 getters
   module.forEachGetter((getter, key) => {
     const namespacedType = namespace + key
     registerGetter(store, namespacedType, getter, local)
@@ -373,6 +377,7 @@ function installModule (store, rootState, path, module, hot) {
 
 ```
 function resetStoreVM (store, state, hot) {
+    // 旧的 vm 实例
   const oldVm = store._vm
 
   // bind store public getters
