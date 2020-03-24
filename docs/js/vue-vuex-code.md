@@ -112,14 +112,8 @@ export default function (Vue) {
       _init.call(this, options)
     }
   }
-
-  /**
-   * Vuex init hook, injected into each instances init hooks list.
-   */
-
   function vuexInit () {
     const options = this.$options
-    // store injection
     // store 注入
     if (options.store) {
       this.$store = typeof options.store === 'function'
@@ -186,16 +180,13 @@ constructor (options = {}) {
 
     const state = this._modules.root.state
 
-    // init root module.
-    // this also recursively registers all sub-modules
-    // and collects all module getters inside this._wrappedGetters
     installModule(this, state, [], this._modules.root)
 
     // initialize the store vm, which is responsible for the reactivity
     // (also registers _wrappedGetters as computed properties)
     resetStoreVM(this, state)
 
-    // apply plugins
+    // 调用插件
     plugins.forEach(plugin => plugin(this))
 
     const useDevtools = options.devtools !== undefined ? options.devtools : Vue.config.devtools
@@ -256,7 +247,9 @@ dispatch (_type, _payload) {
     const {type,payload} = unifyObjectStyle(_type, _payload)
 
     const action = { type, payload }
+    // 找到对应的 action 函数
     const entry = this._actions[type]
+    // 判断是否找到
     if (!entry) {
       if (process.env.NODE_ENV !== 'production') {
         console.error(`[vuex] unknown action type: ${type}`)
@@ -265,6 +258,7 @@ dispatch (_type, _payload) {
     }
 
     try {
+        // 触发订阅函数
       this._actionSubscribers
         .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
         .filter(sub => sub.before)
@@ -276,6 +270,9 @@ dispatch (_type, _payload) {
       }
     }
 
+    // 在注册 action 的时候，会将函数返回值
+    // 处理成 promise，当promise全部
+    // resolve后，就会执行Promise.all里的函数
     const result = entry.length > 1
       ? Promise.all(entry.map(handler => handler(payload)))
       : entry[0](payload)
@@ -296,16 +293,15 @@ dispatch (_type, _payload) {
 }
 ```
 
-3. `subscribe`：
+3. `subscribe`：用于注册订阅 mutation 的回调；
 
 ```
 subscribe (fn) {
     return genericSubscribe(fn, this._subscribers)
 }
-
 ```
 
-4. `subscribeAction`：
+4. `subscribeAction`：用于注册订阅的回调，它和 subscribe 函数的原理是一模一样的
 
 ```
 subscribeAction (fn) {
@@ -329,7 +325,7 @@ function installModule (store, rootState, path, module, hot) {
     store._modulesNamespaceMap[namespace] = module
   }
 
-  // set state
+  // 设置state
   if (!isRoot && !hot) {
     const parentState = getNestedState(rootState, path.slice(0, -1))
     const moduleName = path[path.length - 1]
@@ -380,9 +376,10 @@ function resetStoreVM (store, state, hot) {
     // 旧的 vm 实例
   const oldVm = store._vm
 
-  // bind store public getters
+  // 设置getters属性
   store.getters = {}
   // reset local getters cache
+  // 重置本地getters缓存
   store._makeLocalGettersCache = Object.create(null)
   const wrappedGetters = store._wrappedGetters
   const computed = {}
@@ -412,7 +409,6 @@ function resetStoreVM (store, state, hot) {
   })
   Vue.config.silent = silent
 
-  // enable strict mode for new vm
   // 确保只能通过 commit 的方式改变状态
   if (store.strict) {
     enableStrictMode(store)
