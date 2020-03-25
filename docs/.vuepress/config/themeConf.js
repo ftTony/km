@@ -180,6 +180,7 @@ module.exports = {
                     "px",
                     "pic",
                     "center",
+                    "vertical-align",
                     "background",
                     "stack",
                     "flex",
