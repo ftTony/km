@@ -90,11 +90,15 @@ Vue.js 的源码都在 src 目录下，其目录结构如下。
 
 **使用 Object 数据变得“可观测”**
 
+数据的每次读和写能够被我们看的见，即我们能够知道数据什么时候被读取了或数据什么时候被改写了，我们将其称为数据变的“可观测”。
+
 **什么是依赖收集**
 
 视图里谁用到了这个数据就更新谁，我们换个优雅说法：我们把“谁用到了这个数据”称为“谁依赖了这个数据”，我们给每个数据都建一个依赖数组，谁依赖了这个数据我们就把谁放入这个依赖数组中，那么当这个数据发生变化的时候，我们就去它对应的依赖数据中，把每个依赖都通知一遍，告诉他们：“你们依赖的数据变啦，你们该更新啦！”。这个过程就是依赖收集。
 
 #### 2.2 Array 的变化侦测
+
+上一节文章中我们介绍了`Object`数据的变化侦测方式，本节我们来看一下对`Array`型数据的变化`Vue`是如何进行侦测的。
 
 #### 2.3 变化侦测的 API 实现
 
@@ -146,6 +150,44 @@ Vue.js 的源码都在 src 目录下，其目录结构如下。
 解析器，顾名思义，就是把用户所写的模板根据一定的解析规则解析出有效的信息，最后用这些信息形成`AST`。我们知道在`<template></template>`模板内，除了有常规的`HTML`标签外，
 
 #### 4.2 HTML 解析器
+
+```
+//  代码位置：/src/complier/parser/index.js
+
+/**
+ *  Convert HTML string to AST.
+ *  将HTML模板字符串转化为AST
+ */
+export function parse(template,options){
+    // ...
+    parseHTML(template,{
+        warn,
+        expectHTML: options.expectHTML,
+        isUnaryTag: options.isUnaryTag,
+        canBeLeftOpenTag: options.canBeLeftOpenTag,
+        shouldDecodeNewlines: options.shouldDecodeNewlines,
+        shouldDecodeNewlinesForHref: options.shouldDecodeNewlinesForHref,
+        shouldKeepComment: options.comments,
+        // 当解析到开始标签时，调用该函数
+        start(tag,attrs,unary){
+
+        },
+        // 当解析到结束标签时，调用该函数
+        end(){
+
+        },
+        // 当解析到文本时，调用该函数
+        chars(text){
+
+        },
+        // 当解析到注释时，调用该函数
+        comment(text){
+
+        }
+    })
+    return root
+}
+```
 
 #### 4.3 文本解析器
 

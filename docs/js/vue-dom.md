@@ -728,11 +728,13 @@ function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
         oldEndVnode = oldCh[--oldEndIdx]
         newStartVnode = newCh[++newStartIdx]
       } else {
+        // 如果不属于以上四种情况，就进行常规的循环比对patch
         if (isUndef(oldKeyToIdx)) oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)
         idxInOld = isDef(newStartVnode.key)
           ? oldKeyToIdx[newStartVnode.key]
           : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx)
-        if (isUndef(idxInOld)) { // 如果在oldChildren里找不到当前循环的newChildren里的子节点
+        // 如果在oldChildren里找不到当前循环的newChildren里的子节点
+        if (isUndef(idxInOld)) {
         // 新增节点并插入到合适位置
           createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx)
         } else {
@@ -754,9 +756,19 @@ function updateChildren(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){
       }
     }
     if (oldStartIdx > oldEndIdx) {
+        /**
+         *  如果oldChildrend比newChildrend先循环完毕，
+         *  那么newChildren里面剩余的节点都是需要新增的节点，
+         *  把[newStartIdx,newEndIdx]之间的所有节点都插入到DOM中
+         */
       refElm = isUndef(newCh[newEndIdx + 1]) ? null : newCh[newEndIdx + 1].elm
       addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue)
     } else if (newStartIdx > newEndIdx) {
+      /**
+       *  如果newChildren比oldChildren先循环完毕，
+       *  那么oldChildren里面剩余的节点都是需要删除的节点
+       *  把[oldStartIdx,oldEndIdx]之间的所有节点都删除
+       */
       removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx)
     }
 }
