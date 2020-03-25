@@ -151,6 +151,8 @@ Vue.js 的源码都在 src 目录下，其目录结构如下。
 
 #### 4.2 HTML 解析器
 
+**HTML 解析器内部运行流程**
+
 ```
 //  代码位置：/src/complier/parser/index.js
 
@@ -189,6 +191,10 @@ export function parse(template,options){
 }
 ```
 
+**如何解析不同的内容**
+
+要从模板字符串中解析出不同的内容，那
+
 #### 4.3 文本解析器
 
 #### 4.5 优化阶段
@@ -209,6 +215,24 @@ export function parse(template,options){
 - `initEvents`
 - `initInjections`
 - `initState`
+
+**new Vue 都干了什么**
+
+初始化阶段所做的第一件事就是`new Vue()`创建一个`Vue`实例，那么`new Vue()`的内部都干了什么呢？
+
+```
+function Vue (options) {
+  if (process.env.NODE_ENV !== 'production' &&
+    !(this instanceof Vue)
+  ) {
+    warn('Vue is a constructor and should be called with the `new` keyword')
+  }
+  this._init(options)
+}
+```
+
+**合并属性**
+**initLifecycle 函数分析**
 
 #### 5.2 模板编译阶段
 
