@@ -982,6 +982,7 @@ LRUCache.prototype.put = function(key, value) {
 ## 参考资料
 
 - [图解：我终于让女朋友学会了翻转链表！](https://mp.weixin.qq.com/s/kpaap25Y-2EOZsJnKyXbLQ)
+- [数据结构基础之掌握 5 个常见的链表操作](https://mp.weixin.qq.com/s/KMl8ZigBWeL7pOAtzekerw)
 - 《学习 JavaScript 数据结构与算法》
 
 ## 联系作者

@@ -12,6 +12,7 @@
 - [让骨架屏更快渲染 - 知乎](https://zhuanlan.zhihu.com/p/34550387)
 - [Vue 项目骨架屏注入实践](https://segmentfault.com/a/1190000016068682)
 - [小程序构建骨架屏的探索](https://mp.weixin.qq.com/s/5jUo2e4mtAghLx7iaM6l8g)
+- [考拉前端骨架屏生成技术揭秘](https://mp.weixin.qq.com/s/nFVtmSc5_rWbxdJNq_Kuag)
 
 ## 联系作者
 
