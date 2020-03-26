@@ -236,7 +236,47 @@ function Vue (options) {
 在上文中，`_init`方法里首先会调用`mergeOptions`函数来进行属性合并，如下：
 
 ```
+vm.$options = mergeOptions(
+    resolveConstructorOptions(vm.constructor),
+    options || {},
+    vm
+)
+```
 
+`mergeOptions`这个函数，它的定义在`src/core/util/options.js`中：
+
+```
+
+```
+
+生命周期钩子函数的合并策略如下：
+
+```
+function mergeHook(parentVal,childVal){
+    return childVal? parentVal ? parentVal.concat(childVal) : Array.isArray(childVal) ? childVal : [childVal] : parentVal
+}
+
+LIFECYCLE_HOOKS.forEach(hook => {
+  strats[hook] = mergeHook
+})
+```
+
+这其中的`LIFECYCLE_HOOKS`的定义在`src/shared/constants.js`中：
+
+```
+export const LIFECYCLE_HOOKS = [
+  'beforeCreate',
+  'created',
+  'beforeMount',
+  'mounted',
+  'beforeUpdate',
+  'updated',
+  'beforeDestroy',
+  'destroyed',
+  'activated',
+  'deactivated',
+  'errorCaptured'
+]
 ```
 
 **callHook 函数如何触发钩子函数**
