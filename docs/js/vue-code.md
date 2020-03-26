@@ -218,7 +218,7 @@ export function parse(template,options){
 
 **new Vue 都干了什么**
 
-初始化阶段所做的第一件事就是`new Vue()`创建一个`Vue`实例，那么`new Vue()`的内部都干了什么呢？
+初始化阶段所做的第一件事就是`new Vue()`创建一个`Vue`实例，那么`new Vue()`的内部都干了什么呢？我们知道，`new`关键字在`JS`中表示从一个
 
 ```
 function Vue (options) {

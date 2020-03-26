@@ -231,7 +231,7 @@ module.exports = {
             {
                 title: "HTML5相关API",
                 collapsable: false,
-                children: ["webwork", "webserver", "webrtc", "storage", "api"]
+                children: ["webwork", "webserver", "webrtc", "storage", "api", "hook"]
             },
             {
                 title: "Native学习",
