@@ -218,7 +218,7 @@ export function parse(template,options){
 
 **new Vue 都干了什么**
 
-初始化阶段所做的第一件事就是`new Vue()`创建一个`Vue`实例，那么`new Vue()`的内部都干了什么呢？我们知道，`new`关键字在`JS`中表示从一个
+初始化阶段所做的第一件事就是`new Vue()`创建一个`Vue`实例，那么`new Vue()`的内部都干了什么呢？我们知道，`new`关键字在`JS`中表示从一个类中实例化出一个对象来，由此可见，`Vue`实际上是一个类。所以`new Vue()`实际上是执行了`Vue`类的构造函数
 
 ```
 function Vue (options) {
@@ -232,6 +232,25 @@ function Vue (options) {
 ```
 
 **合并属性**
+
+在上文中，`_init`方法里首先会调用`mergeOptions`函数来进行属性合并，如下：
+
+```
+
+```
+
+**callHook 函数如何触发钩子函数**
+
+关于`callHook`函数如何触发钩子函数的问题，我们只需看一下该函数的实现源码即可，该函数的源码位于`src/core/instance/lifecycle.js`中，如下：
+
+```
+export function callHook(vm,hook){
+
+}
+```
+
+可以看到，`callHook`函数逻辑非常简单。首先从实例的`$options`中获取到需要触发的钩子名称所对应的钩子函数数组`handlers`，我们说过，每个生命周期钩子名称都对应一个钩子函数数组。然后遍历该数组，将数组中的每个钩子函数都执行一遍。
+
 **initLifecycle 函数分析**
 
 #### 5.2 模板编译阶段
