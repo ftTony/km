@@ -28,6 +28,8 @@
 - [【第 923 期】基于 Git、Svn 的 Commit 实现可增量构建的前端持续集成解决方案](https://mp.weixin.qq.com/s/E31b-hF9yNWLOt3bNBIXCA)
 - [网易云音乐前端模块动态下发系统](https://zhuanlan.zhihu.com/p/91386560)
 - [用 travis 和 git hook 搞个一键部署](https://segmentfault.com/a/1190000005804780)
+- [Travis-CI 自动化测试并部署至自己的 CentOS 服务器](https://juejin.im/post/5a9e1a5751882555712bd8e1)
+- [用 Travis CI 打造大前端持续集成和自动化部署](https://juejin.im/post/5c9b3934f265da60d429046d)
 - [Github + Jenkins + Docker 实现自动化部署](https://github.com/mcuking/blog/issues/61)
 - [抛弃 jenkins，使用 node 从零搭建自动化部署管理平台](https://mp.weixin.qq.com/s/UVcZh0QE8g52Iv5UB_61tQ)
 - [《大前端进阶 Node.js》系列 P6 必备脚手架/CI 构建能力（上）](https://juejin.im/post/5e7a22a8e51d4526d87c99ed)
