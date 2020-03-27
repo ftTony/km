@@ -103,21 +103,75 @@ Vue.js 的源码都在 src 目录下，其目录结构如下。
 **把依赖收集到哪里**
 
 ```
+export default class Dep {
+  static target: ?Watcher;
+  id: number;
+  subs: Array<Watcher>;
 
+  constructor () {
+    this.id = uid++
+    this.subs = []
+  }
+
+  addSub (sub: Watcher) {
+    this.subs.push(sub)
+  }
+
+  removeSub (sub: Watcher) {
+    remove(this.subs, sub)
+  }
+
+    // 订阅
+  depend () {
+    if (Dep.target) {
+      Dep.target.addDep(this)
+    }
+  }
+    // 通知更新
+  notify () {
+    // 转化成数组
+    const subs = this.subs.slice()
+    if (process.env.NODE_ENV !== 'production' && !config.async) {
+      subs.sort((a, b) => a.id - b.id)
+    }
+    for (let i = 0, l = subs.length; i < l; i++) {
+      subs[i].update()
+    }
+  }
+}
 ```
 
 **依赖到底是谁**
 
 ```
-
+export default class Watcher {
+  constructor (vm,expOrFn,cb) {
+    this.vm = vm;
+    this.cb = cb;
+    this.getter = parsePath(expOrFn)
+    this.value = this.get()
+  }
+  get () {
+    window.target = this;
+    const vm = this.vm
+    let value = this.getter.call(vm, vm)
+    window.target = undefined;
+    return value
+  }
+  update () {
+    const oldValue = this.value
+    this.value = this.get()
+    this.cb.call(this.vm, this.value, oldValue)
+  }
+}
 ```
 
 `Watcher`类的代码实现逻辑：
 
 1. 当实例化`Watcher`类时，会先执行其构造函数；
 2. 在构造函数中调用了`this.get()`实例方法；
-3. 在`get()`方法中
-4. 而当数据变化时，会触发数据的`setter`，在`setter`中调用了`dep.notify()`
+3. 在`get()`方法中，首先通过`window.target = this`把实例自身赋给了全局的一个唯一对象
+4. 而当数据变化时，会触发数据的`setter`，在`setter`中调用了`dep.notify()`方法，在`dep.notify()`方法中，遍历所有依赖(即 watcher 实例)，执行依赖的`update()`方法，也就是`Watcher`类中的`update()`实例方法，在`update()`方法中调用数据变化的更新回调函数，从而更新视图
 
 #### 2.2 Array 的变化侦测
 
