@@ -170,7 +170,7 @@ export default class Watcher {
 
 1. 当实例化`Watcher`类时，会先执行其构造函数；
 2. 在构造函数中调用了`this.get()`实例方法；
-3. 在`get()`方法中，首先通过`window.target = this`把实例自身赋给了全局的一个唯一对象
+3. 在`get()`方法中，首先通过`window.target = this`把实例自身赋给了全局的一个唯一对象`window.target`上，然后通过`let value = this.getter.call(vm,vm)`获取一下被依赖的数据，获取被依赖数据的目的是触发该数据上面的`getter`，上文我们说过，在`getter`里会调用`dep.depend()`收集依赖，而在`dep.depend()`中取到挂载`window.target`上的值并将其存入依赖数组中，在`get()`方法最后将`window.target`释放掉。
 4. 而当数据变化时，会触发数据的`setter`，在`setter`中调用了`dep.notify()`方法，在`dep.notify()`方法中，遍历所有依赖(即 watcher 实例)，执行依赖的`update()`方法，也就是`Watcher`类中的`update()`实例方法，在`update()`方法中调用数据变化的更新回调函数，从而更新视图
 
 #### 2.2 Array 的变化侦测
