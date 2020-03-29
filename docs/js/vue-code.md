@@ -357,6 +357,10 @@ methodsToPatch.forEach(function (method) {
 
 #### 2.3 变化侦测的 API 实现
 
+- `vm.$watch`
+- `vm.$set`
+- `vm.$delete`
+
 ### 三、虚拟 DOM 篇
 
 - Vue 中的虚拟 DOM
@@ -1122,9 +1126,7 @@ function initWatch (vm: Component, watch: Object) {
 
 #### 6.1 数据相关的方法
 
-- `vm.$watch`
-- `vm.$set`
-- `vm.$delete`
+参考小节[变化侦测的 API 实现](#2.3-变化侦测的-API-实现)
 
 #### 6.2 事件相关的方法
 
@@ -1132,6 +1134,14 @@ function initWatch (vm: Component, watch: Object) {
 - `vm.$emit`
 - `vm.$off`
 - `vm.$once`
+
+**`vm.$on`**
+
+参数：
+
+作用：
+
+内部原理：
 
 #### 6.3 生命周期相关的方法
 
