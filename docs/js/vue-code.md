@@ -307,6 +307,48 @@ export default class Watcher {
 
 上一节文章中我们介绍了`Object`数据的变化侦测方式，本节我们来看一下对`Array`型数据的变化`Vue`是如何进行侦测的。
 
+我们知道，`Object.defineProperty`监测`Object`型数据时是给`Object`型数据的每个`key/value`添加上了`getter`和`setter`，这样，对于`Object`型数据我们再通过`key`值取值或设置值时就可以被监测到。
+
+数组并不是只能由索引值来操作数组，更常用的操作数组的方法是使用数组原型上的一些方法如`push`，`shift`等来操作数组，当使用这些数据原型方法来数组时，`Object.defineProperty`就监测不到了，所以`Vue`对`Array`型数据单独设计了数据监测方式。
+
+```
+const methodsToPatch = [
+  'push',
+  'pop',
+  'shift',
+  'unshift',
+  'splice',
+  'sort',
+  'reverse'
+]
+
+/**
+ * Intercept mutating methods and emit events
+ */
+methodsToPatch.forEach(function (method) {
+  // cache original method
+  const original = arrayProto[method]
+  def(arrayMethods, method, function mutator (...args) {
+    const result = original.apply(this, args)
+    const ob = this.__ob__
+    let inserted
+    switch (method) {
+      case 'push':
+      case 'unshift':
+        inserted = args
+        break
+      case 'splice':
+        inserted = args.slice(2)
+        break
+    }
+    if (inserted) ob.observeArray(inserted)
+    // notify change
+    ob.dep.notify()
+    return result
+  })
+})
+```
+
 #### 2.3 变化侦测的 API 实现
 
 ### 三、虚拟 DOM 篇
@@ -1115,7 +1157,7 @@ function initWatch (vm: Component, watch: Object) {
 - [深入 Vue 技术栈及源码系列](https://www.cnblogs.com/tugenhua0707/category/1577630.html)
 - [Vue 原理剖析](http://www.zhufengpeixun.cn/train/vue-info/source.html)
 - [Vue2.x 源码解析系列一：我的源码阅读心得](https://github.com/lihongxun945/myblog/issues/22)
-- 《深入清出 Vue.js》
+- 《深入浅出 Vue.js》
 
 ## 联系作者
 
