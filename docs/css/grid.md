@@ -452,7 +452,7 @@ HTML 代码:
 
 构成网格结构的分界线。它们既可以是垂直的（“列网格线(column grid lines)”），也可以是水平的（“行网格线(row grid lines)”），并位于行或列的任一侧。例如，这里的黄线就是一条列网格线。
 
-![images](items-grid-line.svg)
+![images](tems-grid-line.svg)
 
 #### 2.4 网格轨道
 

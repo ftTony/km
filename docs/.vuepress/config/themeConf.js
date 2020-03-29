@@ -187,7 +187,7 @@ module.exports = {
                     "grid",
                     "bfc",
                     "column-layout",
-                    "fall-layout",
+                    "masonry-layout",
                     "responsive",
                     "transform",
                     "font-size",
