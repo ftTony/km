@@ -303,6 +303,12 @@ export default class Watcher {
 
 总结一下：`Watcher`先把自己设置到全局唯一的指定位置(`window.target`)，然后读取数据。因为读取了数据，所以会触发这个数据的`getter`。接着，在`getter`中就会从全局唯一的那个位置读取当前正在读取数据的`Watcher`，并把这个`wather`收集到`Dep`中去。收集好之后，当数据发生变化时，会向`Dep`中的每个`Wather`发送通知。通过这样的方式。`Wather`可以主动去订阅任意一个数据的变化。
 
+**不足之处**
+
+虽然我们通过`Object.defineProperty`方法实现了对`object`数据的可观测，但是这个方法仅仅只能观测到`object`数据的取值及设置值，当我们向`object`数据里添加一对新的`key/value`或删除一对已有的`key/value`时，它是无法观测到的，导致当我们对`object`数据添加或删除时，无法通知依赖，无法驱动视力进行响应式更新。
+
+`Vue`也注意到了这一点，为了解决这一问题，`Vue`增加了两个全局 API：`Vue.set`和`Vue.delete`。
+
 #### 2.2 Array 的变化侦测
 
 上一节文章中我们介绍了`Object`数据的变化侦测方式，本节我们来看一下对`Array`型数据的变化`Vue`是如何进行侦测的。
