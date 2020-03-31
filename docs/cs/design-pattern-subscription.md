@@ -43,36 +43,39 @@
 #### 4.1 实现观察者模式
 
 ```
+
+// 主题 保存状态，状态变化之后触发所有观察者对象
 class Subject {
     constructor(){
-
+        this.state = 0
+        this.observers = []
     }
-    add(){
-
+    getState(){
+        return this.state
     }
-    remove(){
-
+    setState(state){
+        this.state = state
+        this.notifyAllObservers()
     }
-
+    notifyAllObservers(){
+        this.observers.forEach(observer =>{
+            observer.update()
+        })
+    }
+    attach(observer){
+        this.observers.push(observer)
+    }
 }
 
+// 观察者
 class Observer {
-    constructor(){
-        this.lists = []
+    constructor(name,subject){
+        this.name = name
+        this.subject = subject
+        this.subject.attach(this)
     }
-    // 添加观察者对象
-    add(obj){
-
-    }
-
-    // 清空观察者对象
-    empty(){
-        this.lists = [];
-    }
-
-    // 计算当前的观察者数量
-    count() {
-        return this.list.length;
+    update(){
+        console.log(`${this.name} update,state:${this.subject.getState()}`)
     }
 }
 ```
@@ -93,18 +96,40 @@ class Pubsub{
 
         let subscribers = this.topics[topic]
         let len = subscribers ? subscribers.length : 0;
+
+        while (len--){
+            subscribers[len].func(topic,args);
+        }
+
+        return this;
     }
 
     // 订阅事件
     subscribe(topic,func){
+        if(!this.topics[topic]) this.topics[topic] = []
 
+        let token = (++this.subUid).toString()
+        this.topics[topic].push({
+            token:token,
+            func:func
+        })
+
+        return token
     }
 
     // 取消订阅
     unsubscribe(token){
         for(let m in topics){
-
+            if(topics[m]){
+                for (let i = 0; i < topics[m].length; i++) {
+                    if (topics[m][i].token == token) {
+                        topics[m].splice(i, 1);
+                        return token;
+                    }
+                }
+            }
         }
+        return this;
     }
 }
 
