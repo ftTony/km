@@ -43,7 +43,38 @@
 #### 4.1 实现观察者模式
 
 ```
+class Subject {
+    constructor(){
 
+    }
+    add(){
+
+    }
+    remove(){
+
+    }
+
+}
+
+class Observer {
+    constructor(){
+        this.lists = []
+    }
+    // 添加观察者对象
+    add(obj){
+
+    }
+
+    // 清空观察者对象
+    empty(){
+        this.lists = [];
+    }
+
+    // 计算当前的观察者数量
+    count() {
+        return this.list.length;
+    }
+}
 ```
 
 #### 4.2 实现订阅-发布模式
@@ -52,12 +83,16 @@
 // 定义发布/订阅类
 class Pubsub{
     constructor(){
-
+        this.topics = {};
+        this.subUid = -1;
     }
 
     // 发布事件
     publish(topic,args){
+        if(!this.topics[topic]) return false;
 
+        let subscribers = this.topics[topic]
+        let len = subscribers ? subscribers.length : 0;
     }
 
     // 订阅事件
