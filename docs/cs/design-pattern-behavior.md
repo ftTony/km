@@ -362,6 +362,36 @@ class A{
         }
     }
 }
+class B{
+    constructor(){
+        this.number = 0
+    }
+    setNumber(num,m){
+
+    }
+}
+class Mediator{
+    constructor(a,b){
+        this.a = a
+        this.b = b
+    }
+    setA(){
+        let number = this.b.number
+        this.a.setNumber(number*10)
+    }
+    setB(){
+        let number = this.a.number
+        this.b.setNumber(number/10)
+    }
+}
+
+let a = new A()
+let b = new B()
+let m = new Mediator(a,b)
+a.setNumber(10,m)
+console.log(a.number,b.number)
+b.setNumber(10,m)
+console.log(a.number,b.number)
 ```
 
 #### 8.3 优化
@@ -383,21 +413,54 @@ class A{
 
 #### 9.1 介绍
 
+在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到保存的状态。
+
 #### 9.2 代码
 
 ```
+// 备忘类
+class Memento{
+    constructor(content){
+        this.content = content
+    }
+    getContent(){
+        return this.content
+    }
+}
+// 备忘列表
+class CareTaker{
+    constructor(){
+        this.list = []
+    }
+}
+// 编辑器
+class Editor{
 
+}
+
+// 测试代码
+
+let editor = new Editor()
 ```
 
 #### 9.3 优点
 
+- 给用户提供了一种可以恢复状态的机制，可以使用户能够比较方便地回到某个历史的状态
+
 #### 9.4 缺点
 
+- 消耗资源。如果类的成员变量过多，势必会占用比较大的资源，而且每一次保存都会消耗一定的内存。
+
 #### 9.5 场景
+
+- 分页控件
+- 撤销组件
 
 ### 十、解释器模式
 
 #### 10.1 介绍
+
+给定一个语言，定义它的方法的一种表示，并定义一个解释器，该解释器使用该表示来解释语言中的句子。
 
 #### 10.2 代码
 
@@ -407,7 +470,13 @@ class A{
 
 #### 10.3 优点
 
+- 易于改变和扩展方法
+- 由于在解释器模式中使用类来表示语言的文法规则，因此可以通过继承等机制来改变或扩展方法
+
 #### 10.4 缺点
+
+- 执行效率较低，在解释器模式中使用了大量的循环和递归调用，因此在解释较为复杂的句子时其速度慢
+- 对于复杂的文法比较难维护
 
 #### 10.5 场景
 
