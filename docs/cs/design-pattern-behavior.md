@@ -200,8 +200,56 @@ console.log(context.getState())
             }
             add(dom,rules){
                 for(let i = 0,rule;rule = rules[i++];){
-
+                    let strategyAry = rule.errorMsg
+                    this.cache.push(()=>{
+                        let strategy = strategyAry.shift()
+                        strategyAry.unshift(dom.value)
+                        strategyAry.push(errorMsg)
+                        return strategies[strategy].apply(dom,strategyAry)
+                    })
                 }
+            }
+            start(){
+                for(let i=0,validatorFunc;validatorFunc = this.cache[i++];){
+                    let errorMsg = validatorFunc()
+                    if(errorMsg){
+                        return errorMsg
+                    }
+                }
+            }
+        }
+
+        // 调用代码
+        let registerFomr = document.getElementById('registerForm')
+
+        let validataFunc = function(){
+            let validator = new Validator()
+            validator.add(registerForm.userName,[{
+                strategy: 'isNoEmpty',
+                errorMsg: '用户名不可为空'
+            },{
+                strategy: 'isNoSpace',
+                errorMsg: '不允许以空白字符命名'
+            },{
+                strategy: 'minLength:2',
+                errorMsg:'用户名长度不能小于2位'
+            }])
+            validator.add(registerForm.password,[{
+                strategy: 'minLength:6',
+                errorMsg: '密码长度不能小于6位'
+            }])
+            validator.add(registerForm.phoneNumber,[{
+                strategy: 'isMobile',
+                errorMsg: '请输入正确的手机号码格式'
+            }])
+            return validator.start(0)
+        }
+
+        registerForm.onsubmit = function(){
+            let errorMsg = validataFunc()
+            if(errorMsg){
+                console.log(errorMsg)
+                return false
             }
         }
     </script>
@@ -603,6 +651,7 @@ context.add(new MinusExpression());
 
 ### 参考资料
 
+- [JavaScript 设计模式 es6（23 种)](https://juejin.im/post/5e021eb96fb9a01628014095)
 - 《JavaScript 设计模式》
 
 ## 联系作者
