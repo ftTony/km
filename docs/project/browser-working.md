@@ -238,6 +238,7 @@ defer 与相比普通 script，有两点区别：**载入 JavaScript 文件时�
 - [JavaScript 内部原理：浏览器的内幕](https://mp.weixin.qq.com/s/gZwPJ7RIl7zYgLFWOlzJoQ)
 - [CSS 渲染原理以及优化策略](https://mp.weixin.qq.com/s/bGq2fL8_mijVgoEphTLr5g)
 - [【第 1892 期】GPU 加速在前端的应用](https://mp.weixin.qq.com/s/T8g8uSn6K_5gz2DiPBWk9Q)
+- [浏览器渲染基本原理解析](https://mp.weixin.qq.com/s/pd_9wzs3hhcvd9LNsT5UcA)
 
 ## 联系作者
 

@@ -600,6 +600,7 @@ webpack 打包配置相对比较复杂，目前介绍应该可以满常规需求
 - [webpack 工程师的自我修养](https://github.com/luoxue-victor/webpack-box)
 - [Webpack 深入浅出之公司级分享总结(内附完整 ppt)](https://juejin.im/post/5df884ad6fb9a0164e7f979d)
 - [2020 年了,再不会 webpack 敲得代码就不香了(近万字实战)](https://juejin.im/post/5de87444518825124c50cd36)
+- [从构建进程间缓存设计 谈 Webpack5 优化和工作原理](https://mp.weixin.qq.com/s/MT5Vpg4BFXMh_c91a515iA)
 
 ## 联系作者
 

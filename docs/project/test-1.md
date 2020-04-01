@@ -41,12 +41,10 @@ Jest 总归是个使用起来很简单的框架，不需要太多的学习时间
 ### 参考资料
 
 - [万字长文总结前端测试体系建设与最佳实践](https://mp.weixin.qq.com/s/IgA29U-etBKUls7JnpE2Zw)
-- [聊聊前端开发的测试](https://www.jianshu.com/p/1b99af371e66)
-- [聊一聊前端自动化测试（下）](https://mp.weixin.qq.com/s/gQZ6SDyDLY8wu5_eedkd1g)
-- [【第 1022 期】聊一聊前端自动化测试（上）](https://mp.weixin.qq.com/s/KSszU-OcnLuxQ-Ap5KcFQg)
 - [单元测试从零开始，包含 Vue 及 React 项目中该如何单测](https://juejin.im/post/5defacfa51882512664b076f)
 - [学习测试框架 Mocha](https://www.cnblogs.com/tugenhua0707/p/8419534.html)
 - [学习 Karma+Jasmine+istanbul+webpack 自动化单元测试](https://www.cnblogs.com/tugenhua0707/p/8433847.html)
+- [NutUI 3.0 中单元测试的探索和实践](https://mp.weixin.qq.com/s/2LFwwuFeZSdEB2kcadnkEg)
 
 ## 联系作者
 

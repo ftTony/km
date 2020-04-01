@@ -351,7 +351,17 @@ element.appcept(visitor)
 #### 8.2 代码
 
 ```
-
+class A{
+    constructor(){
+        this.number = 0
+    }
+    setNumber(num,m){
+        this.number = num
+        if(m){
+            m.setB()
+        }
+    }
+}
 ```
 
 #### 8.3 优化
