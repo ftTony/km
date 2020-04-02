@@ -725,6 +725,12 @@ export const createCompiler = createCompilerCreator(function baseCompile (
 }
 ```
 
+最终返回了抽象语法树(ast)，渲染函数(render)，静态渲染函数(staticRenderFns)，且`render`的值为`code.render`，`staticRendreFns`的值为`code.staticRenderFns`，也就是说通过`generate`处理`ast`之后得到的返回值`code`是一个对象。
+
+流程图如下：
+
+![images](vue13.png)
+
 #### 4.2 整体运行流程
 
 在模板解析阶段主要做的工作是把用户在`<template></template>`标签内写的模板使用正则等方式解析成抽象语法树（`AST`）。而这一阶段在源码中对应解析器（`parser`）模块。
