@@ -784,6 +784,37 @@ export function parse(template,options){
 - template 待转换的模板字符串；
 - options 转换时所需的选项；
 
+第一个参数是待转换的模板字符串，无需多言；重点看第二个参数，第二个参数提供了
+
+- 当解析到开始标签时调用`start`函数生成元素类型的`AST`节点，代码如下；
+
+```
+// 当解析到标签的开始位置时，触发start
+start(tag,attrs,unary){
+    let element = crateASTElement(tag,atrrs,currentParent)
+}
+
+export function crateASTElement(tag,attrs,parent){
+
+}
+```
+
+从上面代码中我们可以看到，`start`函数接收三个参数，分别是标签名`tag`、标签属性`attrs`、标签是否自闭合`unary`。当调用该钩子函数时，内部会调用`createASTElement`函数来创建元素类型的`AST`节点
+
+- 当解析到结束标签时调用`end`函数；
+- 当解析到文本调用`chars`函数生成文本类型的`AST`节点；
+
+```
+
+
+```
+
+- 当解析到注释时调用`comment`函数生成注释类型的`AST`节点；
+
+```
+
+```
+
 **如何解析不同的内容**
 
 要从模板字符串中解析出不同的内容，那
@@ -800,15 +831,17 @@ export function parse(template,options){
 优化阶段的源码位于`src/compiler/optimizer.js`中，如下：
 
 ```
+
 export function optimize (root: ?ASTElement, options: CompilerOptions) {
-  if (!root) return
-  isStaticKey = genStaticKeysCached(options.staticKeys || '')
-  isPlatformReservedTag = options.isReservedTag || no
-  // 标记静态节点
-  markStatic(root)
-  // 标记静态根节点
-  markStaticRoots(root, false)
+if (!root) return
+isStaticKey = genStaticKeysCached(options.staticKeys || '')
+isPlatformReservedTag = options.isReservedTag || no
+// 标记静态节点
+markStatic(root)
+// 标记静态根节点
+markStaticRoots(root, false)
 }
+
 ```
 
 **标记静态节点**
@@ -816,58 +849,62 @@ export function optimize (root: ?ASTElement, options: CompilerOptions) {
 从`AST`中找出所有静态节点并标记其实不难，我们只需从根节点开始，先标记点是否静态节点，然后看根节点如果是元素节点，那么就向下递归它的子节点，子节点如果还有子节点那就继续向下递归，直到票房完所有节点。代码如下：
 
 ```
+
 function markStatic (node: ASTNode) {
-  node.static = isStatic(node)
-  if (node.type === 1) {
-    // do not make component slot content static. this avoids
-    // 1. components not able to mutate slot nodes
-    // 2. static slot content fails for hot-reloading
-    if (
-      !isPlatformReservedTag(node.tag) &&
-      node.tag !== 'slot' &&
-      node.attrsMap['inline-template'] == null
-    ) {
-      return
-    }
-    for (let i = 0, l = node.children.length; i < l; i++) {
-      const child = node.children[i]
-      markStatic(child)
-      if (!child.static) {
-        node.static = false
-      }
-    }
-    if (node.ifConditions) {
-      for (let i = 1, l = node.ifConditions.length; i < l; i++) {
-        const block = node.ifConditions[i].block
-        markStatic(block)
-        if (!block.static) {
-          node.static = false
-        }
-      }
-    }
-  }
+node.static = isStatic(node)
+if (node.type === 1) {
+// do not make component slot content static. this avoids
+// 1. components not able to mutate slot nodes
+// 2. static slot content fails for hot-reloading
+if (
+!isPlatformReservedTag(node.tag) &&
+node.tag !== 'slot' &&
+node.attrsMap['inline-template'] == null
+) {
+return
 }
+for (let i = 0, l = node.children.length; i < l; i++) {
+const child = node.children[i]
+markStatic(child)
+if (!child.static) {
+node.static = false
+}
+}
+if (node.ifConditions) {
+for (let i = 1, l = node.ifConditions.length; i < l; i++) {
+const block = node.ifConditions[i].block
+markStatic(block)
+if (!block.static) {
+node.static = false
+}
+}
+}
+}
+}
+
 ```
 
 上面代码中，首先调用`isStatic`函数标记节点是否为静态节点，该函数若返回`true`表示该节点是静态节点，若返回`false`表示该节点不是静态节点，函数实现如下：
 
 ```
+
 function isStatic (node: ASTNode): boolean {
-  if (node.type === 2) { // expression
-    return false
-  }
-  if (node.type === 3) { // text
-    return true
-  }
-  return !!(node.pre || (
-    !node.hasBindings && // no dynamic bindings
-    !node.if && !node.for && // not v-if or v-for or v-else
-    !isBuiltInTag(node.tag) && // not a built-in
-    isPlatformReservedTag(node.tag) && // not a component
-    !isDirectChildOfTemplateFor(node) &&
-    Object.keys(node).every(isStaticKey)
-  ))
+if (node.type === 2) { // expression
+return false
 }
+if (node.type === 3) { // text
+return true
+}
+return !!(node.pre || (
+!node.hasBindings && // no dynamic bindings
+!node.if && !node.for && // not v-if or v-for or v-else
+!isBuiltInTag(node.tag) && // not a built-in
+isPlatformReservedTag(node.tag) && // not a component
+!isDirectChildOfTemplateFor(node) &&
+Object.keys(node).every(isStaticKey)
+))
+}
+
 ```
 
 该函数的实现过程其实也说明了如何判断一个节点是否为静态节点。
@@ -894,35 +931,37 @@ function isStatic (node: ASTNode): boolean {
 寻找表态根节点找静态节点的逻辑类似，都是从`AST`根节点递归向上遍历寻找，其代码如下：
 
 ```
+
 function markStaticRoots (node: ASTNode, isInFor: boolean) {
-  if (node.type === 1) {
-    if (node.static || node.once) {
-      node.staticInFor = isInFor
-    }
-    // For a node to qualify as a static root, it should have children that
-    // are not just static text. Otherwise the cost of hoisting out will
-    // outweigh the benefits and it's better off to just always render it fresh.
-    if (node.static && node.children.length && !(
-      node.children.length === 1 &&
-      node.children[0].type === 3
-    )) {
-      node.staticRoot = true
-      return
-    } else {
-      node.staticRoot = false
-    }
-    if (node.children) {
-      for (let i = 0, l = node.children.length; i < l; i++) {
-        markStaticRoots(node.children[i], isInFor || !!node.for)
-      }
-    }
-    if (node.ifConditions) {
-      for (let i = 1, l = node.ifConditions.length; i < l; i++) {
-        markStaticRoots(node.ifConditions[i].block, isInFor)
-      }
-    }
-  }
+if (node.type === 1) {
+if (node.static || node.once) {
+node.staticInFor = isInFor
 }
+// For a node to qualify as a static root, it should have children that
+// are not just static text. Otherwise the cost of hoisting out will
+// outweigh the benefits and it's better off to just always render it fresh.
+if (node.static && node.children.length && !(
+node.children.length === 1 &&
+node.children[0].type === 3
+)) {
+node.staticRoot = true
+return
+} else {
+node.staticRoot = false
+}
+if (node.children) {
+for (let i = 0, l = node.children.length; i < l; i++) {
+markStaticRoots(node.children[i], isInFor || !!node.for)
+}
+}
+if (node.ifConditions) {
+for (let i = 1, l = node.ifConditions.length; i < l; i++) {
+markStaticRoots(node.ifConditions[i].block, isInFor)
+}
+}
+}
+}
+
 ```
 
 #### 4.5 代码生成阶段
@@ -947,14 +986,16 @@ function markStaticRoots (node: ASTNode, isInFor: boolean) {
 初始化阶段所做的第一件事就是`new Vue()`创建一个`Vue`实例，那么`new Vue()`的内部都干了什么呢？我们知道，`new`关键字在`JS`中表示从一个类中实例化出一个对象来，由此可见，`Vue`实际上是一个类。所以`new Vue()`实际上是执行了`Vue`类的构造函数
 
 ```
+
 function Vue (options) {
-  if (process.env.NODE_ENV !== 'production' &&
-    !(this instanceof Vue)
-  ) {
-    warn('Vue is a constructor and should be called with the `new` keyword')
-  }
-  this._init(options)
+if (process.env.NODE_ENV !== 'production' &&
+!(this instanceof Vue)
+) {
+warn('Vue is a constructor and should be called with the `new` keyword')
 }
+this.\_init(options)
+}
+
 ```
 
 **合并属性**
@@ -962,44 +1003,52 @@ function Vue (options) {
 在上文中，`_init`方法里首先会调用`mergeOptions`函数来进行属性合并，如下：
 
 ```
-vm.$options = mergeOptions(
-    resolveConstructorOptions(vm.constructor),
-    options || {},
-    vm
+
+vm.\$options = mergeOptions(
+resolveConstructorOptions(vm.constructor),
+options || {},
+vm
 )
+
 ```
 
 它实际上就是把 `resolveConstructorOptions(vm.constructor)` 的返回值和 `options` 做合并，返回`vm.constructor.options`，相当于`Vue.options`，那么这个`Vue.options`又是什么呢，其实在`initGlobalAPI(Vue)`的时候定义了这个值，代码在`src/core/global-api/index.js`中：
 
 ```
-export function initGlobalAPI (Vue: GlobalAPI) {
-  // ...
-  Vue.options = Object.create(null)
-  ASSET_TYPES.forEach(type => {
-    Vue.options[type + 's'] = Object.create(null)
-  })
 
-  extend(Vue.options.components, builtInComponents)
-  // ...
+export function initGlobalAPI (Vue: GlobalAPI) {
+// ...
+Vue.options = Object.create(null)
+ASSET_TYPES.forEach(type => {
+Vue.options[type + 's'] = Object.create(null)
+})
+
+extend(Vue.options.components, builtInComponents)
+// ...
 }
+
 ```
 
 首先通过`Vue.options = Object.create(null)`创建一个空对象，然后遍历`ASSET_TYPES`，`ASSET_TYPES`的定义在`src/shared/contstants.js`中：
 
 ```
+
 export const ASSET_TYPES = [
-  'component',
-  'directive',
-  'filter'
+'component',
+'directive',
+'filter'
 ]
+
 ```
 
 上面遍历`ASSET_TYPES`后代码相当于：
 
 ```
+
 Vue.options.components = {}
 Vue.options.directives = {}
 Vue.options.filters = {}
+
 ```
 
 最后通过`extend(Vue.options.components,builtInCompontents)`把一些内置组件扩展到`Vue.options.components`上，`Vue`的内置组件目前有`<keep-alive>`、`<transition>`和`<transition-group>`组件，这也就是为什么我们在其它组件中使用这些组件不需要注册的原因。
@@ -1007,58 +1056,61 @@ Vue.options.filters = {}
 `mergeOptions`这个函数，它的定义在`src/core/util/options.js`中：
 
 ```
-/**
- * Merge two option objects into a new one.
- * Core utility used in both instantiation and inheritance.
- */
-export function mergeOptions (
+
+/\*\*
+
+- Merge two option objects into a new one.
+- Core utility used in both instantiation and inheritance.
+  \*/
+  export function mergeOptions (
   parent: Object,
   child: Object,
   vm?: Component
-): Object {
+  ): Object {
   if (process.env.NODE_ENV !== 'production') {
-    checkComponents(child)
+  checkComponents(child)
   }
 
-  if (typeof child === 'function') {
-    child = child.options
-  }
-
-  normalizeProps(child, vm)
-  normalizeInject(child, vm)
-  normalizeDirectives(child)
-
-  // Apply extends and mixins on the child options,
-  // but only if it is a raw options object that isn't
-  // the result of another mergeOptions call.
-  // Only merged options has the _base property.
-  if (!child._base) {
-    if (child.extends) {
-      parent = mergeOptions(parent, child.extends, vm)
-    }
-    if (child.mixins) {
-      for (let i = 0, l = child.mixins.length; i < l; i++) {
-        parent = mergeOptions(parent, child.mixins[i], vm)
-      }
-    }
-  }
-
-  const options = {}
-  let key
-  for (key in parent) {
-    mergeField(key)
-  }
-  for (key in child) {
-    if (!hasOwn(parent, key)) {
-      mergeField(key)
-    }
-  }
-  function mergeField (key) {
-    const strat = strats[key] || defaultStrat
-    options[key] = strat(parent[key], child[key], vm, key)
-  }
-  return options
+if (typeof child === 'function') {
+child = child.options
 }
+
+normalizeProps(child, vm)
+normalizeInject(child, vm)
+normalizeDirectives(child)
+
+// Apply extends and mixins on the child options,
+// but only if it is a raw options object that isn't
+// the result of another mergeOptions call.
+// Only merged options has the \_base property.
+if (!child.\_base) {
+if (child.extends) {
+parent = mergeOptions(parent, child.extends, vm)
+}
+if (child.mixins) {
+for (let i = 0, l = child.mixins.length; i < l; i++) {
+parent = mergeOptions(parent, child.mixins[i], vm)
+}
+}
+}
+
+const options = {}
+let key
+for (key in parent) {
+mergeField(key)
+}
+for (key in child) {
+if (!hasOwn(parent, key)) {
+mergeField(key)
+}
+}
+function mergeField (key) {
+const strat = strats[key] || defaultStrat
+options[key] = strat(parent[key], child[key], vm, key)
+}
+return options
+}
+
 ```
 
 可以看出，`mergeOptions`函数的主要功能是把`parent`和`child`这两个对象根据一些合并策略，合并成一个新对象并返回。首先递归把`extends`和`mixins`合并到`parent`上
@@ -1070,31 +1122,35 @@ export function mergeOptions (
 生命周期钩子函数的合并策略如下：
 
 ```
+
 function mergeHook(parentVal,childVal){
-    return childVal? parentVal ? parentVal.concat(childVal) : Array.isArray(childVal) ? childVal : [childVal] : parentVal
+return childVal? parentVal ? parentVal.concat(childVal) : Array.isArray(childVal) ? childVal : [childVal] : parentVal
 }
 
 LIFECYCLE_HOOKS.forEach(hook => {
-  strats[hook] = mergeHook
+strats[hook] = mergeHook
 })
+
 ```
 
 这其中的`LIFECYCLE_HOOKS`的定义在`src/shared/constants.js`中：
 
 ```
+
 export const LIFECYCLE_HOOKS = [
-  'beforeCreate',
-  'created',
-  'beforeMount',
-  'mounted',
-  'beforeUpdate',
-  'updated',
-  'beforeDestroy',
-  'destroyed',
-  'activated',
-  'deactivated',
-  'errorCaptured'
+'beforeCreate',
+'created',
+'beforeMount',
+'mounted',
+'beforeUpdate',
+'updated',
+'beforeDestroy',
+'destroyed',
+'activated',
+'deactivated',
+'errorCaptured'
 ]
+
 ```
 
 **callHook 函数如何触发钩子函数**
@@ -1102,18 +1158,20 @@ export const LIFECYCLE_HOOKS = [
 关于`callHook`函数如何触发钩子函数的问题，我们只需看一下该函数的实现源码即可，该函数的源码位于`src/core/instance/lifecycle.js`中，如下：
 
 ```
+
 export function callHook(vm,hook){
-    const handlers = vm.$options[hook]
-    if(handlers){
-        for(let i = 0,j = handlers.length;i<j;i++){
-            try{
-                hanlders[i].call(vm)
-            }catch(e){
-                handleError(e,vm,`${hook} hook`)
-            }
-        }
-    }
+const handlers = vm.\$options[hook]
+if(handlers){
+for(let i = 0,j = handlers.length;i<j;i++){
+try{
+hanlders[i].call(vm)
+}catch(e){
+handleError(e,vm,`${hook} hook`)
 }
+}
+}
+}
+
 ```
 
 可以看到，`callHook`函数逻辑非常简单。首先从实例的`$options`中获取到需要触发的钩子名称所对应的钩子函数数组`handlers`，我们说过，每个生命周期钩子名称都对应一个钩子函数数组。然后遍历该数组，将数组中的每个钩子函数都执行一遍。
@@ -1123,31 +1181,33 @@ export function callHook(vm,hook){
 `initLifecycle`函数的定义的位于源码的`src/core/instance/lifecycle.js`中，其代码如下：
 
 ```
-export function initLifecycle (vm: Component) {
-  const options = vm.$options
 
-  // locate first non-abstract parent
-  let parent = options.parent
-  if (parent && !options.abstract) {
-    while (parent.$options.abstract && parent.$parent) {
-      parent = parent.$parent
+export function initLifecycle (vm: Component) {
+const options = vm.\$options
+
+// locate first non-abstract parent
+let parent = options.parent
+if (parent && !options.abstract) {
+while (parent.$options.abstract && parent.$parent) {
+parent = parent.$parent
     }
     parent.$children.push(vm)
-  }
+}
 
-  vm.$parent = parent
-  vm.$root = parent ? parent.$root : vm
+vm.$parent = parent
+  vm.$root = parent ? parent.\$root : vm
 
-  vm.$children = []
+vm.$children = []
   vm.$refs = {}
 
-  vm._watcher = null
-  vm._inactive = null
-  vm._directInactive = false
-  vm._isMounted = false
-  vm._isDestroyed = false
-  vm._isBeingDestroyed = false
+vm.\_watcher = null
+vm.\_inactive = null
+vm.\_directInactive = false
+vm.\_isMounted = false
+vm.\_isDestroyed = false
+vm.\_isBeingDestroyed = false
 }
+
 ```
 
 **解析事件**
@@ -1155,148 +1215,152 @@ export function initLifecycle (vm: Component) {
 在`Vue`中，当我们在父组件中使用子组件时可以给子组件上注册一些事件，这些事件包括使用`v-on`或`@`注册的自定义事件，也包括注册的浏览器原生事件，如下：
 
 ```
-<child @select="selectHandler" 	@click.native="clickHandler"></child>
+
+<child @select="selectHandler" @click.native="clickHandler"></child>
+
 ```
 
 上面代码，首先要从解析事件开始说起，当遇到开始标签的时候，除了会解析开始标签，还会调用`processAttrs`方法解析标签中的属性，`processAttrs`方法位于源码的`src/compiler/parser/index.js`中，如下：
 
 ```
+
 function processAttrs (el) {
-  const list = el.attrsList
-  let i, l, name, rawName, value, modifiers, syncGen, isDynamic
-  for (i = 0, l = list.length; i < l; i++) {
-    name = rawName = list[i].name
-    value = list[i].value
-    if (dirRE.test(name)) {
-      // mark element as dynamic
-      el.hasBindings = true
-      // modifiers
-      modifiers = parseModifiers(name.replace(dirRE, ''))
-      // support .foo shorthand syntax for the .prop modifier
-      if (process.env.VBIND_PROP_SHORTHAND && propBindRE.test(name)) {
-        (modifiers || (modifiers = {})).prop = true
-        name = `.` + name.slice(1).replace(modifierRE, '')
-      } else if (modifiers) {
-        name = name.replace(modifierRE, '')
-      }
-      if (bindRE.test(name)) { // v-bind
-        name = name.replace(bindRE, '')
-        value = parseFilters(value)
-        isDynamic = dynamicArgRE.test(name)
-        if (isDynamic) {
-          name = name.slice(1, -1)
-        }
-        if (
-          process.env.NODE_ENV !== 'production' &&
-          value.trim().length === 0
-        ) {
-          warn(
-            `The value for a v-bind expression cannot be empty. Found in "v-bind:${name}"`
-          )
-        }
-        if (modifiers) {
-          if (modifiers.prop && !isDynamic) {
-            name = camelize(name)
-            if (name === 'innerHtml') name = 'innerHTML'
-          }
-          if (modifiers.camel && !isDynamic) {
-            name = camelize(name)
-          }
-          if (modifiers.sync) {
-            syncGen = genAssignmentCode(value, `$event`)
-            if (!isDynamic) {
-              addHandler(
-                el,
-                `update:${camelize(name)}`,
-                syncGen,
-                null,
-                false,
-                warn,
-                list[i]
-              )
-              if (hyphenate(name) !== camelize(name)) {
-                addHandler(
-                  el,
-                  `update:${hyphenate(name)}`,
-                  syncGen,
-                  null,
-                  false,
-                  warn,
-                  list[i]
-                )
-              }
-            } else {
-              // handler w/ dynamic event name
-              addHandler(
-                el,
-                `"update:"+(${name})`,
-                syncGen,
-                null,
-                false,
-                warn,
-                list[i],
-                true // dynamic
-              )
-            }
-          }
-        }
-        if ((modifiers && modifiers.prop) || (
-          !el.component && platformMustUseProp(el.tag, el.attrsMap.type, name)
-        )) {
-          addProp(el, name, value, list[i], isDynamic)
-        } else {
-          addAttr(el, name, value, list[i], isDynamic)
-        }
-      } else if (onRE.test(name)) { // v-on
-        name = name.replace(onRE, '')
-        isDynamic = dynamicArgRE.test(name)
-        if (isDynamic) {
-          name = name.slice(1, -1)
-        }
-        addHandler(el, name, value, modifiers, false, warn, list[i], isDynamic)
-      } else { // normal directives
-        name = name.replace(dirRE, '')
-        // parse arg
-        const argMatch = name.match(argRE)
-        let arg = argMatch && argMatch[1]
-        isDynamic = false
-        if (arg) {
-          name = name.slice(0, -(arg.length + 1))
-          if (dynamicArgRE.test(arg)) {
-            arg = arg.slice(1, -1)
-            isDynamic = true
-          }
-        }
-        addDirective(el, name, rawName, value, arg, isDynamic, modifiers, list[i])
-        if (process.env.NODE_ENV !== 'production' && name === 'model') {
-          checkForAliasModel(el, value)
-        }
-      }
-    } else {
-      // literal attribute
-      if (process.env.NODE_ENV !== 'production') {
-        const res = parseText(value, delimiters)
-        if (res) {
-          warn(
-            `${name}="${value}": ` +
-            'Interpolation inside attributes has been removed. ' +
-            'Use v-bind or the colon shorthand instead. For example, ' +
-            'instead of <div id="{{ val }}">, use <div :id="val">.',
-            list[i]
-          )
-        }
-      }
-      addAttr(el, name, JSON.stringify(value), list[i])
-      // #6887 firefox doesn't update muted state if set via attribute
-      // even immediately after element creation
-      if (!el.component &&
-          name === 'muted' &&
-          platformMustUseProp(el.tag, el.attrsMap.type, name)) {
-        addProp(el, name, 'true', list[i])
-      }
-    }
-  }
+const list = el.attrsList
+let i, l, name, rawName, value, modifiers, syncGen, isDynamic
+for (i = 0, l = list.length; i < l; i++) {
+name = rawName = list[i].name
+value = list[i].value
+if (dirRE.test(name)) {
+// mark element as dynamic
+el.hasBindings = true
+// modifiers
+modifiers = parseModifiers(name.replace(dirRE, ''))
+// support .foo shorthand syntax for the .prop modifier
+if (process.env.VBIND_PROP_SHORTHAND && propBindRE.test(name)) {
+(modifiers || (modifiers = {})).prop = true
+name = `.` + name.slice(1).replace(modifierRE, '')
+} else if (modifiers) {
+name = name.replace(modifierRE, '')
 }
+if (bindRE.test(name)) { // v-bind
+name = name.replace(bindRE, '')
+value = parseFilters(value)
+isDynamic = dynamicArgRE.test(name)
+if (isDynamic) {
+name = name.slice(1, -1)
+}
+if (
+process.env.NODE_ENV !== 'production' &&
+value.trim().length === 0
+) {
+warn(
+`The value for a v-bind expression cannot be empty. Found in "v-bind:${name}"`
+)
+}
+if (modifiers) {
+if (modifiers.prop && !isDynamic) {
+name = camelize(name)
+if (name === 'innerHtml') name = 'innerHTML'
+}
+if (modifiers.camel && !isDynamic) {
+name = camelize(name)
+}
+if (modifiers.sync) {
+syncGen = genAssignmentCode(value, `$event`)
+if (!isDynamic) {
+addHandler(
+el,
+`update:${camelize(name)}`,
+syncGen,
+null,
+false,
+warn,
+list[i]
+)
+if (hyphenate(name) !== camelize(name)) {
+addHandler(
+el,
+`update:${hyphenate(name)}`,
+syncGen,
+null,
+false,
+warn,
+list[i]
+)
+}
+} else {
+// handler w/ dynamic event name
+addHandler(
+el,
+`"update:"+(${name})`,
+syncGen,
+null,
+false,
+warn,
+list[i],
+true // dynamic
+)
+}
+}
+}
+if ((modifiers && modifiers.prop) || (
+!el.component && platformMustUseProp(el.tag, el.attrsMap.type, name)
+)) {
+addProp(el, name, value, list[i], isDynamic)
+} else {
+addAttr(el, name, value, list[i], isDynamic)
+}
+} else if (onRE.test(name)) { // v-on
+name = name.replace(onRE, '')
+isDynamic = dynamicArgRE.test(name)
+if (isDynamic) {
+name = name.slice(1, -1)
+}
+addHandler(el, name, value, modifiers, false, warn, list[i], isDynamic)
+} else { // normal directives
+name = name.replace(dirRE, '')
+// parse arg
+const argMatch = name.match(argRE)
+let arg = argMatch && argMatch[1]
+isDynamic = false
+if (arg) {
+name = name.slice(0, -(arg.length + 1))
+if (dynamicArgRE.test(arg)) {
+arg = arg.slice(1, -1)
+isDynamic = true
+}
+}
+addDirective(el, name, rawName, value, arg, isDynamic, modifiers, list[i])
+if (process.env.NODE_ENV !== 'production' && name === 'model') {
+checkForAliasModel(el, value)
+}
+}
+} else {
+// literal attribute
+if (process.env.NODE_ENV !== 'production') {
+const res = parseText(value, delimiters)
+if (res) {
+warn(
+`${name}="${value}":` +
+'Interpolation inside attributes has been removed. ' +
+'Use v-bind or the colon shorthand instead. For example, ' +
+'instead of <div id="{{ val }}">, use <div :id="val">.',
+list[i]
+)
+}
+}
+addAttr(el, name, JSON.stringify(value), list[i])
+// #6887 firefox doesn't update muted state if set via attribute
+// even immediately after element creation
+if (!el.component &&
+name === 'muted' &&
+platformMustUseProp(el.tag, el.attrsMap.type, name)) {
+addProp(el, name, 'true', list[i])
+}
+}
+}
+}
+
 ```
 
 **initEvents 函数分析**
@@ -1304,29 +1368,33 @@ function processAttrs (el) {
 了解了以上过程之后，开始分析`initEvents`函数，该函数位于源码的`src/instance/events.js`中，如下：
 
 ```
+
 export function initEvents (vm: Component) {
-  vm._events = Object.create(null)
-  vm._hasHookEvent = false
-  // init parent attached events
-  const listeners = vm.$options._parentListeners
-  if (listeners) {
-    updateComponentListeners(vm, listeners)
-  }
+vm.\_events = Object.create(null)
+vm.\_hasHookEvent = false
+// init parent attached events
+const listeners = vm.\$options.\_parentListeners
+if (listeners) {
+updateComponentListeners(vm, listeners)
 }
+}
+
 ```
 
 这个`updateComponentListeners`函数是什么呢？该函数定义如下：
 
 ```
+
 export function updateComponentListeners (
-  vm: Component,
-  listeners: Object,
-  oldListeners: ?Object
+vm: Component,
+listeners: Object,
+oldListeners: ?Object
 ) {
-  target = vm
-  updateListeners(listeners, oldListeners || {}, add, remove, createOnceHandler, vm)
-  target = undefined
+target = vm
+updateListeners(listeners, oldListeners || {}, add, remove, createOnceHandler, vm)
+target = undefined
 }
+
 ```
 
 **initInjections 函数分析**
@@ -1344,28 +1412,30 @@ export function updateComponentListeners (
 `initInjections`函数的具体原理，该函数定义在位于源码的``中，如下：
 
 ```
+
 export function initInjections (vm: Component) {
-  const result = resolveInject(vm.$options.inject, vm)
-  if (result) {
-    toggleObserving(false)
-    Object.keys(result).forEach(key => {
-      /* istanbul ignore else */
-      if (process.env.NODE_ENV !== 'production') {
-        defineReactive(vm, key, result[key], () => {
-          warn(
-            `Avoid mutating an injected value directly since the changes will be ` +
-            `overwritten whenever the provided component re-renders. ` +
-            `injection being mutated: "${key}"`,
-            vm
-          )
-        })
-      } else {
-        defineReactive(vm, key, result[key])
-      }
-    })
-    toggleObserving(true)
-  }
+const result = resolveInject(vm.\$options.inject, vm)
+if (result) {
+toggleObserving(false)
+Object.keys(result).forEach(key => {
+/\* istanbul ignore else \*/
+if (process.env.NODE_ENV !== 'production') {
+defineReactive(vm, key, result[key], () => {
+warn(
+`Avoid mutating an injected value directly since the changes will be` +
+`overwritten whenever the provided component re-renders.` +
+`injection being mutated: "${key}"`,
+vm
+)
+})
+} else {
+defineReactive(vm, key, result[key])
 }
+})
+toggleObserving(true)
+}
+}
+
 ```
 
 **initState 函数分析**
@@ -1375,21 +1445,23 @@ export function initInjections (vm: Component) {
 首先我们先来分析`initState`函数，该函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
+
 export function initState (vm: Component) {
-  vm._watchers = []
-  const opts = vm.$options
-  if (opts.props) initProps(vm, opts.props)
-  if (opts.methods) initMethods(vm, opts.methods)
-  if (opts.data) {
-    initData(vm)
-  } else {
-    observe(vm._data = {}, true /* asRootData */)
-  }
-  if (opts.computed) initComputed(vm, opts.computed)
-  if (opts.watch && opts.watch !== nativeWatch) {
-    initWatch(vm, opts.watch)
-  }
+vm.\_watchers = []
+const opts = vm.\$options
+if (opts.props) initProps(vm, opts.props)
+if (opts.methods) initMethods(vm, opts.methods)
+if (opts.data) {
+initData(vm)
+} else {
+observe(vm.\_data = {}, true /_ asRootData _/)
 }
+if (opts.computed) initComputed(vm, opts.computed)
+if (opts.watch && opts.watch !== nativeWatch) {
+initWatch(vm, opts.watch)
+}
+}
+
 ```
 
 首先，给实例上新增了一个属性`_watchers`，用来存储当前实例中所有的`watcher`实例，无论是使用`vm.$watch`注册的`watcher`实例还是使用`watch`选项注册的`watcher`实例，都会被保存到该属性中。
@@ -1397,53 +1469,55 @@ export function initState (vm: Component) {
 `initProps`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
+
 function initProps (vm: Component, propsOptions: Object) {
-  const propsData = vm.$options.propsData || {}
+const propsData = vm.$options.propsData || {}
   const props = vm._props = {}
   // cache prop keys so that future props updates can iterate using Array
   // instead of dynamic object key enumeration.
-  const keys = vm.$options._propKeys = []
-  const isRoot = !vm.$parent
-  // root instance props should be converted
-  if (!isRoot) {
-    toggleObserving(false)
-  }
-  for (const key in propsOptions) {
-    keys.push(key)
-    const value = validateProp(key, propsOptions, propsData, vm)
-    /* istanbul ignore else */
-    if (process.env.NODE_ENV !== 'production') {
-      const hyphenatedKey = hyphenate(key)
-      if (isReservedAttribute(hyphenatedKey) ||
-          config.isReservedAttr(hyphenatedKey)) {
-        warn(
-          `"${hyphenatedKey}" is a reserved attribute and cannot be used as component prop.`,
-          vm
-        )
-      }
-      defineReactive(props, key, value, () => {
-        if (!isRoot && !isUpdatingChildComponent) {
-          warn(
-            `Avoid mutating a prop directly since the value will be ` +
-            `overwritten whenever the parent component re-renders. ` +
-            `Instead, use a data or computed property based on the prop's ` +
-            `value. Prop being mutated: "${key}"`,
-            vm
-          )
-        }
-      })
-    } else {
-      defineReactive(props, key, value)
-    }
-    // static props are already proxied on the component's prototype
-    // during Vue.extend(). We only need to proxy props defined at
-    // instantiation here.
-    if (!(key in vm)) {
-      proxy(vm, `_props`, key)
-    }
-  }
-  toggleObserving(true)
+  const keys = vm.$options.\_propKeys = []
+const isRoot = !vm.\$parent
+// root instance props should be converted
+if (!isRoot) {
+toggleObserving(false)
 }
+for (const key in propsOptions) {
+keys.push(key)
+const value = validateProp(key, propsOptions, propsData, vm)
+/\* istanbul ignore else \*/
+if (process.env.NODE_ENV !== 'production') {
+const hyphenatedKey = hyphenate(key)
+if (isReservedAttribute(hyphenatedKey) ||
+config.isReservedAttr(hyphenatedKey)) {
+warn(
+`"${hyphenatedKey}" is a reserved attribute and cannot be used as component prop.`,
+vm
+)
+}
+defineReactive(props, key, value, () => {
+if (!isRoot && !isUpdatingChildComponent) {
+warn(
+`Avoid mutating a prop directly since the value will be` +
+`overwritten whenever the parent component re-renders.` +
+`Instead, use a data or computed property based on the prop's` +
+`value. Prop being mutated: "${key}"`,
+vm
+)
+}
+})
+} else {
+defineReactive(props, key, value)
+}
+// static props are already proxied on the component's prototype
+// during Vue.extend(). We only need to proxy props defined at
+// instantiation here.
+if (!(key in vm)) {
+proxy(vm, `_props`, key)
+}
+}
+toggleObserving(true)
+}
+
 ```
 
 可以看到，该函数接收两个参数：当前`Vue`实例和当前实例规范化后的`props`选项。
@@ -1451,10 +1525,12 @@ function initProps (vm: Component, propsOptions: Object) {
 在函数内部首先定义了 4 个变量，分别是：
 
 ```
+
 const propsData = vm.$options.propsData || {}
 const props = vm._props = {}
-const keys = vm.$options._propKeys = []
-const isRoot = !vm.$parent
+const keys = vm.$options.\_propKeys = []
+const isRoot = !vm.\$parent
+
 ```
 
 - propsData：父组件传入的真实`props`数据。
@@ -1465,73 +1541,78 @@ const isRoot = !vm.$parent
 初始化`methods`相较而言就比较简单了，它的初始函数定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
+
 function initMethods (vm: Component, methods: Object) {
-  const props = vm.$options.props
-  for (const key in methods) {
-    if (process.env.NODE_ENV !== 'production') {
-      if (typeof methods[key] !== 'function') {
-        warn(
-          `Method "${key}" has type "${typeof methods[key]}" in the component definition. ` +
-          `Did you reference the function correctly?`,
-          vm
-        )
-      }
-      if (props && hasOwn(props, key)) {
-        warn(
-          `Method "${key}" has already been defined as a prop.`,
-          vm
-        )
-      }
-      if ((key in vm) && isReserved(key)) {
-        warn(
-          `Method "${key}" conflicts with an existing Vue instance method. ` +
-          `Avoid defining component methods that start with _ or $.`
-        )
-      }
-    }
-    vm[key] = typeof methods[key] !== 'function' ? noop : bind(methods[key], vm)
-  }
+const props = vm.\$options.props
+for (const key in methods) {
+if (process.env.NODE_ENV !== 'production') {
+if (typeof methods[key] !== 'function') {
+warn(
+`Method "${key}" has type "${typeof methods[key]}" in the component definition.` +
+`Did you reference the function correctly?`,
+vm
+)
 }
+if (props && hasOwn(props, key)) {
+warn(
+`Method "${key}" has already been defined as a prop.`,
+vm
+)
+}
+if ((key in vm) && isReserved(key)) {
+warn(
+`Method "${key}" conflicts with an existing Vue instance method.` +
+`Avoid defining component methods that start with _ or $.`
+)
+}
+}
+vm[key] = typeof methods[key] !== 'function' ? noop : bind(methods[key], vm)
+}
+}
+
 ```
 
 初始化`data`也比较简单，它的初始化函数定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
+
 export function initState (vm: Component) {
-  vm._watchers = []
-  const opts = vm.$options
-  if (opts.props) initProps(vm, opts.props)
-  if (opts.methods) initMethods(vm, opts.methods)
-  if (opts.data) {
-    initData(vm)
-  } else {
-    observe(vm._data = {}, true /* asRootData */)
-  }
-  if (opts.computed) initComputed(vm, opts.computed)
-  if (opts.watch && opts.watch !== nativeWatch) {
-    initWatch(vm, opts.watch)
-  }
+vm.\_watchers = []
+const opts = vm.\$options
+if (opts.props) initProps(vm, opts.props)
+if (opts.methods) initMethods(vm, opts.methods)
+if (opts.data) {
+initData(vm)
+} else {
+observe(vm.\_data = {}, true /_ asRootData _/)
 }
+if (opts.computed) initComputed(vm, opts.computed)
+if (opts.watch && opts.watch !== nativeWatch) {
+initWatch(vm, opts.watch)
+}
+}
+
 ```
 
 初始化`initComputed`的内部原理是怎样的。`initComputed`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
-function initComputed (vm: Component, computed: Object) {
-  // $flow-disable-line
-  const watchers = vm._computedWatchers = Object.create(null)
-  // computed properties are just getters during SSR
-  const isSSR = isServerRendering()
 
-  for (const key in computed) {
-    const userDef = computed[key]
-    const getter = typeof userDef === 'function' ? userDef : userDef.get
-    if (process.env.NODE_ENV !== 'production' && getter == null) {
-      warn(
-        `Getter is missing for computed property "${key}".`,
-        vm
-      )
-    }
+function initComputed (vm: Component, computed: Object) {
+// \$flow-disable-line
+const watchers = vm.\_computedWatchers = Object.create(null)
+// computed properties are just getters during SSR
+const isSSR = isServerRendering()
+
+for (const key in computed) {
+const userDef = computed[key]
+const getter = typeof userDef === 'function' ? userDef : userDef.get
+if (process.env.NODE_ENV !== 'production' && getter == null) {
+warn(
+`Getter is missing for computed property "${key}".`,
+vm
+)
+}
 
     if (!isSSR) {
       // create internal watcher for the computed property.
@@ -1555,25 +1636,29 @@ function initComputed (vm: Component, computed: Object) {
         warn(`The computed property "${key}" is already defined as a prop.`, vm)
       }
     }
-  }
+
 }
+}
+
 ```
 
 初始化`watch`选项，在日常开发中`watch`选项也经常会使用到，它可以用来侦听某个已有的数据，当该数据发生变化时执行对应的回调函数。
 
 ```
+
 function initWatch (vm: Component, watch: Object) {
-  for (const key in watch) {
-    const handler = watch[key]
-    if (Array.isArray(handler)) {
-      for (let i = 0; i < handler.length; i++) {
-        createWatcher(vm, key, handler[i])
-      }
-    } else {
-      createWatcher(vm, key, handler)
-    }
-  }
+for (const key in watch) {
+const handler = watch[key]
+if (Array.isArray(handler)) {
+for (let i = 0; i < handler.length; i++) {
+createWatcher(vm, key, handler[i])
 }
+} else {
+createWatcher(vm, key, handler)
+}
+}
+}
+
 ```
 
 #### 5.2 模板编译阶段
@@ -1642,14 +1727,15 @@ function initWatch (vm: Component, watch: Object) {
 该 API 的定义位于源码的`src/core/global-api/extend.js`中，如下：
 
 ```
+
 Vue.extend = function (extendOptions: Object): Function {
-    extendOptions = extendOptions || {}
-    const Super = this
-    const SuperId = Super.cid
-    const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
-    if (cachedCtors[SuperId]) {
-        return cachedCtors[SuperId]
-    }
+extendOptions = extendOptions || {}
+const Super = this
+const SuperId = Super.cid
+const cachedCtors = extendOptions.\_Ctor || (extendOptions.\_Ctor = {})
+if (cachedCtors[SuperId]) {
+return cachedCtors[SuperId]
+}
 
     const name = extendOptions.name || Super.options.name
     if (process.env.NODE_ENV !== 'production' && name) {
@@ -1697,7 +1783,9 @@ Vue.extend = function (extendOptions: Object): Function {
     // cache constructor
     cachedCtors[SuperId] = Sub
     return Sub
+
 }
+
 ```
 
 #### 7.9 Vue.use
@@ -1705,11 +1793,12 @@ Vue.extend = function (extendOptions: Object): Function {
 该 API 的定义位于源码的`src/core/global-api/use.js`中，代码如下：
 
 ```
+
 Vue.use = function (plugin) {
-    const installedPlugins = (this._installedPlugins || (this._installedPlugins = []))
-    if (installedPlugins.indexOf(plugin) > -1) {
-        return this
-    }
+const installedPlugins = (this.\_installedPlugins || (this.\_installedPlugins = []))
+if (installedPlugins.indexOf(plugin) > -1) {
+return this
+}
 
     // additional parameters
     const args = toArray(arguments, 1)
@@ -1721,7 +1810,9 @@ Vue.use = function (plugin) {
     }
     installedPlugins.push(plugin)
     return this
+
 }
+
 ```
 
 ### 八、过滤器篇
@@ -1755,3 +1846,4 @@ Vue.use = function (plugin) {
     </p>
     <img :src="$withBase('/about/contact.png')" />
 </div>
+```
