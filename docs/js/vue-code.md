@@ -692,14 +692,38 @@ export function del (target: Array<any> | Object, key: any) {
 ```
 // 源码位置：/src/complier/index.js
 
-export const createCompiler = createCompilerCreate(function baseCompile(){
-
+export const createCompiler = createCompilerCreator(function baseCompile (
+  template: string,
+  options: CompilerOptions
+): CompiledResult {
+  const ast = parse(template.trim(), options)
+  if (options.optimize !== false) {
+    optimize(ast, options)
+  }
+  const code = generate(ast, options)
+  return {
+    ast,
+    render: code.render,
+    staticRenderFns: code.staticRenderFns
+  }
 })
 ```
 
 可以看到`baseCompile`的代码非常的简短主要核心代码。
 
-- **const ast = parse(template.trim(),options)**：`parse`会用与此同时等方式
+- **const ast = parse(template.trim(),options)**：`parse`会用与此同时等方式解析`template`模板中的指令、`class`、`style`等数据，形成`AST`。
+- **optimize(ast,options)**：`optimize`的主要作用是标记静态节点，这是`Vue`在编译过程中的一处优化，档在进行`patch`的过程中，`DOM-Diff`算法会直接跳过静态节点，从而减少了比较的过程，优化了`patch`的性能。
+- **const code = generate(ast,options)**：将`AST`转化成`render`函数字符串的过程，得到结果是`render`函数的字符串以及`staticRenderFns`字符串。
+
+最终`baseCompile`的返回值
+
+```
+{
+    ast:ast,
+    render: code.render,
+    staticRenderFns: code.staticRenderFns
+}
+```
 
 #### 4.2 整体运行流程
 
