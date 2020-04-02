@@ -17,31 +17,55 @@
 
 #### 1.1 介绍
 
+类都封装到一个函数里面，这样在模块调用的时候只需要记住这个函数，通过这个函数创建用户需要的对象就可以了，这个函数就是被称为工厂函数，这种设计模式就被称为简单工厂设计模式。
+
 #### 1.2 代码
 
 ```
-function User(name,age,career,work){
-    this.name = name
-    this.age = age
-    this.career = career
-    this.work = work
-}
-
-function Factory(name,age,career){
-    let work
-    switch(career){
-        case 'coder':
-            work = ['写代码','写系分','修改Bug']
-            break
-        case 'product manager':
-            work = ['订会议室','写RRD','催更']
-            break
-        case 'boss':
-            work = ['喝茶','看报','见客户']
+//篮球基类
+class BasketBall {
+    constructor() {
+        this.intro = '篮球盛行于美国'
     }
 
-    return new User(name, age, career, work)
+    getMember() {
+        console.log('每一个队伍需要五个球员');
+    }
+
+    getBallSize() {
+        console.log('篮球很大')
+    }
 }
+
+// 足球基类
+class FootBall {
+    constructor() {
+        this.intro = '足球在全世界范围都很流行'
+    }
+
+    getMember() {
+        console.log('每一个队伍需要11个球员');
+    }
+
+    getBallSize() {
+        console.log('足球很大')
+    }
+}
+
+let SportsFactory = function(name) {
+    switch (name) {
+        case 'NBA':
+            return new BasketBall();
+        case 'wordCup':
+            return new FootBall();
+    }
+};
+
+// 为直接被创建一个足球，只需要记住工厂，并且调用就可以了
+let footNall  = SportsFactory('wordCup');
+console.log(footNall);
+console.log(footNall.intro);
+footNall.getMember();
 ```
 
 #### 1.3 优点
@@ -59,29 +83,34 @@ function Factory(name,age,career){
 #### 2.2 代码
 
 ```
-class Produce{
-    constructor(name){
-        this.name = name
+let Factory = function (type, content) {
+    if (this instanceof Factory) {
+        return new this[type](content);
+    } else {
+        return new Factory(type, content)
     }
-    init(){
-        console.log('init')
-    }
-    fun(){
-        console.log('fun')
-    }
-}
+};
 
-class Factory{
-    create(name){
-        return new Product(name)
+Factory.prototype = {
+    Java(content) {
+        this.content = content;
+        (function (content) {
+            console.log(content)
+        })(content);
+    },
+    Php(content) {
+        this.content = content;
+        (function (content) {
+            console.log(content)
+        })(content);
+    },
+    JavaScript(content) {
+        this.content = content;
+        (function (content) {
+            console.log(content)
+        })(content);
     }
-}
-
-// use
-let factory = new Factory()
-let p = factory.create('p1')
-p.init()
-p.fun()
+};
 ```
 
 #### 2.3 优点
@@ -90,19 +119,61 @@ p.fun()
 
 #### 2.3 适用场景
 
+- 动态实现：
+- 节省设置开销：
+
 ### 三、抽象工厂模式
 
 #### 3.1 介绍
 
+提供一个创建一系列相关或相互依赖对象的接口，而无需制定它们具体的类。
+
 #### 3.2 代码
 
 ```
+// 抽象工厂
+let VehicleFactory = function(subType,superType){
 
+};
+
+// 小汽车抽象类
+VehicleFactory.Car = function(){
+    this.type = 'car'
+};
+VehicleFactory.Car.prototype = {
+    getPrice(){
+        return new Error('抽象方法不能被调用')
+    },
+    getSpeed(){
+        return new Error('抽象方法不能被调用')
+    }
+}
+
+
+/*具体实现*/
+// 宝马汽车子类
+let BMW = function(price,speed){
+    this.price = price;
+    this.speed = speed;
+};
+VehicleFactory(BMW,'Car')
+BMW.prototype.getPrice = function(){
+    return this.price
+}
+BMW.prototype.getSpeed = function(){
+
+}
 ```
 
 #### 3.3 优点
 
+- 分离接口和实现
+- 舍不得切换产品簇变得容易
+
 #### 3.4 缺点
+
+- 不太容易扩展新产品
+- 容易造成雷层次复杂
 
 #### 3.5 缺点
 
