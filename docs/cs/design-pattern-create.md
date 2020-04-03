@@ -186,7 +186,53 @@ BMW.prototype.getSpeed = function(){
 #### 4.2 代码
 
 ```
+// canvas绘制图形验证码
+function Gcode(el,option){
+    this.el = typeof el === 'string' ? document.querySelectory(el) : el;
+    this.option = option;
+    this.init()
+}
+Gcode.prototype = {
+    constructor:Gcode,
+    init:function(){
+        if(this.el.getContext){
+            isSupportCanvas = true;
+            var ctx = this.el.getContext('2d'),
+                // 设置画布宽高
+                cw = this.el.width = this.option.width || 200,
+                ch = this.el.height = this.option.height || 40,
+                textLen = this.option.textLen || 4,
+                lineNum = this.option.lineNum || 4;
+                var text = this.randomText(textLen);
 
+                this.onClick(ctx,textLen,lineNum,cw,ch);
+                this.drawLine(ctx,lineNum,cw,ch);
+                this.drawText(ctx,text,ch);
+        }
+    },
+    onClick:function(ctx,textLen,lineNum,cw,ch){
+        var  _ = this;
+        this.el.addEventListener('click',function(){
+            text = _.randomText(textLen);
+        },false)
+    },
+    // 画干扰线
+    drawLine: function(ctx,lineNum,maxW,maxH){
+
+    },
+    // 画文字
+    drawText: function(ctx,text,maxH){
+
+    },
+    // 生成指定个数的随机文字
+    randomText:function(len){
+
+    },
+    // 生成唯一文字
+    generateUniqueText:function(source,hasList,limit){
+
+    }
+}
 ```
 
 #### 4.3 优点
