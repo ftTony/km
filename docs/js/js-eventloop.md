@@ -408,6 +408,7 @@ Node 端的处理过程如下：
 - [【THE LAST TIME】彻底吃透 JavaScript 执行机制](https://mp.weixin.qq.com/s/nQgsEQorv00fr4XqU764bA)
 - [《一文看懂浏览器事件循环》](https://mp.weixin.qq.com/s/kG4FHXlqbKFWYQCtPhLtxA)
 - [说说 JS 的事件循环机制 (含满分答题技巧)](https://mp.weixin.qq.com/s/G2L_9kj8ST0_HPG7yxd2lw)
+- [JavaScript 事件循环：从起源到浏览器再到 Node.js](https://mp.weixin.qq.com/s/OudqDff3QvmBqIiD74LrTw)
 
 ## 联系作者
 
