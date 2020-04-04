@@ -67,21 +67,29 @@ console.log(rect)
 
 #### 2.1 介绍
 
+多个对象接受并处理同一个请求，他们请求委托给另一个对象统一处理请求。
+
 #### 2.2 代码
 
 ```
-
+let ul = document.getElementById('container');
+ul.onclick = function (e = window.event) {
+    let tar = e.target || e.srcElement;
+    if (tar.nodeName.toLowerCase() === 'li') {
+        tar.style.color = 'blue';
+    }
+}
 ```
 
-#### 2.3 优点
+#### 2.3 场景
 
-#### 2.4 缺点
-
-#### 2.5 场景
+- dom 事件委托
 
 ### 三、数据访问模式
 
 #### 3.1 介绍
+
+抽象和封装对数据源的访问与存储。
 
 #### 3.2 代码
 
@@ -98,6 +106,8 @@ console.log(rect)
 ### 四、节流模式
 
 #### 4.1 介绍
+
+对于复杂的业务逻辑进行节流控制， 执行最后一次操作并取消其他操作， 提高性能。
 
 #### 4.2 代码
 
