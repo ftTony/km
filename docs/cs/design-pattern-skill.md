@@ -96,7 +96,31 @@ ul.onclick = function (e = window.event) {
 ```
 // 本地存储localStorage
 
+class BaseLocalStorage{
+    constructor(preId,timeSign = '|-|'){
 
+    }
+
+    // 获取本地存储数据ylkd数据真实字段
+    getKey(key){
+
+    }
+
+    // 添加或者修改数据
+    set(key,value,callback,time){
+
+    }
+
+    // 获取数据
+    get(key,callback){
+
+    }
+
+    // 删除数据
+    remove(key,callback){
+
+    }
+}
 ```
 
 ### 四、节流模式
@@ -111,7 +135,26 @@ ul.onclick = function (e = window.event) {
 // 返回顶部
 /* 返回顶部按钮添加动画，每次手动页面滚动时，他都要不停的抖动。原因 */
 
+let throttle = function(){
+    let isClear = arguments[0],fn;
+    // 第一个参数表示是否清楚计时器
+    if(typeof isClear === 'boolean'){
+        // 第二参数则为函数
+        fn = arguments[1]
+    }else{
+        // 第一个参数为函数
+    }
+}
 
+// 实际使用
+function moveScroll(){
+    let top = $(document).scrollTo();
+    $('#back').animate({top:top+30},400,'easeOutCubic')
+}
+// 监听页面滚动事件
+$(window).on('scroll',function(){
+    throttle(moveScroll)
+})
 ```
 
 #### 4.3 优点
