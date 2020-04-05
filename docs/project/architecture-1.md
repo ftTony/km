@@ -81,7 +81,6 @@
 - [架构师之路，19 年文章精选 120 篇](https://mp.weixin.qq.com/s/syli7vs7Jw_VOTl5B2YUqg)
 - [架构师之路 18 年精选 100 篇](https://mp.weixin.qq.com/s/V1hGa6D9aGrP6PiCWEmc0w)
 - [高性能前端架构解决方案](https://mp.weixin.qq.com/s/eITZC-eEBV5c4pnSQ7Z1Fg)
-- [QPS、TPS、并发用户数、吞吐量关系](https://juejin.im/post/5c2cb5e15188257a937fbfaf)
 
 ## 联系作者
 
