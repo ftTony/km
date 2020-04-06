@@ -142,6 +142,7 @@ module.exports = {
                     "node-process",
                     "node-querystring",
                     "node-stream",
+                    "node-queue",
                     "node-url"
                 ]
             },
