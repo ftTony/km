@@ -740,6 +740,8 @@ export default class Watcher {
 }
 ```
 
+创建`watcher`实例的时候会读取被观察的数据，读取了数据就表示依赖了数据，所以`watcher`实例就会存在于数据的依赖列表中，同时`watcher`实例也记录了自己依赖了哪些数据
+
 `traverse`函数定义如下：
 
 ```
@@ -786,6 +788,31 @@ function _traverse(val: any, seen: SimpleSet) {
 const isA = Array.isArray(val);
 if ((!isA && !isObject(val)) || Object.isFrozen(val) || val instanceof VNode) {
   return;
+}
+```
+
+然后拿到`val`的`dep.id`，存入创建好的集合`seen`中，因为集合相比数据而言它有天然的去重效果，以此来保证存入的`dep.id`没有重复，不会造成重复收集依赖，如下：
+
+```
+if (val.__ob__) {
+  const depId = val.__ob__.dep.id;
+  if (seen.has(depId)) {
+    return;
+  }
+  seen.add(depId);
+}
+```
+
+接下来判断如果是数组，则循环数组，将数组中每一项递归调用`_traverse`；如果是对象，则取出对象所有的`key`，然后执行读取操作，再递归内部值，如下：
+
+```
+if (isA) {
+  i = val.length;
+  while (i--) _traverse(val[i], seen);
+} else {
+  keys = Object.keys(val);
+  i = keys.length;
+  while (i--) _traverse(val[keys[i]], seen);
 }
 ```
 
