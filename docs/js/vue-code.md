@@ -838,6 +838,10 @@ vm.$set(target, propertyName / index, value);
 - 用法：向响应式对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新属性，因为`Vue`无法探测普通的新增属性。
 - 内部原理
 
+对于`object`型数据，当我们向`object`数据里添加一对新的`key/value`或删除一对已有的`key/value`时，`vue`是无法观测到的；而对于`Array`弄数据，当我们通过数组下标个性数组中的数据时，`Vue`也是无法观测到的
+
+正是因为存在这个问题，所以`Vue`设计了`set`和`delete`这两个方法来解决这一问题；
+
 `set`方法的定义位于源码的`src/core/observer/index.js`中，如下：
 
 ```
