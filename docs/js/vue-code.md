@@ -942,21 +942,36 @@ export function del (target: Array<any> | Object, key: any) {
 首先判断在非生产环境下如果传入的`target`不存在，或者`target`是原始值，则抛出警告，如下：
 
 ```
-
+ if (process.env.NODE_ENV !== 'production' &&
+    (isUndef(target) || isPrimitive(target))
+  ) {
+    warn(`Cannot delete reactive property on undefined, null, or primitive value: ${(target: any)}`)
+  }
 ```
 
-接着判断如果传入的`target`是数组
+接着判断如果传入的`target`是数组并且传入的`key`是有效索引的话，就使用数组的`splice`方法将索引`key`
 
 ```
-
+if (Array.isArray(target) && isValidArrayIndex(key)) {
+    target.splice(key, 1)
+    return
+}
 ```
 
 如果传入的`target`不是数组，那就当做对象来处理
 
-接下来获取到`target`的`__ob__`属性，
+接下来获取到`target`的`__ob__`属性，该属性是否为`true`标志着`target`是否为响应式对象，接着判断如果`target`是`Vue`实例，或者是`Vue`实例的根数据对象，则抛出警告并退出程序，如下：
 
 ```
-
+const ob = (target: any).__ob__;
+if (target._isVue || (ob && ob.vmCount)) {
+  process.env.NODE_ENV !== "production" &&
+    warn(
+      "Avoid adding reactive properties to a Vue instance or its root $data " +
+        "at runtime - declare it upfront in the data option."
+    );
+  return val;
+}
 ```
 
 最后，如果`targete`是对象，并且传入的`key`也存在于`target`中，那么就从`target`中将该属性删除，
