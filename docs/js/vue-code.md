@@ -878,13 +878,52 @@ export function set (target: Array<any> | Object, key: any, val: any): any {
 }
 ```
 
-首先判断在非生产环境下如果传入的`target`是否为`undefined`
+首先判断在非生产环境下如果传入的`target`是否为`undefined`、`null`或是原始类型，如果是原始类型，如果是，则抛出警告，如下：
 
 ```
-
+if (process.env.NODE_ENV !== 'production' &&
+    (isUndef(target) || isPrimitive(target))
+  ) {
+    warn(`Cannot set reactive property on undefined, null, or primitive value: ${(target: any)}`)
+  }
 ```
 
-接着判断如果传入的`target`是否为`undefined` 、`null`或是原始类型
+接着判断如果传入的`target`是数组并且传入的`key`是有效索引的话，那么就取当前数组长度与`key`这两者的最大值作为数组的新长度，然后使用数组的`splice`方法将传入的索引`key`对应的`val`值添加进数组。这里注意一点，
+
+如下：
+
+```
+if (Array.isArray(target) && isValidArrayIndex(key)) {
+    target.length = Math.max(target.length, key)
+    target.splice(key, 1, val)
+    return val
+}
+```
+
+如果传入的`target`不是数组，那就当做对象来处理。
+
+首先判断传入的`key`是否已经存在于`target`中，如果存在
+
+```
+if (key in target && !(key in Object.prototype)) {
+  target[key] = val;
+  return val;
+}
+```
+
+接下来获取到`target`的`__ob__`属性，我们说过，该属性是否为`true`标志着`target`是否为响应式对象，接着判断如果`target`是`Vue`实例，或者是`Vue`实例的根数据对象，则抛出警告并退出程序，如下：
+
+```
+const ob = (target: any).__ob__;
+if (target._isVue || (ob && ob.vmCount)) {
+  process.env.NODE_ENV !== "production" &&
+    warn(
+      "Avoid adding reactive properties to a Vue instance or its root $data " +
+        "at runtime - declare it upfront in the data option."
+    );
+  return val;
+}
+```
 
 **`vm.$delete`**
 
