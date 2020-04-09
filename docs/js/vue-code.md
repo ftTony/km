@@ -888,9 +888,7 @@ if (process.env.NODE_ENV !== 'production' &&
   }
 ```
 
-接着判断如果传入的`target`是数组并且传入的`key`是有效索引的话，那么就取当前数组长度与`key`这两者的最大值作为数组的新长度，然后使用数组的`splice`方法将传入的索引`key`对应的`val`值添加进数组。这里注意一点，
-
-如下：
+接着判断如果传入的`target`是数组并且传入的`key`是有效索引的话，那么就取当前数组长度与`key`这两者的最大值作为数组的新长度，然后使用数组的`splice`方法将传入的索引`key`对应的`val`值添加进数组。这里注意一点，为什么要用`splice`方法呢？数组的`splice`方法已经被我们创建的拦截器重写了，也就是说，当使用`splice`方法向数组内添加元素时，该元素会自动被变成响应式的。如下：
 
 ```
 if (Array.isArray(target) && isValidArrayIndex(key)) {
@@ -902,7 +900,7 @@ if (Array.isArray(target) && isValidArrayIndex(key)) {
 
 如果传入的`target`不是数组，那就当做对象来处理。
 
-首先判断传入的`key`是否已经存在于`target`中，如果存在
+首先判断传入的`key`是否已经存在于`target`中，如果存在，表明这次操作不是新增属性，而对已有的属性进行简单的修改值，那么就只修改属性值即可，如下：
 
 ```
 if (key in target && !(key in Object.prototype)) {
@@ -921,6 +919,15 @@ if (target._isVue || (ob && ob.vmCount)) {
       "Avoid adding reactive properties to a Vue instance or its root $data " +
         "at runtime - declare it upfront in the data option."
     );
+  return val;
+}
+```
+
+接着判断如果`ob`属性为`false`，那么表明`target`不是一个响应式对象，那么我们只需简单给它添加上新的属性，不用将新属性转化成响应式，如下：
+
+```
+if (!ob) {
+  target[key] = val;
   return val;
 }
 ```
