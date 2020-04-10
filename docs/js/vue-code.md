@@ -3140,6 +3140,34 @@ export function resolveFilter (id) {
 }
 ```
 
+`resolveFilter`函数内部只有一行代码，就是调用`resolveAsset`函数并获取其返回值，如果返回值不存在，则返回`identity`，而`identity`是一个返回同参数一样的值，`resolveAsset`函数，该函数的定义位于源码的`src/core/util/options.js`中，如下：
+
+```
+export function resolveAsset (options,type,id,warnMissing) {
+  if (typeof id !== 'string') {
+    return
+  }
+  const assets = options[type]
+  // 先从本地注册中查找
+  if (hasOwn(assets, id)) return assets[id]
+  const camelizedId = camelize(id)
+  if (hasOwn(assets, camelizedId)) return assets[camelizedId]
+  const PascalCaseId = capitalize(camelizedId)
+  if (hasOwn(assets, PascalCaseId)) return assets[PascalCaseId]
+  // 再从原型链中查找
+  const res = assets[id] || assets[camelizedId] || assets[PascalCaseId]
+  if (process.env.NODE_ENV !== 'production' && warnMissing && !res) {
+    warn(
+      'Failed to resolve ' + type.slice(0, -1) + ': ' + id,
+      options
+    )
+  }
+  return res
+}
+```
+
+调用该函数时传入了 4 个参数，分别是当前实例的`$options`属性，`type`为`filters`，`id`为当前过滤器的`id`。
+
 #### 8.2 parseFilters 函数分析
 
 `parseFilters`函数的定义位于源码的`src/complier/parser/filter-parser.js`文件中，其代码如下：
