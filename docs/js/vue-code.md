@@ -1146,8 +1146,34 @@ export const createCompiler = createCompilerCreator(function baseCompile (
 ```
 // 代码位置：/src/complier/parser/index.js
 
+export function parse(template, options) {
+   // ...
+  parseHTML(template, {
+    warn,
+    expectHTML: options.expectHTML,
+    isUnaryTag: options.isUnaryTag,
+    canBeLeftOpenTag: options.canBeLeftOpenTag,
+    shouldDecodeNewlines: options.shouldDecodeNewlines,
+    shouldDecodeNewlinesForHref: options.shouldDecodeNewlinesForHref,
+    shouldKeepComment: options.comments,
+    start (tag, attrs, unary) {
 
+    },
+    end () {
+
+    },
+    chars (text: string) {
+
+    },
+    comment (text: string) {
+
+    }
+  })
+  return root
+}
 ```
+
+`parse`函数就是解析器的主函数，在`parse`函数内调用了`parseHTML`函数对象模板字符串进行解析，在`parseHTML`函数解析模板字符串的过程中，如果遇到广西信息，就会调用文本解析器`parseText`函数进行文本解析；如果遇到文本中包含过滤器，就会调用过滤器解析器`parseFilters`函数进行解析。
 
 **总结**
 
