@@ -1006,7 +1006,7 @@ export function del (target: Array<any> | Object, key: any) {
   }
 ```
 
-接着判断如果传入的`target`是数组并且传入的`key`是有效索引的话，就使用数组的`splice`方法将索引`key`
+接着判断如果传入的`target`是数组并且传入的`key`是有效索引的话，就使用数组的`splice`方法将索引`key`对应的值删掉，数组的`splice`方法已经被我们创建的拦截器重写了，所以使用该方法会自动通知相关依赖。如下：
 
 ```
 if (Array.isArray(target) && isValidArrayIndex(key)) {
@@ -1031,7 +1031,15 @@ if (target._isVue || (ob && ob.vmCount)) {
 }
 ```
 
-最后，如果`targete`是对象，并且传入的`key`也存在于`target`中，那么就从`target`中将该属性删除，
+接着判断传入的`key`是否存在于`target`中，如果`key`本来就不存在于`target`中，那就不用删除，直接退出程序即可，如下：
+
+```
+if (!hasOwn(target, key)) {
+  return;
+}
+```
+
+最后，如果`target`是对象，并且传入的`key`也存在于`target`中，那么就从`target`中将该属性删除，同时判断当前的`target`是否为响应式对象，如果是响应式对象，则通知依赖更新；如果不是，删除完后直接返回不通知更新，如下：
 
 ```
 delete target[key];
