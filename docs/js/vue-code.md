@@ -3132,6 +3132,115 @@ Vue.mixin = function (mixin: Object) {
 
 `resolveFilter`函数的定义位于源码的`src/core/instance/render-helper.js`中，如下：
 
+```
+import { identity, resolveAsset } from 'core/util/index'
+
+export function resolveFilter (id) {
+  return resolveAsset(this.$options, 'filters', id, true) || identity
+}
+```
+
+#### 8.2 parseFilters 函数分析
+
+`parseFilters`函数的定义位于源码的`src/complier/parser/filter-parser.js`文件中，其代码如下：
+
+```
+export function parseFilters (exp) {
+  let inSingle = false                     // exp是否在 '' 中
+  let inDouble = false                     // exp是否在 "" 中
+  let inTemplateString = false             // exp是否在 `` 中
+  let inRegex = false                      // exp是否在 \\ 中
+  let curly = 0                            // 在exp中发现一个 { 则curly加1，发现一个 } 则curly减1，直到culy为0 说明 { ... }闭合
+  let square = 0                           // 在exp中发现一个 [ 则curly加1，发现一个 ] 则curly减1，直到culy为0 说明 [ ... ]闭合
+  let paren = 0                            // 在exp中发现一个 ( 则curly加1，发现一个 ) 则curly减1，直到culy为0 说明 ( ... )闭合
+  let lastFilterIndex = 0
+  let c, prev, i, expression, filters
+
+
+  for (i = 0; i < exp.length; i++) {
+    prev = c
+    c = exp.charCodeAt(i)
+    if (inSingle) {
+      if (c === 0x27 && prev !== 0x5C) inSingle = false
+    } else if (inDouble) {
+      if (c === 0x22 && prev !== 0x5C) inDouble = false
+    } else if (inTemplateString) {
+      if (c === 0x60 && prev !== 0x5C) inTemplateString = false
+    } else if (inRegex) {
+      if (c === 0x2f && prev !== 0x5C) inRegex = false
+    } else if (
+      c === 0x7C && // pipe
+      exp.charCodeAt(i + 1) !== 0x7C &&
+      exp.charCodeAt(i - 1) !== 0x7C &&
+      !curly && !square && !paren
+    ) {
+      if (expression === undefined) {
+        // first filter, end of expression
+        lastFilterIndex = i + 1
+        expression = exp.slice(0, i).trim()
+      } else {
+        pushFilter()
+      }
+    } else {
+      switch (c) {
+        case 0x22: inDouble = true; break         // "
+        case 0x27: inSingle = true; break         // '
+        case 0x60: inTemplateString = true; break // `
+        case 0x28: paren++; break                 // (
+        case 0x29: paren--; break                 // )
+        case 0x5B: square++; break                // [
+        case 0x5D: square--; break                // ]
+        case 0x7B: curly++; break                 // {
+        case 0x7D: curly--; break                 // }
+      }
+      if (c === 0x2f) { // /
+        let j = i - 1
+        let p
+        // find first non-whitespace prev char
+        for (; j >= 0; j--) {
+          p = exp.charAt(j)
+          if (p !== ' ') break
+        }
+        if (!p || !validDivisionCharRE.test(p)) {
+          inRegex = true
+        }
+      }
+    }
+  }
+
+  if (expression === undefined) {
+    expression = exp.slice(0, i).trim()
+  } else if (lastFilterIndex !== 0) {
+    pushFilter()
+  }
+
+  function pushFilter () {
+    (filters || (filters = [])).push(exp.slice(lastFilterIndex, i).trim())
+    lastFilterIndex = i + 1
+  }
+
+  if (filters) {
+    for (i = 0; i < filters.length; i++) {
+      expression = wrapFilter(expression, filters[i])
+    }
+  }
+
+  return expression
+}
+
+function wrapFilter (exp: string, filter: string): string {
+  const i = filter.indexOf('(')
+  if (i < 0) {
+    // _f: resolveFilter
+    return `_f("${filter}")(${exp})`
+  } else {
+    const name = filter.slice(0, i)
+    const args = filter.slice(i + 1)
+    return `_f("${name}")(${exp}${args !== ')' ? ',' + args : args}`
+  }
+}
+```
+
 ### 九、指令篇
 
 #### 9.1 何时生效
@@ -3152,9 +3261,9 @@ Vue.mixin = function (mixin: Object) {
 
 `Vue`对于自定义指令定义对象提供了几个钩子函数，这几个钩子函数分别对应着指令的几种状态，一个指令从第一次被绑定到元素上到最终与被绑定的元素解绑，它会经过以下几种状态：
 
-- bind：只
-- inserted：被
-- update：所在
+- bind：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
+- inserted：被绑定元素插入父节点时调用（仅保证父节点存在，但不一定已被插入文档中）。
+- update：所在组件的 VNode 更新时调用，**但是可能发生在其子 VNode 更新之前**
 - componentUpdated：指令所在组件的 VNode**及其子 VNode**全部更新后调用。
 - unbind：只调用一次，指令与元素解绑时调用。
 
@@ -3173,7 +3282,66 @@ function updateDirectives (oldVnode: VNodeWithData, vnode: VNodeWithData) {
 `_update`方法定义如下：
 
 ```
+function _update (oldVnode, vnode) {
+  const isCreate = oldVnode === emptyNode
+  const isDestroy = vnode === emptyNode
+  const oldDirs = normalizeDirectives(oldVnode.data.directives, oldVnode.context)
+  const newDirs = normalizeDirectives(vnode.data.directives, vnode.context)
 
+  const dirsWithInsert = []
+  const dirsWithPostpatch = []
+
+  let key, oldDir, dir
+  for (key in newDirs) {
+    oldDir = oldDirs[key]
+    dir = newDirs[key]
+    if (!oldDir) {
+      // new directive, bind
+      callHook(dir, 'bind', vnode, oldVnode)
+      if (dir.def && dir.def.inserted) {
+        dirsWithInsert.push(dir)
+      }
+    } else {
+      // existing directive, update
+      dir.oldValue = oldDir.value
+      dir.oldArg = oldDir.arg
+      callHook(dir, 'update', vnode, oldVnode)
+      if (dir.def && dir.def.componentUpdated) {
+        dirsWithPostpatch.push(dir)
+      }
+    }
+  }
+
+  if (dirsWithInsert.length) {
+    const callInsert = () => {
+      for (let i = 0; i < dirsWithInsert.length; i++) {
+        callHook(dirsWithInsert[i], 'inserted', vnode, oldVnode)
+      }
+    }
+    if (isCreate) {
+      mergeVNodeHook(vnode, 'insert', callInsert)
+    } else {
+      callInsert()
+    }
+  }
+
+  if (dirsWithPostpatch.length) {
+    mergeVNodeHook(vnode, 'postpatch', () => {
+      for (let i = 0; i < dirsWithPostpatch.length; i++) {
+        callHook(dirsWithPostpatch[i], 'componentUpdated', vnode, oldVnode)
+      }
+    })
+  }
+
+  if (!isCreate) {
+    for (key in oldDirs) {
+      if (!newDirs[key]) {
+        // no longer present, unbind
+        callHook(oldDirs[key], 'unbind', oldVnode, oldVnode, isDestroy)
+      }
+    }
+  }
+}
 ```
 
 ### 十、总结
