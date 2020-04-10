@@ -3150,7 +3150,31 @@ Vue.mixin = function (mixin: Object) {
 
 #### 9.2 指令钩子函数
 
+`Vue`对于自定义指令定义对象提供了几个钩子函数，这几个钩子函数分别对应着指令的几种状态，一个指令从第一次被绑定到元素上到最终与被绑定的元素解绑，它会经过以下几种状态：
+
+- bind：只
+- inserted：被
+- update：所在
+- componentUpdated：指令所在组件的 VNode**及其子 VNode**全部更新后调用。
+- unbind：只调用一次，指令与元素解绑时调用。
+
 #### 9.3 如何生效
+
+`updateDirectives`函数的定义位于源码的`src/core/vdom/modules/directives.js`文件中，如下：
+
+```
+function updateDirectives (oldVnode: VNodeWithData, vnode: VNodeWithData) {
+  if (oldVnode.data.directives || vnode.data.directives) {
+    _update(oldVnode, vnode)
+  }
+}
+```
+
+`_update`方法定义如下：
+
+```
+
+```
 
 ### 十、总结
 
