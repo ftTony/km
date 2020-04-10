@@ -932,6 +932,17 @@ if (!ob) {
 }
 ```
 
+最后，如果`target`是对象，并且是响应式，那么就调用`defineReactive`方法将新属性添加到`target`上，`defineReactive`方法会将新属性添加完之后并将其转化成响应式，最后通知依赖更新，如下：
+
+```
+defineReactive(ob.value, key, val);
+ob.dep.notify();
+```
+
+以上，就是`set`方法的内部原理。其逻辑流程图如下：
+
+![images](vue14.jpg)
+
 **`vm.$delete`**
 
 `vm.$delete`是全局`Vue.delete`的**别名**，其用法相同
