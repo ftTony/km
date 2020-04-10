@@ -228,9 +228,9 @@ deep 属性作用是否深度监听某个对象的值，该值默认为 false。
 
 ### 六、computed 的基本原理及源码实现
 
-#### 6.1 理解Vue源码中computed实现流程
+#### 6.1 理解 Vue 源码中 computed 实现流程
 
-`new Vue({})`入口，因此会调用`vue/src/core/instance/index.js`中的init函数代码，如下所示：
+`new Vue({})`入口，因此会调用`vue/src/core/instance/index.js`中的 init 函数代码，如下所示：
 
 ```
 import { initMixin } from './init'
@@ -249,7 +249,7 @@ initMixin(Vue);
 export default Vue;
 ```
 
-上面代码，会执行`this._init(options);`方法内部，因此会调用`vue/src/core/instance/init.js` 文件中的_init方法, 基本代码如下所示:
+上面代码，会执行`this._init(options);`方法内部，因此会调用`vue/src/core/instance/init.js` 文件中的\_init 方法, 基本代码如下所示:
 
 ```
 import { initState } from './state';
@@ -262,7 +262,7 @@ export function initMixin (Vue: Class<Component>) {
 }
 ```
 
-继续执行initState(vm);中的代码了，因此会调用`vue/src/core/instance/state.js `中的文件代码，基本代码如下：
+继续执行 initState(vm);中的代码了，因此会调用`vue/src/core/instance/state.js`中的文件代码，基本代码如下：
 
 ```
 import config from '../config'
@@ -288,7 +288,7 @@ export function initState (vm: Component) {
 }
 ```
 
-如上代码，我们这边最主要的要看` if (opts.computed) initComputed(vm, opts.computed) `这句代码；判断`vm.$options.computed`是否有，如果有的话，就执行`initComputed(vm,opts.computed);`函数。因此我们找到initComputed函数代码如下：
+如上代码，我们这边最主要的要看`if (opts.computed) initComputed(vm, opts.computed)`这句代码；判断`vm.$options.computed`是否有，如果有的话，就执行`initComputed(vm,opts.computed);`函数。因此我们找到 initComputed 函数代码如下：
 
 ```
 function initComputed (vm: Component, computed: Object) {
@@ -333,9 +333,9 @@ function initComputed (vm: Component, computed: Object) {
 }
 ```
 
-如上代码，首先使用`Object.create(null);`创建一个空对象，分别赋值给watchers;和vm._computedWatchers;接着执行代码：`const isSSR = isServerRendering();`判断是否是服务器端渲染，我们这边肯定不是服务器端渲染，因此`const isSSR = false;`,接着使用 for in 循环遍历 computed; 代码：`for (const key in computed) { const userDef = computed[key] };`，最后我们会根据computed中的key来实例化watcher，因此我们可以理解为其实computed就是watcher的实现，通过一个发布订阅模式来监听的。
+如上代码，首先使用`Object.create(null);`创建一个空对象，分别赋值给 watchers;和 vm.\_computedWatchers;接着执行代码：`const isSSR = isServerRendering();`判断是否是服务器端渲染，我们这边肯定不是服务器端渲染，因此`const isSSR = false;`,接着使用 for in 循环遍历 computed; 代码：`for (const key in computed) { const userDef = computed[key] };`，最后我们会根据 computed 中的 key 来实例化 watcher，因此我们可以理解为其实 computed 就是 watcher 的实现，通过一个发布订阅模式来监听的。
 
-#### 6.2 Vue源码中的Watcher
+#### 6.2 Vue 源码中的 Watcher
 
 ```
 //  初始化 Watch
@@ -375,6 +375,7 @@ function createWatcher (
 
 - [vue 系列---理解 Vue 中的 computed,watch,methods 的区别及源码实现(六)](https://www.cnblogs.com/tugenhua0707/p/11760466.html)
 - [Vue 计算属性和侦听属性](https://github.com/ljianshu/Blog/issues/68)
+- [手把手带你实现一个最精简的响应式系统来学习 Vue 的 data、computed、watch 源码](https://juejin.im/post/5db6433b51882564912fc30f)
 
 ## 联系作者
 
