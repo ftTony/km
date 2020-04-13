@@ -2610,6 +2610,34 @@ export function initState (vm: Component) {
 `props`选项通常是由当前组件的父级组件传入的，当父组件在调用子组件的时候，通常会把`props`属性值作为标签属性添加在子组件的标签上，如下：
 
 ```
+<Child prop1="xxx" prop2="yyy"></Child>
+```
+
+在模板编译的时候，当解析到组件标签时会将所有的标签属性都解析出来然后在子组件实例化的时候传给子组件。
+
+在子组件内部，通过`props`选项来接收父组件传来的数据，在接收的时候可以这样写：
+
+```
+// 写法一
+props: ['name']
+
+// 写法二
+props: {
+    name: String, // [String, Number]
+}
+
+// 写法三
+props: {
+    name:{
+		type: String
+    }
+}
+
+```
+
+**规范化数据**
+
+```
 
 ```
 
