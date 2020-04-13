@@ -17,6 +17,7 @@
 - [撸一个前端监控系统（React + Node + Mysql + Webpack plugin + Docker）—— （上）](https://juejin.im/post/5e3146cce51d453176604809)
 - [转转商业前端错误监控系统(Sentry)策略升级](https://juejin.im/post/5e6b16315188254963277621)
 - [如何监控网页崩溃？](https://zhuanlan.zhihu.com/p/40273861)
+- [【第 833 期】如何设计一个前端监控系统](https://mp.weixin.qq.com/s/_AaZXxvMMFjHAynXylsjrw)
 
 ## 联系作者
 
