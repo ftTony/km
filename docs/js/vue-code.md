@@ -2959,6 +2959,34 @@ new Vue({
 
 编译过程对性能会造成一定的损耗，并且由于加入了编译的流程代码，`Vue`代码的总体积也更加庞大（运行时版本相比完整版体积要小大约 30%）。因此在实际开发中，我们需要借助像`webpack`的`vue-loader`这类工具进行编译，将`vue`对模板的编译阶段合并到`webpack`的构建流程中，这样不仅减少了生产环境代码的体积，也大大提高了运行时的性能，一举两得。
 
+**模板编译阶段分析**
+
+完整版本和只包含运行时版之间的差异主要在于是否有模板编译阶段，而是否有模板编译阶段主要表现在`vm.$mount`方法的实现上。实现上`$mount`也有两个版本。
+
+**两种\$mount 方法对比**
+
+只包含运行时版本的`$mount`代码如下：
+
+```
+Vue.prototype.$mount = function(el,hydrating){
+    el = el && inBrowser ? query(el) : undefined;
+    return mountComponent(this, el, hydrating)
+}
+```
+
+在该版本中的`$mount`方法内部获取到`el`选项对应的`DOM`元素后直接调用`mountComponent`函数进行挂载操作，关于该函数我们会在挂载阶段详细介绍。
+
+而完整版本的`$mount`代码如下：
+
+```
+var mount = Vue.prototype.$mount;
+Vue.prototype.$mount = function (el,hydrating) {
+  // 省略获取模板及编译代码
+
+  return mount.call(this, el, hydrating)
+}
+```
+
 #### 5.3 挂载阶段
 
 挂载阶段所做的主要工作是创建`Vue`实例并用其替换`el`选项对应的`DOM`元素，同时还要开启对模板中数据（状态）的监控，当数据（状态）发生变化时通知其依赖进行视图更新。
