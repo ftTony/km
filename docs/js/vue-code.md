@@ -3063,13 +3063,62 @@ Vue.prototype.$mount = function (
 }
 ```
 
+从代码中可以看到，该函数可以大致分为三部分：
+
+- 根据传入的`el`参数获取`DOM`元素
+- 在用户没有手写`render`函数的情况下获取传入的模板`template`；
+- 将获取到的`template`编译成`render`函数；
+
+首先，根据传入的`el`参数获取`DOM`元素。如下：
+
+```
+el = el && query(el);
+
+function query (el) {
+  if (typeof el === 'string') {
+    var selected = document.querySelector(el);
+    if (!selected) {
+      warn(
+        'Cannot find element: ' + el
+      );
+      return document.createElement('div')
+    }
+    return selected
+  } else {
+    return el
+  }
+}
+```
+
+由于`el`参数可以是元素，也可以是字符串类型的元素选择器，所以调用`query`函数来获取到`el`对应的`DOM`元素。
+
 #### 5.3 挂载阶段
 
 挂载阶段所做的主要工作是创建`Vue`实例并用其替换`el`选项对应的`DOM`元素，同时还要开启对模板中数据（状态）的监控，当数据（状态）发生变化时通知其依赖进行视图更新。
 
 ![images](vue17.jpg)
 
+**挂载阶段分析**
+
+在完整版本的`$mount`方法中将模板编译完成之后，会回过头去调只包含运行时版本
+
+`mountComponent`函数的定义位于源码的`src/core/instance/lifecycle.js`中，如下：
+
+```
+
+```
+
 #### 5.4 销毁阶段
+
+销毁阶段所做的主要工作是将当前的`Vue`实例从其父级实例中删除，取消当前实例上的所有依赖追踪并且移除实例上的所有事件监听器。
+
+**销毁阶段分析**
+
+当调用了实例的`$destroy`方法之后，当前实例就进入了销毁阶段。所以分析销毁阶段就是分析`$destroy`
+
+```
+
+```
 
 ### 六、实例方法
 
