@@ -2218,6 +2218,8 @@ export function genData (el: ASTElement, state: CodegenState): string {
 }
 ```
 
+源码中`genData`虽然很长，但是其逻辑非常简单，就是在拼接字符串,先给`data`赋值为一个`{`，然后判断存在哪些属性数据，就将这些数据拼接到`data`中，最后再加一个`}`，最终得到节点全部属性`data`。
+
 2. 获取子节点列表 children
 
 获取子节点列表`children`其实就是遍历`AST`的`children`属性中的元素，然后根据元素属性的不同生成不同的`VNode`创建函数调用字符串，如下：
@@ -2251,7 +2253,7 @@ code = `_c('${el.tag}'${
 
 **文本节点**
 
-文本型的`VNode`可以调用`_v(text)`函数来创建，所以生成文本
+文本型的`VNode`可以调用`_v(text)`函数来创建，所以生成文本节点的`render`函数就是生成一个`_v(text)`函数调用的字符串。`_v()`函数接收文本内容作为参数，如果文本是动态文本，则使用动态文本`AST`节点的`expression`属性，如果是纯静态文本，则使用`text`属性，其生成代码如下：
 
 ```
 export function genText (text: ASTText | ASTExpression): string {
