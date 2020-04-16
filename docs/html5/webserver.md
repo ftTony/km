@@ -9,6 +9,7 @@
 ## 参考资料
 
 - [Service Worker 初探](https://mp.weixin.qq.com/s/cNgC0uDrILaFY5TFL_Bglw)
+- [Service Worker：让你的 Web 应用牛逼起来](https://mp.weixin.qq.com/s/IhMyaCYrTAXJcKSPSnEOjw)
 
 ## 联系作者
 

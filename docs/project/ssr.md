@@ -31,6 +31,7 @@
 - [Vue SSR 踩坑之旅](https://juejin.im/post/5cb6c36e6fb9a068af37aa35)
 - [后端渲染、客户端渲染(CSR)、同构应用(SSR)](https://github.com/amandakelake/blog/issues/60)
 - [从头开始，彻底理解服务端渲染原理(8 千字汇总长文)](https://mp.weixin.qq.com/s/uf_joal0F2csGggfqaYETg)
+- [花椒前端基于 Docker 的 SSR 持续开发集成环境实践](https://mp.weixin.qq.com/s/EowqAuFQ9-0xOQIxqMvrog)
 
 ## 联系作者
 
