@@ -1661,6 +1661,46 @@ for (let i = 0; i < l; i++) {
 const args = ["class="a"", "class", "=", "a", undefined, undefined, index: 0, input: "class="a" id="b"></div>", groups: undefined]
 ```
 
+接着定义了`value`，用于存储标签属性的属性值，我们可以看到，在代码中尝试取`args`的`args[3]`、`args[4]`、`args[5]`，如果都取不到，则给`value`复制为空
+
+```
+const value = args[3] || args[4] || args[5] || ''
+```
+
+接着定义了`shouldDecodeNewlines`，这个常量主要是做一些兼容性处理， 如果 `shouldDecodeNewlines` 为 `true`，意味着 `Vue` 在编译模板的时候，要对属性值中的换行符或制表符做兼容处理。而`shouldDecodeNewlinesForHref` 为 `true` 意味着 `Vue`在编译模板的时候，要对 `a` 标签的 `href` 属性值中的换行符或制表符做兼容处理。
+
+```
+const shouldDecodeNewlines = tagName === 'a' && args[1] === 'href'
+    ? options.shouldDecodeNewlinesForHref
+    : options.shouldDecodeNewlinesconst value = args[3] || args[4] || args[5] || ''
+```
+
+最后将处理好的结果存入之前定义好的与`match.attrs`数组长度相等的`attrs`数组中，如下：
+
+```
+attrs[i] = {
+    name: args[1],    // 标签属性的属性名，如class
+    value: decodeAttr(value, shouldDecodeNewlines) // 标签属性的属性值，如class对应的a
+}
+```
+
+最后，如果该标签是非自闭合标签，则将标签推入栈中，如下：
+
+```
+if (!unary) {
+    stack.push({ tag: tagName, lowerCasedTag: tagName.toLowerCase(), attrs: attrs })
+    lastTag = tagName
+}
+```
+
+如果该标签是自闭标签，现在就可以调用`start`钩子函数并传入处理好的参数来创建`AST`节点了，如下：
+
+```
+if (options.start) {
+    options.start(tagName, attrs, unary, match.start, match.end)
+}
+```
+
 **解析结束标签**
 
 结束标签的解析要比解析开始标签容易多了，因为它不需要解析什么属性，只需要判断剩下的模板字符串是否符合结束标签的特征，如果是，就将结束标签名提取出来，再调用 4 个钩子函数中的`end`函数就好了。
@@ -1694,7 +1734,7 @@ if (endTagMatch) {
 
 **解析文本**
 
-解析文本也比较容易，在解析模板字符串之前，我们先查找一下第一个`<`出现在什么位置，如果第一个`<`在第一个位置，那么说明模板字符串是以其它 5 种类型开始的；
+在解析模板字符串之前，我们先查找一下第一个`<`出现在什么位置，如果第一个`<`在第一个位置，那么说明模板字符串是以其它 5 种类型开始的；如果第一个`<`不在第一个位置而在模板字符串中某个位置，那么说明模板字符串是以文本开头的，那么从开头到第一个`<`出现的位置就都是文本内容了；如果在整个模板字符串里面没有找到`<`，那说明整个模板字符串都是文本，源码如下：
 
 ```
 let textEnd = html.indexOf('<')
