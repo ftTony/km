@@ -1782,6 +1782,52 @@ if (options.chars && text) {
 }
 ```
 
+如果`<` 不在第一个位置而在模板字符串间某个位置，那么说明模板字符串是以文本开头的，那么从开头到第一个`<`出现的位置就都是文本内容了，接着我们还要从第一个`<`的位置继续向后判断，因为还存在这样一种情况，那就是如果广西里面本来就包含一个`<`，例如`1<2</div>`。为了处理这种情况，我们把从第一个`<`的位置直到模板字符串结束都截取出来记作`rest`，如下：
+
+```
+let rest = html.slice(textEnd)
+```
+
+接着用`rest`去匹配以上 5 种类型的正则，如果都匹配不上，则表明这个`<`是属于文本本身的内容，如下：
+
+```
+while (
+    !endTag.test(rest) &&
+    !startTagOpen.test(rest) &&
+    !comment.test(rest) &&
+    !conditionalComment.test(rest)
+) {
+
+}
+```
+
+如果都匹配不上，则表明这个`<`是属于文本本身的内容，接着以这个`<`的位置继续向后查找，看是否还有`<`，如果没有了，则表示后面的都是文本；如果后面还有下一个`<`，那表明至少在这个`<`到下一个`<`中间的内容都是文本，至于下一个`<`以后的内容是什么，则还需要重复以上的逻辑继续判断。代码如下：
+
+```
+while (
+    !endTag.test(rest) &&
+    !startTagOpen.test(rest) &&
+    !comment.test(rest) &&
+    !conditionalComment.test(rest)
+) {
+    // < in plain text, be forgiving and treat it as text
+    /**
+    * 用'<'以后的内容rest去匹配endTag、startTagOpen、comment、conditionalComment
+    * 如果都匹配不上，表示'<'是属于文本本身的内容
+    */
+    // 在'<'之后查找是否还有'<'
+    next = rest.indexOf('<', 1)
+    // 如果没有了，表示'<'后面也是文本
+    if (next < 0) break
+    // 如果还有，表示'<'是文本中的一个字符
+    textEnd += next
+    // 那就把next之后的内容截出来继续下一轮循环匹配
+    rest = html.slice(textEnd)
+}
+```
+
+最后截取文本内容 `text` 并调用 4 个钩子函数中的 `chars` 函数创建文本型的`AST` 节点。
+
 **如何保证 AST 节点层级关系**
 
 #### 4.4 文本解析器
