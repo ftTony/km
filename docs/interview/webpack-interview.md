@@ -526,6 +526,7 @@ new CommonsChunkPlugin({
 - [分别介绍 bundle，chunk，module 是什么](https://www.cxymsg.com/guide/webpack.html#%E5%88%86%E5%88%AB%E4%BB%8B%E7%BB%8Dbundle%EF%BC%8Cchunk%EF%BC%8Cmodule%E6%98%AF%E4%BB%80%E4%B9%88)
 - [webpack 与 grunt、gulp 的不同？](https://www.cxymsg.com/guide/webpack.html#webpack%E4%B8%8Egrunt%E3%80%81gulp%E7%9A%84%E4%B8%8D%E5%90%8C%EF%BC%9F)
 - [「吐血整理」再来一打 Webpack 面试题 🔥(持续更新)](https://juejin.im/post/5e6f4b4e6fb9a07cd443d4a5)
+- [「吐血整理」再来一打 Webpack 面试题](https://mp.weixin.qq.com/s/UdsP3u_LR64dzffNPCx-2g)
 
 ## 联系作者
 
