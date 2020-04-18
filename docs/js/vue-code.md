@@ -2068,7 +2068,7 @@ if (tagName) {
 }
 ```
 
-接着`pos>=0`时，开启一个`for`循环，从栈顶位置从后向前遍历直到`pos`处，如果发现`stack`栈中存在索引大于`pos`元素，那么该元素一定是缺少闭合标签的，这是因为在正常情况下，`stack`栈的栈顶元素应该和当前的结束标签`tagName`匹配，也就是说正常的`pos`应该是栈顶
+接着`pos>=0`时，开启一个`for`循环，从栈顶位置从后向前遍历直到`pos`处，如果发现`stack`栈中存在索引大于`pos`元素，那么该元素一定是缺少闭合标签的，这是因为在正常情况下，`stack`栈的栈顶元素应该和当前的结束标签`tagName`匹配，也就是说正常的`pos`应该是栈顶位置，后面不应该再有元素，如果后面还有元素，那么后面的元素就都缺少闭合标签那么这个时候如果是在非生产环境会抛出警告，告诉你缺少闭合标签。除此之外，还会调用`options.end(stack[i].tag, start, end)` 立即将其闭合，这是为了保证解析结果的正确性。
 
 ```
 if (pos >= 0) {
@@ -2092,10 +2092,48 @@ if (pos >= 0) {
 
 最后把`pos`位置以后的元素都从`stack`栈中弹出，以及把`lastTag`更新为栈顶元素
 
-````
+```
 stack.length = pos;
 lastTag = pos && stack[pos - 1].tag;
 ```
+
+接着，如果`pos`没有大于等于 0，即当`tagName`没有在`stack`栈中找到对应的开始标签时，`pos`为-1。那么此时再判断`tagName`是否为`br`或`p`标签，为什么要单独判断这两个标签呢？这是因为在浏览器中如果我们写了如下`HTML`：
+
+```
+<div>
+    </br>
+    </p>
+</div>
+```
+
+浏览器会自动把`</br>`标签解析为正常的`<br>`标签，而对于`</p>`浏览器则自动将其补全为`<p></p>`，所以 Vue 为了与浏览器对这两个标签的行为保持一致，故对这两个便签单独判断处理，如下：
+
+```
+if (lowerCasedTagName === 'br') {
+    if (options.start) {
+        options.start(tagName, [], true, start, end)  // 创建<br>AST节点
+    }
+}
+// 补全p标签并创建AST节点
+if (lowerCasedTagName === 'p') {
+    if (options.start) {
+        options.start(tagName, [], false, start, end)
+    }
+    if (options.end) {
+        options.end(tagName, start, end)
+    }
+}
+```
+
+以上就是对结束标签的解析与处理。
+
+另外，在`while`循环后面还有一行代码：
+
+```
+parseEndTag()
+```
+
+这行代码执行的时机是`html===last`，即`html`字符串中的标签格式有误时会跳出`while`循环，此时就会执行这行代码，这行代码是调用`parseEndTag`函数并不传递任何参数，如果`parseEndTag`函数不传递任何参数是用于处理栈中剩余未处理的标签。这是因为如果不传递任何函数，此时`parseEndTag`函数里的`pos`就为 0，那么`pos>=0`就会恒成立，那么就会逐个警告缺少闭合标签并调用`options.end`将其闭合。
 
 **总结**
 
@@ -4931,3 +4969,4 @@ const dirsWithPostpatch = []
     <img :src="$withBase('/about/contact.png')" />
 </div>
 ```
+````
