@@ -33,6 +33,7 @@
 - [微前端如何落地？](https://mp.weixin.qq.com/s/NdDj_JYQdfaztEGM-eFCRg)
 - [基于 Vue 技术栈的微前端设计思路与落地实践](https://mp.weixin.qq.com/s/uWBualYrS9kanaAvdP49bQ)
 - [使用 Serverless 模式开发部署前端和 Node.js](https://mp.weixin.qq.com/s/DeOFNQR03Dbf_B7Yt3k4_A)
+- [微前端在企业级应用中的实践(上)](https://juejin.im/post/5e8b094a6fb9a03c300f8b25)
 
 ## 联系作者
 
