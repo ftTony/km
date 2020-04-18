@@ -153,6 +153,7 @@ ETag 是一个响应首部字段，它是根据实体内容生成的一段 hash 
 - [响应速度不给力？解锁正确缓存姿势](https://mp.weixin.qq.com/s/_9aFWDEYmCDz7BVO3sFyLg)
 - [前端面试之浏览器缓存机制](https://mp.weixin.qq.com/s/Io-kEWygYuvqb5wqgygcuw)
 - [一文搞懂浏览器缓存策略](https://mp.weixin.qq.com/s/j83w5ejh4jAwivuINN9BFw)
+- [彻底理解浏览器的缓存机制](https://mp.weixin.qq.com/s/UOSvXZcB0LF6p6HTk1pqlQ)
 
 ## 联系作者
 

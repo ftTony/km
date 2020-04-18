@@ -2056,7 +2056,45 @@ if (end == null) end = index
 如果`tagName`存在，那么就从后往前遍历栈，在栈中寻找与`tagName`相同的标签并记录其所在的位置`pos`，如果`tagName`不存在，则将`pos`置为 0。如下：
 
 ```
+if (tagName) {
+    for (pos = stack.length - 1; pos >= 0; pos--) {
+        if (stack[pos].lowerCasedTag === lowerCasedTagName) {
+            break
+        }
+    }
+} else {
+    // If no tag name is provided, clean shop
+    pos = 0
+}
+```
 
+接着`pos>=0`时，开启一个`for`循环，从栈顶位置从后向前遍历直到`pos`处，如果发现`stack`栈中存在索引大于`pos`元素，那么该元素一定是缺少闭合标签的，这是因为在正常情况下，`stack`栈的栈顶元素应该和当前的结束标签`tagName`匹配，也就是说正常的`pos`应该是栈顶
+
+```
+if (pos >= 0) {
+	// Close all the open elements, up the stack
+	for (var i = stack.length - 1; i >= pos; i--) {
+		if (i > pos || !tagName ) {
+			options.warn(
+				("tag <" + (stack[i].tag) + "> has no matching end tag.")
+			);
+		}
+		if (options.end) {
+			options.end(stack[i].tag, start, end);
+		}
+	}
+
+	// Remove the open elements from the stack
+	stack.length = pos;
+	lastTag = pos && stack[pos - 1].tag;
+}
+```
+
+最后把`pos`位置以后的元素都从`stack`栈中弹出，以及把`lastTag`更新为栈顶元素
+
+````
+stack.length = pos;
+lastTag = pos && stack[pos - 1].tag;
 ```
 
 **总结**
@@ -2071,7 +2109,7 @@ if (end == null) end = index
 
 文本菜板器的源码位于`src/compiler/parser/text-parsre.js`中，代码如下：
 
-```
+````
 
 const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g
 const buildRegex = cached(delimiters => {
