@@ -1055,11 +1055,12 @@ ob.dep.notify();
 
 ### 四、模板编译篇
 
-- 整体运行流程
-- HTML 解析器
-- 文本解析器
-- 优化阶段
-- 代码生成阶段
+- [概述](#_4-1-概述)
+- [整体运行流程](#_4-2-整体运行流程)
+- [HTML 解析器](#_4-3-html-解析器)
+- [文本解析器](#_4-4-文本解析器)
+- [优化阶段](#_4-5-优化阶段)
+- [代码生成阶段](#_4-5-代码生成阶段)
 
 我们知道，在日常开发中，我们把写在`<template></template>`标签中的类似于原生`HTML`的内容称之为模板。这时你可能会问了，为什么说是“类似于原生`HTML`的内容”而不是“就是`HTML`的内容”？因为我们在开发中，在`<template></template>`标签中除了写一些原生`HTML`的标签，我们还会写一些亦是插值，如或者写一些`Vue`指令，如`v-on`、`v-if`等。而这些东西都是在原生`HTML`语法中不存在的，不被接受的。但事实上我们确实这么写了，也被正确识别了，页面也正常显示了，这又是为什么呢？
 
@@ -1067,7 +1068,9 @@ ob.dep.notify();
 
 而把用户在`<template></template>`标签中写的类似于原生`HTML`的内容进行编译，把原生`HTML`的内容找出来，再把非原生`HTML`找出来，经过一系列的逻辑处理成渲染函数，也就是`render`函数的这一段过程称之为模板编译过程。
 
-#### 4.1 整体渲染流程
+#### 4.1 概述
+
+**整体渲染流程**
 
 所谓渲染流程，就是把用户写的类似原生`HTML`的模板经过一系列处理最终反应到视图中称之为整个渲染流程。这个流程在上文中其实已经说到了，下面我们以流程图的形式宏观的了解一下，流程图如下：
 
@@ -2650,7 +2653,7 @@ if (node.ifConditions) {
 
 接着，介绍了优化阶段主要干了两件事件，分别是从构建出的`AST`中找出并标记所有静态节点和所有表态根节点。
 
-#### 4.5 代码生成阶段
+#### 4.6 代码生成阶段
 
 `Vue`实例在挂载的时候会调用其自身的`render`函数来生成实例上的`template`选项所对应的`VNode`，简单的来说就是`Vue`只要调用了`render`函数，就可以把模板转换成对应的虚拟`DOM`。那么`Vue`要想调用`render`函数，那必须先有这个`render`函数，那这个`render`函数又是从哪来的呢？是用户手写的还是`Vue`自己生成的？答案是都有可能。我们在日常开发中是可以在`Vue`组件选项中手写一个`render`选项，其值对应一个函数，那这个函数就是`render`函数，当用户手写了`render`函数时，那么`Vue`在挂载该组件的时候就会调用用户手写的这个`render`函数。那如果用户没有写呢？那这个时候`Vue`就要自己根据模板内容生成一个`render`函数供组件挂载的时候调用。
 
@@ -2935,6 +2938,115 @@ export function genComment (comment: ASTText): string {
 接着，我们通过一个简单的模板演示了把模板经过递归遍历最后生成`render`函数的过程。
 
 最后，我们回归源码，通过分析源码了解了生成`render`函数的具体实现过程。
+
+#### 4.7 整体流程
+
+模板编译就是把模板转化成供`Vue`实例在挂载时可以调用的`render`函数。那么我们就从`Vue`实例挂载时入手，一步一步从后往前推。我们知道
+
+```
+Vue.prototype.$mount = function(el) {
+  const options = this.$options;
+  // 如果用户没有手写render函数
+  if (!options.render) {
+    // 获取模板，先尝试获取内部模板，如果获取不到则获取外部模板
+    let template = options.template;
+    if (template) {
+    } else {
+      template = getOuterHTML(el);
+    }
+    const { render, staticRenderFns } = compileToFunctions(
+      template,
+      {
+        shouldDecodeNewlines,
+        shouldDecodeNewlinesForHref,
+        delimiters: options.delimiters,
+        comments: options.comments
+      },
+      this
+    );
+    options.render = render;
+    options.staticRenderFns = staticRenderFns;
+  }
+};
+```
+
+```
+const { render, staticRenderFns } = compileToFunctions(
+  template,
+  {
+    shouldDecodeNewlines,
+    shouldDecodeNewlinesForHref,
+    delimiters: options.delimiters,
+    comments: options.comments
+  },
+  this
+);
+```
+
+```
+const { compile, compileToFunctions } = createCompiler(baseOptions);
+```
+
+```
+export const createCompiler = createCompilerCreator(function baseCompile(
+  template: string,
+  options: CompilerOptions
+): CompiledResult {
+  // 模板解析阶段：用正则等方式解析 template 模板中的指令、class、style等数据，形成AST
+  const ast = parse(template.trim(), options);
+  if (options.optimize !== false) {
+    // 优化阶段：遍历AST，找出其中的静态节点，并打上标记；
+    optimize(ast, options);
+  }
+  // 代码生成阶段：将AST转换成渲染函数；
+  const code = generate(ast, options);
+  return {
+    ast,
+    render: code.render,
+    staticRenderFns: code.staticRenderFns
+  };
+});
+```
+
+```
+export function createCompilerCreator(baseCompile) {
+  return function createCompiler(baseOptions) {};
+}
+```
+
+```
+function createCompiler(baseOptions) {
+  function compile() {}
+  return {
+    compile,
+    compileToFunctions: createCompileToFunctionFn(compile)
+  };
+}
+```
+
+```
+export function createCompileToFunctionFn(compile) {
+  return function compileToFunctions() {
+    // compile
+    const res = {};
+    const compiled = compile(template, options);
+    res.render = createFunction(compiled.render, fnGenErrors);
+    res.staticRenderFns = compiled.staticRenderFns.map(code => {
+      return createFunction(code, fnGenErrors);
+    });
+    return res;
+  };
+}
+
+function createFunction(code, errors) {
+  try {
+    return new Function(code);
+  } catch (err) {
+    errors.push({ err, code });
+    return noop;
+  }
+}
+```
 
 ### 五、生命周期篇
 
