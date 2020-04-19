@@ -2941,7 +2941,7 @@ export function genComment (comment: ASTText): string {
 
 #### 4.7 整体流程
 
-模板编译就是把模板转化成供`Vue`实例在挂载时可以调用的`render`函数。那么我们就从`Vue`实例挂载时入手，一步一步从后往前推。我们知道
+模板编译就是把模板转化成供`Vue`实例在挂载时可以调用的`render`函数。那么我们就从`Vue`实例挂载时入手，一步一步从后往前推。`Vue`实例在挂载时会调用全局实例方法——`$mount`方法。`$mount`方法，如下：
 
 ```
 Vue.prototype.$mount = function(el) {
@@ -2970,6 +2970,10 @@ Vue.prototype.$mount = function(el) {
 };
 ```
 
+首先从`Vue`实例的属性选项中获取`render`选项，如果没有获取到，说明用户没有手写`render`函数，那么此时，需要`Vue`自己将模板转化成`render`函数。接着获取模板，先尝试获取内部模板，如果获取不到则获取外部模板。最后，调用`compileToFunctions`函数将模板转化成 `render` 函数，再将 `render` 函数赋值给 `options.render`。
+
+核心部分是调用 `compileToFunctions` 函数生成 `render` 函数的部分，如下：
+
 ```
 const { render, staticRenderFns } = compileToFunctions(
   template,
@@ -2982,6 +2986,8 @@ const { render, staticRenderFns } = compileToFunctions(
   this
 );
 ```
+
+将模板`template`
 
 ```
 const { compile, compileToFunctions } = createCompiler(baseOptions);
