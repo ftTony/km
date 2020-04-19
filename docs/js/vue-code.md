@@ -3061,6 +3061,13 @@ function createFunction(code, errors) {
 - 挂载阶段
 - 销毁阶段
 
+`Vue`实例的生命周期大致可分为 4 个阶段：
+
+- 初始化阶段：为`Vue`实例上初始化一些属性，事件以及响应式数据；
+- 模板编译阶段：将模板编译成渲染函数；
+- 挂载阶段：将实例挂载到指定的`DOM`上，即将模板渲染到真实`DOM`中；
+- 销毁阶段：将实例自身从父组件中删除，并取消依赖追踪及事件监听器；
+
 #### 5.1 初始化阶段
 
 - `new Vue`
@@ -3071,7 +3078,7 @@ function createFunction(code, errors) {
 
 **new Vue 都干了什么**
 
-初始化阶段所做的第一件事就是`new Vue()`创建一个`Vue`实例，那么`new Vue()`的内部都干了什么呢？我们知道，`new`关键字在`JS`中表示从一个类中实例化出一个对象来，由此可见，`Vue`实际上是一个类。所以`new Vue()`实际上是执行了`Vue`类的构造函数
+初始化阶段所做的第一件事就是`new Vue()`创建一个`Vue`实例，那么`new Vue()`的内部都干了什么呢？我们知道，`new`关键字在`JS`中表示从一个类中实例化出一个对象来，由此可见，`Vue`实际上是一个类。所以`new Vue()`实际上是执行了`Vue`类的构造函数，`Vue`类的定义是在源码的`src/core/instance/index.js`中，如下：
 
 ```
 
@@ -3091,7 +3098,7 @@ this._init(options)
 this._init(options)
 ```
 
-调用原型上的`_init(options)`方法并把用户所写的
+调用原型上的`_init(options)`方法并把用户所写的选项`options`传入。在`Vue`类定义的下面还有几行代码，其中之一就是：
 
 ```
 initMixin(Vue)
@@ -3125,12 +3132,23 @@ export function initMixin (Vue) {
 }
 ```
 
+在`initMixin`函数内部就只干了一件事，那就是给`Vue`类的原型上绑定`_init`方法，同时`_init` 方法的定义也在该函数内部。`new Vue()` 会执行`Vue`类的构造函数，构造函数内部会执行`_init`方法，所以`new Vue()`所干的事情其实就是`_init`方法所干的事情。
+
+首先，把`Vue`实例赋值给变量`vm`，并且把用户传递的`options`选项与当前构造函数的`options`属性及其父级构造函数的`options`属性进行合并，得到一个新的`options`选项赋值给\$options 属性，并将`$options`属性挂载到`Vue`实例上，如下：
+
+```
+vm.$options = mergeOptions(
+    resolveConstructorOptions(vm.constructor),
+    options || {},
+    vm
+)
+```
+
 **合并属性**
 
 在上文中，`_init`方法里首先会调用`mergeOptions`函数来进行属性合并，如下：
 
 ```
-
 vm.$options = mergeOptions(
 resolveConstructorOptions(vm.constructor),
 options || {},
@@ -3142,7 +3160,6 @@ vm
 它实际上就是把 `resolveConstructorOptions(vm.constructor)` 的返回值和 `options` 做合并，返回`vm.constructor.options`，相当于`Vue.options`，那么这个`Vue.options`又是什么呢，其实在`initGlobalAPI(Vue)`的时候定义了这个值，代码在`src/core/global-api/index.js`中：
 
 ```
-
 export function initGlobalAPI (Vue: GlobalAPI) {
 // ...
 Vue.options = Object.create(null)
@@ -3153,7 +3170,6 @@ Vue.options[type + 's'] = Object.create(null)
 extend(Vue.options.components, builtInComponents)
 // ...
 }
-
 ```
 
 首先通过`Vue.options = Object.create(null)`创建一个空对象，然后遍历`ASSET_TYPES`，`ASSET_TYPES`的定义在`src/shared/contstants.js`中：
