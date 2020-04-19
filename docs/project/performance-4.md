@@ -9,6 +9,7 @@
 ### 参考资料
 
 - [【性能优化】DNS 预解析](https://github.com/amandakelake/blog/issues/50)
+- [Web 前端性能优化原理问题](https://mp.weixin.qq.com/s/ZSGCQlWPcMzp-o3QOUjdyw)
 
 ## 联系作者
 
