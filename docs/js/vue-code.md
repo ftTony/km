@@ -3788,11 +3788,88 @@ export function updateListeners (
 }
 ```
 
+该函数的作用是对比`listeners` 和 `oldListeners`的不同，并调用参数中提供的`add` 和`remove`进行相应的注册事件和卸载事件。其思想是：如果`listeners`对象中存在某个`key`（即事件名）而`oldListeners`
+
+首先对`on`进行遍历，获得每一个事件名
+
+```
+for (name in on) {
+  def = cur = on[name]
+  old = oldOn[name]
+  event = normalizeEvent(name)
+  if (isUndef(cur)) {
+    process.env.NODE_ENV !== 'production' && warn(
+      `Invalid handler for event "${event.name}": got ` + String(cur),
+      vm
+    )
+  }
+}
+```
+
+```
+if (isUndef(old)) {
+  if (isUndef(cur.fns)) {
+    cur = on[name] = createFnInvoker(cur)
+  }
+  add(event.name, cur, event.once, event.capture, event.passive, event.params)
+}
+```
+
+```
+export function createFnInvoker (fns) {
+  function invoker () {
+    const fns = invoker.fns
+    if (Array.isArray(fns)) {
+      const cloned = fns.slice()
+      for (let i = 0; i < cloned.length; i++) {
+        cloned[i].apply(null, arguments)
+      }
+    } else {
+      // return handler return value for single handlers
+      return fns.apply(null, arguments)
+    }
+  }
+  invoker.fns = fns
+  return invoker
+}
+```
+
+```
+if (cur !== old) {
+  old.fns = cur
+  on[name] = old
+}
+```
+
+```
+const normalizeEvent = cached((name: string): {
+  name: string,
+  once: boolean,
+  capture: boolean,
+  passive: boolean,
+  handler?: Function,
+  params?: Array<any>
+} => {
+  const passive = name.charAt(0) === '&'
+  name = passive ? name.slice(1) : name
+  const once = name.charAt(0) === '~'
+  name = once ? name.slice(1) : name
+  const capture = name.charAt(0) === '!'
+  name = capture ? name.slice(1) : name
+  return {
+    name,
+    once,
+    capture,
+    passive
+  }
+})
+```
+
 **总结**
 
-首先从模板编译时对组件标签上的事件解析入手分析，父组件既可以给
+首先从模板编译时对组件标签上的事件解析入手分析，父组件既可以给既可以给子组件上绑定自定义事件，也可以绑定浏览器原生事件。这两种事件有着不同的处理时机，浏览器原生事件是由父组件处理，而自定义事件是在子组件初始化时候由父组件父给子组件，再由子组件注册到实例的事件系统中。
 
-初始化事件函数`initEvents`实际上初始化的是父组件在模板中使用
+初始化事件函数`initEvents`实际上初始化的是父组件在模板中使用`v-on`或`@`注册的监听子组件内触发的事件。
 
 **initInjections 函数分析**
 
