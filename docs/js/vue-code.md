@@ -3720,10 +3720,24 @@ export function initEvents (vm: Component) {
 
 ```
 
+`initEvents`函数首先在`vm`上新增`_events`属性并将其赋值为空对象，用来存储事件。
+
+```
+vm._events = Object.create(null)
+```
+
+接着，获取父组件注册的事件赋给`listeners`，如果`listeners`不为空，则调用`updateComponentListeners`函数，将父组件向子组件注册的事件到子组件的实例中，如下：
+
+```
+const listeners = vm.$options._parentListeners
+if (listeners) {
+  updateComponentListeners(vm, listeners)
+}
+```
+
 这个`updateComponentListeners`函数是什么呢？该函数定义如下：
 
 ```
-
 export function updateComponentListeners (
 vm: Component,
 listeners: Object,
@@ -3732,6 +3746,45 @@ oldListeners: ?Object
 target = vm
 updateListeners(listeners, oldListeners || {}, add, remove, createOnceHandler, vm)
 target = undefined
+}
+```
+
+可以看到，`updateComponentListeners`其实也没有干什么，只是调用了`updateListeners`函数并把`listeners`以及`add`和`remove`这两个函数传入，`updateListeners`函数位于源码的`src/vdom/helpers/update-listeners.js`中，如下：
+
+```
+export function updateListeners (
+  on: Object,
+  oldOn: Object,
+  add: Function,
+  remove: Function,
+  vm: Component
+) {
+  let name, def, cur, old, event
+  for (name in on) {
+    def = cur = on[name]
+    old = oldOn[name]
+    event = normalizeEvent(name)
+    if (isUndef(cur)) {
+      process.env.NODE_ENV !== 'production' && warn(
+        `Invalid handler for event "${event.name}": got ` + String(cur),
+        vm
+      )
+    } else if (isUndef(old)) {
+      if (isUndef(cur.fns)) {
+        cur = on[name] = createFnInvoker(cur)
+      }
+      add(event.name, cur, event.once, event.capture, event.passive, event.params)
+    } else if (cur !== old) {
+      old.fns = cur
+      on[name] = old
+    }
+  }
+  for (name in oldOn) {
+    if (isUndef(on[name])) {
+      event = normalizeEvent(name)
+      remove(event.name, oldOn[name], event.capture)
+    }
+  }
 }
 ```
 
