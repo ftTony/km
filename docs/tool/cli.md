@@ -21,6 +21,7 @@
 - [教你从零开始搭建一款前端脚手架工具](https://segmentfault.com/a/1190000006190814)
 - [有趣又实用的命令行工具](https://github.com/ConardLi/awesome-cli)
 - [前端轻量化部署脚手架实践](https://juejin.im/post/5e1bfbadf265da3e3077005e)
+- [史上最贴心前端脚手架开发辅导](https://juejin.im/post/5dd10fb76fb9a01fe303a5aa)
 
 ## 联系作者
 

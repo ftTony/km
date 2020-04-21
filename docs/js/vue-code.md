@@ -4087,11 +4087,13 @@ if (result) {
 }
 ```
 
-在把`result`中的键值添加到当前实例上之前，会先调用`toggleObserving(false)`，而这个函数内部是把`shouldObserve = false`，这是为了告诉`defineReactive`函数仅仅是把键值添加
+在把`result`中的键值添加到当前实例上之前，会先调用`toggleObserving(false)`，而这个函数内部是把`shouldObserve = false`，这是为了告诉`defineReactive`函数仅仅是把键值添加到当前实例上而不需要将其转换成响应式。
 
 **resolveInject 函数分析**
 
-`inject`选项中的每一个数据`key` 都是由其上游父级组件提供的
+`inject`选项中的每一个数据`key` 都是由其上游父级组件提供的，所以我们应该把每一个数据`key`从当前组件起，不断的向上游父级组件中查找该数据`key`对应的值，直到找到为止。如果在上游所有父级组件中没找到，那么就看在`inject`选项是否为该数据`key`设置了默认值，如果设置了就使用默认值，如果没有设置，则抛出异常。
+
+`resolveInject`函数的源码如下：
 
 ```
 export function resolveInject (inject: any, vm: Component): ?Object {
@@ -4126,6 +4128,8 @@ export function resolveInject (inject: any, vm: Component): ?Object {
 }
 ```
 
+在分析函数源码之前，我们对照着官网给出的示例，这样会比较好理解一些。
+
 ```
 var Parent = {
   provide: {
@@ -4142,6 +4146,112 @@ const Child = {
   }
 }
 ```
+
+```
+var Parent = {
+  provide: {
+    foo: 'bar'
+  },
+  // ...
+}
+const Child = {
+  inject: {
+    foo: {
+      from: 'bar',
+      default: () => [1, 2, 3]
+    }
+  }
+}
+```
+
+```
+for (let i = 0; i < keys.length; i++) {
+  const key = keys[i]
+  const provideKey = inject[key].from
+  let source = vm
+  while (source) {
+    if (source._provided && hasOwn(source._provided, provideKey)) {
+      result[key] = source._provided[provideKey]
+      break
+    }
+    source = source.$parent
+  }
+}
+```
+
+```
+if (!source) {
+  if ('default' in inject[key]) {
+    const provideDefault = inject[key].default
+    result[key] = typeof provideDefault === 'function'
+        ? provideDefault.call(vm)
+    : provideDefault
+  } else if (process.env.NODE_ENV !== 'production') {
+    warn(`Injection "${key}" not found`, vm)
+  }
+}
+```
+
+```
+// 写法一
+var Child = {
+  inject: ['foo']
+}
+
+// 写法二
+const Child = {
+  inject: {
+    foo: { default: 'xxx' }
+  }
+}
+
+// 写法三
+const Child = {
+  inject: {
+    foo
+  }
+}
+```
+
+```
+const Child = {
+  inject: {
+    foo: {
+      from: 'foo',
+      default: 'xxx'  //如果有默认的值就有default属性
+    }
+  }
+}
+```
+
+```
+function normalizeInject (options: Object, vm: ?Component) {
+  const inject = options.inject
+  if (!inject) return
+  const normalized = options.inject = {}
+  if (Array.isArray(inject)) {
+    for (let i = 0; i < inject.length; i++) {
+      normalized[inject[i]] = { from: inject[i] }
+    }
+  } else if (isPlainObject(inject)) {
+    for (const key in inject) {
+      const val = inject[key]
+      normalized[key] = isPlainObject(val)
+        ? extend({ from: key }, val)
+        : { from: val }
+    }
+  } else if (process.env.NODE_ENV !== 'production') {
+    warn(
+      `Invalid value for option "inject": expected an Array or an Object, ` +
+      `but got ${toRawType(inject)}.`,
+      vm
+    )
+  }
+}
+```
+
+**总结**
+
 
 **initState 函数分析**
 
