@@ -309,10 +309,10 @@ export function install (Vue) {
 
 匹配函数是由`src/create-matcher.js`中的`createMatcher`创建的，内部进行路由地址路由对象的转换、路由记录的映射、路由参数处理等操作
 
-路由匹配器`macther`是由`create-matcher`生成一个对象，其将传入VueRouter类的路由记录进行内部转换，对外提供根据location匹配路由方法——match、注册路由方法——addRoutes。
+路由匹配器`macther`是由`create-matcher`生成一个对象，其将传入 VueRouter 类的路由记录进行内部转换，对外提供根据 location 匹配路由方法——match、注册路由方法——addRoutes。
 
-- match方法：根据内部的路由映射匹配location对应的路由对象route
-- addRoutes方法：将路由记录添加matcher实例的路由映射中
+- match 方法：根据内部的路由映射匹配 location 对应的路由对象 route
+- addRoutes 方法：将路由记录添加 matcher 实例的路由映射中
 
 ```
 export function createMatcher (
@@ -763,7 +763,7 @@ confirmTransition (route: Route, onComplete: Function, onAbort?: Function) {
       try {
         // 执行钩子
         hook(route, current, (to: any) => {
-            
+
           if (to === false || isError(to)) {
             // next(false) -> abort navigation, ensure current URL
             this.ensureURL(true)
@@ -829,9 +829,9 @@ confirmTransition (route: Route, onComplete: Function, onAbort?: Function) {
 
 #### 3.6 router-view 组件
 
-router-view是一个函数式组件不存在自己的组件实例，只负责调用父组组件上存储的`keepAlive`、`$route.match`等相关的属性/方法来控制路由对应的组件的渲染情况。
+router-view 是一个函数式组件不存在自己的组件实例，只负责调用父组组件上存储的`keepAlive`、`$route.match`等相关的属性/方法来控制路由对应的组件的渲染情况。
 
-router-view组件可以嵌套来配合实现嵌套路由，其自身所在的页面位置最终是其匹配上的路由组件所挂载的位置。
+router-view 组件可以嵌套来配合实现嵌套路由，其自身所在的页面位置最终是其匹配上的路由组件所挂载的位置。
 
 相关代码如下：
 
@@ -852,9 +852,9 @@ export default {
 
 #### 3.7 router-link 组件
 
-router-link是一个普通组件，内部取消了`a标签`的默认跳转行为，并控制了组件与`control`、`meta`等按键同时存在的兼容性问题，提供了当前激活路由切尔西的样式类；
+router-link 是一个普通组件，内部取消了`a标签`的默认跳转行为，并控制了组件与`control`、`meta`等按键同时存在的兼容性问题，提供了当前激活路由切尔西的样式类；
 
-通过`to`来决定点击事件跳转的目标路由，通过`append``replace`等属性改变默认路由跳转的行为。
+通过`to`来决定点击事件跳转的目标路由，通过` append``replace `等属性改变默认路由跳转的行为。
 
 导航链接组件，他在源码的`src/components/link.js`中定义的：
 
@@ -1024,7 +1024,8 @@ function guardEvent (e) {
 - [VueRouter 源码深度解析](https://juejin.im/post/5b5697675188251b11097464)
 - [vue-router 源码分析-整体流程](https://github.com/DDFE/DDFE-blog/issues/9)
 - [vue-router 源码分析-整体流程](https://github.com/dwqs/blog/issues/53)
-- [带你全面分析vue-router源码（万字长文）](https://juejin.im/post/5e456513f265da573c0c6d4b)
+- [带你全面分析 vue-router 源码（万字长文）](https://juejin.im/post/5e456513f265da573c0c6d4b)
+- [从 vue-router 看前端路由的两种实现](https://zhuanlan.zhihu.com/p/27588422)
 
 ## 联系作者
 
