@@ -27,7 +27,7 @@ var hw = helloWorldGenerator();
 - [Generator.prototype.throw()](#四、generator-prototype-throw)
 - [Generator.prototype.return()](#五、generator-prototype-return)
 - [next()、throw()、return() 的共同点](#六、next-、throw-、return-的共同点)
-- [yield\* 表达式](#七、yield-表达式)
+- [`yield*` 表达式](#七、yield-表达式)
 - [作为对象属性的 Generator 函数](#八、作为对象属性的generator函数)
 - [Generator 函数的 this](#九、generator函数的this)
 - [含义](#十、含义)
