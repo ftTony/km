@@ -196,6 +196,8 @@ Grid 布局，是一个基于网格的二维布局系统，目的是用来优化
     <div class="center">
         <h2>圣怀布局</h2>
     </div>
+    <div class="left">左边</div>
+    <div class="right">右边</div>
 </article>
 ```
 
