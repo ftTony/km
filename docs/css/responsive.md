@@ -57,6 +57,12 @@
 
 #### 2.1 1px 产生的原因
 
+- 我们写代码时一般使用设备独立像素来对页面进行布局。而在设备像素比大于`1`的屏幕上，我们写的`1px`实际上是被多个物理像素渲染，这就会出现`1px`在有些屏幕上看起来很粗的现象。
+- 在`retina`屏的手机上，`dpr`为`2`或`3`，`css`里写的`1px`宽度映射到物理像素上就有`2px`或`3px`宽度。
+- 例如：`iPhone6`的`dpr`为`2`，物理像素是`750`（`x`轴），它的逻辑像素为`375`。也就是说，1 个逻辑像素，在`x`軕和`y`轴方向，需要 2 个物理像素来显示，即：dpr=2 时，表示 1 个 CSS 像素由 4 个物理像素点组成，如下图表示：
+
+![image](responsive10.jpg)
+
 #### 2.2 border-image
 
 基于`media`查询判断不同的设备像素比给定不同的`border-image`：
@@ -90,6 +96,8 @@
 }
 ```
 
+上面两种都需要单独准备图片，而且圆角不是很好处理，但是可以应对大部分场景。
+
 #### 2.4 伪类 + transform
 
 ```
@@ -114,7 +122,13 @@
 }
 ```
 
+这种方式可以满足各种场景，如果需要满足圆角，只需要给伪类也加上`border-radius` 即可。
+
 #### 2.5 svg
+
+上面我们`border-image`和`background-image`都可以模拟`1px`边框，但是使用的都是位图，还需要外部引入。
+
+借助`PostCSS`的`postcss-write-svg`我们能直接使用`border-image`和`background-image`创建`svg`的`1px`边框：
 
 ```
 @svg border_1px {
@@ -128,7 +142,19 @@
 .example { border: 1px solid transparent; border-image: svg(border_1px param(--color #00b1ff)) 2 2 stretch; }
 ```
 
+编译后：
+
+```
+.example { border: 1px solid transparent; border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='2px'%3E%3Crect fill='%2300b1ff' width='100%25' height='50%25'/%3E%3C/svg%3E") 2 2 stretch; }
+```
+
+上面的方案是大漠在他的文章中推荐使用的，基本可以满足所有场景，而且不需要外部引入，这是我个人比较喜欢的一种方案。
+
 #### 2.6 设置 viewport
+
+通过设置缩放，让`CSS`像素等于真正的物理像素。
+
+例如：当设备像素比为`3`时，我们将页面缩放`1/3`倍，这时`1px`等于一个真正的屏幕像素。
 
 ```
 const scale = 1 / window.devicePixelRatio;
@@ -140,6 +166,12 @@ if (!viewport) {
 }
 viewport.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale);
 ```
+
+实际上，上面这种方案是早先`flexible`采用的方案。
+
+当然，这样做是要付出代价的，这意味着你页面上所有的布局都要按照物理像素来写。这显然是不现实的，这时，我们可以借助 `flexible`或 `vw`、`vh` 来帮助我们进行适配。
+
+更多资料参考[温故而知新：移动端 1px 问题](https://mp.weixin.qq.com/s/BZtfCAYvtEHf-ZKq4eB62g)
 
 ### 三、适配 iPhonX
 
@@ -295,9 +327,14 @@ body{
 
 我们平时使用的图片大多数都是属于位图（`png、jpg...`），位图帖一个个像素点构成的，每个像素都具有特定的位置和颜色值：
 
+![images](responsive03.png)
+![images](responsive04.png)
+
 #### 6.2 解决方案
 
 为了保证图片质量，我们应该尽可能让一个屏幕像素来渲染一个图片像素，所以，针对不同`DPR`的屏幕，我们需要展示不同分辨的图片。
+
+![images](responsive05.png)
 
 #### 6.3 media 查询
 
