@@ -328,6 +328,11 @@ body{
 我们平时使用的图片大多数都是属于位图（`png、jpg...`），位图帖一个个像素点构成的，每个像素都具有特定的位置和颜色值：
 
 ![images](responsive03.png)
+
+理论上，位图的每个像素对应在屏幕上使用的一个物理像素来渲染，才达到最佳的显示效果。
+
+而在`dpr>1`的屏幕上，位图的一个像素可能由多个物理像素来渲染，然而这些物理像素点并不能被准确的分配上对应位图像素的颜色，只能取近似值，所以相同的图片在`dpr>1`的屏幕上就会模糊：
+
 ![images](responsive04.png)
 
 #### 6.2 解决方案
@@ -338,9 +343,46 @@ body{
 
 #### 6.3 media 查询
 
+使用`media`查询判断不同的设备像素比来显示不同精度的图片：
+
+```
+.avatar{
+    background-image: url(conardLi_1x.png);
+}
+@media only screen and (-webkit-min-device-pixel-ratio:2){
+    .avatar{
+        background-image: url(conardLi_2x.png);
+    }
+}
+@media only screen and (-webkit-min-device-pixel-ratio:3){
+    .avatar{
+        background-image: url(conardLi_3x.png);
+    }
+}
+```
+
+只适用于背景图
+
 #### 6.4 image-set
 
+使用`image-set`：
+
+```
+.avatar {
+    background-image: -webkit-image-set( "conardLi_1x.png" 1x, "conardLi_2x.png" 2x );
+}
+```
+
+只适用于背景图
+
 #### 6.5 srcset
+
+使用`img`标签的`srcset`属性，浏览器会自动根据像素密度匹配最佳显示图片：
+
+```
+<img src="conardLi_1x.png"
+     srcset=" conardLi_2x.png 2x, conardLi_3x.png 3x">
+```
 
 #### 6.6 JavaScript 拼接图片 url
 
