@@ -4862,6 +4862,65 @@ if (prop.required && absent) {
 
 接着判断如果该项不是必填的并且该项的值
 
+```
+if (type) {
+    if (!Array.isArray(type)) {
+        type = [type]
+    }
+}
+```
+
+```
+{
+    vaild:true,       // 表示是否校验成功
+    expectedType：'Boolean'   // 表示被校验的类型
+}
+```
+
+```
+for (let i = 0; i < type.length && !valid; i++) {
+    const assertedType = assertType(value, type[i])
+    expectedTypes.push(assertedType.expectedType || '')
+    valid = assertedType.valid
+}
+```
+
+```
+if (!valid) {
+    warn(
+        `Invalid prop: type check failed for prop "${name}".` +
+        ` Expected ${expectedTypes.map(capitalize).join(', ')}` +
+        `, got ${toRawType(value)}.`,
+        vm
+    )
+    return
+}
+```
+
+```
+props:{
+   // 自定义验证函数
+    propF: {
+      validator: function (value) {
+        // 这个值必须匹配下列字符串中的一个
+        return ['success', 'warning', 'danger'].indexOf(value) !== -1
+      }
+    }
+}
+```
+
+```
+const validator = prop.validator
+if (validator) {
+    if (!validator(value)) {
+        warn(
+            'Invalid prop: custom validator check failed for prop "' + name + '".',
+            vm
+        )
+    }
+}
+```
+
 **初始化 methods**
 
 初始化`methods`相较而言就比较简单了，它的初始函数定义位于源码的`src/core/instance/state.js`中，如下：
