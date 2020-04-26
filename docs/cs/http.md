@@ -194,6 +194,7 @@ Set-Cookie: BDSVRTM=0; path=/
 - [HTTP 协议漫淡](http://www.cnblogs.com/CareySon/archive/2012/04/27/HTTP-Protocol.html)
 - [http 协议详解](http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html)
 - [http 协议](https://github.com/semlinker/awesome-http#http-%E5%8D%8F%E8%AE%AE)
+- [（建议精读）HTTP 灵魂之问，巩固你的 HTTP 知识体系](https://juejin.im/post/5e76bd516fb9a07cce750746)
 - 《图解 http》
 
 ## 联系作者

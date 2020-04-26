@@ -4670,28 +4670,137 @@ if (value === '' || value === hyphenate(key)) {
 }
 ```
 
-如果父组件传入了该 prop 属性，那么需要满足以下几点：
+另外，在判断属性值与属性名相等的时候，是先将属性名由驼峰转换成用`-`连接的字符串，下面的这几种写法，子组件的`prop`都将被设置为`true`：
 
 ```
-if (value === '' || value === hyphenate(key)) {
-    const stringIndex = getTypeIndex(String, prop.type)
-    if (stringIndex < 0 || booleanIndex < stringIndex) {
-        value = true
-    }
+<Child name></Child>
+<Child name="name"></Child>
+<Child userName="user-name"></Child>
+```
+
+如果不是布尔类型，是其它类型的话，那就只需判断父组件是否传入该属性即可，如果没有传入，则该属性值为`undefined` ，此时调用`getPropDefaultValue`函数获取该属性的默认值，并将其转换成响应式，如下：
+
+```
+if (value === undefined) {
+    value = getPropDefaultValue(vm, prop, key)
+    // since the default value is a fresh copy,
+    // make sure to observe it.
+    const prevShouldObserve = shouldObserve
+    toggleObserving(true)
+    observe(value)
+    toggleObserving(prevShouldObserve)
 }
 ```
 
+如果父组件传入了该属性并且也有对应的真实值，那么在非生产环境下会调用`assertProp`函数校验该属性值是否与要求的类型匹配。如下：
+
+```
+if (process.env.NODE_ENV !== 'production' ) {
+    assertProp(prop, key, value, vm, absent)
+}
+```
+
+最后将父组件传入的该属性的真实值返回。
+
 **getPropDefaultValue 函数分析**
 
-```
+`getPropDefaultValue`函数的定义位于源码的`src/core/util/props.js`中，如下：
 
 ```
+function getPropDefaultValue (vm, prop, key){
+  // no default, return undefined
+  if (!hasOwn(prop, 'default')) {
+    return undefined
+  }
+  const def = prop.default
+  // warn against non-factory defaults for Object & Array
+  if (process.env.NODE_ENV !== 'production' && isObject(def)) {
+    warn(
+      'Invalid default value for prop "' + key + '": ' +
+      'Props with type Object/Array must use a factory function ' +
+      'to return the default value.',
+      vm
+    )
+  }
+  // the raw prop value was also undefined from previous render,
+  // return previous default value to avoid unnecessary watcher trigger
+  if (vm && vm.$options.propsData &&
+    vm.$options.propsData[key] === undefined &&
+    vm._props[key] !== undefined
+  ) {
+    return vm._props[key]
+  }
+  // call factory function for non-Function types
+  // a value is Function if its prototype is function even across different execution context
+  return typeof def === 'function' && getType(prop.type) !== 'Function'
+    ? def.call(vm)
+    : def
+}
+```
+
+该函数接收三个参数，分别是：
+
+- `vm`：当前实例；
+- `prop`：子组件`props`选项中的每个`key`对应的值；
+- `key`：子组件`props`选项中的每个`key`;
 
 **assertProp 函数分析**
 
-```
+`assertProp`函数的定义位于源码的`src/core/util/props.js`中，如下：
 
 ```
+function assertProp (prop,name,value,vm,absent) {
+  if (prop.required && absent) {
+    warn(
+      'Missing required prop: "' + name + '"',
+      vm
+    )
+    return
+  }
+  if (value == null && !prop.required) {
+    return
+  }
+  let type = prop.type
+  let valid = !type || type === true
+  const expectedTypes = []
+  if (type) {
+    if (!Array.isArray(type)) {
+      type = [type]
+    }
+    for (let i = 0; i < type.length && !valid; i++) {
+      const assertedType = assertType(value, type[i])
+      expectedTypes.push(assertedType.expectedType || '')
+      valid = assertedType.valid
+    }
+  }
+  if (!valid) {
+    warn(
+      `Invalid prop: type check failed for prop "${name}".` +
+      ` Expected ${expectedTypes.map(capitalize).join(', ')}` +
+      `, got ${toRawType(value)}.`,
+      vm
+    )
+    return
+  }
+  const validator = prop.validator
+  if (validator) {
+    if (!validator(value)) {
+      warn(
+        'Invalid prop: custom validator check failed for prop "' + name + '".',
+        vm
+      )
+    }
+  }
+}
+```
+
+该函数接收 5 个参数，分别是：
+
+- `prop`:prop 选项;
+- `name`:props 中 prop 选项的 key;
+- `value`:父组件传入的 propsData 中 key 对应的真实数据；
+- `vm`:当前实例；
+- `absent`:当前 key 是否在 propsData 中存在，即父组件是否传入了该属性。
 
 **初始化 methods**
 
