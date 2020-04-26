@@ -4780,6 +4780,14 @@ if (vm && vm.$options.propsData &&
 }
 ```
 
+最后，判断`def`是否为函数并且`prop.type`不为`Function`，如果是的话表明`def`是一个返回对象或数组的工厂函数，那么将函数的返回值作为默认值返回；如果`def`不是函数，那么则将`def`作为默认值返回。如下：
+
+```
+return typeof def === 'function' && getType(prop.type) !== 'Function'
+    ? def.call(vm)
+	: def
+```
+
 **assertProp 函数分析**
 
 `assertProp`函数的定义位于源码的`src/core/util/props.js`中，如下：
@@ -4837,6 +4845,22 @@ function assertProp (prop,name,value,vm,absent) {
 - `value`:父组件传入的 propsData 中 key 对应的真实数据；
 - `vm`:当前实例；
 - `absent`:当前 key 是否在 propsData 中存在，即父组件是否传入了该属性。
+
+其作用是校验父组件传来的真实值是否与`prop`的`type`类型相匹配，如果不切尔西则在非生产环境下抛出警告。
+
+函数内部首先判断`prop`中如果设置了必须项（即`prop.required`为`true`）并且父组件又没有传入该属性，此时则抛出警告：提示该项必须。如下：
+
+```
+if (prop.required && absent) {
+    warn(
+        'Missing required prop: "' + name + '"',
+        vm
+    )
+    return
+}
+```
+
+接着判断如果该项不是必填的并且该项的值
 
 **初始化 methods**
 
