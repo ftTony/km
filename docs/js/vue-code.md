@@ -4744,6 +4744,42 @@ function getPropDefaultValue (vm, prop, key){
 - `prop`：子组件`props`选项中的每个`key`对应的值；
 - `key`：子组件`props`选项中的每个`key`;
 
+其作用是根据子组件`props`选项中的`key`获取其对应的默认值。
+
+首先判断`prop`中是否有`default`属性，如果没有，则表示没有默认值，直接返回，如下：
+
+```
+if (!hasOwn(prop, 'default')) {
+    return undefined
+}
+```
+
+如果有则取出`default`属性，赋给变量`def`。接着判断在非生产环境下`def`是否一个对象，如果是，则抛出警告：对象或数组默认值必须从一个工厂函数获取。如下：
+
+```
+const def = prop.default
+// warn against non-factory defaults for Object & Array
+if (process.env.NODE_ENV !== 'production' && isObject(def)) {
+    warn(
+        'Invalid default value for prop "' + key + '": ' +
+        'Props with type Object/Array must use a factory function ' +
+        'to return the default value.',
+        vm
+    )
+}
+```
+
+接着，再判断如果父组件没有传入该`props`属性，但是在`vm._props`中有该属性值，这说明`vm._props`中的该属性值就是默认值，如下：
+
+```
+if (vm && vm.$options.propsData &&
+    vm.$options.propsData[key] === undefined &&
+    vm._props[key] !== undefined
+   ) {
+    return vm._props[key]
+}
+```
+
 **assertProp 函数分析**
 
 `assertProp`函数的定义位于源码的`src/core/util/props.js`中，如下：
