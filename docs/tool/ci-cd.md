@@ -35,6 +35,7 @@
 - [《大前端进阶 Node.js》系列 P6 必备脚手架/CI 构建能力（上）](https://juejin.im/post/5e7a22a8e51d4526d87c99ed)
 - [《大前端进阶 Node.js》系列 P6 必备脚手架/CI 构建能力（下）](https://juejin.im/post/5e835ef6f265da47a7411b06)
 - [记录一次 docker+jenkins+gitlab 搭建内网开发环境](https://mp.weixin.qq.com/s/c648RasQ6yg4NtOpAE55LA)
+- [前端部署的发展历程]()
 
 ## 联系作者
 
