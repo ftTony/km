@@ -7,8 +7,8 @@
 ## 内容
 
 - [分支模型](#一、分支模型)
-- [Git 常用命令清单](#二、Git常用命令清单)
-- [Git 常用命令导图](#三、Git常用命令导图)
+- [Git 常用命令清单](#二、git-常用命令清单)
+- [Git 常用命令导图](#三、git-常用命令导图)
 
 ### 一、分支模型
 
@@ -442,25 +442,25 @@ $ git stash pop
   - `git checkout`则是把文件从历史记录拿到工作，不影响暂存区的内容。
   - `git revert`不支持文件层面的操作。
 
-#### rebase 与 merge的区别?
+#### rebase 与 merge 的区别?
 
 `git rebase`和`git merge`一样都是用于从一个分支获取并且合并到当前分支。
 
-假设一个场景，就是我们开发的`[feature/todo]`分支要合并到master主分支，那么用`rebase`或者`merge`有什么不同呢？
+假设一个场景，就是我们开发的`[feature/todo]`分支要合并到 master 主分支，那么用`rebase`或者`merge`有什么不同呢？
 
 ![images](git04.png)
 
-- merge特点：自动创建创建一个新的commit如果合并的时候遇到冲突，仅需要修改后重新commit
-- 优点：记录了真实的commit情况，包括每个分支的详情
-- 缺点：因为每次merge会自动产生一个`merge commit`，所以在使用git的GUI tools，特别是commit比较频繁时，看到分支很杂乱。
+- merge 特点：自动创建创建一个新的 commit 如果合并的时候遇到冲突，仅需要修改后重新 commit
+- 优点：记录了真实的 commit 情况，包括每个分支的详情
+- 缺点：因为每次 merge 会自动产生一个`merge commit`，所以在使用 git 的 GUI tools，特别是 commit 比较频繁时，看到分支很杂乱。
 
 ![images](git05.png)
 
-- rebase特点：会合并之前的commit历史
-- 优点：得到更简洁的项目历史，去掉了merge commit
-- 缺点：如果合并出现代码问题不容易定位，因为re-write了history
+- rebase 特点：会合并之前的 commit 历史
+- 优点：得到更简洁的项目历史，去掉了 merge commit
+- 缺点：如果合并出现代码问题不容易定位，因为 re-write 了 history
 
-因此，当需要保留详细的合并信息的时候建议使用git merge，特别是需要将分支合并进入master分支时；当发现自己修改某个功能时，频繁进行了git commit提交时，发现其实过多的提交信息没必要时，可以尝试git rebase。
+因此，当需要保留详细的合并信息的时候建议使用 git merge，特别是需要将分支合并进入 master 分支时；当发现自己修改某个功能时，频繁进行了 git commit 提交时，发现其实过多的提交信息没必要时，可以尝试 git rebase。
 
 ### 三、Git 常用命令导图
 
