@@ -6,6 +6,33 @@
 
 ## 内容
 
+- Serverless 介绍
+- Serverless 使用
+
+### 一、Serverless 介绍
+
+#### 1.1 什么是 ServerLess
+
+ServerLess = Faas(Function as a service) + Baas(Backend as a serice)
+
+Faas 就是一些运行函数的平台，比如阿里云的函数计算、AWS 的 Lambda 等。
+
+BaaS 则是一些后端云服务，比如云数据库、对象存储，消息队列等。利用 Baas，可以极大简化我们的应用开发难度
+
+Serverless 则可以理解为运行在 FaaS 中的，使用了 BaaS 的函数。
+
+#### 1.2 ServerLess 特点
+
+- 事件驱动
+
+#### 1.2 Serverless 优点
+
+#### 1.3 Serverless 缺点
+
+#### 1.4 Serverless 使用场景
+
+### 二、Serverless 使用
+
 ### 参考资料
 
 - [无服务架构实践手册](https://jimmysong.io/serverless-handbook/)
