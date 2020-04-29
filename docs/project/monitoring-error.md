@@ -287,6 +287,8 @@ PromiseRejectionEvent={
 
 #### 4.1 跨域问题
 
+一般情况，如果出现`Script error`这样的错误，基本上可以确定是出现 了跨域问题。这时候不会有其他太多辅助信息的，但是解决思路无非如下：
+
 #### 4.2 代码压缩后，如何处理定位到代码问题
 
 #### 4.3 VUE errorHandler
@@ -295,7 +297,62 @@ PromiseRejectionEvent={
 
 #### 4.5 frame 异常
 
+对于`iframe`的异常捕获，我们还得借力`window.onerror`：
+
+```
+window.onerror = function(message, source, lineno, colno, error) {
+  console.log('捕获到异常：',{message, source, lineno, colno, error});
+}
+```
+
+一个简单的例子可能如下：
+
+```
+<iframe src="./iframe.html" frameborder="0"></iframe>
+<script>
+  window.frames[0].onerror = function (message, source, lineno, colno, error) {
+    console.log('捕获到 iframe 异常：',{message, source, lineno, colno, error});
+    return true;
+  };
+</script>
+```
+
 #### 4.6 崩溃和卡顿
+
+卡顿也是网页暂时响应比较慢，`JS`可能无法及时执行。但崩溃就不一样了，网页都崩溃了，`JS`都不行了，还有什么办法可以监控网页的崩溃，并将网页崩溃上报呢？
+
+崩溃和卡顿也是不可忽视的，也话会导致你的用户流失。
+
+**1. 利用`window`对象的`load`和`beforeunload`事件实现了网页崩溃的监控。**
+
+```
+window.addEventListener('load', function () {
+    sessionStorage.setItem('good_exit', 'pending');
+    setInterval(function () {
+        sessionStorage.setItem('time_before_crash', new Date().toString());
+    }, 1000);
+  });
+
+  window.addEventListener('beforeunload', function () {
+    sessionStorage.setItem('good_exit', 'true');
+  });
+
+  if(sessionStorage.getItem('good_exit') &&
+    sessionStorage.getItem('good_exit') !== 'true') {
+    /*
+        insert crash logging code here
+    */
+    alert('Hey, welcome back from your crash, looks like you crashed on: ' + sessionStorage.getItem('time_before_crash'));
+  }
+```
+
+参考资料：[如何监控网页的卡顿？](https://zhuanlan.zhihu.com/p/39292837)
+
+2. 基于以下原因，我们可以使用`Service Worker`来实现[如何监控网页崩溃？](https://zhuanlan.zhihu.com/p/40273861)
+
+- `Service Worker`有自己独立的工作线程，与网页区分开，网页崩溃了，`Servie Worker`一般情况下不会崩溃；
+- `Service Woker`生命周期一般要比网页还要长，可以用来监控网页的状态；
+- 网页可以通过`navigator.serviceWorker.controller.postMessage API`向掌管自己的`SW`发送消息。
 
 ### 五、错误上传
 
@@ -322,7 +379,6 @@ new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
 - [【第 790 期】构建可靠的前端异常监控服务-采集篇](https://mp.weixin.qq.com/s/LGbMXauSuuGWcvqazjXWjQ)
 - [撸一个前端监控系统（React + Node + Mysql + Webpack plugin + Docker）—— （上）](https://juejin.im/post/5e3146cce51d453176604809)
 - [转转商业前端错误监控系统(Sentry)策略升级](https://juejin.im/post/5e6b16315188254963277621)
-- [如何监控网页崩溃？](https://zhuanlan.zhihu.com/p/40273861)
 - [【第 833 期】如何设计一个前端监控系统](https://mp.weixin.qq.com/s/_AaZXxvMMFjHAynXylsjrw)
 
 ## 联系作者
