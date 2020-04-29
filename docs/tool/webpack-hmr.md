@@ -6,11 +6,18 @@
 
 ## 内容
 
+- 介绍 HMR
+- 为什么需要 HMR
+- HMR 的工作原理
+- 运用 HMR
+
+### 一、介绍 HMR
+
 Hot Module Replacement（以下简称 HMR）是 webpack 发展至今引入的最令人兴奋的特性之一 ，当你对代码进行修改并保存后，webpack 将对代码重新打包，并将新的模块发送到浏览器端，浏览器通过新的模块替换老的模块，这样在不刷新浏览器的前提下就能够对应用进行更新。例如，在开发 Web 页面过程中，当你点击按钮，出现一个弹窗的时候，发现弹窗标题没有对齐，这时候你修改 CSS 样式，然后保存，在浏览器没有刷新的前提下，标题样式发生了改变。感觉就像在 Chrome 的开发者工具中直接修改元素样式一样。
 
 本篇文章不是告诉你怎么使用 HMR，如果你对 HMR 依然感觉到陌生，建议先阅读[官网 HMR 指南](https://doc.webpack-china.org/guides/hot-module-replacement/#-hmr)，上面有 HMR 最简单的用例，我会等着你回来的。
 
-### 为什么需要 HMR
+### 二、为什么需要 HMR
 
 在 webpack HMR 功能之前，已经有很多 live reload 的工具或库，比如[live-server](http://tapiov.net/live-server/)，这些库监控文件的变化，然后通知浏览器端刷新页面，那么我们为什么还需要 HMR 呢？答案其实在上文中已经提及一些。
 
@@ -18,7 +25,7 @@ Hot Module Replacement（以下简称 HMR）是 webpack 发展至今引入的最
 - 在古老的开发流程中，我们可能需要手动运行命令对代码进行打包，并且打包后再手动刷新浏览器页面，而这一系列重复的工作都可以通过 HMR 工作流来自动化完成，让更多的精力投入到业务中，而不是时间浪费在重复的工作上。
 - HMR 兼容市面上大多前端框架或库，比如[React Hot Loader](https://github.com/gaearon/react-hot-loader)，[Vue-loader](https://github.com/vuejs/vue-loader)，能够监听 React 或者 Vue 组件的变化，实时将最新的组件更新到浏览器端。[Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader)支持通过 webpack 对 Elm 语言代码进行转译并打包，当然它也实现了 HMR 功能。
 
-### HMR 的工作原理图解
+### 三、HMR 的工作原理图解
 
 初识 HMR 的时候觉得其很神奇，一直有一些疑问萦绕在脑海。
 
@@ -50,7 +57,7 @@ Hot Module Replacement（以下简称 HMR）是 webpack 发展至今引入的最
 7. 而第 10 步是决定 HMR 成功与否的关键步骤，在该步骤中，HotModulePlugin 将会对新旧模块进行对比，决定是否更新模块，在决定更新模块后，检查模块之间的依赖关系，更新模块的同时更新模块间的依赖引用。
 8. 最后一步，当 HMR 失败后，回退到 live reload 操作，也就是进行浏览器刷新来获取最新打包代码。
 
-### 运用 HMR 的简单例子
+### 四、运用 HMR 的简单例子
 
 在上一个部分，通过一张 HMR 流程图，简要的说明了 HMR 进行模块热更新的过程。当然你可能感觉还是很迷糊，对上面出现的一些英文名词也可能比较陌生（上面这些英文名词代表着代码仓库或者仓库中的文件模块），没关系，在这一部分，我将通过一个[最简单最纯粹的例子](https://github.com/Jocs/webpack-HMR-demo)，通过分析 wepack 及 webpack-dev-server 源码详细说明各个库在 HMR 过程中的具体职责。
 
