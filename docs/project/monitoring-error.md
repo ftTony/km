@@ -289,7 +289,49 @@ PromiseRejectionEvent={
 
 一般情况，如果出现`Script error`这样的错误，基本上可以确定是出现 了跨域问题。这时候不会有其他太多辅助信息的，但是解决思路无非如下：
 
+跨源资源共享机制(`CORS`)：我们为`crossOrigin`属性。
+
+```
+<script src="http://jartto.wang/main.js" crossorigin></script>
+```
+
+或者动态去添加 `js` 脚本：
+
+```
+const script = document.createElement('script');
+script.crossOrigin = 'anonymous';
+script.src = url;
+document.body.appendChild(script);
+```
+
+特别注意，服务器端需要设置：Access-Control-Allow-Origin
+
+此外，我们也可以试试这个[解决 Script Error 的另类思路](https://juejin.im/post/5c00a405f265da610e7fd024)：
+
+```
+const originAddEventListener = EventTarget.prototype.addEventListener;
+EventTarget.prototype.addEventListener = function (type, listener, options) {
+  const wrappedListener = function (...args) {
+    try {
+      return listener.apply(this, args);
+    }
+    catch (err) {
+      throw err;
+    }
+  }
+  return originAddEventListener.call(this, type, wrappedListener, options);
+}
+```
+
+解释一下：
+
 #### 4.2 代码压缩后，如何处理定位到代码问题
+
+如果想将错误和原有的代码关联起来就需要`sourcemap`文件。
+
+**sourceMap 是什么**
+
+`sourceMap`就是一个文件，里面储存着位置信息。这个文件里保存的，是转换后代码的位置，和对应的转换前的位置。
 
 #### 4.3 VUE errorHandler
 
@@ -303,6 +345,18 @@ PromiseRejectionEvent={
 window.onerror = function(message, source, lineno, colno, error) {
   console.log('捕获到异常：',{message, source, lineno, colno, error});
 }
+```
+
+一个简单的例子可能如下：
+
+```
+<iframe src="./iframe.html" frameborder="0"></iframe>
+<script>
+  window.frames[0].onerror = function (message, source, lineno, colno, error) {
+    console.log('捕获到 iframe 异常：',{message, source, lineno, colno, error});
+    return true;
+  };
+</script>
 ```
 
 一个简单的例子可能如下：
