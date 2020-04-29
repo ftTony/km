@@ -280,11 +280,22 @@ PromiseRejectionEvent={
 
 - 跨域问题
 - 代码压缩后，如何处理定位到代码问题
-- Promise Catch
 - VUE errorHandler
 - React 异常捕获
 - iframe 异常
 - 崩溃和卡顿
+
+#### 4.1 跨域问题
+
+#### 4.2 代码压缩后，如何处理定位到代码问题
+
+#### 4.3 VUE errorHandler
+
+#### 4.4 React 异常捕获
+
+#### 4.5 frame 异常
+
+#### 4.6 崩溃和卡顿
 
 ### 五、错误上传
 
