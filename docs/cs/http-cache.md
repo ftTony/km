@@ -6,9 +6,11 @@
 
 ## 内容
 
-- [什么是 web 缓存](#一、什么是web缓存)
-- [web 缓存的作用](#二、web缓存的作用)
-- [web 缓存的类型](#三、web缓存的类型)
+- [什么是 web 缓存](#一、什么是-web-缓存)
+- [web 缓存的作用](#二、web-缓存的作用)
+- [web 缓存的类型](#三、web-缓存的类型)
+- [http 缓存相关参数](#四、http-缓存相关参数)
+- [整体流程](# 五、整体流程)
 
 ### 一、什么是 web 缓存
 
@@ -55,7 +57,7 @@ CDN 缓存，也叫网关缓存、反向代理缓存。CDN 缓存一般是由网
 
 ![161233e63a84f043](http-cache-01.png)
 
-### 四、http 缓存
+### 四、http 缓存相关参数
 
 #### 4.1 http 报文中与缓存相关的首部字段
 
@@ -116,13 +118,19 @@ CDN 缓存，也叫网关缓存、反向代理缓存。CDN 缓存一般是由网
 
 If-Modified-Since 是一个请求首部字段，并且只能用在 GET 或者 HEAD 请求中。Last-Modified 是一个响应首部字段，包含服务器认定的资源作出修改的日期及时间。当带着 If-Modified-Since 头访问服务器请求资源时，服务器会检查 Last-Modified，如果 Last-Modified 的时间早于或等于 If-Modified-Since 则会返回一个不带主体的 304 响应，否则将重新返回资源。
 
-> If-Modified-Since: , :: GMT Last-Modified: , :: GMT
+```
+If-Modified-Since: , :: GMT Last-Modified: , :: GMT
+```
 
 2. ETag/If-None-Match
 
 ETag 是一个响应首部字段，它是根据实体内容生成的一段 hash 字符串，标识资源的状态，由服务端产生。If-None-Match 是一个条件式的请求首部。如果请求资源时在请求首部加上这个字段，值为之前服务器端返回的资源上的 ETag，则当且仅当服务器上没有任何资源的 ETag 属性值与这个首部中列出的时候，服务器才会返回带有所请求资源实体的 200 响应，否则服务器会返回不带实体的 304 响应。ETag 优先级比 Last-Modified 高，同时存在时会以 ETag 为准。
 
-> If-None-Match: <etag_value> If-None-Match: <etag_value>, <etag_value>, … If-None-Match: \*
+```
+If-None-Match: <etag_value>
+If-None-Match: <etag_value>, <etag_value>,
+If-None-Match: \*
+```
 
 ![161233e63a97e53e](http-cache-02.png)
 
@@ -130,13 +138,11 @@ ETag 是一个响应首部字段，它是根据实体内容生成的一段 hash 
 
 因为 ETag 的特性，所以相较于 Last-Modified 有一些优势：
 
-```
-某些情况下服务器无法获取资源的最后修改时间
-资源的最后修改时间变了但是内容没变，使用ETag可以正确缓存
-如果资源修改非常频繁，在秒以下的时间进行修改，Last-Modified只能精确到秒
-```
+- 某些情况下服务器无法获取资源的最后修改时间
+- 资源的最后修改时间变了但是内容没变，使用 ETag 可以正确缓存
+- 如果资源修改非常频繁，在秒以下的时间进行修改，Last-Modified 只能精确到秒
 
-#### 整体流程
+### 五、整体流程
 
 ![161233e6685e5e73](http-cache-03.png)
 
@@ -163,3 +169,4 @@ ETag 是一个响应首部字段，它是根据实体内容生成的一段 hash 
     </p>
     <img :src="$withBase('/about/contact.png')" />
 </div>
+```
