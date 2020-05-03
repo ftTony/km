@@ -15,6 +15,7 @@
 - [QQ 音乐商业化 Web 团队前端工程化实践总结](https://cloud.tencent.com/developer/article/1500013)
 - [美团旅行前端技术体系的思考与实践](https://zhuanlan.zhihu.com/p/29373613)
 - [MPM 卖场可视化搭建系统 — 架构流程设计](https://mp.weixin.qq.com/s/w3sT_K4NOfoTYcdkXu6_OA)
+- [当前端基建任务落到你身上，该如何推动协作？](https://mp.weixin.qq.com/s/Y0S0X_sx_6IlgXQIDd3DkQ)
 - 《大型网站技术架构-核心原理与案例分析》
 
 ## 联系作者
