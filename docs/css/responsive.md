@@ -12,12 +12,12 @@
 
 ## 内容
 
-- 基本概念
-- 1px 问题
-- 适配 iPhonX
-- 横屏适配
-- 移动适配
-- 图片模糊问题
+- [基本概念](#一、基本概念)
+- [1px 问题](#二、1px-问题)
+- [适配 iPhonX](#三、适配-iphonx)
+- [横屏适配](#四、横屏适配)
+- [移动适配](#五、移动端适配方案)
+- [图片模糊问题](#六、图片模糊问题)
 
 ### 一、基本概念
 
@@ -259,6 +259,7 @@ iPhone 6 的 PPI 为 ![images](responsive21.svg)，那它每英寸约含有 326 
 - [深入浅出 Viewport 设计原理](https://www.cnblogs.com/onepixel/p/12144364.html)
 - [彻底搞懂移动 Web 开发中的 viewport 与跨屏适配](https://mp.weixin.qq.com/s/aaXgFw4isWq1RrHkv75zLA)
 - [页面元素坐标和偏移（clientX/pageX/screenX/layerX/offsetWidth/scrollWidth/clientWidth 等）相关整理](https://www.cnblogs.com/skylar/p/4121508.html)
+- [十分钟快速了解 JS 中的 offset、scroll、client](https://mp.weixin.qq.com/s/uFPKgkXJu4Ir3syKus34tQ)
 
 ### 二、1px 问题
 
