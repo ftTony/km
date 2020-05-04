@@ -20,6 +20,7 @@
 - [前端代码质量—怎样实现一个支持多语言、高扩展性的 Linter](https://mp.weixin.qq.com/s/yFa2hFkmCQFyGcPiHeC0Tg)
 - [前端开发规范梳理(全面记录)](https://juejin.im/post/5e3d0362e51d4526d87c605d)
 - [Git commit message 规范](https://juejin.im/post/5d0b3f8c6fb9a07ec07fc5d0)
+- [【第 1934 期】前端最佳实践之可维护性](https://mp.weixin.qq.com/s/C0rO3YflCgR_TJhb0k8h_w)
 
 ## 联系作者
 

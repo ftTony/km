@@ -184,6 +184,7 @@ app.delete('/users',(req,res)=>{
 - [理解 RESTful API 设计规范](https://www.cnblogs.com/tugenhua0707/p/12153857.html)
 - [HTTP 协议理解及服务端与客户端的设计实现](https://mp.weixin.qq.com/s/69EvvR0FHR57QuhDC7bJ8w)
 - [RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
+- [Nodejs RESTFul 架构实践](https://mp.weixin.qq.com/s/p9yUwzI4jivJ26iKRTdm-g)
 
 ## 联系作者
 

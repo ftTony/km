@@ -210,6 +210,7 @@ function heapSort(array,compareFn = defaultCompart){
 - [堆](http://www.conardli.top/docs/dataStructure/%E5%A0%86/%E5%A0%86.html)
 - [堆和堆排序：为什么说堆排序没有快速排序快？](https://time.geekbang.org/column/article/69913)
 - [动画：什么是堆？](https://mp.weixin.qq.com/s/j1wQ6KhA7jk9ftOoKUagWA)
+- [拜托，别再问我什么是堆了!](https://mp.weixin.qq.com/s/XG0hSN7I6LXNcpPJk7X2qA)
 
 ## 联系作者
 
