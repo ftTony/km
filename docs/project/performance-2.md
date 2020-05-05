@@ -236,6 +236,7 @@ Web Worker 使得网页中进行多线程编程成为可能。当主线程在处
 - [CSS3 动画卡顿性能优化解决方案](https://github.com/FrankKai/FrankKai.github.io/issues/8)
 - [从 8 道面试题看浏览器渲染过程与性能优化](https://juejin.im/post/5e143104e51d45414a4715f7)
 - [前端性能优化 24 条建议（2020）](https://segmentfault.com/a/1190000022205291)
+- [React 项目性能分析及优化](https://mp.weixin.qq.com/s/DR_pP36HdxaCKVuG0Tn_og)
 
 ## 联系作者
 
