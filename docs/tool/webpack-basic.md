@@ -491,6 +491,8 @@ webpack 打包配置相对比较复杂，目前介绍应该可以满常规需求
 - [2020 年了,再不会 webpack 敲得代码就不香了(近万字实战)](https://juejin.im/post/5de87444518825124c50cd36)
 - [从构建进程间缓存设计 谈 Webpack5 优化和工作原理](https://mp.weixin.qq.com/s/MT5Vpg4BFXMh_c91a515iA)
 - [Webpack Tree shaking 深入探究](https://juejin.im/post/5bb8ef58f265da0a972e3434)
+- [webpack 的多页应用脚手架](https://github.com/Array-Huang/webpack-seed)
+- [利用 webpack 搭建脚手架一套完整流程](https://mp.weixin.qq.com/s/23f64lu-qAEAK76lFYyzow)
 
 ## 联系作者
 

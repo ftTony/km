@@ -146,7 +146,7 @@ var performance = {
 - TCP 链接耗时 = `connectEnd` - `connectStart`
 - request 请求耗时 = `responseEnd` - `responseStart`
 - 解析 dom 树耗时 = `domComplete` - `domInteractive`
-- 白屏时间 = `domloadng` - `fetchStart`
+- 白屏时间 = `responseStart` - `navigationStart`
 - domready 时间 = `domContentLoadedEventEnd` - `fetchStart`
 - onload 时间 = `loadEventEnd` - `fetchStart`
 

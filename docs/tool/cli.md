@@ -8,8 +8,6 @@
 
 ### 参考资料
 
-- [webpack 的多页应用脚手架](https://github.com/Array-Huang/webpack-seed)
-- [利用 webpack 搭建脚手架一套完整流程](https://mp.weixin.qq.com/s/23f64lu-qAEAK76lFYyzow)
 - [教你从零开始搭建一款前端脚手架工具](https://juejin.im/post/5c237d1a5188256b9e0f21e1)
 - [如何快速开发一个自己的项目脚手架？](https://github.com/alienzhou/blog/issues/29)
 - [自动开发生成脚手架](https://github.com/yanlele/le-cli)

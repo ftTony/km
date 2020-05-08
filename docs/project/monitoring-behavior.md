@@ -28,6 +28,7 @@
 - [大流量的下兜底容灾方案](https://www.barretlee.com/blog/2015/09/16/backup-solution-at-big-traffic/)
 - [一步一步搭建前端监控系统：如何记录用户行为？](https://juejin.im/post/5d44ec1cf265da039a2869c0)
 - [网易云音乐前端性能监控实践](https://mp.weixin.qq.com/s/EuFDLOCg53IxvieaQDeYug)
+- [前端越管越宽，腾讯 Now 直播如何把监控体系做到极致？](https://mp.weixin.qq.com/s/aqO55IyVCZzh9yhKuOKSCQ)
 
 ## 联系作者
 
