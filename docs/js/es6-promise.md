@@ -1118,7 +1118,8 @@ setImmediate(()=>{
 console.log('end')
 ```
 
-[Promise 必知必会（十道题）](https://juejin.im/post/5a04066351882517c416715d)
+- [Promise 必知必会（十道题）](https://juejin.im/post/5a04066351882517c416715d)
+- [【建议星星】要就来 45 道 Promise 面试题一次爽到底(1.1w 字用心整理)](https://juejin.im/post/5e58c618e51d4526ed66b5cf)
 
 ### 参考资料
 
