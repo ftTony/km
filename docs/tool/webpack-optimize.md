@@ -11,6 +11,10 @@
 
 ### 一、优化打包大小
 
+- 开启`production`模式
+- 开启`tree shaking`模式
+- 开启`production`模式
+
 - 对于 Webpack4，打包项目使用 production 模式，这样会自动开启代码压缩
 - 使用 ES6 模块来开启 tree shaking，这个技术可以移除没有使用的代码
 - 优化图片，对于小图可以使用 base64 的方式写入文件中
@@ -50,10 +54,16 @@ module .exports = {
 
 #### 2.2 优化`resolve.module`配置
 
+`resolve.modules`的默认值是`['node_modules']`
+
 示例代码：
 
 ```
-
+module.exports = {
+    resolve: {
+        modules: [path.resolve( __dirname,'node modules')]
+    },
+}
 ```
 
 #### 2.3 优化`resolve.aslias`配置
@@ -61,7 +71,15 @@ module .exports = {
 示例代码：
 
 ```
-
+module.exports = {
+    resolve: {
+    //使用 alias 将导入 react 的语句换成直接使用单独、完整的 react.min.js 文件，
+    //减少耗时的递归解析操作
+        alias: {
+            'react': path.resolve( __dirname ,'./node_modules/react/dist/react.min.js'),
+        }
+    }
+}
 ```
 
 #### 2.4 优化`resolve.mainFields`配置
