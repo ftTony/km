@@ -105,6 +105,7 @@ Docker 镜像是一个特殊的文件系统，除了提供容器运行时所需�
 - [Docker 入门教程](https://github.com/jaywcjlove/docker-tutorial)
 - [前端领域的 Docker 与 Kubernetes](https://juejin.im/post/5dddd15b6fb9a071576dbd7a)
 - [Docker 搭建你的第一个 Node 项目到服务器](https://juejin.im/post/5dff84e051882512290f2fc2)
+- [前端工程师学 Docker ？ 看这篇就够了 【零基础入门 原创】](https://mp.weixin.qq.com/s/1pdSHa3zk-UKWBamAz60Og)
 
 ## 联系作者
 
