@@ -574,6 +574,8 @@ let hasCycle = function(head){
 
 17. 最长公共前缀
 
+参考资料：[https://github.com/sisterAn/JavaScript-Algorithms/issues/19](https://github.com/sisterAn/JavaScript-Algorithms/issues/19)
+
 题目：编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串`""`。
 
 示例 1：
@@ -589,6 +591,92 @@ let hasCycle = function(head){
 输入: ["dog","racecar","car"]
 输出: ""
 解释: 输入不存在公共前缀。
+```
+
+解法一：逐个比较
+
+从前往后依次比较字符串，获取公共前缀。
+
+```
+var longestCommonPrefix = function(strs){
+    if(strs === null || strs.length ===0) return ''
+    let prevs = strs[0]
+    for(let i=1;i<strs.length;i++){
+        let j = 0
+        for(;j<prevs.length && j<strs[i].length;j++){
+            if(prevs.charAt(j) !== strs[i].charAt(j)) break
+        }
+        prevs = prevs.substring(0,j)
+        if(prevs === '') return ''
+    }
+    return prevs
+}
+```
+
+解法二：仅需最大、最小字符串的最长公共前缀
+
+思路：获取数组中的最大值及最小值字符串，最小字符串与最大字符串的最长公共前缀也为其他字符串的公共前缀，即为字符串数组的最公共前缀
+
+代码：
+
+```
+var longestCommonPrefix = function(strs){
+    if(strs === null || strs.length === 0) return ''
+    if(strs.length ===1) return strs[0]
+    let min = 0,max = 0
+    for(let i=1;i<strs.length;i++){
+        if(strs[min].charAt(j) !== strs[max].charAt(j)){
+            return strs[min].substring(0,j)
+        }
+    }
+    return strs[min]
+}
+```
+
+18. JS 如何实现两个超大数相加
+
+解答：
+
+```
+function addBigNum(a, b){
+  let arrA = a.split('').reverse()
+  let arrB = b.split('').reverse()
+  let aLen = arrA.length
+  let bLen = arrB.length
+  let shortArr, shortLen, longArr, longLen
+  let result = []
+  if(aLen<bLen){
+    shortArr = arrA
+    shortLen = aLen
+    longArr = arrB
+    longLen = bLen
+  }else {
+    shortArr = arrB
+    shortLen = bLen
+    longArr = arrA
+    longLen = aLen
+  }
+  let add = 0
+  for(let i = 0; i < shortLen; i++){
+    let temp = (parseInt(arrA[i])+parseInt(arrB[i])+add)%10
+    result.push(temp)
+    add = Math.floor((parseInt(arrA[i])+parseInt(arrB[i])+add)/10)
+  }
+  if(shortLen===longLen){
+    result.push(add)
+  }else{
+    for(let j = shortLen; j < longLen; j++){
+      if(j===longLen-1){
+        result.push(parseInt(longArr[j])+add)
+      }else{
+        let temp = (parseInt(longArr[j])+add)%10
+        result.push(temp)
+        add = Math.floor((parseInt(longArr[j])+add)/10)
+      }
+    }
+  }
+  return parseInt(result.reverse().join(''))
+}
 ```
 
 ### 参考资料
