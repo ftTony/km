@@ -139,6 +139,7 @@ TCP 是按照 4 要素（客户端 IP、端口，服务器 IP、端口）确定�
 - [HTTP/3 要点](https://mp.weixin.qq.com/s/qBD90RdofvYDNX2sSJWgNA)
 - [31 ｜ HTTP/3：甩掉 TCP、TLS 的包袱，构建高效网络](https://time.geekbang.org/column/article/150159)
 - [一文读懂 HTTP/1HTTP/2HTTP/3](https://zhuanlan.zhihu.com/p/102561034)
+- [【第 1944 期】HTTP/3 原理与实践](https://mp.weixin.qq.com/s/Y7v738Zeir3cZMxthjUY_Q)
 
 ## 联系作者
 
