@@ -6,8 +6,34 @@
 
 ## 内容
 
-- 调用插件 apply 函数传入 compiler 对象
-- 通过 compiler 对象监听
+- 常用的插件
+- 自定义插件
+
+### 一、常用的插件
+
+- `CommonsChunkPlugin` 创建一个公用的 `chunk`，常用于将第三方 `lib` 抽取成公用 js，例如
+
+```
+entry:{
+    vendor:['jquery','other-lib'],
+    app:'./entry'
+}
+
+new CommonsChunkPlugin({
+    name:'vendor',
+    filename:'vendor.js',
+    minChunks:infinity
+})
+```
+
+- `define-plugin`：定义环境变量
+- `html-webpack-plugin`：简化 html 文件创建
+- `uglifyjs-webpack-plugin`：通过`UglifyES`压缩`ES6`代码
+- `webpack-parallel-uglify-plugin`：多核压缩，提高压缩速度
+- `webpack-bundle-analyzer`：可以视化 webpack 输出文件的体积
+- `mini-css-extract-plugin`：CSS 提取到单独的文件中，支持按需加载 -`HotMouleReplacementPlugin` 启用 `module`热替换
+
+### 二、自定义插件
 
 插件代码
 
