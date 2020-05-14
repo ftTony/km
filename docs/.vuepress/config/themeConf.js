@@ -344,7 +344,7 @@ module.exports = {
             {
                 title: "其它打包工具",
                 collapsable: false,
-                children: ["gulp-basic", "rollup-basic", "gulp-plugin", "pm2"]
+                children: ["gulp-basic", "rollup-basic", "pm2"]
             },
             {
                 title: "自定义脚手架",
