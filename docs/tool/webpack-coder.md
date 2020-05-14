@@ -6,7 +6,11 @@
 
 ## 内容
 
-### webpack 配置文件 vscode 调试配置文件
+- 断点调试 webpack
+
+### 一、断点调试 webpack
+
+在 vscode 中调试，设置配置文件
 
 ```
 "version": "0.2.0",

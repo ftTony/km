@@ -6,6 +6,9 @@
 
 ## 内容
 
+- [常用 loader](#一、常用-loader)
+- [自定义 loader](#二、自定义-loader)
+
 ### 一、常用 loader
 
 - `file-loader`：把文件输出到一个文件夹中，在代码中通过相对 URL 去引用输出的文件
