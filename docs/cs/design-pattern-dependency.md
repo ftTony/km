@@ -124,33 +124,45 @@ web.matchRouter('login');
 ```
 class Database{
     select(sql){
-
+        const mysql  = require('mysql')
+        return new Promise(resolve=>{
+            //  连接数据库，并执行 sql 语句进行查询
+            mysql.createConnection().query(sql,(error,results,fields)=>{
+                const success = results.length>0? true:false
+                resolve(success)
+            })
+        })
     }
 }
 
 class Service{
     constructor(db){
-
+        this.db = db
     }
     async login(username,password){
-
+        const success = await this.db.select(`select * from user where username =${username} and password=${password}`)
     }
+    return success ? '登录成功' : '登录失败';
 }
 
 class Web{
     constructor(service){
-
+        this.service = service
     }
     matchRouter(path){
         switch(path){
             case 'login':
-
+            const {username,password} = path.query
+            return this.service.login(username,password)
         }
     }
 }
 
 // 使用web层之前，必须手动创建依赖，并注入
-
+const database = new Database()
+const service - new Service(database)
+const web = new Web(service)
+web.matchRouter('login')
 ```
 
 上面的代码可以看出，web 层并不直接依赖 service 层，而是通过构造函数将 service 传进来直接用，这就实现了依赖注入的效果。
@@ -240,6 +252,7 @@ web.matchRouter('login');
 ### 参考资料
 
 - [你需要知道的依赖注入](https://lmjben.github.io/blog/base-ioc.html#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E7%9A%84%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86)
+- [从前端角度彻底搞懂 DIP、IoC、DI、JS](https://zhuanlan.zhihu.com/p/61018434)
 
 ## 联系作者
 
