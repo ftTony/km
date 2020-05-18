@@ -218,6 +218,8 @@ function getPerformanceTiming () {
 - [同程艺龙小程序性能监控系统的探索与实践](https://mp.weixin.qq.com/s/dr-wvKzab9W1h1KZscBFKw)
 - [如何进行 web 性能监控 ？](http://www.alloyteam.com/2020/01/14184/)
 - [7 天打造前端性能监控系统](http://fex.baidu.com/blog/2014/05/build-performance-monitor-in-7-days/)
+- [前端监控，性能监控平台](https://github.com/kisslove/web-monitoring)
+- [浏览器端页面性能](https://github.com/wangweianger/web-report-sdk)
 
 ## 联系作者
 
