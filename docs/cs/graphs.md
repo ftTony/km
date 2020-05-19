@@ -293,7 +293,7 @@ const DFSVisit = (v, color, d, f, p, time, adjList) => {
 
 #### 5.1 Dijkstra 算法
 
-`Dijkstra`算法是一种永无休止从单个源到所有其他源的最短路径的贪心算法。
+`Dijkstra`(迪杰斯特拉)算法是一种永无休止从单个源到所有其他源的最短路径的贪心算法。
 
 ```
 /**
