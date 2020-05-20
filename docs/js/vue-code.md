@@ -5318,7 +5318,7 @@ const sharedPropertyDefinition = {
 const shouldCache = !isServerRendering()
 ```
 
-接着
+接着，判断如果`userDef`是一个函数，则该函数默认为取值器`getter`，此处在非服务端渲染环境下
 
 ```
 /*创建计算属性的getter*/
@@ -5360,11 +5360,27 @@ if (process.env.NODE_ENV !== 'production' &&
 **createComputedGetter 函数分析**
 
 ```
-
+function createComputedGetter (key) {
+  return function computedGetter () {
+    const watcher = this._computedWatchers && this._computedWatchers[key]
+    if (watcher) {
+      /*实际是脏检查，在计算属性中的依赖发生改变的时候dirty会变成true，
+      在get的时候重新计算计算属性的输出值*/
+      if (watcher.dirty) {
+        watcher.evaluate()
+      }
+      /*依赖收集*/
+      if (Dep.target) {
+        watcher.depend()
+      }
+      return watcher.value
+    }
+  }
+}
 ```
 
 ```
-
+const watcher = this._computedWatchers && this._computedWatchers[key]
 ```
 
 **初始化 watch**
@@ -5385,8 +5401,42 @@ function initWatch (vm: Component, watch: Object) {
         }
     }
 }
+```
+
+**initWatch 函数分析**
 
 ```
+
+```
+
+**createWatcher 函数分析**
+
+```
+function createWatcher (
+  vm: Component,
+  expOrFn: string | Function,
+  handler: any,
+  options?: Object
+) {
+  if (isPlainObject(handler)) {
+    options = handler
+    handler = handler.handler
+  }
+  if (typeof handler === 'string') {
+    handler = vm[handler]
+  }
+  return vm.$watch(expOrFn, handler, options)
+}
+```
+
+可以看到，该函数接收 4 个参数，分别是：
+
+- vm：当前实例
+- expOrFn：被侦听的属性表达式
+- handler：`watch`选项中每一项的值
+- options：用于传递给`vm.$watch`的选项对象
+
+**总结**
 
 #### 5.2 模板编译阶段
 
