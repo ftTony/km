@@ -5389,9 +5389,15 @@ function createComputedGetter (key) {
 }
 ```
 
+该函数是一个高阶函数，其内部返回一个叫做`computedGetter`的函数，所以其实是将`computedGetter`函数赋给了`sharedPropertyDefinition.get`。当获取计算属性的值时会执行属性的`getter`，而属性的`getter`就是`sharedPropertyDefinition.get`，也就是说最终执行的`computedGetter`函数。
+
+在`computedGetter`函数内部，首先获取之前创建好的存储在实例上`_computedWatchers`属性中当前计算属性名`key`所对应的`watcher`实例，如下：
+
 ```
 const watcher = this._computedWatchers && this._computedWatchers[key]
 ```
+
+如果`watcher`实例存在，则判断该实例上的`dirty`属性是否为`true`
 
 **初始化 watch**
 
@@ -5415,9 +5421,24 @@ function initWatch (vm: Component, watch: Object) {
 
 **initWatch 函数分析**
 
-```
+`initWatch`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
+function initWatch (vm, watch) {
+  for (const key in watch) {
+    const handler = watch[key]
+    if (Array.isArray(handler)) {
+      for (let i = 0; i < handler.length; i++) {
+        createWatcher(vm, key, handler[i])
+      }
+    } else {
+      createWatcher(vm, key, handler)
+    }
+  }
+}
+```
+
+在函数内部会遍历`watch`选项，拿到每一项的`key`和对应的值`handler`
 
 **createWatcher 函数分析**
 
