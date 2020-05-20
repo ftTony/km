@@ -5318,7 +5318,7 @@ const sharedPropertyDefinition = {
 const shouldCache = !isServerRendering()
 ```
 
-接着，判断如果`userDef`是一个函数，则该函数默认为取值器`getter`，此处在非服务端渲染环境下
+接着，判断如果`userDef`是一个函数，则该函数默认为取值器`getter`，此处在非服务端渲染环境下并没有直接使用`userDef`作为`getter`，而调用`createComputedGetter`函数创建一个`getter`，这是因为`userDef`只是一个普通的`getter`，它并没有缓存功能，所以我们需要额外创建一个具有缓存功能的`getter`。由于用户没有调用`setter`函数，所以将`sharedPropertyDefinition.set`设置为`noop`。如下：
 
 ```
 /*创建计算属性的getter*/
@@ -5335,6 +5335,8 @@ if (typeof userDef === 'function') {
 }
 ```
 
+如果`userDef`不是一个函数，那么就将它当作对象处理。在设置`sharedPropertyDefinition.get`的时候先判断`userDef.get`是否存在，如果不存在，则将其设置为`noop`，如果存在，则同上面一样，在非服务端渲染环境下并且用户没有明确的将`userDef.cache`设置为`false`时调用`createComputedGetter`函数创建一个`getter`赋给 `sharedPropertyDefinition.get` 。然后设置 `sharedPropertyDefinition.set` 为 `userDef.set` 函数。如下：
+
 ```
 sharedPropertyDefinition.get = userDef.get
   ? shouldCache && userDef.cache !== false
@@ -5344,6 +5346,8 @@ sharedPropertyDefinition.get = userDef.get
 /*如果有设置set方法则直接使用，否则赋值空函数*/
 sharedPropertyDefinition.set = userDef.set || noop
 ```
+
+接着，再判断在非生产环境下如果用户没有设置`setter`的话，那么就给`setter`一个默认函数，这是为防止用户在没有设置`setter`的情况下修改计算属性，从而为其抛出警告，如下：
 
 ```
 if (process.env.NODE_ENV !== 'production' &&
@@ -5357,7 +5361,13 @@ if (process.env.NODE_ENV !== 'production' &&
 }
 ```
 
+最后调用`Object.defineProperty`方法将属性`key`绑定到`target`上，其中的属性描述符就是上面设置的`sharedPropertyDefinition`。如此以来，就将计算属性绑定到实例`vm`上了。
+
+计算属性有没有缓存及其响应式貌似主要在于是否将`getter`设置为`createComputedGetter`函数的返回结果。
+
 **createComputedGetter 函数分析**
+
+`createComputedGetter`函数的定义在位于源码的`src/core/instance/state.js`中，如下：
 
 ```
 function createComputedGetter (key) {
