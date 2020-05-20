@@ -4659,7 +4659,7 @@ if (absent && !hasOwn(prop, 'default')) {
 
 - 该属性值为空字符串串或者属性值与属性名相等；
 - `prop`和`type`属性中不存在`String`类型；
-- 如果`prop`
+- 如果`prop`的`type`属性中存在`String`类型，那么`Boolean`类型在`type`属性中的索引必须小于`String`类型的索引，即`Boolean`类型的优先级更高。
 
 ```
 if (value === '' || value === hyphenate(key)) {
@@ -5253,6 +5253,10 @@ if (!isSSR) {
 const computedWatcherOptions = { lazy: true }
 ```
 
+这个参数是用来标记当前所创建的`watcher`实例是一个计算属性的`watcher`实例，给它一个`{lazy:true}`的配置，这是为将来计算属性值缓存做准备。计算属性有个特点就是它可以缓存当前的计算结果，也就是说如果某个计算属性所依赖的数据没有发生变化，那么该计算属性就不会去重复计算，会直接获取上一次的计算结果。这个 `{ lazy: true }`就是给计算属性做缓存时用的。
+
+最后，判断当前循环到的的属性名是否存在于当前实例 `vm` 上，如果存在，则在非生产环境下抛出警告；如果不存在，则调用 `defineComputed` 函数为实例 `vm` 上设置计算属性。
+
 **defineComputed 函数分析**
 
 `defineComputed`函数的定义位于源码的`src/core/instance/state.js`中，如下：
@@ -5308,11 +5312,13 @@ const sharedPropertyDefinition = {
 }
 ```
 
-接着，在函数内部定义了变量`shouldCache`，用于标识计算属性是否应该有缓存。
+接着，在函数内部定义了变量`shouldCache`，用于标识计算属性是否应该有缓存。该变量的值是当前环境是否为非服务端环境，如果非服务端渲染环境则该变量为`true`。也就是说，只有在非服务端渲染环境下计算属性才应该有缓存。如下：
 
 ```
 const shouldCache = !isServerRendering()
 ```
+
+接着
 
 ```
 /*创建计算属性的getter*/
