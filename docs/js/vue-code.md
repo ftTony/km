@@ -5397,7 +5397,31 @@ function createComputedGetter (key) {
 const watcher = this._computedWatchers && this._computedWatchers[key]
 ```
 
-如果`watcher`实例存在，则判断该实例上的`dirty`属性是否为`true`
+如果`watcher`实例存在，则判断该实例上的`dirty`属性是否为`true`，如果为`true`，即表明当前计算属性的计算结果发生了变化，则立即调用实例上的`evaluate`方法获取最新的计算结果，在`evaluate`方法内部会将最新的计算结果赋值给实例上的`value`属性，如下：
+
+```
+if (watcher.dirty) {
+  watcher.evaluate()
+}
+```
+
+如果当前有需要收集的依赖，则调用实例上的`depend`方法进行依赖收集，如下：
+
+```
+if (Dep.target) {
+  watcher.depend()
+}
+```
+
+最后，返回实例上的`value`属性，该属性即为当前计算属性的最终计算结果。
+
+在实例化`Watcher`类的时候，第四个参数传入了一个对象`computedWatcherOptions = { lazy: true }`，该对象中的`lazy`属性标志着这个`watcher`实例是计算的`watcher`实例，同时类中还定义了`this.dirty`属性用于标志计算属性的返回值是否有变化，计算属性的缓存就是通过这个属性来判断的，每当计算属性依赖的数据发生变化时，会将`this.dirty`属性设置为`true`，这样下一次读取计算属性时，会重新计算结果返回，否则直接返回之前的计算结果。
+
+如果计算属性中用到的数据没有发生变化，那么计算属性的`watcher`实例的`watcher.update`方法就不会执行，那么`watcher.dirty`就不会被变化为`true`，依然为`false`，那么当视图获取`name`时，就不会调用`watcher.evaluate`方法，直接返回已有的`watcher.value`，即上一次的计算结果。
+
+其内部原理如图所示：
+
+![images](vue21.jpg)
 
 **初始化 watch**
 
@@ -5438,9 +5462,11 @@ function initWatch (vm, watch) {
 }
 ```
 
-在函数内部会遍历`watch`选项，拿到每一项的`key`和对应的值`handler`
+在函数内部会遍历`watch`选项，拿到每一项的`key`和对应的值`handler`。然后判断`handler`是否为数组，如果是数组则循环该数组并将数组中的每一项依次调用`createWatcher`函数来创建`watcher`；如果不是数组，则直接调用`createWatcher`函数来创建`watcher`。
 
 **createWatcher 函数分析**
+
+`createWatcher`函数的定义位于源码的`src/core/instance/state.js`中，如下：
 
 ```
 function createWatcher (
@@ -5466,6 +5492,17 @@ function createWatcher (
 - expOrFn：被侦听的属性表达式
 - handler：`watch`选项中每一项的值
 - options：用于传递给`vm.$watch`的选项对象
+
+在该函数的内部，首先会判断传入的`handler`是否为一个对象，如果是一个对象，那么就认为用户使用的是这种写法：
+
+```
+watch: {
+    c: {
+        handler: function (val, oldVal) { /* ... */ },
+		deep: true
+    }
+}
+```
 
 **总结**
 
