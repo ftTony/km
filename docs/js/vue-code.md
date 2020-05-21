@@ -5427,22 +5427,6 @@ if (Dep.target) {
 
 初始化`watch`选项，在日常开发中`watch`选项也经常会使用到，它可以用来侦听某个已有的数据，当该数据发生变化时执行对应的回调函数。
 
-```
-
-function initWatch (vm: Component, watch: Object) {
-    for (const key in watch) {
-        const handler = watch[key]
-        if (Array.isArray(handler)) {
-            for (let i = 0; i < handler.length; i++) {
-                createWatcher(vm, key, handler[i])
-            }
-        } else {
-            createWatcher(vm, key, handler)
-        }
-    }
-}
-```
-
 **initWatch 函数分析**
 
 `initWatch`函数的定义位于源码的`src/core/instance/state.js`中，如下：
@@ -5503,6 +5487,36 @@ watch: {
     }
 }
 ```
+
+即带有侦听选项的写法，此时就将`handler`对象整体记作`options`，把`handler`对象中的`handler`属性作为真正的回调函数记作`handler`，如下：
+
+```
+if (isPlainObject(handler)) {
+    options = handler
+    handler = handler.handler
+}
+```
+
+接着判断传入的`handler`是否为一个字符串，如果是一个字符串，那么就认为用户使用的是这种写法：
+
+```
+watch: {
+    // methods选项中的方法名
+    b: 'someMethod',
+}
+```
+
+即回调函数是`methods`选项中的一个方法名，我们知道，在初始化`methods`选项的时候会将选项中的每一个方法都绑定到当前实例上，所以此此时我们只需从当前实例上取出该方法作为真正的回调函数记作`handler`，如下：
+
+```
+if (typeof handler === 'string') {
+    handler = vm[handler]
+}
+```
+
+如果既不是对象又不是字符串，那么我们就认为它是一个函数，就不做任何处理。
+
+针对不同类型的值处理完毕后，`expOrFn`是被
 
 **总结**
 
