@@ -5584,7 +5584,11 @@ Vue.prototype.$mount = function (el,hydrating) {
 }
 ```
 
-在完整版本的`$mount`定义之前，先将`Vue`原型上的`$mount`方法先缓存起来，记作变量`mount`。其实在源码中，是先定义史包含运行时版本的`$mount`方法，再定义完整版本的`$mount`方法，所以此时缓存的`mount`变量就是只包含运行时版本的`$mount`方法。
+在完整版本的`$mount`定义之前，先将`Vue`原型上的`$mount`方法先缓存起来，记作变量`mount`。
+
+其实在源码中，是先定义史包含运行时版本的`$mount`方法，再定义完整版本的`$mount`方法，所以此时缓存的`mount`变量就是只包含运行时版本的`$mount`方法。
+
+完整版本和只包含运行时版本之间的差异主要在于是否有模板编译阶段，只包含运行时版本没有模板编译阶段，初始化阶段完成后直接进入挂载阶段，而完整版本是初始化阶段完成后进入模板编译阶段，然后再进入挂载阶段。也就是说，这两个版本最终都会进入挂载阶段。所以在完整版本的`$mount`方法中将模板编译完成后需要回头去调只包含运行时版本的`$mount`方法以进入挂载阶段。
 
 **完整版的`vm.$mount`方法分析**
 
@@ -5753,6 +5757,35 @@ var idToTemplate = cached(function (id) {
 ```
 if (template.nodeType) {
   template = template.innerHTML;
+}
+```
+
+如果既不是字符串，也不是`DOM`元素，此时会抛出警告：提示用户`template`选项无效。如下：
+
+```
+else {
+  {
+    warn('invalid template option:' + template, this);
+  }
+  return this
+}
+```
+
+如果变量`template`不存在，表明用户没有传入`template`选项，则根据传入的`el`参数调用`getOuterhTML`函数获取外部模板，如下：
+
+```
+if (el) {
+  template = getOuterHTML(el);
+}
+
+function getOuterHTML (el) {
+  if (el.outerHTML) {
+    return el.outerHTML
+  } else {
+    var container = document.createElement('div');
+    container.appendChild(el.cloneNode(true));
+    return container.innerHTML
+  }
 }
 ```
 
