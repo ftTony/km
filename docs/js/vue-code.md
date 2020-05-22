@@ -5941,7 +5941,7 @@ new Watcher(
 
 **销毁阶段分析**
 
-当调用了实例的`$destroy`方法之后，当前实例就进入了销毁阶段。所以分析销毁阶段就是分析`$destroy`
+当调用了实例的`$destroy`方法之后，当前实例就进入了销毁阶段。所以分析销毁阶段就是分析`$destroy`方法的内部实现。该方法的定义位于源码的`src/core/instance.lifecycle.js`中，如下：
 
 ```
 Vue.prototype.$destroy = function () {
@@ -5987,6 +5987,51 @@ Vue.prototype.$destroy = function () {
     }
   }
 }
+```
+
+```
+const vm: Component = this
+if (vm._isBeingDestroyed) {
+  return
+}
+```
+
+```
+callHook(vm, 'beforeDestroy')
+```
+
+```
+const parent = vm.$parent
+if (parent && !parent._isBeingDestroyed && !vm.$options.abstract) {
+  remove(parent.$children, vm)
+}
+```
+
+```
+// teardown watchers
+if (vm._watcher) {
+  vm._watcher.teardown()
+}
+let i = vm._watchers.length
+while (i--) {
+  vm._watchers[i].teardown()
+}
+```
+
+```
+if (vm._data.__ob__) {
+  vm._data.__ob__.vmCount--
+}
+vm._isDestroyed = true
+vm.__patch__(vm._vnode, null)
+```
+
+```
+callHook(vm, 'destroyed')
+```
+
+```
+vm.$off()
 ```
 
 ### 六、实例方法
