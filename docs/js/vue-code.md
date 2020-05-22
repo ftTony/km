@@ -5789,6 +5789,28 @@ function getOuterHTML (el) {
 }
 ```
 
+不管是从内部的`template`选项中获取模板，还是从外部获取模板，总之就是要获取到用户传入的模板内容，有了模板内容接下才能装饰模板编译成渲染函数。
+
+获取到模板之后，接下来要做的事就是将其编译成渲染函数，如下：
+
+```
+if (template) {
+  var ref = compileToFunctions(template, {
+    outputSourceRange: "development" !== 'production',
+    shouldDecodeNewlines: shouldDecodeNewlines,
+    shouldDecodeNewlinesForHref: shouldDecodeNewlinesForHref,
+    delimiters: options.delimiters,
+    comments: options.comments
+  }, this);
+  var render = ref.render;
+  var staticRenderFns = ref.staticRenderFns;
+  options.render = render;
+  options.staticRenderFns = staticRenderFns;
+}
+```
+
+把模板编译成渲染函数是在`compileToFunctions`函数中进行的，该函数接收待编译的模板字符串和编译选项作为参数，返回一个对象，对象里面的`render`属性即是编译好的渲染函数，最后将渲染函数设置到`$options`上。
+
 **总结**
 
 介绍了`Vue`源码构建的两种版本：完整版本和只包含运行时版本。并且我们知道了模板编译阶段只存在于完整版中，在只包含运行时版本中不存在该阶段，这是因为在只包含运行时版本中，当使用`vue-loader`或`vueify`时，`*.vue`文件内部的模板会在构建时预编译成渲染函数，所以是不需要编译的，从而不存在模板编译阶段。
