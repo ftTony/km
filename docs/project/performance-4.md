@@ -14,6 +14,7 @@
 - [微信小程序如何更好的做自动化性能监测？](https://mp.weixin.qq.com/s/eb43Z-8-A0Om_si73RPOhg)
 - [微信活动小程序性能优化实践](https://mp.weixin.qq.com/s/dz_Vj4rQPlTzF1uR1XlQnA)
 - [项目不知道如何做性能优化？不妨试一下代码分割](https://mp.weixin.qq.com/s/Hj4WL8Fu3xjKclrfkjlzYg)
+- [8000 字总结的前端性能优化](https://mp.weixin.qq.com/s/xjtUK9yZVIK9-OL_WxDH7Q)
 
 ## 联系作者
 
