@@ -6328,7 +6328,31 @@ const cbs = vm._events[event]
 接着，判断如果`cbs`不存在，那表明在事件中心从来没有订阅过该事件，那就
 
 ```
+if (!cbs) {
+    return vm
+}
+```
 
+```
+if (!fn) {
+    vm._events[event] = null
+    return vm
+}
+```
+
+```
+if (fn) {
+    // specific handler
+    let cb
+    let i = cbs.length
+    while (i--) {
+        cb = cbs[i]
+        if (cb === fn || cb.fn === fn) {
+            cbs.splice(i, 1)
+            break
+        }
+    }
+}
 ```
 
 **`vm.$once`**
@@ -6365,6 +6389,27 @@ Vue.prototype.$once = function (event, fn) {
     vm.$on(event, on)
     return vm
 }
+```
+
+```
+vm.$on(event, on)
+```
+
+```
+function on () {
+    vm.$off(event, on)
+    fn.apply(vm, arguments)
+}
+```
+
+```
+vm._events = {
+    'xxx':[on]
+}
+```
+
+```
+vm.$off('xxx',fn)
 ```
 
 #### 6.3 生命周期相关的方法
