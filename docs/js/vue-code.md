@@ -6531,12 +6531,29 @@ vm.$destroy()
 
 #### 7.1 Vue.extend
 
+**用法**：
+
+```
+Vue.extend( options )
+```
+
+**参数**：
+
+- `{Object} options`
+
+**作用**：
+
+使用基础`Vue`构造器，创建一个“子类”。参数是一个包含组件选项的对象。
+
+**原理分析**：
+
+`Vue.extend`的作用是创建一个继承自`Vue`类的子类，可接收的参数是一个包含组件选项的对象。
+
 既然是`Vue`类的子类，那么除了它本身独有的一些属性方法，还有一些是从`Vue`类中继承而来，所以创建子类的过程其实就是一边给子类上添加上独有的属性，一边将父类的公共属性到子类上。接下来，我们就来看看源码是如何实现这个过程的。
 
 该 API 的定义位于源码的`src/core/global-api/extend.js`中，如下：
 
 ```
-
 Vue.extend = function (extendOptions: Object): Function {
 extendOptions = extendOptions || {}
 const Super = this
@@ -6546,7 +6563,7 @@ if (cachedCtors[SuperId]) {
 return cachedCtors[SuperId]
 }
 
-    const name = extendOptions.name || Super.options.name
+const name = extendOptions.name || Super.options.name
     if (process.env.NODE_ENV !== 'production' && name) {
         validateComponentName(name)
     }
