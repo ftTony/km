@@ -6032,6 +6032,8 @@ while (i--) {
 }
 ```
 
+首先执行`vm._watcher.teardown()`将实例自身从其他数据的依赖列表中删除，`teardown`方法的作用是从所有依赖向的`Dep`列表中将自己删除。然后，介绍`initState`函数时我们知道，所有实例内的数据对其他数据的依赖都会存放在实例的`_watchers`属性中，所以我们只
+
 ```
 if (vm._data.__ob__) {
   vm._data.__ob__.vmCount--
