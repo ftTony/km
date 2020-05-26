@@ -6434,7 +6434,7 @@ vm.$off('xxx',fn)
 
 #### 6.3 生命周期相关的方法
 
-与生命周期想着的实例方法有 4 个，分别是`vm.$mount`、`vm.$forceUpdate`、`vm.$nextTick`和`vm.$destory`。
+与生命周期想着的实例方法有 4 个，分别是`vm.$mount`、`vm.$forceUpdate`、`vm.$nextTick`和`vm.$destory`。其中，`$forceUpdate`和`$destroy`方法是在`lifecycleMixin`函数中挂载到`Vue`原型上的，`$nextTick`方法是在`renderMixin`函数中挂载到`Vue`原型上的，而`$mount`方法是在跨平台的代码中挂载到`Vue`原型上的。
 
 - `vm.$mount`
 - `vm.$forceUpdate`
@@ -6470,20 +6470,6 @@ vm.$mount( [elementOrSelector] )
 vm.$forceUpdate()
 ```
 
-- **作用：** 迫使`Vue`实例重新渲染
-
-- **内部原理**
-
-关于该方法的内部原理在介绍**生命周期篇的模板编译阶段**中已经详细分析过，此处不再重复。
-
-**`vm.$forceUpdate`**
-
-其使用如下：
-
-```
-vm.$forceUpdate()
-```
-
 - **作用：**
 
 迫使`Vue`实例重新渲染。注意它仅仅影响实例本身和插入插槽内容的子组件，而不是所有子组件。
@@ -6492,7 +6478,9 @@ vm.$forceUpdate()
 
 当实例依赖的数据发生变化时，变化的数据会通知其收集的依赖列表中的依赖进行更新，收集依赖就是收集`watcher`，依赖更新就是`watcher`调用`update`方法更新，所以实例依赖的数据发生变化时，就会通知实例`watcher`去执行`update`方法进行更新。
 
-代码如下：
+实例的重新渲染其实就是实例`watcher`执行了`update`方法。
+
+`$forceUpdate`源码实现，代码如下：
 
 ```
 Vue.prototype.$forceUpdate = function () {
@@ -6502,6 +6490,8 @@ Vue.prototype.$forceUpdate = function () {
     }
 }
 ```
+
+当前实例的`_watcher`属性就是该实例的`watcher`，所以要想让实例重新渲染，我们只需手动的去执行一下实例`watcher`的`update`方法即可。
 
 **`vm.$nextTick`**
 
