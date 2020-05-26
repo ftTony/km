@@ -6614,6 +6614,17 @@ const name = extendOptions.name || Super.options.name
 
 ```
 
+首先，该函数内部定义了几个变量，如下：
+
+```
+extendOptions = extendOptions || {}
+const Super = this
+const SuperId = Super.cid
+const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
+```
+
+- `extendOptions`：用户传入的一个饮食组件选项的对象参数
+
 #### 7.2 Vue.nextTick
 
 全局 nextTick 方法同实例 nextTick 方法一样
