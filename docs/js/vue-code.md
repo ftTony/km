@@ -6864,6 +6864,28 @@ Vue.options = Object.create(null)
 Vue.options['directives'] = Object.create(null)
 ```
 
+该 API 可以用来注册或获取全局指令，这两种功能的切换取决于是否传入了`definition`参数。如果没有传入`definition`参数，则表示为获取指令，那么就从存放指令的地方根据指令`id`来读取指令返回，如下：
+
+```
+if (!definition) {
+    return this.options['directives'][id]
+}
+```
+
+如果传入了`definition`参数，则表示为注册指令，那么继续判断`definition`参数是否是一个函数，如果是函数，则默认监听`bind`和`update`两个事件，即将`definition`函数分别赋给`bind`和`update`两个属性。如下：
+
+```
+if (type === 'directive' && typeof definition === 'function') {
+    definition = { bind: definition, update: definition }
+}
+```
+
+如果 `definition` 参数不是一个函数，那么即认为它是用户自定义的指令对象，直接将其保存在 `this.options['directives']`中，如下：
+
+```
+this.options['directives'][id] = definition
+```
+
 #### 7.6 Vue.filter
 
 其用法如下：
