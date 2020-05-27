@@ -6961,6 +6961,48 @@ Vue.component('my-component', { /* ... */ })
 var MyComponent = Vue.component('my-component')
 ```
 
+- **原理分析**
+
+该 API 是用来注册或获取全局组件的，接收两个参数：组件`id`和组件的定义。同全局指令一样，注册全局组件是将定义好的组件存放在某个位置，获取组件是根据组件`id`从存放组件的位置来读取组件。
+
+该 API 的内部实现原理，其代码如下：
+
+```
+Vue.options = Object.create(null)
+Vue.options['components'] = Object.create(null)
+
+Vue.filter= function (id,definition) {
+    if (!definition) {
+        return this.options['components'][id]
+    } else {
+        if (process.env.NODE_ENV !== 'production' && type === 'component') {
+            validateComponentName(id)
+        }
+        if (type === 'component' && isPlainObject(definition)) {
+            definition.name = definition.name || id
+            definition = this.options._base.extend(definition)
+        }
+        this.options['components'][id] = definition
+        return definition
+    }
+}
+```
+
+同全局指令一样，`Vue.options['components']`是用来存放全局组件的地方
+
+```
+if (process.env.NODE_ENV !== 'production' && type === 'component') {
+    validateComponentName(id)
+}
+```
+
+```
+if (type === 'component' && isPlainObject(definition)) {
+    definition.name = definition.name || id
+    definition = this.options._base.extend(definition)
+}
+```
+
 #### 7.8 directive、filter、component 小结
 
 通过对`Vue.directive`、`Vue.filter`和`Vue.component`这三个 API 的分析，细心的你肯定会发现这三个 API 的代码实现非常的相似，是的，这是我们为了便于理解故意拆开的，其实在源码中这三个 API 的实现是写在一起的，
