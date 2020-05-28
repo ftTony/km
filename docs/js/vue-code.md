@@ -7596,7 +7596,7 @@ if (!oldDir) {
 
 如果当前循环到的指令名`key`在旧的指令列表`oldDirs`中存在时，说明该指令在之前已经绑定过了，那么这一次的操作应该是更新指令。
 
-首先，在`dir`上添加`oldValue`属性和`oldArg`属性，用来保存上一次指令的`value`属性
+首先，在`dir`上添加`oldValue`属性和`oldArg`属性，用来保存上一次指令的`value`属性值和`arg`属性值，然后调用`callHook`触发指令的`update`钩子函数，接着判断如果该指令在定义时设置了`componentUpdated`钩子函数，那么将该指令添加到`dirsWithPostpatch`中，以保证指令所在的组件的`VNode`及其子`VNode`全部更新完后再执行指令的`componentUpdated`钩子函数，如下：
 
 ```
 else {
@@ -7610,6 +7610,8 @@ else {
 }
 ```
 
+最后，判断`dirsWidthInsert`数组中是否有元素，如果有，则循环`dirsWidthInsert`数组，依次执行每一个指令的`inserted`钩子函数，如下：
+
 ```
 if (dirsWithInsert.length) {
     const callInsert = () => {
@@ -7619,6 +7621,10 @@ if (dirsWithInsert.length) {
     }
 }
 ```
+
+从上述代码中可以看到，并没有直接去循环执行每一个指令的`inserted`钩子函数，而是新创建了一个`callInsert`函数，当执行该函数的时候才会去循环每一个指令的`inserted`钩子函数。这又是为什么呢？
+
+这是因为指令的
 
 ```
 if (dirsWithInsert.length) {
