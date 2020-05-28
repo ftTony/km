@@ -7567,6 +7567,10 @@ function normalizeDirectives (dirs,vm):  {
 }
 ```
 
+获取到`oldDirs`和`newDirs`之后，接下来要做的事件就是对比这两个指令集合并触发对应的指令钩子函数。
+
+首先，循环`newDirs`，并分别从`oldDirs`和`newDirs`取出当前循环的指令分别保存在变量`oldDir`和`dir`中，如下：
+
 ```
 let key, oldDir, dir
 for (key in newDirs) {
@@ -7574,6 +7578,8 @@ for (key in newDirs) {
     dir = newDirs[key]
 }
 ```
+
+然后判断当前循环到的指令循环的指令名`key`在旧的指令列表`oldDirs`中是否存在，说明该指令是首次绑定到元素上
 
 ```
 // 判断当前循环到的指令名`key`在旧的指令列表`oldDirs`中是否存在，如果不存在，那么说明这是一个新的指令
@@ -7587,6 +7593,10 @@ if (!oldDir) {
     }
 }
 ```
+
+如果当前循环到的指令名`key`在旧的指令列表`oldDirs`中存在时，说明该指令在之前已经绑定过了，那么这一次的操作应该是更新指令。
+
+首先，在`dir`上添加`oldValue`属性和`oldArg`属性，用来保存上一次指令的`value`属性
 
 ```
 else {
