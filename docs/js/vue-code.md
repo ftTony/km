@@ -7241,15 +7241,49 @@ Vue.observable( object )
 
 **过滤器的定义**
 
-```
+你可以在一个组件的选项中定义本地的过滤器：
 
 ```
+filters: {
+  capitalize: function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  }
+}
+```
+
+也可以在创建 `Vue` 实例之前使用全局 API`Vue.filter`来定义全局过滤器：
+
+```
+Vue.filter('capitalize', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
+```
+
+当全局过滤器和局部过滤器重名时，会采用局部过滤器。
 
 **串联过滤器**
 
-```
+过滤器函数总接收表达式的值 (之前的操作链的结果) 作为第一个参数。在上述例子中，`capitalize` 过滤器函数将会收到 `message` 的值作为第一个参数。
+
+过滤器可以串联：
 
 ```
+{{ message | filterA | filterB }}
+```
+
+在这个例子中，`filterA` 被定义为接收单个参数的过滤器函数，表达式 `message` 的值将作为参数传入到函数中。然后继续调用同样被定义为接收单个参数的过滤器函数 `filterB`，将 `filterA` 的结果传递到 `filterB` 中。
+
+过滤器是 JavaScript 函数，因此可以接收参数：
+
+```
+{{ message | filterA('arg1', arg2) }}
+```
+
+这里，`filterA` 被定义为接收三个参数的过滤器函数。其中 `message` 的值作为第一个参数，普通字符串`'arg1'`作为第二个参数，表达式 `arg2` 的值作为第三个参数。
 
 #### 8.2 工作原理
 
@@ -7425,8 +7459,8 @@ let lastFilterIndex = 0
 - inTemplateString：标志 exp 是否在\`...\`中；
 - inRegex：标志 exp 是否在\\...\中；
 - curly = 0：在 exp 中发现一个（则 curly 加 1，发现一个）由 curly 减 1，直到 culy 为 0 说明{...}闭合；
-- square = 0：在 exp 中发现一个
-- paren = 0：在 exp 中发现一个
+- square = 0：在 exp 中发现一个（则 curly 加 1，发现一个）则 curly 减 1，直到 curly 为 0 说明 [ ... ]闭合；
+- paren = 0：在 exp 中发现一个（则 curly 加 1，发现一个）
 - lastFilterIndex = 0：解析游标，每循环过一个字符串游标加 1；
 
 ### 九、指令篇
