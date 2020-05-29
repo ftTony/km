@@ -7424,7 +7424,10 @@ let lastFilterIndex = 0
 - inDouble：标志 exp 是否在"..."中；
 - inTemplateString：标志 exp 是否在\`...\`中；
 - inRegex：标志 exp 是否在\\...\中；
-- curly = 0：；
+- curly = 0：在 exp 中发现一个（则 curly 加 1，发现一个）由 curly 减 1，直到 culy 为 0 说明{...}闭合；
+- square = 0：在 exp 中发现一个
+- paren = 0：在 exp 中发现一个
+- lastFilterIndex = 0：解析游标，每循环过一个字符串游标加 1；
 
 ### 九、指令篇
 
