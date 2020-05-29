@@ -7395,16 +7395,38 @@ return res
 **串联过滤器原理**
 
 ```
+{{ message | filterA | filterB }}
 
+filters: {
+    filterA: function (value) {
+        // ...
+    },
+    filterB: function (value) {
+        // ...
+    },
+}
 ```
 
 **过滤器接收参数**
 
 ```
+{{ message | filterA | filterB(arg) }}
 
+filters: {
+    filterA: function (value) {
+        // ...
+    },
+    filterB: function (value,arg) {
+        return value + arg
+    },
+}
 ```
 
 **小结**
+
+介绍了过滤器的内部工作原理，就是将用户写在模板中的过滤器通过模板编译，编译成`_f`函数的调用字符串，之后在执行渲染函数的时候会执行`_f`函数，从而使过滤器生效。
+
+所谓`_f`函数其实就是`resolveFilter`函数的别名，在`resolveFilter`函数内部是根据过滤器`id`从当前实例的`$options`中的`filters`属性中获取到对应的过滤器函数，在之后执行渲染函数的时候就会执行获取到的过滤器函数。
 
 #### 8.3 解析过滤器
 
