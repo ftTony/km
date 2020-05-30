@@ -7285,7 +7285,33 @@ Vue.filter('capitalize', function (value) {
 
 这里，`filterA` 被定义为接收三个参数的过滤器函数。其中 `message` 的值作为第一个参数，普通字符串`'arg1'`作为第二个参数，表达式 `arg2` 的值作为第三个参数。
 
+**总结**
+
 #### 8.2 工作原理
+
+过滤器有两种使用方式，分别是在双花括号插件中和在`v-bind`表达式。但是无论是哪一种使用方式，过滤器都是写在模板里面的。既然是写在模板里面，那么它就会被编译，会被编译成渲染函数字符串，然后在挂载的时候会执行渲染函数，从而就会使过滤器生效。举个例子：
+
+假如有如下过滤器：
+
+```
+{{ message | capitalize }}
+
+filters: {
+    capitalize: function (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+    }
+}
+```
+
+那么它被编译成渲染函数字符串后，会变成这个样子：
+
+```
+_f("capitalize")(message)
+```
+
+`_f`对应的是`resolveFilter`函数，通过模板编译会生成一个\_f 函数调用字符串，当执行渲染函数的时候，就会执行`_f`函数，从而让过滤器生效。
 
 **resolveFilter 函数分析**
 
@@ -7335,6 +7361,50 @@ export function resolveAsset (options,type,id,warnMissing) {
 ```
 
 调用该函数时传入了 4 个参数，分别是当前实例的`$options`属性，`type`为`filters`，`id`为当前过滤器的`id`。
+
+在该函数内部，首先判断传入的参数`id`（即当前过滤器的名称 id）是否为字符串类型，如果不是，则直接退出程序。如下：
+
+```
+if (typeof id !== 'string') {
+    return
+}
+```
+
+```
+const assets = options[type]
+```
+
+```
+// 先从本地注册中查找
+if (hasOwn(assets, id)) return assets[id]
+const camelizedId = camelize(id)
+if (hasOwn(assets, camelizedId)) return assets[camelizedId]
+const PascalCaseId = capitalize(camelizedId)
+if (hasOwn(assets, PascalCaseId)) return assets[PascalCaseId]
+// 再从原型链中查找
+const res = assets[id] || assets[camelizedId] || assets[PascalCaseId]
+if (process.env.NODE_ENV !== 'production' && warnMissing && !res) {
+    warn(
+        'Failed to resolve ' + type.slice(0, -1) + ': ' + id,
+        options
+    )
+}
+return res
+```
+
+**串联过滤器原理**
+
+```
+
+```
+
+**过滤器接收参数**
+
+```
+
+```
+
+**小结**
 
 #### 8.3 解析过滤器
 
