@@ -7225,7 +7225,35 @@ Vue.observable( object )
 
 ### 八、过滤器篇
 
-#### 8.1 resolveFilter 函数分析
+#### 8.1 用法回顾
+
+**使用方式**
+
+过滤器有两种使用方式：**在双花括号插值中和在 v-bind 表达式中** 添加在 JavaScript 表达式的尾部，由"|"符号指示：
+
+```
+<!-- 在双花括号中 -->
+{{ message | capitalize }}
+
+<!-- 在 `v-bind` 中 -->
+<div v-bind:id="rawId | formatId"></div>
+```
+
+**过滤器的定义**
+
+```
+
+```
+
+**串联过滤器**
+
+```
+
+```
+
+#### 8.2 工作原理
+
+**resolveFilter 函数分析**
 
 `resolveFilter`函数的定义位于源码的`src/core/instance/render-helper.js`中，如下：
 
@@ -7274,7 +7302,9 @@ export function resolveAsset (options,type,id,warnMissing) {
 
 调用该函数时传入了 4 个参数，分别是当前实例的`$options`属性，`type`为`filters`，`id`为当前过滤器的`id`。
 
-#### 8.2 parseFilters 函数分析
+#### 8.3 解析过滤器
+
+**parseFilters 函数分析**
 
 `parseFilters`函数的定义位于源码的`src/complier/parser/filter-parser.js`文件中，其代码如下：
 
