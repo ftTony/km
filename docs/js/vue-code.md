@@ -7624,7 +7624,7 @@ if (dirsWithInsert.length) {
 
 从上述代码中可以看到，并没有直接去循环执行每一个指令的`inserted`钩子函数，而是新创建了一个`callInsert`函数，当执行该函数的时候才会去循环每一个指令的`inserted`钩子函数。这又是为什么呢？
 
-这是因为指令的`inserted`钩子函数必须在被绑定元素插入到父节点时调用，那么如果是一个新增的节点，如何保证它已经被插入到父节点了呢？我们之前说过，虚拟`DOM`在渲染更新的不同阶段会触发不同的钩子函数，比如当`DOM`节点在被插入到父节点时会触发`insert`函数，那么我们就知道了，当虚拟`DOM`
+这是因为指令的`inserted`钩子函数必须在被绑定元素插入到父节点时调用，那么如果是一个新增的节点，如何保证它已经被插入到父节点了呢？我们之前说过，虚拟`DOM`在渲染更新的不同阶段会触发不同的钩子函数，比如当`DOM`节点在被插入到父节点时会触发`insert`函数，那么我们就知道了，当虚拟`DOM`渲染更新的`insert`钩子函数被调用的时候就标志着当前节点已经被插入到父节点了，所以我们要在虚拟`DOM`渲染更新的`insert`钩子函数内执行指令的 `inserted` 钩子函数。也就是说，当一个新创建的元素被插入到父节点中时虚拟 `DOM` 渲染更新的 `insert` 钩子函数和指令的 `inserted` 钩子函数都要被触发。既然如此，那就可以把这两个钩子函数通过调用 `mergeVNodeHook` 方法进行合并，然后统一在虚拟 `DOM` 渲染更新的 `insert` 钩子函数中触发，这样就保证了元素确实被插入到父节点中才执行的指令的 `inserted` 钩子函数，如下：
 
 ```
 if (dirsWithInsert.length) {
@@ -7641,6 +7641,8 @@ if (dirsWithInsert.length) {
 }
 ```
 
+同理，我们也需要保证指令所在的组件的`VNode`及其子全部更新完后再执行指令的`componentUpdated`钩子函数，所以我们将虚拟`DOM`渲染更新的`postpatch`钩子函数和指令的`componentUpdated`钩子函数进行合并触发，如下：
+
 ```
 if (dirsWithPostpatch.length) {
     mergeVNodeHook(vnode, 'postpatch', () => {
@@ -7650,6 +7652,8 @@ if (dirsWithPostpatch.length) {
     })
 }
 ```
+
+最后，当`newDirs`循环完毕后，再循环`oldDirs`，如果某个指令存在于旧的指令列表`oldDirs`而在新的指令列表`newDirs`中不存在，那说明该指令是被废弃的，所以则触发指令的`unbind`钩子函数对指令进行解绑。如下：
 
 ```
 if (!isCreate) {
