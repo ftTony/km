@@ -7743,7 +7743,13 @@ const args = filter.slice(i + 1)
 return `_f("${name}")(${exp}${args !== ')' ? ',' + args : args}`
 ```
 
-****
+**小结**
+
+首先，我们介绍了两种不同写法的过滤会在不同的地方进行解析，但解析原理都是相同的，都是调用过滤器解析器`parseFilters`函数进行解析。
+
+接着我们分析了`parseFilters`函数的内部逻辑。该函数接收一个形如`'message | capitalize'`这样的过滤器字符串作为，最终将其转化成`_f("capitalize")(message)`输出。在`parseFilters`函数内部是通过遍历传入的过滤器字符串每一个字符，根据每一个字符是否是一些特殊的字符从而作出不同的处理，最终，从传入的过滤器字符串中解析出待处理的表达式`expression`和所有的过滤器`filters`数组。
+
+最后，将解析得到的`expression`和`filters`数组通过调用`wrapFilter`函数将其构造成`_f`函数调用字符串。
 
 ### 九、指令篇
 
