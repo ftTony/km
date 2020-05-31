@@ -7468,6 +7468,36 @@ filters: {
 
 #### 8.3 解析过滤器
 
+**在何处解析过滤器**
+
+```
+<!-- 在双花括号中 -->
+{{ message | capitalize }}
+
+<!-- 在 `v-bind` 中 -->
+<div v-bind:id="rawId | formatId"></div>
+```
+
+```
+function processAttrs (el) {
+    // 省略无关代码...
+    if (bindRE.test(name)) { // v-bind
+        // 省略无关代码...
+        value = parseFilters(value)
+        // 省略无关代码...
+    }
+    // 省略无关代码...
+}
+```
+
+```
+export function parseText (text,delimiters){
+    // 省略无关代码...
+    const exp = parseFilters(match[1].trim())
+    // 省略无关代码...
+}
+```
+
 **parseFilters 函数分析**
 
 `parseFilters`函数的定义位于源码的`src/complier/parser/filter-parser.js`文件中，其代码如下：
@@ -7592,6 +7622,128 @@ let lastFilterIndex = 0
 - square = 0：在 exp 中发现一个（则 curly 加 1，发现一个）则 curly 减 1，直到 curly 为 0 说明 [ ... ]闭合；
 - paren = 0：在 exp 中发现一个（则 curly 加 1，发现一个）
 - lastFilterIndex = 0：解析游标，每循环过一个字符串游标加 1；
+
+```
+for (i = 0; i < exp.length; i++) {
+    prev = c
+    c = exp.charCodeAt(i)
+    if (inSingle) {
+        if (c === 0x27 && prev !== 0x5C) inSingle = false
+    } else if (inDouble) {
+        if (c === 0x22 && prev !== 0x5C) inDouble = false
+    } else if (inTemplateString) {
+        if (c === 0x60 && prev !== 0x5C) inTemplateString = false
+    } else if (inRegex) {
+        if (c === 0x2f && prev !== 0x5C) inRegex = false
+    } else if (
+        c === 0x7C && // pipe
+        exp.charCodeAt(i + 1) !== 0x7C &&
+        exp.charCodeAt(i - 1) !== 0x7C &&
+        !curly && !square && !paren
+    ) {
+        if (expression === undefined) {
+            // first filter, end of expression
+            lastFilterIndex = i + 1
+            expression = exp.slice(0, i).trim()
+        } else {
+            pushFilter()
+        }
+    } else {
+        switch (c) {
+            case 0x22: inDouble = true; break         // "
+            case 0x27: inSingle = true; break         // '
+            case 0x60: inTemplateString = true; break // `
+            case 0x28: paren++; break                 // (
+            case 0x29: paren--; break                 // )
+            case 0x5B: square++; break                // [
+            case 0x5D: square--; break                // ]
+            case 0x7B: curly++; break                 // {
+            case 0x7D: curly--; break                 // }
+        }
+        if (c === 0x2f) { // /
+            let j = i - 1
+            let p
+            // find first non-whitespace prev char
+            for (; j >= 0; j--) {
+                p = exp.charAt(j)
+                if (p !== ' ') break
+            }
+            if (!p || !validDivisionCharRE.test(p)) {
+                inRegex = true
+            }
+        }
+    }
+}
+
+if (expression === undefined) {
+    expression = exp.slice(0, i).trim()
+} else if (lastFilterIndex !== 0) {
+    pushFilter()
+}
+
+function pushFilter () {
+    (filters || (filters = [])).push(exp.slice(lastFilterIndex, i).trim())
+    lastFilterIndex = i + 1
+}
+```
+
+```
+0x22 ----- "
+0x27 ----- '
+0x28 ----- (
+0x29 ----- )
+0x2f ----- /
+0x5C ----- \
+0x5B ----- [
+0x5D ----- ]
+0x60 ----- `
+0x7C ----- |
+0x7B ----- {
+0x7D ----- }
+```
+
+```
+message | filter1 | filter2(arg)
+```
+
+```
+expression = message
+filters = ['filter1','filter2(arg)']
+```
+
+```
+if (filters) {
+    for (i = 0; i < filters.length; i++) {
+        expression = wrapFilter(expression, filters[i])
+    }
+}
+
+function wrapFilter (exp, filter) {
+  const i = filter.indexOf('(')
+  if (i < 0) {
+    return `_f("${filter}")(${exp})`
+  } else {
+    const name = filter.slice(0, i)
+    const args = filter.slice(i + 1)
+    return `_f("${name}")(${exp}${args !== ')' ? ',' + args : args}`
+  }
+}
+```
+
+```
+const i = filter.indexOf('(')
+if (i < 0) {
+    return `_f("${filter}")(${exp})`
+}
+```
+
+```
+const name = filter.slice(0, i)
+const args = filter.slice(i + 1)
+return `_f("${name}")(${exp}${args !== ')' ? ',' + args : args}`
+```
+
+****
 
 ### 九、指令篇
 
