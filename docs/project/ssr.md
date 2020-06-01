@@ -58,6 +58,7 @@ CSR 和 SSR 有几个共同点
 - [React 中同构（SSR）原理脉络梳理](https://juejin.im/post/5bc7ea48e51d450e46289eab)
 - [Vue 预渲染插件 prerender-spa-plugin 使用全记录](https://mp.weixin.qq.com/s/vVuP425SrH9m7pk46jnzmw)
 - [带你五步学会 Vue SSR](https://mp.weixin.qq.com/s/m0yW-rELfCrjbEkfMZ7UAw)
+- [CSR、SSR、NSR、ESR 傻傻分不清楚，一文帮你理清前端渲染方案！](https://mp.weixin.qq.com/s/1QPc2EZQs3jjPOK7-K6H7Q)
 
 ## 联系作者
 
