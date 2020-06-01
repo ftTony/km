@@ -7470,6 +7470,8 @@ filters: {
 
 **在何处解析过滤器**
 
+过滤器有两种使用方式，分别在**在双花括号插值中和在 v-bind 表达式中**，如下：
+
 ```
 <!-- 在双花括号中 -->
 {{ message | capitalize }}
@@ -7477,6 +7479,12 @@ filters: {
 <!-- 在 `v-bind` 中 -->
 <div v-bind:id="rawId | formatId"></div>
 ```
+
+两不同的使用方式唯一的区别是将过滤器写在不同的地方，既然有两种不同的地方可以书写过滤器，那解析的时候必然要在这两种不同地方都进行解析。
+
+- 写在`v-bind`表达式中
+
+`v-bind`表达式中的过滤器它属于存在于标签属性中，那么写在该处的过滤器就需要在处理标签属性时进行解析。我们知道，在`HTML`解析器`parseHTML`函数中负责处理标签属性的函数是`processAttrs`，所以会在`processAttrs`函数中调用过滤解析器`parseFilters`函数对写在该处的过滤器进行解析，如下：
 
 ```
 function processAttrs (el) {
@@ -7489,6 +7497,8 @@ function processAttrs (el) {
     // 省略无关代码...
 }
 ```
+
+在双花括号中的过滤器它属于存在于标签文本中，那么写在该处的过滤器就需要在处理标签文本时进行解析。我们知道，在`HTML`解析器`parseHTML`函数中，当遇到文本信息时会调用`parseHTML`函数的`chars`钩子函数，在`chars`钩子函数内部又会调用文本解析器`parseText`函数对文本进行解析，而写在该处的过滤器它就是存在于文本中，所以在文本解析器`parseText`函数中调用过滤器解析器`parseFilters`函数对写在该处的过滤器进行解析，如下：
 
 ```
 export function parseText (text,delimiters){
