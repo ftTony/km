@@ -7718,7 +7718,11 @@ function pushFilter () {
 
 上述代码的逻辑就是将字符串`exp`的每一个字符都从前往后开始一个一个匹配，匹配出那些特殊字符，如`'`，`"`，`{`，`}`，`[`，`]`，`(`，`)`，`\`，`|`。
 
-如果匹配到`'`，`"`字符
+如果匹配到`'`，`"`字符，说明当前字符在字符串中，那么直到匹配到下一个同样的字符才结束，同时， 匹配 `()`, `{}`,`[]` 这些需要两边相等闭合, 那么匹配到的 | 才被认为是过滤器中的`|`。
+
+当匹配到过滤器中的|符时，那么|符前面的字符串就认为是待处理的表达式，将其存储在 `expression` 中，后面继续匹配，如果再次匹配到过滤器中的 |符 ,并且此时`expression`有值， 那么说明后面还有第二个过滤器，那么此时两个|符之间的字符串就是第一个过滤器的`id`，此时调用 `pushFilter`函数将第一个过滤器添加进`filters`数组中。举个例子：
+
+假如有如下过滤器字符串：
 
 ```
 message | filter1 | filter2(arg)
@@ -7728,10 +7732,14 @@ message | filter1 | filter2(arg)
 
 ![imags](vue27.jpg)
 
+将上例中的过滤器字符串都匹配完毕后，会得到如下结果：
+
 ```
 expression = message
 filters = ['filter1','filter2(arg)']
 ```
+
+接下来遍历得到的`filters`数组，并将数组的每一个元素及`expression`传给`wrapFilter`函数，用来生成最终的`_f`函数调用字符串，如下：
 
 ```
 if (filters) {
@@ -7752,6 +7760,8 @@ function wrapFilter (exp, filter) {
 }
 ```
 
+可以看到， 在`wrapFilter`函数中，首先在解析得到的每个过滤器中查找是否有`(`，以此来判断过滤器中是否接收了参数，如果没有`(`，表示该过滤器没有接收参数，则直接构造`_f`函数调用字符串即`_f("filter1")(message)`并返回赋给`expression`，如下：
+
 ```
 const i = filter.indexOf('(')
 if (i < 0) {
@@ -7759,11 +7769,15 @@ if (i < 0) {
 }
 ```
 
+接着，将新的`experssion`与`filters`数组中下一个过滤器再调用`wrapFilter`函数,如果下一个过滤器有参数，那么先取出过滤器`id`，再取出其带有的参数，生成第二个过滤器的\_f 函数调用字符串，即`_f("filter2")(_f("filter1")(message),arg)`，如下：
+
 ```
 const name = filter.slice(0, i)
 const args = filter.slice(i + 1)
 return `_f("${name}")(${exp}${args !== ')' ? ',' + args : args}`
 ```
+
+这样就最终生成了用户所写的过滤器的`_f`函数调用字符串。
 
 **小结**
 
