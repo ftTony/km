@@ -92,6 +92,7 @@ Serverless 则可以理解为运行在 FaaS 中的，使用了 BaaS 的函数。
 - [探索 Serverless 中的前端开发模式](https://mp.weixin.qq.com/s/OUR5A2InyuRFhbF7SB-Atw)
 - [微前端框架是怎么导入加载子应用的](https://mp.weixin.qq.com/s/DDvVo08cBugv8gKFe4Iw_g)
 - [微前端在小米 CRM 系统的实践](https://www.lishuaishuai.com/architecture/1344.html)
+- [TypeScript + ServerLess 开发 REST API 实战](https://mp.weixin.qq.com/s/whURh7YRr_iUtfmAAd_7AQ)
 
 ## 联系作者
 
