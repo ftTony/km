@@ -1,14 +1,14 @@
-# 动态规划算法（二）
+# ArrayBuffer 学习
+
+# 数组扩展
 
 ## 前言
-
-本人平时学习及收集内容，欢迎参入一起讨论。
 
 ## 内容
 
 ### 参考资料
 
-- [一文搞懂动态规划](https://juejin.im/post/5e86d0ad6fb9a03c387f3342)
+- [你不知道的 Blob](https://juejin.im/post/5ed604aaf265da770e1bcc18)
 
 ## 联系作者
 
