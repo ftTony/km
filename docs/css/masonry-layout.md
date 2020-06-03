@@ -362,6 +362,7 @@ while (i < data.length) {
 - [「前端进阶」深度解析瀑布流布局](https://juejin.im/post/5ddb7a7c51882573520fb185)
 - [蘑菇街 PC 首页瀑布流实践](https://juejin.im/post/5e05acf0f265da33d158a1b1)
 - [Grid 布局 20 行代码快速生成瀑布流](https://www.cnblogs.com/ZweiZhao/p/9783930.html)
+- [前端瀑布流布局如何应用动态规划和贪心算法](https://mp.weixin.qq.com/s/yT0D1qug4Q3YOrCCYf9nKA)
 
 ## 联系作者
 
