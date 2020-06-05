@@ -301,7 +301,7 @@ http://www.example.com/user?token=xxx
   - 服务器重启 session 不丢失（不过也要注意 session 在 Redis 中的刷新/失效机制）；
   - 不仅可以跨服务器 session 共享，甚至可以跨平台（例如网页端和 APP 端）
 
-![images](token06png)
+![images](token06.png)
 
 - 将 session 存储到数据库中，保证 session 的持久化
 
