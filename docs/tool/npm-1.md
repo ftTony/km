@@ -262,6 +262,7 @@ npm publish --registry http://localhost:4873
 - [前端高级进阶：在生产环境中使你的 npm i 速度提升 50%](https://mp.weixin.qq.com/s/2_0kGRXC2xNcaTf_SC8wSQ)
 - [node_modules 困境](https://mp.weixin.qq.com/s/TU6rvx6vWQWROaxqO3qDsA)
 - [2018 年了，你还是只会 npm install 吗？](https://juejin.im/post/5ab3f77df265da2392364341)
+- [从零开始搭建企业级私有鉴权 NPM 仓库](https://mp.weixin.qq.com/s/mmG0rILkwqglBAcpb3LsCQ)
 
 ## 联系作者
 
