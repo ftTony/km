@@ -182,6 +182,7 @@ QPS(TPS)=并发数/平均响应时间
 - [网站性能指标这么多，你到底选对了吗？](https://mp.weixin.qq.com/s/_6iI-aKOzUOsFVXW5vqJuA)
 - [QPS、TPS、并发用户数、吞吐量关系](https://juejin.im/post/5c2cb5e15188257a937fbfaf)
 - [前端性能优化之谈谈常见的性能指标及上报策略](https://mp.weixin.qq.com/s/wDKKj5R8SYm-_75Zn1y30A)
+- [性能体验和质量指标](https://mp.weixin.qq.com/s/E-0XyclhUQCokqIXtbz41g)
 
 ## 联系作者
 
