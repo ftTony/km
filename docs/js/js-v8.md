@@ -303,6 +303,7 @@ Extension 机制是调用 V8 的接口注入新函数，动态扩展非常方便
 - [JavaScript 是如何工作的：深入 V8 引擎&编写优化代码的 5 个技巧](https://github.com/qq449245884/xiaozhi/issues/2)
 - [V8 引擎和 JavaScript 优化建议](https://mp.weixin.qq.com/s/W6y_C0SzrFph7o59WIwUzQ)
 - [V8 是怎么跑起来的 —— V8 的 JavaScript 执行管道](https://juejin.im/post/5dc4d823f265da4d4c202d3b)
+- [V8 系统解读(一): V8 在 Chrome 中的位置&编译调试 V8](https://mp.weixin.qq.com/s/oBHV5iRbwQb8BGNS0C4pmQ)
 
 ## 联系作者
 
