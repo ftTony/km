@@ -6,8 +6,8 @@
 
 ## 内容
 
-- 动画的基本步骤
-- 操控动画
+- [动画的基本步骤](#一、动画的基本步骤)
+- [操控动画](#二、操控动画)
 
 ### 一、动画的基本步骤
 
@@ -49,6 +49,7 @@
 ### 参考资料
 
 - [Canvas 动画的性能优化实践](https://mp.weixin.qq.com/s/60buR6tyRi2A2_riJurUig)
+- [基本的动画](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations)
 
 ## 联系作者
 
