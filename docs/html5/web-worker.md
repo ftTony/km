@@ -6,10 +6,10 @@
 
 ## 内容
 
-- Web Worker 介绍
-- Web Worker 分类
-- Web Worker 工作原理
-- Web Worker 使用
+- [Web Worker 介绍](#一、web-worker-介绍)
+- [Web Worker 分类](#二、web-worker-分类)
+- [Web Worker 工作原理](#三、web-worker-工作原理)
+- [Web Worker 使用](#四、web-worker-使用)
 
 ### 一、Web Worker 介绍
 
