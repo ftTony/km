@@ -17,6 +17,7 @@
 - [小程序技术要点和性能优化要点 【推荐收藏】](https://mp.weixin.qq.com/s/qZge8a4Bdg3AjXW9qEJHJg)
 - [七大热门小程序框架横评，谁是性能之王](https://mp.weixin.qq.com/s/RbrnouSH_jA5fxw0msMxAg)
 - [小程序瀑布流组件:支持翻页与图片懒加载](https://segmentfault.com/a/1190000022680541)
+- [【第 1976 期】滴滴出行小程序体积优化实践](https://mp.weixin.qq.com/s/E8iBnQtpZloQHIYlgNLFHg)
 
 ## 联系作者
 
