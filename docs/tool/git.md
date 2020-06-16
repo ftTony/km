@@ -479,6 +479,7 @@ $ git stash pop
 - [高质量的 Git 中文教程](https://github.com/geeeeeeeeek/git-recipes)
 - [Git Community Book 中文版](http://gitbook.liuhui998.com/index.html)
 - [GitHub 漫游指南](https://github.com/phodal/github)
+- [三年 Git 使用心得 & 常见问题整理](https://juejin.im/post/5ee649ff51882542ea2b5108)
 
 ## 联系作者
 
