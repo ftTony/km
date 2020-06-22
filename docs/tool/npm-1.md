@@ -263,6 +263,7 @@ npm publish --registry http://localhost:4873
 - [node_modules 困境](https://mp.weixin.qq.com/s/TU6rvx6vWQWROaxqO3qDsA)
 - [2018 年了，你还是只会 npm install 吗？](https://juejin.im/post/5ab3f77df265da2392364341)
 - [从零开始搭建企业级私有鉴权 NPM 仓库](https://mp.weixin.qq.com/s/mmG0rILkwqglBAcpb3LsCQ)
+- [分分钟教会你搭建企业级的 npm 私有仓库](https://juejin.im/post/5eef64de518825658c1ad1f6)
 
 ## 联系作者
 
