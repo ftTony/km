@@ -47,7 +47,6 @@
 ### 参考资料
 
 - [前端部署发展史](https://juejin.im/post/5dc4ae67f265da4cfa7bbb9a)
-
 - [基于 GitLab CI/CD 的自动化构建、发布实践](https://mp.weixin.qq.com/s/z2f1i2FgrVGofQR6nKTd1A)
 - [基于 GitLab CI 的前端工程 CI/CD 实践](https://github.com/giscafer/front-end-manual/issues/27)
 - [GitLab CI/CD 在 Node.js 项目中的实践](https://mp.weixin.qq.com/s/AY1nJA0T7YS2YnW-GNMPFQ)
@@ -72,7 +71,7 @@
 - [《大前端进阶 Node.js》系列 P6 必备脚手架/CI 构建能力（上）](https://juejin.im/post/5e7a22a8e51d4526d87c99ed)
 - [《大前端进阶 Node.js》系列 P6 必备脚手架/CI 构建能力（下）](https://juejin.im/post/5e835ef6f265da47a7411b06)
 - [记录一次 docker+jenkins+gitlab 搭建内网开发环境](https://mp.weixin.qq.com/s/c648RasQ6yg4NtOpAE55LA)
-- [前端部署的发展历程]()
+- [知乎部署系统演进](https://zhuanlan.zhihu.com/p/60627311)
 
 ## 联系作者
 
