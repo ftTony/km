@@ -296,6 +296,7 @@ if(module.hot) {
 - [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
 - [从零实现 webpack 热更新 HMR](https://juejin.im/post/5df36ffd518825124d6c1765)
 - [webpack-dev-middleware 源码解读](https://mp.weixin.qq.com/s/mp4iolzgZQkJMjK6oq5wHQ)
+- [了不起的 Webpack HMR 学习指南](https://mp.weixin.qq.com/s/d5MjW48-Zg8hO0QygG3z5w)
 
 ## 联系作者
 
