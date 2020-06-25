@@ -13,6 +13,15 @@
 - [微内核架构在前端的应用](https://mp.weixin.qq.com/s/VJhPe5O9m_o9tqTqaAgZrA)
 - [实施微前端的六种方式](https://segmentfault.com/a/1190000015566927)
 - [Single-Spa + Vue Cli 微前端落地指南 + 视频 (项目隔离远程加载，自动引入)](https://juejin.im/post/5dfd8a0c6fb9a0165f490004)
+- [微前端在美团外卖的实践](https://juejin.im/post/5e57b6f0f265da57547794c9)
+- [微前端如何落地？](https://juejin.im/post/5d1d8d426fb9a07efe2dda40)
+- [[译] 微前端](https://juejin.im/post/5d0e367b6fb9a07ebf4b781a)
+- [了解什么是微前端](https://juejin.im/post/5d1f19e3f265da1bab29ce5f)
+- [微前端如何落地？](https://mp.weixin.qq.com/s/NdDj_JYQdfaztEGM-eFCRg)
+- [基于 Vue 技术栈的微前端设计思路与落地实践](https://mp.weixin.qq.com/s/uWBualYrS9kanaAvdP49bQ)
+- [微前端在企业级应用中的实践(上)](https://juejin.im/post/5e8b094a6fb9a03c300f8b25)
+- [微前端框架是怎么导入加载子应用的](https://mp.weixin.qq.com/s/DDvVo08cBugv8gKFe4Iw_g)
+- [微前端在小米 CRM 系统的实践](https://www.lishuaishuai.com/architecture/1344.html)
 
 ## 联系作者
 
