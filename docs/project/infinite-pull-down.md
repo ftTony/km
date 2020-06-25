@@ -18,6 +18,7 @@
 - [一个简洁、有趣的无限下拉方案](https://juejin.im/post/5de5baf2518825235b095cbe)
 - [再谈前端虚拟列表的实现](https://zhuanlan.zhihu.com/p/34585166)
 - [前端 tree 组件，10000 个树节点，从 14.65s 到 0.49s](https://zhuanlan.zhihu.com/p/55528376)
+- [淘系前端教你写高性能的 Tree 组件](https://mp.weixin.qq.com/s/PK5gsX0sHiB3WmuRoyRzmQ)
 - [高性能渲染大数据 Tree 组件](https://segmentfault.com/a/1190000021228976)
 - [小程序长列表渲染优化另一种解决方案](https://zhuanlan.zhihu.com/p/146791824)
 - [小程序长列表渲染优化另一种解决方案 （二)](https://zhuanlan.zhihu.com/p/147073485)
