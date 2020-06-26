@@ -269,7 +269,8 @@ module.exports = {
                     "dsl",
                     "ssr",
                     "skeleton",
-                    "serverless"
+                    "serverless",
+                    "micro-frontends"
                 ]
             },
             {
