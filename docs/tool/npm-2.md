@@ -1156,6 +1156,7 @@ npm config set save-exact true
 - [【第 1283 期】从 0 开始发布一个无依赖、高质量的 npm](https://mp.weixin.qq.com/s/aKwEF0ES1ldH5e0jgvh6qA)
 - [剖析 npm 的包管理机制](https://juejin.im/post/5df789066fb9a0161f30580c)
 - [如何设计 npm 包的开发和发布流程](https://juejin.im/post/5cbae9f86fb9a068a93f19ba)
+- [【 Node.js 进阶】你应该知道的 NPM 知识都在这！](https://mp.weixin.qq.com/s/CrbNmNnu0EiA7RcDgJbPJA)
 
 ## 联系作者
 
