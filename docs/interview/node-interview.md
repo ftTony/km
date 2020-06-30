@@ -18,6 +18,7 @@
 - [《吊打面试官》系列 深入 Node.js 多进程底层原理（字节跳动被问）](https://mp.weixin.qq.com/s/wBiBZcdNobDoZbk-cLLyfw)
 - [《吊打面试官》系列 Node.js 全栈秒杀系统](https://mp.weixin.qq.com/s/uWeAsJ-P253je15A49uKIQ)
 - [RabbitMQ 和 Kafka 的比较](https://mp.weixin.qq.com/s/QilS_0wNnx-8NZfq2Iv_cA)
+- [面试官问你关于 node 的那些事（基础篇）](https://juejin.im/post/5eeec838e51d4574134ac467)
 
 ## 联系作者
 
