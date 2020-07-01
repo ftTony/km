@@ -71,6 +71,7 @@
 - [《大前端进阶 Node.js》系列 P6 必备脚手架/CI 构建能力（上）](https://juejin.im/post/5e7a22a8e51d4526d87c99ed)
 - [《大前端进阶 Node.js》系列 P6 必备脚手架/CI 构建能力（下）](https://juejin.im/post/5e835ef6f265da47a7411b06)
 - [记录一次 docker+jenkins+gitlab 搭建内网开发环境](https://mp.weixin.qq.com/s/c648RasQ6yg4NtOpAE55LA)
+- [docker + webhook 从零实现前端自动化部署](https://juejin.im/post/5ef4c7eff265da230b52dfc5)
 - [知乎部署系统演进](https://zhuanlan.zhihu.com/p/60627311)
 
 ## 联系作者

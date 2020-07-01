@@ -16,6 +16,7 @@
 - [项目不知道如何做性能优化？不妨试一下代码分割](https://mp.weixin.qq.com/s/Hj4WL8Fu3xjKclrfkjlzYg)
 - [8000 字总结的前端性能优化](https://mp.weixin.qq.com/s/xjtUK9yZVIK9-OL_WxDH7Q)
 - [前端性能优化总结](https://mp.weixin.qq.com/s/01yNoEmHdMLtTmUKoj8oXw)
+- [第 1996 期】前端性能优化：当页面渲染遇上边缘计算](https://mp.weixin.qq.com/s/y38l12pTBM5YePCmC6IXaQ)
 
 ## 联系作者
 
