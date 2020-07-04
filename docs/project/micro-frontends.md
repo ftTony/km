@@ -14,6 +14,7 @@
 - [实施微前端的六种方式](https://segmentfault.com/a/1190000015566927)
 - [Single-Spa + Vue Cli 微前端落地指南 + 视频 (项目隔离远程加载，自动引入)](https://juejin.im/post/5dfd8a0c6fb9a0165f490004)
 - [微前端在美团外卖的实践](https://juejin.im/post/5e57b6f0f265da57547794c9)
+- [用微前端的方式搭建类单页应用](https://tech.meituan.com/2018/09/06/fe-tiny-spa.html)
 - [微前端如何落地？](https://juejin.im/post/5d1d8d426fb9a07efe2dda40)
 - [[译] 微前端](https://juejin.im/post/5d0e367b6fb9a07ebf4b781a)
 - [了解什么是微前端](https://juejin.im/post/5d1f19e3f265da1bab29ce5f)
