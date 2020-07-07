@@ -15,6 +15,7 @@
 - [解密国内 BAT 等大厂前端技术体系-美团点评之上篇（长文建议收藏）](https://mp.weixin.qq.com/s/gxR-KPCdfbHWX5I1um5x_g)
 - [解密国内 BAT 等大厂前端技术体系-美团点评之下篇（长文建议收藏）](https://mp.weixin.qq.com/s/Tdy-SsywdoR6tPhkp8gsjg)
 - [解密国内 BAT 等大厂前端技术体系-完结篇](https://mp.weixin.qq.com/s/2NJbKc4dWyAu_mft-Yzt-Q)
+- [微信支付的架构到底有多牛？](https://mp.weixin.qq.com/s/KMPuQbex8-idFitC8GoUVA)
 
 ## 联系作者
 
