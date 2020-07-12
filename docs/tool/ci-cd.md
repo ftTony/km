@@ -59,6 +59,7 @@
 - [Jenkins 打造强大的前端自动化工作流](https://juejin.im/post/5ad1980e6fb9a028c42ea1be)
 - [一文搞定前端 Jenkins 自动化部署](https://mp.weixin.qq.com/s/DLXnbY3AcZHMgrPw0T28mQ)
 - [使用阿里云 OSS 与 github actions 自动托管个人网站](https://mp.weixin.qq.com/s/DPPOeWHShkasvKAxwH30JA)
+- [持续集成利器，GitHub Actions](https://mp.weixin.qq.com/s/awk6dHaaOxZyglzq55nLcg)
 - [Jenkins 实现前端自动打包,自动部署代码及邮件提醒功能](https://www.cnblogs.com/tugenhua0707/p/11949644.html)
 - [【第 1139 期】基于 Gitlab CI 搭建持续集成环境](https://mp.weixin.qq.com/s/0hss-qGPjsvYOGkprGjW9g)
 - [【第 923 期】基于 Git、Svn 的 Commit 实现可增量构建的前端持续集成解决方案](https://mp.weixin.qq.com/s/E31b-hF9yNWLOt3bNBIXCA)
