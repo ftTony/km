@@ -30,6 +30,7 @@
 - [前端轻量化部署脚手架实践](https://juejin.im/post/5e1bfbadf265da3e3077005e)
 - [史上最贴心前端脚手架开发辅导](https://juejin.im/post/5dd10fb76fb9a01fe303a5aa)
 - [基于 nodejs 的脚手架工具开发经历](https://zhuanlan.zhihu.com/p/31988855)
+- [自定义 ESLint 规则，让代码持续美丽](https://mp.weixin.qq.com/s/zDTRB9BQFbzj6SeAM7mVcA)
 
 ## 联系作者
 

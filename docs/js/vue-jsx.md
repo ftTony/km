@@ -188,6 +188,7 @@ render(createElement){
 
 - [如何在 Vue 中使用 JSX 以及使用它的原因](https://juejin.im/post/5e409f02e51d4526f16e3bce)
 - [Vue Render 介绍和一些基本的实例](https://juejin.im/post/5b4eb11a5188251af91a6eaf)
+- [学会使用Vue JSX，一车老干妈都是你的](https://juejin.im/post/5f01e9fff265da22ab2d532e)
 
 ## 联系作者
 
