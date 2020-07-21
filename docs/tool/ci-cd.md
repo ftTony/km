@@ -8,7 +8,8 @@
 
 - 概念
 - Jenkins 使用
-- gitlab-ci 使用
+- gitlab CI/CD 使用
+- jenkins与Gitlab-CI的区别
 
 ### 一、概念
 
@@ -38,6 +39,28 @@
 #### 2.2 配置
 
 ### 三、Gitlab-CI 使用
+
+- 什么是GitLab CI/CD
+- GitLab CI/CD 接入流程
+
+#### 3.1 什么是GitLab CI/CD
+
+GitLab CI/CD就是提交代码到GitLab 后，满足指定条件后会触发 pipeline 进行自动化构建、发布。
+pipeline 可以理解为构建任务，里面可以包含多个流程，如下载依赖、运行测试、编译、部署。pipeline 什么时候触发，分为几个流程，每个流程做什么，是在项目的 .gitlab-ci.yml 文件中定义。如图所示：
+
+#### 3.2 GitLab CI/CD 接入流程
+
+`GitLab CI/CD` 的 `pipeline` 具体流程和操作在 `.gitlab-ci.yml` 文件中申明，触发 `pipeline` 后，由 `GitLab Runner` 根据 `.gitlab-ci.yml` 文件运行，运行结束后将返回至 `GitLab` 系统。
+
+
+
+### 四、jenkins与Gitlab-CI的区别
+
+- gitlab-runner配置简单，很容易与gitlab集成。当新建一个项目的时候，不需要配置webhook回调地址，也不需要同时在jenkins新建这个项目的编译配置，只需在工程中配置gitlab-ci.yml文件，就可以让这个工程可以进行编译。
+- gitlab-runner没有web页面，但编译的过程直接就在gitlab中可以看到，不需要像jenkins进入web控制台查看编译过程。
+- gitlab-runner仅仅是提供了一个编译的环境而已，全部的编译都通过shell脚本命令进行。当然，jenkins也可以是全部的编译都通过shell脚本命令进行。
+- jenkins的好处就是编译服务和代码仓库分离，而且编译配置文件不需要在工程中配置，如果团队有开发、测试、配置管理员、运维、实施等完整的人员配置，那就采用jenkins，这样职责分明。不仅仅如此，jenkins依靠它丰富的插件，可以配置很多gitlab-ci不存在的功能，比如说看编译状况统计等。
+
 
 **参考资料**
 
