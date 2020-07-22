@@ -12,6 +12,7 @@
 - [超完整的 Flutter 项目](https://github.com/CarGuo/GSYGithubAppFlutter)
 - [FlutterDemo 合集](https://github.com/OpenFlutter/Flutter-Notebook)
 - [【Flutter学习总结】从0到1，到开发四个Flutter项目，为期10个月，分享学习总结](https://juejin.im/post/6863353616473063437)
+- [给所有开发者的React Native详细入门指南（第一阶段）](https://juejin.im/post/6844903462501613575)
 
 ## 联系作者
 

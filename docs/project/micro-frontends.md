@@ -34,6 +34,7 @@
 - [微前端框架是怎么导入加载子应用的](https://mp.weixin.qq.com/s/DDvVo08cBugv8gKFe4Iw_g)
 - [微前端在小米 CRM 系统的实践](https://www.lishuaishuai.com/architecture/1344.html)
 - [采用 vue + qiankun 实践微前端落地](https://github.com/hql7/wl-micro-frontends)
+- [飞冰](https://ice.work/docs/icestark/about)
 
 ## 联系作者
 
