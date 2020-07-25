@@ -185,6 +185,7 @@ QPS(TPS)=并发数/平均响应时间
 - [性能体验和质量指标](https://mp.weixin.qq.com/s/E-0XyclhUQCokqIXtbz41g)
 - [淘宝是如何缩短首屏时间、降低服务器压力的？边缘计算告诉你答案！](https://mp.weixin.qq.com/s/8Nig2vYMUmtcEw0A7jt1yA)
 - [如何使页面交互更流畅](https://juejin.im/post/5ce985b1f265da1bca51b7cc)
+- [你的函数有多快？使用 performance 监控前端性能](https://mp.weixin.qq.com/s/1aM_aBbeId9DHa492j9e5Q)
 
 ## 联系作者
 
