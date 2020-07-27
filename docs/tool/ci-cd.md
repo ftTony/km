@@ -38,20 +38,67 @@
 
 #### 2.2 配置
 
-### 三、Gitlab-CI 使用
+### 三、Gitlab CI/CD 使用
 
 - 什么是GitLab CI/CD
 - GitLab CI/CD 接入流程
 
 #### 3.1 什么是GitLab CI/CD
 
-GitLab CI/CD就是提交代码到GitLab 后，满足指定条件后会触发 pipeline 进行自动化构建、发布。
-pipeline 可以理解为构建任务，里面可以包含多个流程，如下载依赖、运行测试、编译、部署。pipeline 什么时候触发，分为几个流程，每个流程做什么，是在项目的 .gitlab-ci.yml 文件中定义。如图所示：
+`GitLab CI/CD`就是提交代码到`GitLab` 后，满足指定条件后会触发`pipeline`进行自动化构建、发布。
+`pipeline`可以理解为构建任务，里面可以包含多个流程，如下载依赖、运行测试、编译、部署。`pipeline` 什么时候触发，分为几个流程，每个流程做什么，是在项目的 `.gitlab-ci.yml` 文件中定义。如图所示：
 
 #### 3.2 GitLab CI/CD 接入流程
 
 `GitLab CI/CD` 的 `pipeline` 具体流程和操作在 `.gitlab-ci.yml` 文件中申明，触发 `pipeline` 后，由 `GitLab Runner` 根据 `.gitlab-ci.yml` 文件运行，运行结束后将返回至 `GitLab` 系统。
 
+**gitlab-ci.yml 文件**
+
+`gitlab-ci.yml` 文件是一个申明式文件，用于定义 `GitLab CI/CD` 流程分为几个阶段，每个阶段分别干什么。
+
+`yml`文件基本语法规则
+
+```
+image: node
+
+# 定义相关变量
+variables:
+  COPY_PATH: /frontEnd/$CI_PROJECT_NAME #从docker拷贝到宿主机器的目录，勿动
+  NODE_MODULES_PATH: /frontEnd/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/node_modules
+  Mobile: "15767668950" #项目开发者的手机号，在企业微信中使用的，用来流程报错后@开发者
+
+# 定义 stages
+stages:
+  - build
+  - test
+# 定义 job
+ build 阶段:
+  stage: build
+  script:
+    - echo "build stage"
+# 定义 job
+发布到测试环境:
+  stage: test
+  script:
+    - echo "test stage"
+```
+
+- `image`是执行`CI/CD` 依赖的`Docker`基础镜像。镜像中有`Node`、`Yarn`、`Dalp`（内部`rsync`工具）。
+- `stages` 中定义了我们的 `pipeline` 分为以下几个过程：
+1. 下载依赖阶段 `pre_build`
+2. 构建阶段`build`
+3. 发布阶段`deploy`
+- `stage` 申明当前的阶段，在`stages`中使用
+- `variables` 用于定义变量
+- `before_script` 执行`script`前的操作
+- `script` 当前`stage`需要执行的操作
+- `changes`指定`stage`触发的分支
+- `only`指定当前`job`仅仅只在某些`tag`或`branch`上触发
+- `cache`定义全局的缓存策略
+
+**GitLab Runner**
+
+`GitLab Runner` 是`CI`的执行环境，负责执行 `gitlab-ci.yml` 文件，并将结果返回给 `GitLab` 系统。 `Runner` 具体可以有多种形式， `docker` 、虚拟机或shell，在注册 `runner` 时选定方式。
 
 
 ### 四、jenkins与Gitlab-CI的区别
