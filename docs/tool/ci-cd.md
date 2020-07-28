@@ -48,6 +48,8 @@
 `GitLab CI/CD`就是提交代码到`GitLab` 后，满足指定条件后会触发`pipeline`进行自动化构建、发布。
 `pipeline`可以理解为构建任务，里面可以包含多个流程，如下载依赖、运行测试、编译、部署。`pipeline` 什么时候触发，分为几个流程，每个流程做什么，是在项目的 `.gitlab-ci.yml` 文件中定义。如图所示：
 
+![images](ci-cd.png)
+
 #### 3.2 GitLab CI/CD 接入流程
 
 `GitLab CI/CD` 的 `pipeline` 具体流程和操作在 `.gitlab-ci.yml` 文件中申明，触发 `pipeline` 后，由 `GitLab Runner` 根据 `.gitlab-ci.yml` 文件运行，运行结束后将返回至 `GitLab` 系统。
@@ -98,8 +100,22 @@ stages:
 
 **GitLab Runner**
 
-`GitLab Runner` 是`CI`的执行环境，负责执行 `gitlab-ci.yml` 文件，并将结果返回给 `GitLab` 系统。 `Runner` 具体可以有多种形式， `docker` 、虚拟机或shell，在注册 `runner` 时选定方式。
+`GitLab Runner` 是`CI`的执行环境，负责执行 `gitlab-ci.yml` 文件，并将结果返回给 `GitLab` 系统。 `Runner` 具体可以分为两种**Specific Runner**和**Shared Runner**形式， `docker` 、虚拟机或shell，在注册 `runner` 时选定方式。
 
+- **Shared Runner**是Gitlab平台提供的免费使用的runner程序，它由Google云平台提供支持，每个开发团队有十几个。对于公共开源项目是免费使用的，如果是私人项目则有每月2000分钟的CI时间上限。
+- **Specific Runner**是我们自定义的，在自己选择的机器上运行的runner程序，gitlab给我们提供了一个叫gitlab-runner的命令行软件，只要在对应机器上下载安装这个软件，并且运行gitlab-runner register命令，然后输入从gitlab-ci交互界面获取的token进行注册, 就可以在自己的机器上远程运行pipeline程序了。
+
+Shared Runner 和 Specific Runner的区别
+
+1. Shared Runner是所有项目都可以使用的，而Specific Runner只能针对特定项目运行
+2. Shared Runner默认基于docker运行，没有提前装配的执行pipeline的环境，例如node等。而Specific Runner你可以自由选择平台，可以是各种类型的机器，如Linux/Windows等，并在上面装配必需的运行环境，当然也可以选择Docker/K8s等
+3. 私人项目使用Shared Runner受运行时间的限制，而Specific Runner的使用则是完全自由的。
+
+**Executor**
+
+上面说过 Specific Runner是在我们自己选择的平台上执行的，这个平台就是我们现在说到的“Executor”，我们在特定机器上通过gitlab-runner这个命令行软件注册runner的时候，命令行就会提示我们输入相应的平台类型。可供选择的平台一共有如下几种，下面是一张它们各方面特点的比较表格
+
+![images](ci-cd.jpg)
 
 ### 四、jenkins与Gitlab-CI的区别
 
