@@ -150,6 +150,7 @@ module.exports = {
 
 - [【Webpack】513- Webpack 插件开发如此简单！](https://mp.weixin.qq.com/s/LTAlkoyS3C2yiLkFriu-Cw)
 - [编写自定义 webpack plugin](https://github.com/jerryOnlyZRJ/webpack-loader/blob/master/docs/webpack-plugin.md)
+- [【源码解析+代码实现】一篇文章搞定 babel-plugin-import 插件](https://mp.weixin.qq.com/s/aBTODfHAG9p_z2A1ikVoug)
 
 ## 联系作者
 
