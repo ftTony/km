@@ -1007,6 +1007,7 @@ function FindKthToTail(head, k){
 - [图解：我终于让女朋友学会了翻转链表！](https://mp.weixin.qq.com/s/kpaap25Y-2EOZsJnKyXbLQ)
 - [数据结构基础之掌握 5 个常见的链表操作](https://mp.weixin.qq.com/s/KMl8ZigBWeL7pOAtzekerw)
 - [前端进阶算法 4：链表原来如此简单(+leetcode 刷题）](https://mp.weixin.qq.com/s/cujkhUn-u7gX_r9bSoK5sA)
+- [极客算法训练笔记(三)，链表详细图解，别再逃避了朋友](https://mp.weixin.qq.com/s/1S3z6mVrteOQBORb74rtFg)
 - 《学习 JavaScript 数据结构与算法》
 
 ## 联系作者
