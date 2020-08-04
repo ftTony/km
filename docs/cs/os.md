@@ -1703,6 +1703,7 @@ $ gcc hello.o -o hello
 ### 参考资料
 
 - 《深入操作系统第四版》
+- [一文讲透 “进程、线程、协程”](https://mp.weixin.qq.com/s/Yj7O3mucbFHxx3p5UnlvnA)
 - [操作系统——字节跳动](https://github.com/wolverinn/Waking-Up/blob/master/Operating%20Systems.md)
 - [操作系统](https://github.com/frank-lam/fullstack-tutorial/blob/master/notes/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.md)
 - [面试专场之「操作系统」知识](https://mp.weixin.qq.com/s/vTYTpYx4hnXs6wWShCDrTQ)
