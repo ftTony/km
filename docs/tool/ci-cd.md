@@ -29,14 +29,16 @@
 
 持续部署是持续交付的下一步。通过这一步，每个新特性都自动的部署到产品中。但是如果出现未通过的测试用例将会终止自动部署。持续部署可以加速用户反馈新特性，避免发布日带来的压力。开发可以着力于开发系统，开发结束后几分钟就可以触达到用户。
 
+
+**参考资料**
+
+- [持续集成是什么？](http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html)
+- [持续集成 vs 持续交付 vs 持续部署](https://mp.weixin.qq.com/s/Y09_FYS2IWae24geE7tK-Q)
+
 ### 二、Jenkins 使用
 
-- 安装
-- 配置
-
-#### 2.1 安装
-
-#### 2.2 配置
+- [Jenkins 打造强大的前端自动化工作流](https://juejin.im/post/5ad1980e6fb9a028c42ea1be)
+- [一文搞定前端 Jenkins 自动化部署](https://mp.weixin.qq.com/s/DLXnbY3AcZHMgrPw0T28mQ)
 
 ### 三、Gitlab CI/CD 使用
 
@@ -125,11 +127,6 @@ Shared Runner 和 Specific Runner的区别
 - jenkins的好处就是编译服务和代码仓库分离，而且编译配置文件不需要在工程中配置，如果团队有开发、测试、配置管理员、运维、实施等完整的人员配置，那就采用jenkins，这样职责分明。不仅仅如此，jenkins依靠它丰富的插件，可以配置很多gitlab-ci不存在的功能，比如说看编译状况统计等。
 
 
-**参考资料**
-
-- [持续集成是什么？](http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html)
-- [持续集成 vs 持续交付 vs 持续部署](https://mp.weixin.qq.com/s/Y09_FYS2IWae24geE7tK-Q)
-
 ### 参考资料
 
 - [前端部署发展史](https://juejin.im/post/5dc4ae67f265da4cfa7bbb9a)
@@ -143,8 +140,6 @@ Shared Runner 和 Specific Runner的区别
 - [要进大厂？前端灰度发布必须要知道](https://mp.weixin.qq.com/s/54GgUM1saYvZCRP1sJ0Kug)
 - [【第 1805 期】一种前端灰度发布方案](https://mp.weixin.qq.com/s/IT65m3VwlAhXusipB6wa2g)
 - [手把手教你搭建一个灰度发布环境](https://segmentfault.com/a/1190000022612488)
-- [Jenkins 打造强大的前端自动化工作流](https://juejin.im/post/5ad1980e6fb9a028c42ea1be)
-- [一文搞定前端 Jenkins 自动化部署](https://mp.weixin.qq.com/s/DLXnbY3AcZHMgrPw0T28mQ)
 - [使用阿里云 OSS 与 github actions 自动托管个人网站](https://mp.weixin.qq.com/s/DPPOeWHShkasvKAxwH30JA)
 - [持续集成利器，GitHub Actions](https://mp.weixin.qq.com/s/awk6dHaaOxZyglzq55nLcg)
 - [Jenkins 实现前端自动打包,自动部署代码及邮件提醒功能](https://www.cnblogs.com/tugenhua0707/p/11949644.html)
