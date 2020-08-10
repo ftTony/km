@@ -242,6 +242,7 @@ defer 与相比普通 script，有两点区别：**载入 JavaScript 文件时�
 - [浏览器渲染基本原理解析](https://mp.weixin.qq.com/s/pd_9wzs3hhcvd9LNsT5UcA)
 - [CSS 渲染原理以及优化策略](https://mp.weixin.qq.com/s/v-bjrzkMCV50v25iaC_0Cg)
 - [现代浏览器内部机制 — 事件](https://mp.weixin.qq.com/s/hAhenLwhX4-IPV8gx7j4Hw)
+- [实现浏览器中的最大请求并发数控制](https://mp.weixin.qq.com/s/8iWVLUhclUFoU_KdCLTaDw)
 
 ## 联系作者
 
