@@ -56,6 +56,7 @@
 - [让自动化工作流解放你的双手](https://mp.weixin.qq.com/s/MJX5pVwugKsRO__fjhPVmg)
 - [要进大厂？前端灰度发布必须要知道](https://mp.weixin.qq.com/s/54GgUM1saYvZCRP1sJ0Kug)
 - [【第 1805 期】一种前端灰度发布方案](https://mp.weixin.qq.com/s/IT65m3VwlAhXusipB6wa2g)
+- [手把手教你搭建一个灰度发布环境](https://segmentfault.com/a/1190000022612488)
 - [Jenkins 打造强大的前端自动化工作流](https://juejin.im/post/5ad1980e6fb9a028c42ea1be)
 - [一文搞定前端 Jenkins 自动化部署](https://mp.weixin.qq.com/s/DLXnbY3AcZHMgrPw0T28mQ)
 - [使用阿里云 OSS 与 github actions 自动托管个人网站](https://mp.weixin.qq.com/s/DPPOeWHShkasvKAxwH30JA)
