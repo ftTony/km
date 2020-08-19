@@ -16,3 +16,4 @@
 - [如何实现一个下载进度条/播放进度条](https://juejin.im/post/5cfcd4c5f265da1bb13f246e)
 - [H5 直播的疯狂点赞动画是如何实现的？(附完整源码)](https://juejin.im/post/5e947b8f6fb9a03c957ffd1a)
 - [如何优雅的实现一个九宫格抽奖](https://mp.weixin.qq.com/s/zBZUnOfUj1NiTnxRHXlVyQ)
+- [从图片裁剪来聊聊前端二进制](https://juejin.im/post/6862156294611009544)
