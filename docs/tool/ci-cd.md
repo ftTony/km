@@ -51,7 +51,7 @@
 - [基于 GitLab CI 的前端工程 CI/CD 实践](https://github.com/giscafer/front-end-manual/issues/27)
 - [GitLab CI/CD 在 Node.js 项目中的实践](https://mp.weixin.qq.com/s/AY1nJA0T7YS2YnW-GNMPFQ)
 - [Node+GitLab 实现小程序 CI 系统](https://mp.weixin.qq.com/s/5NsY5cj0n1AuU0-zT1VrEQ)
-- [花椒前端基于 GitLab CI/CD 的自动化构建、发布实践](https://mp.weixin.qq.com/s/0VtDFv5bxJp2OyJGufBV0w)
+- [Gitlab-ci:从零开始的前端自动化部署](https://zhuanlan.zhihu.com/p/184936276)
 - [微信小程序工程化之持续集成方案](https://mp.weixin.qq.com/s/k16SjTN7__iRB_7q78hldg)
 - [让自动化工作流解放你的双手](https://mp.weixin.qq.com/s/MJX5pVwugKsRO__fjhPVmg)
 - [要进大厂？前端灰度发布必须要知道](https://mp.weixin.qq.com/s/54GgUM1saYvZCRP1sJ0Kug)
