@@ -501,6 +501,7 @@ const kruskal = graph => {
 - [动画：如何用广度和深度优先搜索找到女朋友？](https://mp.weixin.qq.com/s/ln5xLC3mzFoNdu1tk9olLg)
 - [图解：什么是图？](https://mp.weixin.qq.com/s?__biz=MzAxNDYwODEzNw==&mid=2247486103&idx=1&sn=3a57404cb55c5ed7fce67fdd5569070d&chksm=9b91f8f1ace671e72dc139ddf249d6b0d435456fbfc86d3661847c15bfefc3cd85c939601b8d&scene=21#wechat_redirect)
 - [图文详解 DFS 和 BFS](https://mp.weixin.qq.com/s/rRVGWEm-QzgJ-vkYZTWD7w)
+- [搜索思想——DFS & BFS（基础基础篇）](https://zhuanlan.zhihu.com/p/24986203)
 - [前端进阶算法：初学者应该了解的数据结构 Graph](https://mp.weixin.qq.com/s/L8Dui7gJdUdOTmrYCg_wmQ)
 - 《学习 JavaScript 数据结构与算法》
 
