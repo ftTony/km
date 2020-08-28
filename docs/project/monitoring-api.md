@@ -12,6 +12,7 @@
 - [前端埋点的那些事](http://www.imooc.com/article/27151)
 - [前端工程实践之数据埋点分析系统（一）](https://www.zoo.team/article/data-analysis-one)
 - [WebMonitor 采集端优化之路](https://mp.weixin.qq.com/s/PlgXQMS1mx6FY6K8uovrpw)
+- [监控系统选型，这篇不可不读！](https://mp.weixin.qq.com/s/vviVlqX9Ax0yJT6cMcNQSA)
 
 ## 联系作者
 
