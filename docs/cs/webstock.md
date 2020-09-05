@@ -398,6 +398,7 @@ function broadcast(server, msg) {
 - [WebSocket 教程](http://www.ruanyifeng.com/blog/2017/05/websocket.html)
 - [WebSocket 原理与实践(一)---基本原理](http://www.cnblogs.com/tugenhua0707/p/8504297.html)
 - [WebSocket 协议：5 分钟从入门到精通](https://www.cnblogs.com/chyingp/p/websocket-deep-in.html)
+- [【Web技术】702- 如何优雅的实现消息通信？](https://mp.weixin.qq.com/s/9uihRGQyeYhiXgZhrfwMHA)
 
 ## 联系作者
 
