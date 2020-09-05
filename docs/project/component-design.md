@@ -14,6 +14,7 @@
 - [如何在公司落地业务组件？](https://mp.weixin.qq.com/s/2jb-3WyNdLX8Ozzjux9GMg)
 - [如何开发跨框架的组件](https://mp.weixin.qq.com/s/BehjH5xVXFWohQXFl3u-kQ)
 - [基于react的组件库主题设计方案](https://cloud.tencent.com/developer/article/1663404)
+- [腾讯文档公共组件历史包袱](https://mp.weixin.qq.com/s/Hffb19IpvFLRCenO_gxOZw)
 
 ## 联系作者
 
