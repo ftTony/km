@@ -13,6 +13,7 @@
 - [前端通用组件设计](https://zhuanlan.zhihu.com/p/72091681)
 - [如何在公司落地业务组件？](https://mp.weixin.qq.com/s/2jb-3WyNdLX8Ozzjux9GMg)
 - [如何开发跨框架的组件](https://mp.weixin.qq.com/s/BehjH5xVXFWohQXFl3u-kQ)
+- [基于react的组件库主题设计方案](https://cloud.tencent.com/developer/article/1663404)
 
 ## 联系作者
 
