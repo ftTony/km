@@ -585,6 +585,7 @@ new Image().src = 'http://localhost:7001/monitor/error'+ '?info=xxxxxx'
 - [【第 790 期】构建可靠的前端异常监控服务-采集篇](https://mp.weixin.qq.com/s/LGbMXauSuuGWcvqazjXWjQ)
 - [撸一个前端监控系统（React + Node + Mysql + Webpack plugin + Docker）—— （上）](https://juejin.im/post/5e3146cce51d453176604809)
 - [转转商业前端错误监控系统(Sentry)策略升级](https://juejin.im/post/5e6b16315188254963277621)
+- [基于Sentry的前端监控（初识篇）](https://mp.weixin.qq.com/s/FGo8_lSzuIr_gLriHDmM8w)
 - [【第 833 期】如何设计一个前端监控系统](https://mp.weixin.qq.com/s/_AaZXxvMMFjHAynXylsjrw)
 - [你知道自己的代码在线上有多少问题吗？](https://mp.weixin.qq.com/s/kxBObdhfOOh19rlGQ3gHWA)
 - [钉钉前端-如何设计前端实时分析及报警系统](https://mp.weixin.qq.com/s/-Xh61slKg0cIw4cjqzo0og)
