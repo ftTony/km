@@ -14,6 +14,7 @@
 - [小程序构建骨架屏的探索](https://mp.weixin.qq.com/s/5jUo2e4mtAghLx7iaM6l8g)
 - [考拉前端骨架屏生成技术揭秘](https://mp.weixin.qq.com/s/nFVtmSc5_rWbxdJNq_Kuag)
 - [【第 1438 期】如何让你的网页“看起来”展现地更快 —— 骨架屏二三事](https://mp.weixin.qq.com/s/1v6MqN97xV0zyCph7pl5IA)
+- [网页骨架屏自动生成方案（dps）](https://mp.weixin.qq.com/s/tcItM2EvY2zPXk_NQCV-4g)
 
 ## 联系作者
 
