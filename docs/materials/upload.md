@@ -11,6 +11,7 @@
 - [从设计到实现前端 Uploader 基础类](https://juejin.im/post/5e5badce51882549652d55c2)
 - [一文了解文件上传全过程（项目中碰到的难点）](https://mp.weixin.qq.com/s/jIk9aiHEl2Dw4DbaIdn77Q)
 - [一文了解文件上传全过程（1.8w 字深度解析，进阶必备）](https://juejin.im/post/5e80511f51882573793e6428)
+- [大规格文件的上传优化](https://mp.weixin.qq.com/s/jYng9Fud1Q8YykwqK12NVg)
 - [【实战】Canvas 实现图片上标注、缩放、移动和保存历史状态](https://juejin.im/post/5e717376e51d4526dd1ec2e6)
 - [前端换肤的 N 种方案，请收下](https://juejin.im/post/5e92ad7a518825736c5b91cd)
 - [如何实现一个下载进度条/播放进度条](https://juejin.im/post/5cfcd4c5f265da1bb13f246e)
