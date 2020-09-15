@@ -50,6 +50,8 @@ ab -n 4000 -c 1000 http://www.xiaowuzi.info
 ### 参考资料
 
 - [羚珑项目自动化测试方案实践](https://mp.weixin.qq.com/s/Ta7SFF3IPtW8itZnQypeBA)
+- [京喜前端自动化测试之路](https://mp.weixin.qq.com/s/VhvXTNuM7TSfFtzBVmhTyg)
+- [京喜前端自动化测试之路(小程序篇)](https://mp.weixin.qq.com/s/03LgU-20_PFjtiz6UfeUZA)
 - [测试专题](https://github.com/yanlele/node-index/tree/master/book/13%E3%80%81%E6%B5%8B%E8%AF%95%E4%B8%93%E9%A2%98)
 
 ## 联系作者
