@@ -1136,6 +1136,7 @@ console.log('end')
 - [【建议星星】要就来 45 道 Promise 面试题一次爽到底(1.1w 字用心整理)](https://juejin.im/post/5e58c618e51d4526ed66b5cf)
 - [Promise / async / Generator 实现&原理大解析（附源码）| 9k 字](https://juejin.im/post/5e3b9ae26fb9a07ca714a5cc)
 - [源码速读！一看就会、一写就废的 Promise 实现](https://mp.weixin.qq.com/s/CsUvmRLYJpX1If9Tr0KXrg)
+- [Promise 你真的用明白了么？](https://juejin.im/post/6869573288478113799)
 - 《你不知道的 javascript(中)》
 - 《深入浅出 Node.js》
 
