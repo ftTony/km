@@ -11,6 +11,7 @@
 - [前端面试秘籍](https://github.com/yisainan/web-interview)
 - [前端面试星球](https://github.com/lgwebdream/FE-Interview)
 - [前端面试手册](https://github.com/elecrabbit/front-end-interview)
+- [关于面试的一点心得](https://mp.weixin.qq.com/s/LBSTpeWDvJ56iYpkCo6Ecw)
 
 ## 联系作者
 
