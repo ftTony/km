@@ -17,6 +17,7 @@
 - [解密国内 BAT 等大厂前端技术体系-完结篇](https://mp.weixin.qq.com/s/2NJbKc4dWyAu_mft-Yzt-Q)
 - [微信支付的架构到底有多牛？](https://mp.weixin.qq.com/s/KMPuQbex8-idFitC8GoUVA)
 - [Vivo 商城前端架构升级-总览篇](https://mp.weixin.qq.com/s/thOykSiYBldQhXa0X2edxA)
+- [前端架构探索与实践](https://mp.weixin.qq.com/s/VypIIF3CT3aCExKCtvoKlg)
 
 ## 联系作者
 
