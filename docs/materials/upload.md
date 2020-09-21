@@ -19,3 +19,4 @@
 - [如何优雅的实现一个九宫格抽奖](https://mp.weixin.qq.com/s/zBZUnOfUj1NiTnxRHXlVyQ)
 - [从图片裁剪来聊聊前端二进制](https://juejin.im/post/6862156294611009544)
 - [如何实现文件下载](https://mp.weixin.qq.com/s/Lqo8kXS-WLmRLN1dh97gTw)
+- [大规格文件的上传优化(实用篇)](https://mp.weixin.qq.com/s/S9Op6mk4PjuAB977RJyN9g)
