@@ -6,11 +6,17 @@
 
 ## 内容
 
-- [Flex介绍](#一、flex介绍)
-- [基本概念](#二、基本概念)
-- [CSS属性说明](#三、css属性说明)
-- [Flex项目属性](#三、css属性说明)
-- [兼容性](#四、兼容性)
+- [flex 学习](#flex-学习)
+  - [前言](#前言)
+  - [内容](#内容)
+    - [一、Flex介绍](#一flex介绍)
+    - [二、基本概念](#二基本概念)
+    - [三、CSS属性说明](#三css属性说明)
+      - [3.1 容器的属性](#31-容器的属性)
+      - [3.2 Flex项目属性](#32-flex项目属性)
+    - [四、兼容性](#四兼容性)
+    - [参考资料](#参考资料)
+  - [联系作者](#联系作者)
 
 ### 一、Flex介绍
 
@@ -211,6 +217,7 @@ flex主要经历了三个版本更新导致有很多兼容性问题
 - [Flex 布局教程：实例篇](http://www.ruanyifeng.com/blog/2015/07/flex-examples.html)
 - [flexbox布局的兼容性](http://www.ayqy.net/blog/flexbox%E5%B8%83%E5%B1%80%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7/)
 - [使用Flexbox：新旧语法混用实现最佳浏览器兼容](https://www.w3cplus.com/css3/using-flexbox.html)
+- [48张小图带你领略Flex 布局之美](https://mp.weixin.qq.com/s/LjWMxWuGHhVJr71m1EzTkA)
 
 ## 联系作者
 
