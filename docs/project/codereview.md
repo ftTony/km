@@ -6,9 +6,19 @@
 
 ## 内容
 
-- [Code Review 的好处](#一、code-review-的好处)
-- [推动 Code Review 落地执行](#二、推动-code-review-落地执行)
-- [前端如何做 Code Review](#三、前端如何做-code-review)
+- [代码 Code Review](#代码-code-review)
+  - [前言](#前言)
+  - [内容](#内容)
+    - [一、Code Review 的好处](#一code-review-的好处)
+      - [1.1 互相学习，彼此成就](#11-互相学习彼此成就)
+      - [1.2 知识共享，自动互备](#12-知识共享自动互备)
+      - [1.3 统一风格，提升质量](#13-统一风格提升质量)
+    - [二、推动 Code Review 落地执行](#二推动-code-review-落地执行)
+      - [2.1 选定工具](#21-选定工具)
+      - [2.2 制定开发规范](#22-制定开发规范)
+    - [三、前端如何做 Code Review](#三前端如何做-code-review)
+    - [参考资料](#参考资料)
+  - [联系作者](#联系作者)
 
 ### 一、Code Review 的好处
 
@@ -72,6 +82,7 @@ Code Review 的过程，就是根据提交者的描述阅读代码的逻辑，�
 - [关于代码评审（Code Review）](https://mp.weixin.qq.com/s/2Fpqlhl2XLuk7dFXCPUD-A)
 - [前端代码评审 Checklist 清单](https://github.com/fengshi123/blog/issues/1)
 - [Code Review 最佳实践](https://zhuanlan.zhihu.com/p/73809355)
+- [如何有效地进行代码 Review？](https://mp.weixin.qq.com/s/ICl-IBgR3aVQi4ObsB0-ww)
 
 ## 联系作者
 
