@@ -67,6 +67,7 @@ JavaScript 和页面渲染流水线的任务都是在页面主线程上执行的
 - [Service Worker：让你的 Web 应用牛逼起来](https://mp.weixin.qq.com/s/IhMyaCYrTAXJcKSPSnEOjw)
 - [你不知道的 Web Workers （上）[7.8K 字 | 多图预警]](https://juejin.im/post/5ef2a554f265da02e47d952b)
 - [揭秘：支付宝小程序 V8 Worker 技术演进](https://mp.weixin.qq.com/s/QS0QT7TIcEzZhR6asCOecg)
+- [Javascript 多线程编程​的前世今生](https://mp.weixin.qq.com/s/fb8P2GC1K0UPq6CUTel22g)
 
 ## 联系作者
 

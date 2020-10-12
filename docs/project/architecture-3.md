@@ -18,6 +18,7 @@
 - [微信支付的架构到底有多牛？](https://mp.weixin.qq.com/s/KMPuQbex8-idFitC8GoUVA)
 - [Vivo 商城前端架构升级-总览篇](https://mp.weixin.qq.com/s/thOykSiYBldQhXa0X2edxA)
 - [前端架构探索与实践](https://mp.weixin.qq.com/s/VypIIF3CT3aCExKCtvoKlg)
+- [对高并发流量控制的一点思考](https://mp.weixin.qq.com/s/ObcTK6xRPzev3rr6RfVSsA)
 
 ## 联系作者
 
