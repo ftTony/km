@@ -8,6 +8,8 @@
 
 ### 参考资料
 
+- [CSS 面试知识点总结](https://github.com/CavsZhouyou/Front-End-Interview-Notebook/blob/master/Css/Css.md)
+
 ## 联系作者
 
 <div align="center">
