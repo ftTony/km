@@ -193,6 +193,7 @@ App里的Webview不直接请求一个链接，而先下载一个Download.zip文�
 ### 参考资料
 
 - [流量劫持](https://lmjben.github.io/blog/osi-hijack.html)
+- [超清晰的 DNS 原理入门指南](https://mp.weixin.qq.com/s/iviVDuucoWCC5ZZiitmZPQ)
 
 ## 联系作者
 
