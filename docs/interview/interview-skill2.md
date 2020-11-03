@@ -101,6 +101,7 @@
 - [2020 本科校招-从小白到拿到 30k offer 的学习经历](https://www.cnblogs.com/Hooooober/p/13019798.html)
 - [被单是如何又双叒拿到阿里 offer 的](https://mp.weixin.qq.com/s/6Tbw0E6dqZxJ5LBbX_ZMgw)
 - [Interview](https://github.com/qappleh/Interview)
+- [小前端进腾讯啦！](https://zhuanlan.zhihu.com/p/265147335)
 
 ## 联系作者
 
