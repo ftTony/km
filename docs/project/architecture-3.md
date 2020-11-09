@@ -20,6 +20,7 @@
 - [前端架构探索与实践](https://mp.weixin.qq.com/s/VypIIF3CT3aCExKCtvoKlg)
 - [对高并发流量控制的一点思考](https://mp.weixin.qq.com/s/ObcTK6xRPzev3rr6RfVSsA)
 - [手把手带你入门前端工程化——超详细教程](https://juejin.im/post/6892003555818143752)
+- [web前端工程化](https://www.zhihu.com/question/24558375/answer/139920107)
 
 ## 联系作者
 
