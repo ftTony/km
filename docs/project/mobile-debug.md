@@ -8,6 +8,8 @@
 
 ## 参考资料
 
+- [H5 移动端调试全攻略](https://mp.weixin.qq.com/s/ok9mVpJUvk0wttvqkOL5vw)
+
 ## 联系作者
 
 <div align="center">
