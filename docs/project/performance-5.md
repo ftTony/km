@@ -189,6 +189,7 @@ QPS(TPS)=并发数/平均响应时间
 - [【第 2023 期】从 2.9 秒到 0.6 秒，信息流首屏提效 80%的秘诀](https://mp.weixin.qq.com/s/LDRDHj_QNYHBsX2fWYeAHA)
 - [京喜小程序体验评分优化实践](https://mp.weixin.qq.com/s/3JhouhVftgwcJxeoHZNm3w)
 - [腾讯音乐移动端页面通用性能优化实践](https://mp.weixin.qq.com/s/RdKV_2XNIlctriuNuhAfbA)
+- [前端性能优化 24 条建议（2020）](https://juejin.im/post/6892994632968306702)
 
 ## 联系作者
 
