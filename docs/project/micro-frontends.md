@@ -37,6 +37,7 @@
 - [微前端思考与总结](https://mp.weixin.qq.com/s/YTiJ4UBgZs2om2SI6TUcmQ)
 - [【第2078期】iframe 接班人-微前端框架 qiankun 在中后台系统实践](https://mp.weixin.qq.com/s/duUxw82DizU15vqRrL_iOw)
 - [飞冰](https://ice.work/docs/icestark/about)
+- [微前端究竟是什么，可以带来什么收益](https://juejin.im/post/6893307922902679560)
 
 ## 联系作者
 
