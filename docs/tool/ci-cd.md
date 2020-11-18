@@ -153,6 +153,7 @@ Shared Runner 和 Specific Runner的区别
 - [记录一次 docker+jenkins+gitlab 搭建内网开发环境](https://mp.weixin.qq.com/s/c648RasQ6yg4NtOpAE55LA)
 - [docker + webhook 从零实现前端自动化部署](https://juejin.im/post/6845166890420011021)
 - [知乎部署系统演进](https://zhuanlan.zhihu.com/p/60627311)
+- [写给前端的 Jenkins 教程——10分钟实现前端/ Node.js 项目的 CI/CD](https://mp.weixin.qq.com/s/N81Yn67Lt1JLraDf_pKv9w)
 
 ## 联系作者
 

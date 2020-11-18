@@ -190,6 +190,7 @@ QPS(TPS)=并发数/平均响应时间
 - [京喜小程序体验评分优化实践](https://mp.weixin.qq.com/s/3JhouhVftgwcJxeoHZNm3w)
 - [腾讯音乐移动端页面通用性能优化实践](https://mp.weixin.qq.com/s/RdKV_2XNIlctriuNuhAfbA)
 - [前端性能优化 24 条建议（2020）](https://juejin.im/post/6892994632968306702)
+- [网页渲染性能优化 —— 渲染原理](https://zhuanlan.zhihu.com/p/39879808)
 
 ## 联系作者
 
