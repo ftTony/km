@@ -104,6 +104,7 @@ Javascript 代码中的语法单元主要包括以下这么几种：
 - [【第 1617 期】Webpack 是怎样运行的?](https://mp.weixin.qq.com/s/uc4fVViv4u86TTX2XsMgFA)
 - [理解 webpack 原理，手写一个 100 行的 webpack](https://zhuanlan.zhihu.com/p/58151131)
 - [揭秘 webpack 插件工作流程和原理](https://mp.weixin.qq.com/s/LI-SkBoPA94Ply6Qes92PA)
+= [webpack的异步加载原理及分包策略](https://segmentfault.com/a/1190000038180453)
 
 ## 联系作者
 
