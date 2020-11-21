@@ -57,20 +57,20 @@ module.exports = {
                 children: [
                     "es5-expression",
                     "es5-type",
+                    "es5-execution-context",
                     "es5-prototype",
-                    "es5-this",
                     "es5-closure",
+                    "es5-this",
+                    "es5-extends",
                     "es5-apply-call-bind",
                     "es5-dom",
                     "es5-event",
-                    "es5-execution-context",
-                    "es5-extends",
+                    "es5-scope",
                     "es5-fn",
                     "es5-news",
                     "es5-array",
                     "es5-object",
-                    "es5-reg",
-                    "es5-scope"
+                    "es5-reg"
                 ]
             },
             {
