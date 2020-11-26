@@ -411,6 +411,7 @@ Node 端的处理过程如下：
 - [JavaScript 事件循环：从起源到浏览器再到 Node.js](https://mp.weixin.qq.com/s/OudqDff3QvmBqIiD74LrTw)
 - [深入解析你不知道的 EventLoop 和浏览器渲染、帧动画、空闲回调（动图演示）](https://juejin.im/post/5ec73026f265da76da29cb25)
 - [如何解释Event Loop面试官才满意？](https://zhuanlan.zhihu.com/p/72507900)
+- [多图生动详解浏览器与Node环境下的Event Loop](https://mp.weixin.qq.com/s/WwMgYQRqsI6zD2cAmSs3AQ)
 
 ## 联系作者
 
