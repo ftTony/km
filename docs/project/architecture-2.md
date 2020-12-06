@@ -57,6 +57,7 @@
 - [MPM 卖场可视化搭建系统 — 架构流程设计](https://mp.weixin.qq.com/s/w3sT_K4NOfoTYcdkXu6_OA)
 - [当前端基建任务落到你身上，该如何推动协作？](https://mp.weixin.qq.com/s/Y0S0X_sx_6IlgXQIDd3DkQ)
 - [前端开发与架构师](https://juejin.im/post/5d7990a16fb9a06ad16f9d55)
+- [前端技术架构图谱](https://github.com/f2e-awesome/knowledge)
 - 《大型网站技术架构-核心原理与案例分析》
 
 ## 联系作者
