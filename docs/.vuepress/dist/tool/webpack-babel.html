@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>babel 学习 | 小武子知识库</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/hero.jpg">
+    <meta name="description" content="用心，谈技术。大前端">
+    
+    <link rel="preload" href="/assets/css/0.styles.0c763008.css" as="style"><link rel="preload" href="/assets/js/app.c0e6e248.js" as="script"><link rel="preload" href="/assets/js/2.95c27d7d.js" as="script"><link rel="preload" href="/assets/js/279.f5efdb65.js" as="script"><link rel="preload" href="/assets/js/3.e9403692.js" as="script"><link rel="prefetch" href="/assets/js/10.55459c06.js"><link rel="prefetch" href="/assets/js/100.979736e1.js"><link rel="prefetch" href="/assets/js/101.221faf61.js"><link rel="prefetch" href="/assets/js/102.94aedcca.js"><link rel="prefetch" href="/assets/js/103.f20c9812.js"><link rel="prefetch" href="/assets/js/104.315a1860.js"><link rel="prefetch" href="/assets/js/105.b1c1457e.js"><link rel="prefetch" href="/assets/js/106.d15e2ca0.js"><link rel="prefetch" href="/assets/js/107.a9aa8c09.js"><link rel="prefetch" href="/assets/js/108.dadba095.js"><link rel="prefetch" href="/assets/js/109.29b359ec.js"><link rel="prefetch" href="/assets/js/11.01d1c96d.js"><link rel="prefetch" href="/assets/js/110.f8caf907.js"><link rel="prefetch" href="/assets/js/111.cb06f760.js"><link rel="prefetch" href="/assets/js/112.b6f22b04.js"><link rel="prefetch" href="/assets/js/113.93ad072c.js"><link rel="prefetch" href="/assets/js/114.5b5e7b79.js"><link rel="prefetch" href="/assets/js/115.64a2e93b.js"><link rel="prefetch" href="/assets/js/116.67807b09.js"><link rel="prefetch" href="/assets/js/117.9d2d0bae.js"><link rel="prefetch" href="/assets/js/118.64be5c72.js"><link rel="prefetch" href="/assets/js/119.f8645233.js"><link rel="prefetch" href="/assets/js/12.52c45b75.js"><link rel="prefetch" href="/assets/js/120.33f78b92.js"><link rel="prefetch" href="/assets/js/121.68c62c07.js"><link rel="prefetch" href="/assets/js/122.6ac0bce5.js"><link rel="prefetch" href="/assets/js/123.2fbe615c.js"><link rel="prefetch" href="/assets/js/124.db2635d9.js"><link rel="prefetch" href="/assets/js/125.b9a55161.js"><link rel="prefetch" href="/assets/js/126.8a58009d.js"><link rel="prefetch" href="/assets/js/127.c2bef3ea.js"><link rel="prefetch" href="/assets/js/128.bce1d8c0.js"><link rel="prefetch" href="/assets/js/129.7db75c40.js"><link rel="prefetch" href="/assets/js/13.29d360fe.js"><link rel="prefetch" href="/assets/js/130.d51af23f.js"><link rel="prefetch" href="/assets/js/131.9f4f3763.js"><link rel="prefetch" href="/assets/js/132.cbfe0551.js"><link rel="prefetch" href="/assets/js/133.d56e5883.js"><link rel="prefetch" href="/assets/js/134.72718d19.js"><link rel="prefetch" href="/assets/js/135.e4b301a2.js"><link rel="prefetch" href="/assets/js/136.4c624f68.js"><link rel="prefetch" href="/assets/js/137.20fdc89b.js"><link rel="prefetch" href="/assets/js/138.a4a888fc.js"><link rel="prefetch" href="/assets/js/139.78817bdd.js"><link rel="prefetch" href="/assets/js/14.77482c04.js"><link rel="prefetch" href="/assets/js/140.834efd86.js"><link rel="prefetch" href="/assets/js/141.1fe471c0.js"><link rel="prefetch" href="/assets/js/142.da2e7c72.js"><link rel="prefetch" href="/assets/js/143.34d6dd1d.js"><link rel="prefetch" href="/assets/js/144.86e14680.js"><link rel="prefetch" href="/assets/js/145.a7693849.js"><link rel="prefetch" href="/assets/js/146.cbf95e38.js"><link rel="prefetch" href="/assets/js/147.6bd8239e.js"><link rel="prefetch" href="/assets/js/148.956aed02.js"><link rel="prefetch" href="/assets/js/149.1fcf5700.js"><link rel="prefetch" href="/assets/js/15.fb659717.js"><link rel="prefetch" href="/assets/js/150.bee6e3f2.js"><link rel="prefetch" href="/assets/js/151.9ebfe7de.js"><link rel="prefetch" href="/assets/js/152.1b2879bd.js"><link rel="prefetch" href="/assets/js/153.c4e12f19.js"><link rel="prefetch" href="/assets/js/154.6dfa976e.js"><link rel="prefetch" href="/assets/js/155.3dc3dff8.js"><link rel="prefetch" href="/assets/js/156.cd6e2787.js"><link rel="prefetch" href="/assets/js/157.ecc4c737.js"><link rel="prefetch" href="/assets/js/158.a2ec8adc.js"><link rel="prefetch" href="/assets/js/159.5e7798da.js"><link rel="prefetch" href="/assets/js/16.21715c63.js"><link rel="prefetch" href="/assets/js/160.99b23434.js"><link rel="prefetch" href="/assets/js/161.db46840f.js"><link rel="prefetch" href="/assets/js/162.a5b22316.js"><link rel="prefetch" href="/assets/js/163.21333d52.js"><link rel="prefetch" href="/assets/js/164.1f975bdc.js"><link rel="prefetch" href="/assets/js/165.e2012583.js"><link rel="prefetch" href="/assets/js/166.06773b17.js"><link rel="prefetch" href="/assets/js/167.4bc25080.js"><link rel="prefetch" href="/assets/js/168.3a82aa57.js"><link rel="prefetch" href="/assets/js/169.3018185f.js"><link rel="prefetch" href="/assets/js/17.670573d5.js"><link rel="prefetch" href="/assets/js/170.8936fbb2.js"><link rel="prefetch" href="/assets/js/171.dc6f6900.js"><link rel="prefetch" href="/assets/js/172.eedaccbd.js"><link rel="prefetch" href="/assets/js/173.c844546f.js"><link rel="prefetch" href="/assets/js/174.d20cd29c.js"><link rel="prefetch" href="/assets/js/175.6cf88876.js"><link rel="prefetch" href="/assets/js/176.04fa621e.js"><link rel="prefetch" href="/assets/js/177.cd30bc38.js"><link rel="prefetch" href="/assets/js/178.ced35bd4.js"><link rel="prefetch" href="/assets/js/179.a6219453.js"><link rel="prefetch" href="/assets/js/18.806c513e.js"><link rel="prefetch" href="/assets/js/180.f3514b7d.js"><link rel="prefetch" href="/assets/js/181.eda890f2.js"><link rel="prefetch" href="/assets/js/182.715a83d2.js"><link rel="prefetch" href="/assets/js/183.d4c63d89.js"><link rel="prefetch" href="/assets/js/184.a6c1307c.js"><link rel="prefetch" href="/assets/js/185.5b06b5fe.js"><link rel="prefetch" href="/assets/js/186.7694f778.js"><link rel="prefetch" href="/assets/js/187.b5ec80a1.js"><link rel="prefetch" href="/assets/js/188.c3bfc8c4.js"><link rel="prefetch" href="/assets/js/189.953765e3.js"><link rel="prefetch" href="/assets/js/19.78101a53.js"><link rel="prefetch" href="/assets/js/190.ad16fe45.js"><link rel="prefetch" href="/assets/js/191.4df29c79.js"><link rel="prefetch" href="/assets/js/192.6ca4d558.js"><link rel="prefetch" href="/assets/js/193.cddcb53e.js"><link rel="prefetch" href="/assets/js/194.ff774765.js"><link rel="prefetch" href="/assets/js/195.73e67053.js"><link rel="prefetch" href="/assets/js/196.59b60e08.js"><link rel="prefetch" href="/assets/js/197.bd02a76b.js"><link rel="prefetch" href="/assets/js/198.0f31256e.js"><link rel="prefetch" href="/assets/js/199.b16eff53.js"><link rel="prefetch" href="/assets/js/20.a8d2fc52.js"><link rel="prefetch" href="/assets/js/200.f150de80.js"><link rel="prefetch" href="/assets/js/201.126a0e4f.js"><link rel="prefetch" href="/assets/js/202.1c7c4c65.js"><link rel="prefetch" href="/assets/js/203.38f7ff3c.js"><link rel="prefetch" href="/assets/js/204.294df981.js"><link rel="prefetch" href="/assets/js/205.9e25e35a.js"><link rel="prefetch" href="/assets/js/206.841ab598.js"><link rel="prefetch" href="/assets/js/207.f730319d.js"><link rel="prefetch" href="/assets/js/208.b4fcd3e9.js"><link rel="prefetch" href="/assets/js/209.95a87d7b.js"><link rel="prefetch" href="/assets/js/21.eb35b9f1.js"><link rel="prefetch" href="/assets/js/210.69f1e0bb.js"><link rel="prefetch" href="/assets/js/211.07fc0dbd.js"><link rel="prefetch" href="/assets/js/212.fc3748b2.js"><link rel="prefetch" href="/assets/js/213.f5a4b09e.js"><link rel="prefetch" href="/assets/js/214.4b0381ab.js"><link rel="prefetch" href="/assets/js/215.15678e44.js"><link rel="prefetch" href="/assets/js/216.ac94f0f1.js"><link rel="prefetch" href="/assets/js/217.920d0adf.js"><link rel="prefetch" href="/assets/js/218.5e05db83.js"><link rel="prefetch" href="/assets/js/219.66e5d241.js"><link rel="prefetch" href="/assets/js/22.af8dae44.js"><link rel="prefetch" href="/assets/js/220.e7231313.js"><link rel="prefetch" href="/assets/js/221.972b3641.js"><link rel="prefetch" href="/assets/js/222.91fb255b.js"><link rel="prefetch" href="/assets/js/223.ad64491b.js"><link rel="prefetch" href="/assets/js/224.30dca230.js"><link rel="prefetch" href="/assets/js/225.adab052f.js"><link rel="prefetch" href="/assets/js/226.34a0be2d.js"><link rel="prefetch" href="/assets/js/227.c0d3ee20.js"><link rel="prefetch" href="/assets/js/228.2aeaefd0.js"><link rel="prefetch" href="/assets/js/229.033e4089.js"><link rel="prefetch" href="/assets/js/23.a542dcb5.js"><link rel="prefetch" href="/assets/js/230.4a8509be.js"><link rel="prefetch" href="/assets/js/231.558ea837.js"><link rel="prefetch" href="/assets/js/232.d8344106.js"><link rel="prefetch" href="/assets/js/233.24b91ff6.js"><link rel="prefetch" href="/assets/js/234.143af17a.js"><link rel="prefetch" href="/assets/js/235.27208c92.js"><link rel="prefetch" href="/assets/js/236.f91cccfa.js"><link rel="prefetch" href="/assets/js/237.609f41b7.js"><link rel="prefetch" href="/assets/js/238.0e9dbc88.js"><link rel="prefetch" href="/assets/js/239.4bca5a19.js"><link rel="prefetch" href="/assets/js/24.bebc3fd0.js"><link rel="prefetch" href="/assets/js/240.505fbb80.js"><link rel="prefetch" href="/assets/js/241.364fc3f9.js"><link rel="prefetch" href="/assets/js/242.8f2bcb7e.js"><link rel="prefetch" href="/assets/js/243.e444d545.js"><link rel="prefetch" href="/assets/js/244.b722e92a.js"><link rel="prefetch" href="/assets/js/245.02ae3936.js"><link rel="prefetch" href="/assets/js/246.fa726b67.js"><link rel="prefetch" href="/assets/js/247.8d32305f.js"><link rel="prefetch" href="/assets/js/248.1758f1a7.js"><link rel="prefetch" href="/assets/js/249.1f3771b7.js"><link rel="prefetch" href="/assets/js/25.99a5ea92.js"><link rel="prefetch" href="/assets/js/250.e228c98e.js"><link rel="prefetch" href="/assets/js/251.3af79d2d.js"><link rel="prefetch" href="/assets/js/252.3e04b68c.js"><link rel="prefetch" href="/assets/js/253.6fbfe8dc.js"><link rel="prefetch" href="/assets/js/254.1c0ac586.js"><link rel="prefetch" href="/assets/js/255.80a26fbb.js"><link rel="prefetch" href="/assets/js/256.c3aaaf0c.js"><link rel="prefetch" href="/assets/js/257.7190679f.js"><link rel="prefetch" href="/assets/js/258.4943ab16.js"><link rel="prefetch" href="/assets/js/259.dcf70155.js"><link rel="prefetch" href="/assets/js/26.b7030b19.js"><link rel="prefetch" href="/assets/js/260.3be306d0.js"><link rel="prefetch" href="/assets/js/261.0ae95ea5.js"><link rel="prefetch" href="/assets/js/262.bb365195.js"><link rel="prefetch" href="/assets/js/263.0aa716fb.js"><link rel="prefetch" href="/assets/js/264.78a933c0.js"><link rel="prefetch" href="/assets/js/265.be0b27be.js"><link rel="prefetch" href="/assets/js/266.ea75c372.js"><link rel="prefetch" href="/assets/js/267.8fb51a0d.js"><link rel="prefetch" href="/assets/js/268.1de2cd46.js"><link rel="prefetch" href="/assets/js/269.9538f5e4.js"><link rel="prefetch" href="/assets/js/27.7e8d245c.js"><link rel="prefetch" href="/assets/js/270.096a1296.js"><link rel="prefetch" href="/assets/js/271.87e68697.js"><link rel="prefetch" href="/assets/js/272.5e6144f6.js"><link rel="prefetch" href="/assets/js/273.ef37f06f.js"><link rel="prefetch" href="/assets/js/274.3063ed39.js"><link rel="prefetch" href="/assets/js/275.c7d2ace2.js"><link rel="prefetch" href="/assets/js/276.039b6af9.js"><link rel="prefetch" href="/assets/js/277.b1538013.js"><link rel="prefetch" href="/assets/js/278.921015a3.js"><link rel="prefetch" href="/assets/js/28.417a693f.js"><link rel="prefetch" href="/assets/js/280.8b708dd7.js"><link rel="prefetch" href="/assets/js/281.32c7d7d9.js"><link rel="prefetch" href="/assets/js/282.bca40967.js"><link rel="prefetch" href="/assets/js/283.dc65e580.js"><link rel="prefetch" href="/assets/js/284.c094dc03.js"><link rel="prefetch" href="/assets/js/285.8da857a9.js"><link rel="prefetch" href="/assets/js/286.f6fc008f.js"><link rel="prefetch" href="/assets/js/287.579299eb.js"><link rel="prefetch" href="/assets/js/288.def44f5f.js"><link rel="prefetch" href="/assets/js/289.249367fd.js"><link rel="prefetch" href="/assets/js/29.e74a8793.js"><link rel="prefetch" href="/assets/js/290.51e83cbc.js"><link rel="prefetch" href="/assets/js/30.2ada8ef8.js"><link rel="prefetch" href="/assets/js/31.0fa0fe16.js"><link rel="prefetch" href="/assets/js/32.ee957bcf.js"><link rel="prefetch" href="/assets/js/33.3da559bf.js"><link rel="prefetch" href="/assets/js/34.dc25f4d2.js"><link rel="prefetch" href="/assets/js/35.fa475c71.js"><link rel="prefetch" href="/assets/js/36.a2175633.js"><link rel="prefetch" href="/assets/js/37.6ea8f9a4.js"><link rel="prefetch" href="/assets/js/38.a80cc766.js"><link rel="prefetch" href="/assets/js/39.acc0d98a.js"><link rel="prefetch" href="/assets/js/4.ff22f931.js"><link rel="prefetch" href="/assets/js/40.98cc10f0.js"><link rel="prefetch" href="/assets/js/41.50ce2979.js"><link rel="prefetch" href="/assets/js/42.1c3175a0.js"><link rel="prefetch" href="/assets/js/43.bfe278c0.js"><link rel="prefetch" href="/assets/js/44.1632f7a8.js"><link rel="prefetch" href="/assets/js/45.9fb9fe8b.js"><link rel="prefetch" href="/assets/js/46.312723aa.js"><link rel="prefetch" href="/assets/js/47.9a486a43.js"><link rel="prefetch" href="/assets/js/48.b58bbdbe.js"><link rel="prefetch" href="/assets/js/49.f9594351.js"><link rel="prefetch" href="/assets/js/5.8402f590.js"><link rel="prefetch" href="/assets/js/50.c7ee805f.js"><link rel="prefetch" href="/assets/js/51.af3c953e.js"><link rel="prefetch" href="/assets/js/52.0117b04d.js"><link rel="prefetch" href="/assets/js/53.c0accba1.js"><link rel="prefetch" href="/assets/js/54.19574e6e.js"><link rel="prefetch" href="/assets/js/55.854ebf03.js"><link rel="prefetch" href="/assets/js/56.2876c393.js"><link rel="prefetch" href="/assets/js/57.2015b2b4.js"><link rel="prefetch" href="/assets/js/58.ea17fa42.js"><link rel="prefetch" href="/assets/js/59.b8b54acf.js"><link rel="prefetch" href="/assets/js/6.49e43e20.js"><link rel="prefetch" href="/assets/js/60.eaab2243.js"><link rel="prefetch" href="/assets/js/61.87d7aa63.js"><link rel="prefetch" href="/assets/js/62.e3e52dc6.js"><link rel="prefetch" href="/assets/js/63.a354853d.js"><link rel="prefetch" href="/assets/js/64.c7954f0d.js"><link rel="prefetch" href="/assets/js/65.cfc29f1c.js"><link rel="prefetch" href="/assets/js/66.3b86207c.js"><link rel="prefetch" href="/assets/js/67.876b4986.js"><link rel="prefetch" href="/assets/js/68.1fa63c02.js"><link rel="prefetch" href="/assets/js/69.d4036cbb.js"><link rel="prefetch" href="/assets/js/7.4258fd2a.js"><link rel="prefetch" href="/assets/js/70.bb9df0cf.js"><link rel="prefetch" href="/assets/js/71.6fccae14.js"><link rel="prefetch" href="/assets/js/72.71df66fa.js"><link rel="prefetch" href="/assets/js/73.d1a322b0.js"><link rel="prefetch" href="/assets/js/74.c537a104.js"><link rel="prefetch" href="/assets/js/75.4972e8bf.js"><link rel="prefetch" href="/assets/js/76.fa44b618.js"><link rel="prefetch" href="/assets/js/77.c29e5132.js"><link rel="prefetch" href="/assets/js/78.7d92b430.js"><link rel="prefetch" href="/assets/js/79.308181de.js"><link rel="prefetch" href="/assets/js/8.ca0c9873.js"><link rel="prefetch" href="/assets/js/80.ce541bcd.js"><link rel="prefetch" href="/assets/js/81.be7f983b.js"><link rel="prefetch" href="/assets/js/82.f40c645f.js"><link rel="prefetch" href="/assets/js/83.95f37310.js"><link rel="prefetch" href="/assets/js/84.627c3517.js"><link rel="prefetch" href="/assets/js/85.e70e72c4.js"><link rel="prefetch" href="/assets/js/86.0c5e2f61.js"><link rel="prefetch" href="/assets/js/87.f417dab7.js"><link rel="prefetch" href="/assets/js/88.2be78ecd.js"><link rel="prefetch" href="/assets/js/89.95820484.js"><link rel="prefetch" href="/assets/js/9.0b3f9e20.js"><link rel="prefetch" href="/assets/js/90.fdd86251.js"><link rel="prefetch" href="/assets/js/91.67916501.js"><link rel="prefetch" href="/assets/js/92.90a9c9a0.js"><link rel="prefetch" href="/assets/js/93.095c4ae9.js"><link rel="prefetch" href="/assets/js/94.ee58e3a1.js"><link rel="prefetch" href="/assets/js/95.8cdf233a.js"><link rel="prefetch" href="/assets/js/96.afd52c5b.js"><link rel="prefetch" href="/assets/js/97.4d635846.js"><link rel="prefetch" href="/assets/js/98.bfa2d297.js"><link rel="prefetch" href="/assets/js/99.444f9853.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0c763008.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">小武子知识库</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/js/" class="nav-link">
+  javascript
+</a></div><div class="nav-item"><a href="/css/" class="nav-link">
+  css
+</a></div><div class="nav-item"><a href="/html5/" class="nav-link">
+  HTML5
+</a></div><div class="nav-item"><a href="/tool/" class="nav-link router-link-active">
+  工具
+</a></div><div class="nav-item"><a href="/project/" class="nav-link">
+  软件工程
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  计算机基础
+</a></div><div class="nav-item"><a href="/interview/" class="nav-link">
+  面试题
+</a></div><div class="nav-item"><a href="/materials/" class="nav-link">
+  资料收集
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于作者
+</a></div><div class="nav-item"><a href="https://www.github.com/fttony" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/js/" class="nav-link">
+  javascript
+</a></div><div class="nav-item"><a href="/css/" class="nav-link">
+  css
+</a></div><div class="nav-item"><a href="/html5/" class="nav-link">
+  HTML5
+</a></div><div class="nav-item"><a href="/tool/" class="nav-link router-link-active">
+  工具
+</a></div><div class="nav-item"><a href="/project/" class="nav-link">
+  软件工程
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  计算机基础
+</a></div><div class="nav-item"><a href="/interview/" class="nav-link">
+  面试题
+</a></div><div class="nav-item"><a href="/materials/" class="nav-link">
+  资料收集
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于作者
+</a></div><div class="nav-item"><a href="https://www.github.com/fttony" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>git版本工具</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/git.html" class="sidebar-link">git 常用命令与 gitflow 工作流</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>WEB集成化</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/ci-cd.html" class="sidebar-link">CI 与 CD 介绍</a></li><li><a href="/tool/npm-2.html" class="sidebar-link">npm 相关参数</a></li><li><a href="/tool/npm-1.html" class="sidebar-link">私有 npm 仓库搭建</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>webpack打包</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/webpack-basic.html" class="sidebar-link">webpack 配置</a></li><li><a href="/tool/webpack-babel.html" aria-current="page" class="active sidebar-link">babel 学习</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/tool/webpack-babel.html#前言" class="sidebar-link">前言</a></li><li class="sidebar-sub-header"><a href="/tool/webpack-babel.html#内容" class="sidebar-link">内容</a></li><li class="sidebar-sub-header"><a href="/tool/webpack-babel.html#联系作者" class="sidebar-link">联系作者</a></li></ul></li><li><a href="/tool/webpack-plugin.html" class="sidebar-link">webpack 插件及自定义插件</a></li><li><a href="/tool/webpack-loader.html" class="sidebar-link">常用 loader 及手写 loader</a></li><li><a href="/tool/webpack-optimize.html" class="sidebar-link">webpack 打包优化</a></li><li><a href="/tool/webpack-principle.html" class="sidebar-link">webpack 原理</a></li><li><a href="/tool/webpack-hmr.html" class="sidebar-link">Webpack HMR 原理解析（转载）</a></li><li><a href="/tool/webpack-coder.html" class="sidebar-link">webpack 源码分析</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>其它打包工具</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/gulp-basic.html" class="sidebar-link">gulp 入门学习</a></li><li><a href="/tool/rollup-basic.html" class="sidebar-link">rollup常用配置</a></li><li><a href="/tool/pm2.html" class="sidebar-link">pm2 工具</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>自定义脚手架</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/cli.html" class="sidebar-link">自定义脚手架</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>容器工具</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/docker.html" class="sidebar-link">docker 学习</a></li><li><a href="/tool/k8s.html" class="sidebar-link">Kubernetes学习</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>ngnix配置</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/nginx.html" class="sidebar-link">nginx 常用配置</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="babel-学习"><a href="#babel-学习" class="header-anchor">#</a> babel 学习</h1> <h2 id="前言"><a href="#前言" class="header-anchor">#</a> 前言</h2> <p>Babel 是 JavaScript 编译器，更确切地说是源码到源码的编译器，通常也叫做“转换编译器”。意思是说你为 Babel 提供一些 JavaScript 代码，Babel 更改这些代码，然后返回给你新生成的代码。</p> <h2 id="内容"><a href="#内容" class="header-anchor">#</a> 内容</h2> <ul><li><a href="#%E4%B8%80%E3%80%81%E6%8A%BD%E8%B1%A1%E8%AF%AD%E6%B3%95%E6%A0%91">抽象语法树</a></li> <li><a href="#%E4%BA%8C%E3%80%81babel-%E7%9A%84%E5%A4%84%E7%90%86%E6%AD%A5%E9%AA%A4">Babel 的处理步骤</a></li> <li><a href="#%E4%B8%89%E3%80%81babel-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">Babel 使用方法</a></li> <li><a href="#%E5%9B%9B%E3%80%81%E5%85%B6%E4%BB%96%E9%85%8D%E5%A5%97%E5%B7%A5%E5%85%B7">其他配套工具</a></li> <li><a href="#%E4%BA%94%E3%80%81babel-%E6%8F%92%E4%BB%B6%E5%AE%9E%E8%B7%B5">Babel 插件实践</a></li></ul> <h3 id="一、抽象语法树"><a href="#一、抽象语法树" class="header-anchor">#</a> 一、抽象语法树</h3> <p>这个处理过程中的每一步都涉及到创建或是操作抽象语法树，亦称 AST。</p> <blockquote><p>Babel 使用一个基于 ESTree 并修改过的 AST，它的内核说明文档可以在<a href="https://github.com/babel/babel/blob/master/doc/ast/spec.md" target="_blank" rel="noopener noreferrer">这里<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>找到。</p></blockquote> <div class="language- line-numbers-mode"><pre class="language-text"><code>function square(n) {
+  return n * n;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><blockquote><p><a href="http://astexplorer.net/" target="_blank" rel="noopener noreferrer">AST Explorer<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>可以让你对 AST 节点有一个更好的感性认识。 <a href="http://astexplorer.net/#/Z1exs6BWMq" target="_blank" rel="noopener noreferrer">这里<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>是上述代码的一个示例链接。</p></blockquote> <p>这个程序可以被表示成如下的一棵树：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>- FunctionDeclaration:
+  - id:
+    - Identifier:
+      - name: square
+  - params [1]
+    - Identifier
+      - name: n
+  - body:
+    - BlockStatement
+      - body [1]
+        - ReturnStatement
+          - argument
+            - BinaryExpression
+              - operator: *
+              - left
+                - Identifier
+                  - name: n
+              - right
+                - Identifier
+                  - name: n
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><p>或是如下所示的 JavaScript Object（对象）：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>{
+  type: &quot;FunctionDeclaration&quot;,
+  id: {
+    type: &quot;Identifier&quot;,
+    name: &quot;square&quot;
+  },
+  params: [{
+    type: &quot;Identifier&quot;,
+    name: &quot;n&quot;
+  }],
+  body: {
+    type: &quot;BlockStatement&quot;,
+    body: [{
+      type: &quot;ReturnStatement&quot;,
+      argument: {
+        type: &quot;BinaryExpression&quot;,
+        operator: &quot;*&quot;,
+        left: {
+          type: &quot;Identifier&quot;,
+          name: &quot;n&quot;
+        },
+        right: {
+          type: &quot;Identifier&quot;,
+          name: &quot;n&quot;
+        }
+      }
+    }]
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><p>你会留意到 AST 的每一层都拥有相同的结构：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>{
+  type: &quot;FunctionDeclaration&quot;,
+  id: {...},
+  params: [...],
+  body: {...}
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>{
+  type: &quot;Identifier&quot;,
+  name: ...
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>{
+  type: &quot;BinaryExpression&quot;,
+  operator: ...,
+  left: {...},
+  right: {...}
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><blockquote><p>注意：出于简化的目的移除了某些属性</p></blockquote> <p>这样的每一层结构也被叫做<strong>节点（Node）</strong>。一个 AST 可以由单一的节点或是成百上千个节点构成。它们组合在一些可以描述用于静态分析的程序语法。</p> <p>每一个节点都有如下所示的接口（Interface）：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>interface Node {
+  type: string;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>字符串形式的<code>type</code>字段表示节点的类型（如：<code>&quot;FunctionDeclaration&quot;</code>，<code>&quot;Identifier&quot;</code>，<code>&quot;BinaryExpression&quot;</code>）。每一种类型的节点定义了一些附加属性用来进一步描述该节点类型。</p> <p>Babel 还为每个节点额外生成了一些属性，用于描述该节点在原始代码中的位置。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>{
+  type: ...,
+  start: 0,
+  end: 38,
+  loc: {
+    start: {
+      line: 1,
+      column: 0
+    },
+    end: {
+      line: 3,
+      column: 1
+    }
+  },
+  ...
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>每一个节点都会有<code>start</code>，<code>end</code>，<code>loc</code>这几个属性。</p> <h3 id="二、babel-的处理步骤"><a href="#二、babel-的处理步骤" class="header-anchor">#</a> 二、Babel 的处理步骤</h3> <p>Babel 的三个主要处理步骤分别是：<strong>解析(parse)</strong>，<strong>转换(transform)</strong>，<strong>生成(generate)</strong>。</p> <h4 id="_2-1-解析"><a href="#_2-1-解析" class="header-anchor">#</a> 2.1 解析</h4> <p>将代码解析成抽象语法树(AST)，每个 js 引擎(比如 Chrome 浏览器中的 V8 引擎)都有自己的 AST 解析器，而 Babel 是通过<a href="https://github.com/babel/babylon" target="_blank" rel="noopener noreferrer">Babylon<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>实现的。在解析过程中有两个阶段：<strong>词法分析</strong>和<strong>语法分析</strong>，词法分析阶段把字符串形式的代码转换为<strong>令牌</strong>(tokens)流，令牌类似于 AST 中节点；而语法分析阶段则会把一个令牌流转换成 AST 的形式，同时这个阶段会把令牌中的信息转换成 AST 的表述结构。</p> <p><strong>词法分析</strong></p> <p>词法分析阶段把字符串形式的代码转换为<strong>令牌</strong>流。</p> <p>你可以把令牌看作是一个扁平的语法片段数组：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>n * n;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>[
+  { type: { ... }, value: &quot;n&quot;, start: 0, end: 1, loc: { ... } },
+  { type: { ... }, value: &quot;*&quot;, start: 2, end: 3, loc: { ... } },
+  { type: { ... }, value: &quot;n&quot;, start: 4, end: 5, loc: { ... } },
+  ...
+]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>每一个<code>type</code>有一组属性来描述该令牌：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>{
+  type: {
+    label: 'name',
+    keyword: undefined,
+    beforeExpr: false,
+    startsExpr: true,
+    rightAssociative: false,
+    isLoop: false,
+    isAssign: false,
+    prefix: false,
+    postfix: false,
+    binop: null,
+    updateContext: null
+  },
+  ...
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>和 AST 节点一样它们也有<code>start</code>、<code>end</code>、<code>loc</code>属性。</p> <p><strong>语法分析</strong></p> <p>语法分析阶段会把一个令牌流转换成 AST 的形式。这个阶段会使用令牌中的信息把它们转换成一个 AST 的表述结构，这样更易于后续的操作。</p> <h4 id="_2-2-转换"><a href="#_2-2-转换" class="header-anchor">#</a> 2.2 转换</h4> <p>转换步骤接收 AST 并对其进行遍历，在此过程中对节点进行添加、更新及移除等操作。这是 Babel 或是其他编译器中最复杂的过程同时也是插件将要介入工作的部分。</p> <h4 id="_2-3-生成"><a href="#_2-3-生成" class="header-anchor">#</a> 2.3 生成</h4> <p>代码生成步骤把最终（经过一系列转换之后）的 AST 转换成字符串形式的代码，同时还会创建源码映射。</p> <p>代码生成其实很简单：深度优先遍历整个 AST，然后构建可以表示转换后代码的字符串。</p> <p>为了了解 Babel 在遍历时处理 AST 的具体过程，我们还需要了解下面几个重要知识点。</p> <h4 id="_2-4-visitor"><a href="#_2-4-visitor" class="header-anchor">#</a> 2.4 Visitor</h4> <p>当 Babel 处理一个节点时，是以访问者的形式获取节点信息，并进行相关操作，这种方式是通过一个 visitor 对象来完成的，在 visitor 对象中定义了对于各种节点的访问函数，这样就可以针对不同的节点做出不同的处理。我们编写的 Babel 插件其实也是通过定义一个实例化 visitor 对象处理一系列的 AST 节点来完成我们圣代的修改操作。举个例子：</p> <p>我们想要处理代码中用来加载模块的 import 命令语句</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>import { Ajax } from '../lib/utils';
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>那么我们的 Babel 插件就需要定义这样的一个 visitor 对象：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>visitor: {
+            Program: {
+                enter(path, state) {
+                    console.log('start processing this module...');
+                },
+                exit(path, state) {
+                    console.log('end processing this module!');
+                }
+            },
+    	    ImportDeclaration (path, state) {
+            	console.log('processing ImportDeclaration...');
+            	// do something
+            }
+	}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>当把这个插件用于遍历中时，每当处理到一个 import 语句，即 ImportDeclaration 节点时，都会自动调用 ImportDeclaration()方法，这个方法中定义了处理 import 语句具体操作。ImportDeclaration()都是在进入 ImportDeclaration 节点时调用的，我们也可以让插件在退出节点时调用方法进行处理。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>visitor: {
+            ImportDeclaration: {
+                enter(path, state) {
+                    console.log('start processing ImportDeclaration...');
+                    // do something
+                },
+                exit(path, state) {
+                    console.log('end processing ImportDeclaration!');
+                    // do something
+                }
+            },
+	}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>当进入 ImportDeclaration 节点时调用 enter()方法，退出 ImportDeclaration 节点时调用 exit()方法。上面的 Program 节点（Program 节点可以通俗地解释为一个模块节点）也是一样的道理。值得注意的是，AST 的遍历采用深度优先遍历，所以上述 import 代码块的 AST 遍历的过程如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>─ Program.enter()
+  ─ ImportDeclaration.enter()
+  ─ ImportDeclaration.exit()
+─ Program.exit()
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h4 id="_2-5-path"><a href="#_2-5-path" class="header-anchor">#</a> 2.5 Path</h4> <p>从上面的 visitor 对象中，可以看到每次访问节点方法时，都会传入一个 path 参数，这个 path 参数中包含了节点的信息以及节点和所在的位置，以供对特定节点进行操作。具体来说 Path 是表示两个节点之间连接的对象。这个对象不仅包含了当前节点的信息，也有当前节点的父节点的信息，同时也包含了添加、更新、移动和删除节点有关的其他很多方法。具体地，Path 对象包含的属性和方法主要如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>── 属性
+  - node   当前节点
+  - parent  父节点
+  - parentPath 父path
+  - scope   作用域
+  - context  上下文
+  - ...
+── 方法
+  - get   当前节点
+  - findParent  向父节点搜寻节点
+  - getSibling 获取兄弟节点
+  - replaceWith  用AST节点替换该节点
+  - replaceWithMultiple 用多个AST节点替换该节点
+  - insertBefore  在节点前插入节点
+  - insertAfter 在节点后插入节点
+  - remove   删除节点
+  - ...
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h4 id="_2-6-state"><a href="#_2-6-state" class="header-anchor">#</a> 2.6 State</h4> <p>状态是抽象语法树 AST 转换的敌人，状态管理会不断牵扯我们的精力，而且几乎所有你对状态的假设，总是会有一些未考虑到的语法最终证明你的假设是错误的。</p> <h4 id="_2-7-scopes-作用域"><a href="#_2-7-scopes-作用域" class="header-anchor">#</a> 2.7 Scopes(作用域)</h4> <p>这里的作用域其实跟 js 说的作用域是一个道理，也就是说 babel 在处理 AST 时也需要考虑作用域的问题，比如函数内外的同名变量需要区分开来，这里直接拿 Babel 手册里的一个例子解释一下。考虑下列代码：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function square(n) {
+  return n * n;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>我们来写一个把 n 重命名为 x 的 visitor。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>visitor: {
+	    FunctionDeclaration(path) {
+                const param = path.node.params[0];
+                paramName = param.name;
+                param.name = &quot;x&quot;;
+             },
+
+            Identifier(path) {
+                if (path.node.name === paramName) {
+                  path.node.name = &quot;x&quot;;
+                }
+             }
+	}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h3 id="三、babel-使用方法"><a href="#三、babel-使用方法" class="header-anchor">#</a> 三、Babel 使用方法</h3> <ul><li>使用方法</li> <li>插件</li> <li>配置文件</li> <li>preset</li> <li>执行顺序</li> <li>插件和 preset 的配置项</li> <li>env (重点)</li></ul> <h4 id="_3-1-使用方法"><a href="#_3-1-使用方法" class="header-anchor">#</a> 3.1 使用方法</h4> <p>总共存在三种方法：</p> <ul><li>使用单体文件(standalone script)</li> <li>命令行(cli)</li> <li>构建工具的插件(webpack 的 babel-loader,rollup 的 rollup-plugin-babel)。</li></ul> <p>其中后面两种比较常见。第二种多见于 package.json 中的<code>scripts</code>段落中的某条命令；第三种就直接集成到构建工具中。</p> <p>这三种方式只有入口不同而已，调用的 babel 内核，处理方式都是一样的，所以我们先不纠结入口的问题。</p> <h4 id="_3-2-插件"><a href="#_3-2-插件" class="header-anchor">#</a> 3.2 插件</h4> <p>babel 本身不具有任何转化功能，它把转化的功能都分解到一个个 plugin 里面。因此当我们不配置任何插件时，经过 babel 的代码和输入是相同的。</p> <p>插件总共分为两种：</p> <ul><li>当我们添加<strong>语法插件</strong>之后，在解析这一步就使得 babel 能够解析更多的语法。（顺带一提，babel 内部使用的解析类库叫做 babylon，并非 babel 自行开发）</li></ul> <p>举个简单的例子，当我们定义或者调用方法时，最后一个参数之后是不允许增加逗号的，如<code>callFoo(param1, param2,)</code>就是非法的。如果源码是这种写法，经过 babel 之后就会提示语法错误。</p> <p>但最近的 JS 提案中已经允许了这种新的写法(让代码 diff 更加清晰)。为了避免 babel 报错，就需要增加语法插件<code>babel-plugin-syntax-trailing-function-commas</code></p> <ul><li>当我们添加<strong>转译插件</strong>之后，在转换这一步把源码转换并输出。这也是我们使用 babel 最本质的需求。</li></ul> <p>比起语法插件，转译插件其实更好理解，比如箭头函数<code>(a) =&gt; a</code>就会转化为<code>function (a) {return a}</code>。完成这个工作的插件叫做<code>babel-plugin-transform-es2015-arrow-functions</code>。</p> <p>同一类语法可能同时存在语法插件版本和转译插件版本。如果我们使用了转译插件，就不用再使用语法插件了。</p> <h4 id="_3-3-配置文件"><a href="#_3-3-配置文件" class="header-anchor">#</a> 3.3 配置文件</h4> <p>既然插件是 babel 的根本，那如何使用呢？总共分为 2 个步骤：</p> <ol><li>将插件的名字增加到配置文件中(根目录下创建 .babelrc 或者 package.json 的<code>babel</code>里面，格式相同)</li> <li>使用<code>npm install babel-plugin-xxx</code>进行安装</li></ol> <h4 id="_3-4-preset"><a href="#_3-4-preset" class="header-anchor">#</a> 3.4 preset</h4> <p>preset 分为以下几种：</p> <ol><li>官方内容，目前包括 env,react, flow, minify 等。这里最重要的是 env，后面会详细介绍。</li> <li>stage-x，这里面包含的都是当年最新规范的草案，每年更新。
+<ul><li>Stage 0 - 稻草人：只是一个想法，经过 TC39 成员提出即可。</li> <li>Stage 1 - 提案：初步尝试。</li> <li>Stage 2 - 初稿：完成初步规范。</li> <li>Stage 3 - 候选：完成规范和浏览器初步实现。</li> <li>Stage 4 - 完成：将被添加到下一年度发布。
+例如<code>syntax-dynamic-import</code>就是 stage-2 的内容，<code>transform-object-rest-spread</code>就是 stage-3 的内容。</li></ul></li></ol> <p>此外，低一级的 stage 会包含所有高级 stage 的内容，例如 stage-1 会包含 stage-2, stage-3 的所有内容。</p> <p>stage-4 在下一年更新会直接放到 env 中，所以没有单独的 stage-4 可供使用。</p> <ol start="3"><li>es201x,latest</li></ol> <p>这些是已经纳入到标准规范的语法。例如 es2015 包含 <code>arrow-functions</code>，es2017 包含 <code>syntax-trailing-function-commas</code>。但因为 env 的出现，使得 es2016 和 es2017 都已经废弃。所以我们经常可以看到 es2015 被单独列出来，但极少看到其他两个。</p> <p>latest 是 env 的雏形，它是一个每年更新的 preset，目的是包含所有 es201x。但也是因为更加灵活的 env 的出现，已经废弃。</p> <h4 id="_3-5-执行顺序"><a href="#_3-5-执行顺序" class="header-anchor">#</a> 3.5 执行顺序</h4> <p>很简单的几条原则：</p> <ul><li>Plugin 会运行在 Preset 之前。</li> <li>Plugin 会从前到后顺序执行。</li> <li>Preset 的顺序则<strong>刚好相反</strong>(从后向前)。</li></ul> <p>preset 的逆向顺序主要是为了保证向后兼容，因为大多数用户的编写顺序是<code>['es2015', 'stage-0']</code>。这样必须先执行<code>stage-0</code>才能确保 babel 不报错。因此我们编排 preset 的时候，也要注意顺序，<strong>其实只要按照规范的时间顺序列出即可</strong>。</p> <h4 id="_3-6-插件和-preset-的配置项"><a href="#_3-6-插件和-preset-的配置项" class="header-anchor">#</a> 3.6 插件和 preset 的配置项</h4> <p>简略情况下，插件和 preset 只要列出字符串格式的名字即可。但如果某个 preset 或者插件需要一些配置项(或者说参数)，就需要把自己先变成数组。第一个元素依然是字符串，表示自己的名字；第二个元素是一个对象，即配置对象。</p> <p>最需要配置的当属 env，如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&quot;presets&quot;: [
+    // 带了配置项，自己变成数组
+    [
+        // 第一个元素依然是名字
+        &quot;env&quot;,
+        // 第二个元素是对象，列出配置项
+        {
+          &quot;module&quot;: false
+        }
+    ],
+
+    // 不带配置项，直接列出名字
+    &quot;stage-2&quot;
+]
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h4 id="_3-7-env-重点"><a href="#_3-7-env-重点" class="header-anchor">#</a> 3.7 env (重点)</h4> <p>因为 env 最为常用也最重要，所以我们必须重点关注。</p> <p>env 的核心目的是通过配置得知目标环境的特点，然后只做必要的转换。例如目标浏览器支持 es2015，那么 es2015 这个 preset 其实是不需要的，于是代码就可以小一点(一般转化后的代码总是更长)，构建时间也可以缩短一些。</p> <p>如果不写任何任何配置项，env 等价于 latest，也等价于 es2015 + es2016 + es2017 三个相加(不包含 stage-x 中的插件)。env 包含的插件列表维护在<a href="https://github.com/babel/babel-preset-env/blob/master/data/plugin-features.js" target="_blank" rel="noopener noreferrer">这里<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>下面列出几种比较常用的配置方法：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>{
+    &quot;presets&quot;:[
+        {
+            &quot;env&quot;:{
+                &quot;targets&quot;:[&quot;last 2 versions&quot;, &quot;safari &gt;= 7&quot;]
+            }
+        }
+    ]
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>如上配置将考虑所有浏览器的最新 2 个版本(safari 大于等于 7.0 的版本)的特性，将必要的代码进行转换。而这些版本已有的功能就不进行转化了。这里的语法可以参考<a href="https://github.com/browserslist/browserslist" target="_blank" rel="noopener noreferrer">browserslist<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>{
+  &quot;presets&quot;: [
+    [&quot;env&quot;, {
+      &quot;targets&quot;: {
+        &quot;node&quot;: &quot;6.10&quot;
+      }
+    }]
+  ]
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>如上配置将目标设置为 nodejs，并且支持 6.10 及鸡皮疙瘩版本。也可以使用<code>node: 'current'</code>来支持最新稳定版本。例如箭头函数在 nodejs6 及以上将不被转化，但如果 nodejs 0.12 就会被转化了。</p> <p>另外一个有用的配置项是<code>modules</code>。它的取值可以是<code>amd</code>, <code>umd</code>, <code>systemjs</code>, <code>commonjs</code> 和 <code>false</code>。这可以让 babel 以特定的模块化格式来输出代码。如果选择<code>false</code> 就不进行模块化处理。</p> <h3 id="四、其他配套工具"><a href="#四、其他配套工具" class="header-anchor">#</a> 四、其他配套工具</h3> <ul><li>babel-cli</li> <li>babel-node</li> <li>babel-register</li> <li>babel-polyfill</li> <li>babel-runtime 和 babel-plugin-transform-runtime</li> <li>babel-loader</li> <li>babylon</li> <li>babel-traverse</li> <li>babel-types</li></ul> <h4 id="_4-1-babel-cli"><a href="#_4-1-babel-cli" class="header-anchor">#</a> 4.1 babel-cli</h4> <p>顾名思义，cli 就是命令行工具。安装了<code>babel-cli</code>就能够在命令行中使用<code>babel</code>命令来编译文件。</p> <p>在开发 npm package 时经常会使用如下模式：</p> <ul><li>把<code>babel-cli</code>安装为<code>devDependencies</code></li> <li>在 package.json 中添加<code>scripts</code>(比如<code>prepublish</code>)，使用<code>babel</code>命令编译文件</li> <li><code>npm puhlish</code></li></ul> <p>这样既可以使用较新规范的 JS 语法编写源码，同时又能支持旧版环境。因为项目可能不太大，用不到构建工具(webpack 或者 rollup)，于是在发布之前用<code>babel-cli</code>进行处理。</p> <h4 id="_4-2-babel-node"><a href="#_4-2-babel-node" class="header-anchor">#</a> 4.2 babel-node</h4> <p><code>babel-node</code>是<code>babel-cli</code>的一部分，它不需要单独安装。</p> <p>它的作用是在 node 环境中，直接运行 es2015 的代码，而不需要额外进行转码。例如我们有一个 js 文件以 es2015 的语法进行编写进行编写(如使用了箭头函数)。我们可以直接使用<code>babel-node es2015.js</code>进行执行，而不用再进行转码了。</p> <p>可以说：<code>babel-node</code> = <code>babel-polyfill</code> + <code>babel-register</code>。</p> <h4 id="_4-3-babel-register"><a href="#_4-3-babel-register" class="header-anchor">#</a> 4.3 babel-register</h4> <p>babel-register 模块必写<code>require</code>命令，为它加上一个钩子。此后，每当使用<code>require</code>加载<code>.js</code>、<code>.jsx</code>、<code>.es</code>和<code>.es6</code>后缀名的文件，就会先用 babel 进行转码。</p> <p>使用时，必须首先加载<code>require('babel-register')</code>。</p> <p>需要注意的是，babel-register 只会对<code>require</code>命令加载的文件转码，而<strong>不会对当前文件转码</strong>。</p> <p>另外，由于它是实时转码，所以<strong>只适合在开发环境使用</strong>。</p> <h4 id="_4-4-babel-polyfill"><a href="#_4-4-babel-polyfill" class="header-anchor">#</a> 4.4 babel-polyfill</h4> <p>babel 默认只转换 js 语法，而不转换新的 API，比如 Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise 等全局对象，以及一些定义在全局对象上的方法(比如<code>Object.assign</code>)都不会转码。</p> <p>举例来说，es2015 在 Array 对象上新增了<code>Array.from</code>方法。babel 就不会转码这个方法。如果想让这个方法运行，必须使用<code>babel-polyfill</code>。(内部集成了<code>core-js</code>和<code>regenerator</code>)</p> <p>使用时，在所有代码运行之前增加<code>require('babel-polyfill')</code>。或者更常规的操作是在<code>webpack.config.js</code>中将<code>babel-polyfill</code>作为第一个 entry。因此必须把<code>babel-polyfill</code>作为<code>dependencies</code>而不是<code>devDependencies</code></p> <p><code>babel-polyfill</code>主要有两个缺点：</p> <ul><li>使用<code>babel-polyfill</code>会导致打出来的包非常大，因为<code>babel-polyfill</code>是一个整体，把所有方法都加到原型链上。比如我们只使用了<code>Array.from</code>，但它把<code>Object.defineProperty</code>也给加上了，这就是一种浪费了。这个问题可以通过单独<code>core-js</code>的某个类库来解决，<code>core-js</code>都是分开的。</li> <li><code>babel-polyfill</code>会污染全局变量，给很多类的原型链上都作了修改，如果我们开发的也是一个类库供其他开发者使用，这种情况就会变得非常不可控。</li></ul> <p>因此在实际使用中，如果我们无法忍受这两个缺点(尤其是第二个)，通常我们会倾向于使用<code>babel-plugin-transform-runtime</code>。</p> <p>但如果代码中包含高版本 js 中类型的实例方法 (例如<code>[1,2,3].includes(1)</code>)，这还是要使用 polyfill。</p> <h4 id="_4-5-babel-runtime-和-babel-plugin-transform-runtime"><a href="#_4-5-babel-runtime-和-babel-plugin-transform-runtime" class="header-anchor">#</a> 4.5 babel-runtime 和 babel-plugin-transform-runtime</h4> <p>我们时常在项目中看到.babelrc 中使用<code>babel-plugin-transform-runtime</code>，而<code>package.json</code>中的<code>dependencies</code>(注意不是<code>devDependencies</code>)又包含了<code>babel-runtime</code>，那这两个是不是成套使用的呢？他们又起什么作用呢？</p> <p>先说<code>babel-plugin-transform-runtime</code>。</p> <p>babel 会转换 js 语法，之前已经提过了。以<code>async/await</code>举例，如果不使用这个 plugin(即默认情况)，转换后的代码大概是：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// babel 添加一个方法，把 async 转化为 generator
+function _asyncToGenerator(fn) { return function () {....}} // 很长很长一段
+
+// 具体使用处
+var _ref = _asyncToGenerator(function* (arg1, arg2) {
+  yield (0, something)(arg1, arg2);
+});
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>不用过于纠结具体的语法，只需看到，这个<code>_asyncToGenerator</code>在当前文件被定义，然后被使用了，以替换源代码的<code>await</code>。但每个被转化的文件都会插入一段 <code>_asyncToGenerator</code>这就导致重复和浪费了。</p> <p>在使用了<code>babel-plugin-transform-runtime</code>了之后，转化后的代码会变成</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// 从直接定义改为引用，这样就不会重复定义了。
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+// 具体使用处是一样的
+var _ref = _asyncToGenerator3(function* (arg1, arg2) {
+  yield (0, something)(arg1, arg2);
+});
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>从定义方法改成引用，那重复定义就变成了重复引用，就不存在代码重复的问题了。</p> <p>但在这里，我们也发现<code>babel-runtime</code>出场了，它就是这些方法的集合处，也因此，<strong>在使用<code>babel-plugin-transform-runtime</code>的时候必须把<code>babel-runtime</code></strong></p> <p>再说<code>babel-runtime</code>，它内部集成了</p> <ol><li><code>core-js</code>：转换一些内置类(<code>Promise</code>，<code>Symbols</code>等等)和静态方法(<code>Array.from</code>等)。绝大部分转换是这里做的。自动引入。</li> <li><code>regenerator</code>：作为<code>core-js</code>的拾遗补漏，主要是<code>generator/yield</code>和<code>async/await</code>两组的支持。当代码中有使用<code>generators/async</code>时自动引入。</li> <li>helpers，如上面的<code>asyncToGenerator</code>就是其中之一，其他还有如<code>jsx</code>, <code>classCallCheck</code>等等，可以查看<a href="https://github.com/babel/babel/blob/6.x/packages/babel-helpers/src/helpers.js" target="_blank" rel="noopener noreferrer">babel-helpers<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。在代码中有内置的 helpers 使用时(如上面的第一段代码)移除定义，并插入引用(于是就变成了第二段代码)</li></ol> <p><code>babel-plugin-transform-runtime</code><strong>不支持</strong>实例方法（例如<code>[1,2,3].includes(1)</code>）</p> <h4 id="_4-6-babel-loader"><a href="#_4-6-babel-loader" class="header-anchor">#</a> 4.6 babel-loader</h4> <p>前面提过 babel 的三种使用方法，并且已经介绍过了 babel-cli。但一些大型的项目都会有构建工具 (如 webpack 或 rollup) 来进行代码构建和压缩 (uglify)。理论上来说，我们也可以对压缩后的代码进行 babel 处理，但那会非常慢。因此如果在 uglify 之前就加入 babel 处理，岂不完美？</p> <p>所以就有了 babel 插入到构建工具内部这样的需求。以(我还算熟悉的) webpack 为例，webpack 有 loader 的概念，因此就出现了 babel-loader。</p> <p>和<code>babel-cli</code>一样，<code>babel-loader</code>也会读取 .babelrc 或者 package.json 中的<code>babel</code>段作为自己的配置，之后的内核处理也是相同。唯一比<code>babel-cli</code>复杂的是，它需要和 webpack 交互，因此需要在 webpack 这边进行配置。比较常见的如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>module: {
+  rules: [
+    {
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      loader: 'babel-loader'
+    }
+  ]
+}
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>如果想在这里传入 babel 的配置项，也可以把改成：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// loader: 'babel-loader' 改成如下：
+use: {
+  loader: 'babel-loader',
+  options: {
+    // 配置项在这里
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>这里的配置项优先级是最高的。但我认为放到单独的配置文件中更加清晰合理，可读性强一些。</p> <h4 id="_4-7-babylon"><a href="#_4-7-babylon" class="header-anchor">#</a> 4.7 Babylon</h4> <p>可以说 Babylon 定义了把代码解析成 AST 的一套规范。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>import * as babylon from &quot;babylon&quot;;
+const code = `function square(n) {
+  return n * n;
+}`;
+
+babylon.parse(code);
+// Node {
+//   type: &quot;File&quot;,
+//   start: 0,
+//   end: 38,
+//   loc: SourceLocation {...},
+//   program: Node {...},
+//   comments: [],
+//   tokens: [...]
+// }
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><h4 id="_4-8-babel-traverse"><a href="#_4-8-babel-traverse" class="header-anchor">#</a> 4.8 babel-traverse</h4> <p>babel-traverse 用于维护操作 AST 的状态，定义了更新、添加和移除节点的操作方法。之前也说到，path 参数里面的属性和方法都是在 babel-traverse 里面定义的。这里还是引用一个例子，将 babel-traverse 和 Babylon 一起使用来遍历和更新节点：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>import * as babylon from &quot;babylon&quot;;
+import traverse from &quot;babel-traverse&quot;;
+
+const code = `function square(n) {
+  return n * n;
+}`;
+
+const ast = babylon.parse(code);
+
+traverse(ast, {
+  enter(path) {
+    if (
+      path.node.type === &quot;Identifier&quot; &amp;&amp;
+      path.node.name === &quot;n&quot;
+    ) {
+      path.node.name = &quot;x&quot;;
+    }
+  }
+});
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><h4 id="_4-9-babel-types"><a href="#_4-9-babel-types" class="header-anchor">#</a> 4.9 babel-types</h4> <p>babel-types 是一个强大的用于处理 AST 节点的工具库，“它包含了构造、验证以及变换 AST 节点的方法。该工具库包含考虑周到的工具方法，对编写处理 AST 逻辑非常有用”</p> <p>这里我们还是用 import 命令来演示一个例子，比如我们要判断 import 导入是什么类型的导入，这里先写出三种形式的导入：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>import { Ajax } from '../lib/utils';
+import utils from '../lib/utils';
+import * as utils from '../lib/utils';
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>在 AST 中用于表示上面导入的三个变量的节点是不同的，分别叫做 ImportSpecifier、ImportDefaultSpecifier 和 ImportNamespaceSpecifier。如果我们只对导入指定变量的 import 命令语句做处理，那么我们的 babel 插件就可以这样写：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function plugin () {
+	return ({ types }) =&gt; ({
+	    visitor: {
+	        ImportDeclaration (path, state) {
+        	    const specifiers = path.node.specifiers;
+        	    specifiers.forEach((specifier) =&gt; {
+	                if (!types.isImportDefaultSpecifier(specifier) &amp;&amp; !types.isImportNamespaceSpecifier(specifier)) {
+            	        // do something
+            	    }
+    	        })
+            }
+        }
+    })
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h4 id="小结"><a href="#小结" class="header-anchor">#</a> 小结</h4> <table><thead><tr><th>名称</th> <th>作用</th> <th>备注</th></tr></thead> <tbody><tr><td>babel-cli</td> <td>允许命令行使用 babel 命令转译文件</td> <td></td></tr> <tr><td>babel-node</td> <td>允许命令行使用 babel-node 直接转译+执行 node 文件</td> <td>随<code>babel-cli</code>一同安装 <code>babel-node</code>=<code>babel-polyfill</code>+<code>babel-register</code></td></tr> <tr><td>babel-register</td> <td>改写<code>require</code>命令，为其加载的文件进行转码，不对当前文件转码</td> <td>只适用于开发环境</td></tr> <tr><td>babel-polyfill</td> <td>为所有 API 增加兼容方法</td> <td>需要在所有代码之前<code>require</code>，且体积比较大</td></tr> <tr><td>babel-plugin-transform-runtime &amp; babel-runtime</td> <td>把帮助类方法从每次使用前定义改为统一 <code>require</code>，精简代码</td> <td><code>babel-runtime</code>需要安装为依赖，而不是开发依赖</td></tr> <tr><td>babel-loader</td> <td>使用 webpack 时作为一个 loader 在代码混淆之前进行代码转换</td> <td></td></tr></tbody></table> <h3 id="五、babel-插件实践"><a href="#五、babel-插件实践" class="header-anchor">#</a> 五、Babel 插件实践</h3> <h4 id="_5-1-插件格式"><a href="#_5-1-插件格式" class="header-anchor">#</a> 5.1 插件格式</h4> <p>先从一个接收了当前<code>Babel</code>对象作为参数的<code>Function</code>开始。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>export default function(bable){
+  // plugin contents
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>我们经常会这样写</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>export default function({types:t}){
+  //
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>接着返回一个对象，其<code>visitor</code>属性是这个插件的主要访问者。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>export default function({ types: t }) {
+  return {
+    visitor: {
+      // visitor contents
+    }
+  };
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p><code>visitor</code>中的每个函数接收 2 个参数：<code>path</code>和<code>state</code></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>export default function({types:1}){
+  return {
+    visitor:{
+      CallExpression(path, state) {}
+    }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h4 id="_5-2-写一个简单的插件"><a href="#_5-2-写一个简单的插件" class="header-anchor">#</a> 5.2 写一个简单的插件</h4> <p>我们写一个简单的插件，把所有定义变量名为<code>a</code>的换成<code>b</code></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>export default function({types:t}){
+  return {
+    visitor:{
+      VariableDeclarator(path, state) {
+        if(path.node.id.name == 'a'){
+          path.node.id = t.identifier('b')
+        }
+      }
+    }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>我们要把<code>id</code>属性是 a 的替换成 b 就好了。但是这里不能直接<code>path.node.id.name = 'b'</code> 。如果操作的是 Object，就没问题，但是这里是 AST 语法树，所以想改变某个值，就是用对应的 AST 来替换，现在我们用新的标识符来替换这个属性。</p> <h3 id="参考资料"><a href="#参考资料" class="header-anchor">#</a> 参考资料</h3> <ul><li><a href="https://juejin.im/post/5c19c5e0e51d4502a232c1c6" target="_blank" rel="noopener noreferrer">一口(很长的)气了解 babel<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5c21b584e51d4548ac6f6c99" target="_blank" rel="noopener noreferrer">深入 Babel，这一篇就够了<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://mp.weixin.qq.com/s/XSzQ5nkLI369CDhMZtF-MQ" target="_blank" rel="noopener noreferrer">前端中的编译原理 - 从零打造一个实用的 Babel 插件<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://mp.weixin.qq.com/s/HdIvS75nJ0JFStoNPIl7Iw" target="_blank" rel="noopener noreferrer">前端工程师需要了解的 Babel 知识<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5d94bfbf5188256db95589be" target="_blank" rel="noopener noreferrer">深入浅出 Babel 上篇：架构和原理 + 实战<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5da12397e51d4578364f6ffa" target="_blank" rel="noopener noreferrer">深入浅出 Babel 下篇：既生 Plugin 何生 Macros<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md" target="_blank" rel="noopener noreferrer">Babel 插件手册<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://github.com/frontend9/fe9-library/issues/154" target="_blank" rel="noopener noreferrer">Babel 插件原理的理解与深入<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://zhuanlan.zhihu.com/p/27289600" target="_blank" rel="noopener noreferrer">Babel 是如何读懂 JS 代码的<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5ddff3abe51d4502d56bd143" target="_blank" rel="noopener noreferrer">不容错过的 Babel7 知识<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <h2 id="联系作者"><a href="#联系作者" class="header-anchor">#</a> 联系作者</h2> <div align="center"><p>
+        平凡世界，贵在坚持。
+    </p> <img src="/about/contact.png"></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">更新于:</span> <span class="time">2017/3/19 上午10:01:55</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/tool/webpack-basic.html" class="prev">
+        webpack 配置
+      </a></span> <span class="next"><a href="/tool/webpack-plugin.html">
+        webpack 插件及自定义插件
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----><div></div></div></div>
+    <script src="/assets/js/app.c0e6e248.js" defer></script><script src="/assets/js/2.95c27d7d.js" defer></script><script src="/assets/js/279.f5efdb65.js" defer></script><script src="/assets/js/3.e9403692.js" defer></script>
+  </body>
+</html>

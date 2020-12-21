@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>webpack 配置 | 小武子知识库</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/hero.jpg">
+    <meta name="description" content="用心，谈技术。大前端">
+    
+    <link rel="preload" href="/assets/css/0.styles.0c763008.css" as="style"><link rel="preload" href="/assets/js/app.c0e6e248.js" as="script"><link rel="preload" href="/assets/js/2.95c27d7d.js" as="script"><link rel="preload" href="/assets/js/280.8b708dd7.js" as="script"><link rel="preload" href="/assets/js/3.e9403692.js" as="script"><link rel="prefetch" href="/assets/js/10.55459c06.js"><link rel="prefetch" href="/assets/js/100.979736e1.js"><link rel="prefetch" href="/assets/js/101.221faf61.js"><link rel="prefetch" href="/assets/js/102.94aedcca.js"><link rel="prefetch" href="/assets/js/103.f20c9812.js"><link rel="prefetch" href="/assets/js/104.315a1860.js"><link rel="prefetch" href="/assets/js/105.b1c1457e.js"><link rel="prefetch" href="/assets/js/106.d15e2ca0.js"><link rel="prefetch" href="/assets/js/107.a9aa8c09.js"><link rel="prefetch" href="/assets/js/108.dadba095.js"><link rel="prefetch" href="/assets/js/109.29b359ec.js"><link rel="prefetch" href="/assets/js/11.01d1c96d.js"><link rel="prefetch" href="/assets/js/110.f8caf907.js"><link rel="prefetch" href="/assets/js/111.cb06f760.js"><link rel="prefetch" href="/assets/js/112.b6f22b04.js"><link rel="prefetch" href="/assets/js/113.93ad072c.js"><link rel="prefetch" href="/assets/js/114.5b5e7b79.js"><link rel="prefetch" href="/assets/js/115.64a2e93b.js"><link rel="prefetch" href="/assets/js/116.67807b09.js"><link rel="prefetch" href="/assets/js/117.9d2d0bae.js"><link rel="prefetch" href="/assets/js/118.64be5c72.js"><link rel="prefetch" href="/assets/js/119.f8645233.js"><link rel="prefetch" href="/assets/js/12.52c45b75.js"><link rel="prefetch" href="/assets/js/120.33f78b92.js"><link rel="prefetch" href="/assets/js/121.68c62c07.js"><link rel="prefetch" href="/assets/js/122.6ac0bce5.js"><link rel="prefetch" href="/assets/js/123.2fbe615c.js"><link rel="prefetch" href="/assets/js/124.db2635d9.js"><link rel="prefetch" href="/assets/js/125.b9a55161.js"><link rel="prefetch" href="/assets/js/126.8a58009d.js"><link rel="prefetch" href="/assets/js/127.c2bef3ea.js"><link rel="prefetch" href="/assets/js/128.bce1d8c0.js"><link rel="prefetch" href="/assets/js/129.7db75c40.js"><link rel="prefetch" href="/assets/js/13.29d360fe.js"><link rel="prefetch" href="/assets/js/130.d51af23f.js"><link rel="prefetch" href="/assets/js/131.9f4f3763.js"><link rel="prefetch" href="/assets/js/132.cbfe0551.js"><link rel="prefetch" href="/assets/js/133.d56e5883.js"><link rel="prefetch" href="/assets/js/134.72718d19.js"><link rel="prefetch" href="/assets/js/135.e4b301a2.js"><link rel="prefetch" href="/assets/js/136.4c624f68.js"><link rel="prefetch" href="/assets/js/137.20fdc89b.js"><link rel="prefetch" href="/assets/js/138.a4a888fc.js"><link rel="prefetch" href="/assets/js/139.78817bdd.js"><link rel="prefetch" href="/assets/js/14.77482c04.js"><link rel="prefetch" href="/assets/js/140.834efd86.js"><link rel="prefetch" href="/assets/js/141.1fe471c0.js"><link rel="prefetch" href="/assets/js/142.da2e7c72.js"><link rel="prefetch" href="/assets/js/143.34d6dd1d.js"><link rel="prefetch" href="/assets/js/144.86e14680.js"><link rel="prefetch" href="/assets/js/145.a7693849.js"><link rel="prefetch" href="/assets/js/146.cbf95e38.js"><link rel="prefetch" href="/assets/js/147.6bd8239e.js"><link rel="prefetch" href="/assets/js/148.956aed02.js"><link rel="prefetch" href="/assets/js/149.1fcf5700.js"><link rel="prefetch" href="/assets/js/15.fb659717.js"><link rel="prefetch" href="/assets/js/150.bee6e3f2.js"><link rel="prefetch" href="/assets/js/151.9ebfe7de.js"><link rel="prefetch" href="/assets/js/152.1b2879bd.js"><link rel="prefetch" href="/assets/js/153.c4e12f19.js"><link rel="prefetch" href="/assets/js/154.6dfa976e.js"><link rel="prefetch" href="/assets/js/155.3dc3dff8.js"><link rel="prefetch" href="/assets/js/156.cd6e2787.js"><link rel="prefetch" href="/assets/js/157.ecc4c737.js"><link rel="prefetch" href="/assets/js/158.a2ec8adc.js"><link rel="prefetch" href="/assets/js/159.5e7798da.js"><link rel="prefetch" href="/assets/js/16.21715c63.js"><link rel="prefetch" href="/assets/js/160.99b23434.js"><link rel="prefetch" href="/assets/js/161.db46840f.js"><link rel="prefetch" href="/assets/js/162.a5b22316.js"><link rel="prefetch" href="/assets/js/163.21333d52.js"><link rel="prefetch" href="/assets/js/164.1f975bdc.js"><link rel="prefetch" href="/assets/js/165.e2012583.js"><link rel="prefetch" href="/assets/js/166.06773b17.js"><link rel="prefetch" href="/assets/js/167.4bc25080.js"><link rel="prefetch" href="/assets/js/168.3a82aa57.js"><link rel="prefetch" href="/assets/js/169.3018185f.js"><link rel="prefetch" href="/assets/js/17.670573d5.js"><link rel="prefetch" href="/assets/js/170.8936fbb2.js"><link rel="prefetch" href="/assets/js/171.dc6f6900.js"><link rel="prefetch" href="/assets/js/172.eedaccbd.js"><link rel="prefetch" href="/assets/js/173.c844546f.js"><link rel="prefetch" href="/assets/js/174.d20cd29c.js"><link rel="prefetch" href="/assets/js/175.6cf88876.js"><link rel="prefetch" href="/assets/js/176.04fa621e.js"><link rel="prefetch" href="/assets/js/177.cd30bc38.js"><link rel="prefetch" href="/assets/js/178.ced35bd4.js"><link rel="prefetch" href="/assets/js/179.a6219453.js"><link rel="prefetch" href="/assets/js/18.806c513e.js"><link rel="prefetch" href="/assets/js/180.f3514b7d.js"><link rel="prefetch" href="/assets/js/181.eda890f2.js"><link rel="prefetch" href="/assets/js/182.715a83d2.js"><link rel="prefetch" href="/assets/js/183.d4c63d89.js"><link rel="prefetch" href="/assets/js/184.a6c1307c.js"><link rel="prefetch" href="/assets/js/185.5b06b5fe.js"><link rel="prefetch" href="/assets/js/186.7694f778.js"><link rel="prefetch" href="/assets/js/187.b5ec80a1.js"><link rel="prefetch" href="/assets/js/188.c3bfc8c4.js"><link rel="prefetch" href="/assets/js/189.953765e3.js"><link rel="prefetch" href="/assets/js/19.78101a53.js"><link rel="prefetch" href="/assets/js/190.ad16fe45.js"><link rel="prefetch" href="/assets/js/191.4df29c79.js"><link rel="prefetch" href="/assets/js/192.6ca4d558.js"><link rel="prefetch" href="/assets/js/193.cddcb53e.js"><link rel="prefetch" href="/assets/js/194.ff774765.js"><link rel="prefetch" href="/assets/js/195.73e67053.js"><link rel="prefetch" href="/assets/js/196.59b60e08.js"><link rel="prefetch" href="/assets/js/197.bd02a76b.js"><link rel="prefetch" href="/assets/js/198.0f31256e.js"><link rel="prefetch" href="/assets/js/199.b16eff53.js"><link rel="prefetch" href="/assets/js/20.a8d2fc52.js"><link rel="prefetch" href="/assets/js/200.f150de80.js"><link rel="prefetch" href="/assets/js/201.126a0e4f.js"><link rel="prefetch" href="/assets/js/202.1c7c4c65.js"><link rel="prefetch" href="/assets/js/203.38f7ff3c.js"><link rel="prefetch" href="/assets/js/204.294df981.js"><link rel="prefetch" href="/assets/js/205.9e25e35a.js"><link rel="prefetch" href="/assets/js/206.841ab598.js"><link rel="prefetch" href="/assets/js/207.f730319d.js"><link rel="prefetch" href="/assets/js/208.b4fcd3e9.js"><link rel="prefetch" href="/assets/js/209.95a87d7b.js"><link rel="prefetch" href="/assets/js/21.eb35b9f1.js"><link rel="prefetch" href="/assets/js/210.69f1e0bb.js"><link rel="prefetch" href="/assets/js/211.07fc0dbd.js"><link rel="prefetch" href="/assets/js/212.fc3748b2.js"><link rel="prefetch" href="/assets/js/213.f5a4b09e.js"><link rel="prefetch" href="/assets/js/214.4b0381ab.js"><link rel="prefetch" href="/assets/js/215.15678e44.js"><link rel="prefetch" href="/assets/js/216.ac94f0f1.js"><link rel="prefetch" href="/assets/js/217.920d0adf.js"><link rel="prefetch" href="/assets/js/218.5e05db83.js"><link rel="prefetch" href="/assets/js/219.66e5d241.js"><link rel="prefetch" href="/assets/js/22.af8dae44.js"><link rel="prefetch" href="/assets/js/220.e7231313.js"><link rel="prefetch" href="/assets/js/221.972b3641.js"><link rel="prefetch" href="/assets/js/222.91fb255b.js"><link rel="prefetch" href="/assets/js/223.ad64491b.js"><link rel="prefetch" href="/assets/js/224.30dca230.js"><link rel="prefetch" href="/assets/js/225.adab052f.js"><link rel="prefetch" href="/assets/js/226.34a0be2d.js"><link rel="prefetch" href="/assets/js/227.c0d3ee20.js"><link rel="prefetch" href="/assets/js/228.2aeaefd0.js"><link rel="prefetch" href="/assets/js/229.033e4089.js"><link rel="prefetch" href="/assets/js/23.a542dcb5.js"><link rel="prefetch" href="/assets/js/230.4a8509be.js"><link rel="prefetch" href="/assets/js/231.558ea837.js"><link rel="prefetch" href="/assets/js/232.d8344106.js"><link rel="prefetch" href="/assets/js/233.24b91ff6.js"><link rel="prefetch" href="/assets/js/234.143af17a.js"><link rel="prefetch" href="/assets/js/235.27208c92.js"><link rel="prefetch" href="/assets/js/236.f91cccfa.js"><link rel="prefetch" href="/assets/js/237.609f41b7.js"><link rel="prefetch" href="/assets/js/238.0e9dbc88.js"><link rel="prefetch" href="/assets/js/239.4bca5a19.js"><link rel="prefetch" href="/assets/js/24.bebc3fd0.js"><link rel="prefetch" href="/assets/js/240.505fbb80.js"><link rel="prefetch" href="/assets/js/241.364fc3f9.js"><link rel="prefetch" href="/assets/js/242.8f2bcb7e.js"><link rel="prefetch" href="/assets/js/243.e444d545.js"><link rel="prefetch" href="/assets/js/244.b722e92a.js"><link rel="prefetch" href="/assets/js/245.02ae3936.js"><link rel="prefetch" href="/assets/js/246.fa726b67.js"><link rel="prefetch" href="/assets/js/247.8d32305f.js"><link rel="prefetch" href="/assets/js/248.1758f1a7.js"><link rel="prefetch" href="/assets/js/249.1f3771b7.js"><link rel="prefetch" href="/assets/js/25.99a5ea92.js"><link rel="prefetch" href="/assets/js/250.e228c98e.js"><link rel="prefetch" href="/assets/js/251.3af79d2d.js"><link rel="prefetch" href="/assets/js/252.3e04b68c.js"><link rel="prefetch" href="/assets/js/253.6fbfe8dc.js"><link rel="prefetch" href="/assets/js/254.1c0ac586.js"><link rel="prefetch" href="/assets/js/255.80a26fbb.js"><link rel="prefetch" href="/assets/js/256.c3aaaf0c.js"><link rel="prefetch" href="/assets/js/257.7190679f.js"><link rel="prefetch" href="/assets/js/258.4943ab16.js"><link rel="prefetch" href="/assets/js/259.dcf70155.js"><link rel="prefetch" href="/assets/js/26.b7030b19.js"><link rel="prefetch" href="/assets/js/260.3be306d0.js"><link rel="prefetch" href="/assets/js/261.0ae95ea5.js"><link rel="prefetch" href="/assets/js/262.bb365195.js"><link rel="prefetch" href="/assets/js/263.0aa716fb.js"><link rel="prefetch" href="/assets/js/264.78a933c0.js"><link rel="prefetch" href="/assets/js/265.be0b27be.js"><link rel="prefetch" href="/assets/js/266.ea75c372.js"><link rel="prefetch" href="/assets/js/267.8fb51a0d.js"><link rel="prefetch" href="/assets/js/268.1de2cd46.js"><link rel="prefetch" href="/assets/js/269.9538f5e4.js"><link rel="prefetch" href="/assets/js/27.7e8d245c.js"><link rel="prefetch" href="/assets/js/270.096a1296.js"><link rel="prefetch" href="/assets/js/271.87e68697.js"><link rel="prefetch" href="/assets/js/272.5e6144f6.js"><link rel="prefetch" href="/assets/js/273.ef37f06f.js"><link rel="prefetch" href="/assets/js/274.3063ed39.js"><link rel="prefetch" href="/assets/js/275.c7d2ace2.js"><link rel="prefetch" href="/assets/js/276.039b6af9.js"><link rel="prefetch" href="/assets/js/277.b1538013.js"><link rel="prefetch" href="/assets/js/278.921015a3.js"><link rel="prefetch" href="/assets/js/279.f5efdb65.js"><link rel="prefetch" href="/assets/js/28.417a693f.js"><link rel="prefetch" href="/assets/js/281.32c7d7d9.js"><link rel="prefetch" href="/assets/js/282.bca40967.js"><link rel="prefetch" href="/assets/js/283.dc65e580.js"><link rel="prefetch" href="/assets/js/284.c094dc03.js"><link rel="prefetch" href="/assets/js/285.8da857a9.js"><link rel="prefetch" href="/assets/js/286.f6fc008f.js"><link rel="prefetch" href="/assets/js/287.579299eb.js"><link rel="prefetch" href="/assets/js/288.def44f5f.js"><link rel="prefetch" href="/assets/js/289.249367fd.js"><link rel="prefetch" href="/assets/js/29.e74a8793.js"><link rel="prefetch" href="/assets/js/290.51e83cbc.js"><link rel="prefetch" href="/assets/js/30.2ada8ef8.js"><link rel="prefetch" href="/assets/js/31.0fa0fe16.js"><link rel="prefetch" href="/assets/js/32.ee957bcf.js"><link rel="prefetch" href="/assets/js/33.3da559bf.js"><link rel="prefetch" href="/assets/js/34.dc25f4d2.js"><link rel="prefetch" href="/assets/js/35.fa475c71.js"><link rel="prefetch" href="/assets/js/36.a2175633.js"><link rel="prefetch" href="/assets/js/37.6ea8f9a4.js"><link rel="prefetch" href="/assets/js/38.a80cc766.js"><link rel="prefetch" href="/assets/js/39.acc0d98a.js"><link rel="prefetch" href="/assets/js/4.ff22f931.js"><link rel="prefetch" href="/assets/js/40.98cc10f0.js"><link rel="prefetch" href="/assets/js/41.50ce2979.js"><link rel="prefetch" href="/assets/js/42.1c3175a0.js"><link rel="prefetch" href="/assets/js/43.bfe278c0.js"><link rel="prefetch" href="/assets/js/44.1632f7a8.js"><link rel="prefetch" href="/assets/js/45.9fb9fe8b.js"><link rel="prefetch" href="/assets/js/46.312723aa.js"><link rel="prefetch" href="/assets/js/47.9a486a43.js"><link rel="prefetch" href="/assets/js/48.b58bbdbe.js"><link rel="prefetch" href="/assets/js/49.f9594351.js"><link rel="prefetch" href="/assets/js/5.8402f590.js"><link rel="prefetch" href="/assets/js/50.c7ee805f.js"><link rel="prefetch" href="/assets/js/51.af3c953e.js"><link rel="prefetch" href="/assets/js/52.0117b04d.js"><link rel="prefetch" href="/assets/js/53.c0accba1.js"><link rel="prefetch" href="/assets/js/54.19574e6e.js"><link rel="prefetch" href="/assets/js/55.854ebf03.js"><link rel="prefetch" href="/assets/js/56.2876c393.js"><link rel="prefetch" href="/assets/js/57.2015b2b4.js"><link rel="prefetch" href="/assets/js/58.ea17fa42.js"><link rel="prefetch" href="/assets/js/59.b8b54acf.js"><link rel="prefetch" href="/assets/js/6.49e43e20.js"><link rel="prefetch" href="/assets/js/60.eaab2243.js"><link rel="prefetch" href="/assets/js/61.87d7aa63.js"><link rel="prefetch" href="/assets/js/62.e3e52dc6.js"><link rel="prefetch" href="/assets/js/63.a354853d.js"><link rel="prefetch" href="/assets/js/64.c7954f0d.js"><link rel="prefetch" href="/assets/js/65.cfc29f1c.js"><link rel="prefetch" href="/assets/js/66.3b86207c.js"><link rel="prefetch" href="/assets/js/67.876b4986.js"><link rel="prefetch" href="/assets/js/68.1fa63c02.js"><link rel="prefetch" href="/assets/js/69.d4036cbb.js"><link rel="prefetch" href="/assets/js/7.4258fd2a.js"><link rel="prefetch" href="/assets/js/70.bb9df0cf.js"><link rel="prefetch" href="/assets/js/71.6fccae14.js"><link rel="prefetch" href="/assets/js/72.71df66fa.js"><link rel="prefetch" href="/assets/js/73.d1a322b0.js"><link rel="prefetch" href="/assets/js/74.c537a104.js"><link rel="prefetch" href="/assets/js/75.4972e8bf.js"><link rel="prefetch" href="/assets/js/76.fa44b618.js"><link rel="prefetch" href="/assets/js/77.c29e5132.js"><link rel="prefetch" href="/assets/js/78.7d92b430.js"><link rel="prefetch" href="/assets/js/79.308181de.js"><link rel="prefetch" href="/assets/js/8.ca0c9873.js"><link rel="prefetch" href="/assets/js/80.ce541bcd.js"><link rel="prefetch" href="/assets/js/81.be7f983b.js"><link rel="prefetch" href="/assets/js/82.f40c645f.js"><link rel="prefetch" href="/assets/js/83.95f37310.js"><link rel="prefetch" href="/assets/js/84.627c3517.js"><link rel="prefetch" href="/assets/js/85.e70e72c4.js"><link rel="prefetch" href="/assets/js/86.0c5e2f61.js"><link rel="prefetch" href="/assets/js/87.f417dab7.js"><link rel="prefetch" href="/assets/js/88.2be78ecd.js"><link rel="prefetch" href="/assets/js/89.95820484.js"><link rel="prefetch" href="/assets/js/9.0b3f9e20.js"><link rel="prefetch" href="/assets/js/90.fdd86251.js"><link rel="prefetch" href="/assets/js/91.67916501.js"><link rel="prefetch" href="/assets/js/92.90a9c9a0.js"><link rel="prefetch" href="/assets/js/93.095c4ae9.js"><link rel="prefetch" href="/assets/js/94.ee58e3a1.js"><link rel="prefetch" href="/assets/js/95.8cdf233a.js"><link rel="prefetch" href="/assets/js/96.afd52c5b.js"><link rel="prefetch" href="/assets/js/97.4d635846.js"><link rel="prefetch" href="/assets/js/98.bfa2d297.js"><link rel="prefetch" href="/assets/js/99.444f9853.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0c763008.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">小武子知识库</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/js/" class="nav-link">
+  javascript
+</a></div><div class="nav-item"><a href="/css/" class="nav-link">
+  css
+</a></div><div class="nav-item"><a href="/html5/" class="nav-link">
+  HTML5
+</a></div><div class="nav-item"><a href="/tool/" class="nav-link router-link-active">
+  工具
+</a></div><div class="nav-item"><a href="/project/" class="nav-link">
+  软件工程
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  计算机基础
+</a></div><div class="nav-item"><a href="/interview/" class="nav-link">
+  面试题
+</a></div><div class="nav-item"><a href="/materials/" class="nav-link">
+  资料收集
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于作者
+</a></div><div class="nav-item"><a href="https://www.github.com/fttony" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/js/" class="nav-link">
+  javascript
+</a></div><div class="nav-item"><a href="/css/" class="nav-link">
+  css
+</a></div><div class="nav-item"><a href="/html5/" class="nav-link">
+  HTML5
+</a></div><div class="nav-item"><a href="/tool/" class="nav-link router-link-active">
+  工具
+</a></div><div class="nav-item"><a href="/project/" class="nav-link">
+  软件工程
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  计算机基础
+</a></div><div class="nav-item"><a href="/interview/" class="nav-link">
+  面试题
+</a></div><div class="nav-item"><a href="/materials/" class="nav-link">
+  资料收集
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于作者
+</a></div><div class="nav-item"><a href="https://www.github.com/fttony" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>git版本工具</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/git.html" class="sidebar-link">git 常用命令与 gitflow 工作流</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>WEB集成化</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/ci-cd.html" class="sidebar-link">CI 与 CD 介绍</a></li><li><a href="/tool/npm-2.html" class="sidebar-link">npm 相关参数</a></li><li><a href="/tool/npm-1.html" class="sidebar-link">私有 npm 仓库搭建</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>webpack打包</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/webpack-basic.html" aria-current="page" class="active sidebar-link">webpack 配置</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/tool/webpack-basic.html#前言" class="sidebar-link">前言</a></li><li class="sidebar-sub-header"><a href="/tool/webpack-basic.html#内容" class="sidebar-link">内容</a></li><li class="sidebar-sub-header"><a href="/tool/webpack-basic.html#联系作者" class="sidebar-link">联系作者</a></li></ul></li><li><a href="/tool/webpack-babel.html" class="sidebar-link">babel 学习</a></li><li><a href="/tool/webpack-plugin.html" class="sidebar-link">webpack 插件及自定义插件</a></li><li><a href="/tool/webpack-loader.html" class="sidebar-link">常用 loader 及手写 loader</a></li><li><a href="/tool/webpack-optimize.html" class="sidebar-link">webpack 打包优化</a></li><li><a href="/tool/webpack-principle.html" class="sidebar-link">webpack 原理</a></li><li><a href="/tool/webpack-hmr.html" class="sidebar-link">Webpack HMR 原理解析（转载）</a></li><li><a href="/tool/webpack-coder.html" class="sidebar-link">webpack 源码分析</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>其它打包工具</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/gulp-basic.html" class="sidebar-link">gulp 入门学习</a></li><li><a href="/tool/rollup-basic.html" class="sidebar-link">rollup常用配置</a></li><li><a href="/tool/pm2.html" class="sidebar-link">pm2 工具</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>自定义脚手架</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/cli.html" class="sidebar-link">自定义脚手架</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>容器工具</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/docker.html" class="sidebar-link">docker 学习</a></li><li><a href="/tool/k8s.html" class="sidebar-link">Kubernetes学习</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>ngnix配置</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool/nginx.html" class="sidebar-link">nginx 常用配置</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="webpack-配置"><a href="#webpack-配置" class="header-anchor">#</a> webpack 配置</h1> <h2 id="前言"><a href="#前言" class="header-anchor">#</a> 前言</h2> <p>本人平时学习及收集内容，欢迎参入一起讨论。</p> <h2 id="内容"><a href="#内容" class="header-anchor">#</a> 内容</h2> <ul><li><a href="#%E4%B8%80%E3%80%81%E4%BB%8B%E7%BB%8D%E3%80%81%E5%AE%89%E8%A3%85%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">介绍、安装及常用命令</a></li> <li><a href="#%E4%BA%8C%E3%80%81%E6%9C%80%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE">webpack 基本配置说明</a></li> <li><a href="#%E4%B8%89%E3%80%81webpack%E9%85%8D%E7%BD%AE">webpack 配置</a></li> <li>实际应用</li></ul> <h3 id="一、介绍、安装及常用命令"><a href="#一、介绍、安装及常用命令" class="header-anchor">#</a> 一、介绍、安装及常用命令</h3> <ul><li>什么是 webpack</li> <li>webpack 特点</li> <li>webpack 安装</li> <li>常用命令</li></ul> <h4 id="_1-1-什么是-webpack"><a href="#_1-1-什么是-webpack" class="header-anchor">#</a> 1.1 什么是 webpack</h4> <p>自从出现模块化以后，大家可以将原本一坨代码分离到个个模块中，但是由此引发了一个问题。每个 JS 文件都需要从服务器去拿，由此会导致加载速度变慢。Webpack 最主要的目的就是为了解决这个问题，将所有小文件打包成一个或多个大文件，官网的图片很好的诠释了这个事情，除此之外，Webpack 也是一个能让你使用各种前端新技术的工具。</p> <p><img src="webpack01.jpg" alt="image"></p> <p>webpack 一共经历了 4 个版本，分别是 1、2、3、4，最新版本是 4，以下案例是基于 4 实践的</p> <h4 id="_1-2-webpack-特点"><a href="#_1-2-webpack-特点" class="header-anchor">#</a> 1.2 webpack 特点</h4> <ol><li>专注于处理模块化的项目，能做到开箱即用、一步到位；</li> <li>可通过 Plugin 扩展，完整好用又不失灵活；</li> <li>使用场景不局限于 web 开发；</li> <li>社区庞大活跃，经常引入紧跟时代发展的新特性，能为大多数场景找到自己有的开源扩展；</li> <li>良好的开发体验；</li></ol> <p>——自来《深入浅出 webpack》</p> <h4 id="_1-3-webpack-安装"><a href="#_1-3-webpack-安装" class="header-anchor">#</a> 1.3 webpack 安装</h4> <p>全局安装 webpack</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>npm install -g webpack
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>局部安装 webpack</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>npm install --save-dev webpack
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h4 id="_1-4-常用命令"><a href="#_1-4-常用命令" class="header-anchor">#</a> 1.4 常用命令</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>webpack -p 执行一次生成环境的编译（压缩）
+webpack --watch 在开发时持续监控增量编译（很快）
+webpack -d 让他生成SourceMaps
+webpack --progress 显示编译进度
+webpack --colors 显示静态资源的颜色
+webpack --sort-modules-by, --sort-chunks-by, --sort-assets-by 将modules/chunks/assets进行列表排序
+webpack --display-chunks 展示编译后的分块
+webpack --display-reasons 显示更多引用模块原因
+webapck --display-error-details 显示更多报错信息
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="二、最简单配置"><a href="#二、最简单配置" class="header-anchor">#</a> 二、最简单配置</h3> <h4 id="_2-1-webpack-相关参数介绍"><a href="#_2-1-webpack-相关参数介绍" class="header-anchor">#</a> 2.1 webpack 相关参数介绍</h4> <ul><li><strong>entry</strong></li></ul> <p>配置模块的入口，Entry 参数说明，类型可以是以下三种中的一种或者相互组合</p> <table><thead><tr><th>类型</th> <th>例子</th> <th>含义</th></tr></thead> <tbody><tr><td>string</td> <td>'./app/entry'</td> <td>入口模块的文件路径，可以相对路径</td></tr> <tr><td>array</td> <td>['./app/entry1','./app/entry2']</td> <td>入口模块的文件路径，可以是相对路径</td></tr> <tr><td>object</td> <td>{a:['./app/entry-a'],b:['./app/entry-b1','./app/entry-b2']}</td> <td>配置多个入口，每个入口生成一个 chunk</td></tr></tbody></table> <ul><li><strong>output</strong></li></ul> <p>配置如何输出最终想要的代码</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>output是一个object,里面包含一系列配置项
+
+output.filename:'[name].js'  //输出文件的名称
+也可以使用hash、chunkhash、contenthash来命名，关于hash、chunkhash、contenthash区别可以参考https://www.cnblogs.com/tugenhua0707/p/9615822.html#_labe1_2
+
+output.chunkFilename://chunkFilename 和上面的 filename 非常类似，但 chunkFilename 只用于指定在运行过程中生成的 Chunk 在输出时的文件名称，vue按需加载就可以使用这个参数
+
+output.path：path .resolve( dirname, ’ dist [hash]’) //path 配置输出文件存放在本地的目录
+output.publicPath:'https://cdn.example.com/assets/' //配置发布到线上资源的 URL 前缀
+output.libraryTarget://配置以何种方式导出库，可选值var、commonjs、commonjs2、this、window、global
+output.library://配置导出库的名称。
+output.libraryExport: 配置要导出的模块中哪些子模块需要被导出
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><ul><li><strong>module</strong></li></ul> <p><code>rules</code>配置模块的读取和解析规则，通常用来配置 Loader。大致可以通过以下方式来完成</p> <ul><li>条件匹配:通过<code>test</code>、<code>include</code>、 <code>exclude</code>三个配置项来选中<code>Loader</code>要应用 规则的文件。</li> <li>应用规则：对选中的文件通过 <code>use</code>配置项来应用<code>Loader</code>，可以只应用一个<code>Loader</code>或者按照从后往前的顺序应用一组 <code>Loader</code>，同时可以分别向<code>Loader</code>传入参数。</li> <li>重置顺序:一组<code>Loader</code>的执行顺序默认是从右到左执行的，通过<code>enforce</code>选项可以将其中 一个<code>Loader</code>的执行顺序放到最前或者最后 。</li></ul> <p>具体方法：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>module:{
+    rules:[
+        {
+            //命中 JavaScript 文件
+            test: /\.js$/，
+            //用 babel-loader 转换 JavaScript 文件
+            //?cacheDirectory 表示传给 babel-loader 的参数，用于缓存 babel 的编译结果，
+            use : [’ babel-loader?cacheDirectory ’],
+            //只命中 src 目录里的 JavaScript 文件，加快 Webpack 的搜索速度
+            include: path.resolve( dirname, ’ src ’)
+        },
+        {
+            //命中scss文件
+            test:/\.scss$/,
+            //使用一组loader去处理scss文件
+            //处理顺序为从后到前，即先交给 sass-loader处理，再将结果交给 css-loader,最后交给 style-loader
+            use:['style-loader','css-loader','sass-loader'],
+            //排除node_modules目录下的文件
+            exclude: path.resolve( dirname, ’ node modules ’)
+        },
+        {
+            //对非文件采用file-loader加载
+            test:/\.(gif|png|jpe?g|eot|woff|ttf|svg|pdf)$/,
+            use:['file-loader']
+        }
+    ]
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br></div></div><ul><li><strong>noParse</strong></li></ul> <p>配置项可以让 Webpack 忽略对部分没采用模块化的文件的递归解析和处理，这样做的好处能提高构建性能。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    //使用正则表达式
+noParse: /jquerylchartjs/
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>注意，被忽略的文件里不应该包含<code>import</code>、<code>require</code>、<code>define</code>等模块化 语句，不 然会导致在构建出的代码中包含无法在浏览器环境下执行的模块化语句 。</p> <ul><li><strong>parse</strong></li></ul> <p><code>parser</code>属性可以更细粒度地配置 哪些模块语法被解析、哪些不被解析。同<code>noParse</code>配置项的区别在于，<code>parser</code>可以精确到 语法层 面，而<code>noParse</code>只能控制哪些文件不被解析。</p> <p><code>parser</code>的使用方法如下:</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>module: {
+    rules : [
+        {
+        test: /\.js♀/，
+        use: [ ’ babel-loader ’],
+        parser: {
+            amd: false， //禁用AMD
+            commonjs : false , //禁用 CommonJS
+            system : false, //禁用 SystemJS
+            harmony: false， //禁用 ES6 import/export
+            requireinclude:false,   //禁用require.include
+            requireEnsure: false,   //禁用require.ensure
+            requireContext:false,   //禁用require.context
+            browserify: false, //禁用 browserify requireJs : false, //禁用 requirejs:false
+            requireJs : false, //禁用 requirejs
+            }
+        }
+    ]
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><ul><li><strong>resolve</strong></li></ul> <p>配置寻找模块的规则</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>配置项通过别名来将原导入路径映射成一个新的导入路径
+
+resolve:{
+    alias:{
+        components:'./src/components/'
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><ul><li><strong>mainFields</strong></li></ul> <p>会根据<code>mainFields</code>的配 置去决定 优先采用哪份代码，</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>mainFields : [’jsnext:main’,’browser’,’main’]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ul><li><strong>extensions</strong></li></ul> <p>Webpack 会自动带上后缀后去尝试访问文件是否存在。 resolve.extensions 用于配置在尝试过程中用到的后缀列表</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>extensions:[’.ts’,’.j5 ’,’.json’]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ul><li><strong>plugins</strong></li></ul> <p>配置扩展插件</p> <p>plugins 配置项接收一个数组，数组里的每一项都是一个要使用 的 Plugin 的实例， Plugin 需要的参数通过构造函数传入,<code>mini-css-extract-plugin</code>、<code>clean-webpack-plugin</code>、<code>DllReferencePlugin</code>、<code>html-webpack-plugin</code>、<code>happyPack</code>、<code>webpack-parallel-uglify-plugin</code></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const ClearWebpackPlugin = require('clean-webpack-plugin');
+
+module.exports=[
+    plugins:[
+        new ClearWebpackPlugin(['dist'])
+    ]
+];
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><ul><li><p><strong>DevServer</strong></p> <ul><li><code>hot</code>,开启模块热替换功能后，将在不刷新整个页面的情况下通过用新模块替换老模块来做到实时预览</li> <li><code>inline</code>,依赖一个注入页面里的代理客户端，去接收来自 DevServer 的 命令并负责刷新网页的工作。</li> <li><code>contentBase</code>,配置 DevServerHTTP 服务器的文件根目录</li></ul></li></ul> <h3 id="三、webpack-配置"><a href="#三、webpack-配置" class="header-anchor">#</a> 三、webpack 配置</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require(&quot;mini-css-extract-plugin&quot;);
+const ClearWebpackPlugin = require('clean-webpack-plugin');
+const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const HappyPack = require('happypack');
+module.exports = {
+    entry: './app/index/app.js', //支持多个参数，string|array|object
+    output: {
+        filename: ' [name].js', //输出文件名称
+        path: path.resolve(__dirname, './dist'), //输出文件的目标路径
+        publicPath: '/' //构建文件的输出目录
+    },
+    devServer: { //DevServer相关的配置
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true, //压缩
+        port: 8888, //端口号
+        open: true, //第一次打开浏览器
+        hot: true, //是否监听
+        publicPath: &quot;/&quot; //访问的目录
+    },
+    module: {
+        rules: [{
+                test: /\.js$/,
+                use: [' babel-loader'],
+                parser: {
+                    amd: true, //禁用AMD
+                    commonjs: true, //禁用 CommonJS
+                    system: false, //禁用 SystemJS
+                    harmony: true, //禁用 ES6 import/export
+                    requireinclude: false, //禁用require.include
+                    requireEnsure: false, //禁用require.ensure
+                    requireContext: false, //禁用require.context
+                    browserify: false, //禁用 browserify requireJs : false, //禁用 requirejs:false
+                    requireJs: false, //禁用 requirejs
+                }
+            },
+            {
+                // 用正则去匹配要用该 loader 转换的 CSS 文件
+                test: /\.css$/,
+                use: [{
+                    loader: MiniCssExtractPlugin.loader,
+                }, {
+                    loader: path.resolve('./loaders.js'),
+                    options: {
+                        test: 1
+                    }
+                }, {
+                    loader: 'css-loader?minimize',
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        ident: 'postcss',
+                        plugins: [
+                            require('postcss-cssnext')(),
+                            require('cssnano')(),
+                            require('postcss-sprites')()
+                        ]
+                    }
+                }],
+            }, {
+                //图片处理
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        name: '[name].[ext]'
+                    }
+                }]
+            }
+        ]
+    },
+    resolve: {
+        modules: [
+            // 模块的查找目录
+            &quot;node_modules&quot;,
+            path.resolve(__dirname, &quot;app&quot;)
+        ],
+        extensions: ['.js', '.json', '.vue', '.css'],
+        alias: { //模块别名列表
+            'module': 'new-module'
+        }
+    },
+    devtool: 'source-map', //sourcemap
+    plugins: [ //插件部分
+        new ClearWebpackPlugin(['dist']),
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: `[name]_[contenthash:8].css`,
+            chunkFilename: '[name]_[contenthash:8].css'
+        }),
+        // 告诉webpack使用了哪些第三方库代码
+        new DllReferencePlugin({
+            // jquery 映射到json文件上去
+            manifest: require('./dill/jquery.manifest.json')
+        }),
+        new ParallelUglifyPlugin({
+            // 传递给 UglifyJS的参数如下：
+            uglifyJS: {
+                output: {
+                    /*
+                     是否输出可读性较强的代码，即会保留空格和制表符，默认为输出，为了达到更好的压缩效果，
+                     可以设置为false
+                    */
+                    beautify: false,
+                    /*
+                     是否保留代码中的注释，默认为保留，为了达到更好的压缩效果，可以设置为false
+                    */
+                    comments: false
+                },
+                compress: {
+                    /*
+                     是否在UglifyJS删除没有用到的代码时输出警告信息，默认为输出，可以设置为false关闭这些作用
+                     不大的警告
+                    */
+                    warnings: false,
+
+                    /*
+                     是否删除代码中所有的console语句，默认为不删除，开启后，会删除所有的console语句
+                    */
+                    drop_console: true,
+
+                    /*
+                     是否内嵌虽然已经定义了，但是只用到一次的变量，比如将 var x = 1; y = x, 转换成 y = 5, 默认为不
+                     转换，为了达到更好的压缩效果，可以设置为false
+                    */
+                    collapse_vars: true,
+
+                    /*
+                     是否提取出现了多次但是没有定义成变量去引用的静态值，比如将 x = 'xxx'; y = 'xxx'  转换成
+                     var a = 'xxxx'; x = a; y = a; 默认为不转换，为了达到更好的压缩效果，可以设置为false
+                    */
+                    reduce_vars: true
+                }
+            }
+        }),
+        //将js自动插入到html里
+        new HtmlWebpackPlugin({
+            template: './views/index.html',
+            filename: 'index.html',
+        }),
+        new webpack.HotModuleReplacementPlugin() //引入热更新插件
+    ]
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br></div></div><h3 id="四、实际应用"><a href="#四、实际应用" class="header-anchor">#</a> 四、实际应用</h3> <ul><li>编译 ES6/7</li> <li>编译打包 TS</li> <li>提取公用代码</li> <li>代码分割和懒加载</li> <li>处理 css:style-loader</li> <li>处理 css:style-loader</li> <li>配置 less/sass</li> <li>postcss-in-webpack</li> <li>tree-shaking</li> <li>配置 eslint</li> <li>配置 stylelint</li> <li>mock 使用</li></ul> <h4 id="_4-1-编译-es6-7"><a href="#_4-1-编译-es6-7" class="header-anchor">#</a> 4.1 编译 ES6/7</h4> <p>首先我们要安装<code>babel</code>编译文件<code>npm install -- save-dev babel-loader babel-core</code>同时还需要安装<code>npm install babel-preset-env --save-dev</code>这个时候，给<code>webpack.config.js</code>一个基础配置：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>module.exports = {
+    entry: {
+        app: './app.js'
+    },
+    output: {
+        filename: &quot;[name].[hash:8].js&quot;
+    },
+
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: 'babel-loader',
+                exclude: '/node_modules/'
+            }
+        ]
+    }
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p><code>babel</code>配置文件的写法：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>{
+  &quot;presets&quot;: [
+    [
+      &quot;env&quot;,
+      {
+        &quot;targets&quot;: {
+          &quot;browsers&quot;: [
+            &quot;&gt; 1%&quot;,
+            &quot;last 2 versions&quot;
+          ]
+        }
+      }
+    ]
+  ],
+  &quot;plugins&quot;: [&quot;transform-runtime&quot;]
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>具体配置可以查看<a href="https://km.xiaowuzi.info/tool/webpack-babel.html" target="_blank" rel="noopener noreferrer">babel 学习<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <h3 id="参考资料"><a href="#参考资料" class="header-anchor">#</a> 参考资料</h3> <ul><li>《深入浅出 webpack》</li> <li><a href="https://github.com/yanlele/node-index/blob/master/book/11%E3%80%81%E6%B7%B1%E5%85%A5webpack%E5%B7%A5%E7%A8%8B%E5%8C%96/01%E3%80%81%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1Webpack/README.md" target="_blank" rel="noopener noreferrer">由浅入深 Webpack<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://github.com/webpack-china/awesome-webpack-cn" target="_blank" rel="noopener noreferrer">搜罗一切 webpack 的好文章好工具<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5cea1e1ae51d4510664d1652" target="_blank" rel="noopener noreferrer">关于 webpack4 的 14 个知识点,童叟无欺<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://mp.weixin.qq.com/s/b45oLYScG8L40iVlg7qG7g" target="_blank" rel="noopener noreferrer">一文搞懂 Webpack 多入口配置<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5de06aa851882572d672c1ad" target="_blank" rel="noopener noreferrer">一步步从零开始用 webpack 搭建一个大型项目<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5d518b4de51d4561cc25f013" target="_blank" rel="noopener noreferrer">【Cute-Webpack】Webpack4 入门手册（共 18 章）<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://github.com/luoxue-victor/webpack-box" target="_blank" rel="noopener noreferrer">webpack 工程师的自我修养<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5df884ad6fb9a0164e7f979d" target="_blank" rel="noopener noreferrer">Webpack 深入浅出之公司级分享总结(内附完整 ppt)<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5de87444518825124c50cd36" target="_blank" rel="noopener noreferrer">2020 年了,再不会 webpack 敲得代码就不香了(近万字实战)<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://mp.weixin.qq.com/s/MT5Vpg4BFXMh_c91a515iA" target="_blank" rel="noopener noreferrer">从构建进程间缓存设计 谈 Webpack5 优化和工作原理<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5bb8ef58f265da0a972e3434" target="_blank" rel="noopener noreferrer">Webpack Tree shaking 深入探究<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://github.com/Array-Huang/webpack-seed" target="_blank" rel="noopener noreferrer">webpack 的多页应用脚手架<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://mp.weixin.qq.com/s/23f64lu-qAEAK76lFYyzow" target="_blank" rel="noopener noreferrer">利用 webpack 搭建脚手架一套完整流程<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <h2 id="联系作者"><a href="#联系作者" class="header-anchor">#</a> 联系作者</h2> <div align="center"><p>
+        平凡世界，贵在坚持。
+    </p> <img src="/about/contact.png"></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">更新于:</span> <span class="time">2014/11/15 下午7:34:45</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/tool/npm-1.html" class="prev">
+        私有 npm 仓库搭建
+      </a></span> <span class="next"><a href="/tool/webpack-babel.html">
+        babel 学习
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----><div></div></div></div>
+    <script src="/assets/js/app.c0e6e248.js" defer></script><script src="/assets/js/2.95c27d7d.js" defer></script><script src="/assets/js/280.8b708dd7.js" defer></script><script src="/assets/js/3.e9403692.js" defer></script>
+  </body>
+</html>

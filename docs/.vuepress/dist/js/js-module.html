@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>js 模块化 | 小武子知识库</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/hero.jpg">
+    <meta name="description" content="用心，谈技术。大前端">
+    
+    <link rel="preload" href="/assets/css/0.styles.0c763008.css" as="style"><link rel="preload" href="/assets/js/app.c0e6e248.js" as="script"><link rel="preload" href="/assets/js/2.95c27d7d.js" as="script"><link rel="preload" href="/assets/js/174.d20cd29c.js" as="script"><link rel="preload" href="/assets/js/3.e9403692.js" as="script"><link rel="prefetch" href="/assets/js/10.55459c06.js"><link rel="prefetch" href="/assets/js/100.979736e1.js"><link rel="prefetch" href="/assets/js/101.221faf61.js"><link rel="prefetch" href="/assets/js/102.94aedcca.js"><link rel="prefetch" href="/assets/js/103.f20c9812.js"><link rel="prefetch" href="/assets/js/104.315a1860.js"><link rel="prefetch" href="/assets/js/105.b1c1457e.js"><link rel="prefetch" href="/assets/js/106.d15e2ca0.js"><link rel="prefetch" href="/assets/js/107.a9aa8c09.js"><link rel="prefetch" href="/assets/js/108.dadba095.js"><link rel="prefetch" href="/assets/js/109.29b359ec.js"><link rel="prefetch" href="/assets/js/11.01d1c96d.js"><link rel="prefetch" href="/assets/js/110.f8caf907.js"><link rel="prefetch" href="/assets/js/111.cb06f760.js"><link rel="prefetch" href="/assets/js/112.b6f22b04.js"><link rel="prefetch" href="/assets/js/113.93ad072c.js"><link rel="prefetch" href="/assets/js/114.5b5e7b79.js"><link rel="prefetch" href="/assets/js/115.64a2e93b.js"><link rel="prefetch" href="/assets/js/116.67807b09.js"><link rel="prefetch" href="/assets/js/117.9d2d0bae.js"><link rel="prefetch" href="/assets/js/118.64be5c72.js"><link rel="prefetch" href="/assets/js/119.f8645233.js"><link rel="prefetch" href="/assets/js/12.52c45b75.js"><link rel="prefetch" href="/assets/js/120.33f78b92.js"><link rel="prefetch" href="/assets/js/121.68c62c07.js"><link rel="prefetch" href="/assets/js/122.6ac0bce5.js"><link rel="prefetch" href="/assets/js/123.2fbe615c.js"><link rel="prefetch" href="/assets/js/124.db2635d9.js"><link rel="prefetch" href="/assets/js/125.b9a55161.js"><link rel="prefetch" href="/assets/js/126.8a58009d.js"><link rel="prefetch" href="/assets/js/127.c2bef3ea.js"><link rel="prefetch" href="/assets/js/128.bce1d8c0.js"><link rel="prefetch" href="/assets/js/129.7db75c40.js"><link rel="prefetch" href="/assets/js/13.29d360fe.js"><link rel="prefetch" href="/assets/js/130.d51af23f.js"><link rel="prefetch" href="/assets/js/131.9f4f3763.js"><link rel="prefetch" href="/assets/js/132.cbfe0551.js"><link rel="prefetch" href="/assets/js/133.d56e5883.js"><link rel="prefetch" href="/assets/js/134.72718d19.js"><link rel="prefetch" href="/assets/js/135.e4b301a2.js"><link rel="prefetch" href="/assets/js/136.4c624f68.js"><link rel="prefetch" href="/assets/js/137.20fdc89b.js"><link rel="prefetch" href="/assets/js/138.a4a888fc.js"><link rel="prefetch" href="/assets/js/139.78817bdd.js"><link rel="prefetch" href="/assets/js/14.77482c04.js"><link rel="prefetch" href="/assets/js/140.834efd86.js"><link rel="prefetch" href="/assets/js/141.1fe471c0.js"><link rel="prefetch" href="/assets/js/142.da2e7c72.js"><link rel="prefetch" href="/assets/js/143.34d6dd1d.js"><link rel="prefetch" href="/assets/js/144.86e14680.js"><link rel="prefetch" href="/assets/js/145.a7693849.js"><link rel="prefetch" href="/assets/js/146.cbf95e38.js"><link rel="prefetch" href="/assets/js/147.6bd8239e.js"><link rel="prefetch" href="/assets/js/148.956aed02.js"><link rel="prefetch" href="/assets/js/149.1fcf5700.js"><link rel="prefetch" href="/assets/js/15.fb659717.js"><link rel="prefetch" href="/assets/js/150.bee6e3f2.js"><link rel="prefetch" href="/assets/js/151.9ebfe7de.js"><link rel="prefetch" href="/assets/js/152.1b2879bd.js"><link rel="prefetch" href="/assets/js/153.c4e12f19.js"><link rel="prefetch" href="/assets/js/154.6dfa976e.js"><link rel="prefetch" href="/assets/js/155.3dc3dff8.js"><link rel="prefetch" href="/assets/js/156.cd6e2787.js"><link rel="prefetch" href="/assets/js/157.ecc4c737.js"><link rel="prefetch" href="/assets/js/158.a2ec8adc.js"><link rel="prefetch" href="/assets/js/159.5e7798da.js"><link rel="prefetch" href="/assets/js/16.21715c63.js"><link rel="prefetch" href="/assets/js/160.99b23434.js"><link rel="prefetch" href="/assets/js/161.db46840f.js"><link rel="prefetch" href="/assets/js/162.a5b22316.js"><link rel="prefetch" href="/assets/js/163.21333d52.js"><link rel="prefetch" href="/assets/js/164.1f975bdc.js"><link rel="prefetch" href="/assets/js/165.e2012583.js"><link rel="prefetch" href="/assets/js/166.06773b17.js"><link rel="prefetch" href="/assets/js/167.4bc25080.js"><link rel="prefetch" href="/assets/js/168.3a82aa57.js"><link rel="prefetch" href="/assets/js/169.3018185f.js"><link rel="prefetch" href="/assets/js/17.670573d5.js"><link rel="prefetch" href="/assets/js/170.8936fbb2.js"><link rel="prefetch" href="/assets/js/171.dc6f6900.js"><link rel="prefetch" href="/assets/js/172.eedaccbd.js"><link rel="prefetch" href="/assets/js/173.c844546f.js"><link rel="prefetch" href="/assets/js/175.6cf88876.js"><link rel="prefetch" href="/assets/js/176.04fa621e.js"><link rel="prefetch" href="/assets/js/177.cd30bc38.js"><link rel="prefetch" href="/assets/js/178.ced35bd4.js"><link rel="prefetch" href="/assets/js/179.a6219453.js"><link rel="prefetch" href="/assets/js/18.806c513e.js"><link rel="prefetch" href="/assets/js/180.f3514b7d.js"><link rel="prefetch" href="/assets/js/181.eda890f2.js"><link rel="prefetch" href="/assets/js/182.715a83d2.js"><link rel="prefetch" href="/assets/js/183.d4c63d89.js"><link rel="prefetch" href="/assets/js/184.a6c1307c.js"><link rel="prefetch" href="/assets/js/185.5b06b5fe.js"><link rel="prefetch" href="/assets/js/186.7694f778.js"><link rel="prefetch" href="/assets/js/187.b5ec80a1.js"><link rel="prefetch" href="/assets/js/188.c3bfc8c4.js"><link rel="prefetch" href="/assets/js/189.953765e3.js"><link rel="prefetch" href="/assets/js/19.78101a53.js"><link rel="prefetch" href="/assets/js/190.ad16fe45.js"><link rel="prefetch" href="/assets/js/191.4df29c79.js"><link rel="prefetch" href="/assets/js/192.6ca4d558.js"><link rel="prefetch" href="/assets/js/193.cddcb53e.js"><link rel="prefetch" href="/assets/js/194.ff774765.js"><link rel="prefetch" href="/assets/js/195.73e67053.js"><link rel="prefetch" href="/assets/js/196.59b60e08.js"><link rel="prefetch" href="/assets/js/197.bd02a76b.js"><link rel="prefetch" href="/assets/js/198.0f31256e.js"><link rel="prefetch" href="/assets/js/199.b16eff53.js"><link rel="prefetch" href="/assets/js/20.a8d2fc52.js"><link rel="prefetch" href="/assets/js/200.f150de80.js"><link rel="prefetch" href="/assets/js/201.126a0e4f.js"><link rel="prefetch" href="/assets/js/202.1c7c4c65.js"><link rel="prefetch" href="/assets/js/203.38f7ff3c.js"><link rel="prefetch" href="/assets/js/204.294df981.js"><link rel="prefetch" href="/assets/js/205.9e25e35a.js"><link rel="prefetch" href="/assets/js/206.841ab598.js"><link rel="prefetch" href="/assets/js/207.f730319d.js"><link rel="prefetch" href="/assets/js/208.b4fcd3e9.js"><link rel="prefetch" href="/assets/js/209.95a87d7b.js"><link rel="prefetch" href="/assets/js/21.eb35b9f1.js"><link rel="prefetch" href="/assets/js/210.69f1e0bb.js"><link rel="prefetch" href="/assets/js/211.07fc0dbd.js"><link rel="prefetch" href="/assets/js/212.fc3748b2.js"><link rel="prefetch" href="/assets/js/213.f5a4b09e.js"><link rel="prefetch" href="/assets/js/214.4b0381ab.js"><link rel="prefetch" href="/assets/js/215.15678e44.js"><link rel="prefetch" href="/assets/js/216.ac94f0f1.js"><link rel="prefetch" href="/assets/js/217.920d0adf.js"><link rel="prefetch" href="/assets/js/218.5e05db83.js"><link rel="prefetch" href="/assets/js/219.66e5d241.js"><link rel="prefetch" href="/assets/js/22.af8dae44.js"><link rel="prefetch" href="/assets/js/220.e7231313.js"><link rel="prefetch" href="/assets/js/221.972b3641.js"><link rel="prefetch" href="/assets/js/222.91fb255b.js"><link rel="prefetch" href="/assets/js/223.ad64491b.js"><link rel="prefetch" href="/assets/js/224.30dca230.js"><link rel="prefetch" href="/assets/js/225.adab052f.js"><link rel="prefetch" href="/assets/js/226.34a0be2d.js"><link rel="prefetch" href="/assets/js/227.c0d3ee20.js"><link rel="prefetch" href="/assets/js/228.2aeaefd0.js"><link rel="prefetch" href="/assets/js/229.033e4089.js"><link rel="prefetch" href="/assets/js/23.a542dcb5.js"><link rel="prefetch" href="/assets/js/230.4a8509be.js"><link rel="prefetch" href="/assets/js/231.558ea837.js"><link rel="prefetch" href="/assets/js/232.d8344106.js"><link rel="prefetch" href="/assets/js/233.24b91ff6.js"><link rel="prefetch" href="/assets/js/234.143af17a.js"><link rel="prefetch" href="/assets/js/235.27208c92.js"><link rel="prefetch" href="/assets/js/236.f91cccfa.js"><link rel="prefetch" href="/assets/js/237.609f41b7.js"><link rel="prefetch" href="/assets/js/238.0e9dbc88.js"><link rel="prefetch" href="/assets/js/239.4bca5a19.js"><link rel="prefetch" href="/assets/js/24.bebc3fd0.js"><link rel="prefetch" href="/assets/js/240.505fbb80.js"><link rel="prefetch" href="/assets/js/241.364fc3f9.js"><link rel="prefetch" href="/assets/js/242.8f2bcb7e.js"><link rel="prefetch" href="/assets/js/243.e444d545.js"><link rel="prefetch" href="/assets/js/244.b722e92a.js"><link rel="prefetch" href="/assets/js/245.02ae3936.js"><link rel="prefetch" href="/assets/js/246.fa726b67.js"><link rel="prefetch" href="/assets/js/247.8d32305f.js"><link rel="prefetch" href="/assets/js/248.1758f1a7.js"><link rel="prefetch" href="/assets/js/249.1f3771b7.js"><link rel="prefetch" href="/assets/js/25.99a5ea92.js"><link rel="prefetch" href="/assets/js/250.e228c98e.js"><link rel="prefetch" href="/assets/js/251.3af79d2d.js"><link rel="prefetch" href="/assets/js/252.3e04b68c.js"><link rel="prefetch" href="/assets/js/253.6fbfe8dc.js"><link rel="prefetch" href="/assets/js/254.1c0ac586.js"><link rel="prefetch" href="/assets/js/255.80a26fbb.js"><link rel="prefetch" href="/assets/js/256.c3aaaf0c.js"><link rel="prefetch" href="/assets/js/257.7190679f.js"><link rel="prefetch" href="/assets/js/258.4943ab16.js"><link rel="prefetch" href="/assets/js/259.dcf70155.js"><link rel="prefetch" href="/assets/js/26.b7030b19.js"><link rel="prefetch" href="/assets/js/260.3be306d0.js"><link rel="prefetch" href="/assets/js/261.0ae95ea5.js"><link rel="prefetch" href="/assets/js/262.bb365195.js"><link rel="prefetch" href="/assets/js/263.0aa716fb.js"><link rel="prefetch" href="/assets/js/264.78a933c0.js"><link rel="prefetch" href="/assets/js/265.be0b27be.js"><link rel="prefetch" href="/assets/js/266.ea75c372.js"><link rel="prefetch" href="/assets/js/267.8fb51a0d.js"><link rel="prefetch" href="/assets/js/268.1de2cd46.js"><link rel="prefetch" href="/assets/js/269.9538f5e4.js"><link rel="prefetch" href="/assets/js/27.7e8d245c.js"><link rel="prefetch" href="/assets/js/270.096a1296.js"><link rel="prefetch" href="/assets/js/271.87e68697.js"><link rel="prefetch" href="/assets/js/272.5e6144f6.js"><link rel="prefetch" href="/assets/js/273.ef37f06f.js"><link rel="prefetch" href="/assets/js/274.3063ed39.js"><link rel="prefetch" href="/assets/js/275.c7d2ace2.js"><link rel="prefetch" href="/assets/js/276.039b6af9.js"><link rel="prefetch" href="/assets/js/277.b1538013.js"><link rel="prefetch" href="/assets/js/278.921015a3.js"><link rel="prefetch" href="/assets/js/279.f5efdb65.js"><link rel="prefetch" href="/assets/js/28.417a693f.js"><link rel="prefetch" href="/assets/js/280.8b708dd7.js"><link rel="prefetch" href="/assets/js/281.32c7d7d9.js"><link rel="prefetch" href="/assets/js/282.bca40967.js"><link rel="prefetch" href="/assets/js/283.dc65e580.js"><link rel="prefetch" href="/assets/js/284.c094dc03.js"><link rel="prefetch" href="/assets/js/285.8da857a9.js"><link rel="prefetch" href="/assets/js/286.f6fc008f.js"><link rel="prefetch" href="/assets/js/287.579299eb.js"><link rel="prefetch" href="/assets/js/288.def44f5f.js"><link rel="prefetch" href="/assets/js/289.249367fd.js"><link rel="prefetch" href="/assets/js/29.e74a8793.js"><link rel="prefetch" href="/assets/js/290.51e83cbc.js"><link rel="prefetch" href="/assets/js/30.2ada8ef8.js"><link rel="prefetch" href="/assets/js/31.0fa0fe16.js"><link rel="prefetch" href="/assets/js/32.ee957bcf.js"><link rel="prefetch" href="/assets/js/33.3da559bf.js"><link rel="prefetch" href="/assets/js/34.dc25f4d2.js"><link rel="prefetch" href="/assets/js/35.fa475c71.js"><link rel="prefetch" href="/assets/js/36.a2175633.js"><link rel="prefetch" href="/assets/js/37.6ea8f9a4.js"><link rel="prefetch" href="/assets/js/38.a80cc766.js"><link rel="prefetch" href="/assets/js/39.acc0d98a.js"><link rel="prefetch" href="/assets/js/4.ff22f931.js"><link rel="prefetch" href="/assets/js/40.98cc10f0.js"><link rel="prefetch" href="/assets/js/41.50ce2979.js"><link rel="prefetch" href="/assets/js/42.1c3175a0.js"><link rel="prefetch" href="/assets/js/43.bfe278c0.js"><link rel="prefetch" href="/assets/js/44.1632f7a8.js"><link rel="prefetch" href="/assets/js/45.9fb9fe8b.js"><link rel="prefetch" href="/assets/js/46.312723aa.js"><link rel="prefetch" href="/assets/js/47.9a486a43.js"><link rel="prefetch" href="/assets/js/48.b58bbdbe.js"><link rel="prefetch" href="/assets/js/49.f9594351.js"><link rel="prefetch" href="/assets/js/5.8402f590.js"><link rel="prefetch" href="/assets/js/50.c7ee805f.js"><link rel="prefetch" href="/assets/js/51.af3c953e.js"><link rel="prefetch" href="/assets/js/52.0117b04d.js"><link rel="prefetch" href="/assets/js/53.c0accba1.js"><link rel="prefetch" href="/assets/js/54.19574e6e.js"><link rel="prefetch" href="/assets/js/55.854ebf03.js"><link rel="prefetch" href="/assets/js/56.2876c393.js"><link rel="prefetch" href="/assets/js/57.2015b2b4.js"><link rel="prefetch" href="/assets/js/58.ea17fa42.js"><link rel="prefetch" href="/assets/js/59.b8b54acf.js"><link rel="prefetch" href="/assets/js/6.49e43e20.js"><link rel="prefetch" href="/assets/js/60.eaab2243.js"><link rel="prefetch" href="/assets/js/61.87d7aa63.js"><link rel="prefetch" href="/assets/js/62.e3e52dc6.js"><link rel="prefetch" href="/assets/js/63.a354853d.js"><link rel="prefetch" href="/assets/js/64.c7954f0d.js"><link rel="prefetch" href="/assets/js/65.cfc29f1c.js"><link rel="prefetch" href="/assets/js/66.3b86207c.js"><link rel="prefetch" href="/assets/js/67.876b4986.js"><link rel="prefetch" href="/assets/js/68.1fa63c02.js"><link rel="prefetch" href="/assets/js/69.d4036cbb.js"><link rel="prefetch" href="/assets/js/7.4258fd2a.js"><link rel="prefetch" href="/assets/js/70.bb9df0cf.js"><link rel="prefetch" href="/assets/js/71.6fccae14.js"><link rel="prefetch" href="/assets/js/72.71df66fa.js"><link rel="prefetch" href="/assets/js/73.d1a322b0.js"><link rel="prefetch" href="/assets/js/74.c537a104.js"><link rel="prefetch" href="/assets/js/75.4972e8bf.js"><link rel="prefetch" href="/assets/js/76.fa44b618.js"><link rel="prefetch" href="/assets/js/77.c29e5132.js"><link rel="prefetch" href="/assets/js/78.7d92b430.js"><link rel="prefetch" href="/assets/js/79.308181de.js"><link rel="prefetch" href="/assets/js/8.ca0c9873.js"><link rel="prefetch" href="/assets/js/80.ce541bcd.js"><link rel="prefetch" href="/assets/js/81.be7f983b.js"><link rel="prefetch" href="/assets/js/82.f40c645f.js"><link rel="prefetch" href="/assets/js/83.95f37310.js"><link rel="prefetch" href="/assets/js/84.627c3517.js"><link rel="prefetch" href="/assets/js/85.e70e72c4.js"><link rel="prefetch" href="/assets/js/86.0c5e2f61.js"><link rel="prefetch" href="/assets/js/87.f417dab7.js"><link rel="prefetch" href="/assets/js/88.2be78ecd.js"><link rel="prefetch" href="/assets/js/89.95820484.js"><link rel="prefetch" href="/assets/js/9.0b3f9e20.js"><link rel="prefetch" href="/assets/js/90.fdd86251.js"><link rel="prefetch" href="/assets/js/91.67916501.js"><link rel="prefetch" href="/assets/js/92.90a9c9a0.js"><link rel="prefetch" href="/assets/js/93.095c4ae9.js"><link rel="prefetch" href="/assets/js/94.ee58e3a1.js"><link rel="prefetch" href="/assets/js/95.8cdf233a.js"><link rel="prefetch" href="/assets/js/96.afd52c5b.js"><link rel="prefetch" href="/assets/js/97.4d635846.js"><link rel="prefetch" href="/assets/js/98.bfa2d297.js"><link rel="prefetch" href="/assets/js/99.444f9853.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0c763008.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">小武子知识库</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/js/" class="nav-link router-link-active">
+  javascript
+</a></div><div class="nav-item"><a href="/css/" class="nav-link">
+  css
+</a></div><div class="nav-item"><a href="/html5/" class="nav-link">
+  HTML5
+</a></div><div class="nav-item"><a href="/tool/" class="nav-link">
+  工具
+</a></div><div class="nav-item"><a href="/project/" class="nav-link">
+  软件工程
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  计算机基础
+</a></div><div class="nav-item"><a href="/interview/" class="nav-link">
+  面试题
+</a></div><div class="nav-item"><a href="/materials/" class="nav-link">
+  资料收集
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于作者
+</a></div><div class="nav-item"><a href="https://www.github.com/fttony" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/js/" class="nav-link router-link-active">
+  javascript
+</a></div><div class="nav-item"><a href="/css/" class="nav-link">
+  css
+</a></div><div class="nav-item"><a href="/html5/" class="nav-link">
+  HTML5
+</a></div><div class="nav-item"><a href="/tool/" class="nav-link">
+  工具
+</a></div><div class="nav-item"><a href="/project/" class="nav-link">
+  软件工程
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  计算机基础
+</a></div><div class="nav-item"><a href="/interview/" class="nav-link">
+  面试题
+</a></div><div class="nav-item"><a href="/materials/" class="nav-link">
+  资料收集
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于作者
+</a></div><div class="nav-item"><a href="https://www.github.com/fttony" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>javascript基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/es5-expression.html" class="sidebar-link">表达式与运算符</a></li><li><a href="/js/es5-type.html" class="sidebar-link">JS 数据类型与数据类型转换</a></li><li><a href="/js/es5-execution-context.html" class="sidebar-link">执行上下文与执行上下文栈</a></li><li><a href="/js/es5-prototype.html" class="sidebar-link">原型与原型链</a></li><li><a href="/js/es5-closure.html" class="sidebar-link">闭包</a></li><li><a href="/js/es5-this.html" class="sidebar-link">this 解析</a></li><li><a href="/js/es5-extends.html" class="sidebar-link">继承</a></li><li><a href="/js/es5-apply-call-bind.html" class="sidebar-link">apply&amp;bind&amp;call</a></li><li><a href="/js/es5-dom.html" class="sidebar-link">DOM与BOM</a></li><li><a href="/js/es5-event.html" class="sidebar-link">JS事件</a></li><li><a href="/js/es5-scope.html" class="sidebar-link">作用域</a></li><li><a href="/js/es5-fn.html" class="sidebar-link">函数</a></li><li><a href="/js/es5-news.html" class="sidebar-link">new 理解</a></li><li><a href="/js/es5-array.html" class="sidebar-link">数组</a></li><li><a href="/js/es5-object.html" class="sidebar-link">对象</a></li><li><a href="/js/es5-reg.html" class="sidebar-link">正则表达式学习</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>javascript进阶</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/js-clone.html" class="sidebar-link">JS的浅拷贝与深拷贝</a></li><li><a href="/js/js-curry.html" class="sidebar-link">函数柯理化</a></li><li><a href="/js/js-debounce.html" class="sidebar-link">节流与防抖动</a></li><li><a href="/js/js-precision.html" class="sidebar-link">js 精度丢失问题</a></li><li><a href="/js/js-memory.html" class="sidebar-link">js 内存管理</a></li><li><a href="/js/js-memory-1.html" class="sidebar-link">JS 内存泄漏、监控和分析</a></li><li><a href="/js/js-async.html" class="sidebar-link">事件循环和异步编程的崛起</a></li><li><a href="/js/js-bit.html" class="sidebar-link">js 位运算</a></li><li><a href="/js/js-eventloop.html" class="sidebar-link">理解 EventLoop</a></li><li><a href="/js/js-module.html" aria-current="page" class="active sidebar-link">js 模块化</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/js/js-module.html#前言" class="sidebar-link">前言</a></li><li class="sidebar-sub-header"><a href="/js/js-module.html#内容" class="sidebar-link">内容</a></li><li class="sidebar-sub-header"><a href="/js/js-module.html#参考资料-2" class="sidebar-link">参考资料</a></li><li class="sidebar-sub-header"><a href="/js/js-module.html#联系作者" class="sidebar-link">联系作者</a></li></ul></li><li><a href="/js/js-run.html" class="sidebar-link">javascript 执行过程</a></li><li><a href="/js/js-ast.html" class="sidebar-link">解析、抽象语法树（AST）+ 提升编译速度 5 个技巧</a></li><li><a href="/js/js-v8.html" class="sidebar-link">V8 简介</a></li><li><a href="/js/js-principle.html" class="sidebar-link">JS 编译器，解释引擎</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>es6</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/es6-array.html" class="sidebar-link">数组扩展</a></li><li><a href="/js/es6-fn.html" class="sidebar-link">函数扩展</a></li><li><a href="/js/es6-class-1.html" class="sidebar-link">Class 基本用法</a></li><li><a href="/js/es6-class-2.html" class="sidebar-link">Class 继承</a></li><li><a href="/js/es6-async.html" class="sidebar-link">async 函数</a></li><li><a href="/js/es6-generator-1.html" class="sidebar-link">Generator 函数的语法</a></li><li><a href="/js/es6-generator-2.html" class="sidebar-link">Generator 函数的异步应用</a></li><li><a href="/js/es6-iterator.html" class="sidebar-link">Iterator 和 for...of 循环</a></li><li><a href="/js/es6-let-const.html" class="sidebar-link">let 与 const</a></li><li><a href="/js/es6-module.html" class="sidebar-link">Module 对象</a></li><li><a href="/js/es6-number.html" class="sidebar-link">数值扩展</a></li><li><a href="/js/es6-object.html" class="sidebar-link">对象扩展</a></li><li><a href="/js/es6-promise.html" class="sidebar-link">Promise 对象</a></li><li><a href="/js/es6-proxy-reflect.html" class="sidebar-link">Proxy 和 Reflect</a></li><li><a href="/js/es6-set-map.html" class="sidebar-link">Set和Map数据结构</a></li><li><a href="/js/es6-string.html" class="sidebar-link">字符串扩展</a></li><li><a href="/js/es6-symbol.html" class="sidebar-link">Symbol</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>TypeScript</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/ts-introduct.html" class="sidebar-link">ts 学习</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>nodejs</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/node-introdect.html" class="sidebar-link">node 介绍</a></li><li><a href="/js/node-eventloop.html" class="sidebar-link">Node 的事件循环机制</a></li><li><a href="/js/node-buffer.html" class="sidebar-link">buffer 模块</a></li><li><a href="/js/node-cluster.html" class="sidebar-link">cluster 集群</a></li><li><a href="/js/node-egg.html" class="sidebar-link">egg 基础应用</a></li><li><a href="/js/node-events.html" class="sidebar-link">events 模块</a></li><li><a href="/js/node-express.html" class="sidebar-link">express 基础应用</a></li><li><a href="/js/node-fs.html" class="sidebar-link">fs 模块</a></li><li><a href="/js/node-http.html" class="sidebar-link">http 模块</a></li><li><a href="/js/node-rpc.html" class="sidebar-link">RPC 调用</a></li><li><a href="/js/node-koa.html" class="sidebar-link">koa 基础应用</a></li><li><a href="/js/node-koa-code.html" class="sidebar-link">koa 源码分析</a></li><li><a href="/js/node-net.html" class="sidebar-link">net 模块</a></li><li><a href="/js/node-process.html" class="sidebar-link">process 进程</a></li><li><a href="/js/node-querystring.html" class="sidebar-link">querystring 模块</a></li><li><a href="/js/node-stream.html" class="sidebar-link">stream 模块</a></li><li><a href="/js/node-queue.html" class="sidebar-link">node.js 中的消息队列</a></li><li><a href="/js/node-url.html" class="sidebar-link">url 模块</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>vue框架</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/js/mvvm.html" class="sidebar-link">mvvm 框架介绍</a></li><li><a href="/js/jquery-code.html" class="sidebar-link">jquery 源码分析</a></li><li><a href="/js/undescore.html" class="sidebar-link">undescore 源码分析</a></li><li><a href="/js/vue-jsx.html" class="sidebar-link">Vue 中使用 JSX</a></li><li><a href="/js/vue-lifecycle.html" class="sidebar-link">Vue 生命周期</a></li><li><a href="/js/vue-keep.html" class="sidebar-link">keep-alive 学习</a></li><li><a href="/js/vue-dom.html" class="sidebar-link">虚拟 DOM 解析</a></li><li><a href="/js/vue-communication.html" class="sidebar-link">vue 组件通信</a></li><li><a href="/js/vue-bind.html" class="sidebar-link">vue 双向数据绑定原理</a></li><li><a href="/js/vue-nexttick.html" class="sidebar-link">Vue.netTick 理解与分析</a></li><li><a href="/js/vue-watch.html" class="sidebar-link">Vue 中的 computed,watch,methods 理解与分析</a></li><li><a href="/js/vue-router.html" class="sidebar-link">vue-router 学习及原理</a></li><li><a href="/js/vue-router-code.html" class="sidebar-link">vue-router 源码分析</a></li><li><a href="/js/vue-vuex.html" class="sidebar-link">vuex 学习及原理</a></li><li><a href="/js/vue-vuex-code.html" class="sidebar-link">vue-vuex 源码分析</a></li><li><a href="/js/vue-code.html" class="sidebar-link">vue 源码分析</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="js-模块化"><a href="#js-模块化" class="header-anchor">#</a> js 模块化</h1> <h2 id="前言"><a href="#前言" class="header-anchor">#</a> 前言</h2> <p>本人平时学习及收集内容，欢迎参入一起讨论。</p> <h2 id="内容"><a href="#内容" class="header-anchor">#</a> 内容</h2> <ul><li><a href="#%E4%B8%80%E3%80%81%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3">模块化的理解</a></li> <li><a href="#%E4%BA%8C%E3%80%81commonjs">CommonJS</a></li> <li><a href="#%E4%B8%89%E3%80%81amd">AMD</a></li> <li><a href="#%E5%9B%9B%E3%80%81cmd">CMD</a></li> <li><a href="#%E4%BA%94%E3%80%81es6-%E6%A8%A1%E5%9D%97">ES6 模块</a></li> <li><a href="#%E5%85%AD%E3%80%81%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9D%97%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB">几种模块间的区别</a></li></ul> <h3 id="一、模块化的理解"><a href="#一、模块化的理解" class="header-anchor">#</a> 一、模块化的理解</h3> <ul><li><a href="#11-%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9D%97">什么是模块</a></li> <li><a href="#12-%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E8%BF%9B%E5%8C%96%E8%BF%87%E7%A8%8B">模块化的进化过程</a></li> <li><a href="#13-%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%A5%BD%E5%A4%84">模块化的好处</a></li> <li><a href="#14-%E5%BC%95%E5%85%A5%E5%A4%9A%E4%B8%AAscript%E5%90%8E%E5%87%BA%E7%8E%B0%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98">引入多个<code>&lt;script&gt;</code>后出现出现问题</a></li></ul> <h4 id="_1-1-什么是模块"><a href="#_1-1-什么是模块" class="header-anchor">#</a> 1.1 什么是模块</h4> <ul><li>将一个复杂的程序依据一定的规则(规范)封装成几个块(文件)，并进行组合在一起</li> <li>块的内部数据与实现是私有的，只是向外部暴露一些接口(方法)与外部其它模块通信</li></ul> <h4 id="_1-2-模块化的进化过程"><a href="#_1-2-模块化的进化过程" class="header-anchor">#</a> 1.2 模块化的进化过程</h4> <ul><li><strong>全局 function 模式：将不同的功能封装成不同的全局函数</strong> <ul><li>编码：将不同的功能封装不同的全局函数</li> <li>问题：污染全局命名空间，容易引起命名冲突或数据不安全，而且模块成员之间看不出直接关系</li></ul></li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>function m1(){
+  //...
+}
+function m2(){
+  //...
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><ul><li><strong>namespace 模式 : 简单对象封装</strong> <ul><li>作用：减少了全局变量，解决命名冲突</li> <li>问题：数据不安全（外部可以直接修改模块内部的数据）</li></ul></li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>let myModule = {
+    data:'www.baidu.com',
+    foo(){
+        console.log(`foo() ${this.data}`)
+    },
+    bar(){
+        console.log(`bar() ${this.data}`)
+    }
+}
+
+myModule.data = 'other data';       // 能直接修改模块的数据
+myModule.foo()
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>这样的写法会暴露所有模块成员，内部状态可以被外部改写。</p> <ul><li><strong>IIFE 模式：匿名函数自调用(闭包)</strong> <ul><li>作用：数据是私有的，外部只能通过暴露的方法操作</li> <li>编码：将数据和行为封装到一个函数内部，通过给 window 添加属性来向外暴露接口</li> <li>问题：如果当前这个模块依赖另一个模块怎么办？</li></ul></li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>// index.html文件
+&lt;script type=&quot;text/javascript&quot; src=&quot;module.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    myModule.foo();
+    myModule.bar();
+    console.log(myModule.data)  // undefined 不能访问模块内部数据
+    myModule.data = 'xxx';      // 不是修改的模块内部的data
+    myModule.foo(); // 没有改变
+&lt;/script&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>// module.js文件
+(function(window){
+    let data = 'www.baidu.com'
+    // 操作数据的函数
+    function foo(){
+        // 用于暴露有函数
+        console.log(`foo() ${data}`)
+    }
+    function bar(){
+        // 用于暴露有函数
+        console.log(`bar() ${data}`)
+        otherFun()  // 内部调用
+    }
+    function otherFun(){
+        // 内部私有函数
+        console.log('otherFun()')
+    }
+    // 暴露行为
+    window.myModule = {foo,bar} // ES6 写法
+})(window)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><ul><li><strong>IIFE 模式增强 : 引入依赖</strong></li></ul> <p>这就是现代模块实现的基石</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// module.js文件
+(function(window,$){
+    let data = 'window.baidu.com'
+    // 操作数据的函数
+    function foo(){
+        // 用于暴露函数
+        console.log(`foo() ${data}`)
+        $('body').css('background','red')
+    }
+    function bar(){
+        // 用于暴露有函数
+        console.log(`bar() ${data}`)
+        otherFun()  // 内部调用
+    }
+    function otherFun(){
+        // 内部私有的函数
+        console.log('otherFun()')
+    }
+    // 暴露行为
+    window.myModule = {foo,bar}
+})(window.jQuery)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>    // index.html文件
+  &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-1.10.1.js&quot;&gt;&lt;/script&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;module.js&quot;&gt;&lt;/script&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    myModule.foo()
+  &lt;/script&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>上例子通过 jquery 方法将页面的背景颜色改成红色，所以必须先引入 jQuery 库，就把这个库当作参数传入。<strong>这样做除了保证模块的独立性，还使得模块之间的依赖关系变得明显</strong>。</p> <h4 id="_1-3-模块化的好处"><a href="#_1-3-模块化的好处" class="header-anchor">#</a> 1.3 模块化的好处</h4> <ul><li>避免命名冲突(减少命名空间污染)</li> <li>更好的分离，按需加载</li> <li>更高复用性</li> <li>高可维护性</li></ul> <h4 id="_1-4-引入多个-script-后出现出现问题"><a href="#_1-4-引入多个-script-后出现出现问题" class="header-anchor">#</a> 1.4 引入多个<code>&lt;script&gt;</code>后出现出现问题</h4> <ul><li>请求过多</li></ul> <p>首先我们要依赖多个模块，那样就会发送多个请求，导致请求过多。</p> <ul><li>依赖模糊</li></ul> <p>我们不知道他们的具体依赖关系是什么，也就是说很容易因为不了解他们之间的依赖关系导致加载先后顺序出错。</p> <ul><li>难以维护</li></ul> <p>以上两种原因就导致了很难维护，很可能出现牵一发而动全身的情况导致项目出现严重的问题。
+模块化固然有多个好处，然而一个页面需要引入多个 js 文件，就会出现以上这些问题。而这些问题可以通过模块化规范来解决，下面介绍开发中最流行的 commonjs, AMD, ES6, CMD 规范。</p> <h3 id="二、commonjs"><a href="#二、commonjs" class="header-anchor">#</a> 二、CommonJS</h3> <ul><li><a href="#21-%E6%A6%82%E8%BF%B0">概述</a></li> <li><a href="#22-%E7%89%B9%E7%82%B9">特点</a></li> <li><a href="#23-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95">基本语法</a></li> <li><a href="#24-%E6%A8%A1%E5%9D%97%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6">模块的加载机制</a></li> <li><a href="#25-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%9E%E7%8E%B0">服务器端实现</a></li> <li><a href="#26-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%AB%AF%E5%AE%9E%E7%8E%B0%E5%80%9F%E5%8A%A9browserify">浏览器端实现(借助 Browserify)</a></li></ul> <h4 id="_2-1-概述"><a href="#_2-1-概述" class="header-anchor">#</a> 2.1 概述</h4> <p>Node 应用由模块组成，采用 CommonJS 模块规范。每个文件就是一个模块，有自己的作用域。在一个文件里定义的变量、函数、类，都是私有的，对其他文件不可见。<strong>在服务器端，模块的加载是运行时同步加载的；在浏览器端，模块需要提前编译打包处理</strong>。</p> <h4 id="_2-2-特点"><a href="#_2-2-特点" class="header-anchor">#</a> 2.2 特点</h4> <ul><li>所有代码都运行在模块作用域，不会污染全局作用域。</li> <li>模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存。</li> <li>模块加载的顺序，按照其在代码中出现的顺序。</li></ul> <h4 id="_2-3-基本语法"><a href="#_2-3-基本语法" class="header-anchor">#</a> 2.3 基本语法</h4> <ul><li>暴露模块：<code>module.exports = value</code>或<code>expors.xxx=value</code></li> <li>引入模块：<code>require(xxx)</code>如果是第三方模块，xxx 为模块名；如果是自定义模块，xxx 为模块文件路径</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>// example.js
+var x = 5;
+var addX = function (value){
+    return value + x;
+};
+module.exports.x = x;
+module.exports.addX = addX;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>上面代码通过 module.exports 输出变量 x 和函数 addX。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>var example = require('./example.js');//如果参数字符串以“./”开头，则表示加载的是一个位于相对路径
+console.log(example.x); // 5
+console.log(example.addX(1)); // 6
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>require 命令用于加载模块文件。<strong>require 命令的基本功能是，读入并执行一个 JavaScript 文件，然后返回该模块的 exports 对象。如果没有发现在指定模块，会报错。</strong></p> <h4 id="_2-4-模块的加载机制"><a href="#_2-4-模块的加载机制" class="header-anchor">#</a> 2.4 模块的加载机制</h4> <p><strong>CommonJS 模块的加载机制是，输入的是被输出的值的拷贝。也就是说，一旦输出一个值，模块内部的变化就影响不到这个值</strong>。</p> <h4 id="_2-5-服务器端实现"><a href="#_2-5-服务器端实现" class="header-anchor">#</a> 2.5 服务器端实现</h4> <ul><li>下载安装 node.js</li></ul> <p>略</p> <ul><li>创建项目结构</li></ul> <p>略</p> <ul><li>下载第三方模块</li></ul> <p>略</p> <ul><li>定义模块代码</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>// module1.js
+module.exports={
+    msg:'module1',
+    foo(){
+        console.log(this.msg)
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>//module2.js
+module.exports = function() {
+  console.log('module2')
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>//module3.js
+exports.foo = function() {
+  console.log('foo() module3')
+}
+exports.arr = [1, 2, 3, 3, 2]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>// app.js文件
+// 引入第三方库，应该放置在最前面
+let uniq = require('uniq')
+let module1 = require('./modules/module1')
+let module2 = require('./modules/module2')
+let module3 = require('./modules/module3')
+
+module1.foo()   // module1
+module2()   // module2
+module3.foo();  // foo() module3
+console.log(uniq(module3.arr))  // [1,2,3]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><ul><li>通过 node 运行 app.js</li></ul> <p>命令行输入<code>node app.js</code>，运行 JS 文件</p> <h4 id="_2-6-浏览器端实现-借助-browserify"><a href="#_2-6-浏览器端实现-借助-browserify" class="header-anchor">#</a> 2.6 浏览器端实现(借助 Browserify)</h4> <ul><li>创建项目结构</li></ul> <p>略</p> <ul><li>下载 browserify</li></ul> <p>略</p> <ul><li>定义模块代码(同服务器端)</li></ul> <p>略</p> <ul><li>打包处理 js</li></ul> <p>根目录下运行<code>browserify js/src/app.js -o js/dist/bundle.js</code></p> <ul><li>页面使用引入</li></ul> <p>在 index.html 文件中引入<code>&lt;script type=&quot;text/javascript&quot; src=&quot;js/dist/bundle.js&quot;&gt;&lt;/script&gt;</code></p> <h3 id="三、amd"><a href="#三、amd" class="header-anchor">#</a> 三、AMD</h3> <p>CommonJS 规范加载模块是同步的，也就是说，只有加载完成，才能执行后面的操作。AMD 规范则是非同步加载模块，允许指定回调函数。由于 Node.js 主要用于服务器编程，模块文件一般都已经存在于本地硬盘，所以加载起来比较快，不用考虑非同步加载的方式，所以 CommonJS 规范比较适用。但是，<strong>如果是浏览器环境，要从服务器端加载模块，这里就必须采用非同步模式，因此浏览器端一般采用 AMD 规范</strong>。此外 AMD 规范比 CommonJS 规范在浏览器实现要来着早。</p> <ul><li><a href="#31-amd%E8%A7%84%E8%8C%83%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95">AMD 规范基本语法</a></li> <li><a href="#32-%E6%9C%AA%E4%BD%BF%E7%94%A8amd%E8%A7%84%E8%8C%83%E4%B8%8E%E4%BD%BF%E7%94%A8requirejs">未使用 AMD 规范与使用 require.js</a></li></ul> <h4 id="_3-1-amd-规范基本语法"><a href="#_3-1-amd-规范基本语法" class="header-anchor">#</a> 3.1 AMD 规范基本语法</h4> <p><strong>定义暴露模块</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// 定义没有依赖的模块
+define(function(){
+    return 模块
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>//  定义有依赖的模块
+define(['module1','module2'],function(m1,m2){
+    return 模块
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p><strong>引入使用模块</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>require(['module1','module2'],function(m1,m2){
+    使用m1/m2
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="_3-2-未使用-amd-规范与使用-require-js"><a href="#_3-2-未使用-amd-规范与使用-require-js" class="header-anchor">#</a> 3.2 未使用 AMD 规范与使用 require.js</h4> <p>通过比较两者的实现方法，来说明使用 AMD 规范的好处。</p> <ul><li>未使用 AMD 规范</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>// dataService.js文件
+(function(window){
+    let msg = 'www.baidu.com'
+    function getMsg(){
+        return msg.toUpperCase()
+    }
+    window.dataService = {getMsg}
+})(window)
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>// alerter.js文件
+(function(window,dataService){
+    let name = 'Tom'
+    function showMsg(){
+        alert(dataService.getMsg() + ','+name)
+    }
+    window.alerter = {showMsg}
+})(window,dataService)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>// main.js文件
+(function(alerter){
+    alerter.showMsg()
+})(alerter)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>// index.html文件
+&lt;div&gt;&lt;h1&gt;Modular Demo 1: 未使用AMD(require.js)&lt;/h1&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/modules/dataService.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/modules/alerter.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/main.js&quot;&gt;&lt;/script&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>这种方式缺点很明显：<strong>首先会发送多个请求，其次引入的 js 文件顺序不能搞错，否则会报错！</strong></p> <ul><li>使用 require.js</li></ul> <p>RequireJS 是一个工具库，主要用于客户端的模块管理。它的模块管理遵守 AMD 规范，RequireJS<strong>的基本思想是，通过 define 方法，将代码定义为模块；通过 require 方法，实现代码的模块加载</strong>。</p> <p><strong>定义 require.js 的模块代码</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// dataService.js文件
+// 定义没有依赖的模块
+define(function(){
+    let msg = 'www.baidu.com'
+    function getMsg(){
+        return msg.toUpperCase()
+    }
+    return {getMsg} // 暴露模块
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>//alerter.js文件
+// 定义有依赖的模块
+define(['dataService'], function(dataService) {
+  let name = 'Tom'
+  function showMsg() {
+    alert(dataService.getMsg() + ', ' + name)
+  }
+  // 暴露模块
+  return { showMsg }
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>// main.js文件
+(function(){
+    require.config({
+        baseUrl:'js/',  // 基本路径，出发点在根目录下
+        paths:{
+            // 映射：模块标识名：路径
+            alerter:'./modules/alerter',    // 此处不能写alerter.js，会报错
+            dataService:'./modules/dataService'
+        }
+    })
+    require(['alerter'], function(alerter) {
+        alerter.showMsg()
+    })
+})()
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>// index.html文件
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Modular Demo&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- 引入require.js并指定js主文件的入口 --&gt;
+    &lt;script data-main=&quot;js/main&quot; src=&quot;js/libs/require.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p><strong>页面引入 require.js 模块</strong></p> <p>在 index.html 引入 <code>&lt;script data-main=&quot;js/main&quot; src=&quot;js/libs/require.js&quot;&gt;&lt;/script&gt;</code></p> <p>关于 require.js 实现方式可以参考资料：<a href="https://juejin.im/post/5c3592b26fb9a049aa6f4456" target="_blank" rel="noopener noreferrer">前端模块化之 AMD 与 CMD 原理(附源码)<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><strong>小结：<strong>通过两者的比较，可以得出</strong>AMD 模块定义的方法非常清晰，不会污染全局环境，能够清楚地显示依赖关系</strong>。AMD 模式可以用于浏览器环境，并且允许非同步加载模块，也可以根据需要动态加载模块。</p> <h3 id="四、cmd"><a href="#四、cmd" class="header-anchor">#</a> 四、CMD</h3> <p>CMD 规范专门用于浏览器端，模块的加载是异步的，模块使用时会加载执行。CMD 规范整合了 CommonJS 和 AMD 规范的特点。在 Sea.js 中所有 JavaScript 模块都遵循 CMD 模块定义规范。</p> <ul><li><a href="#41-cmd%E8%A7%84%E8%8C%83%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95">CMD 规范基本语法</a></li> <li><a href="#42-seajs%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B">sea.js 简单使用教程</a></li></ul> <h4 id="_4-1-cmd-规范基本语法"><a href="#_4-1-cmd-规范基本语法" class="header-anchor">#</a> 4.1 CMD 规范基本语法</h4> <p><strong>定义暴露模块</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>//定义没有依赖的模块
+define(function(require, exports, module){
+  exports.xxx = value
+  module.exports = value
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>//定义有依赖的模块
+define(function(require, exports, module){
+  //引入依赖模块(同步)
+  var module2 = require('./module2')
+  //引入依赖模块(异步)
+    require.async('./module3', function (m3) {
+    })
+  //暴露模块
+  exports.xxx = value
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p><strong>引入使用模块</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>define(function (require) {
+  var m1 = require('./module1')
+  var m4 = require('./module4')
+  m1.show()
+  m4.show()
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h4 id="_4-2-sea-js-简单使用教程"><a href="#_4-2-sea-js-简单使用教程" class="header-anchor">#</a> 4.2 sea.js 简单使用教程</h4> <p><strong>定义 sea.js 的模块代码</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// module1.js文件
+define(function (require, exports, module) {
+  //内部变量数据
+  var data = 'atguigu.com'
+  //内部函数
+  function show() {
+    console.log('module1 show() ' + data)
+  }
+  //向外暴露
+  exports.show = show
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>// module2.js文件
+define(function (require, exports, module) {
+  module.exports = {
+    msg: 'I Will Back'
+  }
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>// module3.js文件
+define(function(require, exports, module) {
+  const API_KEY = 'abc123'
+  exports.API_KEY = API_KEY
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>// module4.js文件
+define(function (require, exports, module) {
+  //引入依赖模块(同步)
+  var module2 = require('./module2')
+  function show() {
+    console.log('module4 show() ' + module2.msg)
+  }
+  exports.show = show
+  //引入依赖模块(异步)
+  require.async('./module3', function (m3) {
+    console.log('异步引入依赖模块3  ' + m3.API_KEY)
+  })
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>// main.js文件
+define(function (require) {
+  var m1 = require('./module1')
+  var m4 = require('./module4')
+  m1.show()
+  m4.show()
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p><strong>在 index.html 中引入</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;script type=&quot;text/javascript&quot; src=&quot;js/libs/sea.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  seajs.use('./js/modules/main')
+&lt;/script&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="五、es6-模块"><a href="#五、es6-模块" class="header-anchor">#</a> 五、ES6 模块</h3> <p>参考上一篇文章<a href="https://github.com/cs-learning-record/javascript-series/blob/master/es6/Module%20%E7%9A%84%E8%AF%AD%E6%B3%95.md" target="_blank" rel="noopener noreferrer">Module 的语法<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <h3 id="六、几种模块间的区别"><a href="#六、几种模块间的区别" class="header-anchor">#</a> 六、几种模块间的区别</h3> <ul><li><a href="#61-amd-%E4%B8%8E-cmd-%E7%9A%84%E5%8C%BA%E5%88%AB">AMD 与 CMD 的区别</a></li> <li><a href="#62-commonjs%E4%B8%8Eamd">CommonJS 与 AMD</a></li> <li><a href="#63-commonjs%E4%B8%8Ees6%E7%9A%84%E5%8C%BA%E5%88%AB">Commonjs 与 ES6 的区别</a></li></ul> <h4 id="_6-1-amd-与-cmd-的区别"><a href="#_6-1-amd-与-cmd-的区别" class="header-anchor">#</a> 6.1 AMD 与 CMD 的区别</h4> <ul><li>AMD 推崇<strong>依赖前置</strong>，CMD 推崇<strong>依赖就近</strong></li> <li>AMD 是<strong>提前执行</strong>，CMD 是<strong>延迟执行</strong></li></ul> <h4 id="_6-2-commonjs-与-amd"><a href="#_6-2-commonjs-与-amd" class="header-anchor">#</a> 6.2 CommonJS 与 AMD</h4> <ul><li>CommonJS 规范加载模块是同步，也就是说，只有加载完成，才能执行后面的操作。</li> <li>AMD 规范则是非同步加载模块，允许指定回调函数。</li></ul> <h4 id="_6-3-commonjs-与-es6-的区别"><a href="#_6-3-commonjs-与-es6-的区别" class="header-anchor">#</a> 6.3 Commonjs 与 ES6 的区别</h4> <p>主要区别</p> <table><thead><tr><th>区别</th> <th>CommonJS</th> <th>es6</th></tr></thead> <tbody><tr><td>加载原理</td> <td>第一次加载模块就会执行整个模块，再次用到时，不会执行该模块，而是到缓存中取值</td> <td>不会缓存运行结果，动态去被加载的模块中取值，并且变量总是是绑定其所在模块。</td></tr> <tr><td>输出</td> <td>值的拷贝（模块中值的改变不会影响到已经加载的值）</td> <td>值的引用（静态分析，动态引用，原来模块值改变会改变加载的值）</td></tr> <tr><td>加载方式</td> <td>运行时加载（加载整个模块，即模块中的所有接口）</td> <td>编译时加载（只加载需要的接口）</td></tr> <tr><td>this 指向</td> <td>指向当前模块</td> <td>指向 undefined</td></tr> <tr><td>循环加载</td> <td>只输出已经执行的部分，还未执行的部分不会输出</td> <td>遇到模块加载命令 import 时不会去执行模块，而是生成一个动态的只读引用，等到真正用到时再去模块中取值。只要引用存在，代码就能执行。</td></tr></tbody></table> <h3 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h3> <ul><li>CommonJS 规范主要用于服务端编程，加载模块是同步的，这并不适合在浏览器环境，因为同步意味着阻塞加载，浏览器资源是异步加载的，因此有了 AMD、CMD 解决方案。</li> <li>AMD 规范在浏览器环境中异步加载模块，而且可以并行加载多个模块。不过，AMD 规范开发成本高，代码的阅读和书写比较困难，模块定义方式的主义不顺畅。</li> <li>CMD 规范与 AMD 规范很相似，都用于浏览器编程，依赖就是近，延迟执行，可以很容易在 Node.js 中运行。不过，依赖 SPM 打包，模块的加载逻辑偏重</li> <li><strong>ES6 在语言标准的层面上，实现了模块功能，而且实现得相当简单，完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案。</strong></li></ul> <h3 id="参考资料"><a href="#参考资料" class="header-anchor">#</a> 参考资料</h3> <ul><li><a href="https://github.com/ljianshu/Blog/issues/48" target="_blank" rel="noopener noreferrer">前端模块化详解(完整版)<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://github.com/mqyqingfeng/Blog/issues/108" target="_blank" rel="noopener noreferrer">ES6 系列之模块加载方案<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5aaa37c8f265da23945f365c" target="_blank" rel="noopener noreferrer">前端模块化：CommonJS,AMD,CMD,ES6<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="http://javascript.ruanyifeng.com/nodejs/module.html" target="_blank" rel="noopener noreferrer">《JavaScript 标准参考教程（alpha）》<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5c3592b26fb9a049aa6f4456" target="_blank" rel="noopener noreferrer">前端模块化之 AMD 与 CMD 原理(附源码)<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://mp.weixin.qq.com/s/AkjrTduPc0Wcm6noD-b1GA" target="_blank" rel="noopener noreferrer">前端模块化的今生<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <h2 id="参考资料-2"><a href="#参考资料-2" class="header-anchor">#</a> 参考资料</h2> <h2 id="联系作者"><a href="#联系作者" class="header-anchor">#</a> 联系作者</h2> <div align="center"><p>
+        平凡世界，贵在坚持。
+    </p> <img src="/about/contact.png"></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">更新于:</span> <span class="time">2014/6/20 下午6:55:38</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/js/js-eventloop.html" class="prev">
+        理解 EventLoop
+      </a></span> <span class="next"><a href="/js/js-run.html">
+        javascript 执行过程
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----><div></div></div></div>
+    <script src="/assets/js/app.c0e6e248.js" defer></script><script src="/assets/js/2.95c27d7d.js" defer></script><script src="/assets/js/174.d20cd29c.js" defer></script><script src="/assets/js/3.e9403692.js" defer></script>
+  </body>
+</html>

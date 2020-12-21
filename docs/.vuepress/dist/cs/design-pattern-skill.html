@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>技巧型设计模式 | 小武子知识库</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/hero.jpg">
+    <meta name="description" content="用心，谈技术。大前端">
+    
+    <link rel="preload" href="/assets/css/0.styles.0c763008.css" as="style"><link rel="preload" href="/assets/js/app.c0e6e248.js" as="script"><link rel="preload" href="/assets/js/2.95c27d7d.js" as="script"><link rel="preload" href="/assets/js/23.a542dcb5.js" as="script"><link rel="preload" href="/assets/js/3.e9403692.js" as="script"><link rel="prefetch" href="/assets/js/10.55459c06.js"><link rel="prefetch" href="/assets/js/100.979736e1.js"><link rel="prefetch" href="/assets/js/101.221faf61.js"><link rel="prefetch" href="/assets/js/102.94aedcca.js"><link rel="prefetch" href="/assets/js/103.f20c9812.js"><link rel="prefetch" href="/assets/js/104.315a1860.js"><link rel="prefetch" href="/assets/js/105.b1c1457e.js"><link rel="prefetch" href="/assets/js/106.d15e2ca0.js"><link rel="prefetch" href="/assets/js/107.a9aa8c09.js"><link rel="prefetch" href="/assets/js/108.dadba095.js"><link rel="prefetch" href="/assets/js/109.29b359ec.js"><link rel="prefetch" href="/assets/js/11.01d1c96d.js"><link rel="prefetch" href="/assets/js/110.f8caf907.js"><link rel="prefetch" href="/assets/js/111.cb06f760.js"><link rel="prefetch" href="/assets/js/112.b6f22b04.js"><link rel="prefetch" href="/assets/js/113.93ad072c.js"><link rel="prefetch" href="/assets/js/114.5b5e7b79.js"><link rel="prefetch" href="/assets/js/115.64a2e93b.js"><link rel="prefetch" href="/assets/js/116.67807b09.js"><link rel="prefetch" href="/assets/js/117.9d2d0bae.js"><link rel="prefetch" href="/assets/js/118.64be5c72.js"><link rel="prefetch" href="/assets/js/119.f8645233.js"><link rel="prefetch" href="/assets/js/12.52c45b75.js"><link rel="prefetch" href="/assets/js/120.33f78b92.js"><link rel="prefetch" href="/assets/js/121.68c62c07.js"><link rel="prefetch" href="/assets/js/122.6ac0bce5.js"><link rel="prefetch" href="/assets/js/123.2fbe615c.js"><link rel="prefetch" href="/assets/js/124.db2635d9.js"><link rel="prefetch" href="/assets/js/125.b9a55161.js"><link rel="prefetch" href="/assets/js/126.8a58009d.js"><link rel="prefetch" href="/assets/js/127.c2bef3ea.js"><link rel="prefetch" href="/assets/js/128.bce1d8c0.js"><link rel="prefetch" href="/assets/js/129.7db75c40.js"><link rel="prefetch" href="/assets/js/13.29d360fe.js"><link rel="prefetch" href="/assets/js/130.d51af23f.js"><link rel="prefetch" href="/assets/js/131.9f4f3763.js"><link rel="prefetch" href="/assets/js/132.cbfe0551.js"><link rel="prefetch" href="/assets/js/133.d56e5883.js"><link rel="prefetch" href="/assets/js/134.72718d19.js"><link rel="prefetch" href="/assets/js/135.e4b301a2.js"><link rel="prefetch" href="/assets/js/136.4c624f68.js"><link rel="prefetch" href="/assets/js/137.20fdc89b.js"><link rel="prefetch" href="/assets/js/138.a4a888fc.js"><link rel="prefetch" href="/assets/js/139.78817bdd.js"><link rel="prefetch" href="/assets/js/14.77482c04.js"><link rel="prefetch" href="/assets/js/140.834efd86.js"><link rel="prefetch" href="/assets/js/141.1fe471c0.js"><link rel="prefetch" href="/assets/js/142.da2e7c72.js"><link rel="prefetch" href="/assets/js/143.34d6dd1d.js"><link rel="prefetch" href="/assets/js/144.86e14680.js"><link rel="prefetch" href="/assets/js/145.a7693849.js"><link rel="prefetch" href="/assets/js/146.cbf95e38.js"><link rel="prefetch" href="/assets/js/147.6bd8239e.js"><link rel="prefetch" href="/assets/js/148.956aed02.js"><link rel="prefetch" href="/assets/js/149.1fcf5700.js"><link rel="prefetch" href="/assets/js/15.fb659717.js"><link rel="prefetch" href="/assets/js/150.bee6e3f2.js"><link rel="prefetch" href="/assets/js/151.9ebfe7de.js"><link rel="prefetch" href="/assets/js/152.1b2879bd.js"><link rel="prefetch" href="/assets/js/153.c4e12f19.js"><link rel="prefetch" href="/assets/js/154.6dfa976e.js"><link rel="prefetch" href="/assets/js/155.3dc3dff8.js"><link rel="prefetch" href="/assets/js/156.cd6e2787.js"><link rel="prefetch" href="/assets/js/157.ecc4c737.js"><link rel="prefetch" href="/assets/js/158.a2ec8adc.js"><link rel="prefetch" href="/assets/js/159.5e7798da.js"><link rel="prefetch" href="/assets/js/16.21715c63.js"><link rel="prefetch" href="/assets/js/160.99b23434.js"><link rel="prefetch" href="/assets/js/161.db46840f.js"><link rel="prefetch" href="/assets/js/162.a5b22316.js"><link rel="prefetch" href="/assets/js/163.21333d52.js"><link rel="prefetch" href="/assets/js/164.1f975bdc.js"><link rel="prefetch" href="/assets/js/165.e2012583.js"><link rel="prefetch" href="/assets/js/166.06773b17.js"><link rel="prefetch" href="/assets/js/167.4bc25080.js"><link rel="prefetch" href="/assets/js/168.3a82aa57.js"><link rel="prefetch" href="/assets/js/169.3018185f.js"><link rel="prefetch" href="/assets/js/17.670573d5.js"><link rel="prefetch" href="/assets/js/170.8936fbb2.js"><link rel="prefetch" href="/assets/js/171.dc6f6900.js"><link rel="prefetch" href="/assets/js/172.eedaccbd.js"><link rel="prefetch" href="/assets/js/173.c844546f.js"><link rel="prefetch" href="/assets/js/174.d20cd29c.js"><link rel="prefetch" href="/assets/js/175.6cf88876.js"><link rel="prefetch" href="/assets/js/176.04fa621e.js"><link rel="prefetch" href="/assets/js/177.cd30bc38.js"><link rel="prefetch" href="/assets/js/178.ced35bd4.js"><link rel="prefetch" href="/assets/js/179.a6219453.js"><link rel="prefetch" href="/assets/js/18.806c513e.js"><link rel="prefetch" href="/assets/js/180.f3514b7d.js"><link rel="prefetch" href="/assets/js/181.eda890f2.js"><link rel="prefetch" href="/assets/js/182.715a83d2.js"><link rel="prefetch" href="/assets/js/183.d4c63d89.js"><link rel="prefetch" href="/assets/js/184.a6c1307c.js"><link rel="prefetch" href="/assets/js/185.5b06b5fe.js"><link rel="prefetch" href="/assets/js/186.7694f778.js"><link rel="prefetch" href="/assets/js/187.b5ec80a1.js"><link rel="prefetch" href="/assets/js/188.c3bfc8c4.js"><link rel="prefetch" href="/assets/js/189.953765e3.js"><link rel="prefetch" href="/assets/js/19.78101a53.js"><link rel="prefetch" href="/assets/js/190.ad16fe45.js"><link rel="prefetch" href="/assets/js/191.4df29c79.js"><link rel="prefetch" href="/assets/js/192.6ca4d558.js"><link rel="prefetch" href="/assets/js/193.cddcb53e.js"><link rel="prefetch" href="/assets/js/194.ff774765.js"><link rel="prefetch" href="/assets/js/195.73e67053.js"><link rel="prefetch" href="/assets/js/196.59b60e08.js"><link rel="prefetch" href="/assets/js/197.bd02a76b.js"><link rel="prefetch" href="/assets/js/198.0f31256e.js"><link rel="prefetch" href="/assets/js/199.b16eff53.js"><link rel="prefetch" href="/assets/js/20.a8d2fc52.js"><link rel="prefetch" href="/assets/js/200.f150de80.js"><link rel="prefetch" href="/assets/js/201.126a0e4f.js"><link rel="prefetch" href="/assets/js/202.1c7c4c65.js"><link rel="prefetch" href="/assets/js/203.38f7ff3c.js"><link rel="prefetch" href="/assets/js/204.294df981.js"><link rel="prefetch" href="/assets/js/205.9e25e35a.js"><link rel="prefetch" href="/assets/js/206.841ab598.js"><link rel="prefetch" href="/assets/js/207.f730319d.js"><link rel="prefetch" href="/assets/js/208.b4fcd3e9.js"><link rel="prefetch" href="/assets/js/209.95a87d7b.js"><link rel="prefetch" href="/assets/js/21.eb35b9f1.js"><link rel="prefetch" href="/assets/js/210.69f1e0bb.js"><link rel="prefetch" href="/assets/js/211.07fc0dbd.js"><link rel="prefetch" href="/assets/js/212.fc3748b2.js"><link rel="prefetch" href="/assets/js/213.f5a4b09e.js"><link rel="prefetch" href="/assets/js/214.4b0381ab.js"><link rel="prefetch" href="/assets/js/215.15678e44.js"><link rel="prefetch" href="/assets/js/216.ac94f0f1.js"><link rel="prefetch" href="/assets/js/217.920d0adf.js"><link rel="prefetch" href="/assets/js/218.5e05db83.js"><link rel="prefetch" href="/assets/js/219.66e5d241.js"><link rel="prefetch" href="/assets/js/22.af8dae44.js"><link rel="prefetch" href="/assets/js/220.e7231313.js"><link rel="prefetch" href="/assets/js/221.972b3641.js"><link rel="prefetch" href="/assets/js/222.91fb255b.js"><link rel="prefetch" href="/assets/js/223.ad64491b.js"><link rel="prefetch" href="/assets/js/224.30dca230.js"><link rel="prefetch" href="/assets/js/225.adab052f.js"><link rel="prefetch" href="/assets/js/226.34a0be2d.js"><link rel="prefetch" href="/assets/js/227.c0d3ee20.js"><link rel="prefetch" href="/assets/js/228.2aeaefd0.js"><link rel="prefetch" href="/assets/js/229.033e4089.js"><link rel="prefetch" href="/assets/js/230.4a8509be.js"><link rel="prefetch" href="/assets/js/231.558ea837.js"><link rel="prefetch" href="/assets/js/232.d8344106.js"><link rel="prefetch" href="/assets/js/233.24b91ff6.js"><link rel="prefetch" href="/assets/js/234.143af17a.js"><link rel="prefetch" href="/assets/js/235.27208c92.js"><link rel="prefetch" href="/assets/js/236.f91cccfa.js"><link rel="prefetch" href="/assets/js/237.609f41b7.js"><link rel="prefetch" href="/assets/js/238.0e9dbc88.js"><link rel="prefetch" href="/assets/js/239.4bca5a19.js"><link rel="prefetch" href="/assets/js/24.bebc3fd0.js"><link rel="prefetch" href="/assets/js/240.505fbb80.js"><link rel="prefetch" href="/assets/js/241.364fc3f9.js"><link rel="prefetch" href="/assets/js/242.8f2bcb7e.js"><link rel="prefetch" href="/assets/js/243.e444d545.js"><link rel="prefetch" href="/assets/js/244.b722e92a.js"><link rel="prefetch" href="/assets/js/245.02ae3936.js"><link rel="prefetch" href="/assets/js/246.fa726b67.js"><link rel="prefetch" href="/assets/js/247.8d32305f.js"><link rel="prefetch" href="/assets/js/248.1758f1a7.js"><link rel="prefetch" href="/assets/js/249.1f3771b7.js"><link rel="prefetch" href="/assets/js/25.99a5ea92.js"><link rel="prefetch" href="/assets/js/250.e228c98e.js"><link rel="prefetch" href="/assets/js/251.3af79d2d.js"><link rel="prefetch" href="/assets/js/252.3e04b68c.js"><link rel="prefetch" href="/assets/js/253.6fbfe8dc.js"><link rel="prefetch" href="/assets/js/254.1c0ac586.js"><link rel="prefetch" href="/assets/js/255.80a26fbb.js"><link rel="prefetch" href="/assets/js/256.c3aaaf0c.js"><link rel="prefetch" href="/assets/js/257.7190679f.js"><link rel="prefetch" href="/assets/js/258.4943ab16.js"><link rel="prefetch" href="/assets/js/259.dcf70155.js"><link rel="prefetch" href="/assets/js/26.b7030b19.js"><link rel="prefetch" href="/assets/js/260.3be306d0.js"><link rel="prefetch" href="/assets/js/261.0ae95ea5.js"><link rel="prefetch" href="/assets/js/262.bb365195.js"><link rel="prefetch" href="/assets/js/263.0aa716fb.js"><link rel="prefetch" href="/assets/js/264.78a933c0.js"><link rel="prefetch" href="/assets/js/265.be0b27be.js"><link rel="prefetch" href="/assets/js/266.ea75c372.js"><link rel="prefetch" href="/assets/js/267.8fb51a0d.js"><link rel="prefetch" href="/assets/js/268.1de2cd46.js"><link rel="prefetch" href="/assets/js/269.9538f5e4.js"><link rel="prefetch" href="/assets/js/27.7e8d245c.js"><link rel="prefetch" href="/assets/js/270.096a1296.js"><link rel="prefetch" href="/assets/js/271.87e68697.js"><link rel="prefetch" href="/assets/js/272.5e6144f6.js"><link rel="prefetch" href="/assets/js/273.ef37f06f.js"><link rel="prefetch" href="/assets/js/274.3063ed39.js"><link rel="prefetch" href="/assets/js/275.c7d2ace2.js"><link rel="prefetch" href="/assets/js/276.039b6af9.js"><link rel="prefetch" href="/assets/js/277.b1538013.js"><link rel="prefetch" href="/assets/js/278.921015a3.js"><link rel="prefetch" href="/assets/js/279.f5efdb65.js"><link rel="prefetch" href="/assets/js/28.417a693f.js"><link rel="prefetch" href="/assets/js/280.8b708dd7.js"><link rel="prefetch" href="/assets/js/281.32c7d7d9.js"><link rel="prefetch" href="/assets/js/282.bca40967.js"><link rel="prefetch" href="/assets/js/283.dc65e580.js"><link rel="prefetch" href="/assets/js/284.c094dc03.js"><link rel="prefetch" href="/assets/js/285.8da857a9.js"><link rel="prefetch" href="/assets/js/286.f6fc008f.js"><link rel="prefetch" href="/assets/js/287.579299eb.js"><link rel="prefetch" href="/assets/js/288.def44f5f.js"><link rel="prefetch" href="/assets/js/289.249367fd.js"><link rel="prefetch" href="/assets/js/29.e74a8793.js"><link rel="prefetch" href="/assets/js/290.51e83cbc.js"><link rel="prefetch" href="/assets/js/30.2ada8ef8.js"><link rel="prefetch" href="/assets/js/31.0fa0fe16.js"><link rel="prefetch" href="/assets/js/32.ee957bcf.js"><link rel="prefetch" href="/assets/js/33.3da559bf.js"><link rel="prefetch" href="/assets/js/34.dc25f4d2.js"><link rel="prefetch" href="/assets/js/35.fa475c71.js"><link rel="prefetch" href="/assets/js/36.a2175633.js"><link rel="prefetch" href="/assets/js/37.6ea8f9a4.js"><link rel="prefetch" href="/assets/js/38.a80cc766.js"><link rel="prefetch" href="/assets/js/39.acc0d98a.js"><link rel="prefetch" href="/assets/js/4.ff22f931.js"><link rel="prefetch" href="/assets/js/40.98cc10f0.js"><link rel="prefetch" href="/assets/js/41.50ce2979.js"><link rel="prefetch" href="/assets/js/42.1c3175a0.js"><link rel="prefetch" href="/assets/js/43.bfe278c0.js"><link rel="prefetch" href="/assets/js/44.1632f7a8.js"><link rel="prefetch" href="/assets/js/45.9fb9fe8b.js"><link rel="prefetch" href="/assets/js/46.312723aa.js"><link rel="prefetch" href="/assets/js/47.9a486a43.js"><link rel="prefetch" href="/assets/js/48.b58bbdbe.js"><link rel="prefetch" href="/assets/js/49.f9594351.js"><link rel="prefetch" href="/assets/js/5.8402f590.js"><link rel="prefetch" href="/assets/js/50.c7ee805f.js"><link rel="prefetch" href="/assets/js/51.af3c953e.js"><link rel="prefetch" href="/assets/js/52.0117b04d.js"><link rel="prefetch" href="/assets/js/53.c0accba1.js"><link rel="prefetch" href="/assets/js/54.19574e6e.js"><link rel="prefetch" href="/assets/js/55.854ebf03.js"><link rel="prefetch" href="/assets/js/56.2876c393.js"><link rel="prefetch" href="/assets/js/57.2015b2b4.js"><link rel="prefetch" href="/assets/js/58.ea17fa42.js"><link rel="prefetch" href="/assets/js/59.b8b54acf.js"><link rel="prefetch" href="/assets/js/6.49e43e20.js"><link rel="prefetch" href="/assets/js/60.eaab2243.js"><link rel="prefetch" href="/assets/js/61.87d7aa63.js"><link rel="prefetch" href="/assets/js/62.e3e52dc6.js"><link rel="prefetch" href="/assets/js/63.a354853d.js"><link rel="prefetch" href="/assets/js/64.c7954f0d.js"><link rel="prefetch" href="/assets/js/65.cfc29f1c.js"><link rel="prefetch" href="/assets/js/66.3b86207c.js"><link rel="prefetch" href="/assets/js/67.876b4986.js"><link rel="prefetch" href="/assets/js/68.1fa63c02.js"><link rel="prefetch" href="/assets/js/69.d4036cbb.js"><link rel="prefetch" href="/assets/js/7.4258fd2a.js"><link rel="prefetch" href="/assets/js/70.bb9df0cf.js"><link rel="prefetch" href="/assets/js/71.6fccae14.js"><link rel="prefetch" href="/assets/js/72.71df66fa.js"><link rel="prefetch" href="/assets/js/73.d1a322b0.js"><link rel="prefetch" href="/assets/js/74.c537a104.js"><link rel="prefetch" href="/assets/js/75.4972e8bf.js"><link rel="prefetch" href="/assets/js/76.fa44b618.js"><link rel="prefetch" href="/assets/js/77.c29e5132.js"><link rel="prefetch" href="/assets/js/78.7d92b430.js"><link rel="prefetch" href="/assets/js/79.308181de.js"><link rel="prefetch" href="/assets/js/8.ca0c9873.js"><link rel="prefetch" href="/assets/js/80.ce541bcd.js"><link rel="prefetch" href="/assets/js/81.be7f983b.js"><link rel="prefetch" href="/assets/js/82.f40c645f.js"><link rel="prefetch" href="/assets/js/83.95f37310.js"><link rel="prefetch" href="/assets/js/84.627c3517.js"><link rel="prefetch" href="/assets/js/85.e70e72c4.js"><link rel="prefetch" href="/assets/js/86.0c5e2f61.js"><link rel="prefetch" href="/assets/js/87.f417dab7.js"><link rel="prefetch" href="/assets/js/88.2be78ecd.js"><link rel="prefetch" href="/assets/js/89.95820484.js"><link rel="prefetch" href="/assets/js/9.0b3f9e20.js"><link rel="prefetch" href="/assets/js/90.fdd86251.js"><link rel="prefetch" href="/assets/js/91.67916501.js"><link rel="prefetch" href="/assets/js/92.90a9c9a0.js"><link rel="prefetch" href="/assets/js/93.095c4ae9.js"><link rel="prefetch" href="/assets/js/94.ee58e3a1.js"><link rel="prefetch" href="/assets/js/95.8cdf233a.js"><link rel="prefetch" href="/assets/js/96.afd52c5b.js"><link rel="prefetch" href="/assets/js/97.4d635846.js"><link rel="prefetch" href="/assets/js/98.bfa2d297.js"><link rel="prefetch" href="/assets/js/99.444f9853.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0c763008.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">小武子知识库</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/js/" class="nav-link">
+  javascript
+</a></div><div class="nav-item"><a href="/css/" class="nav-link">
+  css
+</a></div><div class="nav-item"><a href="/html5/" class="nav-link">
+  HTML5
+</a></div><div class="nav-item"><a href="/tool/" class="nav-link">
+  工具
+</a></div><div class="nav-item"><a href="/project/" class="nav-link">
+  软件工程
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link router-link-active">
+  计算机基础
+</a></div><div class="nav-item"><a href="/interview/" class="nav-link">
+  面试题
+</a></div><div class="nav-item"><a href="/materials/" class="nav-link">
+  资料收集
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于作者
+</a></div><div class="nav-item"><a href="https://www.github.com/fttony" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/js/" class="nav-link">
+  javascript
+</a></div><div class="nav-item"><a href="/css/" class="nav-link">
+  css
+</a></div><div class="nav-item"><a href="/html5/" class="nav-link">
+  HTML5
+</a></div><div class="nav-item"><a href="/tool/" class="nav-link">
+  工具
+</a></div><div class="nav-item"><a href="/project/" class="nav-link">
+  软件工程
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link router-link-active">
+  计算机基础
+</a></div><div class="nav-item"><a href="/interview/" class="nav-link">
+  面试题
+</a></div><div class="nav-item"><a href="/materials/" class="nav-link">
+  资料收集
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于作者
+</a></div><div class="nav-item"><a href="https://www.github.com/fttony" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>数据结构</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cs/base-o.html" class="sidebar-link">大 O 时间复杂度</a></li><li><a href="/cs/array.html" class="sidebar-link">数组</a></li><li><a href="/cs/queue.html" class="sidebar-link">队列</a></li><li><a href="/cs/stack.html" class="sidebar-link">栈</a></li><li><a href="/cs/list.html" class="sidebar-link">链表</a></li><li><a href="/cs/set.html" class="sidebar-link">集合</a></li><li><a href="/cs/dictionary.html" class="sidebar-link">字典</a></li><li><a href="/cs/hashtable.html" class="sidebar-link">散列表</a></li><li><a href="/cs/hash.html" class="sidebar-link">哈希算法</a></li><li><a href="/cs/trees-1.html" class="sidebar-link">树结构</a></li><li><a href="/cs/trees-2.html" class="sidebar-link">平衡树(AVL)</a></li><li><a href="/cs/trees-b.html" class="sidebar-link">B 树与 B+树</a></li><li><a href="/cs/heap.html" class="sidebar-link">二叉堆</a></li><li><a href="/cs/trie.html" class="sidebar-link">字典树</a></li><li><a href="/cs/graphs.html" class="sidebar-link">图</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>算法</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cs/base-sort.html" class="sidebar-link">简单排序</a></li><li><a href="/cs/high-sort.html" class="sidebar-link">高级排序</a></li><li><a href="/cs/base-select.html" class="sidebar-link">查找算法</a></li><li><a href="/cs/common-algorithm.html" class="sidebar-link">前端常见算法</a></li><li><a href="/cs/recursion.html" class="sidebar-link">递归</a></li><li><a href="/cs/greed.html" class="sidebar-link">贪心算法</a></li><li><a href="/cs/divide.html" class="sidebar-link">分治算法</a></li><li><a href="/cs/backtracking.html" class="sidebar-link">回溯算法</a></li><li><a href="/cs/dp-1.html" class="sidebar-link">动态规划算法（一）</a></li><li><a href="/cs/dp-2.html" class="sidebar-link">动态规划算法（二）</a></li><li><a href="/cs/kmp.html" class="sidebar-link">KMP 算法</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>设计模式</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cs/base-design-pattern.html" class="sidebar-link">设计模式六大原则</a></li><li><a href="/cs/design-pattern-create.html" class="sidebar-link">创建型设计模式</a></li><li><a href="/cs/design-pattern-structure.html" class="sidebar-link">结构型设计模式</a></li><li><a href="/cs/design-pattern-skill.html" aria-current="page" class="active sidebar-link">技巧型设计模式</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/cs/design-pattern-skill.html#前言" class="sidebar-link">前言</a></li><li class="sidebar-sub-header"><a href="/cs/design-pattern-skill.html#内容" class="sidebar-link">内容</a></li><li class="sidebar-sub-header"><a href="/cs/design-pattern-skill.html#联系作者" class="sidebar-link">联系作者</a></li></ul></li><li><a href="/cs/design-pattern-architecture.html" class="sidebar-link">架构型设计模式</a></li><li><a href="/cs/design-pattern-behavior.html" class="sidebar-link">行为型设计模式</a></li><li><a href="/cs/design-pattern-subscription.html" class="sidebar-link">观察者模式和发布订阅模式的区别</a></li><li><a href="/cs/design-pattern-dependency.html" class="sidebar-link">你需要知道的依赖注入</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>函数式编程</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cs/base-functional.html" class="sidebar-link">函数式编程</a></li><li><a href="/cs/unicode.html" class="sidebar-link">计算机字符编码</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>网络</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cs/net.html" class="sidebar-link">计算机网络基础</a></li><li><a href="/cs/http.html" class="sidebar-link">http 详情</a></li><li><a href="/cs/https.html" class="sidebar-link">https 详情</a></li><li><a href="/cs/http2.html" class="sidebar-link">http2 详情</a></li><li><a href="/cs/http3.html" class="sidebar-link">HTTP3 学习</a></li><li><a href="/cs/http-cache.html" class="sidebar-link">web 缓存</a></li><li><a href="/cs/tcp.html" class="sidebar-link">TCP 与 UDP</a></li><li><a href="/cs/webstock.html" class="sidebar-link">webstock 学习</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>操作系统</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cs/os.html" class="sidebar-link">操作系统</a></li><li><a href="/cs/linux.html" class="sidebar-link">linux 常用命令</a></li><li><a href="/cs/linux-1.html" class="sidebar-link">linux 性能优化</a></li><li><a href="/cs/linux-2.html" class="sidebar-link">linux 免密登录</a></li><li><a href="/cs/shell.html" class="sidebar-link">shell 基本语法</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="技巧型设计模式"><a href="#技巧型设计模式" class="header-anchor">#</a> 技巧型设计模式</h1> <h2 id="前言"><a href="#前言" class="header-anchor">#</a> 前言</h2> <p>本人平时学习及收集内容，欢迎参入一起讨论。</p> <h2 id="内容"><a href="#内容" class="header-anchor">#</a> 内容</h2> <ul><li><a href="#%E4%B8%80%E3%80%81%E9%93%BE%E6%A8%A1%E5%BC%8F">链模式</a></li> <li><a href="#%E4%BA%8C%E3%80%81%E5%A7%94%E6%89%98%E6%A8%A1%E5%BC%8F">委托模式</a></li> <li><a href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F">数据访问模式</a></li> <li><a href="#%E5%9B%9B%E3%80%81%E8%8A%82%E6%B5%81%E6%A8%A1%E5%BC%8F">节流模式</a></li> <li><a href="#%E4%BA%94%E3%80%81%E7%AE%80%E5%8D%95%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F">简单模板模式</a></li> <li><a href="#%E5%85%AD%E3%80%81%E6%83%B0%E6%80%A7%E6%A8%A1%E5%BC%8F">惰性模式</a></li> <li><a href="#%E4%B8%83%E3%80%81%E5%8F%82%E4%B8%8E%E8%80%85%E6%A8%A1%E5%BC%8F">参与者模式</a></li> <li><a href="#%E5%85%AB%E3%80%81%E7%AD%89%E5%BE%85%E8%80%85%E6%A8%A1%E5%BC%8F">等待者模式</a></li></ul> <h3 id="一、链模式"><a href="#一、链模式" class="header-anchor">#</a> 一、链模式</h3> <h4 id="_1-1-介绍"><a href="#_1-1-介绍" class="header-anchor">#</a> 1.1 介绍</h4> <p>通常情况下，通过对构造函数使用<code>new</code>会返回一个绑定到<code>this</code>上的新实例，所以我们可以在<code>new</code>出来的对象上直接用<code>.</code>访问其属性和方法。如果在普通函数中也返回当前实例，那么我们就可以使用<code>.</code>在单行代码中一次性连续调用多个方法，就好像它们被链接在一起一样，这就是链式调用。</p> <h4 id="_1-2-代码"><a href="#_1-2-代码" class="header-anchor">#</a> 1.2 代码</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>class Reactangle{
+    constructor(){
+        this.length = null      // 长
+        this.width = null       // 宽
+        this.color = null       // 颜色
+    }
+
+    /* 设置长度 */
+    setLength(length){
+        this.length = length
+        return this
+    }
+
+    /* 设置宽度 */
+    setWidth(width){
+        this.width = width
+        return this
+    }
+
+    /* 设置颜色 */
+    setColor(color){
+        this.color = color
+        return this
+    }
+}
+
+const rect = new Rectangle()
+  .setLength('100px')
+  .setWidth('80px')
+  .setColor('blue')
+console.log(rect)
+// 输出：{length: &quot;100px&quot;, width: &quot;80px&quot;, color: &quot;blue&quot;}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><h4 id="_1-4-场景"><a href="#_1-4-场景" class="header-anchor">#</a> 1.4 场景</h4> <ul><li>jquery 中的链式调用</li> <li>Underscore 中的链模式</li></ul> <h3 id="二、委托模式"><a href="#二、委托模式" class="header-anchor">#</a> 二、委托模式</h3> <h4 id="_2-1-介绍"><a href="#_2-1-介绍" class="header-anchor">#</a> 2.1 介绍</h4> <p>多个对象接受并处理同一个请求，他们请求委托给另一个对象统一处理请求。</p> <h4 id="_2-2-代码"><a href="#_2-2-代码" class="header-anchor">#</a> 2.2 代码</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>let ul = document.getElementById('container');
+ul.onclick = function (e = window.event) {
+    let tar = e.target || e.srcElement;
+    if (tar.nodeName.toLowerCase() === 'li') {
+        tar.style.color = 'blue';
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h4 id="_2-3-场景"><a href="#_2-3-场景" class="header-anchor">#</a> 2.3 场景</h4> <ul><li>dom 事件委托</li></ul> <h3 id="三、数据访问模式"><a href="#三、数据访问模式" class="header-anchor">#</a> 三、数据访问模式</h3> <h4 id="_3-1-介绍"><a href="#_3-1-介绍" class="header-anchor">#</a> 3.1 介绍</h4> <p>抽象和封装对数据源的访问与存储。</p> <h4 id="_3-2-代码"><a href="#_3-2-代码" class="header-anchor">#</a> 3.2 代码</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>// 本地存储localStorage
+
+class BaseLocalStorage{
+    constructor(preId,timeSign = '|-|'){
+        this.preId = preId;
+        this.timeSing = timeSign;
+        this.status = {
+            SUCCESS: 0,     // 成功
+            FAILURE: 1,         // 失败
+            OVERFLOW: 2,        // 溢出
+            TIMEOUT: 3          // 过期
+        };
+        this.storage = localStorage || window.localStorage;
+    }
+
+    // 获取本地存储数据ylkd数据真实字段
+    getKey(key){
+        return this.preId + key;
+    }
+
+    /** 添加或者修改数据
+     * @param key
+     * @param value
+     * @param callback
+     * @param time
+     */
+    set(key,value,callback,time){
+        // 默认操作状态是成功的
+        let status = this.status.SUCCESS,
+             getKey = this.getKey(key);
+        try{
+            time = + new Date(time) || time.getTime();
+        }catch(e){
+            // 传入的时间参数或者时间参数有无获取默认时间，一个月
+            time = +new Date()+ 1000 * 60 * 60 * 24 * 31;
+        }
+
+        try{
+            this.storage.setItem(getKey,time + this.timeSing + value);
+        }catch(e){
+            // 溢出失败，返回溢出状态
+            status = this.status.OVERFLOW
+        }
+        callback &amp;&amp; callback.call(this,status,getKey,value)
+    }
+
+    // 获取数据
+    get(key,callback){
+        let status = this.status.SUCCESS,
+            getKey = this.getKey(key),
+            value = null,           // 默认值为空
+            timeSignLen = this.timeSing.length,         // 时间戳与存储数据之间的拼接长度
+            index,
+            time,   // 时间戳
+            result; // 最终获致到的数据
+        try{
+            value = this.storage.getItem(getKey);
+        }catch(e){
+            result = {
+                status: this.status.FAILURE,
+                value:null
+            }
+            callback &amp;&amp; callback.call(this.result.status,result,value)
+            return result
+        }
+
+        // 获取成功
+        if(value){
+            index = value.indexOf(this.timeSing);
+            time = +value.slice(0,index);           // 获取时间戳
+            if(+new Date(time) &gt; + new Date() || time===0){
+                // 获取数据结果
+                value = value.slice(index + timeSignLen);
+            }else{
+                // 获取则结果为null
+                value = null
+                status = this.status.TIMEOUT;
+                time.remove(key)
+            }
+        }else{
+            status = this.status.FAILURE;
+        }
+
+        // 设置结果
+        result = {
+            status: status,
+            value: value
+        };
+        callback &amp;&amp; callback.call(this,result.status,result.value);
+        return result
+    }
+
+    // 删除数据
+    remove(key,callback){
+        let status = this.status.FAILURE,
+            getKey = this.getKey(key),
+            value = null;
+        value = this.storage.getItem(getKey);
+        if(value){
+            // 删除数据
+            this.storage.removeItem(getKey);
+            status = this.status.SUCCESS;
+        }
+        callback &amp;&amp; callback.call(this,status,status&gt;0? null : value.slice(value.indexOf(this.timeSing)+this.timeSing.length))
+    }
+}
+
+/*使用实例*/
+let LS = new BaseLocalStorage('LS__');
+LS.set('a', 'xiao ming', function () {
+    console.log(arguments)
+});
+LS.get('a', function () {
+    console.log(arguments)
+});
+LS.remove('a', function () {
+    console.log(arguments)
+});
+LS.remove('a', function () {
+    console.log(arguments)
+});
+LS.get('a', function () {
+    console.log(arguments)
+});
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br></div></div><h3 id="四、节流模式"><a href="#四、节流模式" class="header-anchor">#</a> 四、节流模式</h3> <h4 id="_4-1-介绍"><a href="#_4-1-介绍" class="header-anchor">#</a> 4.1 介绍</h4> <p>对于复杂的业务逻辑进行节流控制， 执行最后一次操作并取消其他操作， 提高性能。</p> <h4 id="_4-2-代码"><a href="#_4-2-代码" class="header-anchor">#</a> 4.2 代码</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>// 返回顶部
+/* 返回顶部按钮添加动画，每次手动页面滚动时，他都要不停的抖动。原因 */
+
+let throttle = function(){
+    let isClear = arguments[0],fn;
+    // 第一个参数表示是否清楚计时器
+    if(typeof isClear === 'boolean'){
+        // 第二参数则为函数
+        fn = arguments[1];
+        fn.__trottleID &amp;&amp; clearTimeout(fn.__trottleID);
+    }else{
+        // 第一个参数为函数
+        fn = isClear;
+        // 第二个参数为函数执行时候的参数
+        let param = arguments[1];
+        let p = Object.assign({
+            context: null,
+            args: [],
+            time:300
+        },param);
+        arguments.callee(true,fn);
+        fn.__trottleID = setTimeout(function(){
+            fn.apply(p.context,p.args)
+        },p.time)
+    }
+}
+
+// 实际使用
+function moveScroll(){
+    let top = $(document).scrollTo();
+    $('#back').animate({top:top+30},400,'easeOutCubic')
+}
+// 监听页面滚动事件
+$(window).on('scroll',function(){
+    throttle(moveScroll)
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br></div></div><h3 id="五、简单模板模式"><a href="#五、简单模板模式" class="header-anchor">#</a> 五、简单模板模式</h3> <h4 id="_5-1-介绍"><a href="#_5-1-介绍" class="header-anchor">#</a> 5.1 介绍</h4> <h4 id="_5-2-代码"><a href="#_5-2-代码" class="header-anchor">#</a> 5.2 代码</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h4 id="_5-3-优点"><a href="#_5-3-优点" class="header-anchor">#</a> 5.3 优点</h4> <h4 id="_5-4-缺点"><a href="#_5-4-缺点" class="header-anchor">#</a> 5.4 缺点</h4> <h4 id="_5-5-场景"><a href="#_5-5-场景" class="header-anchor">#</a> 5.5 场景</h4> <h3 id="六、惰性模式"><a href="#六、惰性模式" class="header-anchor">#</a> 六、惰性模式</h3> <h4 id="_6-1-介绍"><a href="#_6-1-介绍" class="header-anchor">#</a> 6.1 介绍</h4> <p>减少每次代码执行的重复性的分支判断，通过对对象重定义比原对象中的分支判断。</p> <h4 id="_6-2-代码"><a href="#_6-2-代码" class="header-anchor">#</a> 6.2 代码</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>// 解决函数执行时候的重复性的分支判断
+A.on3 = function (dom, type, fn) {
+    if (document.addEventListener) {
+        A.on3 = function (dom, type, fn) {
+            dom.addEventListener(type, fn, false);
+        }
+    } else if (document.attachEvent) {
+        A.on3 = function (dom, type, fn) {
+            dom.attachEvent('on' + type, fn);
+        }
+    } else {
+        A.on3 = function (dom, type, fn) {
+            dom['on' + type] = fn;
+        }
+    }
+    A.on3(dom, type, fn);
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h3 id="七、参与者模式"><a href="#七、参与者模式" class="header-anchor">#</a> 七、参与者模式</h3> <h4 id="_7-1-介绍"><a href="#_7-1-介绍" class="header-anchor">#</a> 7.1 介绍</h4> <p>在特定的作用于中执行给定的函数，并将参数原封不动的传递。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="八、等待者模式"><a href="#八、等待者模式" class="header-anchor">#</a> 八、等待者模式</h3> <h4 id="_8-1-介绍"><a href="#_8-1-介绍" class="header-anchor">#</a> 8.1 介绍</h4> <p>通过对多个异步进程的监听， 来触发未来发生的动作。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="参考资料"><a href="#参考资料" class="header-anchor">#</a> 参考资料</h3> <ul><li>《JavaScript 设计模式》</li></ul> <h2 id="联系作者"><a href="#联系作者" class="header-anchor">#</a> 联系作者</h2> <div align="center"><p>
+        平凡世界，贵在坚持。
+    </p> <img src="/about/contact.png"></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">更新于:</span> <span class="time">2014/8/4 下午9:09:21</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/cs/design-pattern-structure.html" class="prev">
+        结构型设计模式
+      </a></span> <span class="next"><a href="/cs/design-pattern-architecture.html">
+        架构型设计模式
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----><div></div></div></div>
+    <script src="/assets/js/app.c0e6e248.js" defer></script><script src="/assets/js/2.95c27d7d.js" defer></script><script src="/assets/js/23.a542dcb5.js" defer></script><script src="/assets/js/3.e9403692.js" defer></script>
+  </body>
+</html>
