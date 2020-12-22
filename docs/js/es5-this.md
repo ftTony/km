@@ -187,6 +187,7 @@ var bar = new foo(2); console.log( bar.a ); // 2
 - [全面理解 JavaScript 中的 this](https://juejin.im/entry/5a29df626fb9a045211e9c2a?utm_source=gold_browser_extension)
 - [JavaScript This 的六道坎](https://mp.weixin.qq.com/s/b_SojysoGA_Z7WLJrilizg)
 - [ Open嗨，你真的懂this吗？](https://github.com/YvetteLau/Blog/issues/6)
+- [jsliang 求职系列 - 05 - this](https://juejin.cn/post/6891791033613746189)
 
 ## 联系作者
 
