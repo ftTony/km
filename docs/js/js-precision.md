@@ -319,6 +319,7 @@ withinErrorMargin(0.1+0.2,0.3)
 ### 参考资料
 
 - [0.1 + 0.2 不等于 0.3？为什么 JavaScript 有这种“骚”操作？](https://juejin.im/post/5b90e00e6fb9a05cf9080dff)
+- [解决js精度丢失办法](https://segmentfault.com/a/1190000022730047)
 - [揭秘 0.1 + 0.2 != 0.3](https://www.barretlee.com/blog/2016/09/28/ieee754-operation-in-js/)
 - [js 中 0.1+0.2 为什么不等于 0.3](https://coolcao.com/2016/10/12/js%E4%B8%AD0-1-0-2%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%AD%89%E4%BA%8E0-3/)
 - [JavaScript 浮点数陷阱及解法](https://github.com/camsong/blog/issues/9)
