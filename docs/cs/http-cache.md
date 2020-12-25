@@ -78,7 +78,7 @@ CDN 缓存，也叫网关缓存、反向代理缓存。CDN 缓存一般是由网
 | no-store    | 无     | 不缓存请求或响应的任何内容                                             |
 | max-age=[s] | 必需   | 响应的最大值                                                           |
 
-- `max-age`（单位为 s）设置缓存的存在时间，相对于发送请求的时间。只有响应报文首部设置 Cache-Control 为非 0 的 max-age 或者设置了大于请求日期的 Expires（下文会讲）才有可能命中强缓存。当满足这个条件，同时响应报文首部中 Cache-Control 不存在 no-cache、no-store 且请求报文首部不存在 Pragma 字段，才会真正命中强缓存。以下所有图片均为刷新（command+R）的截图。
+- `max-age`（单位为 s）设置缓存的存在时间，相对于发送请求的时间。只有响应报文首部设置 `Cache-Control` 为非 `0` 的 `max-age` 或者设置了大于请求日期的 Expires（下文会讲）才有可能命中强缓存。当满足这个条件，同时响应报文首部中 `Cache-Control` 不存在 `no-cache`、`no-store` 且请求报文首部不存在 Pragma 字段，才会真正命中强缓存。以下所有图片均为刷新（command+R）的截图。
 - `no-cache`表示请求必须先与服务器确认缓存的有效性，如果有效才能使用缓存（协商缓存），无论是响应报文首部还是请求报文首部出现这个字段均一定不会命中强缓存。Chrome 硬性重新加载（Command+shift+R）会在请求的首部加上 Pragma：no-cache 和 Cache-Control：no-cache。
 - `no-store`表示禁止浏览器以及所有中间缓存存储任何版本的返回响应，一定不会出现强缓存和协商缓存，适合个人隐私数据或者经济类数据。
 - `public`表明响应可以被浏览器、CDN 等等缓存。
