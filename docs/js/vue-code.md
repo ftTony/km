@@ -8079,7 +8079,7 @@ if (!isCreate) {
 - [Vue.js 源码解析](https://github.com/answershuto/learnVue)
 - [你想要的 vue 源码分析](https://github.com/dirkhe1051931999/hjBlog/tree/master/blog-vue-sourcecode-study)
 - [学习 Vue 源码的必要知识储备](https://juejin.im/post/5ce5565d6fb9a07ed2244513)
-- [逐行剖析 Vue.js 源码](https://nlrx-wjc.github.io/Learn-Vue-Source-Code/start/)
+- [逐行剖析 Vue.js 源码](https://www.bookset.io/book/Learn-Vue-Source-Code)
 - [渲染器](http://hcysun.me/vue-design/zh/)
 - [深入 Vue 技术栈及源码系列](https://www.cnblogs.com/tugenhua0707/category/1577630.html)
 - [Vue 原理剖析](http://www.zhufengpeixun.cn/train/vue-info/source.html)

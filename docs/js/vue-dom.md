@@ -880,7 +880,7 @@ export function removeChild (node: Node, child: Node) {
 - [VirtualDOM 与 diff(Vue 实现)](https://zhuanlan.zhihu.com/p/29450092)
 - [让虚拟 DOM 和 DOM-diff 不再成为你的绊脚石](https://juejin.im/post/5c8e5e4951882545c109ae9c)
 - [虚拟 Dom+Diff--Vue 源码动手写系列](https://juejin.im/post/5e53c9c051882549150ea5d3)
-- [虚拟DOM](https://nlrx-wjc.github.io/Learn-Vue-Source-Code/virtualDOM/#_1-%E5%89%8D%E8%A8%80)
+- [虚拟DOM](https://www.bookset.io/read/Learn-Vue-Source-Code/5c077ff8e76f54d0.md)
 
 ## 联系作者
 

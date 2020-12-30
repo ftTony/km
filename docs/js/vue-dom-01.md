@@ -23,4 +23,4 @@
 
 ### 参考资料
 
-- [优化更新子节点](https://nlrx-wjc.github.io/Learn-Vue-Source-Code/virtualDOM/optimizeUpdataChildren.html)
+- [优化更新子节点](https://www.bookset.io/read/Learn-Vue-Source-Code/03c8bbd76b668bed.md)
