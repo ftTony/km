@@ -13,6 +13,7 @@
 - [前端面试手册](https://github.com/elecrabbit/front-end-interview)
 - [关于面试的一点心得](https://mp.weixin.qq.com/s/LBSTpeWDvJ56iYpkCo6Ecw)
 - [一位大龄程序员所经历的面试的历炼和思考](https://www.cnblogs.com/lovesqcc/p/14354921.html)
+- [前端知识库](https://www.html5iq.com/6010198a9ab55c133a95671a.html)
 ## 联系作者
 
 <div align="center">
