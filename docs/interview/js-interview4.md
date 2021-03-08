@@ -9,6 +9,7 @@
 ## 参考资料
 
 - [壹题汇总](https://muyiy.cn/question/)
+- [前端面试题](https://github.com/pwstrick/daily)
 
 ## 联系作者
 
