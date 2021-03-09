@@ -293,6 +293,7 @@ interface Point {
 - [滋 TS 源码（一）- 准备调试](https://mp.weixin.qq.com/s/vU4WN2wA8hzW8Y5WHulFSQ)
 - [滋 TS 源码（二）- 开始编译](https://mp.weixin.qq.com/s/GgpDGAbSbWpFD_hgfqnCZQ)
 - [滋 TS 源码（三）- 词法分析](https://mp.weixin.qq.com/s/r9waheefjYfsJ_D-r6UlUg)
+- [一份不可多得的 TS 学习指南（1.8W字](https://juejin.cn/post/6872111128135073806)
 
 ## 联系作者
 
