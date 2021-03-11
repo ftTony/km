@@ -8,7 +8,6 @@
 
 ### 参考资料
 
-- [node-interview](https://github.com/ElemeFE/node-interview/tree/master/sections/zh-cn)
 - [饿了么 Node.js 面试](https://github.com/ElemeFE/node-interview/tree/master/sections/zh-cn)
 - [nodejs 面试题](https://interview.nodejs.red/#/zh/)
 - [浅谈 Node.js 模块机制及常见面试问题解答](https://mp.weixin.qq.com/s/e2c4NF2U6B2hVqTTfPx8DQ)
