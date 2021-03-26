@@ -38,6 +38,7 @@
 - [【第2078期】iframe 接班人-微前端框架 qiankun 在中后台系统实践](https://mp.weixin.qq.com/s/duUxw82DizU15vqRrL_iOw)
 - [飞冰](https://ice.work/docs/icestark/about)
 - [微前端究竟是什么，可以带来什么收益](https://juejin.im/post/6893307922902679560)
+- [探索微前端的场景极限](https://www.zhihu.com/column/p/355419817)
 
 ## 联系作者
 
