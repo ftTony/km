@@ -11,6 +11,7 @@
 - [壹题汇总](https://muyiy.cn/question/)
 - [前端面试题](https://github.com/pwstrick/daily)
 - [前端游乐场](https://github.com/godbasin/godbasin.github.io)
+- [互联网寒冬，一年经验字节跳动、虾皮、快手、拼多多前端面试总结]()
 
 ## 联系作者
 
