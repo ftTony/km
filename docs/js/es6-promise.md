@@ -1137,6 +1137,7 @@ console.log('end')
 - [Promise / async / Generator 实现&原理大解析（附源码）| 9k 字](https://juejin.im/post/5e3b9ae26fb9a07ca714a5cc)
 - [源码速读！一看就会、一写就废的 Promise 实现](https://mp.weixin.qq.com/s/CsUvmRLYJpX1If9Tr0KXrg)
 - [Promise 你真的用明白了么？](https://juejin.im/post/6869573288478113799)
+- [一道赋值面试题引发的思考3【并发数控制】](https://libin1991.github.io/2019/02/06/%E4%B8%80%E9%81%93%E8%B5%8B%E5%80%BC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%833%E3%80%90%E5%B9%B6%E5%8F%91%E6%95%B0%E6%8E%A7%E5%88%B6%E3%80%91/)
 - 《你不知道的 javascript(中)》
 - 《深入浅出 Node.js》
 
