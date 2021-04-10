@@ -125,6 +125,7 @@ Node.js 是基于 Chrome V8 引擎构建的，由事件循环（Event Loop）分
 - [Node.js 如何利用 Libuv 实现事件循环和异步](https://mp.weixin.qq.com/s/WyZ_DJqbjG82n0IzuAtNpQ)
 - [关于 NodeJS 工作原理的五个误解](https://mp.weixin.qq.com/s/hAE3ket5N_vC-OlV0ISAzQ)
 - [简析 Node.js 特点与应用场景(让你更了解它)](https://mp.weixin.qq.com/s/iK3r9I28NMWApEydH046-w)
+- [node 中间层怎样做的请求合并转发](https://github.com/lgwebdream/FE-Interview/issues/28)
 
 ## 联系作者
 
