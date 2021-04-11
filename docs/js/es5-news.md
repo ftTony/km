@@ -70,7 +70,7 @@ car.name;
 
 实例 car 中只能访问到**构造函数中的属性**，和情况1完全相反。
 
-#### 3.3 返回一个对象
+#### 3.3 返回`undefined` 以外的基本类型
 
 ```
 function Car(color, name) {
