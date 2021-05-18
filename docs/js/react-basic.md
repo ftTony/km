@@ -12,6 +12,7 @@
 - [Deep In React 之浅谈 React Fiber 架构(一)](https://mp.weixin.qq.com/s/dONYc-Y96baiXBXpwh1w3A)
 - [React 函数式组件性能优化指南](https://mp.weixin.qq.com/s/mpL1MxLjBqSO49TRijeyeg)
 - [时间切片的实现和调度（原创 2.6 万字）](https://juejin.im/post/5ecdd66ff265da76d53c094a)
+- [mobx教程](https://cn.mobx.js.org/intro/overview.html)
 
 ## 联系作者
 
