@@ -6,6 +6,35 @@
 
 ## 内容
 
+- jsx语法
+- 组件的生命周期
+- hook
+
+### 一、jsx语法
+
+### 二、组件的生命周期
+
+组件的生命周期分成三个状态：
+
+- Mounting：已插入真实DOM
+- Updating：正在被重新渲染
+- Unmounting：已移出真实DOM
+
+React为每个状态都提供了两种处理函数，`will`函数在进入状态之前调用，`did`函数在进入状态之后调用，三状态共计五种函数
+
+- componentWillMount()
+- componentDidMount()
+- componentWillUpdate(object nextProps, object nextState)
+- componentDidUpdate(object prevProps, object prevState)
+- componentWillUnmount()
+
+React还提供两种特殊状态的处理函数
+
+- componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用
+- shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
+
+### 三、hook
+
 ### 参考资料
 
 - [详解 React 16 的 Diff 策略](https://mp.weixin.qq.com/s/_jAW4Z3VR-uW0AEnjHgAEw)
