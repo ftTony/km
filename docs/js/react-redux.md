@@ -31,3 +31,5 @@ function listerner(){
   component.setState(newState);   
 }
 ```
+
+- [redux基础用法](https://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html)
